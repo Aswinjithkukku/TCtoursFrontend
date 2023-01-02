@@ -171,7 +171,7 @@ function DetailsCard() {
                                             <div className='space-y-1'>
                                                 <div className='flex items-center space-x-2 text-darktext'>
                                                     <span className='text-lg text-lightblue'><AiFillCar /> </span>
-                                                    <span className='text-lg'>Travel</span>
+                                                    <span className='text-lg'>Transfer</span>
                                                 </div>
                                                 <div className='mx-1'>
                                                     <select

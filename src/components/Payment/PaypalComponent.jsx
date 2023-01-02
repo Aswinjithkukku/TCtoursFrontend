@@ -1,74 +1,108 @@
-// import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
-// import React, { useEffect, useRef, useState } from 'react'
-// import { useParams } from 'react-router-dom'
+import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
+import React, { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom'
+import axios from '../../axios';
 
-// // function PaypalComponent() {
-// //   const { id } = useParams()
+function PaypalComponent({ travellerData }) {
+  // const email = travellerData.email;
+  // console.log(email);
+  // const [email, setEmail] = useState(travellerData.email)
 
-// //     const paypal = useRef()
-// //     useEffect(() => {
-// //         window.paypal.Buttons({
-// //           creteOrder: (data, actions, err) => {
-// //             return actions.order.create({
-// //               intent: "CAPTURE",
-// //               purchase_units: [
-// //                 {
-// //                   description: 'table',
-// //                   amount: {
-// //                     currency_code: "CAD",
-// //                     value: 650.00
-// //                   }
-// //                 }
-// //               ]
-// //             })
-// //           },
-// //           onApprove: async(data,actions) => {
-// //             const order = await actions.order.capture()
-// //             console.log(order);
-// //           },
-// //           onError: (err) => {
-// //             console.log(err);
-// //           }
-// //         }).render(paypal.current)
-// //     } ,[])
-// //   return (
-// //     <div>
-// //         <div className='' ref={paypal}></div>
-// //     </div>
-// //   )
-// // }
+  const params = useParams()
+  // const [orderId, setOrderId] = useState("");
+  const attractionOrderId = params.id
 
-// function PaypalComponent() {
-//   const [modalOpen, setModalOpen] = useState < boolean > (false);
+  const paypal = useRef()
+  useEffect(() => {
+    window.paypal.Buttons({
+      createOrder: async (data, actions, err) => {
+        try {
+          const response = await axios.post("/attractions/orders/payment", {
+            attractionOrderId,
+            name: "test",
+            email: "test@email.com",
+            phoneNumber: "9200025655",
+            country: "63ac33c3ff04e5652a2583f1"
+          });
+
+          console.log(response.data.id);
+          return response.data.id;
+
+        } catch {
+          console.log("Error Creating Paypal Order");
+          return "";
+        }
+      },
+      onApprove: async (data, actions) => {
+        const order = await actions.order.capture()
+        let messageFromServer = ''
+        try {
+          const resFromServer = await axios.post("/attractions/orders/paypal/capture",
+            {
+              orderId: order.id,
+              paymentId: order.purchase_units[0]?.payments["captures"][0]?.id
+            }
+          );
+          messageFromServer = resFromServer.message;
+          // Make Calls to backend to changes in react state corresponding to successful payment here
+          console.log("Success");
+          console.log("Payment successful.");
+        } catch {
+          console.log(
+            "Error enrolling student, please contact tech@xyz.com"
+          );
+        }
+        console.log(data);
+        console.log(order);
+      },
+      onError: (err) => {
+        console.log(err);
+      }
+    }).render(paypal.current)
+  }, [])
+  return (
+    <div>
+      <div className='' ref={paypal}></div>
+    </div>
+  )
+}
+
+// function PaypalComponent({travellerData}) {
+
+//   const params = useParams()
 //   const [orderId, setOrderId] = useState("");
-//   const [modalText, setModalText] = useState("");
-//   const [paymentStatus, setPaymentStatus] = useState("Success");
 
-//   const initialOptions = {
-//     "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
-//     currency: USD,
-//   };
+//   const attractionOrderId = params.id
 
-//   const closeModals = () => {
-//     setModalOpen(false);
-//   };
+// const initialOptions = {
+//   "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+//   currency: "USD",
+// };
+
 
 //   const closeModalsAndRedirect = () => {
 //     window.location.href = "/";
 //   };
 //   return (
 //     <div>
-      
-//       <PayPalScriptProvider options={initialOptions}>
+
+//       <PayPalScriptProvider >
 //         <PayPalButtons
 //           style={{ layout: "horizontal" }}
 //           createOrder={async (data, actions) => {
 //             try {
-//               const orderId = await generateOrder(Id, currency);
+//               const orderId = await axios.post("/orders/payment", {
+//                 attractionOrderId ,
+//                 name:travellerData?.firstName + " " + travellerData?.lastName,
+//                 email: travellerData?.email,
+//                 phoneNumber: travellerData?.phone,
+//                 country: travellerData?.country
+//                });
 //               setOrderId(orderId);
 //               return orderId;
 //             } catch {
-//               Toastr.error("Error Creating Paypal Order");
+//               console.log("Error Creating Paypal Order");
 //               return "";
 //             }
 //           }}
@@ -78,36 +112,32 @@
 //               let messageFromServer = "";
 //               if (details?.purchase_units?.[0]?.payments?.captures) {
 //                 try {
-//                   const resFromServer = await recievePayment(
+//                   const resFromServer = await axios.post("/orders/paypal/capture",
 //                     details.id,
 //                     details.purchase_units[0].payments["captures"][0].id
 //                   );
-//                   // @ts-ignore
 //                   messageFromServer = resFromServer.message;
 //                   // Make Calls to backend to changes in react state corresponding to successful payment here
-//                   setPaymentStatus("Success");
-//                   setModalText("Payment successful.");
-//                   setModalOpen(true);
+//                   console.log("Success");
+//                   console.log("Payment successful.");
 //                 } catch {
-//                   Toastr.error(
+//                   console.log(
 //                     "Error enrolling student, please contact tech@xyz.com"
 //                   );
 //                 }
 //               } else {
-//                 setPaymentStatus("Fail");
-//                 setModalText(
+//                 console.log("Fail");
+//                 console.log(
 //                   "Payment failed. Please contact tech@xyz.com if money is deducted!"
 //                 );
-//                 setModalOpen(true);
 //               }
 //             });
 //           }}
 //           onError={(err) => {
-//             setPaymentStatus("Fail");
-//             setModalText(
+//             console.log("Fail");
+//             console.log(
 //               "Payment failed from Paypal's end! Please try again after sometime."
 //             );
-//             setModalOpen(true);
 //           }}
 //         />
 //       </PayPalScriptProvider>
@@ -115,4 +145,4 @@
 //   )
 // }
 
-// export default PaypalComponent
+export default PaypalComponent

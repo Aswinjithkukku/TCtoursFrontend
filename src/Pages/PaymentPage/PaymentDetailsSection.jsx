@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { AiOutlineDown } from 'react-icons/ai'
+import { useSelector } from 'react-redux'
 import PaypalComponent from '../../components/Payment/PaypalComponent'
 // import { PaymentInputsWrapper, usePaymentInputs } from 'react-payment-inputs';
 // import images from 'react-payment-inputs/images';
 
 function PaymentDetailsSection() {
 
-    const [checkout, setCheckout] = useState(true)
+    // const [checkout, setCheckout] = useState(true)
     const [travellerData, setTravellerData] = useState({
         gender: "",
         firstname: "",
@@ -17,7 +18,7 @@ function PaymentDetailsSection() {
         special_request_text: ""
     })
     const [viewRedeem, setViewRedeem] = useState(false)
-    // const { wrapperProps, getCardImageProps, getCardNumberProps, getExpiryDateProps, getCVCProps } = usePaymentInputs();
+    const { initialData } = useSelector(state => state.home)
 
     const onChange = (e) => {
         setTravellerData({ ...travellerData, [e.target.name]: e.target.value })
@@ -85,8 +86,8 @@ function PaymentDetailsSection() {
                             <input
                                 type='text'
                                 className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
-                                name='lastname'
-                                value={travellerData.lastname}
+                                name='email'
+                                value={travellerData.email}
                                 onChange={onChange}
                             />
                         </div>
@@ -96,19 +97,17 @@ function PaymentDetailsSection() {
                             <label className=''>Country</label>
                         </div>
                         <div className=''>
-                            <select type='text' className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light' >
-                                <option>Choose Country</option>
-                                <option>India</option>
-                                <option>United Arab Emirate</option>
-                                <option>SriLanka</option>
-                                <option>Argentina</option>
-                                <option>Russia</option>
-                                <option>Caneda</option>
-                                <option>United State of America</option>
-                                <option>United Kingdom</option>
-                                <option>Italy</option>
-                                <option>Portugal</option>
-                                <option>Moroko</option>
+                            <select 
+                            type='text' 
+                            className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light' 
+                            name='country'
+                            value={travellerData.country}
+                            onChange={onChange}
+                            >
+                                <option >Choose Country</option>
+                                {initialData?.countries?.map((item) => (
+                                <option key={item._id} value={item._id}>{item.countryName} </option>
+                                ))}
                             </select>
                         </div>
                     </div>
@@ -117,7 +116,13 @@ function PaymentDetailsSection() {
                             <label className=''>Phone</label>
                         </div>
                         <div className=''>
-                            <input type='text' className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light' />
+                            <input 
+                            type='number' 
+                            className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
+                            name='phone'
+                            value={travellerData.phone}
+                            onChange={onChange}
+                            />
                         </div>
                     </div>
                 </div>
@@ -126,7 +131,13 @@ function PaymentDetailsSection() {
                         <label className=''>Special Request</label>
                     </div>
                     <div className=''>
-                        <textarea type='text' className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light' />
+                        <textarea 
+                        type='text' 
+                        className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
+                        name='special_request_text'
+                        value={travellerData.special_request_text}
+                        onChange={onChange}
+                        />
                     </div>
                 </div>
             </div>
@@ -156,7 +167,7 @@ function PaymentDetailsSection() {
                     <h2 className='text-xl font-medium'>Choose Payment Method</h2>
                 </div>
 
-                {/* <PaypalComponent /> */}
+                <PaypalComponent travellerData={travellerData} />
 
             </div>
             <div className='bg-light my-5 p-7 rounded-2xl lg:flex '>

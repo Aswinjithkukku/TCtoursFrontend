@@ -18,7 +18,7 @@ function Register({ setViewRegister, setViewlogin, viewlogin, viewRegister }) {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
 
-    const { countries } = useSelector((state) => state.general);
+    const { initialData } = useSelector((state) => state.home);
 
     const dispatch = useDispatch();
 
@@ -116,7 +116,7 @@ function Register({ setViewRegister, setViewlogin, viewlogin, viewRegister }) {
                                         <option value="" hidden>
                                             Select Country
                                         </option>
-                                        {countries?.map((country, index) => {
+                                        {initialData?.countries?.map((country, index) => {
                                             return (
                                                 <option
                                                     value={country?._id}

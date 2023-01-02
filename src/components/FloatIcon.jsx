@@ -19,7 +19,7 @@ export default function FloatIcon() {
                     viewIcons ? "bottom-60" : "bottom-0"
                 } `}
             >
-                <a href={`mailto:${home?.data?.email}`}>
+                <a href={`mailto:${home?.email}`}>
                     <AiOutlineMail />
                 </a>
             </div>
@@ -28,7 +28,7 @@ export default function FloatIcon() {
                     viewIcons ? "bottom-40" : "bottom-0"
                 }`}
             >
-                <a href={`tel:${home?.data?.phoneNumber1}`}>
+                <a href={`tel:${home?.phoneNumber1}`}>
                     <AiOutlinePhone />
                 </a>
             </div>
@@ -37,7 +37,7 @@ export default function FloatIcon() {
                     viewIcons ? "bottom-20" : "bottom-0"
                 } `}
             >
-                <a href={`https://wa.me/${home?.data?.whatsappNumber}`}>
+                <a href={`https://wa.me/${home?.whatsappNumber}`}>
                     <AiOutlineWhatsApp />
                 </a>
             </div>

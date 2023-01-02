@@ -9,14 +9,15 @@ import { useNavigate } from 'react-router-dom'
 function AttractionCard() {
     const navigate = useNavigate()
     const [value, setValue] = useState("")
+    const [date, setDate] = useState('')
     const [datalist, setDatalist] = useState(false)
     const [filteredData, setFilteredData] = useState([])
 
     const submitHandler = (e) => {
         e.preventDefault()
         console.log(value);
-        if (value !== "") {
-            navigate(`/search/${value}`)
+        if (value !== "" && date !== '') {
+            navigate(`/search/${value}?date=${date}`)
         } else {
             console.log("result not found");
         }
@@ -57,7 +58,7 @@ function AttractionCard() {
                                     onChange={(e) => setValue(e.target.value)}
                                     onFocus={handleFocus}
                                     // onBlur={handleBlur}
-                                    className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+                                    className='capitalize px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
                             </div>
                                 {datalist && value.length > 0 && (
                                     
@@ -84,7 +85,12 @@ function AttractionCard() {
                                 <span className='text-lg'>Date</span>
                             </div>
                             <div className=''>
-                                <input type='date' placeholder='Choose date' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+                                <input 
+                                type='date' 
+                                placeholder='Choose date' 
+                                value={date}
+                                onChange={(e) => setDate(e.target.value)}
+                                className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
                             </div>
                         </div>
                     </div>
