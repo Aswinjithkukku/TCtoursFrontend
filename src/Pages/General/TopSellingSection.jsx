@@ -28,8 +28,8 @@ function TopSellingSection() {
                   <img className='hover:scale-110 object-cover  h-[14em] w-full transition-all duration-500 cursor-pointer' src={process.env.REACT_APP_SERVER_URL + item?.images[0]} alt={item?.title} />
                 </div>
                 <div className='px-3 pt-5 flex justify-between '>
-                  <div className='text-light bg-lightblue text-xs px-2 rounded-lg flex items-center'>
-                    Dubai
+                  <div className='text-light bg-lightblue text-xs px-2 rounded-lg flex items-center capitalize'>
+                    {item?.category?.categoryName}
                   </div>
                   <div className='flex items-center space-x-1 text-yellow-500'>
                     <span className='text-sm'>4.7</span>
