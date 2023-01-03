@@ -35,7 +35,7 @@ function SearchListViewSection() {
                                             <div className='flex justify-between items-center'>
                                                 <span className='space-y-1'>
                                                     <div className='text-xs text-text font-light'>from</div>
-                                                    <div className='text-xl font-medium text-darktext'>AED {item?.activity?.adultPrice}</div>
+                                                    <div className='text-xl font-medium text-darktext'>USD {item?.activity?.adultPrice}</div>
                                                     <div className='text-xs text-text font-light'>*price varies</div>
                                                 </span>
                                                 <span className='space-y-1'>

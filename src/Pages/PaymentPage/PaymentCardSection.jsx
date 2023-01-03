@@ -46,7 +46,7 @@ function PaymentCardSection() {
                         </div> */}
                         <div className='flex items-center justify-between font-medium'>
                             <span className=''>Amount :</span>
-                            <span className=''>{orderPayloadData?.price} AED</span>
+                            <span className=''>{orderPayloadData?.price} USD</span>
                         </div>
                         <div className='flex items-center justify-between font-medium'>
                             <span className=''>VAT percentage :</span>
@@ -54,11 +54,11 @@ function PaymentCardSection() {
                         </div>
                         <div className='flex items-center justify-between font-medium'>
                             <span className=''>VAT amount :</span>
-                            <span className=''>{vatAmount} AED</span>
+                            <span className=''>{vatAmount} USD</span>
                         </div>
                         <div className='flex items-center justify-between font-medium text-lightblue text-lg'>
                             <span className=''>Total :</span>
-                            <span className=''>{orderPayloadData?.price + vatAmount} AED</span>
+                            <span className=''>{orderPayloadData?.price + vatAmount} USD</span>
                         </div>
                     </div>
                 </div>
@@ -69,15 +69,15 @@ function PaymentCardSection() {
                     <div className='text-darktext p-5 space-y-3'>
                         <div className='flex items-center justify-between font-medium'>
                             <span className=''>VAT Amount :</span>
-                            <span className=''>{vatAmount} AED</span>
+                            <span className=''>{vatAmount} USD</span>
                         </div>
                         <div className='flex items-center justify-between font-medium'>
                             <span className=''>Total :</span>
-                            <span className=''>{orderPayloadData?.price + vatAmount} AED</span>
+                            <span className=''>{orderPayloadData?.price + vatAmount} USD</span>
                         </div>
                         <div className='flex items-center justify-between font-bold text-xl'>
                             <span className=''>Final Payment :</span>
-                            <span className=''>{orderPayloadData?.price + vatAmount} AED</span>
+                            <span className=''>{orderPayloadData?.price + vatAmount} USD</span>
                         </div>
                     </div>
                 </div>

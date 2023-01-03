@@ -29,7 +29,7 @@ function VisaHomeScreen() {
             </span>
             <span className='space-y-2'>
               <div className='text-sm text-text'>Starting from</div>
-              <div className='text-xl'>AED 310.00</div>
+              <div className='text-xl'>USD 310.00</div>
             </span>
           </div>
         </div>

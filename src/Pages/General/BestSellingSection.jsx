@@ -41,7 +41,7 @@ function BestSellingSection() {
                 <div className='font-semibold'>{item?.title} </div>
                 <div className='flex justify-between '>
                   <span className='text-sm'>{item?.category?.categoryName}</span>
-                  <span className='text-base font-medium text-blue '>AED {item?.activity?.adultPrice}</span>
+                  <span className='text-base font-medium text-blue '>USD {item?.activity?.adultPrice}</span>
                 </div>
               </div>
             </div>

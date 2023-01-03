@@ -31,7 +31,7 @@ function ComboListViewSection() {
                     </div>
                     <div className='text-lg text-main flex space-x-1 justify-end items-center pb-3 lg:pr-5'>
                         <span className=''>from</span>
-                        <span className=' font-medium flex items-center'> AED 175 <AiOutlineRight /> </span>
+                        <span className=' font-medium flex items-center'> USD 175 <AiOutlineRight /> </span>
                     </div>
                 </div>
             </div>

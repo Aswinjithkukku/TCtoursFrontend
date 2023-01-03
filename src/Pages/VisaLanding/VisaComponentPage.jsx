@@ -19,7 +19,7 @@ function VisaComponentPage() {
                         </div>
                         <div className='p-5 space-y-3 '>
                             <div className='flex border-b py-2'>
-                                <span className='text-2xl text-lightblue'>AED 320.00</span>
+                                <span className='text-2xl text-lightblue'>USD 320.00</span>
                             </div>
                             <div className='flex border-b pb-3 text-text'>
                                 <span className=''>30 days UAE Tourist Visa Medical Insurance (COVID)</span>
@@ -38,7 +38,7 @@ function VisaComponentPage() {
                         </div>
                         <div className='p-5 space-y-3 '>
                             <div className='flex border-b py-2'>
-                                <span className='text-2xl text-lightblue'>AED 740.00</span>
+                                <span className='text-2xl text-lightblue'>USD 740.00</span>
                             </div>
                             <div className='flex border-b pb-3 text-text'>
                                 <span className=''>90 days UAE Tourist Visa Medical Insurance (COVID)</span>
@@ -57,7 +57,7 @@ function VisaComponentPage() {
                         </div>
                         <div className='p-5 space-y-3 '>
                             <div className='flex border-b py-2'>
-                                <span className='text-2xl text-lightblue'>AED 310.00</span>
+                                <span className='text-2xl text-lightblue'>USD 310.00</span>
                             </div>
                             <div className='flex border-b pb-3 text-text'>
                                 <span className=''>14 days UAE Tourist Visa Medical Insurance (COVID)</span>
@@ -76,7 +76,7 @@ function VisaComponentPage() {
                         </div>
                         <div className='p-5 space-y-3 '>
                             <div className='flex border-b py-2'>
-                                <span className='text-2xl text-lightblue'>AED 970.00</span>
+                                <span className='text-2xl text-lightblue'>USD 970.00</span>
                             </div>
                             <div className='flex border-b pb-3 text-text'>
                                 <span className=''>30 days inside the country</span>
@@ -112,7 +112,7 @@ function VisaComponentPage() {
                             </div>
                             <div className='flex justify-between'>
                                 <span className=''>Fees:</span>
-                                <span className='text-xl'>AED 540/-</span>
+                                <span className='text-xl'>USD 540/-</span>
                             </div>
                         </div>
                     </div>

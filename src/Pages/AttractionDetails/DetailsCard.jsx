@@ -109,16 +109,16 @@ function DetailsCard() {
                 <div className=''>
                     <div className=''>
                         {excursion?.isOffer && (
-                            <p className='text-main text-xs'><s>AED {excursion?.activities && (excursion?.activities[0]?.adultPrice)}</s></p>
+                            <p className='text-main text-xs'><s>USD {excursion?.activities && (excursion?.activities[0]?.adultPrice)}</s></p>
                         )}
                     </div>
                     <div className='flex justify-between items-center'>
                         <span className='flex items-center space-x-2'>
-                            <h2 className='text-darktext font-bold text-3xl'>AED {offerAmount}</h2>
+                            <h2 className='text-darktext font-bold text-3xl'>USD {offerAmount}</h2>
                             <p className='text-xs text-darktext font-extralight'>per person</p>
                         </span>
                         {excursion?.isOffer && (
-                            <span className='bg-soft px-3 py-2 rounded-full text-blue'>{excursion?.offerAmount && excursion?.offerAmount} {excursion?.offerAmountType && excursion?.offerAmountType === "flat" ? "AED" : "%"} OFF</span>
+                            <span className='bg-soft px-3 py-2 rounded-full text-blue'>{excursion?.offerAmount && excursion?.offerAmount} {excursion?.offerAmountType && excursion?.offerAmountType === "flat" ? "USD" : "%"} OFF</span>
                         )}
                     </div>
                     {/* <div className=''>
@@ -162,8 +162,8 @@ function DetailsCard() {
                                                 <div className='mx-1'>
                                                     <select className='px-3 w-full border  py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-xl text-darktext' >
                                                         <option>Choose the slot</option>
-                                                        <option>11:30,  127AED</option>
-                                                        <option>12:30,  220AED</option>
+                                                        <option>11:30,  127USD</option>
+                                                        <option>12:30,  220USD</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -233,19 +233,19 @@ function DetailsCard() {
                             <div className='px-5'>
                                 <div className='flex justify-between text-darktext'>
                                     <span className=''>adults</span>
-                                    <span className=''>{excursion?.activities && (Number(excursion?.activities[0]?.adultPrice) * data.adult)}  AED</span>
+                                    <span className=''>{excursion?.activities && (Number(excursion?.activities[0]?.adultPrice) * data.adult)}  USD</span>
                                 </div>
                                 <div className='flex justify-between text-darktext'>
                                     <span className=''>child</span>
-                                    <span className=''>{excursion?.activities && (Number(excursion?.activities[0]?.childPrice) * data.child)} AED</span>
+                                    <span className=''>{excursion?.activities && (Number(excursion?.activities[0]?.childPrice) * data.child)} USD</span>
                                 </div>
                                 {/* <div className='flex justify-between text-darktext'>
                                 <span className=''>Travel</span>
-                                <span className=''> AED</span>
+                                <span className=''> USD</span>
                             </div> */}
                                 <div className='flex justify-between text-darktext'>
                                     <span className='font-semibold text-lg'>Grand Total</span>
-                                    <span className='font-bold text-xl'>{price}.00 AED</span>
+                                    <span className='font-bold text-xl'>{price}.00 USD</span>
                                 </div>
                             </div>
 
