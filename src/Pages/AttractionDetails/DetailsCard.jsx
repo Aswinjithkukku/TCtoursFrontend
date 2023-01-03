@@ -66,9 +66,9 @@ function DetailsCard() {
                     adultsCount: data.adult,
                     childrenCount: data.child,
                     infantCount: 0,
-                    transferType: activity.transfer,
+                    transferType: "without",
                     activity: excursion?.activities && (excursion?.activities[0]?._id),
-                    date: activity.date,
+                    date: "2023-01-12",
                 }
             ]
         }

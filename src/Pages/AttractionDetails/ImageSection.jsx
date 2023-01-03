@@ -16,7 +16,7 @@ function ImageSection() {
                     <div className='col-span-3 space-y-3 px-5'>
                         {excursion?.images?.map((item) => (
                             <div className='' key={item}>
-                                <img src={"http://127.0.0.1:5000" + item} alt='Burj Khalifa'
+                                <img src={process.env.REACT_APP_SERVER_URL + item} alt='img'
                                     className='rounded-xl object-cover w-full h-[16vh] hidden lg:block' />
                             </div>
                         ))}
