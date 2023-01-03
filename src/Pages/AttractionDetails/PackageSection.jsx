@@ -10,8 +10,8 @@ function PackageSection() {
     return (
         <>
             <div className='text-xl font-semibold my-2'>Select Tour Options</div>
-            <div className='border-2 rounded-xl'>
-                <div className='p-4'>
+            <div className='border-2 rounded-xl overflow-x-auto'>
+                <div className='p-4 '>
                     <table className='w-full'>
                         <thead>
                             <tr className='bg-semisoft text-left'>

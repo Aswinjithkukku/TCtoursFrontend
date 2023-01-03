@@ -28,7 +28,7 @@ function ActivityTable({item, index}) {
   },[item.adult,item.child,item.infant,price])
   return (
     <tr className='text-darktext'>
-    <td className='py-3 border-b px-1 max-w-[13em] flex items-start space-x-2'>
+    <td className='py-3 border-b px-1 max-w-[13em] sm:w-[10em] lg:w-[13em] flex items-start space-x-2'>
         <span className=''>
             <input type='checkbox'  className='' 
             name='isChecked'
