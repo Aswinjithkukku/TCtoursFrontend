@@ -67,9 +67,9 @@ const excursionSlice = createSlice({
     setActivities: (state, action) => {
       state.recievedActivities[action.payload.index][action.payload.name] = action.payload.value
     },
-    // setSum : (state,action) => {
-    //   state.recievedActivities[i].p
-    // }
+    setSum: (state, action) => {
+      state.recievedActivities[action.payload.index][action.payload.sum] = action.payload.value
+    },
   },
   extraReducers: {
     [getExcursion.pending]: (state, action) => {
@@ -86,6 +86,7 @@ const excursionSlice = createSlice({
         state.excursion.activities[i].adult = 1
         state.excursion.activities[i].child = 0
         state.excursion.activities[i].infant = 0
+        state.excursion.activities[i].sum = 0
         array.push(state.excursion.activities[i])
       }
       state.recievedActivities = array

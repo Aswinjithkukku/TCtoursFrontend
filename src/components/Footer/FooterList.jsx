@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { AiOutlineDown, AiOutlineUp } from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 
-function FooterList({item}) {
+function FooterList({ item }) {
     const [view, setView] = useState(false)
     return (
         <>
@@ -22,14 +23,18 @@ function FooterList({item}) {
                 {view &&
                     item?.navLinks?.map((links, index) => (
                         <div className="space-y-2 md:hidden" key={index}>
-                            <div className="text-sm">
-                                {links?.name}
-                            </div>
+                            <Link to={links?.link && links?.link}>
+                                <div className="text-sm">
+                                    {links?.name}
+                                </div>
+                            </Link>
                         </div>
                     ))}
                 {item?.navLinks?.map((links, index) => (
                     <div className="space-y-2 hidden md:block" key={index}>
-                        <div className="text-sm">{links?.name}</div>
+                        <Link to={links?.link && links?.link}>
+                            <div className="text-sm">{links?.name}</div>
+                        </Link>
                     </div>
                 ))}
             </div>

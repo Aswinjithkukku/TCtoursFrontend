@@ -104,10 +104,10 @@ function HeroSection() {
                                         </div>
                                     ))}
 
-
-                                    <div id='faqSection' className='py-5'>
+                                    
+                                    {/* <div id='faqSection' className='py-5'>
                                         <FaqSection />
-                                    </div>
+                                    </div> */}
                                     <div id='reviewSection' className=''>
                                         <ReviewSection />
                                     </div>

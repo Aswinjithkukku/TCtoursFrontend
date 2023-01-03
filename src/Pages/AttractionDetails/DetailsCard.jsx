@@ -151,7 +151,6 @@ function DetailsCard() {
 
                                 <div>
                                     <div className=''>
-                                        <input type='checkbox' name='check' className='peer px-3 ' />
                                         <label className='text-darktext ml-1'>{excursion?.activities && (excursion?.activities[0]?.name)}</label>
                                         {/* <div className='py-2 space-y-2 overflow-hidden peer-checked:block hidden cursor-pointer'>
 
