@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import axios from '../../axios'
 import { setUser } from '../../redux/slices/usersSlice'
 
-function LoginMobileCard({ viewloginMobile, setViewloginMobile }) {
+function LoginMobileCard({ setView, view }) {
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -42,17 +42,17 @@ function LoginMobileCard({ viewloginMobile, setViewloginMobile }) {
     };
 
     return (
-        <div className={`fixed ${viewloginMobile ? "bottom-0" : "-bottom-full "} bg-light rounded-t-3xl max-h-[85vh] overflow-y-auto w-full z-30 transition-all duration-500`}>
+        <div className={`fixed ${view.viewloginMobile ? "bottom-0" : "-bottom-full "} bg-light rounded-t-3xl max-h-[85vh] overflow-y-auto w-full z-30 transition-all duration-500`}>
             <form onSubmit={handleSubmit}>
             <div className='py-10 p-7 space-y-5'>
                 <div className=' flex justify-between items-center'>
                     <div className=''>
                         <h2 className='text-3xl text-darktext font-bold'>Welcome Back!!</h2>
                     </div>
-                    <div className=' text-3xl' onClick={() => setViewloginMobile(!viewloginMobile)}><AiOutlineClose /></div>
+                    <div className=' text-3xl' onClick={() => setView(!view)}><AiOutlineClose /></div>
                 </div>
 
-                <div className='space-y-5 py-4'>
+                <div className='space-y-5 py-4 invisible'>
                     <button className='flex items-center border border-main space-x-2 bg-trans w-full  justify-center py-4 rounded-xl hover:bg-light hover:text-main text-maintrans duration-200'>
                         <span className='text-3xl'><FcGoogle /></span>
                         <span className=''>Continue with google</span>
@@ -83,11 +83,8 @@ function LoginMobileCard({ viewloginMobile, setViewloginMobile }) {
                     value={data.password}
                     onChange={handleChange} />
                 </div>
-                <div className='text-text'>
-                    <span className='text-xs'>By Signing In you agree to our</span>
-                    <span className='text-xs text-main hover:text-orange-500 cursor-pointer underline'>{' '} Terms and Conditions</span>
-                </div>
-                <div className=' flex justify-center'>
+
+                <div className=' flex justify-center pt-2'>
                     <div className='space-y-3'>
                         <div className=' flex justify-center'>
                             <button type='submit' className='py-2 rounded-xl px-5 bg-main hover:bg-light hover:text-main text-light duration-300 flex items-center space-x-2'>

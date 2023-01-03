@@ -7,13 +7,19 @@ import RegisterMobileCard from "../Authentication/RegisterMobileCard";
 import LoginMobileCard from "../Authentication/LoginMobileCard";
 import { getHome } from "../../redux/slices/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
+import avatar from '../../static/images/avatar.png'
+import ProfileModal from "../Navbar/ProfileModal";
 
 function Navbar() {
-    const [viewRegister, setViewRegister] = useState(false);
-    const [viewlogin, setViewlogin] = useState(false);
-    const [viewRegisterMobile, setViewRegisterMobile] = useState(false);
-    const [viewloginMobile, setViewloginMobile] = useState(false);
 
+    const [view, setView] = useState({
+        viewRegister: false,
+        viewLogin: false,
+        viewRegisterMobile: false,
+        viewloginMobile: false
+
+    })
+    const [profileView, setProfileView] = useState(false)
 
     const dispatch = useDispatch();
     const { home } = useSelector((state) => state.general);
@@ -32,76 +38,98 @@ function Navbar() {
                             <div className="">
                                 <img
                                     className="h-8 md:h-14"
-                                    src={"http://127.0.0.1:5000" + home?.logo}
+                                    src={process.env.REACT_APP_SERVER_URL + home?.logo}
                                     alt={"img"}
                                 />
                             </div>
                         </Link>
                         <div className="flex space-x-5">
-                            {/* <span className='lg:hidden flex items-center text-stone-600 text-2xl '><CgProfile /></span> */}
-                            {/* <span className='lg:hidden flex items-center text-stone-600 text-2xl' onClick={() => setViewMenu(!viewMenu)}><AiOutlineMenu /></span> */}
-                            {/* <span className='hidden lg:flex items-center text-stone-600 text-2xl'><AiOutlineQuestionCircle /> </span> */}
                             {!isLoggedIn ? (
                                 <>
                                     <span
                                         className="hidden lg:flex items-center text-light text-xs lg:text-sm bg-main px-2 lg:px-3 py-2 lg:my-3 rounded-lg shadow-sm cursor-pointer"
-                                        onClick={() =>
-                                            setViewRegister(!viewRegister)
+                                        onClick={() => setView((prev) => {
+                                            return { ...prev, viewRegister: true }
+                                        })
                                         }
                                     >
                                         Register{" "}
                                     </span>
                                     <span
                                         className="hidden lg:flex items-center text-light text-xs lg:text-sm bg-blue px-2 lg:px-3 py-2 lg:my-3 rounded-lg shadow-sm cursor-pointer"
-                                        onClick={() => setViewlogin(!viewlogin)}
+                                        onClick={() => setView((prev) => {
+                                            return { ...prev, viewLogin: true }
+                                        })
+                                        }
                                     >
                                         Sign in
                                     </span>
                                 </>
                             ) : (
-                                <div className="hidden lg:flex  items-center">
-                                    <div className="text-sm bg-lightblue px-3 py-2 rounded-md text-light">Logged In</div>
+                                <div className="relative">
+                                <div className='hidden lg:flex items-center '>
+                                    <img src={avatar} alt='avatar' className="h-10 w-10 rounded-full object-cover cursor-pointer"
+                                    onClick={() => {
+                                        setProfileView(!profileView)
+                                    }}
+                                    />
                                 </div>
+                            </div>
                             )}
                             {!isLoggedIn ? (
-                            <>
-                            <span
-                                className="lg:hidden flex items-center text-light text-xs lg:text-sm bg-main px-2 lg:px-3   rounded-lg shadow-sm cursor-pointer"
-                                onClick={() =>
-                                    setViewRegisterMobile(!viewRegisterMobile)
-                                }
-                            >
-                                Register{" "}
-                            </span>
-                            <span
-                                className="lg:hidden flex items-center text-light text-xs lg:text-sm bg-blue px-2 lg:px-3   rounded-lg shadow-sm cursor-pointer"
-                                onClick={() =>
-                                    setViewloginMobile(!viewloginMobile)
-                                }
-                            >
-                                Sign in
-                            </span>
-                            </>
+                                <>
+                                    <span
+                                        className="lg:hidden flex items-center text-light text-xs lg:text-sm bg-main px-2 lg:px-3   rounded-lg shadow-sm cursor-pointer"
+                                        onClick={() => setView((prev) => {
+                                            return { ...prev, viewRegisterMobile: true }
+                                        })
+                                        }
+                                    >
+                                        Register{" "}
+                                    </span>
+                                    <span
+                                        className="lg:hidden flex items-center text-light text-xs lg:text-sm bg-blue px-2 lg:px-3   rounded-lg shadow-sm cursor-pointer"
+                                        onClick={() => setView((prev) => {
+                                            return { ...prev, viewloginMobile: true }
+                                        })
+                                        }
+                                    >
+                                        Sign in
+                                    </span>
+                                </>
                             ) : (
-                                <div className='lg:hidden flex items-center'>
-                                <div className="text-xs bg-lightblue px-2 py-1 rounded-md text-light">Logged In</div>
+                                <div className="relative">
+                                    <div className='lg:hidden flex items-center '>
+                                        <img src={avatar} alt='avatar' className="h-8 w-8 rounded-full object-cover cursor-pointer"
+                                        onClick={() => {
+                                            setProfileView(!profileView)
+                                        }}
+                                        />
+                                    </div>
+                                    {profileView && (
+                                        <ProfileModal profileView={profileView} setProfileView={setProfileView} />
+                                    )}
                                 </div>
                             )}
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
+            {/* modals */}
             <>
                 <div>
                     <RegisterMobileCard
-                        viewRegisterMobile={viewRegisterMobile}
-                        setViewRegisterMobile={setViewRegisterMobile}
+                        setView={setView}
+                        view={view}
                     />
-                    {viewRegisterMobile && (
+                    {view.viewRegisterMobile && (
                         <div
                             className={`fixed top-0 bottom-0 left-0 right-0 lightglass z-20`}
                             onClick={() =>
-                                setViewRegisterMobile(!viewRegisterMobile)
+                                setView(!view)
                             }
                         ></div>
                     )}
@@ -109,52 +137,29 @@ function Navbar() {
 
                 <div>
                     <LoginMobileCard
-                        viewloginMobile={viewloginMobile}
-                        setViewloginMobile={setViewloginMobile}
+                        setView={setView}
+                        view={view}
                     />
-                    {viewloginMobile && (
+                    {view.viewloginMobile && (
                         <div
                             className={`fixed top-0 bottom-0 left-0 right-0 lightglass z-20`}
-                            onClick={() => setViewloginMobile(!viewloginMobile)}
+                            onClick={() => setView(!view)}
                         ></div>
                     )}
                 </div>
 
-                {viewRegister && (
-                    <div
-                        className={`fixed top-0 bottom-0 left-0 right-0 lightglass z-20  duration-200 ease-in transition-all `}
-                    >
-                        <div
-                            className={`absolute right-20  top-16 flex justify-center items-center bg-trans text-darktext h-16 w-16 rounded-full text-4xl`}
-                            onClick={() => setViewRegister(!viewRegister)}
-                        >
-                            <AiOutlineClose />
-                        </div>
-                        <Register
-                            setViewRegister={setViewRegister}
-                            setViewlogin={setViewlogin}
-                            viewRegister={viewRegister}
-                            viewlogin={viewlogin}
-                        />
-                    </div>
+                {view.viewRegister && (
+
+                    <Register
+                        setView={setView}
+                        view={view}
+                    />
                 )}
-                {viewlogin && (
-                    <div
-                        className={`fixed top-0 bottom-0 left-0 right-0 lightglass z-20  duration-200 ease-in transition-all `}
-                    >
-                        <div
-                            className={`absolute right-20  top-16 flex justify-center items-center bg-trans text-darktext h-16 w-16 rounded-full text-4xl`}
-                            onClick={() => setViewlogin(!viewlogin)}
-                        >
-                            <AiOutlineClose />
-                        </div>
-                        <Login
-                            setViewRegister={setViewRegister}
-                            setViewlogin={setViewlogin}
-                            viewRegister={viewRegister}
-                            viewlogin={viewlogin}
-                        />
-                    </div>
+                {view.viewLogin && (
+                    <Login
+                        setView={setView}
+                        view={view}
+                    />
                 )}
             </>
         </>

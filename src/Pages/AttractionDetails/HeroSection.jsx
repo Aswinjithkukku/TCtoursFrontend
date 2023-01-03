@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { CiLocationOn } from 'react-icons/ci'
 // import { GoThumbsup } from 'react-icons/go'
 import { SlCalender } from 'react-icons/sl'
-import {  AiFillStar, AiOutlineHeart, AiOutlineClose } from 'react-icons/ai'
+import { AiFillStar, AiOutlineHeart, AiOutlineClose } from 'react-icons/ai'
 // import { FaHotel } from 'react-icons/fa'
 import { RxShare2 } from 'react-icons/rx'
 // import { BsCalendar2X } from 'react-icons/bs'
@@ -17,18 +17,20 @@ import FeatureSection from './FeatureSection'
 // import TourOverview from './TourOverview'
 import { useDispatch, useSelector } from 'react-redux'
 import { getExcursion } from '../../redux/slices/excursionSlice'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import Rating from '../../components/Rating/Rating'
 
 function HeroSection() {
     const dispatch = useDispatch()
+    // const navigate = useNavigate()
     const { id } = useParams()
 
     const { excursion } = useSelector(state => state.excursion)
 
     useEffect(() => {
         dispatch(getExcursion(id))
-    }, [dispatch])
-    // const [viewBook, setViewBook] = useState(false)
+    }, [dispatch, id])
+
     const [viewBookCard, setViewBookCard] = useState(false)
 
     return (
@@ -46,14 +48,9 @@ function HeroSection() {
                                         </div>
                                         <div className='flex items-center space-x-3 text-sm'>
                                             <span className=' text-yellow-500 flex space-x-1 '>
-                                                <AiFillStar />
-                                                <AiFillStar />
-                                                <AiFillStar />
-                                                <AiFillStar />
-                                                <AiFillStar />
+                                                <Rating value={4} text={"20 review"} color={"#FED049"} />
                                             </span>
-                                            <span className='text-text'>(1935 Reviews)</span>
-                                            <span className='flex items-center text-blue'><CiLocationOn /> {excursion?.destination?.name} </span>
+                                            <span className='flex items-center text-blue capitalize'><CiLocationOn /> {excursion?.destination?.name} </span>
                                         </div>
 
                                         <div className='text-sm flex items-center space-x-1 text-green-600'>
@@ -85,32 +82,7 @@ function HeroSection() {
                             </div>
                             <div className='md:my-5'>
                                 <>
-                                    <div className=' bg-lightblue py-5 md:rounded-md sticky top-0  gap-3 z-10'>
-                                        <div className='overflow-x-auto'>
-                                            <div className='flex space-x-1 items-center px-1 lg:px-5'>
-                                                <button className='border border-lightblue rounded-lg hover:bg-lightblue hover:text-light hover:border-light text-blue w-full py-3 text-center focus:ring-light focus:bg-lightblue focus:text-light focus:ring-1 focus:outline-none px-3 lg:px-5  focus:border-none bg-light'>
 
-                                                    <a href='#packageSection'> <span className=' whitespace-nowrap px-3 py-2'>Package Option</span></a>
-                                                </button>
-                                                <button className='border border-lightblue rounded-lg hover:bg-lightblue hover:text-light hover:border-light text-blue w-full py-3 text-center focus:ring-light focus:bg-lightblue focus:text-light focus:ring-1 focus:outline-none px-3 lg:px-5  focus:border-none bg-light'>
-
-                                                    <span className=' px-3 py-2'>Map</span>
-                                                </button>
-                                                <button className='border border-lightblue rounded-lg hover:bg-lightblue hover:text-light hover:border-light text-blue w-full py-3 text-center focus:ring-light focus:bg-lightblue focus:text-light focus:ring-1 focus:outline-none px-3 lg:px-5  focus:border-none bg-light'>
-
-                                                <a href='#reviewSection'> <span className=' px-3 py-2'>Reviews</span></a>
-                                                </button>
-                                                <button className='border border-lightblue rounded-lg hover:bg-lightblue hover:text-light hover:border-light text-blue w-full py-3 text-center focus:ring-light focus:bg-lightblue focus:text-light focus:ring-1 focus:outline-none px-3 lg:px-5  focus:border-none bg-light'>
-
-                                                    <span className=' px-3 py-2'>Policies</span>
-                                                </button>
-                                                <button className='border border-lightblue rounded-lg hover:bg-lightblue hover:text-light hover:border-light text-blue w-full py-3 text-center focus:ring-light focus:bg-lightblue focus:text-light focus:ring-1 focus:outline-none px-3 lg:px-5  focus:border-none bg-light'>
-
-                                                    <span className=' px-3 py-2'>FAQs</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <div id='packageSection' className='p-5 bg-light rounded-2xl '>
                                         <PackageSection />
@@ -121,7 +93,7 @@ function HeroSection() {
 
 
                                     {excursion?.sections?.map((item) => (
-                                        <div className='bg-light py-10 px-4 rounded-2xl md:my-4 w-full text-darktext'key={item.title} >
+                                        <div className='bg-light py-10 px-4 rounded-2xl md:my-4 w-full text-darktext' key={item.title} >
                                             <div className='py-3'>
                                                 <span className='text-xl font-semibold text-darktext '>{item?.title}</span>
                                             </div>
@@ -133,18 +105,13 @@ function HeroSection() {
                                     ))}
 
 
-                                    <div id='reviewSection' className=''>
-                                        <ReviewSection />
-                                    </div>
-                                    {/* <div id='policySection' className='py-5'>
-                                        <TourOverview />
-                                    </div>
-                                    <div id='policySection' className='py-5'>
-                                        <PolicySection />
-                                    </div> */}
                                     <div id='faqSection' className='py-5'>
                                         <FaqSection />
                                     </div>
+                                    <div id='reviewSection' className=''>
+                                        <ReviewSection />
+                                    </div>
+
                                 </>
                             </div>
                         </div>

@@ -12,6 +12,7 @@ import {
     SearchingResultPage,
     PaymentPage
 } from '../Pages/Hero'
+import { Error404Page } from "../components/Layouts";
 
 const ThemeRoutes = [
     {
@@ -21,6 +22,7 @@ const ThemeRoutes = [
         ),
         children: [
             { path: "", element: <AttractionHomePage /> },
+            { path: "/error", element: <Error404Page /> },
             { path: "/attraction", element: <AttractionLandingPage /> },
             { path: "/details/:id", element: <AttractionDetailsPage /> },
             { path: "/combo", element: <ComboLandingPage /> },

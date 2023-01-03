@@ -18,13 +18,13 @@ function SearchListViewSection() {
                                 <div className='h-full snap-start mt-2 bg-light shadow-md p-3 rounded-3xl cursor-pointer mx-2 md:mx-0' onClick={() => navigate(`/details/${item?._id}`)}>
                                     <div className=' relative space-y-3'>
                                         <div className='overflow-hidden rounded-2xl '>
-                                            <img className='hover:scale-110 object-cover  h-[14em] w-full transition-all duration-500 cursor-pointer' src={"http://localhost:5000" + item?.images[0]} alt={item?.title} />
+                                            <img className='hover:scale-110 object-cover  h-[14em] w-full transition-all duration-500 cursor-pointer' src={process.env.REACT_APP_SERVER_URL + item?.images[0]} alt={item?.title} />
                                         </div>
                                         <div className='px-3 pt-5 flex justify-between '>
                                             <div className='text-lg font-semibold  text-darktext flex items-center'>
                                                 {item?.title}
                                             </div>
-                                            <div className='flex items-center space-x-1 text-text'>
+                                            <div className='flex items-center space-x-1 text-text '>
                                                 <span className='text-3xl'><AiOutlineHeart /></span>
                                             </div>
                                         </div>
@@ -47,7 +47,7 @@ function SearchListViewSection() {
                                         <div className='px-3 space-y-2 pb-5  text-darktext'>
                                             <div className='flex space-x-1 items-center'>
                                                 <span className='text-lightblue'> <AiOutlineClockCircle /></span>
-                                                <span className='text-text text-sm'>7 Days</span>
+                                                <span className='text-text text-sm'>Duration 7 Days</span>
                                             </div>
                                             <div className='flex space-x-3 items-center'>
                                                 <div className='flex space-x-1 items-center'>
@@ -56,7 +56,7 @@ function SearchListViewSection() {
                                                 </div>
                                                 <div className='flex space-x-1 items-center'>
                                                     <span className='text-lightblue'><TiTick /></span>
-                                                    <span className='text-text text-sm'>New On TCtours</span>
+                                                    <span className='text-text text-sm'>New On Travellers Choice</span>
                                                 </div>
                                             </div>
                                         </div>

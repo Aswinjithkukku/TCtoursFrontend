@@ -99,9 +99,9 @@ function DetailsCard() {
             console.log(err);
         }
     }
-    const takeData = (e) => {
-        return setActivity({ ...activity, [e.target.name]: e.target.value })
-    }
+    // const takeData = (e) => {
+    //     return setActivity({ ...activity, [e.target.name]: e.target.value })
+    // }
 
     return (
         <>
@@ -127,7 +127,7 @@ function DetailsCard() {
                     <form onSubmit={submitHandler}>
                         <div className='inputs space-y-5 my-4'>
 
-                            <div className='space-y-1'>
+                            {/* <div className='space-y-1'>
                                 <div className='flex items-center space-x-2 text-darktext'>
                                     <span className='text-lg text-lightblue'><BsCalendar2Day /> </span>
                                     <span className='text-lg'>Dates</span>
@@ -142,7 +142,7 @@ function DetailsCard() {
                                         onChange={takeData}
                                     />
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className='space-y-1'>
                                 <div className='flex items-center space-x-2 text-darktext'>
@@ -153,21 +153,21 @@ function DetailsCard() {
                                     <div className=''>
                                         <input type='checkbox' name='check' className='peer px-3 ' />
                                         <label className='text-darktext ml-1'>{excursion?.activities && (excursion?.activities[0]?.name)}</label>
-                                        <div className='py-2 space-y-2 overflow-hidden peer-checked:block hidden cursor-pointer'>
+                                        {/* <div className='py-2 space-y-2 overflow-hidden peer-checked:block hidden cursor-pointer'>
 
-                                            {/* <div className='space-y-1'>
-                                            <div className='flex items-center space-x-2 text-darktext'>
-                                                <span className='text-lg text-lightblue'><GiClockwork /> </span>
-                                                <span className='text-lg'>Choose Time Slot</span>
+                                            <div className='space-y-1'>
+                                                <div className='flex items-center space-x-2 text-darktext'>
+                                                    <span className='text-lg text-lightblue'><GiClockwork /> </span>
+                                                    <span className='text-lg'>Choose Time Slot</span>
+                                                </div>
+                                                <div className='mx-1'>
+                                                    <select className='px-3 w-full border  py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-xl text-darktext' >
+                                                        <option>Choose the slot</option>
+                                                        <option>11:30,  127AED</option>
+                                                        <option>12:30,  220AED</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div className='mx-1'>
-                                                <select className='px-3 w-full border  py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-xl text-darktext' >
-                                                    <option>Choose the slot</option>
-                                                    <option>11:30,  127AED</option>
-                                                    <option>12:30,  220AED</option>
-                                                </select>
-                                            </div>
-                                        </div> */}
                                             <div className='space-y-1'>
                                                 <div className='flex items-center space-x-2 text-darktext'>
                                                     <span className='text-lg text-lightblue'><AiFillCar /> </span>
@@ -186,7 +186,7 @@ function DetailsCard() {
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@ function DetailsCard() {
 
 
 
-                            <div className=' flex space-x-2'>
+                            {/* <div className=' flex space-x-2'>
                                 <div className='space-y-1'>
                                     <div className='flex items-center space-x-2 text-darktext'>
                                         <span className='text-lg text-lightblue'><IoIosMan /> </span>
@@ -203,7 +203,7 @@ function DetailsCard() {
                                     <div className=''>
                                         <input
                                             type='number'
-                                            min={1}
+                                            min='1'
                                             placeholder='Adult number'
                                             className='px-3 w-full border placeholder:text-sm placeholder:text-darktext py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-xl text-darktext'
                                             name='adult'
@@ -229,7 +229,7 @@ function DetailsCard() {
                                         />
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className='px-5'>
                                 <div className='flex justify-between text-darktext'>

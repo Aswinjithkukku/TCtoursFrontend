@@ -22,7 +22,7 @@ function BlogHeroSection() {
                         <div className=' mt-2 bg-light p-3 rounded-3xl cursor-pointer' key={index}>
                             <div className=' relative'>
                                 <div className='overflow-hidden rounded-t-3xl rounded-b-md'>
-                                    <img className='hover:scale-110 object-cover  h-[14em] lg:[14em] w-full transition-all duration-500 cursor-pointer' src={item.img} alt='Loreum' />
+                                    <img className='hover:scale-110 object-cover  h-[14em] lg:[14em] w-full transition-all duration-500 cursor-pointer' src={process.env.REACT_APP_SERVER_URL + item?.img} alt='Loreum' />
                                 </div>
                                 <div className='px-3 space-y-3 pb-5 pt-3 text-darktext'>
                                     <div className='font-semibold'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempo </div>

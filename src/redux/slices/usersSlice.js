@@ -8,7 +8,6 @@ const initialState = {
     countries: [],
     jwtToken: localStorage.getItem("random-string") || "",
     isLoggedIn: false,
-    // getinitialState
 };
 
 const fetchUser = createAsyncThunk(
@@ -25,6 +24,13 @@ const fetchUser = createAsyncThunk(
         } else {
             throw Error("");
         }
+    }
+);
+
+const logoutUser = createAsyncThunk(
+    '/usersSlice/logoutUser',
+    async (dispatch,  getState ) => {
+        const response = await axios.get('/user/logout');
     }
 );
 
@@ -50,10 +56,17 @@ const usersSlice = createSlice({
             state.isSiteLoading = false;
             localStorage.removeItem("random-string");
         },
+        [logoutUser.fulfilled]: (state, action) => {
+            state.isLoggedIn = false;
+            state.user = {};
+            state.jwtToken = '';
+
+        localStorage.removeItem('random-string')
+        },
     },
 });
 
-export { fetchUser };
+export { fetchUser, logoutUser };
 
 export const { setUser } = usersSlice.actions;
 

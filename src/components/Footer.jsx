@@ -11,15 +11,15 @@ function Footer() {
             <div className="mx-5 lg:max-w-screen-xl lg:mx-auto">
                 <div className="md:grid md:grid-cols-5 md:gap-5">
 
-                    {home?.footer?.map((item) => (
-                            <FooterList item={item} />
+                    {home?.footer?.map((item,index) => (
+                            <FooterList item={item} key={index} />
                     ))}
                 </div>
 
                 <div className="flex justify-center items-center py-7 border-text border-b-2 space-x-5">
                     <div className="">
                         <img
-                            src={home?.logo}
+                            src={process.env.REACT_APP_SERVER_URL + home?.logo}
                             alt="tc"
                             className="h-10 md:h-auto"
                         />

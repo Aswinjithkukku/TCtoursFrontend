@@ -14,7 +14,7 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 0.5em;
     height: 1em;
 }
@@ -33,7 +33,7 @@ body {
 }
 ::-webkit-scrollbar:horizontal {
     display: none;
-}
+} */
 
 .heading {
     font-family: "Josefin Sans", sans-serif;

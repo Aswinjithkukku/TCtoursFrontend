@@ -7,7 +7,9 @@ const initialState = {
   reviews: [],
   categories: [],
   excursions: [],
-  excursionAll: []
+  excursionAll: [],
+  recievedActivities: [],
+
 };
 
 export const excursionall = createAsyncThunk(
@@ -27,25 +29,15 @@ export const excursionall = createAsyncThunk(
 export const getAllExcursions = createAsyncThunk(
   "excursion/getAllExcursions",
   async (args, { getState }) => {
-    // const { token } = getState().user
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // };
-    const response = await axios.get(`/attractions/all?limit=100&destination=${args.destination}&category=${args.category}`);
+    const response = await axios.get(
+      `/attractions/all?keyword=${args.keyword}&limit=100&destination=${args.destination}&category=${args.category}`
+    );
     return response.data;
   }
 );
 export const getExcursion = createAsyncThunk(
   "excursion/getExcursion",
   async (args, { getState }) => {
-    // const { token } = getState().user
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // };
     console.log(args);
     const response = await axios.get(`/attractions/single/${args}`);
     return response.data;
@@ -55,12 +47,6 @@ export const getExcursion = createAsyncThunk(
 export const getReviews = createAsyncThunk(
   "excursion/getReviews",
   async (args, { getState }) => {
-    // const { token } = getState().user
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // };
     const response = await axios.get(`/attractions/reviews/single/${args}`);
     return response.data;
   }
@@ -77,6 +63,14 @@ export const getCategories = createAsyncThunk(
 const excursionSlice = createSlice({
   name: "excursion",
   initialState,
+  reducers: {
+    setActivities: (state, action) => {
+      state.recievedActivities[action.payload.index][action.payload.name] = action.payload.value
+    },
+    // setSum : (state,action) => {
+    //   state.recievedActivities[i].p
+    // }
+  },
   extraReducers: {
     [getExcursion.pending]: (state, action) => {
       state.loading = true;
@@ -84,6 +78,17 @@ const excursionSlice = createSlice({
     [getExcursion.fulfilled]: (state, action) => {
       state.loading = false;
       state.excursion = action.payload;
+      let array = []
+      for(let i = 0 ; i < state.excursion.activities.length ; i++) {
+        state.excursion.activities[i].isChecked = i === 0 ? true : false
+        state.excursion.activities[i].date = ''
+        state.excursion.activities[i].transfer = 'without'
+        state.excursion.activities[i].adult = 1
+        state.excursion.activities[i].child = 0
+        state.excursion.activities[i].infant = 0
+        array.push(state.excursion.activities[i])
+      }
+      state.recievedActivities = array
     },
     [getReviews.pending]: (state, action) => {
       state.loading = true;
@@ -116,7 +121,8 @@ const excursionSlice = createSlice({
   },
 });
 
-// export const {
-// } = excursionSlice.actions
+export const {
+  setActivities
+} = excursionSlice.actions
 
 export default excursionSlice.reducer;

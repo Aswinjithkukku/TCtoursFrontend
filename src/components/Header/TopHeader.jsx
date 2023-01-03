@@ -32,7 +32,7 @@ export default function TopHeader() {
                                 </a>
                             </span>
                             <span className=" lg:text-lg">
-                                <a href={`mailto:${home?.data?.email}`}>
+                                <a href={`mailto:${home?.email}`}>
                                     <AiOutlineMail />
                                 </a>
                             </span>
@@ -45,7 +45,7 @@ export default function TopHeader() {
                                 })
                             }}
                         >
-                            <span className="text-xs">Help line</span>
+                            <span className="text-xs">Helpline</span>
                             <span className="text-sm">
                                 {view.helpline ? (
                                     <AiOutlineUp />

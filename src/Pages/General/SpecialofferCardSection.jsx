@@ -16,7 +16,7 @@ function SpecialofferCardSection() {
                         <div className='  h-[23em] group cursor-pointer'>
                             <div className=' relative '>
                                 <div className='overflow-hidden lg:rounded-xl bg-bottom'>
-                                    <img className='group-hover:scale-110 object-cover  h-[23em] w-full transition-all duration-500 cursor-pointer' src={'http://127.0.0.1:5000' + home?.cards[0]?.backgroundImage} alt='special offer' />
+                                    <img className='group-hover:scale-110 object-cover  h-[23em] w-full transition-all duration-500 cursor-pointer' src={process.env.REACT_APP_SERVER_URL + home?.cards[0]?.backgroundImage} alt='special offer' />
                                 </div>
                                 <div className='absolute top-10 px-10'>
                                     <div className=' pt-5'>
@@ -45,7 +45,7 @@ function SpecialofferCardSection() {
                             <div className=' h-[23em] group mx-3 cursor-pointer'>
                                 <div className='relative'>
                                     <div className='overflow-hidden rounded-xl'>
-                                        <img className='group-hover:scale-110 object-cover  h-[23em] w-full transition-all duration-500 cursor-pointer' src={"http://127.0.0.1:5000" + item.backgroundImage} alt='combo' />
+                                        <img className='group-hover:scale-110 object-cover  h-[23em] w-full transition-all duration-500 cursor-pointer' src={process.env.REACT_APP_SERVER_URL + item.backgroundImage} alt='combo' />
                                     </div>
                                     <div className='absolute h-full w-full top-0 bg-cardtransblue rounded-xl'>
                                         <div className=' px-10 py-10'>

@@ -12,14 +12,16 @@ function AttractionCard() {
     const [date, setDate] = useState('')
     const [datalist, setDatalist] = useState(false)
     const [filteredData, setFilteredData] = useState([])
+    const [validate, setValidate] = useState(false)
 
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log(value);
         if (value !== "" && date !== '') {
             navigate(`/search/${value}?date=${date}`)
+        } else if(value !== "" && date === "") {
+            setValidate(true)
         } else {
-            console.log("result not found");
+            console.log("good to go");;
         }
     }
 
@@ -28,7 +30,6 @@ function AttractionCard() {
     }
 
     const { initialData } = useSelector(state => state.home) 
-    console.log(initialData?.destinations);
 
 
 
@@ -39,6 +40,12 @@ function AttractionCard() {
 
         setFilteredData(list)
     }, [value, initialData])
+
+    useEffect(() =>{
+        if(date.length > 1){
+            setValidate(false)
+        }
+    },[date])
 
     return (
         <>
@@ -60,7 +67,7 @@ function AttractionCard() {
                                     // onBlur={handleBlur}
                                     className='capitalize px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
                             </div>
-                                {datalist && value.length > 0 && (
+                                {datalist && (
                                     
                                     <div className='absolute max-h-[17em] w-[21em] mt-1  bg-light rounded-lg overflow-y-auto'>
                                         <div className='w-full p-2 overflow-y-auto'>
@@ -90,7 +97,7 @@ function AttractionCard() {
                                 placeholder='Choose date' 
                                 value={date}
                                 onChange={(e) => setDate(e.target.value)}
-                                className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+                                className={`px-3 w-full  placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl  ${validate ? "text-red-500 border-red-600 border" : "border-none text-darktext"}`} />
                             </div>
                         </div>
                     </div>

@@ -5,8 +5,7 @@ function CurrencyModal({ setView, view }) {
     return (
         <div className="absolute z-20 top-7 md:top-8 -left-8 bg-[#002366]">
             <div className="mx-7 space-y-3 py-2">
-                <div className="">EUR</div>
-                <div className="">INR</div>
+                <div className="">AED</div>
                 <div className="">USD</div>
             </div>
         </div>

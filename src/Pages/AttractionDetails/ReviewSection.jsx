@@ -33,7 +33,7 @@ function ReviewSection() {
       <div className='lg:max-w-6xl lg:mx-auto py-7'>
         <div className=''>
           {reviews?.attractionReviews?.map((item) => (
-            <div className='bg-light  lg:rounded-xl my-3 overflow-hidden'>
+            <div className='bg-light  lg:rounded-xl my-3 overflow-hidden' key={item?._id}>
               <div className='p-3 px-5 bg-semisoft '>
                 <div className='flex justify-between items-center'>
                   <div className='flex items-end space-x-2'>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from '../../axios'
 import { GiIsland } from 'react-icons/gi'
+import Swal from 'sweetalert2'
 
 function SubscribeSection() {
 
@@ -15,10 +16,13 @@ function SubscribeSection() {
         try {
             const { data } = await axios.post('/subscribers/subscribe', email)
             console.log(data);
+            Swal.fire('You have successfully Subscribed!!')
+        
         } catch (error) {
             console.log(error?.response?.data?.error);
         }
     }
+
 
 
     return (

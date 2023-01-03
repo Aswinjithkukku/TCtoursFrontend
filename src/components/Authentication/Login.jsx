@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
-import { AiOutlineRight } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineRight } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 
 import axios from "../../axios";
 import { setUser } from "../../redux/slices/usersSlice";
 
-function Login({ setViewRegister, setViewlogin, viewlogin, viewRegister }) {
+function Login({ setView, view }) {
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -34,6 +34,7 @@ function Login({ setViewRegister, setViewlogin, viewlogin, viewRegister }) {
 
             dispatch(setUser(response.data));
             setIsLoading(false);
+            setView(!view)
         } catch (err) {
             setError(
                 err?.response?.data?.error || "Something went wrong, Try again"
@@ -41,10 +42,16 @@ function Login({ setViewRegister, setViewlogin, viewlogin, viewRegister }) {
             setIsLoading(false);
         }
     };
-
+    if(!view) return null
     return (
+        <div className="fixed top-0 left-0 right-0 bottom-0 z-30 modal_overlay" onClick={() => setView(!view)}>
+        <div className={`absolute right-20  top-16 flex justify-center items-center bg-trans text-darktext h-16 w-16 rounded-full text-4xl`}
+            onClick={() => setView(!view)}
+        >
+            <AiOutlineClose />
+        </div>
         <div className="flex justify-center items-center w-full h-[100vh] z-50">
-            <div className="h-[75vh] w-8/12 bg-[#fcfeff] rounded-2xl overflow-hidden">
+            <div className="h-[75vh] w-8/12 bg-[#fcfeff] rounded-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
                 <div className="m-4 h-[96%] relative">
                     <div className="bglogindubai h-[100%]  bg-right rounded-2xl flex justify-start items-center pl-6 ">
                         <div className="w-[24em] loginCard h-[40em] shadow-md  rounded-2xl">
@@ -56,7 +63,7 @@ function Login({ setViewRegister, setViewlogin, viewlogin, viewRegister }) {
                                     Welcome Back...
                                 </div>
 
-                                <div className="space-y-5 py-4">
+                                <div className="space-y-5 py-4 invisible" >
                                     <button className="flex items-center shadow-md space-x-2 bg-trans w-full  justify-center py-4 rounded-xl hover:bg-light hover:text-main text-maintrans duration-200">
                                         <span className="text-3xl">
                                             <FcGoogle />
@@ -98,15 +105,8 @@ function Login({ setViewRegister, setViewlogin, viewlogin, viewRegister }) {
                                         onChange={handleChange}
                                     />
                                 </div>
-                                <div className="text-text">
-                                    <span className="text-xs">
-                                        By Signing In you agree to our
-                                    </span>
-                                    <span className="text-xs text-main hover:text-orange-500 cursor-pointer underline">
-                                        Terms and Conditions
-                                    </span>
-                                </div>
-                                <div className="flex justify-between">
+
+                                <div className="flex justify-between pt-2">
                                     <button
                                         type="submit"
                                         className="py-2 rounded-xl px-5 bg-main hover:bg-light hover:text-main text-light duration-300 flex items-center space-x-2"
@@ -121,7 +121,7 @@ function Login({ setViewRegister, setViewlogin, viewlogin, viewRegister }) {
                                             <RiLockPasswordLine />{" "}
                                         </span>
                                         <span className="">
-                                            Forgot password
+                                            Reset password
                                         </span>
                                     </span>
                                 </div>
@@ -131,11 +131,10 @@ function Login({ setViewRegister, setViewlogin, viewlogin, viewRegister }) {
                                     </span>
                                     <span
                                         className="text-main underline cursor-pointer"
-                                        onClick={async () => {
-                                            await setViewlogin(!viewlogin);
-                                            await setViewRegister(
-                                                !viewRegister
-                                            );
+                                        onClick={ () => {
+                                            setView((prev) => {
+                                                return {...prev, viewRegister: true , viewLogin: false}
+                                            })
                                         }}
                                     >
                                         Register
@@ -145,6 +144,7 @@ function Login({ setViewRegister, setViewlogin, viewlogin, viewRegister }) {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     );

@@ -1,10 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 function FaqSection() {
+    const { excursion } = useSelector(state => state.excursion)
   return (
     <div>
         <div className='py-5'>
-            <div className='font-medium text-2xl text-darktext pb-5'>Dubai Visa FAQs</div>
+            <div className='font-medium text-2xl text-darktext pb-5'>{excursion?.title} FAQs</div>
             <div className='bg-light text-darktext font-light cursor-pointer rounded-2xl'>
                 <div className='p-5 relative border-b'>
                     <input type='checkbox' className='peer absolute top-0 inset-x-0 w-full h-10 opacity-0  cursor-pointer' />

@@ -75,7 +75,7 @@ function HeroSection() {
                             >
                                 {home?.heroImages?.map((item,index) => (
                                 <div className='bg-inherit h-full' key={index}>
-                                     <img src={'http://127.0.0.1:5000'+item} alt='banner' className='bg-cover h-full' />
+                                     <img src={ process.env.REACT_APP_SERVER_URL+ item } alt='banner' className='bg-cover h-full' />
                                 </div>
                                 ))} 
 
@@ -141,7 +141,7 @@ function HeroSection() {
                                 </div>
 
                                 <div className='flex items-center justify-center'>
-                                    <div className='bg-light w-full  md:rounded-[2em] relative'>
+                                    <div className='bg-light w-full  md:rounded-[2em] relative '>
                                         <>
                                             {viewAttraction && (
                                                 <AttractionCard />

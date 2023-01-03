@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from '../../axios';
 import { setUser } from '../../redux/slices/usersSlice';
 
-function RegisterMobileCard({ viewRegisterMobile, setViewRegisterMobile }) {
+function RegisterMobileCard({ view, setView }) {
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -45,14 +45,14 @@ function RegisterMobileCard({ viewRegisterMobile, setViewRegisterMobile }) {
   };
 
   return (
-    <div className={`fixed ${viewRegisterMobile ? "bottom-0" : "-bottom-full "} bg-light rounded-t-3xl overflow-y-auto max-h-[98vh] w-full z-30 transition-all duration-500`}>
+    <div className={`fixed ${view.viewRegisterMobile ? "bottom-0" : "-bottom-full "} bg-light rounded-t-3xl overflow-y-auto max-h-[98vh] w-full z-30 transition-all duration-500`}>
       <form onSubmit={handleSubmit}>
         <div className='p-7 py-10 space-y-4'>
           <div className=' flex justify-between items-center'>
             <div className=''>
               <h2 className='text-3xl text-darktext font-bold'>Greetings..</h2>
             </div>
-            <div className=' text-3xl' onClick={() => setViewRegisterMobile(!viewRegisterMobile)}><AiOutlineClose /></div>
+            <div className=' text-3xl' onClick={() => setView(!view)}><AiOutlineClose /></div>
           </div>
           <div className='space-y-2'>
             <label className='text-text '> Name</label>
@@ -120,18 +120,18 @@ function RegisterMobileCard({ viewRegisterMobile, setViewRegisterMobile }) {
               name="password"
               value={data.password || ""} />
           </div>
-          <div className='text-text'>
+          {/* <div className='text-text'>
             <span className='text-xs'>By register you agree to our</span>
             <span className='text-xs text-blue hover:text-sky-500 cursor-pointer underline'>{' '} Terms and Conditions</span>
-          </div>
-          <div className='flex justify-center'>
+          </div> */}
+          <div className='flex justify-center pt-2'>
             <button type='submit' className='py-2 rounded-xl px-10 bg-blue hover:bg-light hover:text-blue text-light duration-300 flex items-center space-x-2 cursor-pointer'>
               <span className=''>Register</span>
               <span className=''><AiOutlineRight /> </span>
             </button>
 
           </div>
-          <div className='flex items-center justify-between pt-2'>
+          {/* <div className='flex items-center justify-between pt-2'>
             <button className='flex items-center border border-lightblue space-x-2 bg-trans w-full mx-3 justify-center py-2 rounded-xl hover:bg-light hover:text-blue text-bluetrans duration-200'>
               <span className=''><FcGoogle /></span>
               <span className=''>Google</span>
@@ -140,7 +140,7 @@ function RegisterMobileCard({ viewRegisterMobile, setViewRegisterMobile }) {
               <span className='text-blue'><BsFacebook /> </span>
               <span className=''>Facebook</span>
             </button>
-          </div>
+          </div> */}
         </div>
       </form>
     </div>

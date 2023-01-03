@@ -4,7 +4,7 @@ function Rating({ value, text, color }) {
   return (
     <>
       {" "}
-      <div className="rating flex">
+      <div className="rating flex items-center">
         <span>
           <i
             style={{ color }}
