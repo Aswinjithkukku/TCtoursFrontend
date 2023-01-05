@@ -8,6 +8,8 @@ import BlogLandingPage from "./BlogLandingPage";
 import BlogDetailsPage from "./BlogDetailsPage";
 import SearchingResultPage from "./SearchingResultPage";
 import PaymentPage from "./PaymentPage";
+import ProfileMainPage from "./ProfileMainPage";
+import ProfileSettingsPage from "./ProfileSettingsPage";
 
 export {
   AttractionLandingPage,
@@ -20,4 +22,6 @@ export {
   BlogDetailsPage,
   SearchingResultPage,
   PaymentPage,
+  ProfileMainPage,
+  ProfileSettingsPage,
 };

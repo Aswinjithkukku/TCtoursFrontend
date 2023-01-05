@@ -1,21 +1,26 @@
 import React from 'react'
-import { FaLuggageCart } from 'react-icons/fa'
+import { ImProfile } from 'react-icons/im'
 import { BiLogOut } from 'react-icons/bi'
 import { useDispatch } from 'react-redux'
 import { logoutUser } from '../../redux/slices/usersSlice'
+import { useNavigate } from 'react-router-dom'
 
 function ProfileModal({ profileView, setProfileView }) {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   if (!profileView) return null
   return (
-    <div className='absolute top-14 -left-40 z-20'>
-      <div className='bg-semisoft border  w-[260px] rounded-md text-darktext'>
-        <div className='flex space-x-3 items-center hover:bg-bluetrans px-5 py-3 cursor-pointer '>
-          <span className='text-xl'><FaLuggageCart /></span>
-          <span className=''>Orders</span>
+    <div className='absolute lg:top-14 right-0 z-20'>
+      <div className='bg-semisoft border  w-[260px] rounded-md text-darktext '>
+        <div className='flex space-x-3 items-center hover:bg-darktext px-5 py-3 cursor-pointer hover:text-text' onClick={() => {
+          navigate('/profile')
+          setProfileView(!profileView)
+        }}>
+          <span className='text-xl'><ImProfile /></span>
+          <span className=''>Profile</span>
         </div>
-        <div className='flex space-x-3 items-center hover:bg-bluetrans px-5 py-3 cursor-pointer '
+        <div className='flex space-x-3 items-center hover:bg-darktext px-5 py-3 cursor-pointer hover:text-text'
           onClick={() => {
             dispatch(logoutUser())
             setProfileView(!profileView)

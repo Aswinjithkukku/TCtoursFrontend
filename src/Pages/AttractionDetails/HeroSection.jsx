@@ -48,7 +48,7 @@ function HeroSection() {
                                         </div>
                                         <div className='flex items-center space-x-3 text-sm'>
                                             <span className=' text-yellow-500 flex space-x-1 '>
-                                                <Rating value={4} text={"20 review"} color={"#FED049"} />
+                                                <Rating value={excursion?.averageRating} text={excursion?.totalReviews} color={"#FED049"} />
                                             </span>
                                             <span className='flex items-center text-blue capitalize'><CiLocationOn /> {excursion?.destination?.name} </span>
                                         </div>

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { BsCalendar2Date, BsEmojiHeartEyes } from 'react-icons/bs'
 import { IoLocationOutline } from 'react-icons/io5'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { useHandleClickOutside } from '../../hooks'
 
 
 function AttractionCard() {
@@ -14,11 +15,15 @@ function AttractionCard() {
     const [filteredData, setFilteredData] = useState([])
     const [validate, setValidate] = useState(false)
 
+    const dropdownWrapperRef = useRef()
+    useHandleClickOutside(dropdownWrapperRef, () => setDatalist(false))
+
+
     const submitHandler = (e) => {
         e.preventDefault()
         if (value !== "" && date !== '') {
             navigate(`/search/${value}?date=${date}`)
-        } else if(value !== "" && date === "") {
+        } else if (value !== "" && date === "") {
             setValidate(true)
         } else {
             console.log("good to go");;
@@ -29,7 +34,7 @@ function AttractionCard() {
         setDatalist(true)
     }
 
-    const { initialData } = useSelector(state => state.home) 
+    const { initialData } = useSelector(state => state.home)
 
 
 
@@ -41,11 +46,11 @@ function AttractionCard() {
         setFilteredData(list)
     }, [value, initialData])
 
-    useEffect(() =>{
-        if(date.length > 1){
+    useEffect(() => {
+        if (date.length > 1) {
             setValidate(false)
         }
-    },[date])
+    }, [date])
 
     return (
         <>
@@ -57,18 +62,19 @@ function AttractionCard() {
                                 <span className='text-2xl text-blue'><IoLocationOutline /> </span>
                                 <span className='text-lg '>Destination</span>
                             </div>
-                            <div className='relative'>
-                                <input type='text'
-                                    list='Country'
-                                    value={value}
-                                    placeholder='Where do you want to go?'
-                                    onChange={(e) => setValue(e.target.value)}
-                                    onFocus={handleFocus}
-                                    // onBlur={handleBlur}
-                                    className='capitalize px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
-                            </div>
+                            <div className='' ref={dropdownWrapperRef}>
+                                <div className='relative'>
+                                    <input type='text'
+                                        list='Country'
+                                        value={value}
+                                        placeholder='Where do you want to go?'
+                                        onChange={(e) => setValue(e.target.value)}
+                                        onFocus={handleFocus}
+                                        // onBlur={handleBlur}
+                                        className='capitalize px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+                                </div>
                                 {datalist && (
-                                    
+
                                     <div className='absolute max-h-[17em] w-[21em] mt-1  bg-light rounded-lg overflow-y-auto'>
                                         <div className='w-full p-2 overflow-y-auto'>
                                             {filteredData?.map((item) => (
@@ -83,6 +89,7 @@ function AttractionCard() {
                                         </div>
                                     </div>
                                 )}
+                            </div>
                         </div>
                     </div>
                     <div className='md:col-span-5 flex justify-center items-center md:border-r-2 border-bluetrans'>
@@ -92,12 +99,12 @@ function AttractionCard() {
                                 <span className='text-lg'>Date</span>
                             </div>
                             <div className=''>
-                                <input 
-                                type='date' 
-                                placeholder='Choose date' 
-                                value={date}
-                                onChange={(e) => setDate(e.target.value)}
-                                className={`px-3 w-full  placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl  ${validate ? "text-red-500 border-red-600 border" : "border-none text-darktext"}`} />
+                                <input
+                                    type='date'
+                                    placeholder='Choose date'
+                                    value={date}
+                                    onChange={(e) => setDate(e.target.value)}
+                                    className={`px-3 w-full  placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl  ${validate ? "text-red-500 border-red-600 border" : "border-none text-darktext"}`} />
                             </div>
                         </div>
                     </div>

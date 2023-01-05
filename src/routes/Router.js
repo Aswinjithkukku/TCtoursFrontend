@@ -10,9 +10,11 @@ import {
     BlogLandingPage,
     BlogDetailsPage,
     SearchingResultPage,
-    PaymentPage
+    PaymentPage,
+    ProfileMainPage,
+    ProfileSettingsPage
 } from '../Pages/Hero'
-import { Error404Page } from "../components/Layouts";
+import { PageNotFound } from "../Pages/Errors";
 
 const ThemeRoutes = [
     {
@@ -22,7 +24,7 @@ const ThemeRoutes = [
         ),
         children: [
             { path: "", element: <AttractionHomePage /> },
-            { path: "/error", element: <Error404Page /> },
+            // { path: "/*",element: <PageNotFound /> },
             { path: "/attraction", element: <AttractionLandingPage /> },
             { path: "/details/:id", element: <AttractionDetailsPage /> },
             { path: "/combo", element: <ComboLandingPage /> },
@@ -32,8 +34,13 @@ const ThemeRoutes = [
             { path: "/blog/details", element: <BlogDetailsPage /> },
             { path: "/search/:slug", element: <SearchingResultPage /> },
             { path: "/payment/:id", element: <PaymentPage /> },
+            { path: "/Profile", element: <ProfileMainPage /> },
+            { path: "/Profile/settings", element: <ProfileSettingsPage /> },
         ]
     },
+    {
+        path: "/*", element: <PageNotFound />
+    }
 ]
 
 export default ThemeRoutes

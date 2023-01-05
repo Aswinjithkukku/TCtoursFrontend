@@ -14,26 +14,25 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
-/* ::-webkit-scrollbar {
-    width: 0.5em;
+::-webkit-scrollbar {
+    width: auto;
     height: 1em;
 }
 
-::-webkit-scrollbar-track {
-    background: rgb(43, 43, 43);
+ ::-webkit-scrollbar-track {
+    background: rgb(43, 43, 43,0.1);
 }
 
 ::-webkit-scrollbar-thumb {
-    border: 0.25em solid #1140de;
-    border-radius: 100vw;
+    background: rgb(43, 43, 43,0.1);
 }
 
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
     background: hsl(120 100% 10% / 1);
-}
+} */
 ::-webkit-scrollbar:horizontal {
     display: none;
-} */
+} 
 
 .heading {
     font-family: "Josefin Sans", sans-serif;

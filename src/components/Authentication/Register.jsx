@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { BsFacebook } from "react-icons/bs";
-import { AiOutlineClose, AiOutlineRight } from "react-icons/ai";
+import { BsFacebook, BsFillTelephoneInboundFill } from "react-icons/bs";
+import { AiFillMail, AiOutlineClose, AiOutlineRight } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 
 import axios from "../../axios";
@@ -74,9 +74,21 @@ function Register({ setView, view }) {
                                     <div className="text-2xl text-darktext">
                                         Help line
                                     </div>
-                                    <div className="text-sm text-text">
-                                        <span className="">{home?.phoneNumber1}</span>
-                                        <span className="">{home?.phoneNumber2}</span>
+                                    <div className=" flex items-end space-x-2">
+                                        <div className="text-sm text-text">
+                                            <div className="flex space-x-2">
+                                                <span className=""> <BsFillTelephoneInboundFill /> </span>
+                                                <span className="">{home?.phoneNumber1}</span>
+                                            </div>
+                                            <div className="flex space-x-2">
+                                                <span className=""><BsFillTelephoneInboundFill /></span>
+                                                <span className="">{home?.phoneNumber2}</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex space-x-2 text-text">
+                                            <span className=""><AiFillMail /> </span>
+                                            <span className="text-sm">{home?.email}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -111,44 +123,48 @@ function Register({ setView, view }) {
                                             onChange={handleChange}
                                         />
                                     </div>
+                                    <div className="flex ">
                                     <div className="space-y-1">
                                         <label className="text-text ">
-                                            Country
+                                            code
                                         </label>
                                         <select
                                             name="country"
                                             id=""
-                                            className="w-full placeholder:text-bluetrans bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-bluetrans"
+                                            className="text-darktext placeholder:text-bluetrans bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-bluetrans"
                                             onChange={handleChange}
                                             value={data.country || ""}
                                         >
                                             <option value="" hidden>
-                                                Select Country
+                                                code
                                             </option>
                                             {initialData?.countries?.map((country, index) => {
                                                 return (
                                                     <option
+                                                    className="text-darktext"
                                                         value={country?._id}
                                                         key={index}
                                                     >
-                                                        {country?.countryName}
+                                                        {country?.phonecode}
                                                     </option>
                                                 );
                                             })}
                                         </select>
                                     </div>
-                                    <div className="space-y-1">
-                                        <label className="text-text ">
-                                            PhoneNumber
-                                        </label>
-                                        <input
-                                            type="number"
-                                            placeholder="Enter Your Phone Number"
-                                            className="w-full placeholder:text-bluetrans bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-bluetrans"
-                                            name="phoneNumber"
-                                            value={data.phoneNumber || ""}
-                                            onChange={handleChange}
-                                        />
+
+                                        <div className="space-y-1">
+                                            <label className="text-text ">
+                                                PhoneNumber
+                                            </label>
+                                            <input
+                                                type="number"
+                                                placeholder="Enter Your Phone Number"
+                                                className="w-full placeholder:text-bluetrans bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-bluetrans"
+                                                name="phoneNumber"
+                                                value={data.phoneNumber || ""}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
                                     </div>
                                     <div className="space-y-1">
                                         <label className="text-text ">
@@ -182,7 +198,7 @@ function Register({ setView, view }) {
                                             </span>
                                         </button>
                                     </div>
-                                    <div className="flex items-center justify-between pt-2">
+                                    {/* <div className="flex items-center justify-between pt-2">
                                         <button className="flex items-center space-x-2 bg-trans w-full mx-3 justify-center py-2 rounded-xl hover:bg-light hover:text-blue text-bluetrans duration-200">
                                             <span className="">
                                                 <FcGoogle />
@@ -195,16 +211,16 @@ function Register({ setView, view }) {
                                             </span>
                                             <span className="">Facebook</span>
                                         </button>
-                                    </div>
+                                    </div> */}
                                     <div className="text-sm pt-1">
                                         <span className="text-bluetrans">
                                             Already have an account?{" "}
                                         </span>
                                         <span
                                             className="text-blue underline cursor-pointer"
-                                            onClick={ () => {
+                                            onClick={() => {
                                                 setView((prev) => {
-                                                    return {...prev, viewRegister: false , viewLogin: true}
+                                                    return { ...prev, viewRegister: false, viewLogin: true }
                                                 })
                                             }}
                                         >

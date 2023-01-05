@@ -10,12 +10,32 @@ function SearchListViewSection() {
 
     const { excursions } = useSelector(state => state.excursion)
 
+    const saveDatatoLocalStorage = (data) => {
+        var array = []
+        array = JSON.parse(localStorage.getItem('recent')) || []
+        // const result = array.find(item => item?._id === data?._id)
+        const result = array.filter(item => item?._id !== data?._id)
+        console.log(result);
+        // if(result === undefined) {
+        // }
+        array = [data ,...result]
+        alert(array)
+        localStorage.setItem('recent', JSON.stringify(array));
+    }
+
     return (
         <div>
             {excursions[0] ? (
                 <div className='md:grid md:grid-cols-2 gap-5'>
-                    {excursions[0] && excursions?.map((item) => (
-                                <div className='h-full snap-start mt-2 bg-light shadow-md p-3 rounded-3xl cursor-pointer mx-2 md:mx-0' onClick={() => navigate(`/details/${item?._id}`)}>
+                    {excursions[0] && excursions?.map((item, index) => (
+                                <div key={index} className='h-full snap-start mt-2 bg-light shadow-md p-3 rounded-3xl cursor-pointer mx-2 md:mx-0' onClick={() => {
+                                    saveDatatoLocalStorage({
+                                        _id: item?._id,
+                                        title: item?.title,
+                                        image: item?.images[0]
+                                    })
+                                    navigate(`/details/${item?._id}`)
+                                }}>
                                     <div className=' relative space-y-3'>
                                         <div className='overflow-hidden rounded-2xl '>
                                             <img className='hover:scale-110 object-cover  h-[14em] w-full transition-all duration-500 cursor-pointer' src={process.env.REACT_APP_SERVER_URL + item?.images[0]} alt={item?.title} />

@@ -6,7 +6,7 @@ import { IoIosCar } from 'react-icons/io'
 import { FaHotel, FaWpforms } from 'react-icons/fa'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import { AttractionCard, FlightCard, HotelCard, CarCard, VisaCard } from '../../components/Attractions'
+import { AttractionCard, FlightCard, HotelCard, CarCard, VisaCard } from '../../components/Cards'
 import { IoLocationOutline } from 'react-icons/io5'
 import { useDispatch, useSelector } from 'react-redux'
 import { excursionall } from '../../redux/slices/excursionSlice'
@@ -135,7 +135,7 @@ function HeroSection() {
                                              setViewCar(true)
                                         }}>
                                             <span className=''><IoIosCar /> </span>
-                                            <span className=''>Transport</span>
+                                            <span className=''>Transfer</span>
                                         </button>
                                     </div>
                                 </div>

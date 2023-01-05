@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiFillStar, AiOutlineClose } from 'react-icons/ai'
 import { NeedHelp } from '../../components/Layouts'
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
+import { useSearchParams } from 'react-router-dom';
 
 function SearchFunctionalitySection({ viewCategory, setViewCategory }) {
-    const [ price, setPrice ] = useState([])
+    const [searchParams] = useSearchParams()
+    const [date, setDate] = useState('')
+    const queryDate = searchParams.get('date');
+    useEffect(() => {
+        setDate(queryDate)
+    },[])
 
-console.log(price);
     return (
         <>
             <div className={`lightglass ${viewCategory ? "fixed" : "hidden"} top-0 bottom-0 right-0 left-0 z-10`} onClick={() => setViewCategory(!viewCategory)}></div>
@@ -24,7 +29,9 @@ console.log(price);
                                     <p className=''>Where are you travelling?</p>
                                 </div>
                                 <div className=''>
-                                    <input type='date' className='text-text py-2 w-full border border-sky-500 rounded-lg px-2 focus:border-none focus:ring-1 focus:ring-sky-500 outline-none' />
+                                    <input type='date'
+                                    onChange={(e) => setDate(e.target.value)}
+                                    value={date} className='text-text py-2 w-full border border-sky-500 rounded-lg px-2 focus:border-none focus:ring-1 focus:ring-sky-500 outline-none' />
                                 </div>
                             </div>
 
@@ -35,10 +42,10 @@ console.log(price);
                                 <div className='flex items-center space-x-4'>
                                     {/* <input type='range' min={'0'} max={'100'} className='w-full' /> */}
                                     <RangeSlider
-                                    min={5}
-                                    max={100}
-                                    value={price}
-                                    defaultValue={[0,50]}
+                                        min={5}
+                                        max={100}
+                                        // value={price}
+                                        defaultValue={[0, 50]}
                                     />
 
                                 </div>

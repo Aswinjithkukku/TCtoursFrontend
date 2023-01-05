@@ -13,7 +13,7 @@ function DetailsCard() {
     const dispatch = useDispatch()
 
     const { excursion } = useSelector(state => state.excursion)
-    const { selectedActivities } = useSelector(state => state.excursion)
+    const { recievedActivities } = useSelector(state => state.excursion)
 
     const [price, setPrice] = useState(0)
     const [data, setData] = useState({
@@ -32,14 +32,22 @@ function DetailsCard() {
     }
 
 
-    useEffect(() => {
-        if (excursion?.activities) {
-            const { childPrice } = excursion?.activities[0] ? excursion?.activities[0] : 0
-            let sum = (Number(offerAmount) * Number(data.adult)) + (Number(childPrice) * Number(data.child))
-            setPrice(sum)
-        }
+    // useEffect(() => {
+    //     if (excursion?.activities) {
+    //         const { childPrice } = excursion?.activities[0] ? excursion?.activities[0] : 0
+    //         let sum = (Number(offerAmount) * Number(data.adult)) + (Number(childPrice) * Number(data.child))
+    //         setPrice(sum)
+    //     }
 
-    }, [data.adult, data.child, excursion])
+    // }, [data.adult, data.child, excursion])
+
+    useEffect(() => {
+        const sum = recievedActivities?.filter((item) => item?.isChecked)?.reduce((acc, data) => {
+            return Number(acc) + Number(data?.price)
+        }, 0)
+        console.log(sum);
+        setPrice(sum)
+    }, [recievedActivities])
 
     useEffect(() => {
         if (excursion?.activities) {
@@ -57,40 +65,19 @@ function DetailsCard() {
         }
     }, [excursion])
 
+
     const submitHandler = async (e) => {
         e.preventDefault()
+
+        const filteredActivities = recievedActivities?.filter((item) => item?.isChecked)
 
         const payload = {
             attraction: excursion._id,
             selectedActivities: [
-                {
-                    adultsCount: data.adult,
-                    childrenCount: data.child,
-                    infantCount: 0,
-                    transferType: "without",
-                    activity: excursion?.activities && (excursion?.activities[0]?._id),
-                    date: "2023-01-12",
-                }
+                filteredActivities
             ]
         }
-        const order = {
-            attraction: excursion?._id,
-            attractionName: excursion?.title,
-            isOffer: excursion?.isOffer,
-            offerAmount: excursion?.offerAmount,
-            offerAmountType: excursion?.offerAmountType,
-            price: price,
-            selectedActivities: {
-                adultsCount: data.adult,
-                childrenCount: data.child,
-                infantCount: 0,
-                transferType: activity.transfer,
-                activity: excursion?.activities && (excursion?.activities[0]),
-                activityName: excursion?.activities && (excursion?.activities[0]?.name),
-                date: activity.date,
-            }
 
-        }
         try {
             const response = await axios.post('attractions/orders/initiate', payload)
             dispatch(orderPayload(order))
@@ -100,11 +87,30 @@ function DetailsCard() {
             console.log(err);
         }
     }
+    const order = {
+        attraction: excursion?._id,
+        attractionName: excursion?.title,
+        isOffer: excursion?.isOffer,
+        offerAmount: excursion?.offerAmount,
+        offerAmountType: excursion?.offerAmountType,
+        price: price,
+        selectedActivities: {
+            adultsCount: data?.adult,
+            childrenCount: data?.child,
+            infantCount: 0,
+            transferType: activity?.transfer,
+            activity: excursion?.activities && (excursion?.activities[0]),
+            activityName: excursion?.activities && (excursion?.activities[0]?.name),
+            date: activity.date,
+        }
+
+    }
 
     return (
         <>
             <div className='bg-light  lg:rounded-xl p-5 space-y-2 sticky top-0'>
                 <div className=''>
+                    {/* cutted price without offer */}
                     <div className=''>
                         {excursion?.isOffer && (
                             <p className='text-main text-xs'><s>USD {excursion?.activities && (excursion?.activities[0]?.adultPrice)}</s></p>
@@ -113,8 +119,9 @@ function DetailsCard() {
                     <div className='flex justify-between items-center'>
                         <span className='flex items-center space-x-2'>
                             <h2 className='text-darktext font-bold text-3xl'>USD {offerAmount}</h2>
-                            <p className='text-xs text-darktext font-extralight'>per person</p>
+                            <p className='text-xs text-text'>cheapest price*</p> 
                         </span>
+                        {/* offer percentage  */}
                         {excursion?.isOffer && (
                             <span className='bg-soft px-3 py-2 rounded-full text-blue'>{excursion?.offerAmount && excursion?.offerAmount} {excursion?.offerAmountType && excursion?.offerAmountType === "flat" ? "USD" : "%"} OFF</span>
                         )}
@@ -128,23 +135,28 @@ function DetailsCard() {
                                 </div>
 
                                 <div>
-                                    <div className=''>
-                                        <label className='text-darktext ml-1'>{excursion?.activities && (excursion?.activities[0]?.name)}</label>
-                                    </div>
+                                    {recievedActivities?.map((item) => (
+                                        <div className='flex justify-between gap-2 text-sm'>
+                                            <span className='text-darktext ml-1'>{item?.isChecked === true && (item?.name)}</span>
+                                            <span className=''>{item?.isChecked === true && item?.price + " USD"}</span>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
 
 
 
-                            <div className='px-5'>
-                                <div className='flex justify-between text-darktext'>
-                                    <span className=''>adults</span>
-                                    <span className=''>{excursion?.activities && (Number(excursion?.activities[0]?.adultPrice) * data.adult)}  USD</span>
-                                </div>
-                                <div className='flex justify-between text-darktext'>
+                            <div className=''>
+                                {(excursion?.isOffer === true) && (
+                                    <div className='flex justify-between text-darktext'>
+                                        <span className=''>{excursion?.offerAmountType === 'flat' ? 'flat' : "discount"} </span>
+                                        <span className=''>{excursion?.offerAmount + "%"  } </span>
+                                    </div>
+                                )}
+                                {/* <div className='flex justify-between text-darktext'>
                                     <span className=''>child</span>
                                     <span className=''>{excursion?.activities && (Number(excursion?.activities[0]?.childPrice) * data.child)} USD</span>
-                                </div>
+                                </div> */}
                                 <div className='flex justify-between text-darktext'>
                                     <span className='font-semibold text-lg'>Grand Total</span>
                                     <span className='font-bold text-xl'>{price}.00 USD</span>
@@ -153,9 +165,7 @@ function DetailsCard() {
 
 
                             <div className=''>
-                                {/* <Link to='/payment'> */}
                                 <button type='submit' className='bg-lightblue text-light w-full py-3 rounded-lg'>Book Now</button>
-                                {/* </Link> */}
                             </div>
 
                         </div>

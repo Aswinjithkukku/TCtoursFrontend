@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Register from "../Authentication/Register";
@@ -9,6 +9,7 @@ import { getHome } from "../../redux/slices/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import avatar from '../../static/images/avatar.png'
 import ProfileModal from "../Navbar/ProfileModal";
+import { useHandleClickOutside } from "../../hooks";
 
 function Navbar() {
 
@@ -23,7 +24,10 @@ function Navbar() {
 
     const dispatch = useDispatch();
     const { home } = useSelector((state) => state.general);
-    const { isLoggedIn } = useSelector((state) => state.users);
+    const { isLoggedIn, user } = useSelector((state) => state.users);
+
+    const dropdownWrapperRef = useRef()
+    useHandleClickOutside(dropdownWrapperRef, () => setProfileView(false))
 
     useEffect(() => {
         dispatch(getHome());
@@ -66,17 +70,22 @@ function Navbar() {
                                     </span>
                                 </>
                             ) : (
-                                <div className="relative">
-                                <div className='hidden lg:flex items-center '>
-                                    <img src={avatar} alt='avatar' className="h-10 w-10 rounded-full object-cover cursor-pointer"
-                                    onClick={() => {
-                                        setProfileView(!profileView)
-                                    }}
-                                    />
+                                <div className="relative"  ref={dropdownWrapperRef}>
+                                    <div className='flex items-center '>
+                                        <img src={`https://avatars.dicebear.com/api/identicon/${user?.email}.svg`} alt='avatar' className="h-8 w-8 lg:h-10 lg:w-10 rounded-full object-cover cursor-pointer "
+                                            onClick={() => {
+                                                setProfileView(!profileView)
+                                            }}
+                                        />
+                                    </div>
+                                    {profileView && (
+                                        <div >
+                                            <ProfileModal profileView={profileView} setProfileView={setProfileView} />
+                                        </div>
+                                    )}
                                 </div>
-                            </div>
                             )}
-                            {!isLoggedIn ? (
+                            {!isLoggedIn && (
                                 <>
                                     <span
                                         className="lg:hidden flex items-center text-light text-xs lg:text-sm bg-main px-2 lg:px-3   rounded-lg shadow-sm cursor-pointer"
@@ -97,19 +106,6 @@ function Navbar() {
                                         Sign in
                                     </span>
                                 </>
-                            ) : (
-                                <div className="relative">
-                                    <div className='lg:hidden flex items-center '>
-                                        <img src={avatar} alt='avatar' className="h-8 w-8 rounded-full object-cover cursor-pointer"
-                                        onClick={() => {
-                                            setProfileView(!profileView)
-                                        }}
-                                        />
-                                    </div>
-                                    {profileView && (
-                                        <ProfileModal profileView={profileView} setProfileView={setProfileView} />
-                                    )}
-                                </div>
                             )}
                         </div>
                     </div>

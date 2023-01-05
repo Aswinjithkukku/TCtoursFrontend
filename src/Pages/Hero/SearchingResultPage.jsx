@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getAllExcursions } from '../../redux/slices/excursionSlice'
 import SearchFunctionalitySection from '../Searching/SearchFunctionalitySection'
 import SearchHomePage from '../Searching/SearchHomePage'
-import SearchListViewSection from '../Searching/SearchListViewSection'
+// import SearchListViewSection from '../Searching/SearchListViewSection'
 import SearchRecentlyViewedSection from '../Searching/SearchRecentlyViewedSection'
+const SearchListViewSection = React.lazy(() => import('../Searching/SearchListViewSection'))
 
 function SearchingResultPage() {
     const dispatch = useDispatch()
@@ -19,7 +20,7 @@ function SearchingResultPage() {
 
     useEffect(() => {
 
-        dispatch(getAllExcursions({destination,category}))
+        dispatch(getAllExcursions({ destination, category }))
     }, [dispatch, destination, category])
 
 
@@ -40,7 +41,9 @@ function SearchingResultPage() {
                         />
                     </div>
                     <div className='col-span-9'>
-                        <SearchListViewSection />
+                        <Suspense fallback={<div className=''>loading please wait.....</div>}>
+                            <SearchListViewSection />
+                        </Suspense>
                     </div>
                 </div>
                 <div className=''>
