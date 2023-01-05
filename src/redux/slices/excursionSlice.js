@@ -66,6 +66,7 @@ const excursionSlice = createSlice({
   reducers: {
     setActivities: (state, action) => {
       state.recievedActivities[action.payload.index][action.payload.name] = action.payload.value
+
     },
     setSum: (state, action) => {
       state.recievedActivities[action.payload.index][action.payload.sum] = action.payload.value

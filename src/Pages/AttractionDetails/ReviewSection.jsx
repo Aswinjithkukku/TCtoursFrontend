@@ -40,11 +40,11 @@ function ReviewSection() {
                     <span className=''>
                       <img src='https://images.pexels.com/photos/7199830/pexels-photo-7199830.png?auto=compress&cs=tinysrgb&w=1600' alt='img' className='rounded-full h-10 w-10' />
                     </span>
-                    <span className='text-darktext'> {item.user.name} </span>
+                    <span className='text-darktext'> {item?.user?.name} </span>
                   </div>
                   <div className=''>
                     <span className=' text-yellow-500'>
-                      <Rating value={item.rating} color={"#FFB100"} text={item.rating} />
+                      <Rating value={item?.rating} color={"#FFB100"} text={item?.rating} />
                     </span>
                   </div>
                 </div>
@@ -52,7 +52,7 @@ function ReviewSection() {
               <div className='p-5'>
                 <div className='border-b flex justify-between items-center py-3'>
                   <span className='text-darktext font-medium'>{item?.title}</span>
-                  <span className='text-text text-sm'>{item.createdAt.substr(0,10)}</span>
+                  <span className='text-text text-sm'>{item?.createdAt.substr(0,10)}</span>
                 </div>
                 <div className='py-3'>
                   <p className='text-text text-sm'>{item?.description}</p>

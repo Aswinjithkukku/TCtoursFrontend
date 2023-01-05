@@ -12,7 +12,8 @@ import {
     SearchingResultPage,
     PaymentPage,
     ProfileMainPage,
-    ProfileSettingsPage
+    ProfileSettingsPage,
+    ProfilePasswordPage
 } from '../Pages/Hero'
 import { PageNotFound } from "../Pages/Errors";
 
@@ -24,7 +25,6 @@ const ThemeRoutes = [
         ),
         children: [
             { path: "", element: <AttractionHomePage /> },
-            // { path: "/*",element: <PageNotFound /> },
             { path: "/attraction", element: <AttractionLandingPage /> },
             { path: "/details/:id", element: <AttractionDetailsPage /> },
             { path: "/combo", element: <ComboLandingPage /> },
@@ -36,6 +36,7 @@ const ThemeRoutes = [
             { path: "/payment/:id", element: <PaymentPage /> },
             { path: "/Profile", element: <ProfileMainPage /> },
             { path: "/Profile/settings", element: <ProfileSettingsPage /> },
+            { path: "/Profile/password", element: <ProfilePasswordPage /> },
         ]
     },
     {

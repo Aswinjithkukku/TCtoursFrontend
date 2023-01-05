@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AiFillStar, AiOutlineClose } from 'react-icons/ai'
 import { NeedHelp } from '../../components/Layouts'
-import "react-range-slider-input/dist/style.css";
 import { useSearchParams } from 'react-router-dom';
 
 function SearchFunctionalitySection({ viewCategory, setViewCategory }) {

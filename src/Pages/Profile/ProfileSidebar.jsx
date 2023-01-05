@@ -40,10 +40,12 @@ function ProfileSidebar() {
             <span className=''>Profile Settings</span>
           </div>
         </Link>
-        <div className='flex py-2 items-center space-x-2 hover:bg-semisoft cursor-pointer px-5 border-b'>
-          <span className=''><FaUserShield /></span>
-          <span className=''>Update Password</span>
-        </div>
+        <Link to='/profile/password'>
+          <div className='flex py-2 items-center space-x-2 hover:bg-semisoft cursor-pointer px-5 border-b'>
+            <span className=''><FaUserShield /></span>
+            <span className=''>Update Password</span>
+          </div>
+        </Link>
       </div>
 
     </div>

@@ -13,13 +13,9 @@ function SearchListViewSection() {
     const saveDatatoLocalStorage = (data) => {
         var array = []
         array = JSON.parse(localStorage.getItem('recent')) || []
-        // const result = array.find(item => item?._id === data?._id)
         const result = array.filter(item => item?._id !== data?._id)
         console.log(result);
-        // if(result === undefined) {
-        // }
         array = [data ,...result]
-        alert(array)
         localStorage.setItem('recent', JSON.stringify(array));
     }
 

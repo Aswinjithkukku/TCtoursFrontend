@@ -1,8 +1,8 @@
 import React from 'react'
-import ProfileSettingSection from './ProfileSettingSection'
+import ChangePasswordSection from './ChangePasswordSection'
 import ProfileSidebar from './ProfileSidebar'
 
-function ProfileSettingsHeroSection() {
+function ProfilePasswordSection() {
   return (
     <div className='lg:max-w-screen-xl lg:mx-auto py-10 '>
     <div className='lg:flex lg:gap-5 space-y-5 lg:space-y-0'>
@@ -11,7 +11,7 @@ function ProfileSettingsHeroSection() {
       </div>
       <div className='lg:w-9/12'>
         <div className=''>
-          <ProfileSettingSection />
+          <ChangePasswordSection />
         </div>
       </div>
     </div>
@@ -19,4 +19,4 @@ function ProfileSettingsHeroSection() {
   )
 }
 
-export default ProfileSettingsHeroSection
+export default ProfilePasswordSection

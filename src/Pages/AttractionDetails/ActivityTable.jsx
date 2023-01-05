@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { IoMdCart } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActivities } from '../../redux/slices/excursionSlice';
 
 function ActivityTable({ item, index }) {
-      const [price, setPrice] = useState(0)
+    const [price, setPrice] = useState(0)
     const dispatch = useDispatch()
 
     const { recievedActivities } = useSelector(state => state.excursion)
@@ -33,16 +34,26 @@ function ActivityTable({ item, index }) {
             name: "price",
             index,
         }))
-    }, [item.adult, item.child, item.infant,recievedActivities,dispatch])
+    }, [item.adult, item.child, item.infant, recievedActivities, dispatch])
+
+    useEffect(() => {
+
+        const result = recievedActivities?.filter(item => item?.isChecked === true)
+        localStorage.setItem('tour_order', JSON.stringify(result))
+
+    }, [recievedActivities])
+
+
     return (
         <tr className='text-darktext'>
             <td className='py-3 border-b px-1 max-w-[13em] sm:w-[10em] lg:w-[13em] flex items-start space-x-2'>
                 <span className=''>
-                    <input type='checkbox' className=''
+
+                    {/* <input type='checkbox' className=''
                         name='isChecked'
                         checked={item?.isChecked}
                         onChange={(e) => handleChange({ value: e.target.checked, name: e.target.name, index })}
-                    />
+                    /> */}
                 </span>
                 <span className=''>
                     {item?.name}
@@ -81,23 +92,23 @@ function ActivityTable({ item, index }) {
                     ))}
                 </select>
             </td>
-            <td className='py-3 border-b px-1'
-                name='child'
-                value={item.child}
-                onChange={(e) => handleChange({ value: e.target.value, name: e.target.name, index })}
-            >
-                <select className='border py-1 px-1'>
+            <td className='py-3 border-b px-1'>
+                <select className='border py-1 px-1'
+                    name='child'
+                    value={item.child}
+                    onChange={(e) => handleChange({ value: e.target.value, name: e.target.name, index })}
+                >
                     {Array.from({ length: 50 }).map((_, index) => (
                         <option value={index}>{index}</option>
                     ))}
                 </select>
             </td>
-            <td className='py-3 border-b px-1'
-                name='infant'
-                value={item.infant}
-                onChange={(e) => handleChange({ value: e.target.value, name: e.target.name, index })}
-            >
-                <select className='border py-1 px-1'>
+            <td className='py-3 border-b px-1'>
+                <select className='border py-1 px-1'
+                    name='infant'
+                    value={item.infant}
+                    onChange={(e) => handleChange({ value: e.target.value, name: e.target.name, index })}
+                >
                     <option value='0'>0</option>
                     <option value='1'>1</option>
                     <option value='2'>2</option>
@@ -107,6 +118,15 @@ function ActivityTable({ item, index }) {
             </td>
             <td className='py-3 border-b px-1 min-w-[4em]'>
                 <h2 className='font-medium'>{price} USD</h2>
+                <div className='relative'>
+                    <input type='checkbox'
+                        className='peer absolute top-0 inset-x-0 w-full h-6 opacity-0  cursor-pointer'
+                        name='isChecked'
+                        checked={item?.isChecked}
+                        onChange={(e) => handleChange({ value: e.target.checked, name: e.target.name, index })} />
+                    <button className='text-light bg-lightblue px-1 py-1 rounded-sm hover:bg-blue text-xs flex items-center'
+                    > {item?.isChecked === false ? "add to cart" : "remove from cart"}<IoMdCart /> </button>
+                </div>
             </td>
         </tr>
     )

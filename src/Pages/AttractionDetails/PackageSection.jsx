@@ -30,7 +30,6 @@ function PackageSection() {
                             ))}
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </>

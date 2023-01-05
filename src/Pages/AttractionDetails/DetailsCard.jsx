@@ -1,36 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { AiFillCar } from 'react-icons/ai'
-import { BsCalendar2Day } from 'react-icons/bs'
-import { FaChild } from 'react-icons/fa'
-import { IoIosMan } from 'react-icons/io'
-import { useDispatch, useSelector } from 'react-redux'
-import axios from '../../axios'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { orderPayload } from '../../redux/slices/paymentSlice'
 
 function DetailsCard() {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     const { excursion } = useSelector(state => state.excursion)
     const { recievedActivities } = useSelector(state => state.excursion)
 
     const [price, setPrice] = useState(0)
-    const [data, setData] = useState({
-        adult: 1,
-        child: 0,
-    })
-    const [activity, setActivity] = useState({
-        date: "",
-        transfer: "",
-    })
 
     const [offerAmount, setOfferAmount] = useState(0)
-
-    const onChange = (e) => {
-        return setData({ ...data, [e.target.name]: e.target.value })
-    }
-
 
     // useEffect(() => {
     //     if (excursion?.activities) {
@@ -64,47 +44,7 @@ function DetailsCard() {
             }
         }
     }, [excursion])
-
-
-    const submitHandler = async (e) => {
-        e.preventDefault()
-
-        const filteredActivities = recievedActivities?.filter((item) => item?.isChecked)
-
-        const payload = {
-            attraction: excursion._id,
-            selectedActivities: [
-                filteredActivities
-            ]
-        }
-
-        try {
-            const response = await axios.post('attractions/orders/initiate', payload)
-            dispatch(orderPayload(order))
-            navigate(`/payment/${response.data._id}`)
-
-        } catch (err) {
-            console.log(err);
-        }
-    }
-    const order = {
-        attraction: excursion?._id,
-        attractionName: excursion?.title,
-        isOffer: excursion?.isOffer,
-        offerAmount: excursion?.offerAmount,
-        offerAmountType: excursion?.offerAmountType,
-        price: price,
-        selectedActivities: {
-            adultsCount: data?.adult,
-            childrenCount: data?.child,
-            infantCount: 0,
-            transferType: activity?.transfer,
-            activity: excursion?.activities && (excursion?.activities[0]),
-            activityName: excursion?.activities && (excursion?.activities[0]?.name),
-            date: activity.date,
-        }
-
-    }
+    
 
     return (
         <>
@@ -126,7 +66,7 @@ function DetailsCard() {
                             <span className='bg-soft px-3 py-2 rounded-full text-blue'>{excursion?.offerAmount && excursion?.offerAmount} {excursion?.offerAmountType && excursion?.offerAmountType === "flat" ? "USD" : "%"} OFF</span>
                         )}
                     </div>
-                    <form onSubmit={submitHandler}>
+                    <form>
                         <div className='inputs space-y-5 my-4'>
 
                             <div className='space-y-1'>
@@ -165,7 +105,9 @@ function DetailsCard() {
 
 
                             <div className=''>
-                                <button type='submit' className='bg-lightblue text-light w-full py-3 rounded-lg'>Book Now</button>
+                                <button type='submit' className='bg-lightblue text-light w-full py-3 rounded-lg'
+                                onClick={() => navigate(`/payment/${excursion?._id}`)}
+                                >Book Now</button>
                             </div>
 
                         </div>

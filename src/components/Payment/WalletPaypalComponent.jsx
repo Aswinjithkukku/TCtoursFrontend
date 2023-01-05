@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import axios from '../../axios';
 
-function PaypalComponent({ travellerData }) {
+function WalletPaypalComponent({ travellerData }) {
   // const email = travellerData.email;
   // console.log(email);
   // const [email, setEmail] = useState(travellerData.email)
@@ -69,4 +69,4 @@ function PaypalComponent({ travellerData }) {
 }
 
 
-export default PaypalComponent
+export default WalletPaypalComponent

@@ -10,6 +10,7 @@ import SearchingResultPage from "./SearchingResultPage";
 import PaymentPage from "./PaymentPage";
 import ProfileMainPage from "./ProfileMainPage";
 import ProfileSettingsPage from "./ProfileSettingsPage";
+import ProfilePasswordPage from "./ProfilePasswordPage";
 
 export {
   AttractionLandingPage,
@@ -24,4 +25,5 @@ export {
   PaymentPage,
   ProfileMainPage,
   ProfileSettingsPage,
+  ProfilePasswordPage,
 };

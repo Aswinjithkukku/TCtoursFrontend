@@ -3,7 +3,7 @@ import ProfileSettingsHeroSection from '../Profile/ProfileSettingsHeroSection'
 
 function ProfileSettingsPage() {
   return (
-    <div className=''>
+    <div className='bg-soft'>
       <ProfileSettingsHeroSection />
     </div>
   )

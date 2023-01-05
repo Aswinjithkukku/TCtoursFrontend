@@ -22,7 +22,7 @@ function PaymentHomePage() {
                 </div>
             </div>
 
-            <div className='lg:grid grid-cols-12 lg:gap-7 space-y-3 lg:mt-5'>
+            <div className='lg:grid grid-cols-12 lg:gap-7 space-y-3 lg:space-y-0 lg:mt-5'>
                 <div className='1 col-span-8'>
                     <PaymentDetailsSection />
                 </div>
