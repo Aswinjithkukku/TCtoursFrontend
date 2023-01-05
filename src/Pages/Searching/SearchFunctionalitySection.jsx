@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AiFillStar, AiOutlineClose } from 'react-icons/ai'
 import { NeedHelp } from '../../components/Layouts'
-import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
 import { useSearchParams } from 'react-router-dom';
 
@@ -41,12 +40,12 @@ function SearchFunctionalitySection({ viewCategory, setViewCategory }) {
                                 </div>
                                 <div className='flex items-center space-x-4'>
                                     {/* <input type='range' min={'0'} max={'100'} className='w-full' /> */}
-                                    <RangeSlider
+                                    {/* <RangeSlider
                                         min={5}
                                         max={100}
                                         // value={price}
                                         defaultValue={[0, 50]}
-                                    />
+                                    /> */}
 
                                 </div>
                                 <div className='flex items-center space-x-4 justify-center'>

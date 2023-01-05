@@ -30,6 +30,7 @@ function PaymentDetailsSection() {
                 <div className=' cursor-default'>
                     <h2 className='text-2xl font-semibold text-darktext'>Lead Passenger Details</h2>
                 </div>
+                
                 <div className='lg:flex gap-5 text-darktext space-y-3 lg:space-y-0'>
                     <div className=''>
                         <div className=''>

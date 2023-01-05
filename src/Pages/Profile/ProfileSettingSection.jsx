@@ -14,6 +14,7 @@ function ProfileSettingSection() {
         <div className=''>name</div>
         <div className=''>email</div>
       </div>
+
     </div>
   )
 }
