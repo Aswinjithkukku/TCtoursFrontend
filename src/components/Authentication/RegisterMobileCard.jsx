@@ -23,25 +23,25 @@ function RegisterMobileCard({ view, setView }) {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-      setData((prev) => {
-          return { ...prev, [e.target.name]: e.target.value };
-      });
+    setData((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
   };
 
   const handleSubmit = async (e) => {
-      try {
-          e.preventDefault();
-          setIsLoading(true);
+    try {
+      e.preventDefault();
+      setIsLoading(true);
 
-          const response = await axios.post("/users/signup", data);
-          dispatch(setUser(response.data));
-          setIsLoading(false);
-      } catch (err) {
-          setError(
-              err?.response?.data?.error || "Something went wrong, Try again"
-          );
-          setIsLoading(false);
-      }
+      const response = await axios.post("/users/signup", data);
+      dispatch(setUser(response.data));
+      setIsLoading(false);
+    } catch (err) {
+      setError(
+        err?.response?.data?.error || "Something went wrong, Try again"
+      );
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -120,6 +120,9 @@ function RegisterMobileCard({ view, setView }) {
               name="password"
               value={data.password || ""} />
           </div>
+          {error && (
+            <p className="text-main text-sm">{error}</p>
+          )}
           {/* <div className='text-text'>
             <span className='text-xs'>By register you agree to our</span>
             <span className='text-xs text-blue hover:text-sky-500 cursor-pointer underline'>{' '} Terms and Conditions</span>

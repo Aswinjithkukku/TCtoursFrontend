@@ -93,7 +93,7 @@ function Register({ setView, view }) {
                                 </div>
                             </div>
 
-                            <div className="w-[24em] h-[40em] loginCard shadow-md  rounded-2xl">
+                            <div className="w-[24em] h-[97%] loginCard shadow-md  rounded-2xl">
                                 <form
                                     onSubmit={handleSubmit}
                                     className="p-5 space-y-1"
@@ -179,6 +179,9 @@ function Register({ setView, view }) {
                                             onChange={handleChange}
                                         />
                                     </div>
+                                    {error && (
+                                    <p className="text-main text-sm">{error}</p>
+                                    )}
                                     {/* <div className="text-text">
                                         <span className="text-xs">
                                             By register you agree to our
