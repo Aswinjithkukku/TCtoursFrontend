@@ -3,7 +3,7 @@ import React from 'react'
 import { AiFillStar, AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai'
 import { TiTick } from 'react-icons/ti'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 function SearchListViewSection() {
     const navigate = useNavigate()

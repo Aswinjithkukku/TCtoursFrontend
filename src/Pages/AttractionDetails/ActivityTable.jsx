@@ -27,7 +27,6 @@ function ActivityTable({ item, index }) {
                 sum = sum
             }
         }
-        console.log(sum);
         setPrice(sum)
         dispatch(setActivities({
             value: sum,
@@ -45,8 +44,8 @@ function ActivityTable({ item, index }) {
 
 
     return (
-        <tr className='text-darktext'>
-            <td className='py-3 border-b px-1 max-w-[13em] sm:w-[10em] lg:w-[13em] flex items-start space-x-2'>
+        <tr className='text-darktext border-b' key={index}>
+            <td className='py-3 px-1 max-w-[13em] sm:w-[10em] lg:w-[13em] flex items-start space-x-2'>
                 <span className=''>
 
                     {/* <input type='checkbox' className=''
@@ -59,14 +58,14 @@ function ActivityTable({ item, index }) {
                     {item?.name}
                 </span>
             </td>
-            <td className='py-3 border-b px-1 text-sm'>
+            <td className='py-3 px-1 text-sm'>
                 <input type='date' className=''
                     name='date'
                     value={item.date}
-                    onChange={(e) => handleChange({ value: e.target.value, name: e.target.name, index })}
+                    onChange={(e) => handleChange({ value: e.target.value , name: e.target.name, index })}
                 />
             </td>
-            <td className='py-3 border-b px-1 '>
+            <td className='py-3 px-1 '>
                 <select className='border py-1 px-1'
                     name='transfer'
                     value={item.transfer}
@@ -81,7 +80,7 @@ function ActivityTable({ item, index }) {
                     )}
                 </select>
             </td>
-            <td className='py-3 border-b px-1'>
+            <td className='py-3 px-1'>
                 <select className='border py-1 px-1'
                     name='adult'
                     value={item.adult}
@@ -92,7 +91,7 @@ function ActivityTable({ item, index }) {
                     ))}
                 </select>
             </td>
-            <td className='py-3 border-b px-1'>
+            <td className='py-3 px-1'>
                 <select className='border py-1 px-1'
                     name='child'
                     value={item.child}
@@ -103,7 +102,7 @@ function ActivityTable({ item, index }) {
                     ))}
                 </select>
             </td>
-            <td className='py-3 border-b px-1'>
+            <td className='py-3 px-1'>
                 <select className='border py-1 px-1'
                     name='infant'
                     value={item.infant}
@@ -116,7 +115,7 @@ function ActivityTable({ item, index }) {
                     <option value='4'>4</option>
                 </select>
             </td>
-            <td className='py-3 border-b px-1 min-w-[4em]'>
+            <td className='py-3 px-1 min-w-[4em]'>
                 <h2 className='font-medium'>{price} USD</h2>
                 <div className='relative'>
                     <input type='checkbox'

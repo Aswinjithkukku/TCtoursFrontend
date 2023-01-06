@@ -11,13 +11,15 @@ function WithdrawModal({ modal, setModal }) {
 
   if (!modal.withdraw) return null
   return (
-    <div className='fixed top-0 bottom-0 left-0 right-0 modal_overlay' onClick={() => setModal(!modal)}>
-      <div className='h-full w-full flex justify-center items-center'>
-        <div className='bg-white w-7/12  rounded-2xl max-h-[95vh] overflow-auto' onClick={(e) => e.stopPropagation()}>
+    <>
+      <div className={`${modal ? "fixed" : "hidden"} top-0 bottom-0 left-0 right-0 modal_overlay`} >
+      </div >
+      <div className={` h-full w-full fixed top-0 left-0 right-0 ${modal ? "bottom-0" : "-bottom-full " } lg:flex lg:justify-center items-center z-10 transition-all duration-500 h-[100vh] `}onClick={() => setModal(!modal)}>
+        <div className={`fixed lg:static  ${modal ? "bottom-0" : "-bottom-full " } left-0 right-0 bg-white lg:w-7/12  z-10 rounded-xl max-h-[90vh] overflow-auto transition-all duration-500`} onClick={(e) => e.stopPropagation()}>
           <div className=''>
             <form onSubmit={submitHandler}>
-              <div className='p-7 space-y-4'>
-                <div className='flex justify-between items-center'>
+              <div className='p-7 space-y-4 '>
+                <div className='flex justify-between items-center border-b border-dashed border-text pb-3'>
                   <p className='text-3xl font-bold text-darktext'></p>
                   <h1 className='text-3xl font-bold text-darktext tracking-wide'>Withdraw</h1>
                   <h3 className='text-3xl font-bold text-darktext' onClick={() => setModal(false)}><AiOutlineClose /></h3>
@@ -179,7 +181,7 @@ function WithdrawModal({ modal, setModal }) {
           </div>
         </div>
       </div>
-    </div >
+    </>
   )
 }
 

@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import SuspenseLoader from '../../components/Loaders/SuspenseLoader'
 import { getAllExcursions } from '../../redux/slices/excursionSlice'
 import SearchFunctionalitySection from '../Searching/SearchFunctionalitySection'
 import SearchHomePage from '../Searching/SearchHomePage'
@@ -41,7 +42,11 @@ function SearchingResultPage() {
                         />
                     </div>
                     <div className='col-span-9'>
-                        <Suspense fallback={<div className=''>loading please wait.....</div>}>
+                        <Suspense fallback={
+                        <div className=''>
+                           <SuspenseLoader /> 
+                        </div>
+                    }>
                             <SearchListViewSection />
                         </Suspense>
                     </div>

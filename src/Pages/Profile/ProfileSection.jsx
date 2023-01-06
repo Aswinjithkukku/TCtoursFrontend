@@ -12,7 +12,7 @@ function ProfileSection() {
       <div className='lg:px-7 px-2 '>
 
         <div className='bg-light rounded-2xl py-5 shadow px-2 lg:px-7'>
-          <div className='flex justify-between'>
+          <div className='lg:flex justify-between'>
             <div className=''>
 
               <h2 className='lg:text-3xl text-2xl text-center lg:text-start font-black text-darktext tracking-wider mb-3'>Wallet Balance</h2>
@@ -28,7 +28,7 @@ function ProfileSection() {
               </div>
             </div>
 
-            <div className='space-y-6 py-7'>
+            <div className='lg:space-y-6 py-7 flex lg:block space-x-3 lg:space-x-0'>
               <div className=''>
                 <button className='w-[15em] bg-dark text-light py-3 rounded-lg text-xs lg:text-sm'
                   onClick={() => {

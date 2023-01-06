@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { AiOutlineDown, AiOutlineMail, AiOutlineUp } from "react-icons/ai";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import CurrencyModal from "./CurrencyModal";
 import HelplineModal from "./HelplineModal";
 import LanguageModal from "./LanguageModal";
+import { useHandleClickOutside } from "../../hooks";
 
 export default function TopHeader() {
     const [view, setView] = useState({
@@ -12,6 +13,13 @@ export default function TopHeader() {
         currency: false,
         language: false
     })
+
+    const helplineRef = useRef()
+    const currencyRef = useRef()
+    const languageRef = useRef()
+    useHandleClickOutside(helplineRef, () => setView(!view))
+    useHandleClickOutside(currencyRef, () => setView(!view))
+    useHandleClickOutside(languageRef, () => setView(!view))
 
     const { home } = useSelector(state => state.general)
 
@@ -38,6 +46,7 @@ export default function TopHeader() {
                             </span>
                         </div>
                         <div
+                            ref={helplineRef}
                             className="text-soft flex space-x-1 items-center px-3 text-xs lg:text-sm whitespace-nowrap cursor-pointer"
                             onClick={() => {
                                 setView((prev) => {
@@ -53,10 +62,10 @@ export default function TopHeader() {
                                     <AiOutlineDown />
                                 )}
                             </span>
+                            {/* absolute div */}
+                            <HelplineModal setView={setView} view={view} />
+                            {/* absolute div */}
                         </div>
-                        {/* absolute div */}
-                        <HelplineModal setView={setView} view={view} />
-                        {/* absolute div */}
                     </span>
                     <span className="flex text-sm">
                         <div className="flex px-5 space-x-2 md:space-x-5 text-soft items-center font-light">
@@ -66,6 +75,7 @@ export default function TopHeader() {
                                 </a>
                             </div>
                             <div
+                                ref={currencyRef}
                                 className="flex space-x-1 items-center cursor-pointer relative"
                                 onClick={() => setView((prev) => {
                                     return { ...prev, currency: !view.currency }
@@ -84,6 +94,7 @@ export default function TopHeader() {
                                 {/* absolute modal */}
                             </div>
                             <div
+                                ref={languageRef}
                                 className="flex space-x-2 items-center cursor-pointer"
                                 onClick={() =>
                                     setView((prev) => {

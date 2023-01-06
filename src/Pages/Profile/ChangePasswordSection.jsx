@@ -2,7 +2,7 @@ import React from 'react'
 
 function ChangePasswordSection() {
   return (
-    <div className='bg-light rounded-3xl p-10'>
+    <div className='bg-light rounded-3xl p-10 mx-4 lg:mx-0'>
       <div className='flex justify-center'>
         <h1 className='text-2xl font-bold tracking-wider'>Update Password</h1>
       </div>

@@ -55,7 +55,7 @@ function Register({ setView, view }) {
             </div>
 
             <div className="flex justify-center items-center w-full h-[100vh] z-50">
-                <div className="h-[75vh] w-8/12 bg-[#fcfeff]  rounded-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+                <div className="h-[80vh] w-8/12 bg-[#fcfeff]  rounded-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
                     <div className="m-4 h-[96%] relative">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,7 @@ function Register({ setView, view }) {
                             <div className="h-full flex items-end z-20">
                                 <div className="mb-7">
                                     <div className="text-2xl text-darktext">
-                                        Help line
+                                        Helpline
                                     </div>
                                     <div className=" flex items-end space-x-2">
                                         <div className="text-sm text-text">

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 function DetailsCard() {
     const navigate = useNavigate()
+    const [error, setError] = useState('')
 
     const { excursion } = useSelector(state => state.excursion)
     const { recievedActivities } = useSelector(state => state.excursion)
@@ -25,7 +26,6 @@ function DetailsCard() {
         const sum = recievedActivities?.filter((item) => item?.isChecked)?.reduce((acc, data) => {
             return Number(acc) + Number(data?.price)
         }, 0)
-        console.log(sum);
         setPrice(sum)
     }, [recievedActivities])
 
@@ -44,7 +44,22 @@ function DetailsCard() {
             }
         }
     }, [excursion])
-    
+
+    const navigator = () => {
+        const isDateExist =  recievedActivities.filter(item => {
+            return item?.isChecked === true && item?.date !== ""
+        })
+        console.log(isDateExist);
+        if (isDateExist.length >= 1) {
+            if (!error) {
+
+                navigate(`/payment/${excursion?._id}`)
+            }
+        } else {
+            setError("Fill the tour Date")
+        }
+    }
+
 
     return (
         <>
@@ -59,7 +74,7 @@ function DetailsCard() {
                     <div className='flex justify-between items-center'>
                         <span className='flex items-center space-x-2'>
                             <h2 className='text-darktext font-bold text-3xl'>USD {offerAmount}</h2>
-                            <p className='text-xs text-text'>cheapest price*</p> 
+                            <p className='text-xs text-text'>cheapest price*</p>
                         </span>
                         {/* offer percentage  */}
                         {excursion?.isOffer && (
@@ -90,7 +105,7 @@ function DetailsCard() {
                                 {(excursion?.isOffer === true) && (
                                     <div className='flex justify-between text-darktext'>
                                         <span className=''>{excursion?.offerAmountType === 'flat' ? 'flat' : "discount"} </span>
-                                        <span className=''>{excursion?.offerAmount + "%"  } </span>
+                                        <span className=''>{excursion?.offerAmount + "%"} </span>
                                     </div>
                                 )}
                                 {/* <div className='flex justify-between text-darktext'>
@@ -102,11 +117,12 @@ function DetailsCard() {
                                     <span className='font-bold text-xl'>{price}.00 USD</span>
                                 </div>
                             </div>
-
-
+                            {error && (
+                                <p className='text-xs text-main'>{error} </p>
+                            )}
                             <div className=''>
                                 <button type='submit' className='bg-lightblue text-light w-full py-3 rounded-lg'
-                                onClick={() => navigate(`/payment/${excursion?._id}`)}
+                                    onClick={navigator}
                                 >Book Now</button>
                             </div>
 

@@ -3,21 +3,25 @@ import { AiFillStar, AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { NearbyDestinations } from '../../data'
 import { useSelector } from 'react-redux'
+import Rating from '../../components/Rating/Rating'
 
 function TopSellingSection() {
-  const { topAttractions } = useSelector(state => state.general)
+  const { topAttractions, home } = useSelector(state => state.general)
+  if (!home?.isTopAttractionsSectionEnabled) return null
   return (
     <div className='mx-5 my-10 lg:mx-auto lg:max-w-screen-xl'>
       <div className='flex justify-between'>
         <div className='text-3xl font-semibold text-darktext cursor-default '>Top Attractions</div>
-        <div className='hidden lg:flex space-x-5'>
-          <button className='hover:bg-main rounded-full w-12 h-12 flex justify-center items-center hover:text-light text-xl bg-light text-main duration-500' onClick={() => {
-            document.querySelector('.containertop').scrollLeft -= 200
-          }}><AiOutlineLeft /></button>
-          <button className='hover:bg-main rounded-full w-12 h-12 flex justify-center items-center hover:text-light text-xl bg-light text-main duration-500' onClick={() => {
-            document.querySelector('.containertop').scrollLeft += 200
-          }}><AiOutlineRight /> </button>
-        </div>
+        {topAttractions.length > 4 && (
+          <div className='hidden lg:flex space-x-5'>
+            <button className='hover:bg-main rounded-full w-12 h-12 flex justify-center items-center hover:text-light text-xl bg-light text-main duration-500' onClick={() => {
+              document.querySelector('.containertop').scrollLeft -= 200
+            }}><AiOutlineLeft /></button>
+            <button className='hover:bg-main rounded-full w-12 h-12 flex justify-center items-center hover:text-light text-xl bg-light text-main duration-500' onClick={() => {
+              document.querySelector('.containertop').scrollLeft += 200
+            }}><AiOutlineRight /> </button>
+          </div>
+        )}
       </div>
       <div className='containertop scroll-smooth flex overflow-x-auto snap-x overflow-y-hidden  gap-5'>
         {topAttractions?.map((item) => (
@@ -32,14 +36,13 @@ function TopSellingSection() {
                     {item?.category?.categoryName}
                   </div>
                   <div className='flex items-center space-x-1 text-yellow-500'>
-                    <span className='text-sm'>4.7</span>
-                    <span className=''><AiFillStar /></span>
+                  <Rating value={item?.averageRating} text={item?.totalReviews} color={"#FED049"} />
                   </div>
                 </div>
                 <div className='px-3 space-y-2 pb-5 pt-3 text-darktext'>
                   <div className='font-semibold'>{item.title} </div>
                   <div className='flex justify-between '>
-                    <span className='text-sm'>{item?.category?.categoryName}</span>
+                    <span className='text-sm'>{item?.destination?.name}</span>
                     <span className='text-base font-medium text-blue '>USD {item?.activity?.adultPrice}</span>
                   </div>
                 </div>

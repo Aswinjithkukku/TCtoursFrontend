@@ -5,8 +5,8 @@ import { useSearchParams } from 'react-router-dom';
 
 function SearchFunctionalitySection({ viewCategory, setViewCategory }) {
     const [searchParams] = useSearchParams()
-    const [date, setDate] = useState('')
     const queryDate = searchParams.get('date');
+    const [date, setDate] = useState('')
     useEffect(() => {
         setDate(queryDate)
     },[])

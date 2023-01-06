@@ -6,6 +6,7 @@ const initialState = {
     Home: {},
     topAttractions: [],
     bestSellingAttractions: [],
+    recentBlogs: [],
     countries: [],
 };
 
@@ -14,7 +15,7 @@ const initialState = {
 export const getHome = createAsyncThunk(
     "general/getHome",
     async (args, { getState }) => {
-        const response = await axios.get(`/home/`);
+        const response = await axios.get(`/home`);
         return response.data;
     }
 );
@@ -40,6 +41,7 @@ const generalSlice = createSlice({
             state.topAttractions = action.payload?.topAttractions;
             state.bestSellingAttractions =
                 action.payload?.bestSellingAttractions;
+            state.recentBlogs = action?.payload?.recentBlogs
         },
         [getAllCountries.pending]: (state, action) => {
             state.loading = true;

@@ -1,19 +1,21 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { NearbyDestinations } from '../../data'
 
 function NearbySection() {
+
+  const { initialData } = useSelector(state => state.home)
   return (
     <div className='mx-5 py-10 lg:mx-auto lg:max-w-screen-xl'>
       <div className='text-3xl font-semibold text-dark mb-4'>Nearby destinations</div>
-      <div className='md:grid md:grid-cols-3 gap-5'>
-      {NearbyDestinations?.map((image,index) => (
+      <div className='md:grid md:grid-cols-4 gap-5'>
+      {initialData?.destinations?.map((item,index) => (
       <div className='mt-2 relative cursor-pointer' key={index}>
         <div className='overflow-hidden rounded-2xl'>
-        <img className='hover:scale-110 object-cover rounded-2xl h-[14em] w-full  transition-all duration-500 cursor-pointer' src={image.img} alt={image.name} />
+        <img className='hover:scale-110 object-cover rounded-2xl h-[14em] w-full  transition-all duration-500 cursor-pointer' src={process.env.REACT_APP_SERVER_URL +  item?.image} alt={item?.name} />
         </div>
         <div className='absolute bottom-2 left-4  text-light'>
-          <div className='font-semibold'>{image.name} </div>
-          <div className='text-xs'>{image.number}tickets more</div>
+          <div className='font-semibold capitalize'>{item?.name} </div>
         </div>
       </div>
       ))}

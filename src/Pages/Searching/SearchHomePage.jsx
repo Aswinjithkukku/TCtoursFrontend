@@ -30,7 +30,7 @@ function SearchHomePage({ viewCategory, setViewCategory, setCategory }) {
                             <span className='text-3xl' onClick={() => setViewFilter(!viewFilter)}><AiOutlineClose /></span>
                         </div>
                         <div className={`overflow-x-auto `}>
-                            <div className=' justify-between space-x-3 flex w-full  px-1'>
+                            <div className=' justify-between lg:space-x-3  lg:flex w-full  px-1'>
                                 {categories?.map((item) => (
                                     <div key={item?._id} className='space-x-2 w-full flex px-3 hover:text-lightblue lg:justify-center items-center py-4 rounded-lg lg:border lg:border-lightblue cursor-pointer'
                                         onClick={() => setCategory(item?._id)}

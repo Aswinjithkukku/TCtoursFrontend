@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
@@ -30,19 +30,22 @@ function Login({ setView, view }) {
             e.preventDefault();
             setError("");
             setIsLoading(true);
-
             const response = await axios.post("/users/login", data);
 
             dispatch(setUser(response.data));
             setIsLoading(false);
             setView(!view)
         } catch (err) {
-            setError(
-                err?.response?.data?.error || "Something went wrong, Try again"
-            );
+
+            if (err?.response?.data?.error === "Invalid credentials") {
+                setError("You have given incorrect email or password")
+            } else {
+                setError(err?.response?.data?.error)
+            }
             setIsLoading(false);
         }
     };
+
     if (!view) return null
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 z-30 modal_overlay" onClick={() => setView(!view)}>
@@ -52,13 +55,11 @@ function Login({ setView, view }) {
                 <AiOutlineClose />
             </div>
             <div className="flex justify-center items-center w-full h-[100vh] z-50">
-                <div className="h-[75vh] w-8/12 bg-[#fcfeff] rounded-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+                <div className="h-[80vh] w-8/12 bg-[#fcfeff] rounded-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
                     <div className="m-4 h-[96%] relative">
                         <div className="bglogindubai h-[100%]  bg-right rounded-2xl flex justify-start items-center pl-6 ">
                             <div className="w-[24em] loginCard h-[95%] shadow-md  rounded-2xl">
-                                <form
-                                    onSubmit={handleSubmit}
-                                    className="p-5 space-y-3"
+                                <div className="p-5 space-y-3"
                                 >
                                     <div className="text-4xl text-main font-semibold">
                                         Welcome Back...
@@ -92,6 +93,7 @@ function Login({ setView, view }) {
                                                     placeholder="Enter Your Email"
                                                     className="w-full placeholder:text-maintrans bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400 text-maintrans "
                                                     name="email"
+                                                    required
                                                 />
                                             </div>
                                             <div className="flex justify-between pt-2">
@@ -105,7 +107,7 @@ function Login({ setView, view }) {
                                                     </span>
                                                 </button>
                                                 <span className="text-sm flex space-x-1 items-center hover:text-main cursor-pointer px-5 text-maintrans"
-                                                onClick={() => setResetPassword(!resetPassword)}
+                                                    onClick={() => setResetPassword(!resetPassword)}
                                                 >
                                                     <span className="">
                                                         <AiOutlineLeft />{" "}
@@ -118,54 +120,57 @@ function Login({ setView, view }) {
                                         </>
                                     ) : (
                                         <>
-                                            <div className="space-y-2  py-4">
-                                                <label className="text-text "> Email</label>
-                                                <input
-                                                    type="email"
-                                                    placeholder="Enter Your Email"
-                                                    className="w-full placeholder:text-maintrans bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400 text-maintrans "
-                                                    name="email"
-                                                    value={data.email || ""}
-                                                    onChange={handleChange}
-                                                />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <label className="text-text ">
-                                                    Password
-                                                </label>
-                                                <input
-                                                    type="password"
-                                                    placeholder="Give a password"
-                                                    className="w-full placeholder:text-maintrans bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400 text-maintrans"
-                                                    name="password"
-                                                    value={data.password || ""}
-                                                    onChange={handleChange}
-                                                />
-                                            </div>
-                                            {error && (
-                                                <p className="text-main text-sm">{error}</p>
-                                            )}
-                                            <div className="flex justify-between pt-2">
-                                                <button
-                                                    type="submit"
-                                                    className="py-2 rounded-xl px-5 bg-main hover:bg-light hover:text-main text-light duration-300 flex items-center space-x-2"
-                                                >
-                                                    <span className="">Sign In</span>
-                                                    <span className="">
-                                                        <AiOutlineRight />{" "}
+                                            <form onSubmit={handleSubmit} >
+                                                <div className="space-y-2  py-4">
+                                                    <label className="text-text "> Email</label>
+                                                    <input
+                                                        type="email"
+                                                        placeholder="Enter Your Email"
+                                                        className="w-full placeholder:text-maintrans bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400 text-maintrans "
+                                                        name="email"
+                                                        value={data.email || ""}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-text ">
+                                                        Password
+                                                    </label>
+                                                    <input
+                                                        required
+                                                        type="password"
+                                                        placeholder="Give a password"
+                                                        className="w-full placeholder:text-maintrans bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400 text-maintrans"
+                                                        name="password"
+                                                        value={data.password || ""}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                                {error && (
+                                                    <p className="text-main text-sm">{error}</p>
+                                                )}
+                                                <div className="flex justify-between pt-2">
+                                                    <button
+                                                        type="submit"
+                                                        className="py-2 rounded-xl px-5 bg-main hover:bg-light hover:text-main text-light duration-300 flex items-center space-x-2"
+                                                    >
+                                                        <span className="">Sign In</span>
+                                                        <span className="">
+                                                            <AiOutlineRight />{" "}
+                                                        </span>
+                                                    </button>
+                                                    <span className="text-sm flex space-x-1 items-center hover:text-main cursor-pointer px-5 text-maintrans"
+                                                        onClick={() => setResetPassword(!resetPassword)}
+                                                    >
+                                                        <span className="">
+                                                            <RiLockPasswordLine />{" "}
+                                                        </span>
+                                                        <span className="">
+                                                            Reset password
+                                                        </span>
                                                     </span>
-                                                </button>
-                                                <span className="text-sm flex space-x-1 items-center hover:text-main cursor-pointer px-5 text-maintrans"
-                                                onClick={() => setResetPassword(!resetPassword)}
-                                                >
-                                                    <span className="">
-                                                        <RiLockPasswordLine />{" "}
-                                                    </span>
-                                                    <span className="">
-                                                        Reset password
-                                                    </span>
-                                                </span>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </>
                                     )}
                                     <div className="text-sm pt-1">
@@ -183,7 +188,7 @@ function Login({ setView, view }) {
                                             Register
                                         </span>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
