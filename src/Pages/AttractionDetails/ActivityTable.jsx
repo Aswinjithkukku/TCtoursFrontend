@@ -45,7 +45,7 @@ function ActivityTable({ item, index }) {
 
     return (
         <tr className='text-darktext border-b' key={index}>
-            <td className='py-3 px-1 max-w-[13em] sm:w-[10em] lg:w-[13em] flex items-start space-x-2'>
+            <td className='py-3 px-1 max-w-[13em] w-[13em] flex items-start space-x-2'>
                 <span className=''>
 
                     {/* <input type='checkbox' className=''
@@ -87,7 +87,7 @@ function ActivityTable({ item, index }) {
                     onChange={(e) => handleChange({ value: e.target.value, name: e.target.name, index })}
                 >
                     {Array.from({ length: 50 }).map((_, index) => (
-                        <option value={index + 1}>{index + 1}</option>
+                        <option value={index + 1} key={index}>{index + 1}</option>
                     ))}
                 </select>
             </td>
@@ -98,7 +98,7 @@ function ActivityTable({ item, index }) {
                     onChange={(e) => handleChange({ value: e.target.value, name: e.target.name, index })}
                 >
                     {Array.from({ length: 50 }).map((_, index) => (
-                        <option value={index}>{index}</option>
+                        <option value={index} key={index}>{index}</option>
                     ))}
                 </select>
             </td>
@@ -115,7 +115,7 @@ function ActivityTable({ item, index }) {
                     <option value='4'>4</option>
                 </select>
             </td>
-            <td className='py-3 px-1 min-w-[4em]'>
+            <td className='py-3 px-1 min-w-[4em] pl-5'>
                 <h2 className='font-medium'>{price} USD</h2>
                 <div className='relative'>
                     <input type='checkbox'
@@ -123,7 +123,7 @@ function ActivityTable({ item, index }) {
                         name='isChecked'
                         checked={item?.isChecked}
                         onChange={(e) => handleChange({ value: e.target.checked, name: e.target.name, index })} />
-                    <button className='text-light bg-lightblue px-1 py-1 rounded-sm hover:bg-blue text-xs flex items-center'
+                    <button className='text-light bg-lightblue px-1 py-1 rounded-sm hover:bg-blue text-xs flex items-center whitespace-nowrap'
                     > {item?.isChecked === false ? "add to cart" : "remove from cart"}<IoMdCart /> </button>
                 </div>
             </td>

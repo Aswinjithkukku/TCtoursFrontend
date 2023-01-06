@@ -1,5 +1,5 @@
 import React from 'react'
-import {  GiHoneycomb } from 'react-icons/gi'
+import { GiHoneycomb } from 'react-icons/gi'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -12,7 +12,7 @@ function SpecialofferCardSection() {
             <div className='lg:grid lg:grid-cols-12 lg:gap-7'>
 
                 <div className='1 col-span-6'>
-                    {/* <Link to={home?.cards[0]?.url}> */}
+                    <Link to={`/search/isOffer`}>
                         <div className='  h-[23em] group cursor-pointer'>
                             <div className=' relative '>
                                 <div className='overflow-hidden lg:rounded-xl bg-bottom'>
@@ -36,12 +36,12 @@ function SpecialofferCardSection() {
                                 </div>
                             </div>
                         </div>
-                    {/* </Link> */}
+                    </Link>
                 </div>
 
                 {home?.cards?.slice(1)?.map((item) => (
                     <div className='2 hidden lg:block col-span-3' key={item.title}>
-                        {/* <Link to={item.url}> */}
+                        <Link to={`/search/isCombo`}>
                             <div className=' h-[23em] group mx-3 cursor-pointer'>
                                 <div className='relative'>
                                     <div className='overflow-hidden rounded-xl'>
@@ -67,7 +67,7 @@ function SpecialofferCardSection() {
                                     </div>
                                 </div>
                             </div>
-                        {/* </Link> */}
+                        </Link>
                     </div>
                 ))}
 

@@ -13,16 +13,27 @@ function SearchingResultPage() {
     const dispatch = useDispatch()
     const params = useParams()
 
-    const destination = params.slug
-
+    
     const [viewCategory, setViewCategory] = useState(false)
     const [category, setCategory] = useState('')
-
-
+    const [search, setSearch] = useState('')
+    
+    let destination =''
+    let isOffer = ''
+    let isCombo = ''
     useEffect(() => {
+        if(params.slug === 'isOffer'){
+            isOffer = "true"
+            dispatch(getAllExcursions({ isOffer, category, search }))
+        }else if(params.slug === 'isCombo'){
+            isCombo = "true"
+            dispatch(getAllExcursions({ isCombo, category, search }))
+        }else {
+            destination = params.slug
+            dispatch(getAllExcursions({ destination, category, search }))
+        }
 
-        dispatch(getAllExcursions({ destination, category }))
-    }, [dispatch, destination, category])
+    }, [dispatch, destination, category, search])
 
 
 
@@ -32,6 +43,7 @@ function SearchingResultPage() {
                 viewCategory={viewCategory}
                 setViewCategory={setViewCategory}
                 setCategory={setCategory}
+                setSearch={setSearch}
             />
             <div className='lg:max-w-screen-xl lg:mx-auto'>
                 <div className='lg:grid grid-cols-12 gap-5'>

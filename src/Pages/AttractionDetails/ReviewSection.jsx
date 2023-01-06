@@ -10,6 +10,7 @@ function ReviewSection() {
   const { id } = useParams()
 
   const { reviews } = useSelector(state => state.excursion)
+  const { isLoggedIn } = useSelector(state => state.users)
 
   useEffect(() => {
     dispatch(getReviews(id))
@@ -18,18 +19,37 @@ function ReviewSection() {
 
   return (
     <div className=''>
-      <div className='lg:max-w-6xl lg:mx-auto '>
-        <div className='bg-light rounded-xl py-10 px-10 lg:px-20'>
-          <div className='text-lg font-medium text-text'>
-            Write your review
+      {!isLoggedIn ? (
+        <div className='lg:max-w-6xl lg:mx-auto '>
+          <div className='bg-light rounded-xl py-10 px-10 lg:px-20'>
+            <div className='text-lg font-semibold tracking-wider text-text'>
+              Write your review!
+            </div>
+            <div className='text-text font-medium text-sm text-center'>
+              please
+              <span className='underline text-card'>login</span>
+              to submit your review
+            </div>
           </div>
-          <div className='text-text font-medium text-sm text-center'>
-            please
-            <span className='underline text-card'>login</span>
-            to submit your review
+        </div>
+      ) : (
+        <div className='lg:max-w-6xl lg:mx-auto '>
+          <div className='bg-light rounded-xl py-10 px-10 lg:px-20'>
+            <div className='text-lg font-semibold mb-2 text-dark tracking-wider'>
+              Write your review !
+            </div>
+            <form>
+              <div className='text-gray-500 font-medium text-sm text-center'>
+                <textarea className='w-full border-cardtransblue border rounded-md h-24' />
+              </div>
+              <div className='flex justify-end mt-2'>
+                <button type='submit' className='text-light bg-lightblue rounded-md px-4 py-2'>Submit Review</button>
+              </div>
+            </form>
           </div>
-        </div> 
-      </div>
+        </div>
+      )}
+
       <div className='lg:max-w-6xl lg:mx-auto py-7'>
         <div className=''>
           {reviews?.attractionReviews?.map((item) => (
@@ -52,7 +72,7 @@ function ReviewSection() {
               <div className='p-5'>
                 <div className='border-b flex justify-between items-center py-3'>
                   <span className='text-darktext font-medium'>{item?.title}</span>
-                  <span className='text-text text-sm'>{item?.createdAt.substr(0,10)}</span>
+                  <span className='text-text text-sm'>{item?.createdAt.substr(0, 10)}</span>
                 </div>
                 <div className='py-3'>
                   <p className='text-text text-sm'>{item?.description}</p>

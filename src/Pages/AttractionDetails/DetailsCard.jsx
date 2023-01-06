@@ -49,12 +49,8 @@ function DetailsCard() {
         const isDateExist =  recievedActivities.filter(item => {
             return item?.isChecked === true && item?.date !== ""
         })
-        console.log(isDateExist);
-        if (isDateExist.length >= 1) {
-            if (!error) {
-
-                navigate(`/payment/${excursion?._id}`)
-            }
+        if (isDateExist.length > 0) {
+            navigate(`/payment/${excursion?._id}`)
         } else {
             setError("Fill the tour Date")
         }
@@ -90,8 +86,8 @@ function DetailsCard() {
                                 </div>
 
                                 <div>
-                                    {recievedActivities?.map((item) => (
-                                        <div className='flex justify-between gap-2 text-sm'>
+                                    {recievedActivities?.map((item, index) => (
+                                        <div className='flex justify-between gap-2 text-sm' key={index}>
                                             <span className='text-darktext ml-1'>{item?.isChecked === true && (item?.name)}</span>
                                             <span className=''>{item?.isChecked === true && item?.price + " USD"}</span>
                                         </div>

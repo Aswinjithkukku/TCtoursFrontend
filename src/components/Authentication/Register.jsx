@@ -71,21 +71,21 @@ function Register({ setView, view }) {
                         <div className=" bgdubai h-[100%]  bg-right rounded-2xl flex justify-between items-center pr-6">
                             <div className="h-full flex items-end z-20">
                                 <div className="mb-7">
-                                    <div className="text-2xl text-darktext">
+                                    <div className="text-2xl text-darktext font-bold">
                                         Helpline
                                     </div>
-                                    <div className=" flex items-end space-x-2">
+                                    <div className=" flex items-end space-x-2 ">
                                         <div className="text-sm text-text">
-                                            <div className="flex space-x-2">
+                                            <div className="flex space-x-2 text-lightblue">
                                                 <span className=""> <BsFillTelephoneInboundFill /> </span>
                                                 <span className="">{home?.phoneNumber1}</span>
                                             </div>
-                                            <div className="flex space-x-2">
+                                            <div className="flex space-x-2 text-lightblue">
                                                 <span className=""><BsFillTelephoneInboundFill /></span>
                                                 <span className="">{home?.phoneNumber2}</span>
                                             </div>
                                         </div>
-                                        <div className="flex space-x-2 text-text">
+                                        <div className="flex space-x-2 text-lightblue">
                                             <span className=""><AiFillMail /> </span>
                                             <span className="text-sm">{home?.email}</span>
                                         </div>

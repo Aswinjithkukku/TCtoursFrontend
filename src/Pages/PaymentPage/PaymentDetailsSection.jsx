@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineDown } from 'react-icons/ai'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import PaypalComponent from '../../components/Payment/PaypalComponent'
+import { getPassengerDetails } from '../../redux/slices/paymentSlice'
 
 
 
 function PaymentDetailsSection() {
+    const dispatch = useDispatch()
 
     const [travellerData, setTravellerData] = useState({
-        gender: "",
+        gender: "male",
         firstname: "",
         lastname: "",
         email: "",
@@ -23,123 +25,136 @@ function PaymentDetailsSection() {
         setTravellerData({ ...travellerData, [e.target.name]: e.target.value })
     }
 
+    const submitHandler = (e) => {
+        e.preventDefault()
+        dispatch(getPassengerDetails(travellerData))
+        localStorage.setItem('passenger', JSON.stringify(travellerData))
+        console.log(travellerData);
+        console.log("hiiii");
+    }
+
     return (
         <>
             <div className='bg-light  w-full p-5 rounded-2xl space-y-5'>
-                <div className=' cursor-default'>
-                    <h2 className='text-2xl font-semibold text-darktext'>Lead Passenger Details</h2>
-                </div>
+                <form onSubmit={submitHandler} >
+                    <div className=' cursor-default'>
+                        <h2 className='text-2xl font-semibold text-darktext'>Lead Passenger Details</h2>
+                    </div>
 
-                <div className='lg:flex gap-5 text-darktext space-y-3 lg:space-y-0'>
-                    <div className=''>
+                    <div className='lg:flex gap-5 text-darktext space-y-3 lg:space-y-0'>
                         <div className=''>
-                            <label className=''>Mr/Mrs</label>
+                            <div className=''>
+                                <label className=''>Mr/Mrs</label>
+                            </div>
+                            <div className=''>
+                                <select
+                                    type='text'
+                                    name='gender'
+                                    value={travellerData.gender}
+                                    onChange={onChange}
+                                    className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light' >
+                                    <option value={"male"}>Mr.</option>
+                                    <option value={"female"}>Mrs.</option>
+                                    <option value={"other"}>Ms.</option>
+                                </select>
+                            </div>
                         </div>
-                        <div className=''>
-                            <select
-                                type='text'
-                                name='gender'
-                                value={travellerData.gender}
-                                onChange={onChange}
-                                className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light' >
-                                <option value={"male"}>Mr.</option>
-                                <option value={"female"}>Mrs.</option>
-                                <option value={"other"}>Ms.</option>
-                            </select>
+                        <div className='lg:w-5/12'>
+                            <div className=''>
+                                <label className=''>First Name</label>
+                            </div>
+                            <div className=''>
+                                <input
+                                    type='text'
+                                    className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
+                                    name='firstname'
+                                    value={travellerData.firstname}
+                                    onChange={onChange}
+                                />
+                            </div>
+                        </div>
+                        <div className='lg:w-5/12'>
+                            <div className=''>
+                                <label className=''>Last Name</label>
+                            </div>
+                            <div className=''>
+                                <input
+                                    type='text'
+                                    className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
+                                    name='lastname'
+                                    value={travellerData.lastname}
+                                    onChange={onChange}
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className='lg:w-5/12'>
+                    <div className='lg:flex gap-5 text-darktext space-y-3 lg:space-y-0'>
+                        <div className='lg:w-4/12'>
+                            <div className=''>
+                                <label className=''>Email</label>
+                            </div>
+                            <div className=''>
+                                <input
+                                    type='text'
+                                    className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
+                                    name='email'
+                                    value={travellerData.email}
+                                    onChange={onChange}
+                                />
+                            </div>
+                        </div>
+                        <div className='lg:w-4/12'>
+                            <div className=''>
+                                <label className=''>Country</label>
+                            </div>
+                            <div className=''>
+                                <select
+                                    type='text'
+                                    className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
+                                    name='country'
+                                    value={travellerData.country}
+                                    onChange={onChange}
+                                >
+                                    <option >Choose Country</option>
+                                    {initialData?.countries?.map((item) => (
+                                        <option key={item._id} value={item._id}>{item.countryName} </option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+                        <div className='lg:w-4/12'>
+                            <div className=''>
+                                <label className=''>Phone</label>
+                            </div>
+                            <div className=''>
+                                <input
+                                    type='number'
+                                    className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
+                                    name='phone'
+                                    value={travellerData.phone}
+                                    onChange={onChange}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='text-darktext'>
                         <div className=''>
-                            <label className=''>First Name</label>
+                            <label className=''>Special Request</label>
                         </div>
                         <div className=''>
-                            <input
+                            <textarea
                                 type='text'
                                 className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
-                                name='firstname'
-                                value={travellerData.firstname}
+                                name='special_request_text'
+                                value={travellerData.special_request_text}
                                 onChange={onChange}
                             />
                         </div>
                     </div>
-                    <div className='lg:w-5/12'>
-                        <div className=''>
-                            <label className=''>Last Name</label>
-                        </div>
-                        <div className=''>
-                            <input
-                                type='text'
-                                className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
-                                name='lastname'
-                                value={travellerData.lastname}
-                                onChange={onChange}
-                            />
-                        </div>
+                    <div className='flex justify-end' >
+                        <button type='submit' className='text-sm text-light bg-lightblue px-3 py-1 rounded-[4px]'>Submit</button>
                     </div>
-                </div>
-                <div className='lg:flex gap-5 text-darktext space-y-3 lg:space-y-0'>
-                    <div className='lg:w-4/12'>
-                        <div className=''>
-                            <label className=''>Email</label>
-                        </div>
-                        <div className=''>
-                            <input
-                                type='text'
-                                className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
-                                name='email'
-                                value={travellerData.email}
-                                onChange={onChange}
-                            />
-                        </div>
-                    </div>
-                    <div className='lg:w-4/12'>
-                        <div className=''>
-                            <label className=''>Country</label>
-                        </div>
-                        <div className=''>
-                            <select
-                                type='text'
-                                className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
-                                name='country'
-                                value={travellerData.country}
-                                onChange={onChange}
-                            >
-                                <option >Choose Country</option>
-                                {initialData?.countries?.map((item) => (
-                                    <option key={item._id} value={item._id}>{item.countryName} </option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
-                    <div className='lg:w-4/12'>
-                        <div className=''>
-                            <label className=''>Phone</label>
-                        </div>
-                        <div className=''>
-                            <input
-                                type='number'
-                                className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
-                                name='phone'
-                                value={travellerData.phone}
-                                onChange={onChange}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className='text-darktext'>
-                    <div className=''>
-                        <label className=''>Special Request</label>
-                    </div>
-                    <div className=''>
-                        <textarea
-                            type='text'
-                            className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
-                            name='special_request_text'
-                            value={travellerData.special_request_text}
-                            onChange={onChange}
-                        />
-                    </div>
-                </div>
+                </form>
             </div>
             <div className='bg-light  w-full px-5 py-10 rounded-2xl lg:my-5'>
                 <div className='lg:flex items-center lg:space-x-2'>

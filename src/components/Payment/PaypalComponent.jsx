@@ -1,35 +1,48 @@
-import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
+// import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import React, { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom'
 import axios from '../../axios';
+import Swal from 'sweetalert2'
 
-function PaypalComponent({ travellerData }) {
-  // const email = travellerData.email;
-  // console.log(email);
-  // const [email, setEmail] = useState(travellerData.email)
+function PaypalComponent() {
 
-  const params = useParams()
-  // const [orderId, setOrderId] = useState("");
-  const attractionOrderId = params.id
+  const passenger = JSON.parse(localStorage.getItem('passenger'))
+  const tour_order = JSON.parse(localStorage.getItem('tour_order'))
+
+  const order_data = tour_order.map((item) => {
+    return {
+      activity: item?._id,
+      date: item?.date,
+      adultsCount: Number(item?.adult),
+      childrenCount: Number(item?.child),
+      infantCount: Number(item?.infant),
+      transferType: item?.transfer
+    }
+  })
+
+  const createOrderData = {
+    name: passenger?.firstname + ' ' + passenger?.lastname,
+    email: passenger?.email,
+    country: passenger?.country,
+    phoneNumber: passenger?.phone,
+    selectedActivities: order_data
+  }
 
   const paypal = useRef()
   useEffect(() => {
     window.paypal.Buttons({
       createOrder: async (data, actions, err) => {
         try {
-          const response = await axios.post("/attractions/orders/payment", {
-            attractionOrderId,
-            name: "test",
-            email: "test@email.com",
-            phoneNumber: "9200025655",
-            country: "63ac33c3ff04e5652a2583f1"
-          });
+          const response = await axios.post("/attractions/orders/create", createOrderData);
 
           console.log(response.data.id);
           return response.data.id;
 
         } catch {
+          Swal.fire({
+            icon: 'error',
+            title: 'Something went wrong!',
+            text: 'Error Creating Paypal Order',
+          })
           console.log("Error Creating Paypal Order");
           return "";
         }

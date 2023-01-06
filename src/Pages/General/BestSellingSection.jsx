@@ -1,5 +1,6 @@
 import React from 'react'
 import { AiFillStar, AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
+import { IoLocation } from 'react-icons/io5'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Rating from '../../components/Rating/Rating'
@@ -28,7 +29,7 @@ function BestSellingSection() {
         <div className='containerBAL scroll-smooth flex overflow-x-auto snap-x overflow-y-hidden  gap-5'>
           {bestSellingAttractions?.map((item, index) => (
             <Link to={`/details/${item?._id}`} key={index}>
-              <div className=' snap-start mt-2 bg-light p-3 rounded-3xl cursor-pointer' >
+              <div className=' snap-start mt-2 bg-light p-3 rounded-3xl cursor-pointer h-[96%] ' >
                 <div className=' relative w-[17.5em]'>
                   <div className='overflow-hidden rounded-t-3xl rounded-b-md'>
                     <img className='hover:scale-110 object-cover  h-[14em] w-full transition-all duration-500 cursor-pointer' src={process.env.REACT_APP_SERVER_URL + item?.images[0]} alt={item?.title} />
@@ -44,8 +45,11 @@ function BestSellingSection() {
                   <div className='px-3 space-y-2 pb-5 pt-3 text-darktext'>
                     <div className='font-semibold'>{item?.title} </div>
                     <div className='flex justify-between '>
-                      <span className='text-sm'>{item?.destination?.name}</span>
-                      <span className='text-base font-medium text-blue '>USD {item?.activity?.adultPrice}</span>
+                      <div className='flex items-center'>
+                        <span className='text-green-600'><IoLocation/></span>
+                        <span className='text-sm text-green-600'>{item?.destination?.name} dsfdf</span>
+                      </div>
+                      <div className='text-base font-medium text-blue '>USD {item?.activity?.adultPrice}</div>
                     </div>
                   </div>
                 </div>

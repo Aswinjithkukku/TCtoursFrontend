@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getExcursion } from '../../redux/slices/excursionSlice'
 import { useNavigate, useParams } from 'react-router-dom'
 import Rating from '../../components/Rating/Rating'
+import CarousalMobile from './CarousalMobile'
 
 function HeroSection() {
     const dispatch = useDispatch()
@@ -37,7 +38,7 @@ function HeroSection() {
         <div className='bg-soft'>
             <div className='lg:max-w-screen-xl lg:mx-auto'>
                 <div className=''>
-                    <div className='relative lg:grid lg:grid-cols-12 gap-5 my-7 lg:my-0 lg:py-7'>
+                    <div className='relative lg:grid lg:grid-cols-12 gap-5 py-7 lg:my-0 lg:py-7'>
                         <div className='1st lg:col-span-8'>
 
                             <div className='bg-light md:rounded-2xl p-5 py-7  text-darktext'>
@@ -71,40 +72,44 @@ function HeroSection() {
                             </>
 
 
-                            <div className='bg-light py-10 px-4 rounded-2xl md:my-4 w-full text-darktext'>
+                            <div className='bg-light py-10 px-4 rounded-2xl md:my-4 w-full mx-2 lg:mx-0 my-2 lg:my-0 text-darktext'>
                                 <div className='py-3'>
-                                    <span className='text-xl font-semibold text-darktext '>{excursion?.title} Highlights</span>
+                                    <span className='text-xl font-semibold text-blue '>{excursion?.title} Highlights</span>
                                 </div>
-                                <div className='space-y-6 text-text mt-3'>
-                                    <div dangerouslySetInnerHTML={{ __html: excursion?.highlights }} className=''>
+                                <div className='space-y-6 text-gray-500 mt-3'>
+                                    <div dangerouslySetInnerHTML={{ __html: excursion?.highlights }} className='text-sm lg:text-base'>
                                     </div>
                                 </div>
                             </div>
-                            <div className='md:my-5'>
+                            <div className='md:my-5 mx-2 lg:mx-0'>
                                 <>
 
 
-                                    <div id='packageSection' className='p-5 bg-light rounded-2xl '>
+                                    <div id='packageSection' className='p-5  bg-light rounded-2xl '>
                                         <PackageSection />
                                     </div>
-                                    <div id='mapSection' className='p-5 my-5 bg-light rounded-2xl'>
+
+                                    <div id='Images' className='p-5  bg-light rounded-2xl my-2'>
+                                        <CarousalMobile />
+                                    </div>
+                                    
+                                    <div id='mapSection' className='p-5 my-2 lg:my-5 map bg-light rounded-2xl'>
                                         <MapSection />
                                     </div>
 
-
                                     {excursion?.sections?.map((item) => (
-                                        <div className='bg-light py-10 px-4 rounded-2xl md:my-4 w-full text-darktext' key={item.title} >
+                                        <div className='bg-light py-3 px-4 rounded-2xl md:my-4 w-full my-2' key={item.title} >
                                             <div className='py-3'>
-                                                <span className='text-xl font-semibold text-darktext '>{item?.title}</span>
+                                                <span className='text-xl text-darktext font-bold tracking-wider'>{item?.title}</span>
                                             </div>
-                                            <div className='space-y-6 text-text mt-3'>
+                                            <div className='space-y-6 text-gray-500 mt-3 tracking-wide'>
                                                 <div dangerouslySetInnerHTML={{ __html: item?.body }} className=' space-y-2'>
                                                 </div>
                                             </div>
                                         </div>
                                     ))}
 
-                                    
+
                                     {/* <div id='faqSection' className='py-5'>
                                         <FaqSection />
                                     </div> */}
@@ -129,8 +134,8 @@ function HeroSection() {
 
                 </div>
             </div>
-            <div className={`fixed  ${viewBookCard ? "-bottom-full" : "bottom-0"} transition-all duration-500 left-0 right-0 lg:hidden px-7 py-7 bg-light rounded-t-xl z-10`}>
-                <button className='bg-blue w-full py-3 rounded-md shadow-sm text-light' onClick={() => setViewBookCard(!viewBookCard)}>Book Now</button>
+            <div className={`fixed  ${viewBookCard ? "-bottom-full" : "bottom-0"} transition-all  duration-500 left-0 right-0 lg:hidden px-7 py-7 bg-[rgb(255,255,255,0)] rounded-t-xl z-10`}>
+                <button className='bg-blue w-full py-3 rounded-lg font-semibold tracking-wider shadow-sm text-light' onClick={() => setViewBookCard(!viewBookCard)}>Book Now</button>
             </div>
         </div>
     )

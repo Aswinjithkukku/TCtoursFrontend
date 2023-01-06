@@ -156,3 +156,8 @@ body {
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
 }
+.map {
+    background-image: url("./static/images/map.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}

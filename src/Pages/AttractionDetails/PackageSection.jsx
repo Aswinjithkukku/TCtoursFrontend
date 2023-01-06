@@ -9,19 +9,19 @@ function PackageSection() {
 
     return (
         <>
-            <div className='text-xl font-semibold my-2'>Select Tour Options</div>
+            <div className=' my-2 text-xl text-darktext font-bold tracking-wider'>Select Tour Options</div>
             <div className='rounded-sm overflow-x-auto'>
                 <div className=' '>
                     <table className='w-full'>
                         <thead>
                             <tr className='bg-semisoft text-left'>
-                                <th className='py-2 font-medium '>Tour</th>
+                                <th className='py-2 font-medium pl-2'>Tour</th>
                                 <th className='py-2 font-medium  '>Date</th>
                                 <th className='py-2 font-medium '>Transfer</th>
                                 <th className='py-2 font-medium '>Adult</th>
                                 <th className='py-2 font-medium '>Child</th>
                                 <th className='py-2 font-medium '>Infant</th>
-                                <th className='py-2 font-medium min-w-[4em]'>Price</th>
+                                <th className='py-2 font-medium min-w-[4em] pl-5'>Price</th>
                             </tr>
                         </thead>
                         <tbody>

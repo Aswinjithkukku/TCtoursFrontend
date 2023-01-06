@@ -4,10 +4,11 @@ import { GiIsland } from 'react-icons/gi'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategories } from '../../redux/slices/excursionSlice'
 
-function SearchHomePage({ viewCategory, setViewCategory, setCategory }) {
+function SearchHomePage({ viewCategory, setViewCategory, setCategory, setSearch }) {
     const dispatch = useDispatch()
 
     const [viewFilter, setViewFilter] = useState(false)
+    const [keyword, setKeyword] = useState('')
 
     const { categories } = useSelector(state => state.excursion)
 
@@ -15,15 +16,30 @@ function SearchHomePage({ viewCategory, setViewCategory, setCategory }) {
         dispatch(getCategories())
     }, [dispatch])
 
+    // const searchHandler = (e) => {
+    //     e.preventDefault()
+    //     setSearch(keyword)
+    // }
+    useEffect(() => {
+        setSearch(keyword)
+    },[keyword])
+
     return (
         <>
             <div className={`${viewFilter ? "fixed" : "hidden"}  z-10 bottom-0 left-0 right-0 top-0 lightglass`} onClick={() => setViewFilter(!viewFilter)}></div>
             <div className='py-10'>
                 <div className='lg:max-w-screen-xl lg:mx-auto space-y-7'>
-                    <div className='mx-5 lg:mx-0 flex'>
-                        <input type='search' placeholder='Search here!!!' className='px-3 bg-trans w-full border placeholder:text-text py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-l-md text-darktext' />
-                        <button className='px-4 text-light bg-lightblue rounded-r-md '>Search</button>
-                    </div>
+
+                    <form>
+                        <div className='mx-5 lg:mx-0 flex'>
+                            <input type='search' 
+                            placeholder='Search here!!!'
+                            onChange={(e) => setKeyword(e.target.value)} 
+                            className='px-3 bg-trans w-full border placeholder:text-text py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-l-md text-darktext' />
+                            <button type='submit' className='px-4 text-light bg-lightblue rounded-r-md '>Search</button>
+                        </div>
+                    </form>
+
                     <div className={`bg-light  p-5 lg:p-0 rounded-t-3xl lg:rounded-none lg:bg-light lg:h-auto lg:w-auto max-h-[80vh] w-full fixed lg:static ${viewFilter ? "bottom-0" : "-bottom-full"} z-10 transition-all duration-500`}>
                         <div className='flex lg:hidden justify-between text-darktext p-3'>
                             <span className='text-xl font-semibold'>Filters</span>
