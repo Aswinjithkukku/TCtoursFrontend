@@ -10,7 +10,7 @@ function ProfileSidebar() {
 
   const { user } = useSelector(state => state.users)
   return (
-    <div className=' bg-light lg:rounded-3xl lg:shadow-md sticky top-5'>
+    <div className=' bg-light rounded-3xl lg:shadow-md sticky top-5 mx-2 lg:mx-0'>
 
       <div className='flex justify-center py-5'>
         <img src={`https://avatars.dicebear.com/api/identicon/${user?.email}.svg`} alt='profile' className='h-16 w-16 rounded-full' />

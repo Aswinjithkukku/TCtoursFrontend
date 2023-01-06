@@ -1,7 +1,6 @@
 import React from 'react'
-import { AiFillStar, AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
+import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import { NearbyDestinations } from '../../data'
 import { useSelector } from 'react-redux'
 import Rating from '../../components/Rating/Rating'
 import { IoLocation } from 'react-icons/io5'
@@ -46,7 +45,7 @@ function TopSellingSection() {
                     <div className='text-sm'>
                     <div className='flex items-center'>
                         <span className='text-green-600'><IoLocation/></span>
-                        <span className='text-sm text-green-600'>{item?.destination?.name} dsfdf</span>
+                        <span className='text-sm text-green-600'>{item?.destination?.name}</span>
                       </div></div>
                     <div className='text-base font-medium text-blue '>USD {item?.activity?.adultPrice}</div>
                   </div>

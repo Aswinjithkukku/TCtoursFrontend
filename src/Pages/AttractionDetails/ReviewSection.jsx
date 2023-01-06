@@ -23,7 +23,7 @@ function ReviewSection() {
         <div className='lg:max-w-6xl lg:mx-auto '>
           <div className='bg-light rounded-xl py-10 px-10 lg:px-20'>
             <div className='text-lg font-semibold tracking-wider text-text'>
-              Write your review!
+              Tell us your experience!
             </div>
             <div className='text-text font-medium text-sm text-center'>
               please
@@ -34,13 +34,22 @@ function ReviewSection() {
         </div>
       ) : (
         <div className='lg:max-w-6xl lg:mx-auto '>
-          <div className='bg-light rounded-xl py-10 px-10 lg:px-20'>
-            <div className='text-lg font-semibold mb-2 text-dark tracking-wider'>
-              Write your review !
+          <div className='bg-light rounded-xl p-5'>
+            <div className=' mb-2 text-xl text-darktext font-bold tracking-wider'>
+              Tell us your experience !
             </div>
-            <form>
-              <div className='text-gray-500 font-medium text-sm text-center'>
-                <textarea className='w-full border-cardtransblue border rounded-md h-24' />
+            <form className='space-y-3'>
+              <div className=''>
+                <label htmlFor="title" className='text-lightblue font-medium tracking-wide ml-2'> Title</label>
+                <div id='title' className='text-gray-500 font-medium text-sm text-center'>
+                  <input className='px-3 w-full ring-1 placeholder:text-text py-3 focus:outline-none  focus:ring-1 focus:ring-blue rounded-xl text-darktext ' />
+                </div>
+              </div>
+              <div className=''>
+                <label htmlFor="note" className='text-lightblue font-medium tracking-wide ml-2'>Note..</label>
+                <div className='text-gray-500 font-medium text-sm text-center'>
+                  <textarea id='note' className='px-3 w-full ring-1 placeholder:text-text py-3 focus:outline-none  focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+                </div>
               </div>
               <div className='flex justify-end mt-2'>
                 <button type='submit' className='text-light bg-lightblue rounded-md px-4 py-2'>Submit Review</button>
@@ -50,17 +59,17 @@ function ReviewSection() {
         </div>
       )}
 
-      <div className='lg:max-w-6xl lg:mx-auto py-7'>
+      <div className='lg:max-w-6xl lg:mx-auto lg:py-7'>
         <div className=''>
           {reviews?.attractionReviews?.map((item) => (
-            <div className='bg-light  lg:rounded-xl my-3 overflow-hidden' key={item?._id}>
+            <div className='bg-light  rounded-xl my-3 overflow-hidden' key={item?._id}>
               <div className='p-3 px-5 bg-semisoft '>
                 <div className='flex justify-between items-center'>
                   <div className='flex items-end space-x-2'>
                     <span className=''>
-                      <img src='https://images.pexels.com/photos/7199830/pexels-photo-7199830.png?auto=compress&cs=tinysrgb&w=1600' alt='img' className='rounded-full h-10 w-10' />
+                      <img src={`https://avatars.dicebear.com/api/identicon/emailcomeshere.svg`} alt='img' className='rounded-full h-10 w-10' />
                     </span>
-                    <span className='text-darktext'> {item?.user?.name} </span>
+                    <span className='text-darktext'> {item?.user?.name}name comes here!!</span>
                   </div>
                   <div className=''>
                     <span className=' text-yellow-500'>

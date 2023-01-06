@@ -19,7 +19,7 @@ function ProfileSettingSection() {
   }
 
   return (
-    <div className='bg-light rounded-3xl py-10 px-10 shadow mx-4 lg:mx-0'>
+    <div className='bg-light rounded-3xl py-10 px-10 shadow mx-2 lg:mx-0'>
       <div className='flex  justify-center '>
         <img src={`https://avatars.dicebear.com/api/initials/${user?.name}.svg`} alt='avatar' className='outline-double outline-1 outline-offset-8 outline-semisoft border-2 h-24 w-24 rounded-full' />
       </div>

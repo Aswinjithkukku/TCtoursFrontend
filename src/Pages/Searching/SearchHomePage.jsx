@@ -27,7 +27,7 @@ function SearchHomePage({ viewCategory, setViewCategory, setCategory, setSearch 
     return (
         <>
             <div className={`${viewFilter ? "fixed" : "hidden"}  z-10 bottom-0 left-0 right-0 top-0 lightglass`} onClick={() => setViewFilter(!viewFilter)}></div>
-            <div className='py-10'>
+            <div className='lg:pb-10 py-5'>
                 <div className='lg:max-w-screen-xl lg:mx-auto space-y-7'>
 
                     <form>

@@ -12,19 +12,21 @@ function SearchRecentlyViewedSection() {
   }, [])
   return (
     <>
-      {data !== [] && (
+      {data.length > 0 && (
         <div className='py-10 '>
           <div className='space-y-2 mx-3 lg:mx-0'>
             <div className='flex justify-between'>
               <div className='text-3xl font-semibold text-darktext mb-4 cursor-default'>Recently Viewed</div>
-              <div className='hidden  lg:flex space-x-5'>
-                <button className='hover:bg-main rounded-full w-12 h-12 flex justify-center items-center hover:text-light text-xl bg-soft text-main duration-500' onClick={() => {
-                  document.querySelector('.containerRV').scrollLeft -= 220
-                }}><AiOutlineLeft /></button>
-                <button className='hover:bg-main rounded-full w-12 h-12 flex justify-center items-center hover:text-light text-xl bg-soft text-main durRVion-500' onClick={() => {
-                  document.querySelector('.containerRV').scrollLeft += 220
-                }}><AiOutlineRight /> </button>
-              </div>
+              {data.length > 3 && (
+                <div className='hidden  lg:flex space-x-5'>
+                  <button className='hover:bg-main rounded-full w-12 h-12 flex justify-center items-center hover:text-light text-xl bg-soft text-main duration-500' onClick={() => {
+                    document.querySelector('.containerRV').scrollLeft -= 220
+                  }}><AiOutlineLeft /></button>
+                  <button className='hover:bg-main rounded-full w-12 h-12 flex justify-center items-center hover:text-light text-xl bg-soft text-main durRVion-500' onClick={() => {
+                    document.querySelector('.containerRV').scrollLeft += 220
+                  }}><AiOutlineRight /> </button>
+                </div>
+              )}
             </div>
           </div>
           <div className='py-7'>

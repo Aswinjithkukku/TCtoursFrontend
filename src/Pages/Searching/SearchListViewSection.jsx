@@ -4,6 +4,7 @@ import { AiFillStar, AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai
 import { TiTick } from 'react-icons/ti'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import Rating from '../../components/Rating/Rating'
 
 function SearchListViewSection() {
     const navigate = useNavigate()
@@ -44,8 +45,15 @@ function SearchListViewSection() {
                                         <span className='text-3xl'><AiOutlineHeart /></span>
                                     </div>
                                 </div>
-                                <div className='text-xs text-text px-3 '>
-                                    <span className='bg-lightblue px-2 py-1 text-light rounded-sm'>{item.bookingType}</span>
+                                <div className='text-xs text-text px-3  flex justify-between items-center'>
+                                    <div className=''>
+                                        <button className='bg-lightblue w-16 px-2 py-1 text-light rounded-sm'>{item.bookingType}</button>
+                                    </div>
+                                    {item?.isOffer === true && item?.offerAmount > 0 && (
+                                        <div className='bg-[#D2DAFF] px-4 py-1 text-blue font-medium rounded-lg'>
+                                            {item?.offerAmount + ' % ' + item?.offerAmountType}
+                                        </div>
+                                    )}
                                 </div>
                                 <div className='px-3 space-y-2  text-darktext'>
                                     <div className='flex justify-between items-center'>
@@ -55,24 +63,28 @@ function SearchListViewSection() {
                                             <div className='text-xs text-text font-light'>*price varies</div>
                                         </span>
                                         <span className='space-y-1'>
-                                            <div className=' text-yellow-500 flex'> <AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /></div>
-                                            <div className='text-xs text-text flex justify-end'>4.9 (105)</div>
+                                            <div className=' text-yellow-500 flex'>
+                                                <Rating value={item?.averageRating} color={"#FED049"} />
+                                            </div>
+                                            <div className='text-xs text-text flex justify-end'>{item?.averageRating + ' '} ({item?.totalReviews})</div>
                                         </span>
                                     </div>
                                 </div>
                                 <div className='px-3 space-y-2 pb-5  text-darktext'>
                                     <div className='flex space-x-1 items-center'>
                                         <span className='text-lightblue'> <AiOutlineClockCircle /></span>
-                                        <span className='text-text text-sm'>Duration 7 Days</span>
+                                        <span className='text-gray-500 text-sm'>Duration {' ' + item?.duration + ' ' + item?.durationType}</span>
                                     </div>
                                     <div className='flex space-x-3 items-center'>
+                                        {item?.cancellationType === "freeCancellation" && (
                                         <div className='flex space-x-1 items-center'>
                                             <span className='text-lightblue'><TiTick /></span>
-                                            <span className='text-text text-sm'>Free Cancellation</span>
+                                            <span className='text-green-600 text-sm'>Free Cancellation </span>
                                         </div>
+                                        )}
                                         <div className='flex space-x-1 items-center'>
                                             <span className='text-lightblue'><TiTick /></span>
-                                            <span className='text-text text-sm'>New On Travellers Choice</span>
+                                            <span className='text-gray-500 capitalize text-sm'>{item?.category?.categoryName} </span>
                                         </div>
                                     </div>
                                 </div>

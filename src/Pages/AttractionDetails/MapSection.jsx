@@ -2,7 +2,6 @@ import React from 'react'
 import { RiShareForward2Fill } from 'react-icons/ri'
 import { IoLocationOutline } from 'react-icons/io5'
 import { useSelector } from 'react-redux'
-import map from '../../static/images/map.jpg'
 
 function MapSection() {
     const { excursion } = useSelector(state => state.excursion)

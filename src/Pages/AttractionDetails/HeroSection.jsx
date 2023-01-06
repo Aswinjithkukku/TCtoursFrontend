@@ -38,10 +38,10 @@ function HeroSection() {
         <div className='bg-soft'>
             <div className='lg:max-w-screen-xl lg:mx-auto'>
                 <div className=''>
-                    <div className='relative lg:grid lg:grid-cols-12 gap-5 py-7 lg:my-0 lg:py-7'>
+                    <div className='relative lg:grid lg:grid-cols-12 gap-5 py-2 lg:my-0 lg:py-7'>
                         <div className='1st lg:col-span-8'>
 
-                            <div className='bg-light md:rounded-2xl p-5 py-7  text-darktext'>
+                            <div className='bg-light rounded-2xl p-5 py-7 mx-2 my-2 lg:my-0 lg:mx-0 text-darktext'>
                                 <div className='flex justify-between'>
                                     <div className='space-y-5'>
                                         <div className='text-3xl font-bold '>
@@ -67,17 +67,18 @@ function HeroSection() {
 
                             </div>
 
-                            <>
+                            <div className='mx-2'>
                                 <FeatureSection />
-                            </>
+                            </div>
 
-
-                            <div className='bg-light py-10 px-4 rounded-2xl md:my-4 w-full mx-2 lg:mx-0 my-2 lg:my-0 text-darktext'>
-                                <div className='py-3'>
-                                    <span className='text-xl font-semibold text-blue '>{excursion?.title} Highlights</span>
-                                </div>
-                                <div className='space-y-6 text-gray-500 mt-3'>
-                                    <div dangerouslySetInnerHTML={{ __html: excursion?.highlights }} className='text-sm lg:text-base'>
+                            <div className='mx-2 lg:mx-0'>
+                                <div className='bg-light py-5 px-4 rounded-2xl md:my-4 w-full  lg:mx-0 my-2 lg:my-0 text-darktext'>
+                                    <div className='py-3'>
+                                        <span className='text-xl font-semibold text-blue '>{excursion?.title} {excursion?.title &&'Highlights'}</span>
+                                    </div>
+                                    <div className='space-y-6 text-gray-500 mt-3'>
+                                        <div dangerouslySetInnerHTML={{ __html: excursion?.highlights }} className='text-sm lg:text-base'>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -89,10 +90,10 @@ function HeroSection() {
                                         <PackageSection />
                                     </div>
 
-                                    <div id='Images' className='p-5  bg-light rounded-2xl my-2'>
+                                    <>
                                         <CarousalMobile />
-                                    </div>
-                                    
+                                    </>
+
                                     <div id='mapSection' className='p-5 my-2 lg:my-5 map bg-light rounded-2xl'>
                                         <MapSection />
                                     </div>
