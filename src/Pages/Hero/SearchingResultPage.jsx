@@ -13,10 +13,11 @@ function SearchingResultPage() {
     const dispatch = useDispatch()
     const params = useParams()
 
-    
     const [viewCategory, setViewCategory] = useState(false)
     const [category, setCategory] = useState('')
     const [search, setSearch] = useState('')
+    const [rating, setRating] = useState('')
+    const [duration, setDuration] = useState('')
     
     let destination =''
     let isOffer = ''
@@ -24,16 +25,16 @@ function SearchingResultPage() {
     useEffect(() => {
         if(params.slug === 'isOffer'){
             isOffer = "true"
-            dispatch(getAllExcursions({ isOffer, category, search }))
+            dispatch(getAllExcursions({ isOffer, category, search, rating, duration}))
         }else if(params.slug === 'isCombo'){
             isCombo = "true"
-            dispatch(getAllExcursions({ isCombo, category, search }))
+            dispatch(getAllExcursions({ isCombo, category, search, rating, duration }))
         }else {
             destination = params.slug
-            dispatch(getAllExcursions({ destination, category, search }))
+            dispatch(getAllExcursions({ destination, category, search, rating, duration }))
         }
 
-    }, [dispatch, destination, category, search])
+    }, [dispatch, destination, category, search, rating, duration])
 
 
 
@@ -51,6 +52,8 @@ function SearchingResultPage() {
                         <SearchFunctionalitySection
                             viewCategory={viewCategory}
                             setViewCategory={setViewCategory}
+                            setRating={setRating}
+                            setDuration={setDuration}
                         />
                     </div>
                     <div className='col-span-9'>

@@ -71,7 +71,7 @@ function Navbar() {
                                 </>
                             ) : (
                                 <div className="relative"  ref={dropdownWrapperRef}>
-                                    <div className='flex items-center '>
+                                    <div className='flex items-center mt-2'>
                                         <img src={`https://avatars.dicebear.com/api/identicon/${user?.email}.svg`} alt='avatar' className="h-8 w-8 lg:h-10 lg:w-10 rounded-full object-cover cursor-pointer "
                                             onClick={() => {
                                                 setProfileView(!profileView)

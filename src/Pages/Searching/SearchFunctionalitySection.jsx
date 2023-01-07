@@ -3,7 +3,7 @@ import { AiFillStar, AiOutlineClose } from 'react-icons/ai'
 import { NeedHelp } from '../../components/Layouts'
 import { useSearchParams } from 'react-router-dom';
 
-function SearchFunctionalitySection({ viewCategory, setViewCategory }) {
+function SearchFunctionalitySection({ viewCategory, setViewCategory, setRating, setDuration }) {
     const [searchParams] = useSearchParams()
     const queryDate = searchParams.get('date');
     const [date, setDate] = useState('')
@@ -24,7 +24,7 @@ function SearchFunctionalitySection({ viewCategory, setViewCategory }) {
                         <div className='p-5 space-y-5'>
                             <div className='1 space-y-3'>
                                 <div className='text-text font-medium'>
-                                    <p className=''>Where are you travelling?</p>
+                                    <p className=''>When are you travelling?</p>
                                 </div>
                                 <div className=''>
                                     <input type='date'
@@ -59,23 +59,23 @@ function SearchFunctionalitySection({ viewCategory, setViewCategory }) {
                                 </div>
                                 <div className='space-y-3'>
                                     <div className='flex space-x-3'>
-                                        <input type='checkbox' className='w-5' />
+                                        <input type='radio' name='destination' className='w-5' value={"0hourto1hour"} onChange={(e) => setDuration(e.target.checked === true && e.target.value)} />
                                         <p className='text-sm text-darktext'>Upto 1 Hour</p>
                                     </div>
                                     <div className='flex space-x-3'>
-                                        <input type='checkbox' className='w-5' />
+                                        <input type='radio' name='destination' className='w-5' value={"1hourto4hour"} onChange={(e) => setDuration(e.target.checked === true && e.target.value)} />
                                         <p className='text-sm text-darktext'>1 to 4 Hour</p>
                                     </div>
                                     <div className='flex space-x-3'>
-                                        <input type='checkbox' className='w-5' />
+                                        <input type='radio' name='destination' className='w-5' value={"4hourto1day"} onChange={(e) => setDuration(e.target.checked === true && e.target.value)} />
                                         <p className='text-sm text-darktext'>4 Hour to 1 Day</p>
                                     </div>
                                     <div className='flex space-x-3'>
-                                        <input type='checkbox' className='w-5' />
+                                        <input type='radio' name='destination' className='w-5' value={"1dayto3day"} onChange={(e) => setDuration(e.target.checked === true && e.target.value)} />
                                         <p className='text-sm text-darktext'>1 to 3 Day</p>
                                     </div>
                                     <div className='flex space-x-3'>
-                                        <input type='checkbox' className='w-5' />
+                                        <input type='radio' name='destination' className='w-5' value={"3dayto30day"} onChange={(e) => setDuration(e.target.checked === true && e.target.value)} />
                                         <p className='text-sm text-darktext'>3 Days or more</p>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@ function SearchFunctionalitySection({ viewCategory, setViewCategory }) {
                                 </div>
                                 <div className='space-y-3'>
                                     <div className='flex space-x-3'>
-                                        <input type='checkbox' className='w-5' />
+                                        <input type='radio' name='rating' className='w-5' value={1} onChange={(e) => setRating(e.target.checked === true && e.target.value)} />
                                         <div className='text-lg text-darktext flex items-center'>
                                             <span className='text-yellow-500'><AiFillStar /></span>
                                             <span className='text-semisoft'><AiFillStar /></span>
@@ -96,7 +96,7 @@ function SearchFunctionalitySection({ viewCategory, setViewCategory }) {
                                         </div>
                                     </div>
                                     <div className='flex space-x-3'>
-                                        <input type='checkbox' className='w-5' />
+                                        <input type='radio' name='rating' className='w-5' value={2} onChange={(e) => setRating(e.target.checked === true && e.target.value)} />
                                         <div className='text-lg text-darktext flex items-center'>
                                             <span className='text-yellow-500'><AiFillStar /></span>
                                             <span className='text-yellow-500'><AiFillStar /></span>
@@ -106,7 +106,7 @@ function SearchFunctionalitySection({ viewCategory, setViewCategory }) {
                                         </div>
                                     </div>
                                     <div className='flex space-x-3'>
-                                        <input type='checkbox' className='w-5' />
+                                        <input type='radio' name='rating' className='w-5' value={3} onChange={(e) => setRating(e.target.checked === true && e.target.value)}/>
                                         <div className='text-lg text-darktext flex items-center'>
                                             <span className='text-yellow-500'><AiFillStar /></span>
                                             <span className='text-yellow-500'><AiFillStar /></span>
@@ -116,7 +116,7 @@ function SearchFunctionalitySection({ viewCategory, setViewCategory }) {
                                         </div>
                                     </div>
                                     <div className='flex space-x-3'>
-                                        <input type='checkbox' className='w-5' />
+                                        <input type='radio' name='rating' className='w-5' value={4} onChange={(e) => setRating(e.target.checked === true && e.target.value)}/>
                                         <div className='text-lg text-darktext flex items-center'>
                                             <span className='text-yellow-500'><AiFillStar /></span>
                                             <span className='text-yellow-500'><AiFillStar /></span>
@@ -126,7 +126,7 @@ function SearchFunctionalitySection({ viewCategory, setViewCategory }) {
                                         </div>
                                     </div>
                                     <div className='flex space-x-3'>
-                                        <input type='checkbox' className='w-5' />
+                                        <input type='radio' name='rating' className='w-5' value={5} onChange={(e) => setRating(e.target.checked === true && e.target.value)}/>
                                         <div className='text-lg text-darktext flex items-center'>
                                             <span className='text-yellow-500'><AiFillStar /></span>
                                             <span className='text-yellow-500'><AiFillStar /></span>

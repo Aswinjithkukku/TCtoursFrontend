@@ -13,8 +13,8 @@ function SearchRecentlyViewedSection() {
   return (
     <>
       {data.length > 0 && (
-        <div className='py-10 '>
-          <div className='space-y-2 mx-3 lg:mx-0'>
+        <div className='py-10 mx-2'>
+          <div className='space-y-2 lg:mx-0'>
             <div className='flex justify-between'>
               <div className='text-3xl font-semibold text-darktext mb-4 cursor-default'>Recently Viewed</div>
               {data.length > 3 && (
@@ -34,7 +34,7 @@ function SearchRecentlyViewedSection() {
               {data?.map((item, index) => (
                 <div key={index} className=' snap-start'>
                   <Link to={`/details/${item._id}`}>
-                    <div className='w-[25.5em] space-y-4 snap-start'>
+                    <div className='w-[24.8em] lg:w-[25.5em] space-y-4 snap-start'>
                       <div className=''>
                         <img src={process.env.REACT_APP_SERVER_URL + item?.image} alt='demo'
                           className='object-cover  h-[15em] lg:[14em] w-full rounded-2xl' />

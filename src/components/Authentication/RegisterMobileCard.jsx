@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { AiOutlineClose, AiOutlineRight } from 'react-icons/ai'
-import { BsFacebook } from 'react-icons/bs'
-import { FcGoogle } from 'react-icons/fc'
+// import { BsFacebook } from 'react-icons/bs'
+// import { FcGoogle } from 'react-icons/fc'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from '../../axios';
 import { setUser } from '../../redux/slices/usersSlice';
@@ -18,7 +18,7 @@ function RegisterMobileCard({ view, setView }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { countries } = useSelector((state) => state.general);
+  const { initialData } = useSelector((state) => state.home);
 
   const dispatch = useDispatch();
 
@@ -74,42 +74,50 @@ function RegisterMobileCard({ view, setView }) {
               name="email"
               value={data.email || ""} />
           </div>
-          <div className="space-y-2">
-            <label className="text-text ">
-              Country
-            </label>
-            <select
-              id=""
-              className="w-full placeholder:text-bluetrans border border-lightblue bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-bluetrans"
-              onChange={handleChange}
-              name="country"
-              value={data.country || ""}
-            >
-              <option value="" hidden>
-                Select Country
-              </option>
-              {countries?.map((country, index) => {
-                return (
-                  <option
-                    value={country?._id}
-                    key={index}
-                  >
-                    {country?.countryName}
-                  </option>
-                );
-              })}
-            </select>
+          <div className="flex ">
+            <div className="space-y-1">
+              <label className="text-text ">
+                code
+              </label>
+              <select
+                name="country"
+                id=""
+                className="placeholder:text-bluetrans border border-lightblue bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-bluetrans"
+                onChange={handleChange}
+                value={data.country || ""}
+              >
+                <option value="" hidden>
+                  code
+                </option>
+                {initialData?.countries?.map((country, index) => {
+                  return (
+                    <option
+                      className="text-darktext"
+                      value={country?._id}
+                      key={index}
+                    >
+                      {country?.phonecode}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-text ">
+                PhoneNumber
+              </label>
+              <input
+                type="number"
+                placeholder="Enter Your Phone Number"
+                className="w-full placeholder:text-bluetrans border border-lightblue bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-bluetrans"
+                name="phoneNumber"
+                value={data.phoneNumber || ""}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-          <div className='space-y-2'>
-            <label className='text-text '> PhoneNumber</label>
-            <input
-              type='number'
-              placeholder='Enter Your Phone Number'
-              className='w-full placeholder:text-bluetrans border border-lightblue bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-bluetrans'
-              onChange={handleChange}
-              name="phoneNumber"
-              value={data.phoneNumber || ""} />
-          </div>
+
           <div className='space-y-2'>
             <label className='text-text '> Password</label>
             <input

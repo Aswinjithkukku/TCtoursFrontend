@@ -9,6 +9,8 @@ const initialState = {
   excursions: [],
   excursionAll: [],
   recievedActivities: [],
+  favorites: [],
+  isLiked: false
 };
 
 export const excursionall = createAsyncThunk(
@@ -30,19 +32,19 @@ export const getAllExcursions = createAsyncThunk(
   async (args, { getState }) => {
     if (args.isOffer) {
       const response = await axios.get(
-        `/attractions/all?search=${args.search}&limit=100&isOffer=${args.isOffer}&category=${args.category}`
+        `/attractions/all?search=${args.search}&limit=100&isOffer=${args.isOffer}&category=${args.category}&rating=${args.rating}&duration=${args.duration}`
       );
       return response.data;
     }
     if (args.isCombo) {
       const response = await axios.get(
-        `/attractions/all?search=${args.search}&limit=100&isCombo=${args.isCombo}&category=${args.category}`
+        `/attractions/all?search=${args.search}&limit=100&isCombo=${args.isCombo}&category=${args.category}&rating=${args.rating}&duration=${args.duration}`
       );
       return response.data;
     }
     if (args.destination) {
       const response = await axios.get(
-        `/attractions/all?search=${args.search}&limit=100&destination=${args.destination}&category=${args.category}`
+        `/attractions/all?search=${args.search}&limit=100&destination=${args.destination}&category=${args.category}&rating=${args.rating}&duration=${args.duration}`
       );
       return response.data;
     }
@@ -85,6 +87,15 @@ const excursionSlice = createSlice({
       state.recievedActivities[action.payload.index][action.payload.sum] =
         action.payload.value;
     },
+    setFavourites: (state, action) => {
+        var array = []
+        array = JSON.parse(localStorage.getItem('favourites')) || []
+        const result = array.filter(item => item !== action.payload)
+        console.log(result);
+        array = [action.payload, ...result]
+        localStorage.setItem('favourites', JSON.stringify(array));
+        state.favorites = array
+    }
   },
   extraReducers: {
     [getExcursion.pending]: (state, action) => {
@@ -137,6 +148,6 @@ const excursionSlice = createSlice({
   },
 });
 
-export const { setActivities } = excursionSlice.actions;
+export const { setActivities, setFavourites } = excursionSlice.actions;
 
 export default excursionSlice.reducer;

@@ -10,11 +10,11 @@ function BlogSection() {
     if (home?.isBlogsEnabled === false) return null
     return (
         <>
-            <div className='my-10 lg:max-w-screen-xl lg:mx-auto'>
+            <div className='my-10 lg:max-w-screen-xl lg:mx-auto mx-5'>
                 <div className='space-y-5'>
-                    <div className='space-y-3 p-5 bg-trans shadow-sm lg:rounded-2xl py-14'>
+                    <div className='space-y-3   lg:rounded-2xl py-14'>
                         <div className='flex justify-between items-center'>
-                            <div className='text-darktext text-3xl font-medium cursor-default'>
+                            <div className='text-3xl font-semibold text-darktext cursor-default ml-3 lg:ml-0'>
                                 Blog
                             </div>
                             <Link to='/blog'>

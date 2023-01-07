@@ -45,7 +45,7 @@ function TopSellingSection() {
                     <div className='text-sm'>
                     <div className='flex items-center'>
                         <span className='text-green-600'><IoLocation/></span>
-                        <span className='text-sm text-green-600'>{item?.destination?.name}</span>
+                        <span className='text-sm text-green-600 capitalize'>{item?.destination?.name}</span>
                       </div></div>
                     <div className='text-base font-medium text-blue '>USD {item?.activity?.adultPrice}</div>
                   </div>

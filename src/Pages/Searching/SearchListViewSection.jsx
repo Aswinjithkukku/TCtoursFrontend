@@ -47,10 +47,10 @@ function SearchListViewSection() {
                                 </div>
                                 <div className='text-xs text-text px-3  flex justify-between items-center'>
                                     <div className=''>
-                                        <button className='bg-lightblue w-16 px-2 py-1 text-light rounded-sm'>{item.bookingType}</button>
+                                        <button className='bg-lightblue w-16 px-2 py-1 text-light rounded-md capitalize'>{item.bookingType}</button>
                                     </div>
                                     {item?.isOffer === true && item?.offerAmount > 0 && (
-                                        <div className='bg-[#D2DAFF] px-4 py-1 text-blue font-medium rounded-lg'>
+                                        <div className='bg-[#D2DAFF] px-4 py-1 text-blue font-medium rounded-lg '>
                                             {item?.offerAmount + ' % ' + item?.offerAmountType}
                                         </div>
                                     )}
@@ -58,7 +58,7 @@ function SearchListViewSection() {
                                 <div className='px-3 space-y-2  text-darktext'>
                                     <div className='flex justify-between items-center'>
                                         <span className='space-y-1'>
-                                            <div className='text-xs text-text font-light'>from</div>
+                                            <div className='text-xs text-text font-light'>Starting from</div>
                                             <div className='text-xl font-medium text-darktext'>USD {item?.activity?.adultPrice}</div>
                                             <div className='text-xs text-text font-light'>*price varies</div>
                                         </span>
@@ -83,7 +83,7 @@ function SearchListViewSection() {
                                         </div>
                                         )}
                                         <div className='flex space-x-1 items-center'>
-                                            <span className='text-lightblue'><TiTick /></span>
+                                            {/* <span className='text-lightblue'><TiTick /></span> */}
                                             <span className='text-gray-500 capitalize text-sm'>{item?.category?.categoryName} </span>
                                         </div>
                                     </div>
