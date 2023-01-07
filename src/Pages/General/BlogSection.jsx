@@ -10,9 +10,9 @@ function BlogSection() {
     if (home?.isBlogsEnabled === false) return null
     return (
         <>
-            <div className='my-10 lg:max-w-screen-xl lg:mx-auto mx-5'>
+            <div className=' my-3 lg:max-w-screen-xl lg:mx-auto mx-5'>
                 <div className='space-y-5'>
-                    <div className='space-y-3   lg:rounded-2xl py-14'>
+                    <div className='space-y-3 lg:rounded-2xl '>
                         <div className='flex justify-between items-center'>
                             <div className='text-3xl font-semibold text-darktext cursor-default ml-3 lg:ml-0'>
                                 Blog
@@ -23,7 +23,7 @@ function BlogSection() {
                         </div>
                         <div className=' gap-5 md:grid-cols-2 md:grid lg:grid-cols-3'>
 
-                            {recentBlogs?.map((item) => (
+                            {recentBlogs?.slice(0,3)?.map((item) => (
                                 <div className=' mt-2 bg-light p-3 rounded-3xl cursor-pointer' key={item?._id}>
                                     <div className=' relative'>
                                         <div className='overflow-hidden rounded-t-3xl rounded-b-md'>

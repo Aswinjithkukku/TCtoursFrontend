@@ -7,7 +7,7 @@ function NearbySection() {
 
   const { initialData } = useSelector(state => state.home)
   return (
-    <div className='mx-5 py-10 lg:mx-auto lg:max-w-screen-xl'>
+    <div className='mx-5 py-3 lg:mx-auto lg:max-w-screen-xl'>
       <div className='text-3xl font-semibold text-dark mb-4'>Nearby destinations</div>
       <div className='md:grid md:grid-cols-4 gap-5'>
       {initialData?.destinations?.map((item,index) => (

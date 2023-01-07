@@ -23,18 +23,18 @@ function FooterList({ item }) {
                 {view &&
                     item?.navLinks?.map((links, index) => (
                         <div className="space-y-2 md:hidden" key={index}>
-                            <Link to={links?.link && links?.link}>
+                            <a href={links?.link && links?.link} target={links?.isRelativeUrl === false && "_blank"} >
                                 <div className="text-sm">
                                     {links?.name}
                                 </div>
-                            </Link>
+                            </a>
                         </div>
                     ))}
                 {item?.navLinks?.map((links, index) => (
                     <div className="space-y-2 hidden md:block" key={index}>
-                        <Link to={links?.link && links?.link}>
+                        <a href={links?.link && links?.link} target={links?.isRelativeUrl === false && "_blank"}  >
                             <div className="text-sm">{links?.name}</div>
-                        </Link>
+                        </a>
                     </div>
                 ))}
             </div>

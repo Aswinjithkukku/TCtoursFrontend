@@ -9,8 +9,7 @@ const initialState = {
   excursions: [],
   excursionAll: [],
   recievedActivities: [],
-  favorites: [],
-  isLiked: false
+  favourites: [],
 };
 
 export const excursionall = createAsyncThunk(
@@ -93,8 +92,11 @@ const excursionSlice = createSlice({
         const result = array.filter(item => item !== action.payload)
         console.log(result);
         array = [action.payload, ...result]
-        localStorage.setItem('favourites', JSON.stringify(array));
-        state.favorites = array
+        localStorage.setItem('favourites', array);
+        state.favourites = array
+    },
+    stateFavourites: (state, action) => {
+      state.favourites = localStorage.getItem('favourites') || []
     }
   },
   extraReducers: {
@@ -148,6 +150,6 @@ const excursionSlice = createSlice({
   },
 });
 
-export const { setActivities, setFavourites } = excursionSlice.actions;
+export const { setActivities, setFavourites, stateFavourites } = excursionSlice.actions;
 
 export default excursionSlice.reducer;

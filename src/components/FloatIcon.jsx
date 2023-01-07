@@ -5,6 +5,7 @@ import {
     AiOutlinePlus,
     AiOutlineWhatsApp,
 } from "react-icons/ai";
+import { RiCustomerService2Fill } from "react-icons/ri";
 import { useSelector } from "react-redux";
 
 export default function FloatIcon() {
@@ -13,7 +14,7 @@ export default function FloatIcon() {
     const { home } = useSelector((state) => state.general);
 
     return (
-        <div className="fixed right-7 bottom-24 md:right-10 md:bottom-10">
+        <div className="hidden lg:block fixed right-7 bottom-24 md:right-10 md:bottom-10">
             <div
                 className={` absolute right-0 transition-all duration-1000 h-14 w-14 rounded-full flex justify-center items-center text-3xl text-light bg-lightblue hover:blue ${
                     viewIcons ? "bottom-60" : "bottom-0"
@@ -47,7 +48,7 @@ export default function FloatIcon() {
                 } `}
                 onClick={() => setViewicons(!viewIcons)}
             >
-                <AiOutlinePlus />{" "}
+                <RiCustomerService2Fill />{" "}
             </button>
         </div>
     );

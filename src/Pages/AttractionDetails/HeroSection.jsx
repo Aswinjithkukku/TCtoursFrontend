@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { CiLocationOn } from 'react-icons/ci'
 // import { GoThumbsup } from 'react-icons/go'
 import { SlCalender } from 'react-icons/sl'
-import { AiFillStar, AiOutlineHeart, AiOutlineClose } from 'react-icons/ai'
+import { AiFillStar, AiOutlineHeart, AiOutlineClose, AiFillHeart } from 'react-icons/ai'
 // import { FaHotel } from 'react-icons/fa'
 import { RxShare2 } from 'react-icons/rx'
 // import { BsCalendar2X } from 'react-icons/bs'
@@ -16,7 +16,7 @@ import DetailsCard from './DetailsCard'
 import FeatureSection from './FeatureSection'
 // import TourOverview from './TourOverview'
 import { useDispatch, useSelector } from 'react-redux'
-import { getExcursion, setFavourites } from '../../redux/slices/excursionSlice'
+import { getExcursion, setFavourites, stateFavourites } from '../../redux/slices/excursionSlice'
 import { useNavigate, useParams } from 'react-router-dom'
 import Rating from '../../components/Rating/Rating'
 import CarousalMobile from './CarousalMobile'
@@ -31,10 +31,14 @@ function HeroSection() {
 
     useEffect(() => {
         dispatch(getExcursion(id))
+        dispatch(stateFavourites())
     }, [dispatch, id])
 
     const [viewBookCard, setViewBookCard] = useState(false)
     const [shareModal, setShareModal] = useState(false)
+    
+    let demo = excursion?.favourites?.find(item => item === id)
+    console.log(demo)
 
     return (
         <>
@@ -64,11 +68,16 @@ function HeroSection() {
                                         </div>
                                         <div className='flex space-x-2'>
                                             <button className='h-10 w-10 rounded-full bg-soft border border-green-600 flex justify-center items-center text-2xl text-green-600' onClick={() => setShareModal(!shareModal)} ><RxShare2 /></button>
-                                            <button className='h-10 w-10 rounded-full bg-soft text-main border-main border flex justify-center items-center text-2xl'onClick={() => {
-                                                console.log("hello");
+                                            <button className='h-10 w-10 rounded-full bg-soft text-main border-main border flex justify-center items-center text-2xl' onClick={() => {
                                                 dispatch(setFavourites(excursion?._id))
                                             }
-                                                } ><AiOutlineHeart /></button>
+                                            } >
+                                                {!excursion?.favourites?.find(item => item === id) ? (
+                                                <AiOutlineHeart />
+                                                ) : (
+                                                    <AiFillHeart />
+                                                )}
+                                            </button>
                                         </div>
                                     </div>
 

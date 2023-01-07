@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Register from "../Authentication/Register";
 import Login from "../Authentication/Login";
@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import avatar from '../../static/images/avatar.png'
 import ProfileModal from "../Navbar/ProfileModal";
 import { useHandleClickOutside } from "../../hooks";
+import CurrencyModal from "../Header/CurrencyModal";
+import LanguageModal from "../Header/LanguageModal";
 
 function Navbar() {
 
@@ -17,9 +19,20 @@ function Navbar() {
         viewRegister: false,
         viewLogin: false,
         viewRegisterMobile: false,
-        viewloginMobile: false
-
+        viewloginMobile: false,
+        currency: false,
+        language: false
     })
+    // const [view, setView] = useState({
+    //     helpline: false,
+    //     currency: false,
+    //     language: false
+    // })
+    const currencyRef = useRef()
+    const languageRef = useRef()
+    useHandleClickOutside(currencyRef, () => setView(!view))
+    useHandleClickOutside(languageRef, () => setView(!view))
+
     const [profileView, setProfileView] = useState(false)
 
     const dispatch = useDispatch();
@@ -35,9 +48,9 @@ function Navbar() {
 
     return (
         <>
-            <div className="bg-soft">
-                <div className=" py-1 px-3 lg:max-w-screen-xl lg:mx-auto">
-                    <div className="flex justify-between">
+            <div className="bg-soft sticky top-0 z-20">
+                <div className=" py-4 px-3 lg:max-w-screen-xl lg:mx-auto">
+                    <div className="flex justify-between items-center">
                         <Link to="/">
                             <div className="">
                                 <img
@@ -48,6 +61,57 @@ function Navbar() {
                             </div>
                         </Link>
                         <div className="flex space-x-5">
+                        <span className="md:flex text-lg hidden items-center ">
+                        <div className="flex px-5 space-x-2 md:space-x-5 text-dark items-center">
+                            <div className="cursor-pointer whitespace-nowrap font-medium text-sm lg:text-base">
+                                <a href="https://app.mytcb2b.com/#/login" target={"_blank"}>
+                                    B2B Login
+                                </a>
+                            </div>
+                            <div
+                                ref={currencyRef}
+                                className="flex space-x-1 items-center cursor-pointer relative"
+                                onClick={() => setView((prev) => {
+                                    return { ...prev, currency: !view.currency }
+                                })}
+                            >
+                                <span className="text-base font-medium">USD</span>
+                                <span className="text-base">
+                                    {view.currency ? (
+                                        <AiOutlineUp />
+                                    ) : (
+                                        <AiOutlineDown />
+                                    )}
+                                </span>
+                                {/* absolute modal */}
+                                <CurrencyModal setView={setView} view={view} />
+                                {/* absolute modal */}
+                            </div>
+                            <div
+                                ref={languageRef}
+                                className="flex space-x-2 items-center cursor-pointer"
+                                onClick={() =>
+                                    setView((prev) => {
+                                        return { ...prev, language: !view.language }
+                                    })
+                                }
+                            >
+                                <span className="text-base font-medium cursor-pointer">
+                                    English
+                                </span>
+                                <span className="text-base">
+                                    {view.language ? (
+                                        <AiOutlineUp />
+                                    ) : (
+                                        <AiOutlineDown />
+                                    )}
+                                </span>
+                                {/* absolute modal */}
+                                <LanguageModal setView={setView} view={view} />
+                                {/* absolute modal */}
+                            </div>
+                        </div>
+                    </span>
                             {!isLoggedIn ? (
                                 <>
                                     <span
@@ -71,8 +135,8 @@ function Navbar() {
                                 </>
                             ) : (
                                 <div className="relative"  ref={dropdownWrapperRef}>
-                                    <div className='flex items-center mt-2'>
-                                        <img src={`https://avatars.dicebear.com/api/identicon/${user?.email}.svg`} alt='avatar' className="h-8 w-8 lg:h-10 lg:w-10 rounded-full object-cover cursor-pointer "
+                                    <div className='flex items-center'>
+                                        <img src={`https://avatars.dicebear.com/api/identicon/${user?.email}.svg`} alt='avatar' className="h-8 w-8 md:h-12 md:w-12 rounded-full object-cover cursor-pointer "
                                             onClick={() => {
                                                 setProfileView(!profileView)
                                             }}

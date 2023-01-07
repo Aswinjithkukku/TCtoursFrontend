@@ -24,7 +24,7 @@ function ShareModal({ setShareModal, shareModal }) {
       <div className={`lightglass  top-0 bottom-0  left-0 right-0 z-20 ${shareModal ? "fixed" : "hidden"}`} onClick={() => setShareModal(!shareModal)}></div>
       <div className={`fixed lg:top-0 ${shareModal ? "bottom-0" : "-bottom-full"} left-0 right-0  lg:flex lg:justify-center lg:items-center z-20 transition-all duration-500`} onClick={() => setShareModal(!shareModal)}>
 
-        <div className='bg-white rounded-2xl' onClick={(e) => e.stopPropagation()}>
+        <div className='bg-white rounded-2xl lg:w-[25em]' onClick={(e) => e.stopPropagation()}>
           <div className='flex border-b border-dashed  border-text justify-center mt-3 lg:pt-0  py-4 font-bold tracking-wide text-xl'>
             Share
           </div>

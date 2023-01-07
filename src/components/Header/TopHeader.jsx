@@ -24,7 +24,7 @@ export default function TopHeader() {
     const { home } = useSelector(state => state.general)
 
     return (
-        <div className="block bg-[#002366]">
+        <div className=" hidden bg-[#002366]">
             <div className="lg:max-w-screen-xl lg:mx-auto">
                 <div className="flex justify-between py-2">
                     <span className="flex text-sm relative">
@@ -118,6 +118,7 @@ export default function TopHeader() {
                             </div>
                         </div>
                     </span>
+                    
                 </div>
             </div>
         </div>
