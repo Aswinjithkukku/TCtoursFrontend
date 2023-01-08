@@ -27,19 +27,17 @@ function HeroSection() {
     // const navigate = useNavigate()
     const { id } = useParams()
 
-    const { excursion } = useSelector(state => state.excursion)
+    const { excursion,favourites } = useSelector(state => state.excursion)
 
     useEffect(() => {
         dispatch(getExcursion(id))
         dispatch(stateFavourites())
     }, [dispatch, id])
-
+    
     const [viewBookCard, setViewBookCard] = useState(false)
     const [shareModal, setShareModal] = useState(false)
     
-    let demo = excursion?.favourites?.find(item => item === id)
-    console.log(demo)
-
+    
     return (
         <>
             <div className='bg-soft'>
@@ -67,13 +65,22 @@ function HeroSection() {
                                             </div>
                                         </div>
                                         <div className='flex space-x-2'>
-                                            <button className='h-10 w-10 rounded-full bg-soft border border-green-600 flex justify-center items-center text-2xl text-green-600' onClick={() => setShareModal(!shareModal)} ><RxShare2 /></button>
+                                            {/* share button */}
+                                            <button className='h-10 w-10 rounded-full bg-soft border border-green-600 flex justify-center items-center text-2xl text-green-600' onClick={() => setShareModal(!shareModal)} >
+                                                <RxShare2 />
+                                            </button>
+                                            {/* like button */}
                                             <button className='h-10 w-10 rounded-full bg-soft text-main border-main border flex justify-center items-center text-2xl' onClick={() => {
-                                                dispatch(setFavourites(excursion?._id))
+                                                dispatch(setFavourites({
+                                                    _id: excursion?._id,
+                                                    name: excursion?.title,
+                                                    image: excursion?.images[0],
+                                                    price: excursion?.activities[0]?.adultPrice
+                                                }))
                                             }
                                             } >
-                                                {!excursion?.favourites?.find(item => item === id) ? (
-                                                <AiOutlineHeart />
+                                                {!favourites?.find(item => item?._id === id) ? (
+                                                    <AiOutlineHeart />
                                                 ) : (
                                                     <AiFillHeart />
                                                 )}

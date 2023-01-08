@@ -59,8 +59,8 @@ function SearchListViewSection() {
                                                     <s> USD {item?.activity?.adultPrice}</s>
                                                 </div>}
                                             <div className='text-xl font-bold text-darktext'>
-                                                USD {item?.isOffer === true && item?.offerAmountType === "flat" && item?.activity?.adultPrice - item?.offerAmount}
-                                                {item?.isOffer === true && item?.offerAmountType === "percentage" ? item?.activity?.adultPrice - ((item?.activity?.adultPrice * item?.offerAmount) / 100) : item?.activity?.adultPrice}
+                                                USD {item?.isOffer === true && item?.offerAmountType === "flat" && Number(item?.activity?.adultPrice) - Number(item?.offerAmount)}
+                                                {item?.isOffer === true && item?.offerAmountType === "percentage" ? Number(item?.activity?.adultPrice) - ((Number(item?.activity?.adultPrice) * Number(item?.offerAmount)) / 100) : item?.activity?.adultPrice}
                                             </div>
                                             <div className='text-xs text-text font-light'>*price varies</div>
                                         </span>

@@ -52,7 +52,6 @@ export const getAllExcursions = createAsyncThunk(
 export const getExcursion = createAsyncThunk(
   "excursion/getExcursion",
   async (args, { getState }) => {
-    console.log(args);
     const response = await axios.get(`/attractions/single/${args}`);
     return response.data;
   }
@@ -89,14 +88,13 @@ const excursionSlice = createSlice({
     setFavourites: (state, action) => {
         var array = []
         array = JSON.parse(localStorage.getItem('favourites')) || []
-        const result = array.filter(item => item !== action.payload)
-        console.log(result);
+        const result = array.filter(item => item?._id !== action.payload._id)
         array = [action.payload, ...result]
-        localStorage.setItem('favourites', array);
         state.favourites = array
+        localStorage.setItem('favourites', JSON.stringify(array));
     },
     stateFavourites: (state, action) => {
-      state.favourites = localStorage.getItem('favourites') || []
+      state.favourites = JSON.parse(localStorage.getItem('favourites')) || []
     }
   },
   extraReducers: {

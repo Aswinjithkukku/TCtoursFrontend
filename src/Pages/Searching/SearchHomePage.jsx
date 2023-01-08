@@ -42,7 +42,7 @@ function SearchHomePage({ viewCategory, setViewCategory, setCategory, setSearch 
 
                     <div className={`bg-light  p-5 lg:p-0 rounded-t-3xl lg:rounded-none lg:bg-light lg:h-auto lg:w-auto max-h-[80vh] w-full fixed lg:static ${viewFilter ? "bottom-0" : "-bottom-full"} z-10 transition-all duration-500`}>
                         <div className='flex lg:hidden justify-between text-darktext p-3'>
-                            <span className='text-xl font-semibold'>Filters</span>
+                            <span className='text-xl font-semibold'>Category</span>
                             <span className='text-3xl' onClick={() => setViewFilter(!viewFilter)}><AiOutlineClose /></span>
                         </div>
                         <div className={`overflow-x-auto `}>
@@ -60,10 +60,10 @@ function SearchHomePage({ viewCategory, setViewCategory, setCategory, setSearch 
                     </div>
                     <div className=' flex justify-around lg:hidden'>
                         <span className=''>
-                            <button className='border border-blue rounded-lg px-10 py-2 hover:text-blue' onClick={() => setViewFilter(!viewFilter)}>Filters</button>
+                            <button className='border border-blue rounded-lg px-5 py-2 hover:text-blue' onClick={() => setViewFilter(!viewFilter)}>Category</button>
                         </span>
                         <span className=''>
-                            <button className='border border-blue rounded-lg px-5 py-2' onClick={() => setViewCategory(!viewCategory)}>Category</button>
+                            <button className='border border-blue rounded-lg px-10 py-2' onClick={() => setViewCategory(!viewCategory)}>Filters</button>
                         </span>
                     </div>
                 </div>

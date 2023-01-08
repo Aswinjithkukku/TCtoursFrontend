@@ -9,7 +9,7 @@ function ProfileSettingSection() {
     name: user?.name || '',
     email: user?.email || '',
     country: user?.country || '',
-    phone: user?.phone || 0
+    phone: user?.phoneNumber || 0
   })
 
   const { initialData } = useSelector(state => state.home)
