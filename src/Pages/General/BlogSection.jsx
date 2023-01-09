@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import banner from '../../static/images/banner.jpg'
 import { useSelector } from 'react-redux'
 
 function BlogSection() {
+    const navigate = useNavigate()
 
     const { home, recentBlogs } = useSelector(state => state.general)
 
@@ -35,7 +36,9 @@ function BlogSection() {
                                             <div className='text-sm text-text leading-relaxed line-clamp-6' dangerouslySetInnerHTML={{ __html: item?.body }}>
                                             </div>
                                             <div className='flex justify-end'>
-                                                <button className='py-1 px-2 bg-lightblue hover:bg-blue rounded-md text-light text-sm '>Read more</button>
+                                                <button className='py-1 px-2 bg-lightblue hover:bg-blue rounded-md text-light text-sm '
+                                                onClick={() => navigate(`/blog/detail/${item?.title}`)}
+                                                >Read more</button>
                                             </div>
                                         </div>
                                     </div>

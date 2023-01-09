@@ -31,7 +31,7 @@ const ThemeRoutes = [
             { path: "/specialoffer", element: <SpecialOfferLandingPage /> },
             { path: "/visa", element: <VisaLandingPage /> },
             { path: "/blog", element: <BlogLandingPage /> },
-            { path: "/blog/details", element: <BlogDetailsPage /> },
+            { path: "/blog/detail/:slug", element: <BlogDetailsPage /> },
             { path: "/search/:slug", element: <SearchingResultPage /> },
             { path: "/payment/:id", element: <PaymentPage /> },
             { path: "/Profile", element: <ProfileMainPage /> },

@@ -123,8 +123,11 @@ function ActivityTable({ item, index }) {
                         name='isChecked'
                         checked={item?.isChecked}
                         onChange={(e) => handleChange({ value: e.target.checked, name: e.target.name, index })} />
-                    <button className='text-light bg-lightblue px-1 py-1 rounded-sm hover:bg-blue text-xs flex items-center whitespace-nowrap'
-                    > {item?.isChecked === false ? "add to cart" : "remove from cart"}<IoMdCart /> </button>
+                    <button className='text-light bg-lightblue px-1 py-1 rounded-md space-x-1 hover:bg-blue text-xs flex items-center whitespace-nowrap'
+                    >
+                        <span className=''> {item?.isChecked === false ? "Add to cart" : "Remove from cart"} </span>
+                    <span className='text-lg'> <IoMdCart /> </span>
+                    </button>
                 </div>
             </td>
         </tr>

@@ -18,8 +18,6 @@ function Navbar() {
     const [view, setView] = useState({
         viewRegister: false,
         viewLogin: false,
-        viewRegisterMobile: false,
-        viewloginMobile: false,
         currency: false,
         language: false
     })
@@ -143,13 +141,13 @@ function Navbar() {
                                         />
                                     </div>
                                     {profileView && (
-                                        <div >
+                                        <div className="hidden md:block" >
                                             <ProfileModal profileView={profileView} setProfileView={setProfileView} />
                                         </div>
                                     )}
                                 </div>
                             )}
-                            {!isLoggedIn && (
+                            {/* {!isLoggedIn && (
                                 <>
                                     <span
                                         className="lg:hidden flex items-center text-light text-xs lg:text-sm bg-main px-2 lg:px-3   rounded-lg shadow-sm cursor-pointer"
@@ -170,7 +168,7 @@ function Navbar() {
                                         Sign in
                                     </span>
                                 </>
-                            )}
+                            )} */}
                         </div>
                     </div>
                 </div>
@@ -178,8 +176,9 @@ function Navbar() {
 
 
 
-            {/* modals */}
+             {/* modals */}
             <>
+            {/*
                 <div>
                     <RegisterMobileCard
                         setView={setView}
@@ -206,7 +205,7 @@ function Navbar() {
                             onClick={() => setView(!view)}
                         ></div>
                     )}
-                </div>
+                </div> */}
 
                 {view.viewRegister && (
 

@@ -5,13 +5,13 @@ import { AiOutlineSearch } from 'react-icons/ai'
 
 function BlogHeroSection() {
     return (
-        <div className='lg:max-w-screen-xl lg:mx-auto py-14'>
+        <div className='lg:max-w-screen-xl lg:mx-auto lg:py-14 py-3 mx-2'>
             <div className='flex justify-between items-center'>
                 <div className='text-darktext'>
                     <h1 className='text-5xl font-medium heading'>Blog</h1>
-                    <p className='text-text'>Latin literature from 45 BC, making it over 2000 years old</p>
+                    {/* <p className='text-text'>Latin literature from 45 BC, making it over 2000 years old</p> */}
                 </div>
-                <div className='mr-5 flex'>
+                <div className='lg:mr-5 flex'>
                     <input type='search' placeholder='Search here!!!' className=' py-3 bg-light border border-main px-2 rounded-l-xl' />
                     <button className='text-3xl flex justify-center items-center bg-main rounded-r-lg text-light w-16 h-14'><AiOutlineSearch /></button>
                 </div>

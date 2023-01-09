@@ -21,23 +21,24 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Rating from '../../components/Rating/Rating'
 import CarousalMobile from './CarousalMobile'
 import ShareModal from './ShareModal'
+import { FaChevronLeft } from 'react-icons/fa'
 
 function HeroSection() {
     const dispatch = useDispatch()
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const { id } = useParams()
 
-    const { excursion,favourites } = useSelector(state => state.excursion)
+    const { excursion, favourites } = useSelector(state => state.excursion)
 
     useEffect(() => {
         dispatch(getExcursion(id))
         dispatch(stateFavourites())
     }, [dispatch, id])
-    
+
     const [viewBookCard, setViewBookCard] = useState(false)
     const [shareModal, setShareModal] = useState(false)
-    
-    
+
+
     return (
         <>
             <div className='bg-soft'>
@@ -48,7 +49,31 @@ function HeroSection() {
 
                                 <div className='bg-light rounded-2xl p-5 py-7 mx-2 my-2 lg:my-0 lg:mx-0 text-darktext'>
                                     <div className='flex justify-between'>
-                                        <div className='space-y-5'>
+                                        <div className='space-y-3'>
+                                            {/* tags */}
+                                            <div className='text-xs text-text   flex space-x-1 items-center'>
+                                                <div className=''>
+                                                    <button className='bg-yellow-500 w-16 px-2 py-1 text-light rounded-md capitalize'>{excursion?.bookingType}</button>
+                                                </div>
+                                                <div className='flex space-x-3 items-center'>
+                                                    {excursion?.cancellationType === "freeCancellation" && (
+                                                        <div className='flex space-x-1 items-center'>
+                                                            {/* <span className='text-lightblue'><TiTick /></span> */}
+                                                            <span className='text-green-600 text-sm'>Free Cancellation </span>
+                                                        </div>
+                                                    )}
+
+                                                </div>
+                                                <div className='flex space-x-1 items-center'>
+                                                    <span className='text-light bg-lightblue w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{excursion?.category?.categoryName} </span>
+                                                    {excursion?.isOffer === true && excursion?.offerAmountType === 'flat' && (
+                                                        <span className='text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{excursion?.offerAmountType === 'flat' ? `$ ${excursion?.offerAmount} OFF` : ''} </span>
+                                                    )}
+                                                    {excursion?.isOffer === true && excursion?.offerAmountType === 'percentage' && (
+                                                        <span className='text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{excursion?.offerAmountType === 'percentage' ? `${excursion?.offerAmount} % OFF` : ''} </span>
+                                                    )}
+                                                </div>
+                                            </div>
                                             <div className='text-3xl font-bold '>
                                                 {excursion?.title}
                                             </div>
@@ -59,10 +84,6 @@ function HeroSection() {
                                                 <span className='flex items-center text-blue capitalize'><CiLocationOn /> {excursion?.destination?.name} </span>
                                             </div>
 
-                                            <div className='text-sm flex items-center space-x-1 text-green-600'>
-                                                <span className=''><SlCalender /> </span>
-                                                <span className='text-xs'>Free cancellation available</span>
-                                            </div>
                                         </div>
                                         <div className='flex space-x-2'>
                                             {/* share button */}
@@ -158,8 +179,12 @@ function HeroSection() {
 
                     </div>
                 </div>
-                <div className={`fixed  ${viewBookCard ? "-bottom-full" : "bottom-0"} transition-all  duration-500 left-0 right-0 lg:hidden px-7 py-7 bg-[rgb(255,255,255,0)] rounded-t-xl z-10`}>
-                    <button className='bg-blue w-full py-3 rounded-lg font-semibold tracking-wider shadow-sm text-light' onClick={() => setViewBookCard(!viewBookCard)}>Book Now</button>
+
+                <div className={`fixed  ${viewBookCard ? "-bottom-full" : "bottom-0"} flex transition-all  duration-500 left-0 right-0 lg:hidden space-x-1 px-7 py-7 bg-[rgb(255,255,255,0)] rounded-t-xl z-10`}>
+                    <button className='bg-blue w-2/12 flex justify-center items-center rounded-lg text-lg text-light'
+                    onClick={() => navigate(-1)}
+                    ><FaChevronLeft /></button>
+                    <button className='bg-blue w-10/12 py-3 rounded-lg font-semibold tracking-wider shadow-sm text-light' onClick={() => setViewBookCard(!viewBookCard)}>Book Now</button>
                 </div>
             </div>
             {shareModal && (

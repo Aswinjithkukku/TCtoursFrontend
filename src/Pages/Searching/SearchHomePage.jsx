@@ -48,7 +48,7 @@ function SearchHomePage({ viewCategory, setViewCategory, setCategory, setSearch 
                         <div className={`overflow-x-auto `}>
                             <div className=' justify-between lg:space-x-3  lg:flex w-full  px-1'>
                                 {categories?.map((item) => (
-                                    <div key={item?._id} className='space-x-2 w-full flex px-3 hover:text-lightblue lg:justify-center items-center py-4 rounded-lg lg:border lg:border-lightblue cursor-pointer'
+                                    <div key={item?._id} className='space-x-2 w-full flex px-3 hover:text-lightblue lg:justify-center items-center py-4 rounded-lg lg:border lg:border-lightblue cursor-pointer capitalize'
                                         onClick={() => setCategory(item?._id)}
                                     >
                                         <span className='text-lightblue'> <GiIsland /></span>

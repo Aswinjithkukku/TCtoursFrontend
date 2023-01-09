@@ -1,15 +1,17 @@
 import React from 'react'
 // import NearbyDestinations from '../../data/NearbyDestinations'
-import { AiFillStar, AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai'
+import { AiFillHeart, AiFillStar, AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai'
 import { TiTick } from 'react-icons/ti'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Rating from '../../components/Rating/Rating'
+import { setFavourites } from '../../redux/slices/excursionSlice'
 
 function SearchListViewSection() {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const { excursions } = useSelector(state => state.excursion)
+    const { excursions, favourites } = useSelector(state => state.excursion)
 
     const saveDatatoLocalStorage = (data) => {
         var array = []
@@ -42,12 +44,46 @@ function SearchListViewSection() {
                                         {item?.title}
                                     </div>
                                     <div className='flex items-center space-x-1 text-text '>
-                                        <span className='text-3xl'><AiOutlineHeart /></span>
+                                        <span className='text-3xl text-main'
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                dispatch(setFavourites({
+                                                    _id: item._id,
+                                                    name: item?.title,
+                                                    image: item?.images[0],
+                                                    price: item?.activity?.adultPrice
+                                                }))
+                                            }}
+                                        >
+                                            {!favourites?.find(fav => fav?._id === item?._id) ? (
+                                                <AiOutlineHeart />
+                                            ) : (
+                                                <AiFillHeart />
+                                            )}
+                                        </span>
                                     </div>
                                 </div>
-                                <div className='text-xs text-text px-3  flex justify-between items-center'>
+                                <div className='text-xs text-text px-3  flex space-x-1 items-center'>
                                     <div className=''>
-                                        <button className='bg-green-600 w-16 px-2 py-1 text-light rounded-md capitalize'>{item.bookingType}</button>
+                                        <button className='bg-yellow-500 w-16 px-2 py-1 text-light rounded-md capitalize'>{item.bookingType}</button>
+                                    </div>
+                                    <div className='flex space-x-3 items-center'>
+                                        {item?.cancellationType === "freeCancellation" && (
+                                            <div className='flex space-x-1 items-center'>
+                                                <span className='text-lightblue'><TiTick /></span>
+                                                <span className='text-green-600 text-sm'>Free Cancellation </span>
+                                            </div>
+                                        )}
+
+                                    </div>
+                                    <div className='flex space-x-1 items-center'>
+                                        <span className='text-light bg-lightblue w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{item?.category?.categoryName} </span>
+                                        {item?.isOffer === true && item?.offerAmountType === 'flat' && (
+                                            <span className='text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{item?.offerAmountType === 'flat' ? `$ ${item?.offerAmount} OFF` : ''} </span>
+                                        )}
+                                        {item?.isOffer === true && item?.offerAmountType === 'percentage' && (
+                                            <span className='text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{item?.offerAmountType === 'percentage' ? `${item?.offerAmount} % OFF` : ''} </span>
+                                        )}
                                     </div>
                                 </div>
                                 <div className='px-3 space-y-2  text-darktext'>
@@ -59,8 +95,9 @@ function SearchListViewSection() {
                                                     <s> USD {item?.activity?.adultPrice}</s>
                                                 </div>}
                                             <div className='text-xl font-bold text-darktext'>
-                                                USD {item?.isOffer === true && item?.offerAmountType === "flat" && Number(item?.activity?.adultPrice) - Number(item?.offerAmount)}
-                                                {item?.isOffer === true && item?.offerAmountType === "percentage" ? Number(item?.activity?.adultPrice) - ((Number(item?.activity?.adultPrice) * Number(item?.offerAmount)) / 100) : item?.activity?.adultPrice}
+                                                USD {item?.isOffer === true ? (item?.isOffer === true && item?.offerAmountType === "flat" ? Number(item?.activity?.adultPrice) - Number(item?.offerAmount) :
+                                                    Number(item?.activity?.adultPrice) - ((Number(item?.activity?.adultPrice) * Number(item?.offerAmount)) / 100)) : item?.activity?.adultPrice}
+                                                {/* {item?.activity?.adultPrice} */}
                                             </div>
                                             <div className='text-xs text-text font-light'>*price varies</div>
                                         </span>
@@ -78,25 +115,7 @@ function SearchListViewSection() {
                                         </span>
                                     </div>
                                 </div>
-                                <div className='px-3 space-y-2 pb-5  text-darktext'>
-                                    <div className='flex space-x-3 items-center'>
-                                        {item?.cancellationType === "freeCancellation" && (
-                                            <div className='flex space-x-1 items-center'>
-                                                <span className='text-lightblue'><TiTick /></span>
-                                                <span className='text-green-600 text-sm'>Free Cancellation </span>
-                                            </div>
-                                        )}
-                                        <div className='flex space-x-1 items-center'>
-                                            <span className='text-light bg-lightblue w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{item?.category?.categoryName} </span>
-                                            {item?.isOffer === true && item?.offerAmountType === 'flat' && (
-                                                <span className='text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{item?.offerAmountType === 'flat' ? `$ ${item?.offerAmount} OFF` : ''} </span>
-                                            )}
-                                            {item?.isOffer === true && item?.offerAmountType === 'percentage' && (
-                                                <span className='text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{item?.offerAmountType === 'percentage' ? `${item?.offerAmount} %` : ''} </span>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     ))}

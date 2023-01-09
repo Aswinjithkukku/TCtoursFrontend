@@ -22,11 +22,10 @@ function BlogDetailsHomeSection() {
                             <div className='flex justify-between items-center'>
                                 <div className='flex space-x-2 items-center'>
                                     <span className=''>
-                                        <img src={banner} className='h-12 w-12 rounded-full' />
-                                    </span>
-                                    <span className=''>
-                                        <div className='text-darktext text-lg '>Sam Philipie</div>
                                         <div className=''><p className='text-bluetrans font-light text-lg '>15th April 2022</p></div>
+                                    </span>
+                                    <span className=' bg-green-600 px-2 py-1 rounded-lg text-light'>
+                                        <p className='text-xs lg:text-sm'>Promotion </p>
                                     </span>
                                 </div>
                                 <div className='mr-5'>
@@ -45,6 +44,15 @@ function BlogDetailsHomeSection() {
                                     totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
                                     Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit
                                 </p>
+                            </div>
+                            <div className='space-y-2'>
+                                <h2 className='text-darktext text-2xl font-medium'>Tags</h2>
+                                <div className='flex space-x-2'>
+                                    <span className='bg-[rgb(120,120,120,.2)] px-2 py-1 rounded-md text-light'>group</span>
+                                    <span className='bg-[rgb(120,120,120,.2)] px-2 py-1 rounded-md text-light'>group</span>
+                                    <span className='bg-[rgb(120,120,120,.2)] px-2 py-1 rounded-md text-light'>group</span>
+                                    <span className='bg-[rgb(120,120,120,.2)] px-2 py-1 rounded-md text-light'>group</span>
+                                </div>
                             </div>
                         </div>
                     </div>

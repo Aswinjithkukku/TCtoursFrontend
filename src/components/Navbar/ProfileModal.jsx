@@ -11,7 +11,7 @@ function ProfileModal({ profileView, setProfileView }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  if (!profileView) return null
+  // if (!profileView) return null
   return (
     <div className='absolute lg:top-14 right-0 z-20'>
       <div className='bg-semisoft border  w-[260px] rounded-md text-darktext '>

@@ -110,8 +110,13 @@ function AttractionCard() {
                     </div>
                     <div className='md:col-span-2 flex justify-center items-center'>
                         <div className=''>
-                            <button type='submit' className='h-14 w-14 bg-blue rounded-xl text-light text-3xl flex justify-center items-center'>
-                                <AiOutlineSearch />
+                            <button type='submit' className='md:h-14 h-12 md:w-14 px-4 md:px-0 bg-blue rounded-xl text-light text-3xl flex justify-center items-center'>
+                                <span className=''>
+                                    <AiOutlineSearch />
+                                </span>
+                                <span className='text-lg md:hidden'>
+                                    Search
+                                </span>
                             </button>
                         </div>
                     </div>

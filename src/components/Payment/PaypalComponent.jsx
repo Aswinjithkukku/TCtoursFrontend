@@ -2,8 +2,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import axios from '../../axios';
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
 
 function PaypalComponent() {
+  const navigate = useNavigate()
 
   const passenger = JSON.parse(localStorage.getItem('passenger'))
   const tour_order = JSON.parse(localStorage.getItem('tour_order'))
@@ -60,7 +62,12 @@ function PaypalComponent() {
           messageFromServer = resFromServer.message;
           // Make Calls to backend to changes in react state corresponding to successful payment here
           console.log("Success");
-          console.log("Payment successful.");
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Payment Successful',
+          })
+          navigate('/')
         } catch {
           console.log(
             "Error enrolling student, please contact tech@xyz.com"

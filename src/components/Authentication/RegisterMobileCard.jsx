@@ -45,14 +45,12 @@ function RegisterMobileCard({ view, setView }) {
   };
 
   return (
-    <div className={`fixed ${view.viewRegisterMobile ? "bottom-0" : "-bottom-full "} bg-light rounded-t-3xl overflow-y-auto max-h-[98vh] w-full z-30 transition-all duration-500`}>
       <form onSubmit={handleSubmit}>
-        <div className='p-7 py-10 space-y-4'>
+        <div className=' space-y-4'>
           <div className=' flex justify-between items-center'>
             <div className=''>
               <h2 className='text-3xl text-darktext font-bold'>Greetings..</h2>
             </div>
-            <div className=' text-3xl' onClick={() => setView(!view)}><AiOutlineClose /></div>
           </div>
           <div className='space-y-2'>
             <label className='text-text '> Name</label>
@@ -154,7 +152,6 @@ function RegisterMobileCard({ view, setView }) {
           </div> */}
         </div>
       </form>
-    </div>
   )
 }
 

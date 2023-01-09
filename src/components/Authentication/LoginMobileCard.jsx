@@ -43,14 +43,12 @@ function LoginMobileCard({ setView, view }) {
     };
 
     return (
-        <div className={`fixed ${view.viewloginMobile ? "bottom-0" : "-bottom-full "} bg-light rounded-t-3xl max-h-[85vh] overflow-y-auto w-full z-30 transition-all duration-500`}>
             <form onSubmit={handleSubmit}>
-                <div className='py-10 p-7 space-y-5'>
+                <div className=' space-y-5'>
                     <div className=' flex justify-between items-center'>
                         <div className=''>
                             <h2 className='text-3xl text-darktext font-bold'>Welcome Back!!</h2>
                         </div>
-                        <div className=' text-3xl' onClick={() => setView(!view)}><AiOutlineClose /></div>
                     </div>
                     {/*    <div className='space-y-5 py-4 invisible'>
                         <button className='flex items-center border border-main space-x-2 bg-trans w-full  justify-center py-4 rounded-xl hover:bg-light hover:text-main text-maintrans duration-200'>
@@ -64,7 +62,7 @@ function LoginMobileCard({ setView, view }) {
                     </div> */}
                     {resetPassword ? (
                         <>
-                            <div className='space-y-2 border-t py-4'>
+                            <div className='space-y-2  py-4'>
                                 <label className='text-text '> Email</label>
                                 <input
                                     type='email'
@@ -92,7 +90,7 @@ function LoginMobileCard({ setView, view }) {
                         </>
                     ) : (
                         <>
-                            <div className='space-y-2 border-t py-4'>
+                            <div className='space-y-2 py-4'>
                                 <label className='text-text '> Email</label>
                                 <input
                                     type='email'
@@ -136,7 +134,6 @@ function LoginMobileCard({ setView, view }) {
                     )}
                 </div>
             </form>
-        </div>
     )
 }
 

@@ -61,7 +61,7 @@ function HelpModal({ view, setView }) {
               
               <a className='flex space-x-2' href={`${home?.facebookUrl}`} target="_blank" rel="noopener noreferrer" >
               <div className=''><BsFacebook /> </div>
-              <div className=''>facebook</div>
+              <div className=''>Facebook</div>
               </a>
             </div>
             <div className='flex justify-between border-b border-dashed pb-3'>
