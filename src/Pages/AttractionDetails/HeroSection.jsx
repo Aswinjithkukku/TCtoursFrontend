@@ -42,7 +42,7 @@ function HeroSection() {
 
     return (
         <>
-            <MetaData title={excursion?.title} link_title={excursion?.title} description={'Get best deals on Travel and Tourism online with us'} thumbnail={excursion?.images[0]} />
+            <MetaData title={excursion?.title} link_title={excursion?.title} description={'Get best deals on Travel and Tourism online with us'} thumbnail={excursion?.images[0] && excursion?.images[0]} />
             <div className='bg-soft'>
                 <div className='lg:max-w-screen-xl lg:mx-auto'>
                     <div className=''>
