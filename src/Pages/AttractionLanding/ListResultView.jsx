@@ -39,7 +39,7 @@ function ListResultView({ id }) {
                                     <div className='flex justify-between items-center'>
                                         <span className='space-y-1'>
                                             <div className='text-xs text-text font-light'>from</div>
-                                            <div className='text-xl font-medium text-darktext'>USD 175.00</div>
+                                            <div className='text-xl font-medium text-darktext'>AED 175.00</div>
                                             <div className='text-xs text-text font-light'>*price varies</div>
                                         </span>
                                         <span className='space-y-1'>

@@ -81,7 +81,7 @@ export default function TopHeader() {
                                     return { ...prev, currency: !view.currency }
                                 })}
                             >
-                                <span className="text-xs">USD</span>
+                                <span className="text-xs">AED</span>
                                 <span className="text-sm">
                                     {view.currency ? (
                                         <AiOutlineUp />

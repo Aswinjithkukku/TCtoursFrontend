@@ -116,7 +116,7 @@ function ActivityTable({ item, index }) {
                 </select>
             </td>
             <td className='py-3 px-1 min-w-[4em] pl-5'>
-                <h2 className='font-medium'>{price} USD</h2>
+                <h2 className='font-medium'>{price} AED</h2>
                 <div className='relative'>
                     <input type='checkbox'
                         className='peer absolute top-0 inset-x-0 w-full h-6 opacity-0  cursor-pointer'

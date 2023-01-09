@@ -30,7 +30,8 @@ const fetchUser = createAsyncThunk(
 const logoutUser = createAsyncThunk(
     '/usersSlice/logoutUser',
     async (dispatch,  getState ) => {
-        const response = await axios.get('/user/logout');
+        // const response = await axios.get('/user/logout');
+        localStorage.removeItem('random-string')
     }
 );
 

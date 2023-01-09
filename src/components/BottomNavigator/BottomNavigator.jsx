@@ -7,10 +7,10 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import FavouriteModal from './FavouriteModal'
 import HelpModal from './HelpModal'
 import ProfileModal from './ProfileModal'
+import SearchModal from './SearchModal'
 
 function BottomNavigator() {
   const location = useLocation()
-  console.log(location);
 
   const [view, setView] = useState({
     favourite: false,
@@ -96,6 +96,19 @@ function BottomNavigator() {
           view={view}
         />
         {view.help && (
+          <div
+            className={`fixed top-0 bottom-0 left-0 right-0 lightglass z-20`}
+            onClick={() => setView(!view)}
+          ></div>
+        )}
+      </div>
+
+      <div>
+        <SearchModal
+          setSearch={setView}
+          searchview={view}
+        />
+        {view.search && (
           <div
             className={`fixed top-0 bottom-0 left-0 right-0 lightglass z-20`}
             onClick={() => setView(!view)}

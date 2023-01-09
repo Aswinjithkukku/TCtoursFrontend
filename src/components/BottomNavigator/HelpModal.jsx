@@ -28,7 +28,7 @@ function HelpModal({ view, setView }) {
               </div>
             </div>
             <div className='flex justify-between border-b border-dashed pb-3'>
-              <div className=''>USD</div>
+              <div className=''>AED</div>
             </div>
             <div className='flex justify-between border-b border-dashed pb-3'>
               <div className=''>English</div>

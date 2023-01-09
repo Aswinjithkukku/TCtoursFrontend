@@ -10,6 +10,7 @@ const initialState = {
   excursionAll: [],
   recievedActivities: [],
   favourites: [],
+  review: {},
 };
 
 export const excursionall = createAsyncThunk(
@@ -73,6 +74,21 @@ export const getCategories = createAsyncThunk(
   }
 );
 
+export const addReview = createAsyncThunk(
+  "excursion/addReview",
+  async (args, { getState }) => {
+     const { jwtToken } = getState().users
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${jwtToken}`
+      },
+    };
+    const response = await axios.post("/attractions/reviews/add",args, config);
+    return response.data;
+  }
+);
+
 const excursionSlice = createSlice({
   name: "excursion",
   initialState,
@@ -86,16 +102,29 @@ const excursionSlice = createSlice({
         action.payload.value;
     },
     setFavourites: (state, action) => {
-        var array = []
-        array = JSON.parse(localStorage.getItem('favourites')) || []
-        const result = array.filter(item => item?._id !== action.payload._id)
-        array = [action.payload, ...result]
-        state.favourites = array
-        localStorage.setItem('favourites', JSON.stringify(array));
+      var array = [];
+      array = JSON.parse(localStorage.getItem("favourites")) || [];
+      const isItemExist = array.find(
+        (item) => item?._id === action.payload._id
+      );
+      if (isItemExist) {
+        const result = array.filter((item) => item?._id !== action.payload._id);
+        array = result;
+        state.favourites = array;
+        localStorage.setItem("favourites", JSON.stringify(array));
+      } else {
+        array = [action.payload, ...array];
+        state.favourites = array;
+        localStorage.setItem("favourites", JSON.stringify(array));
+      }
     },
     stateFavourites: (state, action) => {
-      state.favourites = JSON.parse(localStorage.getItem('favourites')) || []
-    }
+      state.favourites = localStorage.getItem("favourites")
+        ? JSON.parse(localStorage.getItem("favourites"))
+        : [];
+      // state.favourites = JSON.parse(localStorage.getItem('favourites')) || []
+      console.log(".");
+    },
   },
   extraReducers: {
     [getExcursion.pending]: (state, action) => {
@@ -145,9 +174,14 @@ const excursionSlice = createSlice({
       state.loading = false;
       state.excursionAll = action.payload;
     },
+    [addReview.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.review = action.payload;
+    },
   },
 });
 
-export const { setActivities, setFavourites, stateFavourites } = excursionSlice.actions;
+export const { setActivities, setFavourites, stateFavourites } =
+  excursionSlice.actions;
 
 export default excursionSlice.reducer;

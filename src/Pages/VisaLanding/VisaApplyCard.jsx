@@ -69,7 +69,7 @@ function VisaApplyCard() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='flex justify-center font-medium lg:justify-end px-2 py-2 text-lg text-lightblue'>USD 0.00</div>
+                            <div className='flex justify-center font-medium lg:justify-end px-2 py-2 text-lg text-lightblue'>AED 0.00</div>
                             <div className='flex justify-end px-2 my-3 text-lg text-lightblue'>
                                 <button className='bg-blue w-full lg:w-auto text-light px-2 py-1 rounded-md'>Submit</button>
                             </div>

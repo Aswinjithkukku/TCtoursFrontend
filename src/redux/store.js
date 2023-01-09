@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
+    blogReducer,
     excursionReducer,
     generalReducer,
     homeReducer,
@@ -14,6 +15,7 @@ const store = configureStore({
         payment: paymentReducer,
         users: usersReducer,
         home: homeReducer,
+        blog: blogReducer,
     },
     devTools: true,
 });

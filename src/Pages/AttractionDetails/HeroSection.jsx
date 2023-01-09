@@ -22,6 +22,7 @@ import Rating from '../../components/Rating/Rating'
 import CarousalMobile from './CarousalMobile'
 import ShareModal from './ShareModal'
 import { FaChevronLeft } from 'react-icons/fa'
+import MetaData from '../../utils/MetaData'
 
 function HeroSection() {
     const dispatch = useDispatch()
@@ -41,6 +42,7 @@ function HeroSection() {
 
     return (
         <>
+            <MetaData title={excursion?.title} link_title={excursion?.title} description={'Get best deals on Travel and Tourism online with us'} thumbnail={excursion?.images[0]} />
             <div className='bg-soft'>
                 <div className='lg:max-w-screen-xl lg:mx-auto'>
                     <div className=''>
@@ -168,7 +170,7 @@ function HeroSection() {
 
                             <div className='2nd lg:col-span-4'>
                                 <div className={`lightglass  top-0 bottom-0  left-0 right-0 z-10 ${viewBookCard ? "fixed" : "hidden"}`} onClick={() => setViewBookCard(!viewBookCard)}></div>
-                                <div className={`${viewBookCard ? "fixed bottom-0 max-h-[93vh] overflow-y-auto w-full z-10 bg-white" : "-bottom-full invisible h-0 overflow-hidden"} transition-all duration-500  rounded-t-3xl lg:rounded-none lg:block   lg:visible lg:h-auto  lg:sticky lg:top-0`}>
+                                <div className={`${viewBookCard ? "fixed bottom-0 max-h-[93vh] overflow-y-auto w-full z-10 bg-white" : "-bottom-full invisible h-0 overflow-hidden"} transition-all duration-500  rounded-t-3xl lg:rounded-none lg:block   lg:visible lg:h-auto  lg:sticky lg:top-[90px]`}>
                                     <div className='flex lg:hidden justify-end pt-5 lg:pt-0 px-7 text-4xl' onClick={() => setViewBookCard(!viewBookCard)}><AiOutlineClose /></div>
 
                                     <DetailsCard />
@@ -182,7 +184,7 @@ function HeroSection() {
 
                 <div className={`fixed  ${viewBookCard ? "-bottom-full" : "bottom-0"} flex transition-all  duration-500 left-0 right-0 lg:hidden space-x-1 px-7 py-7 bg-[rgb(255,255,255,0)] rounded-t-xl z-10`}>
                     <button className='bg-blue w-2/12 flex justify-center items-center rounded-lg text-lg text-light'
-                    onClick={() => navigate(-1)}
+                        onClick={() => navigate(-1)}
                     ><FaChevronLeft /></button>
                     <button className='bg-blue w-10/12 py-3 rounded-lg font-semibold tracking-wider shadow-sm text-light' onClick={() => setViewBookCard(!viewBookCard)}>Book Now</button>
                 </div>

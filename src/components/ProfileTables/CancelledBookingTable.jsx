@@ -27,7 +27,7 @@ function CancelledBookingTable() {
                 <td className='py-3 text-left text-sm'>2</td>
                 <td className='py-3 text-left text-sm'>1</td>
                 <td className='py-3 text-left text-sm'>0</td>
-                <td className='py-3 text-left text-sm text-main font-semibold'>120 USD</td>
+                <td className='py-3 text-left text-sm text-main font-semibold'>120 AED</td>
               </tr>
               <tr className='hover:bg-soft cursor-default'>
                 <td className='py-3 text-left text-sm pl-2'>#sd44s</td>
@@ -36,7 +36,7 @@ function CancelledBookingTable() {
                 <td className='py-3 text-left text-sm'>2</td>
                 <td className='py-3 text-left text-sm'>1</td>
                 <td className='py-3 text-left text-sm'>0</td>
-                <td className='py-3 text-left text-sm text-main font-semibold'>120 USD</td>
+                <td className='py-3 text-left text-sm text-main font-semibold'>120 AED</td>
               </tr>
               <tr className='hover:bg-soft cursor-default'>
                 <td className='py-3 text-left text-sm pl-2'>#sd44s</td>
@@ -45,7 +45,7 @@ function CancelledBookingTable() {
                 <td className='py-3 text-left text-sm'>2</td>
                 <td className='py-3 text-left text-sm'>1</td>
                 <td className='py-3 text-left text-sm'>0</td>
-                <td className='py-3 text-left text-sm text-main font-semibold'>120 USD</td>
+                <td className='py-3 text-left text-sm text-main font-semibold'>120 AED</td>
               </tr>
             </tbody>
           </table>

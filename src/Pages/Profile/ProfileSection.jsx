@@ -19,7 +19,7 @@ function ProfileSection() {
               <h5 className='text-xs lg:text-sm text-text mb-3'>My balance*</h5>
               <div className='flex space-x-2 text-2xl tracking-wider font-bold  '>
                 <p className='text-main'>202</p>
-                <p className='text-text'>USD</p>
+                <p className='text-text'>AED</p>
               </div>
               <div className='mb-10'>
                 <h5 className='text-xs lg:text-sm text-text mb-3'>is left on your wallet!</h5>

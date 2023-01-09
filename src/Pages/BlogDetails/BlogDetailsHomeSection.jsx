@@ -1,11 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RxShare2 } from 'react-icons/rx'
+import { useDispatch, useSelector } from 'react-redux'
 import banner from '../../static/images/banner.jpg'
 import BlogShareModal from './BlogShareModal'
 import RecentBlogSection from './RecentBlogSection'
+import { getSingleBlog } from '../../redux/slices/blogSlice'
+import { useParams } from 'react-router-dom'
 
 function BlogDetailsHomeSection() {
+    const { slug } = useParams()
+    const dispatch = useDispatch()
+    console.log(slug);
+
     const [shareModal, setShareModal] = useState(false)
+
+    useEffect(() => {
+        dispatch(getSingleBlog(slug))
+    },[dispatch,slug ])
+
+    const { blog } = useSelector(state => state.blog) 
     return (
         <>
             <div className='lg:max-w-screen-xl lg:mx-auto py-10 mx-2'>
@@ -14,15 +27,15 @@ function BlogDetailsHomeSection() {
                     <div className='col-span-8'>
                         <div className='w-full space-y-5'>
                             <div className=''>
-                                <h1 className='lg:text-3xl text-2xl font-medium text-darktext '>Lorem ipsum dolor sit amet, consectetur adipiscing </h1>
+                                <h1 className='lg:text-3xl text-2xl font-medium text-darktext '>{blog?.title} </h1>
                             </div>
                             <div className='rounded-2xl overflow-hidden md:h-[30em]'>
-                                <img src={banner} alt='banner' className='' />
+                                <img src={process.env.REACT_APP_SERVER_URL + blog?.thumbnail} alt={blog?.title} className='' />
                             </div>
                             <div className='flex justify-between items-center'>
                                 <div className='flex space-x-2 items-center'>
                                     <span className=''>
-                                        <div className=''><p className='text-bluetrans font-light text-lg '>15th April 2022</p></div>
+                                        <div className=''><p className='text-bluetrans font-light text-lg '>{blog?.createdAt?.slice(0,10)} </p></div>
                                     </span>
                                     <span className=' bg-green-600 px-2 py-1 rounded-lg text-light'>
                                         <p className='text-xs lg:text-sm'>Promotion </p>
@@ -32,26 +45,21 @@ function BlogDetailsHomeSection() {
                                     <button className='h-10 w-10 rounded-full bg-soft border border-green-600 flex justify-center items-center text-2xl text-green-600' onClick={() => setShareModal(true)}><RxShare2 /></button>
                                 </div>
                             </div>
-                            <div className='text-darktext text-lg'>
+                            {/* <div className='text-darktext text-lg'>
                                 <i>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
                                     eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur
                                 </i>
-                            </div>
+                            </div> */}
                             <div className='text-text leading-relaxed'>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-                                    eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit
-                                </p>
+                            <div dangerouslySetInnerHTML={{ __html: blog?.body }} className=' space-y-2'>
+                                </div>
                             </div>
                             <div className='space-y-2'>
                                 <h2 className='text-darktext text-2xl font-medium'>Tags</h2>
                                 <div className='flex space-x-2'>
-                                    <span className='bg-[rgb(120,120,120,.2)] px-2 py-1 rounded-md text-light'>group</span>
-                                    <span className='bg-[rgb(120,120,120,.2)] px-2 py-1 rounded-md text-light'>group</span>
-                                    <span className='bg-[rgb(120,120,120,.2)] px-2 py-1 rounded-md text-light'>group</span>
-                                    <span className='bg-[rgb(120,120,120,.2)] px-2 py-1 rounded-md text-light'>group</span>
+                                    {blog?.tags?.map((item,index) => (
+                                    <span className='bg-[rgb(120,120,120,.2)] px-2 py-1 rounded-md text-lightblue capitalize' key={index}>{item} </span>
+                                    ))}
                                 </div>
                             </div>
                         </div>

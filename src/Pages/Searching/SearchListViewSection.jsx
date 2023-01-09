@@ -92,10 +92,10 @@ function SearchListViewSection() {
                                             <div className='text-xs text-text font-light'>Starting from</div>
                                             {item?.isOffer === true &&
                                                 <div className='text-xs text-main font-light'>
-                                                    <s> USD {item?.activity?.adultPrice}</s>
+                                                    <s> AED {item?.activity?.adultPrice}</s>
                                                 </div>}
                                             <div className='text-xl font-bold text-darktext'>
-                                                USD {item?.isOffer === true ? (item?.isOffer === true && item?.offerAmountType === "flat" ? Number(item?.activity?.adultPrice) - Number(item?.offerAmount) :
+                                                AED {item?.isOffer === true ? (item?.isOffer === true && item?.offerAmountType === "flat" ? Number(item?.activity?.adultPrice) - Number(item?.offerAmount) :
                                                     Number(item?.activity?.adultPrice) - ((Number(item?.activity?.adultPrice) * Number(item?.offerAmount)) / 100)) : item?.activity?.adultPrice}
                                                 {/* {item?.activity?.adultPrice} */}
                                             </div>

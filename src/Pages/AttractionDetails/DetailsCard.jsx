@@ -59,25 +59,25 @@ function DetailsCard() {
 
     return (
         <>
-            <div className='bg-light  lg:rounded-xl p-5 space-y-2 sticky top-0'>
+            <div className='bg-light  lg:rounded-xl p-5 space-y-2 '>
                 <div className=''>
                     {/* cutted price without offer */}
                     <div className=''>
                         {excursion?.isOffer && (
-                            <p className='text-main text-xs'><s>USD {excursion?.activities && (excursion?.activities[0]?.adultPrice)}</s></p>
+                            <p className='text-main text-xs'><s>AED {excursion?.activities && (excursion?.activities[0]?.adultPrice)}</s></p>
                         )}
                     </div>
                     <div className='flex justify-between items-center'>
                         <span className='flex items-center space-x-2'>
-                            <h2 className='text-darktext font-bold text-3xl'>USD {offerAmount}</h2>
+                            <h2 className='text-darktext font-bold text-3xl'>AED {offerAmount}</h2>
                             <p className='text-xs text-text'>cheapest price*</p>
                         </span>
                         {/* offer percentage  */}
                         {excursion?.isOffer && (
-                            <span className='bg-soft px-3 py-2 rounded-full text-blue'>{excursion?.offerAmount && excursion?.offerAmount} {excursion?.offerAmountType && excursion?.offerAmountType === "flat" ? "USD" : "%"} OFF</span>
+                            <span className='bg-soft px-3 py-2 rounded-full text-blue'>{excursion?.offerAmount && excursion?.offerAmount} {excursion?.offerAmountType && excursion?.offerAmountType === "flat" ? "AED" : "%"} OFF</span>
                         )}
                     </div>
-                    <form>
+                    <div>
                         <div className='inputs space-y-5 my-4'>
 
                             <div className='space-y-1'>
@@ -89,7 +89,7 @@ function DetailsCard() {
                                     {recievedActivities?.map((item, index) => (
                                         <div className='flex justify-between gap-2 text-sm' key={index}>
                                             <span className='text-darktext ml-1'>{item?.isChecked === true && (item?.name)}</span>
-                                            <span className=''>{item?.isChecked === true && item?.price + " USD"}</span>
+                                            <span className=''>{item?.isChecked === true && item?.price + " AED"}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -106,11 +106,11 @@ function DetailsCard() {
                                 )}
                                 {/* <div className='flex justify-between text-darktext'>
                                     <span className=''>child</span>
-                                    <span className=''>{excursion?.activities && (Number(excursion?.activities[0]?.childPrice) * data.child)} USD</span>
+                                    <span className=''>{excursion?.activities && (Number(excursion?.activities[0]?.childPrice) * data.child)} AED</span>
                                 </div> */}
                                 <div className='flex justify-between text-darktext'>
                                     <span className='font-semibold text-lg'>Grand Total</span>
-                                    <span className='font-bold text-xl'>{price}.00 USD</span>
+                                    <span className='font-bold text-xl'>{price}.00 AED</span>
                                 </div>
                             </div>
                             {error && (
@@ -123,7 +123,7 @@ function DetailsCard() {
                             </div>
 
                         </div>
-                    </form>
+                    </div>
 
                     <div className='hidden lg:block py-7 space-y-3'>
                         <div className=''>

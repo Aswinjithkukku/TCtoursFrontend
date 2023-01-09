@@ -73,7 +73,7 @@ function Navbar() {
                                     return { ...prev, currency: !view.currency }
                                 })}
                             >
-                                <span className="text-base font-medium">USD</span>
+                                <span className="text-base font-medium">AED</span>
                                 <span className="text-base">
                                     {view.currency ? (
                                         <AiOutlineUp />

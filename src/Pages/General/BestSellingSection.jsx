@@ -49,7 +49,7 @@ function BestSellingSection() {
                         <span className='text-green-600'><IoLocation/></span>
                         <span className='text-sm text-green-600 capitalize '>{item?.destination?.name}</span>
                       </div>
-                      <div className='text-base font-medium text-blue '>USD {item?.activity?.adultPrice}</div>
+                      <div className='text-base font-medium text-blue '>AED {item?.activity?.adultPrice}</div>
                     </div>
                   </div>
                 </div>

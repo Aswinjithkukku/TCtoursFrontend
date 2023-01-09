@@ -22,28 +22,28 @@ function TransactionHistoryTable() {
                 <td className='py-3 text-left text-sm'>test #52010 0120 01200</td>
                 <td className='py-3 text-left text-sm'>15-04-2023</td>
                 <td className='py-3 text-left text-sm'>21:00</td>
-                <td className='py-3 text-left text-sm text-[#54B435] font-semibold'>+120 USD</td>
+                <td className='py-3 text-left text-sm text-[#54B435] font-semibold'>+120 AED</td>
               </tr>
               <tr className='hover:bg-soft cursor-default'>
                 <td className='py-3 text-left text-lg pl-2 text-[#54B435]'><AiFillDollarCircle/></td>
                 <td className='py-3 text-left text-sm'>test #52010 0120 01200</td>
                 <td className='py-3 text-left text-sm'>15-04-2023</td>
                 <td className='py-3 text-left text-sm'>02:00</td>
-                <td className='py-3 text-left text-sm text-[#54B435] font-semibold'>+120 USD</td>
+                <td className='py-3 text-left text-sm text-[#54B435] font-semibold'>+120 AED</td>
               </tr>
               <tr className='hover:bg-soft cursor-default '>
                 <td className='py-3 text-left text-lg pl-2 text-main'><AiFillDollarCircle/> </td>
                 <td className='py-3 text-left text-sm'>test #52010 0120 01200</td>
                 <td className='py-3 text-left text-sm'>15-04-2023</td>
                 <td className='py-3 text-left text-sm'>12:00</td>
-                <td className='py-3 text-left text-sm text-main font-semibold'>-120 USD</td>
+                <td className='py-3 text-left text-sm text-main font-semibold'>-120 AED</td>
               </tr>
               <tr className='hover:bg-soft cursor-default'>
                 <td className='py-3 text-left text-lg pl-2 text-main'><AiFillDollarCircle/> </td>
                 <td className='py-3 text-left text-sm'>test #52010 0120 01200</td>
                 <td className='py-3 text-left text-sm'>15-04-2023</td>
                 <td className='py-3 text-left text-sm'>12:00</td>
-                <td className='py-3 text-left text-sm text-main font-semibold'>-120 USD</td>
+                <td className='py-3 text-left text-sm text-main font-semibold'>-120 AED</td>
               </tr>
             </tbody>
           </table>
