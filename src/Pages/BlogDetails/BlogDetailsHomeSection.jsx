@@ -6,6 +6,7 @@ import BlogShareModal from './BlogShareModal'
 import RecentBlogSection from './RecentBlogSection'
 import { getSingleBlog } from '../../redux/slices/blogSlice'
 import { useParams } from 'react-router-dom'
+import MetaData from '../../utils/MetaData'
 
 function BlogDetailsHomeSection() {
     const { slug } = useParams()
@@ -21,6 +22,7 @@ function BlogDetailsHomeSection() {
     const { blog } = useSelector(state => state.blog) 
     return (
         <>
+        <MetaData title={blog?.title} link_title={blog?.title} description={'Stay put on Travellers Choice'} thumbnail={blog?.thumbnail} />
             <div className='lg:max-w-screen-xl lg:mx-auto py-10 mx-2'>
                 <div className='md:grid grid-cols-12 gap-5'>
 
