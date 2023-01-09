@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import axios from "../../axios";
 import { setUser } from "../../redux/slices/usersSlice";
 
-function Login({ setView, view }) {
+function Login({ setViewAuth, viewAuth }) {
     const [resetPassword, setResetPassword] = useState(false)
     const [data, setData] = useState({
         email: "",
@@ -34,7 +34,7 @@ function Login({ setView, view }) {
 
             dispatch(setUser(response.data));
             setIsLoading(false);
-            setView(!view)
+            setViewAuth(!viewAuth)
         } catch (err) {
 
             if (err?.response?.data?.error === "Invalid credentials") {
@@ -46,11 +46,11 @@ function Login({ setView, view }) {
         }
     };
 
-    if (!view) return null
+    if (!viewAuth) return null
     return (
-        <div className="fixed top-0 left-0 right-0 bottom-0 z-30 modal_overlay" onClick={() => setView(!view)}>
+        <div className="fixed top-0 left-0 right-0 bottom-0 z-30 modal_overlay" onClick={() => setViewAuth(!viewAuth)}>
             <div className={`absolute right-20  top-16 flex justify-center items-center bg-trans text-darktext h-16 w-16 rounded-full text-4xl`}
-                onClick={() => setView(!view)}
+                onClick={() => setViewAuth(!viewAuth)}
             >
                 <AiOutlineClose />
             </div>
@@ -180,7 +180,7 @@ function Login({ setView, view }) {
                                         <span
                                             className="text-main underline cursor-pointer"
                                             onClick={() => {
-                                                setView((prev) => {
+                                                setViewAuth((prev) => {
                                                     return { ...prev, viewRegister: true, viewLogin: false }
                                                 })
                                             }}

@@ -4,8 +4,10 @@ import BlogImagesLink from '../../data/BlogImagesLink'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBlogs } from '../../redux/slices/blogSlice'
+import { useNavigate } from 'react-router-dom'
 
 function BlogHeroSection() {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const [value, setValue] = useState('')
@@ -44,7 +46,7 @@ function BlogHeroSection() {
             <div className='mt-5'>
                 <div className='md:grid md:grid-cols-2 lg:grid-cols-3 gap-5'>
                     {filteredData?.map((item, index) => (
-                        <div className=' mt-2 bg-light p-3 rounded-3xl cursor-pointer' key={index}>
+                        <div className=' mt-2 bg-light p-3 rounded-3xl cursor-pointer' key={index} onClick={() => navigate(`/blog/detail/${item?.slug}`)}>
                             <div className=' relative'>
                                 <div className='overflow-hidden rounded-t-3xl rounded-b-md'>
                                     <img className='hover:scale-110 object-cover  h-[14em] lg:[14em] w-full transition-all duration-500 cursor-pointer' src={process.env.REACT_APP_SERVER_URL + item?.thumbnail} alt='Loreum' />

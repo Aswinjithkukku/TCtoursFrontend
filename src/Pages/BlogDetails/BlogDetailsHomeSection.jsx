@@ -23,16 +23,16 @@ function BlogDetailsHomeSection() {
     return (
         <>
         <MetaData title={blog?.title} link_title={blog?.title} description={'Stay put on Travellers Choice'} thumbnail={blog?.thumbnail} />
-            <div className='lg:max-w-screen-xl lg:mx-auto py-10 mx-2'>
-                <div className='md:grid grid-cols-12 gap-5'>
+            <div className='lg:max-w-screen-lg lg:mx-auto py-10 mx-2'>
+                <div className=''>
 
-                    <div className='col-span-8'>
+                    <div className=''>
                         <div className='w-full space-y-5'>
+                            <div className='rounded-2xl overflow-hidden md:h-[30em]'>
+                                <img src={process.env.REACT_APP_SERVER_URL + blog?.thumbnail} alt={blog?.title} className='rounded-2xl' />
+                            </div>
                             <div className=''>
                                 <h1 className='lg:text-3xl text-2xl font-medium text-darktext '>{blog?.title} </h1>
-                            </div>
-                            <div className='rounded-2xl overflow-hidden md:h-[30em]'>
-                                <img src={process.env.REACT_APP_SERVER_URL + blog?.thumbnail} alt={blog?.title} className='' />
                             </div>
                             <div className='flex justify-between items-center'>
                                 <div className='flex space-x-2 items-center'>
@@ -66,21 +66,21 @@ function BlogDetailsHomeSection() {
                             </div>
                         </div>
                     </div>
-                    <div className='col-span-4 mt-5 lg:mt-0'>
+                    {/* <div className='col-span-4 mt-5 lg:mt-0'>
                         <RecentBlogSection />
-                    </div>
+                    </div> */}
                 </div>
             </div>
             {/* modals */}
-            <div>
+             <div>
                 <BlogShareModal setShareModal={setShareModal} shareModal={shareModal} />
                 {shareModal && (
                     <div
-                        className={`fixed top-0 bottom-0 left-0 right-0 lightglass z-10`}
+                        className={`fixed top-0 bottom-0 left-0 right-0 lightglass z-20 `}
                         onClick={() => setShareModal(!shareModal)}
                     ></div>
                 )}
-            </div>
+            </div> 
         </>
     )
 }

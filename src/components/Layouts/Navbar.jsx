@@ -12,20 +12,18 @@ import ProfileModal from "../Navbar/ProfileModal";
 import { useHandleClickOutside } from "../../hooks";
 import CurrencyModal from "../Header/CurrencyModal";
 import LanguageModal from "../Header/LanguageModal";
+import RegisterCard from "../Authentication/RegisterCard";
 
 function Navbar() {
 
     const [view, setView] = useState({
-        viewRegister: false,
-        viewLogin: false,
         currency: false,
         language: false
     })
-    // const [view, setView] = useState({
-    //     helpline: false,
-    //     currency: false,
-    //     language: false
-    // })
+    const [viewAuth, setViewAuth] = useState({
+        viewRegister: false,
+        viewLogin: false,
+    })
     const currencyRef = useRef()
     const languageRef = useRef()
     useHandleClickOutside(currencyRef, () => setView(!view))
@@ -46,7 +44,7 @@ function Navbar() {
 
     return (
         <>
-            <div className="bg-soft sticky top-0 z-20">
+            <div className="bg-soft sticky top-0 z-20 shadow">
                 <div className=" py-4 px-3 lg:max-w-screen-xl lg:mx-auto">
                     <div className="flex justify-between items-center">
                         <Link to="/">
@@ -113,8 +111,8 @@ function Navbar() {
                             {!isLoggedIn ? (
                                 <>
                                     <span
-                                        className="hidden lg:flex items-center text-light text-xs lg:text-sm bg-main px-2 lg:px-3 py-2 lg:my-3 rounded-lg shadow-sm cursor-pointer"
-                                        onClick={() => setView((prev) => {
+                                        className="hidden lg:flex items-center text-light text-xs lg:text-sm bg-main px-2 lg:px-3 py-2 lg:my-3 rounded-lg  cursor-pointer"
+                                        onClick={() => setViewAuth((prev) => {
                                             return { ...prev, viewRegister: true }
                                         })
                                         }
@@ -122,8 +120,8 @@ function Navbar() {
                                         Register{" "}
                                     </span>
                                     <span
-                                        className="hidden lg:flex items-center text-light text-xs lg:text-sm bg-blue px-2 lg:px-3 py-2 lg:my-3 rounded-lg shadow-sm cursor-pointer"
-                                        onClick={() => setView((prev) => {
+                                        className="hidden lg:flex items-center text-light text-xs lg:text-sm bg-blue px-2 lg:px-3 py-2 lg:my-3 rounded-lg  cursor-pointer"
+                                        onClick={() => setViewAuth((prev) => {
                                             return { ...prev, viewLogin: true }
                                         })
                                         }
@@ -147,28 +145,7 @@ function Navbar() {
                                     )}
                                 </div>
                             )}
-                            {/* {!isLoggedIn && (
-                                <>
-                                    <span
-                                        className="lg:hidden flex items-center text-light text-xs lg:text-sm bg-main px-2 lg:px-3   rounded-lg shadow-sm cursor-pointer"
-                                        onClick={() => setView((prev) => {
-                                            return { ...prev, viewRegisterMobile: true }
-                                        })
-                                        }
-                                    >
-                                        Register{" "}
-                                    </span>
-                                    <span
-                                        className="lg:hidden flex items-center text-light text-xs lg:text-sm bg-blue px-2 lg:px-3   rounded-lg shadow-sm cursor-pointer"
-                                        onClick={() => setView((prev) => {
-                                            return { ...prev, viewloginMobile: true }
-                                        })
-                                        }
-                                    >
-                                        Sign in
-                                    </span>
-                                </>
-                            )} */}
+ 
                         </div>
                     </div>
                 </div>
@@ -178,46 +155,19 @@ function Navbar() {
 
              {/* modals */}
             <>
-            {/*
-                <div>
-                    <RegisterMobileCard
-                        setView={setView}
-                        view={view}
-                    />
-                    {view.viewRegisterMobile && (
-                        <div
-                            className={`fixed top-0 bottom-0 left-0 right-0 lightglass z-20`}
-                            onClick={() =>
-                                setView(!view)
-                            }
-                        ></div>
-                    )}
-                </div>
 
-                <div>
-                    <LoginMobileCard
-                        setView={setView}
-                        view={view}
-                    />
-                    {view.viewloginMobile && (
-                        <div
-                            className={`fixed top-0 bottom-0 left-0 right-0 lightglass z-20`}
-                            onClick={() => setView(!view)}
-                        ></div>
-                    )}
-                </div> */}
 
-                {view.viewRegister && (
+                {viewAuth.viewRegister && (
 
-                    <Register
-                        setView={setView}
-                        view={view}
+                    <RegisterCard
+                    setViewAuth={setViewAuth}
+                        viewAuth={viewAuth}
                     />
                 )}
-                {view.viewLogin && (
+                {viewAuth.viewLogin && (
                     <Login
-                        setView={setView}
-                        view={view}
+                    setViewAuth={setViewAuth}
+                        viewAuth={viewAuth}
                     />
                 )}
             </>

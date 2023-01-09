@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "../../axios";
 import { setUser } from "../../redux/slices/usersSlice";
 
-function Register({ setViewAuth, viewAuth }) {
+function RegisterCard({ setViewAuth, viewAuth }) {
     const [data, setData] = useState({
         name: "",
         email: "",
@@ -37,7 +37,7 @@ function Register({ setViewAuth, viewAuth }) {
             const response = await axios.post("/users/signup", data);
             dispatch(setUser(response.data));
             setIsLoading(false);
-            setView(!view)
+            setViewAuth(!viewAuth)
         } catch (err) {
             setError(
                 err?.response?.data?.error || "Something went wrong, Try again"
@@ -239,4 +239,4 @@ function Register({ setViewAuth, viewAuth }) {
     );
 }
 
-export default Register;
+export default RegisterCard;
