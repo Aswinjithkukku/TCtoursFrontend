@@ -1,7 +1,9 @@
 import React from 'react'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
+import { useNavigate } from 'react-router-dom'
 
 function Resellers() {
+  const navigate = useNavigate()
   return (
     <div className='text-darktext mx-4'>
       <div className=''>
@@ -32,7 +34,9 @@ function Resellers() {
                             <td className="p-3 ">9800456123</td>
                             <td className="p-3">test@email.com</td>
                             <td className="p-3 flex space-x-1">
-                              <span className='text-xl text-lightblue'><AiFillEdit/> </span>
+                              <span className='text-xl text-lightblue'
+                              onClick={() => navigate('/b2b/reseller/edit')}
+                              ><AiFillEdit/> </span>
                               <span className='text-xl text-main'><AiFillDelete /> </span>
                             </td>
                         </tr>

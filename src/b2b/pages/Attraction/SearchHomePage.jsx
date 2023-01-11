@@ -36,7 +36,6 @@ function SearchHomePage({ viewCategory, setViewCategory, setCategory, setSearch 
                             placeholder='Search here!!!'
                             onChange={(e) => setKeyword(e.target.value)} 
                             className='px-3 bg-trans w-full border placeholder:text-text py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-l-md text-darktext' />
-                            <button type='submit' className='px-4 text-light bg-lightblue rounded-r-md '>Search</button>
                         </div>
                     </form>
 

@@ -54,7 +54,7 @@ function HeroSearch() {
 
     return (
         <>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={submitHandler} className='max-w-screen-2xl mx-auto'>
                 <div className='md:grid md:grid-cols-12 gap-0 py-7 mx-4 space-y-4 md:space-y-0 space-x-4'>
                     <div className='md:col-span-5 flex justify-center items-center '>
                         <div className='space-y-2 w-full '>

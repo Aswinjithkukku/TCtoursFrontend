@@ -39,7 +39,7 @@ function Navbar() {
     const { isLoggedIn, user } = useSelector((state) => state.users);
 
     const dropdownWrapperRef = useRef()
-    useHandleClickOutside(dropdownWrapperRef, () => setProfileView(false))
+    useHandleClickOutside(dropdownWrapperRef, () => setProfileView(!profileView))
 
     useEffect(() => {
         dispatch(getHome());
@@ -68,22 +68,6 @@ function Navbar() {
                                 </Link>
                             </div>
                             <div
-                                ref={currencyRef}
-                                className="flex space-x-1 items-center cursor-pointer relative"
-                                onClick={() => setView((prev) => {
-                                    return { ...prev, currency: !view.currency }
-                                })}
-                            >
-                                <span className="text-base font-medium">
-                                    <img src={initialData?.countries ? initialData?.countries[1]?.flag : ''} className="w-[28px]" />
-                                </span>
-                                <span className="text-base">
-                                </span>
-                                {/* absolute modal */}
-                                <CurrencyModal setView={setView} view={view} />
-                                {/* absolute modal */}
-                            </div>
-                            <div
                                 ref={languageRef}
                                 className="flex space-x-2 items-center cursor-pointer"
                                 onClick={() =>
@@ -106,6 +90,21 @@ function Navbar() {
                                 <LanguageModal setView={setView} view={view} />
                                 {/* absolute modal */}
                             </div>
+                            <div
+                                ref={currencyRef}
+                                className="flex space-x-1 items-center cursor-pointer relative"
+                                onClick={() => setView(!view)}
+                            >
+                                <span className="text-base font-medium">
+                                    <img src={initialData?.countries ? initialData?.countries[1]?.flag : ''} className="w-[28px]" />
+                                </span>
+                                <span className="text-base">
+                                </span>
+                                {/* absolute modal */}
+                                <CurrencyModal setView={setView} view={view} />
+                                {/* absolute modal */}
+                            </div>
+
                         </div>
                     </span>
                             {!isLoggedIn ? (

@@ -2,7 +2,7 @@ import { FaGlobe, FaHandsHelping } from "react-icons/fa";
 import { FiHome, FiMapPin } from "react-icons/fi";
 import { MdAttractions, MdSubscriptions } from "react-icons/md";
 import { RxDashboard } from "react-icons/rx";
-import { ImBlog } from "react-icons/im";
+import { GiWallet } from "react-icons/gi";
 import { HiOutlineShoppingCart, HiOutlineUsers } from "react-icons/hi";
 import { RiMarkupFill, RiSteeringFill } from "react-icons/ri";
 
@@ -13,17 +13,38 @@ const sidebarMenus = [
     icon: <RxDashboard />,
   },
   {
-    name: "Attractions",
-    icon: <MdAttractions />,
+    name: "Wallet",
+    icon: <GiWallet />,
     link: "#",
     dropdown: [
       {
-        name: "Attractions",
-        link: "/b2b/attractions",
+        name: "Wallet",
+        link: "/attractions/orders/bookings",
       },
     ],
   },
-
+  {
+    name: "Orders",
+    icon: <HiOutlineShoppingCart />,
+    link: "#",
+    dropdown: [
+      {
+        name: "Orders",
+        link: "/attractions/orders/bookings",
+      },
+    ],
+  },
+  {
+    name: "Markups",
+    icon: <RiMarkupFill />,
+    link: "#",
+    dropdown: [
+      {
+        name: "Markups",
+        link: "/b2b/markup/attraction",
+      },
+    ],
+  },
   {
     name: "Resellers",
     icon: <FaHandsHelping />,
@@ -40,24 +61,13 @@ const sidebarMenus = [
     ],
   },
   {
-    name: "Markups",
-    icon: <RiMarkupFill />,
+    name: "Attractions",
+    icon: <MdAttractions />,
     link: "#",
     dropdown: [
       {
-        name: "Markups",
-        link: "/b2b/markup/attraction",
-      },
-    ],
-  },
-  {
-    name: "Orders",
-    icon: <HiOutlineShoppingCart />,
-    link: "#",
-    dropdown: [
-      {
-        name: "orders",
-        link: "/attractions/orders/bookings",
+        name: "Attractions",
+        link: "/b2b/attractions",
       },
     ],
   },

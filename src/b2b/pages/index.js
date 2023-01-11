@@ -8,5 +8,18 @@ import HeroSearch from "./Attraction/HeroSearch";
 import AttractionDetails from "./AttractionDetails/AttractionDetails";
 import PaymentHomePage from "./AttractionPayment/PaymentHomePage";
 import MarkUpList from "./MarkUp/MarkUpList";
+import EditResellers from "./Resllers/EditResellers";
 
-export { Dashboard, B2BLoginPage, B2BRegisterPage, NewRegisters, Resellers, Attraction, HeroSearch, AttractionDetails, PaymentHomePage, MarkUpList}
+export {
+  Dashboard,
+  B2BLoginPage,
+  B2BRegisterPage,
+  NewRegisters,
+  Resellers,
+  Attraction,
+  HeroSearch,
+  AttractionDetails,
+  PaymentHomePage,
+  MarkUpList,
+  EditResellers,
+};

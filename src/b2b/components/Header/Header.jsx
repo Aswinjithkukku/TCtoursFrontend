@@ -12,7 +12,17 @@ export default function Header() {
             <div className="h-full flex items-center justify-between">
                 <div></div>
                 <div className="h-full">
-                    <div className="relative h-full">
+                    <div className="relative h-full flex">
+                        <div className="bg-[#f3f3f9] h-[100%] flex gap-[10px] items-center px-[12px] cursor-pointer" >
+                            <div className="">
+                                <span className="block text-sm font-medium">
+                                    WALLET BALANCE
+                                </span>
+                                <span className="block text-[12px] font-semibold tracking-wide text-secondaryColor">
+                                    120 AED
+                                </span>
+                            </div>
+                        </div>
                         <div
                             className="bg-[#f3f3f9] h-[100%] flex gap-[10px] items-center px-[12px] cursor-pointer"
                             onClick={() => setIsAdminDropdownOpen(true)}

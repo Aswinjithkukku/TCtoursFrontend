@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
     blogReducer,
+    currencyReducer,
     excursionReducer,
     generalReducer,
     homeReducer,
@@ -16,6 +17,7 @@ const store = configureStore({
         users: usersReducer,
         home: homeReducer,
         blog: blogReducer,
+        currency: currencyReducer,
     },
     devTools: true,
 });
