@@ -22,13 +22,20 @@ function Navbar() {
     })
     const currencyRef = useRef()
     const languageRef = useRef()
-    useHandleClickOutside(currencyRef, () => setView(!view))
-    useHandleClickOutside(languageRef, () => setView(!view))
+    useHandleClickOutside(currencyRef, () => setView({
+        currency: false,
+        language: false
+    }))
+    useHandleClickOutside(languageRef, () => setView({
+        currency: false,
+        language: false
+    }))
 
     const [profileView, setProfileView] = useState(false)
 
     const dispatch = useDispatch();
     const { home } = useSelector((state) => state.general);
+    const { initialData } = useSelector((state) => state.home);
     const { isLoggedIn, user } = useSelector((state) => state.users);
 
     const dropdownWrapperRef = useRef()
@@ -67,13 +74,10 @@ function Navbar() {
                                     return { ...prev, currency: !view.currency }
                                 })}
                             >
-                                <span className="text-base font-medium">AED</span>
+                                <span className="text-base font-medium">
+                                    <img src={initialData?.countries[0]?.flag} className="w-[28px]" />
+                                </span>
                                 <span className="text-base">
-                                    {view.currency ? (
-                                        <AiOutlineUp />
-                                    ) : (
-                                        <AiOutlineDown />
-                                    )}
                                 </span>
                                 {/* absolute modal */}
                                 <CurrencyModal setView={setView} view={view} />

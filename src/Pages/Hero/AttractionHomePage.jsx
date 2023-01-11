@@ -10,7 +10,7 @@ import BestSellingSection from '../General/BestSellingSection'
 
 function AttractionHomePage() {
   return (
-    <div className='bg-soft md:space-y-20'>
+    <div className='bg-soft md:space-y-10'>
       <HeroSection />
       <SpecialofferCardSection />
       <BestSellingSection />

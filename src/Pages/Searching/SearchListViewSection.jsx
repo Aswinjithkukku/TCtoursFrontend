@@ -1,15 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 // import NearbyDestinations from '../../data/NearbyDestinations'
 import { AiFillHeart, AiFillStar, AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai'
 import { TiTick } from 'react-icons/ti'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import axios from '../../axios'
 import Rating from '../../components/Rating/Rating'
 import { setFavourites } from '../../redux/slices/excursionSlice'
 
 function SearchListViewSection() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const [subEmail, setSubEmail] = useState('')
 
     const { excursions, favourites } = useSelector(state => state.excursion)
 
@@ -20,6 +24,20 @@ function SearchListViewSection() {
         console.log(result);
         array = [data, ...result]
         localStorage.setItem('recent', JSON.stringify(array));
+    }
+    const email = {
+        email: subEmail
+    }
+    const submitHandler = async (e) => {
+        e.preventDefault()
+        try {
+            const { data } = await axios.post('/subscribers/subscribe', email)
+            console.log(data);
+            Swal.fire('You have successfully Subscribed!!')
+        
+        } catch (error) {
+            console.log(error?.response?.data?.error);
+        }
     }
 
     return (
@@ -133,15 +151,22 @@ function SearchListViewSection() {
                             {' '}email Id
                         </span>   with us!
                     </p>
-                    <input className='outline-none text-darktext border-lightblue placeholder:text-text border text-sm py-2 rounded-md px-2 w-[20em] ' placeholder='Enter your email' type='text' />
+                    <form onSubmit={submitHandler}>
+                    <input
+                    type='email'
+                    required
+                    value={subEmail}
+                    onChange={(e) => setSubEmail(e.target.value)} 
+                    className='outline-none text-darktext border-lightblue placeholder:text-text border text-sm py-2 rounded-md px-2 w-[20em] ' placeholder='Enter your email' />
                     <button
-                        type="button"
+                        type="submit"
                         className="inline-block px-6 py-2.5 mt-4 bg-blue text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                         data-mdb-ripple="true"
                         data-mdb-ripple-color="light"
                     >
-                        Learn more
+                        Subscribe
                     </button>
+                    </form>
                 </div>
             )}
         </div>

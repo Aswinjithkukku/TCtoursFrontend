@@ -9,7 +9,7 @@ function TopSellingSection() {
   const { topAttractions, home } = useSelector(state => state.general)
   if (!home?.isTopAttractionsSectionEnabled) return null
   return (
-    <div className='mx-5 lg:my-10 my-3 lg:mx-auto lg:max-w-screen-xl'>
+    <div className='mx-5 lg:my-5 my-3 lg:mx-auto lg:max-w-screen-xl'>
       <div className='flex justify-between'>
         <div className='text-3xl font-semibold text-darktext cursor-default '>Top Attractions</div>
         {topAttractions.length > 4 && (

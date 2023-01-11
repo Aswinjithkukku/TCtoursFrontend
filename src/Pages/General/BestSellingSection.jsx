@@ -12,7 +12,7 @@ function BestSellingSection() {
   if (!home?.isBestSellingAttractionsSectionEnabled) return null
   return (
     <>
-      <div className='mx-5 mb-3 mt-5 lg:my-10 lg:mx-auto lg:max-w-screen-xl'>
+      <div className='mx-5 mb-3 mt-5 lg:my-5 lg:mx-auto lg:max-w-screen-xl'>
         <div className='flex justify-between'>
           <div className='text-3xl font-semibold text-darktext mb-4 cursor-default'>Best Selling Attractions</div>
           {bestSellingAttractions.length > 4 && (
