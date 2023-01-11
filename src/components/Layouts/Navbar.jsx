@@ -1,13 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { AiOutlineClose, AiOutlineDown, AiOutlineUp } from "react-icons/ai";
+import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import Register from "../Authentication/Register";
 import Login from "../Authentication/Login";
-import RegisterMobileCard from "../Authentication/RegisterMobileCard";
-import LoginMobileCard from "../Authentication/LoginMobileCard";
 import { getHome } from "../../redux/slices/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
-import avatar from '../../static/images/avatar.png'
 import ProfileModal from "../Navbar/ProfileModal";
 import { useHandleClickOutside } from "../../hooks";
 import CurrencyModal from "../Header/CurrencyModal";
@@ -60,9 +56,9 @@ function Navbar() {
                         <span className="md:flex text-lg hidden items-center ">
                         <div className="flex px-5 space-x-2 md:space-x-5 text-dark items-center">
                             <div className="cursor-pointer whitespace-nowrap font-medium text-sm lg:text-base">
-                                <a href="https://app.mytcb2b.com/#/login" target={"_blank"}>
+                                <Link to="/b2b">
                                     B2B Login
-                                </a>
+                                </Link>
                             </div>
                             <div
                                 ref={currencyRef}

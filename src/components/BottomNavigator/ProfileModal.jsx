@@ -67,7 +67,7 @@ function ProfileModal({ view, setView}) {
           </div>
         </>
         ) : (
-          <Auth />
+          <Auth setView={setView} view={view} />
         )}
       </div>
     </div>

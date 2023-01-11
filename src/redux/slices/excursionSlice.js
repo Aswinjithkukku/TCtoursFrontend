@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
+import Swal from 'sweetalert2'
 
 const initialState = {
   loading: false,
@@ -84,8 +85,20 @@ export const addReview = createAsyncThunk(
         "Authorization": `Bearer ${jwtToken}`
       },
     };
-    const response = await axios.post("/attractions/reviews/add",args, config);
-    return response.data;
+    try {
+      const response = await axios.post("/attractions/reviews/add",args, config);
+      return response.data;
+      
+    } catch (error) {
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Something went wrong!',
+        text: error?.response?.data?.error,
+      })
+      console.log(error?.response?.data?.error);
+    }
+    
   }
 );
 

@@ -35,6 +35,11 @@ module.exports = {
                 cardyellow: "#f6b756",
                 cardtransblue: "rgba(0, 48, 208, .85)",
                 cardtransyellow: "rgba(246, 183, 86, .8)",
+                textColor: "#495057",
+                grayColor: "#878a99",
+                primaryColor: "#002366",
+                secondaryColor: "#ff0000",
+                tableBorderColor: "#e9ebec",
             },
             boxShadow: {
                 sm: "0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%)",

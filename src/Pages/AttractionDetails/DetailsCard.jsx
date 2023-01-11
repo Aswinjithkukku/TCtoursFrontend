@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 function DetailsCard() {
     const navigate = useNavigate()
     const [error, setError] = useState('')
+    const location = useLocation()
 
     const { excursion } = useSelector(state => state.excursion)
     const { recievedActivities } = useSelector(state => state.excursion)
@@ -49,8 +50,10 @@ function DetailsCard() {
         const isDateExist =  recievedActivities.filter(item => {
             return item?.isChecked === true && item?.date !== ""
         })
-        if (isDateExist.length > 0) {
+        if (isDateExist.length > 0 && !location.pathname.includes('/b2b')) {
             navigate(`/payment/${excursion?._id}`)
+        } else if(isDateExist.length > 0 && location.pathname.includes('/b2b')){
+            navigate(`/b2b/attractions/payment/${excursion?._id}`)
         } else {
             setError("Fill the tour Date")
         }

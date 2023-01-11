@@ -17,7 +17,7 @@ function FeatureSection() {
         // }else if (enabledDays < 3){
         //     setAvail(enabledDays)
         // }
-        console.log(avail);
+        // console.log(avail);
 
   return (
     <div className=' md:border border-lightblue bg-light py-4 lg:py-10 px-3 rounded-2xl md:my-4 lg:flex text-center justify-between w-full grid grid-cols-3 gap-5'>

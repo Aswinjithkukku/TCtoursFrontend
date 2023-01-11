@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { BsStarFill } from 'react-icons/bs'
-// import { AiFillStar } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Rating from '../../components/Rating/Rating'
@@ -14,7 +13,7 @@ function ReviewSection() {
     title: '',
     note: '',
   })
-  const [star,setStar] = useState(0)
+  const [star, setStar] = useState(0)
 
   const handleChange = (e) => {
     setReview((prev) => {
@@ -27,17 +26,17 @@ function ReviewSection() {
 
   useEffect(() => {
     dispatch(getReviews(id))
-  }, [dispatch])
+  }, [dispatch, reviews])
 
   const submitHandler = () => {
-    const formData = new FormData();
+      const formData = new FormData();
 
-    formData.set("rating", star + 1);
-    formData.set("title", review.title);
-    formData.set("description", review.note);
-    formData.set("attraction", id);
+      formData.set("rating", star + 1);
+      formData.set("title", review.title);
+      formData.set("description", review.note);
+      formData.set("attraction", id);
 
-    dispatch(addReview(formData));
+      dispatch(addReview(formData));
   };
 
 
@@ -74,7 +73,7 @@ function ReviewSection() {
               </div>
             </div>
             <div className='space-y-3'>
-              <div className='space-x-2'>
+              <div className=''>
                 <label htmlFor="title" className='text-lightblue font-medium tracking-wide ml-2 '> Title</label>
                 <div id='title' className='text-gray-500 font-medium text-sm text-center w-full'>
                   <input
@@ -98,7 +97,7 @@ function ReviewSection() {
               </div>
               <div className='flex justify-end mt-2'>
                 <button className='text-light bg-lightblue rounded-md px-4 py-2'
-                onClick={() => submitHandler()}
+                  onClick={() => submitHandler()}
                 >Submit Review</button>
               </div>
             </div>

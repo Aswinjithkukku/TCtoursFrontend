@@ -121,16 +121,27 @@ function SearchListViewSection() {
                     ))}
                 </div>
             ) : (
-                <div className='flex justify-center mt-20'>
-                    <div className='bg-semisoft rounded-md p-10 text-xl'>
-                        <h1 className='text-darktext'>The data you looking for is not available right now!!</h1>
-                        <p className='text-text text-sm underline'>notify me when it is available*</p>
-                        <input className='w-8/12 py-2 rounded-lg mt-2 placeholder:text-bluetrans  text-sm  px-2 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-text' type="email" />
-                        <div className='pt-2'>
-                            <button className='text-sm text-light bg-lightblue px-3 py-1 rounded-sm'>Notify</button>
-                        </div>
-
-                    </div>
+                <div className="p-6 shadow-lg rounded-lg bg-gray-100 text-gray-700">
+                    <h2 className="font-semibold text-3xl mb-5">Found Nothing!</h2>
+                    <p>
+                        The data that you are seeking is currently unavailable right now. We will be progressing on that. It will be found as soon as possible.
+                    </p>
+                    <hr className="my-6 border-gray-300" />
+                    <p>
+                        For letting you to know the availbalility of data. Share your
+                        <span className='text-lightblue underline'>
+                            {' '}email Id
+                        </span>   with us!
+                    </p>
+                    <input className='outline-none text-darktext border-lightblue placeholder:text-text border text-sm py-2 rounded-md px-2 w-[20em] ' placeholder='Enter your email' type='text' />
+                    <button
+                        type="button"
+                        className="inline-block px-6 py-2.5 mt-4 bg-blue text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                        data-mdb-ripple="true"
+                        data-mdb-ripple-color="light"
+                    >
+                        Learn more
+                    </button>
                 </div>
             )}
         </div>

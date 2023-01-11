@@ -105,8 +105,8 @@ function BottomNavigator() {
 
       <div>
         <SearchModal
-          setSearch={setView}
-          searchview={view}
+          setView={setView}
+          view={view}
         />
         {view.search && (
           <div

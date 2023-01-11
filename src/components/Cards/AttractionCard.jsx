@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { useHandleClickOutside } from '../../hooks'
 
 
-function AttractionCard() {
+function AttractionCard({ setView }) {
     const navigate = useNavigate()
     const [value, setValue] = useState("")
     const [date, setDate] = useState('')
@@ -23,6 +23,12 @@ function AttractionCard() {
         e.preventDefault()
         if (value !== "" && date !== '') {
             navigate(`/search/${value}?date=${date}`)
+           setView && setView({
+                favourite: false,
+                search: false,
+                profile: false,
+                help: false
+            })
         } else if (value !== "" && date === "") {
             setValidate(true)
         } else {
