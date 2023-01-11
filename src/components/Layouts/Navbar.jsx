@@ -75,7 +75,7 @@ function Navbar() {
                                 })}
                             >
                                 <span className="text-base font-medium">
-                                    <img src={initialData?.countries[0]?.flag} className="w-[28px]" />
+                                    <img src={initialData?.countries ? initialData?.countries[1]?.flag : ''} className="w-[28px]" />
                                 </span>
                                 <span className="text-base">
                                 </span>
