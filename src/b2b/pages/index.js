@@ -9,6 +9,7 @@ import AttractionDetails from "./AttractionDetails/AttractionDetails";
 import PaymentHomePage from "./AttractionPayment/PaymentHomePage";
 import MarkUpList from "./MarkUp/MarkUpList";
 import EditResellers from "./Resllers/EditResellers";
+import Settings from "./Settings/Settings";
 
 export {
   Dashboard,
@@ -22,4 +23,5 @@ export {
   PaymentHomePage,
   MarkUpList,
   EditResellers,
+  Settings,
 };

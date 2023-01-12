@@ -11,11 +11,11 @@ function ImageSection() {
 
     return (
         <>
-            <div className='bg-soft py-10'>
+            <div className='bg-soft lg:py-10'>
                 <div className='lg:mx-auto lg:max-w-screen-2xl'>
                     <div className='lg:grid lg:grid-cols-12 gap-1'>
                         <div className='col-span-3 space-y-3 px-5 overflow-y-auto'>
-                            <div className='overflow-y-auto h-[70vh] space-y-2'>
+                            <div className='hidden lg:block overflow-y-auto h-[70vh] space-y-2'>
                                 {excursion?.images?.map((item) => (
                                     <div className='h-[22.4vh]' key={item}>
                                         <img src={process.env.REACT_APP_SERVER_URL + item} alt='img'

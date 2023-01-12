@@ -29,6 +29,7 @@ import {
   NewRegisters,
   PaymentHomePage,
   Resellers,
+  Settings,
 } from "../b2b/pages";
 
 const ThemeRoutes = [
@@ -64,6 +65,7 @@ const ThemeRoutes = [
       { path: "/b2b/attractions/details/:id", element: <AttractionDetails /> },
       { path: "/b2b/attractions/payment/:id", element: <PaymentHomePage /> },
       { path: "/b2b/markup/attraction", element: <MarkUpList /> },
+      { path: "/b2b/settings", element: <Settings /> },
     ],
   },
   {

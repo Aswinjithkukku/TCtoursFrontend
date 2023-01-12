@@ -18,7 +18,7 @@ export default function Dashboard() {
     // const { admin } = useSelector((state) => state.admin);
 
     return (
-        <div className="p-6">
+        <div className="p-6 bg-bodyColor">
             <div className="flex items-center justify-between gap-[10px] mb-5">
                 <div>
                     <span className="font-medium text-textColor">
@@ -45,18 +45,26 @@ export default function Dashboard() {
                     isAmount={true}
                 />
             <WalletCard
-                    title={"Add to Wallet"}
+                    title={"Wallet Deposit"}
                     value={300}
                     link="/b2b/wallet"
-                    linkText="Add to wallet"
+                    linkText="Deposit to wallet"
                     icon={totalRevenuePng}
                     isAmount={true}
                 />
             <WalletCard
-                    title={"Withdraw form wallet"}
+                    title={"Withdraw Withdraw"}
                     value={300}
                     link="/b2b/wallet"
                     linkText="Withdraw from wallet"
+                    icon={totalRevenuePng}
+                    isAmount={true}
+                />
+            <WalletCard
+                    title={"Profit"}
+                    value={200}
+                    link="/b2b/profit"
+                    linkText="Profit recieved"
                     icon={totalRevenuePng}
                     isAmount={true}
                 />

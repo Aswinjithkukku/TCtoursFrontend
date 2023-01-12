@@ -15,7 +15,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: auto;
+    width: 7px;
     height: 1em;
 }
 
@@ -160,4 +160,66 @@ body {
     background-image: url("./static/images/map.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+}
+
+input {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.9rem;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    outline: none;
+    border-radius: 0.25rem;
+    background-color: #fff;
+}
+
+select {
+    border: 1px solid #ced4da;
+    outline: none;
+    border-radius: 0.25rem;
+    width: 100%;
+    padding: 0.5rem 0.5rem;
+    font-size: 14px;
+    font-weight: 400;
+    color: #212529;
+}
+
+textarea {
+    border-radius: 0.25rem;
+    background-color: #fff;
+    padding: 0.5rem 0.9rem;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    outline: none;
+    resize: none;
+    width: 100%;
+    height: 160px;
+}
+
+button {
+    height: 40px;
+    background-color: #002366;
+    border-radius: 0.25rem;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+button:disabled {
+    cursor: not-allowed;
 }

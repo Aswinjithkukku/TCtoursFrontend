@@ -12,7 +12,7 @@ export default function SidebarMenu({ icon, name, dropdown, link }) {
             <Link
                 to={link}
                 className={
-                    `relative px-[15px] flex items-center text-[14.8px] justify-between px-[15px] py-[13px] transition-all hover:text-[#fff] ` +
+                    `relative px-[15px] flex items-center text-[14.8px] justify-between py-[13px] transition-all hover:text-[#fff] ` +
                     (location.pathname === link
                         ? "text-[#fff] "
                         : "text-[#b6b2d2] ")

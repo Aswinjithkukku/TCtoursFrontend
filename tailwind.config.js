@@ -40,6 +40,7 @@ module.exports = {
                 primaryColor: "#002366",
                 secondaryColor: "#ff0000",
                 tableBorderColor: "#e9ebec",
+                bodyColor:'#f3f3f9',
             },
             boxShadow: {
                 sm: "0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%)",

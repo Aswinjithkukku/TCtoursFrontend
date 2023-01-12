@@ -1,5 +1,5 @@
 import { FaGlobe, FaHandsHelping } from "react-icons/fa";
-import { FiHome, FiMapPin } from "react-icons/fi";
+import { AiFillSetting } from "react-icons/ai";
 import { MdAttractions, MdSubscriptions } from "react-icons/md";
 import { RxDashboard } from "react-icons/rx";
 import { GiWallet } from "react-icons/gi";
@@ -70,6 +70,17 @@ const sidebarMenus = [
         link: "/b2b/attractions",
       },
     ],
+  },
+  {
+    name: "Settings",
+    icon: <AiFillSetting />,
+    link: "/b2b/settings",
+    // dropdown: [
+    //   {
+    //     name: "Attractions",
+    //     link: "/b2b/attractions",
+    //   },
+    // ],
   },
 ];
 
