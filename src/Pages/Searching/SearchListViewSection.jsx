@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 import axios from '../../axios'
 import Rating from '../../components/Rating/Rating'
 import { setFavourites } from '../../redux/slices/excursionSlice'
+import priceConversion from '../../utils/PriceConversion'
 
 function SearchListViewSection() {
     const dispatch = useDispatch()
@@ -16,6 +17,7 @@ function SearchListViewSection() {
     const [subEmail, setSubEmail] = useState('')
 
     const { excursions, favourites } = useSelector(state => state.excursion)
+    const { selectedCurrency } = useSelector(state => state.home)
 
     const saveDatatoLocalStorage = (data) => {
         var array = []
@@ -113,9 +115,9 @@ function SearchListViewSection() {
                                                     <s> AED {item?.activity?.adultPrice}</s>
                                                 </div>}
                                             <div className='text-xl font-bold text-darktext'>
-                                                AED {item?.isOffer === true ? (item?.isOffer === true && item?.offerAmountType === "flat" ? Number(item?.activity?.adultPrice) - Number(item?.offerAmount) :
-                                                    Number(item?.activity?.adultPrice) - ((Number(item?.activity?.adultPrice) * Number(item?.offerAmount)) / 100)) : item?.activity?.adultPrice}
-                                                {/* {item?.activity?.adultPrice} */}
+                                                 {priceConversion(item?.isOffer === true ? (item?.isOffer === true && item?.offerAmountType === "flat" ? Number(item?.activity?.adultPrice) - Number(item?.offerAmount) :
+                                                    Number(item?.activity?.adultPrice) - ((Number(item?.activity?.adultPrice) * Number(item?.offerAmount)) / 100)) : item?.activity?.adultPrice, selectedCurrency, true)}
+
                                             </div>
                                             <div className='text-xs text-text font-light'>*price varies</div>
                                         </span>

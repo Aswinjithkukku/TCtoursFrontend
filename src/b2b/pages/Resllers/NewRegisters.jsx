@@ -2,138 +2,140 @@ import React from 'react'
 import { FaLock } from 'react-icons/fa'
 import { GiFactory } from 'react-icons/gi'
 import { GoPerson } from 'react-icons/go'
+import { Link } from 'react-router-dom'
 
 function NewRegisters() {
   return (
-    <div className='max-w-screen-xl mx-auto text-darktext space-y-2 text-sm py-10'>
-
     <div className=''>
-      <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
-        <span className=''><GiFactory /> </span>
-        <span className=''>Company Details</span>
-      </h2>
-    </div>
-
-    <div className='flex space-x-2 mx-2'>
-      <span className='w-6/12'>
-        <label className=''>Travel Agency Name</label>
-        <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: TravellerChoice'></input>
-      </span>
-      <span className='w-6/12'>
-        <label className=''>Address</label>
-        <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: Tc, North california'></input>
-      </span>
-    </div>
-
-    <div className='flex space-x-2 mx-2'>
-      <span className='w-6/12'>
-        <label className=''>Website</label>
-        <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: TravellerChoice.ae'></input>
-      </span>
-      <span className='w-6/12'>
-        <label className=''>Country</label>
-        <select className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' >
-          <option>Ex: United Arab Emirates</option>
-          <option></option>
-          <option></option>
-        </select>
-      </span>
-    </div>
-
-    <div className='flex space-x-2 mx-2'>
-      <span className='w-6/12'>
-        <label className=''>City</label>
-        <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: Dubai'></input>
-      </span>
-      <span className='w-6/12'>
-        <label className=''>Zip Code</label>
-        <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder=''></input>
-      </span>
-    </div>
-
-    <div className='pt-3'>
-      <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
-        <span className=''><GoPerson /> </span>
-        <span className=''>Profile Details</span>
-      </h2>
-    </div>
-
-
-    <div className='flex space-x-2 mx-2'>
-      <span className='w-6/12'>
-        <label className=''>Agent Name</label>
-        <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: Name'></input>
-      </span>
-      <span className='w-6/12 flex space-x-1'>
-        <div className='w-2/12'>
-          <label className=''>Code</label>
-          <select className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400'>
-            <option>Ex: +451</option>
-            <option></option>
-            <option></option>
-          </select>
+      <div className="bg-white flex items-center justify-between gap-[10px] px-6 shadow-sm border-t py-2">
+        <h1 className="font-[600] text-[15px] uppercase">
+          New Reseller Register
+        </h1>
+        <div className="text-sm text-grayColor">
+          <Link to="/b2b" className="text-textColor">
+            Dashboard{" "}
+          </Link>
+          <span>{">"} </span>
+          <span>New Register</span>
         </div>
-        <div className='w-10/12'>
-          <label className=''>Number</label>
-          <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: 0000000000'></input>
+      </div>
+      <div className='p-6'>
+        <div className="bg-white rounded shadow-sm mt-6 p-6 ">
+          <div className='flex items-center justify-between border-b border-dashed p-4'>
+            <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
+              <span className=''><GiFactory /> </span>
+              <span className=''>Company Details</span>
+            </h2>
+          </div>
+          <div className='grid grid-cols-3 gap-[20px] mt-4'>
+
+            <div className=''>
+              <label className='label'>Travel Agency Name</label>
+              <input className='input' type='text' placeholder='Ex: TravellerChoice'></input>
+            </div>
+            <div className=''>
+              <label className='label'>Address</label>
+              <input className='input' type='text' placeholder='Ex: Tc, North california'></input>
+            </div>
+
+            <div className=''>
+              <label className='label'>Website</label>
+              <input className='input' type='text' placeholder='Ex: TravellerChoice.ae'></input>
+            </div>
+            <div className=''>
+              <label className='label'>Country</label>
+              <select className='select' >
+                <option>Ex: United Arab Emirates</option>
+                <option></option>
+                <option></option>
+              </select>
+            </div>
+
+            <div className=''>
+              <label className='label'>City</label>
+              <input className='input' type='text' placeholder='Ex: Dubai'></input>
+            </div>
+            <div className=''>
+              <label className='label'>Zip Code</label>
+              <input className='input' type='text' placeholder=''></input>
+            </div>
+          </div>
+          <div className='pt-3 flex items-center justify-between border-b border-dashed p-4'>
+            <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
+              <span className=''><GoPerson /> </span>
+              <span className=''>Profile Details</span>
+            </h2>
+          </div>
+
+          <div className='grid grid-cols-3 gap-[20px] mt-4'>
+
+            <div className=''>
+              <label className='label'>Agent Name</label>
+              <input className='input' type='text' placeholder='Ex: Name'></input>
+            </div>
+            <div className=' flex space-x-1'>
+              <div className='w-2/12'>
+                <label className='label'>Code</label>
+                <select className='select'>
+                  <option>Ex: +451</option>
+                  <option></option>
+                  <option></option>
+                </select>
+              </div>
+              <div className='w-10/12'>
+                <label className='label'>Number</label>
+                <input className='input' type='text' placeholder='Ex: 0000000000'></input>
+              </div>
+            </div>
+
+            <div className=' flex space-x-1'>
+              <div className='w-2/12'>
+                <label className='label'>Code</label>
+                <select className='select'>
+                  <option>Ex: +451</option>
+                </select>
+              </div>
+              <div className='w-10/12'>
+                <label className='label'> Telephone Number</label>
+                <input className='input' type='number' placeholder='Ex: 0000000000'></input>
+              </div>
+            </div>
+            <div className=''>
+              <label className='label'>Email</label>
+              <input className='input' type='text' placeholder='Ex: example@email.com'></input>
+            </div>
+
+            <div className='w'>
+              <label className='label'>Confirm Email</label>
+              <input className='input' type='text' placeholder='Ex: example@email.com'></input>
+            </div>
+            <div className=''>
+              <label className='label'>Reffered Currency</label>
+              <input className='input' type='text' placeholder='Ex: AED'></input>
+            </div>
+
+            <div className=''>
+              <label className='label'>Director</label>
+              <input className='input' type='text' placeholder='Director'></input>
+            </div>
+            <div className=''>
+              <label className='label'>Skype Id</label>
+              <input className='input' type='text' placeholder='skypeid'></input>
+            </div>
+
+            <div className=''>
+              <label className='label'>Whatsapp</label>
+              <input className='input' type='number' placeholder='Ex: 000000000'></input>
+            </div>
+          </div>
+
+          <div className='flex justify-end mt-6'>
+            <button className='button w-[100px]'>Create</button>
+          </div>
+
         </div>
-      </span>
+      </div>
     </div>
-
-    <div className='flex space-x-2 mx-2'>
-      <span className='w-6/12 flex space-x-1'>
-      <div className='w-2/12'>
-          <label className=''>Code</label>
-          <select className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400'>
-            <option>Ex: +451</option>
-          </select>
-        </div>
-        <div className='w-10/12'>
-          <label className=''> Telephone Number</label>
-          <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='number' placeholder='Ex: 0000000000'></input>
-        </div>
-      </span>
-      <span className='w-6/12'>
-        <label className=''>Email</label>
-        <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: example@email.com'></input>
-      </span>
-    </div>
-
-    <div className='flex space-x-2 mx-2'>
-      <span className='w-6/12'>
-        <label className=''>Confirm Email</label>
-        <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: example@email.com'></input>
-      </span>
-      <span className='w-6/12'>
-        <label className=''>Reffered Currency</label>
-        <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: AED'></input>
-      </span>
-    </div>
-
-    <div className='flex space-x-2 mx-2'>
-      <span className='w-6/12'>
-        <label className=''>Director</label>
-        <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Director'></input>
-      </span>
-      <span className='w-6/12'>
-        <label className=''>Skype Id</label>
-        <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='skypeid'></input>
-      </span>
-    </div>
-
-    <div className='flex space-x-2 mx-2'>
-      <span className='w-6/12'>
-        <label className=''>Whatsapp</label>
-        <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='number' placeholder='Ex: 000000000'></input>
-      </span>
-    </div>
-
-
-    <div className='flex justify-end'>
-      <button className='py-2 text-sm text-light bg-lightblue w-32 rounded-md'>Create</button>
-    </div>
-
-  </div>
   )
 }
 

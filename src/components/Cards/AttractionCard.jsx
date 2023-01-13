@@ -40,17 +40,17 @@ function AttractionCard({ setView }) {
         setDatalist(true)
     }
 
-    const { initialData } = useSelector(state => state.home)
+    const { destinations } = useSelector(state => state.home)
 
 
 
     useEffect(() => {
-        const list = initialData?.destinations?.filter((data) => {
+        const list = destinations?.filter((data) => {
             return data.name?.toLowerCase().startsWith(value)
         })
 
         setFilteredData(list)
-    }, [value, initialData])
+    }, [value, destinations])
 
     useEffect(() => {
         if (date.length > 1) {

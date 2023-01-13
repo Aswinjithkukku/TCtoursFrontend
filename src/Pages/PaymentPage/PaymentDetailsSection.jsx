@@ -19,7 +19,7 @@ function PaymentDetailsSection() {
         special_request_text: ""
     })
     const [viewRedeem, setViewRedeem] = useState(false)
-    const { initialData } = useSelector(state => state.home)
+    const { countries } = useSelector(state => state.home)
 
     const onChange = (e) => {
         setTravellerData({ ...travellerData, [e.target.name]: e.target.value })
@@ -116,7 +116,7 @@ function PaymentDetailsSection() {
                                     onChange={onChange}
                                 >
                                     <option >Choose Country</option>
-                                    {initialData?.countries?.map((item) => (
+                                    {countries?.map((item) => (
                                         <option key={item._id} value={item._id}>{item.countryName} </option>
                                     ))}
                                 </select>

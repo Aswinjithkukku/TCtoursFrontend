@@ -39,7 +39,7 @@ function SearchHomePage({ viewCategory, setViewCategory, setCategory, setSearch 
                         </div>
                     </form>
 
-                    <div className={`bg-light  p-5 lg:p-0 rounded-t-3xl lg:rounded-none lg:bg-light lg:h-auto lg:w-auto max-h-[80vh] w-full fixed lg:static ${viewFilter ? "bottom-0" : "-bottom-full"} z-10 transition-all duration-500`}>
+                    <div className={`  p-5 lg:p-0 rounded-t-3xl lg:rounded-none lg:h-auto lg:w-auto max-h-[80vh] w-full fixed lg:static ${viewFilter ? "bottom-0 bg-light" : "-bottom-full"} z-10 transition-all duration-500`}>
                         <div className='flex lg:hidden justify-between text-darktext p-3'>
                             <span className='text-xl font-semibold'>Category</span>
                             <span className='text-3xl' onClick={() => setViewFilter(!viewFilter)}><AiOutlineClose /></span>
@@ -47,7 +47,7 @@ function SearchHomePage({ viewCategory, setViewCategory, setCategory, setSearch 
                         <div className={`overflow-x-auto `}>
                             <div className=' justify-between lg:space-x-3  lg:flex w-full  px-1'>
                                 {categories?.map((item) => (
-                                    <div key={item?._id} className='space-x-2 w-full flex px-3 hover:text-lightblue lg:justify-center items-center py-4 rounded-lg lg:border lg:border-lightblue cursor-pointer capitalize'
+                                    <div key={item?._id} className='space-x-2 w-full flex px-3 hover:text-lightblue lg:justify-center items-center py-4 rounded-lg lg:border lg:border-lightblue cursor-pointer capitalize bg-white'
                                         onClick={() => setCategory(item?._id)}
                                     >
                                         <span className='text-lightblue'> <GiIsland /></span>

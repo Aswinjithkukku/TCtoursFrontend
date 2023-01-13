@@ -39,7 +39,7 @@ function SearchingResultPage() {
 
 
     return (
-        <div className='bg-light'>
+        <div className=''>
             <SearchHomePage
                 viewCategory={viewCategory}
                 setViewCategory={setViewCategory}

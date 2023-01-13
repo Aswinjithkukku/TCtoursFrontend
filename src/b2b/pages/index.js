@@ -10,6 +10,8 @@ import PaymentHomePage from "./AttractionPayment/PaymentHomePage";
 import MarkUpList from "./MarkUp/MarkUpList";
 import EditResellers from "./Resllers/EditResellers";
 import Settings from "./Settings/Settings";
+import MainOrder from "./Order/MainOrder";
+import SubOrders from "./Order/SubOrders";
 
 export {
   Dashboard,
@@ -24,4 +26,6 @@ export {
   MarkUpList,
   EditResellers,
   Settings,
+  MainOrder,
+  SubOrders,
 };

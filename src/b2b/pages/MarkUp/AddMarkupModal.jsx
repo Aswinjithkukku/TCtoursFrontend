@@ -30,12 +30,12 @@ function AddMarkupModal({
               <MdClose />
             </button>
           </div>
-          <div className="p-4 text-darktext">
+          <div className="p-6">
             <form action="" className='space-y-2'>
               <div>
-                <label htmlFor="">Excursion</label>
+                <label className='label' htmlFor="">Excursion</label>
                 <select
-                  className='border rounded w-full outline-none text-text text-sm py-1 px-1'
+                  className='select'
                   type="text"
                   required
                 >
@@ -43,39 +43,40 @@ function AddMarkupModal({
                 </select>
               </div>
               <div>
-                <label htmlFor="">Price</label>
+                <label className='label' htmlFor="">Price</label>
                 <input
-                  className='border rounded w-full outline-none placeholder:text-text text-sm py-1 px-1'
+                  className='input'
                   type="number"
                   readonly
                 />
               </div>
               <div>
-                <label htmlFor="">Flat</label>
+                <label className='label' htmlFor="">Flat</label>
                 <input
-                  className='border rounded w-full outline-none placeholder:text-text text-sm py-1 px-1'
+                  className='input'
                   type="text"
                   placeholder="Enter Flat Amount"
                 />
               </div>
               <div>
-                <label htmlFor="">Percentage</label>
+                <label className='label' htmlFor="">Percentage</label>
                 <input
-                  className='border rounded w-full outline-none placeholder:text-text text-sm py-1 px-1'
+                  className='input'
                   type="text"
                   placeholder="Enter Percentage"
                 />
               </div>
               <div>
-                <label htmlFor="">Current Price</label>
+                <label className='label' htmlFor="">Current Price</label>
                 <input
-                  className='border rounded w-full outline-none placeholder:text-text text-sm py-1 px-1'
+                  className='input'
                   type="text"
                   placeholder="Enter Percentage"
                 />
               </div>
               <div className="mt-4 flex items-center justify-end gap-[12px]">
-                <button className="w-[140px] bg-lightblue text-light rounded-md text-sm py-1"> Add Markup
+                <button className="button w-[100px]">
+                   Add Markup
                 </button>
               </div>
             </form>

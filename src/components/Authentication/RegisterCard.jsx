@@ -18,7 +18,7 @@ function RegisterCard({ setViewAuth, viewAuth }) {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
 
-    const { initialData } = useSelector((state) => state.home);
+    const { countries } = useSelector((state) => state.home);
     const { home } = useSelector((state) => state.general);
 
     const dispatch = useDispatch();
@@ -137,7 +137,7 @@ function RegisterCard({ setViewAuth, viewAuth }) {
                                             <option value="" hidden>
                                                 code
                                             </option>
-                                            {initialData?.countries?.map((country, index) => {
+                                            {countries?.map((country, index) => {
                                                 return (
                                                     <option
                                                     className="text-darktext"

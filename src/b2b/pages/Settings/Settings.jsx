@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import ProfileSettings from './ProfileSettings'
+import CompanySettings from './CompanySettings'
+import AuthSettings from './AuthSettings'
 
 function Settings() {
   const [settingSection, setSettingSection] = useState({
-    profile: false
+    profile: true,
+    company: false,
+    auth: false
   })
   return (
     <div>
@@ -21,52 +26,63 @@ function Settings() {
       </div>
 
       <div className="p-6">
-                <div className="bg-white rounded shadow-sm">
-                    <div className="grid grid-cols-3">
-                        <div
-                            className={
-                                "p-3 cursor-pointer font-medium text-sm " 
-                            }
-                        >
-                            Profile Settings
-                        </div>
-                        <div
-                            className={
-                                "p-3 cursor-pointer font-medium text-sm " 
-                            }
-                        >
-                            Company Settings
-                        </div>
-                        <div
-                            className={
-                                "p-3 cursor-pointer font-medium text-sm "
-                            }
-                        >
-                            Email & Password Settings
-                        </div>
-                    </div>
-
-                    <div className="p-4">
-                        {/* <AttrDetailsForm
-                            setSection={setSection}
-                            section={section}
-                        />
-                        <AttrAvailabilityForm
-                            setSection={setSection}
-                            section={section}
-                        />
-                        <AttrDescriptionForm
-                            setSection={setSection}
-                            section={section}
-                        />
-                        <AttrMediaForm
-                            setSection={setSection}
-                            section={section}
-                        /> */}
-                    </div>
-                </div>
+        <div className="bg-white rounded shadow-sm">
+          <div className="grid grid-cols-3">
+            <div
+              className={
+                `p-3 cursor-pointer font-medium text-sm 
+                ${settingSection.profile ? "bg-[#e1e5ee]" : ""}`
+              }
+              onClick={() => setSettingSection({
+                profile: true,
+                company: false,
+                auth: false
+              })}
+            >
+              Profile Settings
             </div>
-    </div>
+            <div
+              className={
+                `p-3 cursor-pointer font-medium text-sm 
+                ${settingSection.company ? "bg-[#e1e5ee]" : ""}`
+              }
+              onClick={() => setSettingSection({
+                profile: false,
+                company: true,
+                auth: false
+              })}
+            >
+              Company Settings
+            </div>
+            <div
+              className={
+                `p-3 cursor-pointer font-medium text-sm 
+                ${settingSection.auth ? "bg-[#e1e5ee]" : ""}`
+              }
+              onClick={() => setSettingSection({
+                profile: false,
+                company: false,
+                auth: true
+              })}
+            >
+              Email & Password Settings
+            </div>
+          </div>
+
+          <div className="p-4">
+            {settingSection.profile && (
+              <ProfileSettings />
+            )}
+            {settingSection.company && (
+              <CompanySettings />
+            )}
+            {settingSection.auth && (
+              <AuthSettings />
+            )}
+          </div>
+        </div>
+      </div>
+    </div >
   )
 }
 

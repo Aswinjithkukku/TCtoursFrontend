@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { IoMdCart } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActivities } from '../../redux/slices/excursionSlice';
+import priceConversion from '../../utils/PriceConversion'
 
 function ActivityTable({ item, index }) {
     const [price, setPrice] = useState(0)
     const dispatch = useDispatch()
 
     const { recievedActivities } = useSelector(state => state.excursion)
+    const { selectedCurrency } = useSelector(state => state.home)
 
     const handleChange = ({ value, name, index }) => {
         dispatch(setActivities({
@@ -116,7 +118,7 @@ function ActivityTable({ item, index }) {
                 </select>
             </td>
             <td className='py-3 px-1 min-w-[4em] pl-5'>
-                <h2 className='font-medium'>{price} AED</h2>
+                <h2 className='font-medium'>{priceConversion(price, selectedCurrency,true)}</h2>
                 <div className='relative'>
                     <input type='checkbox'
                         className='peer absolute top-0 inset-x-0 w-full h-6 opacity-0  cursor-pointer'

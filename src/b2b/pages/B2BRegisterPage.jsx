@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AiFillHeart } from 'react-icons/ai'
 import { BsCalendar2Week, BsFillCartCheckFill } from 'react-icons/bs'
 import { FaHandsHelping, FaLock } from 'react-icons/fa'
@@ -8,241 +8,296 @@ import { ImFilePdf, ImProfile } from 'react-icons/im'
 import { IoIosPricetags } from 'react-icons/io'
 import { TfiPackage } from 'react-icons/tfi'
 import { TbBuildingWarehouse } from 'react-icons/tb'
+import { logoPng } from '../../static/imagesB2B'
 
 function B2BRegisterPage() {
+  const [register, setRegister] = useState({
+    comapny: true,
+    profile: false,
+    password: false
+  })
   return (
     <div className='max-w-screen-xl mx-auto my-10'>
-      <div className='bg-[#C0DEFF] rounded-3xl'>
-        <div className='grid grid-cols-12 gap-0 p-10'>
+      <div className='bg-white rounded-xl p-10'>
+        <div className='flex justify-center pb-5'>
+          <img src={logoPng} alt='logo' className='h-[65px]' />
+        </div>
+        <div className='lg:grid grid-cols-12 gap-0 '>
           <div className='1 col-span-7 text-darktext space-y-2 text-sm'>
 
-            <div className=''>
-              <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
-                <span className=''><GiFactory /> </span>
-                <span className=''>Company Details</span>
-              </h2>
-            </div>
-
-            <div className='flex space-x-2 mx-2'>
-              <span className='w-6/12'>
-                <label className=''>Travel Agency Name</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: TravellerChoice'></input>
-              </span>
-              <span className='w-6/12'>
-                <label className=''>Address</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: Tc, North california'></input>
-              </span>
-            </div>
-
-            <div className='flex space-x-2 mx-2'>
-              <span className='w-6/12'>
-                <label className=''>Website</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: TravellerChoice.ae'></input>
-              </span>
-              <span className='w-6/12'>
-                <label className=''>Country</label>
-                <select className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' >
-                  <option>Ex: United Arab Emirates</option>
-                  <option></option>
-                  <option></option>
-                </select>
-              </span>
-            </div>
-
-            <div className='flex space-x-2 mx-2'>
-              <span className='w-6/12'>
-                <label className=''>City</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: Dubai'></input>
-              </span>
-              <span className='w-6/12'>
-                <label className=''>Zip Code</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder=''></input>
-              </span>
-            </div>
-
-            <div className='pt-3'>
-              <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
-                <span className=''><GoPerson /> </span>
-                <span className=''>Profile Details</span>
-              </h2>
-            </div>
-
-
-            <div className='flex space-x-2 mx-2'>
-              <span className='w-6/12'>
-                <label className=''>Agent Name</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: Name'></input>
-              </span>
-              <span className='w-6/12 flex space-x-1'>
-                <div className='w-2/12'>
-                  <label className=''>Code</label>
-                  <select className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400'>
-                    <option>Ex: +451</option>
-                    <option></option>
-                    <option></option>
-                  </select>
+            <ol class="relative  border-l border-gray-200 ">
+              <li class={`mb-10 ml-6 ${register.comapny ? 'h-full' : 'h-6'} overflow-hidden `}>
+                <span class={`absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 ring-4 ring-white ${register.comapny ? "bg-green-200" : "bg-gray-100"} `}
+                  onClick={() => setRegister({
+                    comapny: true,
+                    profile: false,
+                    password: false
+                  })}>
+                  {register.comapny ? (
+                    <svg aria-hidden="true" class="w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  ) : (
+                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 lg:w-6 lg:h-6 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"></path></svg>
+                  )}
+                </span>
+                <div className=''
+                  onClick={() => setRegister({
+                    comapny: true,
+                    profile: false,
+                    password: false
+                  })}>
+                  <h2 className='text-[15px] uppercase font-semibold tracking-wide space-x-2 flex'>
+                    <span className=''><GiFactory /> </span>
+                    <span className=''>Company Details</span>
+                  </h2>
                 </div>
-                <div className='w-10/12'>
-                  <label className=''>Number</label>
-                  <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: 0000000000'></input>
+
+                <div className='grid grid-cols-2 gap-[10px]'>
+                  <div className=''>
+                    <label className='label'>Travel Agency Name</label>
+                    <input className='input' type='text' placeholder='Ex: TravellerChoice'></input>
+                  </div>
+                  <div className=''>
+                    <label className='label'>Address</label>
+                    <input className='input' type='text' placeholder='Ex: Tc, North california'></input>
+                  </div>
+
+                  <div className=''>
+                    <label className='label'>Website</label>
+                    <input className='input' type='text' placeholder='Ex: TravellerChoice.ae'></input>
+                  </div>
+                  <div className=''>
+                    <label className='label'>Country</label>
+                    <select className='select' >
+                      <option>Ex: United Arab Emirates</option>
+                      <option></option>
+                      <option></option>
+                    </select>
+                  </div>
+
+                  <div className=''>
+                    <label className='label'>City</label>
+                    <input className='input' type='text' placeholder='Ex: Dubai'></input>
+                  </div>
+                  <div className=''>
+                    <label className='label'>Zip Code</label>
+                    <input className='input' type='text' placeholder=''></input>
+                  </div>
                 </div>
-              </span>
-            </div>
-
-            <div className='flex space-x-2 mx-2'>
-              <span className='w-6/12 flex space-x-1'>
-              <div className='w-2/12'>
-                  <label className=''>Code</label>
-                  <select className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400'>
-                    <option>Ex: +451</option>
-                  </select>
+              </li>
+              <li class={`mb-10 ml-6 ${register.profile ? 'h-full' : 'h-8'} overflow-hidden `}>
+                <span class={`absolute flex items-center justify-center w-8 h-8  rounded-full -left-4 ring-4 ring-white ${register.profile ? "bg-green-200" : "bg-gray-100"}`}
+                  onClick={() => setRegister({
+                    comapny: false,
+                    profile: true,
+                    password: false
+                  })}>
+                  {register.profile ? (
+                    <svg aria-hidden="true" class="w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  ) : (
+                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 4h3a3 3 0 006 0h3a2 2 0 012 2v9a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm2.5 7a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm2.45 4a2.5 2.5 0 10-4.9 0h4.9zM12 9a1 1 0 100 2h3a1 1 0 100-2h-3zm-1 4a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                  )}
+                </span>
+                <div className='pt-2'
+                  onClick={() => setRegister({
+                    comapny: false,
+                    profile: true,
+                    password: false
+                  })}>
+                  <h2 className='text-[15px] uppercase font-semibold tracking-wide space-x-2 flex'>
+                    <span className=''><GoPerson /> </span>
+                    <span className=''>Profile Details</span>
+                  </h2>
                 </div>
-                <div className='w-10/12'>
-                  <label className=''> Telephone Number</label>
-                  <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='number' placeholder='Ex: 0000000000'></input>
+
+                <div className='grid grid-cols-2 gap-[10px]'>
+                  <div className=''>
+                    <label className='label'>Agent Name</label>
+                    <input className='input' type='text' placeholder='Ex: Name'></input>
+                  </div>
+                  <div className=' flex space-x-1'>
+                    <div className='w-2/12'>
+                      <label className='label'>Code</label>
+                      <select className='input'>
+                        <option>Ex: +451</option>
+                        <option></option>
+                        <option></option>
+                      </select>
+                    </div>
+                    <div className='w-10/12'>
+                      <label className='label'>Number</label>
+                      <input className='input' type='text' placeholder='Ex: 0000000000'></input>
+                    </div>
+                  </div>
+
+                  <div className=' flex space-x-1'>
+                    <div className='w-2/12'>
+                      <label className='label'>Code</label>
+                      <select className='select'>
+                        <option>Ex: +451</option>
+                      </select>
+                    </div>
+                    <div className='w-10/12'>
+                      <label className='label'> Telephone Number</label>
+                      <input className='input' type='number' placeholder='Ex: 0000000000'></input>
+                    </div>
+                  </div>
+                  <div className=''>
+                    <label className='label'>Email</label>
+                    <input className='input' type='text' placeholder='Ex: example@email.com'></input>
+                  </div>
+
+                  <div className=''>
+                    <label className='label'>Confirm Email</label>
+                    <input className='input' type='text' placeholder='Ex: example@email.com'></input>
+                  </div>
+                  <div className=''>
+                    <label className='label'>Preffered Currency</label>
+                    <input className='input' type='text' placeholder='Ex: AED'></input>
+                  </div>
+
+                  <div className=''>
+                    <label className='label'>Director</label>
+                    <input className='input' type='text' placeholder='Director'></input>
+                  </div>
+                  <div className=''>
+                    <label className='label'>Skype Id</label>
+                    <input className='input' type='text' placeholder='skypeid'></input>
+                  </div>
+
+                  <div className=''>
+                    <label className='label'>Whatsapp</label>
+                    <input className='input' type='number' placeholder='Ex: 000000000'></input>
+                  </div>
+
                 </div>
-              </span>
-              <span className='w-6/12'>
-                <label className=''>Email</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: example@email.com'></input>
-              </span>
-            </div>
+              </li>
+              <li class={`mb-10 ml-6 ${register.password ? 'h-full' : 'h-8'} overflow-hidden `}>
+                <span class={`absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 ring-4 ring-white ${register.password ? "bg-green-200" : "bg-gray-100"} `}
+                  onClick={() => setRegister({
+                    comapny: false,
+                    profile: false,
+                    password: true
+                  })}>
+                  {register.password ? (
+                    <svg aria-hidden="true" class="w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  ) : (
+                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
+                  )}
+                </span>
+                <div className='pt-2'
+                  onClick={() => setRegister({
+                    comapny: false,
+                    profile: false,
+                    password: true
+                  })}>
+                  <h2 className='text-[15px] uppercase font-semibold tracking-wide space-x-2 flex'>
+                    <span className=''><FaLock /> </span>
+                    <span className=''>Password Settings</span>
+                  </h2>
+                </div>
+                <div className='grid grid-cols-2 gap-[10px]'>
+                  <div className=''>
+                    <label className='label'>Username</label>
+                    <input className='input' type='text' placeholder='Ex: username@123'></input>
+                  </div>
+                  <div className=''>
+                    <label className='label'>Password</label>
+                    <input className='input' type='passsword' placeholder='***********'></input>
+                  </div>
 
-            <div className='flex space-x-2 mx-2'>
-              <span className='w-6/12'>
-                <label className=''>Confirm Email</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: example@email.com'></input>
-              </span>
-              <span className='w-6/12'>
-                <label className=''>Reffered Currency</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: AED'></input>
-              </span>
-            </div>
+                  <div className=''>
+                    <label className='label'>Confirm Password</label>
+                    <input className='input' type='password' placeholder='***********'></input>
+                  </div>
 
-            <div className='flex space-x-2 mx-2'>
-              <span className='w-6/12'>
-                <label className=''>Director</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Director'></input>
-              </span>
-              <span className='w-6/12'>
-                <label className=''>Skype Id</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='skypeid'></input>
-              </span>
-            </div>
+                </div>
+                <div className='pt-3'>
+                  <button className='text-sm font-medium text-light bg-lightblue w-[100px] py-1 rounded'>Signup</button>
+                </div>
+              </li>
+            </ol>
 
-            <div className='flex space-x-2 mx-2'>
-              <span className='w-6/12'>
-                <label className=''>Whatsapp</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='number' placeholder='Ex: 000000000'></input>
-              </span>
-            </div>
-
-
-            <div className='pt-3'>
-              <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
-                <span className=''><FaLock /> </span>
-                <span className=''>Password Settings</span>
-              </h2>
-            </div>
-
-            <div className='flex space-x-2 mx-2'>
-              <span className='w-6/12'>
-                <label className=''>Username</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='text' placeholder='Ex: username@123'></input>
-              </span>
-              <span className='w-6/12'>
-                <label className=''>Password</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='passsword' placeholder='***********'></input>
-              </span>
-            </div>
-
-            <div className='flex space-x-2 mx-2'>
-              <span className='w-6/12'>
-                <label className=''>Confirm Password</label>
-                <input className='placeholder:text-sm placeholder:text-text w-full border border-darktext py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400' type='password' placeholder='***********'></input>
-              </span>
-            </div>
 
           </div>
-          <div className='2 col-span-5 text-darktext space-y-2 mx-3'>
+          <div className='2 col-span-5 text-darktext space-y-2 mx-3 p-5 text-sm'>
 
-          <div className=''>
-              <h2 className='text-xl font-bold tracking-wide flex space-x-2 pb-4'>
+            <div className=''>
+              <h2 className='text-xl font-bold tracking-wide flex space-x-2 pb-2'>
                 <span className=''><ImProfile /> </span>
                 <span className=''>Registers</span>
               </h2>
             </div>
 
-            <div className=''>
+            <div className='tracking-wide '>
               <p className='mb-2'>Welcome to Travellers Choice B2B website made for our agents!</p>
               <p className=''>You can resell sdvsgdfgsfdjgs sdsjhdfsjd sfvdshjfgsd fdnbfvsjdfsadf snbvfjsfjhshfjsa fsfjsjsd fdsnbfajsfdvsjafvdsnb sdnfdsgjfdv sdfnsfdsgjvd sncshgdcv sncsndfcgsdnfcvsg nddbfc sbcvsh x</p>
             </div>
 
             <div className=''>
-              <h2 className=' font-medium tracking-wide flex py-2 space-x-2'>
+              <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
                 <span className='text-lg'><TfiPackage /> </span>
                 <span className=''>Build your own package</span>
               </h2>
             </div>
 
             <div className=''>
-              <h2 className=' font-medium tracking-wide flex py-2 space-x-2'>
+              <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
                 <span className='text-lg'><IoIosPricetags /> </span>
                 <span className=''>Best Rate availability</span>
               </h2>
             </div>
 
             <div className=''>
-              <h2 className=' font-medium tracking-wide flex py-2 space-x-2'>
+              <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
                 <span className='text-lg'><ImFilePdf /> </span>
                 <span className=''>Online Settlements of invoices & Reciepts</span>
               </h2>
             </div>
 
             <div className=''>
-              <h2 className=' font-medium tracking-wide flex py-2 space-x-2'>
+              <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
                 <span className='text-lg'><FaHandsHelping /> </span>
                 <span className=''>Create your sub agents</span>
               </h2>
             </div>
 
             <div className=''>
-              <h2 className=' font-medium tracking-wide flex py-2 space-x-2'>
+              <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
                 <span className='text-lg'><GiReceiveMoney /> </span>
                 <span className=''>Strong mrak-up modules</span>
               </h2>
             </div>
 
             <div className=''>
-              <h2 className=' font-medium tracking-wide flex py-2 space-x-2'>
+              <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
                 <span className='text-lg'><TbBuildingWarehouse /> </span>
                 <span className=''>Live inventory of Products</span>
               </h2>
             </div>
 
             <div className=''>
-              <h2 className=' font-medium tracking-wide flex py-2 space-x-2'>
+              <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
                 <span className='text-lg'><AiFillHeart /> </span>
                 <span className=''>Add to favourite list</span>
               </h2>
             </div>
 
             <div className=''>
-              <h2 className=' font-medium tracking-wide flex py-2 space-x-2'>
+              <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
                 <span className='text-lg'><GiClockwork /> </span>
                 <span className=''>Multiple Tour option, Transfer option & time slots for the same tour</span>
               </h2>
             </div>
 
             <div className=''>
-              <h2 className=' font-medium tracking-wide flex py-2 space-x-2'>
+              <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
                 <span className='text-lg'><BsFillCartCheckFill /> </span>
                 <span className=''>Shopping cart application</span>
               </h2>
             </div>
 
             <div className=''>
-              <h2 className=' font-medium tracking-wide flex py-2 space-x-2'>
+              <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
                 <span className='text-lg'><BsCalendar2Week /></span>
                 <span className=''>Get relaxed with instant confirmation on bookings</span>
               </h2>

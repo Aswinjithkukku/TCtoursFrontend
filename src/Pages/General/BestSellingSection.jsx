@@ -4,10 +4,12 @@ import { IoLocation } from 'react-icons/io5'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Rating from '../../components/Rating/Rating'
+import priceConversion from '../../utils/PriceConversion'
 
 function BestSellingSection() {
 
   const { bestSellingAttractions, home } = useSelector(state => state.general)
+  const { selectedCurrency } = useSelector(state => state.home)
 
   if (!home?.isBestSellingAttractionsSectionEnabled) return null
   return (
@@ -34,7 +36,7 @@ function BestSellingSection() {
                   <div className='overflow-hidden rounded-t-3xl rounded-b-md'>
                     <img className='hover:scale-110 object-cover  h-[14em] w-full transition-all duration-500 cursor-pointer' src={process.env.REACT_APP_SERVER_URL + item?.images[0]} alt={item?.title} />
                   </div>
-                  <div className='px-3 pt-5 flex justify-between '>
+                  <div className='px-3 pt-5 flex justify-between'>
                     <div className='text-light bg-lightblue text-xs px-2 rounded-lg flex items-center capitalize'>
                       {item?.category?.categoryName}
                     </div>
@@ -44,12 +46,14 @@ function BestSellingSection() {
                   </div>
                   <div className='px-3 space-y-2 pb-5 pt-3 text-darktext'>
                     <div className='font-semibold'>{item?.title} </div>
-                    <div className='flex justify-between '>
+                    <div className='flex justify-between items-end'>
                       <div className='flex items-center'>
                         <span className='text-green-600'><IoLocation/></span>
                         <span className='text-sm text-green-600 capitalize '>{item?.destination?.name}</span>
                       </div>
-                      <div className='text-base font-medium text-blue '>AED {item?.activity?.adultPrice}</div>
+                      <div className='text-base font-medium text-blue'> 
+                     { priceConversion(item?.activity?.adultPrice, selectedCurrency, true) }
+                      </div>
                     </div>
                   </div>
                 </div>

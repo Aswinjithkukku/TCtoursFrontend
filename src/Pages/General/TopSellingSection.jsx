@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Rating from '../../components/Rating/Rating'
 import { IoLocation } from 'react-icons/io5'
+import priceConversion from '../../utils/PriceConversion'
 
 function TopSellingSection() {
   const { topAttractions, home } = useSelector(state => state.general)
+  const { selectedCurrency } = useSelector(state => state.home)
+
   if (!home?.isTopAttractionsSectionEnabled) return null
   return (
     <div className='mx-5 lg:my-5 my-3 lg:mx-auto lg:max-w-screen-xl'>
@@ -36,7 +39,7 @@ function TopSellingSection() {
                     {item?.category?.categoryName}
                   </div>
                   <div className='flex items-center space-x-1 text-yellow-500'>
-                  <Rating value={item?.averageRating} text={item?.totalReviews} color={"#FED049"} />
+                  <Rating value={item?.averageReviews} text={item?.totalReviews} color={"#FED049"} />
                   </div>
                 </div>
                 <div className='px-3 space-y-2 pb-5 pt-3 text-darktext'>
@@ -47,7 +50,9 @@ function TopSellingSection() {
                         <span className='text-green-600'><IoLocation/></span>
                         <span className='text-sm text-green-600 capitalize'>{item?.destination?.name}</span>
                       </div></div>
-                    <div className='text-base font-medium text-blue '>AED {item?.activity?.adultPrice}</div>
+                    <div className='text-base font-medium text-blue '> {
+                      priceConversion(item?.activity?.adultPrice, selectedCurrency, true)
+                    }</div>
                   </div>
                 </div>
               </div>

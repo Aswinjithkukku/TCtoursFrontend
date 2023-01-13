@@ -16,6 +16,7 @@ import CarousalMobile from './CarousalMobile'
 import ShareModal from './ShareModal'
 import { FaChevronLeft } from 'react-icons/fa'
 import MetaData from '../../utils/MetaData'
+import Availablity from './Availablity'
 
 function HeroSection() {
     const dispatch = useDispatch()
@@ -125,6 +126,10 @@ function HeroSection() {
                                     <>
 
 
+                                        <div id='availability' className='p-5 mb-2 lg:mb-5  bg-[#3C79F5] text-darktext rounded-2xl '>
+                                            <Availablity />
+                                        </div>
+
                                         <div id='packageSection' className='p-5  bg-light rounded-2xl '>
                                             <PackageSection />
                                         </div>
@@ -150,9 +155,9 @@ function HeroSection() {
                                         ))}
 
 
-                                        {/* <div id='faqSection' className='py-5'>
-                                        <FaqSection />
-                                    </div> */}
+                                        <div id='faqSection' className=''>
+                                            <FaqSection />
+                                        </div>
                                         <div id='reviewSection' className=''>
                                             <ReviewSection />
                                         </div>

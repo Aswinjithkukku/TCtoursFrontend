@@ -12,7 +12,7 @@ function ProfileSettingSection() {
     phone: user?.phoneNumber || 0
   })
 
-  const { initialData } = useSelector(state => state.home)
+  const { countries } = useSelector(state => state.home)
 
   const onChageData = (e) => {
     setProfile({...profile,[e.target.name]: e.target.value})
@@ -72,7 +72,7 @@ function ProfileSettingSection() {
                 onChange={onChageData}
               >
                 <option ></option>
-                {initialData?.countries?.map((item) => (
+                {countries?.map((item) => (
                   <option key={item._id} value={item._id}>{item.countryName} </option>
                 ))}
               </select>

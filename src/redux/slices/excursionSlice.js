@@ -87,7 +87,13 @@ export const addReview = createAsyncThunk(
     };
     try {
       const response = await axios.post("/attractions/reviews/add",args, config);
+      Swal.fire({
+        icon: 'success',
+        title: 'Review Submitted',
+        text: 'You have successfully Submitted your review',
+      })
       return response.data;
+
       
     } catch (error) {
 

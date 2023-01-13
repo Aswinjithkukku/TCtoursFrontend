@@ -1,25 +1,31 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrency } from '../../redux/slices/currencySlice'
+import { useHandleClickOutside } from '../../hooks'
+import { changeCurrency } from '../../redux/slices/homeSlice' 
 
-function CurrencyModal({ setView, view }) {
+function CurrencyModal({ setCurrency, currency }) {
     const dispatch = useDispatch()
-    const { initialData } = useSelector(state => state.home)
+    const { currencies } = useSelector(state => state.home)
+    const currencyRef = useRef()
+    useHandleClickOutside(currencyRef, () => setCurrency(false))
 
-    if(!view.currency) return null
     return (
-        <div className="absolute z-20 top-7 md:top-8 -left-8 bg-light rounded-md w-[200px] ">
+        <div className="absolute z-20 top-7 md:top-8 -left-8 bg-light rounded-md w-[200px] "  ref={currencyRef}>
             <div className="space-y-3 py-2">
-                {initialData?.countries?.map((item,index) => (
+                {currencies?.map((item,index) => (
                 <div className="flex space-x-2 items-center hover:bg-gray-100 px-4 " 
                 key={index} 
                 onClick={() => {
-                    dispatch(setCurrency(item?._id))
-                    console.log('....')
+                    dispatch(changeCurrency({
+                        isocode: item?.isocode,
+                        conversionRate: item?.conversionRate,
+                        flag: item?.country?.flag,
+                    }))
+                    setCurrency(!currency)
                 }}
                 >
-                    <img src={item?.flag} alt={item?.countryName} className='w-[30px]' />
-                    <p className='text-[10px] text-start whitespace-nowrap'>{item?.countryName}</p>
+                    <img src={item?.country?.flag} alt={item?.country?.countryName} className='w-[30px]' />
+                    <p className='text-[10px] text-start whitespace-nowrap capitalize'>{item?.country?.countryName}</p>
                 </div>
                 ))}
             </div>

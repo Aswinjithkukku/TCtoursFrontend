@@ -29,8 +29,12 @@ const sidebarMenus = [
     link: "#",
     dropdown: [
       {
-        name: "Orders",
-        link: "/attractions/orders/bookings",
+        name: "Order History",
+        link: "/b2b/order",
+      },
+      {
+        name: "Sub-Agent History",
+        link: "/b2b/order/sub",
       },
     ],
   },

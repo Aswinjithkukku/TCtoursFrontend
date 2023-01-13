@@ -14,13 +14,13 @@ function SearchFunctionalitySection({ viewCategory, setViewCategory, setRating, 
     return (
         <>
             <div className={`lightglass ${viewCategory ? "fixed" : "hidden"} top-0 bottom-0 right-0 left-0 z-10`} onClick={() => setViewCategory(!viewCategory)}></div>
-            <div className={`bg-light  p-5 lg:p-0 rounded-t-3xl overflow-y-auto lg:rounded-none lg:bg-light lg:h-auto lg:w-auto h-[85vh] w-full fixed lg:static ${viewCategory ? "bottom-0" : "-bottom-full"} z-10 transition-all duration-500`}>
+            <div className={`  p-5 lg:p-0 rounded-t-3xl overflow-y-auto lg:rounded-none lg:bg-none lg:h-auto lg:w-auto h-[85vh] w-full fixed lg:static ${viewCategory ? "bottom-0 bg-light" : "-bottom-full"} z-10 transition-all duration-500`}>
                 <div className='flex lg:hidden justify-between text-darktext p-3'>
                     <span className='text-xl font-semibold'>Filters</span>
                     <span className='text-3xl' onClick={() => setViewCategory(!viewCategory)}><AiOutlineClose /></span>
                 </div>
                 <div className=''>
-                    <div className='lg:border rounded-xl'>
+                    <div className='lg:border rounded-xl bg-white'>
                         <div className='p-5 space-y-5'>
                             <div className='1 space-y-3'>
                                 <div className='text-text font-medium'>

@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom'
 function NearbySection() {
   const navigate = useNavigate()
 
-  const { initialData } = useSelector(state => state.home)
+  const { destinations } = useSelector(state => state.home)
   return (
     <div className='mx-5 py-3 lg:mx-auto lg:max-w-screen-xl'>
       <div className='text-3xl font-semibold text-dark mb-4'>Nearby destinations</div>
       <div className='md:grid md:grid-cols-4 gap-5'>
-      {initialData?.destinations?.map((item,index) => (
+      {destinations?.map((item,index) => (
       <div className='mt-2 relative cursor-pointer' key={index} onClick={() => navigate(`/search/${item?.name}`)}>
         <div className='overflow-hidden rounded-2xl'>
         <img className='hover:scale-110 object-cover rounded-2xl h-[14em] w-full  transition-all duration-500 cursor-pointer' src={process.env.REACT_APP_SERVER_URL +  item?.image} alt={item?.name} />

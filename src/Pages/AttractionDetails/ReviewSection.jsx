@@ -26,7 +26,7 @@ function ReviewSection() {
 
   useEffect(() => {
     dispatch(getReviews(id))
-  }, [dispatch, reviews])
+  }, [dispatch])
 
   const submitHandler = () => {
       const formData = new FormData();

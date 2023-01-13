@@ -12,6 +12,7 @@
 
 body {
     font-family: "Poppins", sans-serif;
+    background-color: #f5f5f5;
 }
 
 ::-webkit-scrollbar {
@@ -162,14 +163,14 @@ body {
     background-size: cover;
 }
 
-label {
+.label {
     display: block;
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 0.3rem;
 }
 
-input {
+.input {
     display: block;
     width: 100%;
     padding: 0.5rem 0.9rem;
@@ -184,7 +185,7 @@ input {
     background-color: #fff;
 }
 
-select {
+.select {
     border: 1px solid #ced4da;
     outline: none;
     border-radius: 0.25rem;
@@ -193,9 +194,9 @@ select {
     font-size: 14px;
     font-weight: 400;
     color: #212529;
-}
+} 
 
-textarea {
+.textarea {
     border-radius: 0.25rem;
     background-color: #fff;
     padding: 0.5rem 0.9rem;
@@ -211,7 +212,7 @@ textarea {
     height: 160px;
 }
 
-button {
+.button {
     height: 40px;
     background-color: #002366;
     border-radius: 0.25rem;

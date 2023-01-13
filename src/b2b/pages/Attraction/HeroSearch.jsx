@@ -3,7 +3,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { BsCalendar2Date, BsEmojiHeartEyes } from 'react-icons/bs'
 import { IoLocationOutline } from 'react-icons/io5'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 import { useHandleClickOutside } from '../../../hooks'
 
 
@@ -34,17 +34,17 @@ function HeroSearch() {
         setDatalist(true)
     }
 
-    const { initialData } = useSelector(state => state.home)
+    const { destinations } = useSelector(state => state.home)
 
 
 
     useEffect(() => {
-        const list = initialData?.destinations?.filter((data) => {
+        const list = destinations?.filter((data) => {
             return data.name?.toLowerCase().startsWith(value)
         })
 
         setFilteredData(list)
-    }, [value, initialData])
+    }, [value, destinations])
 
     useEffect(() => {
         if (date.length > 1) {
@@ -54,6 +54,7 @@ function HeroSearch() {
 
     return (
         <>
+
             <form onSubmit={submitHandler} className='max-w-screen-2xl mx-auto'>
                 <div className='md:grid md:grid-cols-12 gap-0 py-7 mx-4 space-y-4 md:space-y-0 space-x-4'>
                     <div className='md:col-span-5 flex justify-center items-center '>

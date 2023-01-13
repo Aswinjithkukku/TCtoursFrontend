@@ -46,7 +46,7 @@ function HeroSection() {
         <>
             <MetaData title={'Travellers Choice'} />
             <div>
-                <div className='lg:max-w-screen-xl lg:mx-auto lg:pt-14'>
+                <div className='lg:max-w-screen-xl lg:mx-auto lg:pt-10'>
                     <main className='md:mb-28 '>
                         <div className=' relative'>
 
