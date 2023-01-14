@@ -15,13 +15,13 @@ const sidebarMenus = [
   {
     name: "Wallet",
     icon: <GiWallet />,
-    link: "#",
-    dropdown: [
-      {
-        name: "Wallet",
-        link: "/attractions/orders/bookings",
-      },
-    ],
+    link: "/b2b/wallet",
+    // dropdown: [
+    //   {
+    //     name: "Wallet",
+    //     link: "/b2b/wallet",
+    //   },
+    // ],
   },
   {
     name: "Orders",
@@ -61,17 +61,6 @@ const sidebarMenus = [
       {
         name: "Total Resellers",
         link: "/b2b/resellers",
-      },
-    ],
-  },
-  {
-    name: "Attractions",
-    icon: <MdAttractions />,
-    link: "#",
-    dropdown: [
-      {
-        name: "Attractions",
-        link: "/b2b/attractions",
       },
     ],
   },

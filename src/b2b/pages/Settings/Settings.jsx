@@ -65,7 +65,7 @@ function Settings() {
                 auth: true
               })}
             >
-              Email & Password Settings
+              Password Settings
             </div>
           </div>
 

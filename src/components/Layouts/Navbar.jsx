@@ -9,6 +9,7 @@ import ProfileModal from "../Navbar/ProfileModal";
 import CurrencyModal from "../Header/CurrencyModal";
 import LanguageModal from "../Header/LanguageModal";
 import RegisterCard from "../Authentication/RegisterCard";
+import { useHandleClickOutside } from "../../hooks";
 
 function Navbar() {
 
@@ -29,6 +30,12 @@ function Navbar() {
     useEffect(() => {
         dispatch(getHome());
     }, [dispatch]);
+
+    const currencyRef = useRef()
+    useHandleClickOutside(currencyRef, () => setCurrency(false))
+
+    const languageRef = useRef()
+    useHandleClickOutside(languageRef, () => setLanguage(false))
 
     return (
         <>
@@ -53,9 +60,10 @@ function Navbar() {
                                         </Link>
                                     </div>
                                     <div
-                                        className="flex space-x-2 items-center cursor-pointer"
+                                        ref={languageRef}
+                                        className="flex space-x-1 items-center cursor-pointer"
                                         onClick={() =>
-                                            setLanguage(true)
+                                            setLanguage(!language)
                                         }
                                     >
                                         <span className="text-base font-medium cursor-pointer">
@@ -69,12 +77,15 @@ function Navbar() {
                                             )}
                                         </span>
                                         {/* absolute modal */}
-                                        <LanguageModal setLanguage={setLanguage} language={language} />
+                                        {language && (
+                                            <LanguageModal setLanguage={setLanguage} language={language} />
+                                        )}
                                         {/* absolute modal */}
                                     </div>
                                     <div
+                                        ref={currencyRef}
                                         className="flex space-x-1 items-center cursor-pointer relative"
-                                        onClick={() => setCurrency(true)}
+                                        onClick={() => setCurrency(!currency)}
                                     >
                                         <span className="text-base font-medium">
                                             <img src={selectedCurrency ? selectedCurrency?.flag : ''} className="w-[32px]" />

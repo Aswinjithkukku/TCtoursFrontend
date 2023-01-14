@@ -29,17 +29,13 @@ function BlogHeroSection() {
 
     return (
         <div className='lg:max-w-screen-xl lg:mx-auto lg:py-14 py-3 mx-2'>
-            <div className='flex justify-between items-center'>
-                <div className='text-darktext'>
-                    <h1 className='text-5xl font-medium heading'>Blog</h1>
-                    {/* <p className='text-text'>Latin literature from 45 BC, making it over 2000 years old</p> */}
-                </div>
-                <div className='lg:mr-5 flex'>
+            <div className=' items-center'>
+                <div className=' flex'>
                     <input type='search'
                         placeholder='Search here!!!'
                         onChange={(e) => setValue(e.target.value)}
                         value={value}
-                        className=' py-3 bg-light border border-main px-2 rounded-l-xl' />
+                        className=' py-3 bg-light border border-main px-2 rounded-l-xl w-full outline-none' />
                     <button className='text-3xl flex justify-center items-center bg-main rounded-r-lg text-light w-16 h-14'><AiOutlineSearch /></button>
                 </div>
             </div>

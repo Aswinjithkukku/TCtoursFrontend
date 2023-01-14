@@ -55,8 +55,8 @@ function HeroSearch() {
     return (
         <>
 
-            <form onSubmit={submitHandler} className='max-w-screen-2xl mx-auto'>
-                <div className='md:grid md:grid-cols-12 gap-0 py-7 mx-4 space-y-4 md:space-y-0 space-x-4'>
+            <form onSubmit={submitHandler} className=''>
+                <div className='md:grid md:grid-cols-12 gap-0 py-5 space-y-4 md:space-y-0 space-x-4'>
                     <div className='md:col-span-5 flex justify-center items-center '>
                         <div className='space-y-2 w-full '>
                             <div className='flex items-center space-x-2 text-darktext'>
@@ -72,7 +72,7 @@ function HeroSearch() {
                                         onChange={(e) => setValue(e.target.value)}
                                         onFocus={handleFocus}
                                         // onBlur={handleBlur}
-                                        className='capitalize px-3 w-full border placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+                                        className='capitalize input' />
                                 </div>
                                 {datalist && (
 
@@ -105,14 +105,14 @@ function HeroSearch() {
                                     placeholder='Choose date'
                                     value={date}
                                     onChange={(e) => setDate(e.target.value)}
-                                    className={`px-3 w-full  placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl  ${validate ? "text-red-500 border-red-600 border" : "border text-darktext"}`} />
+                                    className={`input  ${validate ? "text-red-500 border-red-600 border" : "border text-darktext"}`} />
                             </div>
                         </div>
                     </div>
                     <div className='md:col-span-2 flex items-end'>
-                        <div className=''>
-                            <button type='submit' className=' h-12 px-7  bg-blue rounded-xl text-light text-xl flex justify-center items-center'>
-                                <span className=''>
+                        <div className='w-full'>
+                            <button type='submit' className='button w-full flex justify-center items-center'>
+                                <span className='text-xl'>
                                     <AiOutlineSearch />
                                 </span>
                                 <span className='text-base'>

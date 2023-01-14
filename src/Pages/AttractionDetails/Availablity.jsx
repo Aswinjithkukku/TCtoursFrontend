@@ -18,19 +18,23 @@ function Availablity() {
         <div className='col-span-10 space-y-3 py-3 text-darktext'>
           <div className=' '>
             <span className=''>
-              <div className='grid lg:grid-cols-7 grid-cols-2 gap-3'>
+              <div className='grid lg:grid-cols-4 grid-cols-2 gap-4'>
                 {excursion?.availability?.map((item, index) => (
-                  <div className='bg-[#E6e6e6] rounded w-[100px] h-[100px]  flex justify-center items-center '>
-                    <div className=''>
-                    <p className='text-center  uppercase' key={index}>{item?.day}</p>
-                    <div className='flex space-x-1 justify-center'>
-                      <span className=''><BsDoorOpenFill /> </span>
-                      <span className=''>{item?.open} </span>
+                  <div className='bg-white rounded-2xl shadow-sm lg:w-[190px] h-[100px] ' key={index}>
+                    <div className='py-1 border-b border-dashed'>
+                      <p className='text-center font-bold uppercase ' >{item?.day}</p>
                     </div>
-                    <div className='flex space-x-1 justify-center'>
-                      <span className=''><BsDoorClosedFill /> </span>
-                      <span className=''>{item?.close} </span>
-                    </div>
+                    <div className='mt-2'>
+                      <div className=''>
+                        <div className='flex space-x-1 justify-center'>
+                          <span className='text-lightblue '><BsDoorOpenFill />  </span>
+                          <span className=''>{item?.open} </span>
+                        </div>
+                        <div className='flex space-x-1 justify-center'>
+                          <span className='text-lightblue'><BsDoorClosedFill /> </span>
+                          <span className=''>{item?.close} </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ))}

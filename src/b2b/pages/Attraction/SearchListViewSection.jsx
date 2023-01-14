@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Rating from '../../../components/Rating/Rating'
 import { setFavourites } from '../../../redux/slices/excursionSlice'
+import priceConversion from '../../../utils/PriceConversion'
 
 function SearchListViewSection() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const { excursions, favourites } = useSelector(state => state.excursion)
+    const { selectedCurrency } = useSelector(state => state.home)
 
     const saveDatatoLocalStorage = (data) => {
         var array = []
@@ -25,7 +27,7 @@ function SearchListViewSection() {
     return (
         <div>
             {excursions?.attractions?.data[0] ? (
-                <div className='md:grid md:grid-cols-3 gap-5'>
+                <div className='md:grid md:grid-cols-4 gap-5'>
                     {excursions?.attractions?.data[0] && excursions?.attractions?.data?.map((item, index) => (
                         <div key={index} className='h-full snap-start mt-2 bg-light shadow-md p-3 rounded-3xl cursor-pointer mx-2 md:mx-0' onClick={() => {
                             saveDatatoLocalStorage({
@@ -92,12 +94,12 @@ function SearchListViewSection() {
                                             <div className='text-xs text-text font-light'>Starting from</div>
                                             {item?.isOffer === true &&
                                                 <div className='text-xs text-main font-light'>
-                                                    <s> AED {item?.activity?.adultPrice}</s>
+                                                    <s>{priceConversion(item?.activity?.adultPrice,selectedCurrency, true)}</s>
                                                 </div>}
                                             <div className='text-xl font-bold text-darktext'>
-                                                AED {item?.isOffer === true ? (item?.isOffer === true && item?.offerAmountType === "flat" ? Number(item?.activity?.adultPrice) - Number(item?.offerAmount) :
-                                                    Number(item?.activity?.adultPrice) - ((Number(item?.activity?.adultPrice) * Number(item?.offerAmount)) / 100)) : item?.activity?.adultPrice}
-                                                {/* {item?.activity?.adultPrice} */}
+                                                {priceConversion(item?.isOffer === true ? (item?.isOffer === true && item?.offerAmountType === "flat" ? Number(item?.activity?.adultPrice) - Number(item?.offerAmount) :
+                                                    Number(item?.activity?.adultPrice) - ((Number(item?.activity?.adultPrice) * Number(item?.offerAmount)) / 100)) : item?.activity?.adultPrice, selectedCurrency, true)}
+
                                             </div>
                                             <div className='text-xs text-text font-light'>*price varies</div>
                                         </span>

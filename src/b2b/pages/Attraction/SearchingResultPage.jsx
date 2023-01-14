@@ -18,18 +18,18 @@ function SearchingResultPage() {
     const [search, setSearch] = useState('')
     const [rating, setRating] = useState('')
     const [duration, setDuration] = useState('')
-    
-    let destination =''
+
+    let destination = ''
     let isOffer = ''
     let isCombo = ''
     useEffect(() => {
-        if(params.slug === 'isOffer'){
+        if (params.slug === 'isOffer') {
             isOffer = "true"
-            dispatch(getAllExcursions({ isOffer, category, search, rating, duration}))
-        }else if(params.slug === 'isCombo'){
+            dispatch(getAllExcursions({ isOffer, category, search, rating, duration }))
+        } else if (params.slug === 'isCombo') {
             isCombo = "true"
             dispatch(getAllExcursions({ isCombo, category, search, rating, duration }))
-        }else {
+        } else {
             destination = params.slug
             dispatch(getAllExcursions({ destination, category, search, rating, duration }))
         }
@@ -40,34 +40,38 @@ function SearchingResultPage() {
 
     return (
         <div className=''>
-            <SearchHomePage
-                viewCategory={viewCategory}
-                setViewCategory={setViewCategory}
-                setCategory={setCategory}
-                setSearch={setSearch}
-            />
-            <div className=''>
-                <div className='lg:grid grid-cols-12 gap-5'>
-                    <div className='col-span-3'>
+            <div className="bg-white rounded shadow-sm p-6">
+                <div className=''>
+                    <SearchHomePage
+                        viewCategory={viewCategory}
+                        setViewCategory={setViewCategory}
+                        setCategory={setCategory}
+                        setSearch={setSearch}
+                    />
+                    <div className=''>
+                        <div className=''>
+                            {/* <div className='col-span-3'>
                         <SearchFunctionalitySection
                             viewCategory={viewCategory}
                             setViewCategory={setViewCategory}
                             setRating={setRating}
                             setDuration={setDuration}
                         />
-                    </div>
-                    <div className='col-span-9'>
-                        <Suspense fallback={
-                        <div className=''>
-                           <SuspenseLoader /> 
+                    </div> */}
+                            <div className=''>
+                                <Suspense fallback={
+                                    <div className=''>
+                                        <SuspenseLoader />
+                                    </div>
+                                }>
+                                    <SearchListViewSection />
+                                </Suspense>
+                            </div>
                         </div>
-                    }>
-                            <SearchListViewSection />
-                        </Suspense>
+                        <div className=''>
+                            <SearchRecentlyViewedSection />
+                        </div>
                     </div>
-                </div>
-                <div className=''>
-                    <SearchRecentlyViewedSection />
                 </div>
             </div>
         </div>

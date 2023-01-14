@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
     AiOutlineMail,
     AiOutlinePhone,
-    AiOutlinePlus,
     AiOutlineWhatsApp,
 } from "react-icons/ai";
 import { RiCustomerService2Fill } from "react-icons/ri";
@@ -38,7 +37,7 @@ export default function FloatIcon() {
                     viewIcons ? "bottom-20" : "bottom-0"
                 } `}
             >
-                <a href={`https://wa.me/${home?.whatsappNumber}`}>
+                <a href={`https://wa.me/${home?.phoneNumber2}`}>
                     <AiOutlineWhatsApp />
                 </a>
             </div>

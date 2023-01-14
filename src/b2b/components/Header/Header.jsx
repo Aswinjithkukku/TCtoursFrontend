@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import AdminDropdown from "./AdminDropdown";
 import WalletDepositModal from "./WalletDepositModal";
+import CurrencyModal from './CurrencyModal'
+import { useHandleClickOutside } from "../../../hooks";
+import { AiOutlineDown } from "react-icons/ai";
 
 export default function Header() {
     const [isAdminDropdownOpen, setIsAdminDropdownOpen] = useState(false);
     const [walletDropdown, setWalletDropdown] = useState(false)
+    const [currency, setCurrency] = useState(false)
 
     const { user } = useSelector((state) => state.users);
+    const { selectedCurrency } = useSelector(state => state.home)
+
+    const currencyRef = useRef()
+    useHandleClickOutside(currencyRef, () => setCurrency(false))
 
     return (
         <>
@@ -16,10 +24,32 @@ export default function Header() {
                     <div></div>
                     <div className="h-full">
                         <div className="relative h-full flex">
-                            <div className="bg-[#f3f3f9] h-[100%] flex gap-[10px] items-center px-[12px] cursor-pointer" 
-                            onClick={() => setWalletDropdown(!walletDropdown)} >
+
+                            <div
+                                ref={currencyRef}
+                                className="flex space-x-1 items-center cursor-pointer relative mr-4"
+                                onClick={() => setCurrency(!currency)}
+                            >
+                                <span className="text-base font-medium">
+                                    <img src={selectedCurrency ? selectedCurrency?.flag : ''} className="w-[32px]" />
+                                </span>
+                                <span className="text-sm">
+                                {selectedCurrency ? selectedCurrency?.isocode : ''}
+                                </span>
+                                <span className="text-sm">
+                                <AiOutlineDown />
+                                </span>
+                                {/* absolute modal */}
+                                {currency && (
+                                    <CurrencyModal setCurrency={setCurrency} currency={currency} />
+                                )}
+                                {/* absolute modal */}
+                            </div>
+
+                            <div className="bg-primaryColor h-[100%] flex gap-[10px] items-center px-[12px] cursor-pointer"
+                                onClick={() => setWalletDropdown(!walletDropdown)} >
                                 <div className="">
-                                    <span className="block text-sm font-medium">
+                                    <span className="block text-light text-sm font-medium">
                                         WALLET BALANCE
                                     </span>
                                     <span className="block text-[12px] font-semibold tracking-wide text-secondaryColor">
@@ -29,7 +59,7 @@ export default function Header() {
                             </div>
                             {walletDropdown && (
                                 <WalletDepositModal
-                                setWalletDropdown={setWalletDropdown}/>
+                                    setWalletDropdown={setWalletDropdown} />
                             )}
                             <div
                                 className="bg-[#f3f3f9] h-[100%] flex gap-[10px] items-center px-[12px] cursor-pointer"

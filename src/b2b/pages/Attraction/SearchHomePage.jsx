@@ -33,9 +33,9 @@ function SearchHomePage({ viewCategory, setViewCategory, setCategory, setSearch 
                     <form>
                         <div className='mx-5 lg:mx-0 flex'>
                             <input type='search' 
-                            placeholder='Search here!!!'
+                            placeholder='Search here for attractions!!!'
                             onChange={(e) => setKeyword(e.target.value)} 
-                            className='px-3 bg-trans w-full border placeholder:text-text py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-l-md text-darktext' />
+                            className='input' />
                         </div>
                     </form>
 
@@ -47,7 +47,7 @@ function SearchHomePage({ viewCategory, setViewCategory, setCategory, setSearch 
                         <div className={`overflow-x-auto `}>
                             <div className=' justify-between lg:space-x-3  lg:flex w-full  px-1'>
                                 {categories?.map((item) => (
-                                    <div key={item?._id} className='space-x-2 w-full flex px-3 hover:text-lightblue lg:justify-center items-center py-4 rounded-lg lg:border lg:border-lightblue cursor-pointer capitalize bg-white'
+                                    <div key={item?._id} className='space-x-2 w-full flex px-3 hover:text-lightblue lg:justify-center items-center py-3 rounded-lg lg:border lg:border-lightblue cursor-pointer capitalize bg-white'
                                         onClick={() => setCategory(item?._id)}
                                     >
                                         <span className='text-lightblue'> <GiIsland /></span>

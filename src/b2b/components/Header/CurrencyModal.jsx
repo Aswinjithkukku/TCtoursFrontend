@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeCurrency } from '../../redux/slices/homeSlice' 
+import { changeCurrency } from '../../../redux/slices/homeSlice' 
 
 function CurrencyModal({ setCurrency, currency }) {
     const dispatch = useDispatch()
@@ -8,7 +8,7 @@ function CurrencyModal({ setCurrency, currency }) {
 
 
     return (
-        <div className="absolute z-20 top-7 md:top-8 -left-8 bg-light rounded-md w-[200px] "  >
+        <div className="absolute z-20 top-7 md:top-14 -left-8 bg-light rounded-md w-[200px] "  >
             <div className="space-y-3 py-2">
                 {currencies?.map((item,index) => (
                 <div className="flex space-x-2 items-center hover:bg-gray-100 px-4 " 

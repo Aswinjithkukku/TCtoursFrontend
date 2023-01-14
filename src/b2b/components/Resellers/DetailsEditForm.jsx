@@ -21,6 +21,15 @@ function DetailsEditForm() {
             <input className='input' type='text' placeholder='Ex: TravellerChoice'></input>
           </div>
           <div className=''>
+          <label className='label'>TRN Number</label>
+          <input className='input' type='number' placeholder='Ex: Dubai' />
+        </div>
+
+        <div className=''>
+          <label className='label'>Company Registration Number</label>
+          <input className='input' type='text' placeholder='Ex: Dubai' />
+        </div>
+          <div className=''>
             <label className='label'>Address</label>
             <input className='input' type='text' placeholder='Ex: Tc, North california'></input>
           </div>

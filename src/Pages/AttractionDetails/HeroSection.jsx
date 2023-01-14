@@ -33,6 +33,9 @@ function HeroSection() {
     const [viewBookCard, setViewBookCard] = useState(false)
     const [shareModal, setShareModal] = useState(false)
 
+    if(excursion === null || excursion === undefined || excursion === {}) {
+        navigate('/error')
+    }
 
     return (
         <>
@@ -126,7 +129,7 @@ function HeroSection() {
                                     <>
 
 
-                                        <div id='availability' className='p-5 mb-2 lg:mb-5  bg-[#3C79F5] text-darktext rounded-2xl '>
+                                        <div id='availability' className='p-5 mb-2 lg:mb-5  bg-gray-300 text-darktext rounded-2xl '>
                                             <Availablity />
                                         </div>
 
