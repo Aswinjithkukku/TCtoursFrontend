@@ -3,13 +3,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import axios from '../../axios';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function PaypalComponent() {
   const navigate = useNavigate()
-
-  const passenger = JSON.parse(localStorage.getItem('passenger'))
+  
   const tour_order = JSON.parse(localStorage.getItem('tour_order'))
-
+  const { passengerDetails } = useSelector(state => state.payment)
+  
   const order_data = tour_order.map((item) => {
     return {
       activity: item?._id,
@@ -21,14 +22,18 @@ function PaypalComponent() {
     }
   })
 
-  const createOrderData = {
-    name: passenger?.firstname + ' ' + passenger?.lastname,
-    email: passenger?.email,
-    country: passenger?.country,
-    phoneNumber: passenger?.phone,
-    selectedActivities: order_data
-  }
-
+  let createOrderData 
+  useEffect(() => {
+    
+     createOrderData = {
+      name: passengerDetails?.firstname + ' ' + passengerDetails?.lastname,
+      email: passengerDetails?.email,
+      country: passengerDetails?.country,
+      phoneNumber: passengerDetails?.phone,
+      selectedActivities: order_data
+    }
+  },[passengerDetails])
+  
   const paypal = useRef()
   useEffect(() => {
     window.paypal.Buttons({

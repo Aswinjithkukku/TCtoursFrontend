@@ -3,10 +3,12 @@ import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { totalRevenuePng } from '../../../static/imagesB2B'
 import AllTransaction from './AllTransaction'
+import CompletedTransaction from './CompletedTransaction'
+import FailedTransaction from './FailedTransaction'
 
 function Wallet() {
 
-  const [componenet, setComponent] = useState({
+  const [component, setComponent] = useState({
     all: true,
     completed: false,
     failed: false
@@ -100,39 +102,51 @@ function Wallet() {
             </div>
             {/* tables */}
             <div className='px-6'>
-            <div className="flex items-center justify-between border-y border-dashed p-4">
-            <h1 className="font-medium">Details</h1>
-            <div className="flex items-center gap-4">
-              <button className={`px-2 bg-transparent font-bold tracking-wide text-textColor transition-all hover:bg-primaryColor hover:text-white`}
-                onClick={() => setComponent({
-                  all: true,
-                  completed: false,
-                  failed: false
-                })} 
-                >
-                All Transactions
-              </button>
-              <button className={`px-2 bg-transparent text-textColor transition-all hover:bg-primaryColor hover:text-white`}
-                onClick={() => setComponent({
-                  all: false,
-                  completed: true,
-                  failed: false
-                })} 
-                >
-                Completed Transatcions
-              </button>
-              <button className={`px-2 bg-transparent text-textColor transition-all hover:bg-primaryColor hover:text-white`}
-                onClick={() => setComponent({
-                  all: false,
-                  completed: false,
-                  failed: true
-                })} 
-                >
-                Failed Transactions
-              </button>
-            </div>
-          </div>
-              <AllTransaction />
+              <div className="flex items-center justify-between border-y border-dashed p-4">
+                <h1 className="font-medium">
+                  {component.all && "All Transactions"}
+                  {component.completed && "Completed Transactions"}
+                  {component.failed && "Failed Transactions"}
+                </h1>
+                <div className="flex items-center gap-4">
+                  <button className={`px-2 bg-transparent ${component.all ? "font-bold" : "font-normal"} tracking-wide text-textColor transition-all hover:bg-primaryColor hover:text-white`}
+                    onClick={() => setComponent({
+                      all: true,
+                      completed: false,
+                      failed: false
+                    })}
+                  >
+                    All Transactions
+                  </button>
+                  <button className={`px-2 bg-transparent ${component.completed ? "font-bold" : "font-normal"} tracking-wide text-textColor transition-all hover:bg-primaryColor hover:text-white`}
+                    onClick={() => setComponent({
+                      all: false,
+                      completed: true,
+                      failed: false
+                    })}
+                  >
+                    Completed Transatcions
+                  </button>
+                  <button className={`px-2 bg-transparent ${component.failed ? "font-bold" : "font-normal"} text-textColor tracking-wide transition-all hover:bg-primaryColor hover:text-white`}
+                    onClick={() => setComponent({
+                      all: false,
+                      completed: false,
+                      failed: true
+                    })}
+                  >
+                    Failed Transactions
+                  </button>
+                </div>
+              </div>
+              {component.all && (
+                <AllTransaction />
+              )}
+              {component.completed && (
+                <CompletedTransaction />
+              )}
+              {component.failed && (
+                <FailedTransaction />
+              )}
             </div>
 
           </div>

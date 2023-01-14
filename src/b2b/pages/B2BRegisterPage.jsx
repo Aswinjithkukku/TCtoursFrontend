@@ -18,11 +18,11 @@ function B2BRegisterPage() {
   })
   return (
     <div className='max-w-screen-xl mx-auto my-10'>
-      <div className='bg-white rounded-xl p-10'>
-        <div className='flex justify-center pb-5'>
+      <div className='bg-white rounded-xl px-10 py-5'>
+        <div className='flex justify-center pb-5 border-b'>
           <img src={logoPng} alt='logo' className='h-[65px]' />
         </div>
-        <div className='lg:grid grid-cols-12 gap-0 '>
+        <div className='lg:grid grid-cols-12 gap-0 pt-4'>
           <div className='1 col-span-7 text-darktext space-y-2 text-sm'>
 
             <ol class="relative  border-l border-gray-200 ">
@@ -39,19 +39,19 @@ function B2BRegisterPage() {
                     <svg aria-hidden="true" class="w-5 h-5 text-gray-500 lg:w-6 lg:h-6 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"></path></svg>
                   )}
                 </span>
-                <div className=''
+                <div className='cursor-pointer'
                   onClick={() => setRegister({
                     comapny: true,
                     profile: false,
                     password: false
                   })}>
-                  <h2 className='text-[15px] uppercase font-semibold tracking-wide space-x-2 flex'>
+                  <h2 className='text-[15px] uppercase font-semibold tracking-wide space-x-2 flex pt-2'>
                     <span className=''><GiFactory /> </span>
                     <span className=''>Company Details</span>
                   </h2>
                 </div>
 
-                <div className='grid grid-cols-2 gap-[10px]'>
+                <div className='grid grid-cols-2 gap-[10px] pt-3'>
                   <div className=''>
                     <label className='label'>Travel Agency Name</label>
                     <input className='input' type='text' placeholder='Ex: TravellerChoice'></input>
@@ -97,7 +97,7 @@ function B2BRegisterPage() {
                     <svg aria-hidden="true" class="w-5 h-5 text-gray-500 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 4h3a3 3 0 006 0h3a2 2 0 012 2v9a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm2.5 7a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm2.45 4a2.5 2.5 0 10-4.9 0h4.9zM12 9a1 1 0 100 2h3a1 1 0 100-2h-3zm-1 4a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
                   )}
                 </span>
-                <div className='pt-2'
+                <div className='pt-2 cursor-pointer'
                   onClick={() => setRegister({
                     comapny: false,
                     profile: true,
@@ -109,7 +109,7 @@ function B2BRegisterPage() {
                   </h2>
                 </div>
 
-                <div className='grid grid-cols-2 gap-[10px]'>
+                <div className='grid grid-cols-2 gap-[10px] pt-2'>
                   <div className=''>
                     <label className='label'>Agent Name</label>
                     <input className='input' type='text' placeholder='Ex: Name'></input>
@@ -184,7 +184,7 @@ function B2BRegisterPage() {
                     <svg aria-hidden="true" class="w-5 h-5 text-gray-500 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
                   )}
                 </span>
-                <div className='pt-2'
+                <div className='pt-2 cursor-pointer'
                   onClick={() => setRegister({
                     comapny: false,
                     profile: false,
@@ -195,7 +195,7 @@ function B2BRegisterPage() {
                     <span className=''>Password Settings</span>
                   </h2>
                 </div>
-                <div className='grid grid-cols-2 gap-[10px]'>
+                <div className='grid grid-cols-2 gap-[10px] pt-2'>
                   <div className=''>
                     <label className='label'>Username</label>
                     <input className='input' type='text' placeholder='Ex: username@123'></input>
@@ -219,7 +219,7 @@ function B2BRegisterPage() {
 
 
           </div>
-          <div className='2 col-span-5 text-darktext space-y-2 mx-3 p-5 text-sm'>
+          <div className='2 col-span-5 text-darktext space-y-4 mx-3 p-5 text-sm border-l'>
 
             <div className=''>
               <h2 className='text-xl font-bold tracking-wide flex space-x-2 pb-2'>
@@ -229,76 +229,76 @@ function B2BRegisterPage() {
             </div>
 
             <div className='tracking-wide '>
-              <p className='mb-2'>Welcome to Travellers Choice B2B website made for our agents!</p>
-              <p className=''>You can resell sdvsgdfgsfdjgs sdsjhdfsjd sfvdshjfgsd fdnbfvsjdfsadf snbvfjsfjhshfjsa fsfjsjsd fdsnbfajsfdvsjafvdsnb sdnfdsgjfdv sdfnsfdsgjvd sncshgdcv sncsndfcgsdnfcvsg nddbfc sbcvsh x</p>
+              <p className='mb-2 text-darktext font-medium'>Welcome to Travellers Choice B2B website made for our agents!</p>
+              <p className='text-darktext font-medium'>You can resell sdvsgdfgsfdjgs sdsjhdfsjd sfvdshjfgsd fdnbfvsjdfsadf snbvfjsfjhshfjsa fsfjsjsd fdsnbfajsfdvsjafvdsnb sdnfdsgjfdv sdfnsfdsgjvd sncshgdcv sncsndfcgsdnfcvsg nddbfc sbcvsh x</p>
             </div>
 
             <div className=''>
               <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
-                <span className='text-lg'><TfiPackage /> </span>
+                <span className='text-lg text-green-700'><TfiPackage /> </span>
                 <span className=''>Build your own package</span>
               </h2>
             </div>
 
             <div className=''>
               <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
-                <span className='text-lg'><IoIosPricetags /> </span>
+                <span className='text-lg text-green-700'><IoIosPricetags /> </span>
                 <span className=''>Best Rate availability</span>
               </h2>
             </div>
 
             <div className=''>
               <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
-                <span className='text-lg'><ImFilePdf /> </span>
+                <span className='text-lg text-green-700'><ImFilePdf /> </span>
                 <span className=''>Online Settlements of invoices & Reciepts</span>
               </h2>
             </div>
 
             <div className=''>
               <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
-                <span className='text-lg'><FaHandsHelping /> </span>
+                <span className='text-lg text-green-700'><FaHandsHelping /> </span>
                 <span className=''>Create your sub agents</span>
               </h2>
             </div>
 
             <div className=''>
               <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
-                <span className='text-lg'><GiReceiveMoney /> </span>
+                <span className='text-lg text-green-700'><GiReceiveMoney /> </span>
                 <span className=''>Strong mrak-up modules</span>
               </h2>
             </div>
 
             <div className=''>
               <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
-                <span className='text-lg'><TbBuildingWarehouse /> </span>
+                <span className='text-lg text-green-700'><TbBuildingWarehouse /> </span>
                 <span className=''>Live inventory of Products</span>
               </h2>
             </div>
 
             <div className=''>
               <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
-                <span className='text-lg'><AiFillHeart /> </span>
+                <span className='text-lg text-green-700'><AiFillHeart /> </span>
                 <span className=''>Add to favourite list</span>
               </h2>
             </div>
 
             <div className=''>
               <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
-                <span className='text-lg'><GiClockwork /> </span>
+                <span className='text-lg text-green-700'><GiClockwork /> </span>
                 <span className=''>Multiple Tour option, Transfer option & time slots for the same tour</span>
               </h2>
             </div>
 
             <div className=''>
               <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
-                <span className='text-lg'><BsFillCartCheckFill /> </span>
+                <span className='text-lg text-green-700'><BsFillCartCheckFill /> </span>
                 <span className=''>Shopping cart application</span>
               </h2>
             </div>
 
             <div className=''>
               <h2 className=' font-medium tracking-wide flex py-[1px]  space-x-2'>
-                <span className='text-lg'><BsCalendar2Week /></span>
+                <span className='text-lg text-green-700'><BsCalendar2Week /></span>
                 <span className=''>Get relaxed with instant confirmation on bookings</span>
               </h2>
             </div>

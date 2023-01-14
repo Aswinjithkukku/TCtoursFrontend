@@ -31,7 +31,6 @@ import {
   PaymentHomePage,
   Resellers,
   Settings,
-  SubOrders,
   Wallet,
 } from "../b2b/pages";
 
@@ -70,7 +69,6 @@ const ThemeRoutes = [
       { path: "/b2b/markup/attraction", element: <MarkUpList /> },
       { path: "/b2b/settings", element: <Settings /> },
       { path: "/b2b/order", element: <MainOrder /> },
-      { path: "/b2b/order/sub", element: <SubOrders /> },
       { path: "/b2b/wallet", element: <Wallet /> },
     ],
   },

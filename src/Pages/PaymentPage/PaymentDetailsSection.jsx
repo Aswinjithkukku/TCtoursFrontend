@@ -30,18 +30,21 @@ function PaymentDetailsSection() {
         setTravellerData({ ...travellerData, [e.target.name]: e.target.value })
     }
 
-    const submitHandler = (e) => {
-        e.preventDefault()
+    useEffect(() =>{
         dispatch(getPassengerDetails(travellerData))
-        localStorage.setItem('passenger', JSON.stringify(travellerData))
-        console.log(travellerData);
-        console.log("hiiii");
-    }
+    }, [travellerData])
+    // const submitHandler = (e) => {
+    //     e.preventDefault()
+    //     dispatch(getPassengerDetails(travellerData))
+    //     localStorage.setItem('passenger', JSON.stringify(travellerData))
+    //     console.log(travellerData);
+    //     console.log("hiiii");
+    // }
 
     return (
         <>
             <div className='bg-light  w-full p-5 rounded-2xl space-y-5'>
-                <form onSubmit={submitHandler} >
+                <form >
                     <div className=' cursor-default'>
                         <h2 className='text-2xl font-semibold text-darktext'>Lead Passenger Details</h2>
                     </div>
@@ -156,9 +159,9 @@ function PaymentDetailsSection() {
                             />
                         </div>
                     </div>
-                    <div className='flex justify-end' >
+                    {/* <div className='flex justify-end' >
                         <button type='submit' className='text-sm text-light bg-lightblue px-3 py-1 rounded-[4px]'>Submit</button>
-                    </div>
+                    </div> */}
                 </form>
             </div>
             <div className='bg-light  w-full px-5 py-10 rounded-2xl lg:my-5'>
@@ -193,7 +196,7 @@ function PaymentDetailsSection() {
                     </div>
                 </div>
                 {paymentSection.paypal && (
-                    <PaypalComponent travellerData={travellerData} />
+                    <PaypalComponent />
                 )}
                 {paymentSection.razorpay && (
                     <RazorpayComponent />

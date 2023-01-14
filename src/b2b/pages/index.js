@@ -11,7 +11,6 @@ import MarkUpList from "./MarkUp/MarkUpList";
 import EditResellers from "./Resllers/EditResellers";
 import Settings from "./Settings/Settings";
 import MainOrder from "./Order/MainOrder";
-import SubOrders from "./Order/SubOrders";
 import Wallet from "./Wallet/Wallet";
 
 export {
@@ -28,6 +27,5 @@ export {
   EditResellers,
   Settings,
   MainOrder,
-  SubOrders,
   Wallet,
 };

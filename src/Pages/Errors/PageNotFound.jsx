@@ -15,7 +15,7 @@ function PageNotFound() {
           <div className='flex justify-center my-1'>
             <button className='bg-white text-lg font-bold tracking-wider text-[#1a2e35] rounded w-[120px] py-2'
             onClick={() =>  navigate(-1)}
-            >RETRUN</button>
+            >RETURN</button>
           </div>
         </div>
       </div>

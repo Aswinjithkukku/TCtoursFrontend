@@ -8,6 +8,7 @@ function OrderHistory() {
           <th className="font-[500] p-3">Ref.No</th>
           <th className="font-[500] p-3">Activity</th>
           <th className="font-[500] p-3">Bookig Type</th>
+          <th className="font-[500] p-3">Date</th>
           <th className="font-[500] p-3">Adults</th>
           <th className="font-[500] p-3">Children</th>
           <th className="font-[500] p-3">Infant</th>
@@ -21,17 +22,13 @@ function OrderHistory() {
           <td className="p-3">
             Pearl Heli Tour (12 Mins. Ride)
           </td>
+          <td className="p-3">Ticket</td>
           <td className="p-3">January 3, 2023</td>
-          <td className="p-3">
-            <span className="block text-sm capitalize">
-              Test
-            </span>
-            <span>test@email.com</span>
-          </td>
           <td className="p-3 ">1</td>
           <td className="p-3">0</td>
           <td className="p-3">0</td>
           <td className="p-3">153 AED</td>
+          <td className="p-3">Confirmed</td>
         </tr>
       </tbody>
     </table>

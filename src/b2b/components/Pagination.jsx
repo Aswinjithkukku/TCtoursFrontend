@@ -67,7 +67,7 @@ export default function Pagination({
                     return <></>;
                 })}
                 <button
-                    className="px-[10px] h-[32px] font-[500] text-[13px disabled:cursor-not-allowed bg-transparent border text-textColor hover:bg-[#f3f6f9] disabled:hover:bg-[#fff]"
+                    className="px-[10px] h-[32px] font-[500] text-[13px] disabled:cursor-not-allowed bg-transparent border text-textColor hover:bg-[#f3f6f9] disabled:hover:bg-[#fff]"
                     onClick={() => incOrDecSkip(1)}
                     disabled={(skip + 1) * limit >= total}
                 >

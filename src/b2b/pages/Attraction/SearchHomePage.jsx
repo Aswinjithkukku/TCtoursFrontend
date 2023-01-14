@@ -50,7 +50,7 @@ function SearchHomePage({ viewCategory, setViewCategory, setCategory, setSearch 
                                     <div key={item?._id} className='space-x-2 w-full flex px-3 hover:text-lightblue lg:justify-center items-center py-3 rounded-lg lg:border lg:border-lightblue cursor-pointer capitalize bg-white'
                                         onClick={() => setCategory(item?._id)}
                                     >
-                                        <span className='text-lightblue'> <GiIsland /></span>
+                                        <img src={process.env.REACT_APP_SERVER_URL + item?.icon} alt='icon' className='w-5 h-5'/>
                                         <span className='whitespace-nowrap'>{item?.categoryName}</span>
                                     </div>
                                 ))}

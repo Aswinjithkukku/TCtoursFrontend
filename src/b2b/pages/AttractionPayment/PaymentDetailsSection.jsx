@@ -3,11 +3,17 @@ import { AiOutlineDown } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import PaypalComponent from '../../../components/Payment/PaypalComponent'
 import { getPassengerDetails } from '../../../redux/slices/paymentSlice'
+import RazorpayComponent from '../../../components/Payment/RazorpayComponent'
 
 
 
 function PaymentDetailsSection() {
     const dispatch = useDispatch()
+
+    const [paymentSection, setPaymentSection] = useState({
+        paypal: true,
+        razorpay: false
+    })
 
     const [travellerData, setTravellerData] = useState({
         gender: "male",
@@ -25,18 +31,21 @@ function PaymentDetailsSection() {
         setTravellerData({ ...travellerData, [e.target.name]: e.target.value })
     }
 
-    const submitHandler = (e) => {
-        e.preventDefault()
+    useEffect(() =>{
         dispatch(getPassengerDetails(travellerData))
-        localStorage.setItem('passenger', JSON.stringify(travellerData))
-        console.log(travellerData);
-        console.log("hiiii");
-    }
+    }, [travellerData])
+    // const submitHandler = (e) => {
+    //     e.preventDefault()
+    //     dispatch(getPassengerDetails(travellerData))
+    //     localStorage.setItem('passenger', JSON.stringify(travellerData))
+    //     console.log(travellerData);
+    //     console.log("hiiii");
+    // }
 
     return (
         <>
             <div className='bg-light  w-full p-5 rounded-2xl space-y-5'>
-                <form onSubmit={submitHandler} >
+                <form >
                     <div className=' cursor-default'>
                         <h2 className='text-2xl font-semibold text-darktext'>Lead Passenger Details</h2>
                     </div>
@@ -151,9 +160,9 @@ function PaymentDetailsSection() {
                             />
                         </div>
                     </div>
-                    <div className='flex justify-end' >
+                    {/* <div className='flex justify-end' >
                         <button type='submit' className='text-sm text-light bg-lightblue px-3 py-1 rounded-[4px]'>Submit</button>
-                    </div>
+                    </div> */}
                 </form>
             </div>
             <div className='bg-light  w-full px-5 py-10 rounded-2xl lg:my-5'>
@@ -178,11 +187,21 @@ function PaymentDetailsSection() {
                 )}
             </div>
             <div className='bg-light rounded-2xl w-full p-5 space-y-5'>
-                <div className='border-b pb-3 my-2'>
+                <div className='border-b pb-3 my-2 flex justify-between'>
                     <h2 className='text-xl font-medium'>Choose Payment Method</h2>
+                    <div className='space-x-2 bg-[#E6e6e6] rounded'>
+                        <button className={` ${paymentSection.paypal ? "bg-lightblue text-white" : "text-darktext font-medium"} w-[100px] py-1 rounded`}
+                            onClick={() => setPaymentSection({ paypal: true, razorpay: false })}>Paypal</button>
+                        <button className={`${paymentSection.razorpay ? "bg-lightblue text-white" : "text-darktext font-medium"} w-[100px] py-1 rounded`}
+                            onClick={() => setPaymentSection({ paypal: false, razorpay: true })}>Razor Pay</button>
+                    </div>
                 </div>
-
-                <PaypalComponent travellerData={travellerData} />
+                {paymentSection.paypal && (
+                    <PaypalComponent />
+                )}
+                {paymentSection.razorpay && (
+                    <RazorpayComponent />
+                )}
 
             </div>
             <div className='bg-light my-5 p-7 rounded-2xl lg:flex '>

@@ -26,28 +26,28 @@ const sidebarMenus = [
   {
     name: "Orders",
     icon: <HiOutlineShoppingCart />,
-    link: "#",
-    dropdown: [
-      {
-        name: "Order History",
-        link: "/b2b/order",
-      },
-      {
-        name: "Sub-Agent History",
-        link: "/b2b/order/sub",
-      },
-    ],
+    link: "/b2b/order",
+    // dropdown: [
+    //   {
+    //     name: "Order History",
+    //     link: "/b2b/order",
+    //   },
+    //   {
+    //     name: "Sub-Agent History",
+    //     link: "/b2b/order/sub",
+    //   },
+    // ],
   },
   {
     name: "Markups",
     icon: <RiMarkupFill />,
-    link: "#",
-    dropdown: [
-      {
-        name: "Markups",
-        link: "/b2b/markup/attraction",
-      },
-    ],
+    link: "/b2b/markup/attraction",
+    // dropdown: [
+    //   {
+    //     name: "Markups",
+    //     link: ,
+    //   },
+    // ],
   },
   {
     name: "Resellers",

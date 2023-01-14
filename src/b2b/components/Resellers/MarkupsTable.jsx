@@ -1,4 +1,5 @@
 import React from 'react'
+import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 
 function MarkupsTable() {
   return (
@@ -26,8 +27,8 @@ function MarkupsTable() {
             <td className="p-3">N/A</td>
             <td className="p-3">170</td>
             <td className="p-3 flex space-x-1">
-              {/* <span className='text-xl text-lightblue'><AiFillEdit /> </span>
-              <span className='text-xl text-main'><AiFillDelete /> </span> */}
+              <span className='text-xl text-lightblue'><AiFillEdit /> </span>
+              <span className='text-xl text-main'><AiFillDelete /> </span>
             </td>
           </tr>
         </tbody>

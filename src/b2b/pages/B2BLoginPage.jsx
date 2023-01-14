@@ -7,9 +7,9 @@ function B2BLoginPage() {
   return (
     <section class="h-screen max-w-screen-xl mx-auto">
       <div class=" h-full text-darktext flex items-center justify-center">
-        <div className='bg-white p-10 rounded-lg'>
+        <div className='bg-white px-10 py-5 rounded-lg '>
 
-          <div className='flex justify-center mb-7'>
+          <div className='flex justify-center pb-4 mb-7 border-b'>
             <img src={logoPng} alt='logo' className='h-[65px]' />
           </div>
 
@@ -23,15 +23,6 @@ function B2BLoginPage() {
             </div>
             <div class=" lg:w-10/12 mb-12 md:mb-0">
               <form>
-                <div class="mb-6">
-                  <input
-                    type="text"
-                    class="input"
-                    id="exampleFormControlInput2"
-                    placeholder="Email address"
-                  />
-                </div>
-
 
                 <div class="mb-6">
                   <input
@@ -39,6 +30,15 @@ function B2BLoginPage() {
                     class="input"
                     id="exampleFormControlInput2"
                     placeholder="Agent-code"
+                  />
+                </div>
+
+                <div class="mb-6">
+                  <input
+                    type="text"
+                    class="input"
+                    id="exampleFormControlInput2"
+                    placeholder="Email address"
                   />
                 </div>
 

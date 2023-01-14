@@ -1,5 +1,5 @@
 import React from 'react'
-import { MdOutlineArrowDownward, MdOutlineArrowUpward } from 'react-icons/md'
+import { MdBlockFlipped, MdOutlineArrowDownward, MdOutlineArrowUpward } from 'react-icons/md'
 
 function AllTransaction() {
   return (
@@ -30,7 +30,7 @@ function AllTransaction() {
             </span>
           </td>
           <td className="p-3">170</td>
-          <td className="p-3 font-semibold">300</td>
+          <td className="p-3 font-semibold">470</td>
 
         </tr>
         <tr className="border-b border-tableBorderColor">
@@ -47,6 +47,23 @@ function AllTransaction() {
             </span>
           </td>
           <td className="p-3">170</td>
+          <td className="p-3 font-semibold">300</td>
+
+        </tr>
+        <tr className="border-b border-tableBorderColor">
+          <td className="p-3">#63b2cc</td>
+          <td className="p-3">paypal</td>
+          <td className="p-3">2022-12-15</td>
+          <td className="p-3 ">11:00</td>
+          <td className="p-3 flex space-x-1 items-center text-main">
+            <span className=''>
+              <MdBlockFlipped />
+            </span>
+            <span className=''>
+              Failed
+            </span>
+          </td>
+          <td className="p-3">270</td>
           <td className="p-3 font-semibold">300</td>
 
         </tr>
