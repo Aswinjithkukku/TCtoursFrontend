@@ -47,7 +47,7 @@ function ActivityTable({ item, index }) {
 
     return (
         <tr className='text-darktext border-b' key={index}>
-            <td className='py-3 px-1 max-w-[13em] w-[13em] flex items-start space-x-2'>
+            <td className='py-3 px-1 max-w-[13em] w-[13em] space-x-2'>
                 <span className=''>
 
                     {/* <input type='checkbox' className=''

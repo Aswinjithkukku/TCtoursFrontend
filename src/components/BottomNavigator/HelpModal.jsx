@@ -3,6 +3,7 @@ import { AiOutlineClose, AiOutlineMail } from 'react-icons/ai'
 import { BsFacebook, BsPhoneVibrate, BsTelephone, BsTelephoneFill, BsWhatsapp } from 'react-icons/bs'
 import { FaFacebookF } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 function HelpModal({ view, setView }) {
 
@@ -22,9 +23,9 @@ function HelpModal({ view, setView }) {
             <h2 className='bg-gray-300 pl-2 mb-5'>General</h2>
             <div className='flex justify-between border-b border-dashed pb-3'>
               <div className=''>
-                <a href="https://app.mytcb2b.com/#/login" target={"_blank"}>
+                <Link to="/b2b">
                   B2B Login
-                </a>
+                </Link>
               </div>
             </div>
             <div className='flex justify-between border-b border-dashed pb-3'>

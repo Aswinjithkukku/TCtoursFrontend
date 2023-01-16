@@ -61,13 +61,13 @@ function Navbar() {
                                     </div>
                                     <div
                                         ref={languageRef}
-                                        className="flex space-x-1 items-center cursor-pointer"
+                                        className="flex space-x-1 items-center cursor-pointer relative"
                                         onClick={() =>
                                             setLanguage(!language)
                                         }
                                     >
                                         <span className="text-base font-medium cursor-pointer">
-                                            English
+                                            EN
                                         </span>
                                         <span className="text-base">
                                             {language ? (

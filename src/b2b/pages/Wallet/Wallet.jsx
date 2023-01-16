@@ -16,7 +16,7 @@ function Wallet() {
   return (
     <>
       <div className=' '>
-        <div className="bg-white flex items-center justify-between gap-[10px] px-6 shadow-sm border-t py-2">
+        <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
           <h1 className="font-[600] text-[15px] uppercase">
             Wallet
           </h1>
@@ -28,13 +28,13 @@ function Wallet() {
             <span>Wallet</span>
           </div>
         </div>
-        <div className='p-6'>
-          <div className="bg-white rounded shadow-sm mt-6">
+        <div className='p-2 lg:p-6'>
+          <div className="bg-white rounded shadow-sm mt-2 lg:mt-6">
             <div className="flex items-center justify-between border-b border-dashed p-4">
               <h1 className="font-medium">Wallet</h1>
             </div>
 
-            <div className='grid grid-cols-2 p-12 gap-12'>
+            <div className='md:grid md:grid-cols-2 space-y-2 md:space-y-0 md:p-12 gap-12'>
               <div className=''>
                 <div className='bg-gray-200 rounded-sm py-3 shadow-sm px-2 lg:px-7'>
                   <div className='lg:flex justify-between'>
@@ -101,15 +101,15 @@ function Wallet() {
               </div>
             </div>
             {/* tables */}
-            <div className='px-6'>
-              <div className="flex items-center justify-between border-y border-dashed p-4">
-                <h1 className="font-medium">
+            <div className='lg:px-6 px-1 '>
+              <div className="flex items-center justify-between border-y border-dashed p-2 py-4  lg:p-4">
+                <h1 className="font-medium hidden md:block">
                   {component.all && "All Transactions"}
                   {component.completed && "Completed Transactions"}
                   {component.failed && "Failed Transactions"}
                 </h1>
-                <div className="flex items-center gap-4">
-                  <button className={`px-2 bg-transparent ${component.all ? "font-bold" : "font-normal"} tracking-wide text-textColor transition-all hover:bg-primaryColor hover:text-white`}
+                <div className="flex items-center gap-2 lg:gap-4 overflow-x-auto">
+                  <button className={`px-2 bg-transparent whitespace-nowrap ${component.all ? "font-bold" : "font-normal"} tracking-wide text-textColor transition-all hover:bg-primaryColor hover:text-white`}
                     onClick={() => setComponent({
                       all: true,
                       completed: false,
@@ -118,7 +118,7 @@ function Wallet() {
                   >
                     All Transactions
                   </button>
-                  <button className={`px-2 bg-transparent ${component.completed ? "font-bold" : "font-normal"} tracking-wide text-textColor transition-all hover:bg-primaryColor hover:text-white`}
+                  <button className={`px-2 bg-transparent whitespace-nowrap ${component.completed ? "font-bold" : "font-normal"} tracking-wide text-textColor transition-all hover:bg-primaryColor hover:text-white`}
                     onClick={() => setComponent({
                       all: false,
                       completed: true,
@@ -127,7 +127,7 @@ function Wallet() {
                   >
                     Completed Transatcions
                   </button>
-                  <button className={`px-2 bg-transparent ${component.failed ? "font-bold" : "font-normal"} text-textColor tracking-wide transition-all hover:bg-primaryColor hover:text-white`}
+                  <button className={`px-2 bg-transparent whitespace-nowrap ${component.failed ? "font-bold" : "font-normal"} text-textColor tracking-wide transition-all hover:bg-primaryColor hover:text-white`}
                     onClick={() => setComponent({
                       all: false,
                       completed: false,
@@ -139,13 +139,19 @@ function Wallet() {
                 </div>
               </div>
               {component.all && (
-                <AllTransaction />
+                <div className='overflow-x-auto'>
+                  <AllTransaction />
+                </div>
               )}
               {component.completed && (
+                <div className='overflow-x-auto'>
                 <CompletedTransaction />
+                </div>
               )}
               {component.failed && (
+                <div className='overflow-x-auto'>
                 <FailedTransaction />
+                </div>
               )}
             </div>
 

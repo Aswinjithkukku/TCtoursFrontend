@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 function NewRegisters() {
   return (
     <div className=''>
-      <div className="bg-white flex items-center justify-between gap-[10px] px-6 shadow-sm border-t py-2">
+      <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
         <h1 className="font-[600] text-[15px] uppercase">
           New Reseller Register
         </h1>
@@ -19,15 +19,15 @@ function NewRegisters() {
           <span>New Register</span>
         </div>
       </div>
-      <div className='p-6'>
-        <div className="bg-white rounded shadow-sm mt-6 p-6 ">
+      <div className='p-2 lg:p-6'>
+        <div className="bg-white rounded shadow-sm mt-2 lg:mt-6 p-3 lg:p-6 ">
           <div className='flex items-center justify-between border-b border-dashed p-4'>
             <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
               <span className=''><GiFactory /> </span>
               <span className=''>Company Details</span>
             </h2>
           </div>
-          <div className='grid grid-cols-3 gap-[20px] mt-4'>
+          <div className='space-y-2 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-4'>
 
             <div className=''>
               <label className='label'>Travel Agency Name</label>
@@ -69,14 +69,14 @@ function NewRegisters() {
               <input className='input' type='text' placeholder=''></input>
             </div>
           </div>
-          <div className='pt-3 flex items-center justify-between border-b border-dashed p-4'>
+          <div className='pt-5 lg:pt-3 flex items-center justify-between border-b border-dashed p-4'>
             <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
               <span className=''><GoPerson /> </span>
               <span className=''>Profile Details</span>
             </h2>
           </div>
 
-          <div className='grid grid-cols-3 gap-[20px] mt-4'>
+          <div className='lg:space-y-0 space-y-2 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-4'>
 
             <div className=''>
               <label className='label'>Agent Name</label>

@@ -57,14 +57,14 @@ function SearchHomePage({ viewCategory, setViewCategory, setCategory, setSearch 
                             </div>
                         </div>
                     </div>
-                    <div className=' flex justify-around lg:hidden'>
+                    {/* <div className=' flex justify-around lg:hidden'>
                         <span className=''>
                             <button className='border border-blue rounded-lg px-5 py-2 hover:text-blue' onClick={() => setViewFilter(!viewFilter)}>Category</button>
                         </span>
                         <span className=''>
                             <button className='border border-blue rounded-lg px-10 py-2' onClick={() => setViewCategory(!viewCategory)}>Filters</button>
                         </span>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>

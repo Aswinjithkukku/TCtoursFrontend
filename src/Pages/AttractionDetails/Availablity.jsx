@@ -20,18 +20,18 @@ function Availablity() {
             <span className=''>
               <div className='grid lg:grid-cols-4 grid-cols-2 gap-4'>
                 {excursion?.availability?.map((item, index) => (
-                  <div className='bg-white rounded-2xl shadow-sm lg:w-[190px] h-[100px] ' key={index}>
+                  <div className='bg-[#00337C] text-white rounded-2xl shadow-sm lg:w-[190px] h-[100px] ' key={index}>
                     <div className='py-1 border-b border-dashed'>
                       <p className='text-center font-bold uppercase ' >{item?.day}</p>
                     </div>
                     <div className='mt-2'>
                       <div className=''>
                         <div className='flex space-x-1 justify-center'>
-                          <span className='text-lightblue '><BsDoorOpenFill />  </span>
+                          <span className='text-gray-300 '><BsDoorOpenFill />  </span>
                           <span className=''>{item?.open} </span>
                         </div>
                         <div className='flex space-x-1 justify-center'>
-                          <span className='text-lightblue'><BsDoorClosedFill /> </span>
+                          <span className='text-gray-300'><BsDoorClosedFill /> </span>
                           <span className=''>{item?.close} </span>
                         </div>
                       </div>
@@ -62,3 +62,4 @@ function Availablity() {
 }
 
 export default Availablity
+

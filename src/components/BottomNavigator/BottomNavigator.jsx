@@ -21,7 +21,7 @@ function BottomNavigator() {
   return (
     <>
       <main className={`${location.pathname.includes('/details/') ? 'hidden' : 'block'} md:hidden sticky bottom-0 bg-blue  w-full shadow-sm border-t rounded-t-xl`}>
-        <div className='flex justify-between gap-5 px-5 place-items-center h-16 text-light text-sm'>
+        <div className='grid grid-cols-5 gap-5 px-5 place-items-center h-16 text-light text-sm'>
           <Link to='/'>
             <div className="space-y-[1px]">
               <div className='flex justify-center text-2xl'><AiOutlineHome /> </div>
@@ -41,8 +41,9 @@ function BottomNavigator() {
               return { ...prev, search: true }
             })
           }}>
-            <div className=' flex absolute -top-12 -left-9  justify-center items-center text-3xl bg-main w-16 h-16 rounded-full '><AiOutlineSearch /> </div>
-            {/* <div className=''>Search </div> */}
+            <div className=' flex items-center justify-center relative '>
+              <div className='absolute -top-12 flex  justify-center items-center text-3xl  bg-main w-16 h-16 rounded-full'><AiOutlineSearch /> </div>
+            </div>
           </div>
           <div className="space-y-[1px]" onClick={() => {
             setView((prev) => {

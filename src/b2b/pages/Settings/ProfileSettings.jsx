@@ -3,7 +3,7 @@ import React from 'react'
 function ProfileSettings() {
   return (
     <div className=''>
-      <div className='grid grid-cols-3 gap-[20px]'>
+      <div className='space-y-2 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px]'>
 
         <div className=''>
           <label className='label'>Agent Name</label>

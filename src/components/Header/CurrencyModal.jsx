@@ -8,7 +8,7 @@ function CurrencyModal({ setCurrency, currency }) {
 
 
     return (
-        <div className="absolute z-20 top-7 md:top-8 -left-8 bg-light rounded-md w-[200px] "  >
+        <div className="absolute z-20 top-7 md:top-8 -left-5 bg-light rounded-md w-[230px] "  >
             <div className="space-y-3 py-2">
                 {currencies?.map((item,index) => (
                 <div className="flex space-x-2 items-center hover:bg-gray-100 px-4 " 
@@ -23,7 +23,7 @@ function CurrencyModal({ setCurrency, currency }) {
                 }}
                 >
                     <img src={item?.country?.flag} alt={item?.country?.countryName} className='w-[30px]' />
-                    <p className='text-[10px] text-start whitespace-nowrap capitalize'>{item?.country?.countryName}</p>
+                    <p className='text-[13px] text-start whitespace-nowrap capitalize'>{item?.country?.countryName}</p>
                 </div>
                 ))}
             </div>

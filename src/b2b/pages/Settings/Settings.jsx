@@ -12,7 +12,7 @@ function Settings() {
   })
   return (
     <div>
-      <div className="bg-white flex items-center justify-between gap-[10px] px-6 shadow-sm border-t py-2">
+      <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
         <h1 className="font-[600] text-[15px] uppercase">
           Settings
         </h1>
@@ -25,7 +25,7 @@ function Settings() {
         </div>
       </div>
 
-      <div className="p-6">
+      <div className="p-2 lg:p-6">
         <div className="bg-white rounded shadow-sm">
           <div className="grid grid-cols-3">
             <div

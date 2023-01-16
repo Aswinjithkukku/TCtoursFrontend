@@ -15,7 +15,7 @@ function EditResellers() {
   })
   return (
     <div className=''>
-      <div className="bg-white flex items-center justify-between gap-[10px] px-6 shadow-sm border-t py-2">
+      <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
         <h1 className="font-[600] text-[15px] uppercase">
           Edit Resellers
         </h1>
@@ -27,12 +27,12 @@ function EditResellers() {
           <span>Edit resellers</span>
         </div>
       </div>
-      <div className='p-6'>
-        <div className=" bg-white rounded shadow-sm mt-6">
+      <div className='p-2 lg:p-6'>
+        <div className=" bg-white rounded shadow-sm mt-2 lg:mt-6">
           <div className="flex items-center justify-between border-b border-dashed p-4">
-            <h1 className="font-medium">Details</h1>
-            <div className="flex items-center gap-4">
-              <button className={`px-2 bg-transparent ${component.details ? "font-bold tracking-wide text-darktext" : "text-textColor"} transition-all hover:bg-primaryColor hover:text-white`}
+            <h1 className="font-medium hidden md:block ">Details</h1>
+            <div className="flex items-center gap-4 overflow-x-auto">
+              <button className={`px-2 bg-transparent whitespace-nowrap ${component.details ? "font-bold tracking-wide text-darktext" : "text-textColor"} transition-all hover:bg-primaryColor hover:text-white`}
                 onClick={() => setComponent({
                   details: true,
                   markups: false,
@@ -41,7 +41,7 @@ function EditResellers() {
                 })} >
                 Details
               </button>
-              <button className={`px-2 bg-transparent text-textColor transition-all hover:bg-primaryColor hover:text-white`}
+              <button className={`px-2 bg-transparent whitespace-nowrap text-textColor transition-all hover:bg-primaryColor hover:text-white`}
                 onClick={() => setComponent({
                   details: false,
                   markups: true,
@@ -50,7 +50,7 @@ function EditResellers() {
                 })}>
                 Markups
               </button>
-              <button className={`px-2 bg-transparent text-textColor transition-all hover:bg-primaryColor hover:text-white`}
+              <button className={`px-2 bg-transparent whitespace-nowrap text-textColor transition-all hover:bg-primaryColor hover:text-white`}
                 onClick={() => setComponent({
                   details: false,
                   markups: false,
@@ -59,7 +59,7 @@ function EditResellers() {
                 })}>
                 Order History
               </button>
-              <button className={`px-2 bg-transparent text-textColor transition-all hover:bg-primaryColor hover:text-white`}
+              <button className={`px-2 bg-transparent whitespace-nowrap text-textColor transition-all hover:bg-primaryColor hover:text-white`}
                 onClick={() => setComponent({
                   details: false,
                   markups: false,
@@ -74,13 +74,19 @@ function EditResellers() {
             <DetailsEditForm />
           )}
           {component.markups && (
-            <MarkupsTable />
+            <div className='overflow-x-auto'>
+              <MarkupsTable />
+            </div>
           )}
           {component.orders && (
-            <OrderHistory />
+            <div className='overflow-x-auto'>
+              <OrderHistory />
+            </div>
           )}
           {component.transactions && (
+            <div className='overflow-x-auto'>
             <TransactionHistoryTable />
+            </div>
           )}
         </div>
       </div>

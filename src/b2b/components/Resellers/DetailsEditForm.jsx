@@ -38,14 +38,14 @@ function DetailsEditForm() {
 
   return (
     <div className=''>
-      <div className='p-6'>
+      <div className='p-3 lg:p-6'>
         <div className='flex items-center justify-between border-b border-dashed p-4'>
           <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
             <span className=''><GiFactory /> </span>
             <span className=''>Company Details</span>
           </h2>
         </div>
-        <div className='grid grid-cols-3 gap-[20px] mt-4'>
+        <div className='space-y-2 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-4'>
 
           <div className=''>
             <label className='label'>Travel Agency Name</label>
@@ -144,7 +144,7 @@ function DetailsEditForm() {
           </h2>
         </div>
 
-        <div className='grid grid-cols-3 gap-[20px] mt-4'>
+        <div className='space-y-2 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-4'>
 
           <div className=''>
             <label className='label'>Agent Name</label>

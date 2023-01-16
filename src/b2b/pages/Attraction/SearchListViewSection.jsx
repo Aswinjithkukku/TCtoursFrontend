@@ -27,9 +27,9 @@ function SearchListViewSection() {
     return (
         <div>
             {excursions?.attractions?.data[0] ? (
-                <div className='md:grid md:grid-cols-4 gap-5'>
+                <div className='md:grid md:grid-cols-2 lg:grid-cols-4 gap-5'>
                     {excursions?.attractions?.data[0] && excursions?.attractions?.data?.map((item, index) => (
-                        <div key={index} className='h-full snap-start mt-2 bg-light shadow-md p-3 rounded-3xl cursor-pointer mx-2 md:mx-0' onClick={() => {
+                        <div key={index} className='h-full snap-start mt-2 bg-light shadow-md p-3 rounded-3xl cursor-pointer md:mx-0' onClick={() => {
                             saveDatatoLocalStorage({
                                 _id: item?._id,
                                 title: item?.title,

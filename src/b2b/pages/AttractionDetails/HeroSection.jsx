@@ -38,7 +38,7 @@ function HeroSection() {
     <>
       <MetaData title={excursion?.title} link_title={excursion?.title} description={'Get best deals on Travel and Tourism online with us'} thumbnail={excursion?.images ? excursion?.images[0] : ''} />
       <div className='bg-white'>
-        <div className='p-6'>
+        <div className='p-0 lg:p-6'>
           <div className=''>
             <div className='relative lg:grid lg:grid-cols-12 gap-5 py-2 lg:my-0 lg:py-7'>
               <div className='1st lg:col-span-8'>

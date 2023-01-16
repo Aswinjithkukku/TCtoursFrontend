@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import HeroSearch from './Attraction/HeroSearch'
+// import HeroSearch from './Attraction/HeroSearch'
+import SearchCards from '../components/Cards/SearchCards'
 
 import {
     bookingCancelledPng,
@@ -21,7 +22,7 @@ export default function Dashboard() {
 
     return (
         <div className="">
-            <div className="bg-white flex items-center justify-between gap-[10px] px-6 shadow-sm border-t py-2">
+            <div className="bg-white flex items-center justify-between gap-[10px] lg:px-6 px-2 shadow-sm border-t py-2">
                 <h1 className="font-[600] text-[15px] uppercase">
                     Dashboard
                 </h1>
@@ -31,7 +32,7 @@ export default function Dashboard() {
                     </Link>
                 </div>
             </div>
-            <div className="p-6 bg-bodyColor">
+            <div className="lg:p-6 p-2 bg-bodyColor">
                 <div className="flex items-center justify-between gap-[10px] mb-5">
                     <div>
                         <span className="font-medium text-textColor">
@@ -42,20 +43,20 @@ export default function Dashboard() {
                         </span>
                     </div>
                     <div>
-                        <select name="" id="" className="w-[150px]">
+                        <select name="" id="" className="lg:w-[150px] w-[100px]">
                             <option value="">All Time</option>
                         </select>
                     </div>
                 </div>
 
-                <div className="">
+                <div className="my-2 lg:my-6 ">
                     <div className="">
                         <h2 className="font-[600] text-[18px] uppercase">Attraction</h2>
                     </div>
-                    <HeroSearch />
+                    <SearchCards />
                 </div>
 
-                <div className="grid grid-cols-4 gap-6">
+                <div className="md:grid md:grid-cols-2 space-y-2 md:space-y-0 lg:grid-cols-4 gap-6">
                     <WalletCard
                         title={"Wallet Balance"}
                         value={300}
@@ -90,7 +91,7 @@ export default function Dashboard() {
                     />
                 </div>
 
-                <div className="grid grid-cols-4 gap-6 mt-6">
+                <div className="md:grid md:grid-cols-2 lg:grid-cols-4 space-y-2 lg:space-y-0 gap-6 mt-2 lg:mt-6">
                     <TopCard
                         title={"Total Revenue"}
                         value={300}
