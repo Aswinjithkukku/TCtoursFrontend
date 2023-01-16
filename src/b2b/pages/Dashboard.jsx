@@ -50,9 +50,6 @@ export default function Dashboard() {
                 </div>
 
                 <div className="my-2 lg:my-6 ">
-                    <div className="">
-                        <h2 className="font-[600] text-[18px] uppercase">Attraction</h2>
-                    </div>
                     <SearchCards />
                 </div>
 
