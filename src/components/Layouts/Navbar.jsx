@@ -55,7 +55,7 @@ function Navbar() {
                             <span className="md:flex text-lg hidden items-center ">
                                 <div className="flex px-5 space-x-2 md:space-x-5 text-dark items-center">
                                     <div className="cursor-pointer whitespace-nowrap font-medium text-sm lg:text-base">
-                                        <Link to="/b2b">
+                                        <Link to="/b2b/login">
                                             B2B Login
                                         </Link>
                                     </div>
@@ -99,9 +99,9 @@ function Navbar() {
                                         {/* absolute modal */}
                                     </div>
                                     <div className="cursor-pointer whitespace-nowrap font-medium text-sm lg:text-base">
-                                        <Link className="flex space-x-1 items-center w-[80px] rounded justify-center py-1 bg-[#E6e6e6]" to="#">
-                                            <span className=''><IoMdCart /> </span>
-                                            <span className=''>Cart</span>
+                                        <Link className="flex space-x-1 items-center w-[20px] rounded justify-center py-1" to="#">
+                                            <span className='text-xl text-darktext'><IoMdCart /> </span>
+                                            {/* <span className=''>Cart</span> */}
                                         </Link>
                                     </div>
 

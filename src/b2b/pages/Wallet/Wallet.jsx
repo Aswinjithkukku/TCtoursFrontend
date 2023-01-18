@@ -39,39 +39,6 @@ function Wallet() {
                 <div className='bg-gray-200 rounded-sm py-3 shadow-sm px-2 lg:px-7'>
                   <div className='lg:flex justify-between'>
                     <div className=''>
-                      <h2 className='lg:text-3xl text-2xl text-center lg:text-start font-black text-darktext tracking-wider mb-3'>Credit Money</h2>
-                      <h5 className='text-xs lg:text-sm text-text mb-3'>My balance*</h5>
-                      <div className='flex space-x-2 text-2xl tracking-wider font-bold  '>
-                        <p className='text-main'>202</p>
-                        <p className='text-text'>AED</p>
-                      </div>
-                      <div className='mb-5'>
-                        <h5 className='text-xs lg:text-sm text-text mb-3'>is left on your wallet!</h5>
-                        <h5 className='text-xs text-text mb-3'>add money to your wallet and expolre destinations</h5>
-                        <h5 className='text-xs text-text mb-3'>withdraw the money in to your account.</h5>
-                      </div>
-                    </div>
-
-                    <div className='lg:space-y-6 py-7 flex lg:block space-x-3 lg:space-x-0'>
-                      <div className=''>
-                        <button className='w-[15em] bg-dark text-light py-3 rounded-lg text-xs lg:text-sm'
-                        >
-                          ADD MONEY
-                        </button>
-                      </div>
-                      <div className='flex justify-end items-end'>
-                        <img src={totalRevenuePng} alt='revenue' className='w-[70px]' />
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-              <div className=' '>
-                <div className='bg-gray-200 rounded-sm py-3 shadow-sm px-2 lg:px-7'>
-                  <div className='lg:flex justify-between'>
-                    <div className=''>
-
                       <h2 className='lg:text-3xl text-2xl text-center lg:text-start font-black text-darktext tracking-wider mb-3'>Wallet Balance</h2>
                       <h5 className='text-xs lg:text-sm text-text mb-3'>My balance*</h5>
                       <div className='flex space-x-2 text-2xl tracking-wider font-bold  '>
@@ -87,11 +54,44 @@ function Wallet() {
 
                     <div className='lg:space-y-6 py-7 flex lg:block space-x-3 lg:space-x-0'>
                       <div className=''>
-                        <button className='w-[15em] bg-dark text-light py-3 rounded-lg text-xs lg:text-sm'
+                        <button className='w-[15em] bg-dark text-light py-3 rounded-[0.25rem] text-xs lg:text-sm'
+                        >
+                          ADD MONEY
+                        </button>
+                      </div>
+                      <div className=''>
+                        <button className='w-[15em] bg-dark text-light py-3 rounded-[0.25rem] text-xs lg:text-sm'
                         >
                           WITHDRAW
                         </button>
                       </div>
+                      {/* <div className='flex justify-end items-end'>
+                        <img src={totalRevenuePng} alt='revenue' className='w-[70px]' />
+                      </div> */}
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div className=' '>
+                <div className='bg-gray-200 rounded-sm py-3 shadow-sm px-2 lg:px-7'>
+                  <div className='lg:flex justify-between'>
+                    <div className=''>
+
+                      <h2 className='lg:text-3xl text-2xl text-center lg:text-start font-black text-darktext tracking-wider mb-3'>Pending Balance</h2>
+                      <h5 className='text-xs lg:text-sm text-text mb-3'>Pending balance*</h5>
+                      <div className='flex space-x-2 text-2xl tracking-wider font-bold  '>
+                        <p className='text-main'>100</p>
+                        <p className='text-text'>AED</p>
+                      </div>
+                      <div className='mb-5'>
+                        <h5 className='text-xs lg:text-sm text-text mb-3'>amount is pending!</h5>
+                        <h5 className='text-xs text-text mb-3'>add money to your wallet and expolre destinations</h5>
+                        <h5 className='text-xs text-text mb-3'>withdraw the money in to your account.</h5>
+                      </div>
+                    </div>
+
+                    <div className='lg:space-y-6 py-7 flex lg:block space-x-3 lg:space-x-0'>
                       <div className='flex justify-end items-end'>
                         <img src={totalRevenuePng} alt='revenue' className='w-[70px]' />
                       </div>

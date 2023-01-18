@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import PaypalComponent from '../../components/Payment/PaypalComponent'
 import { getPassengerDetails } from '../../redux/slices/paymentSlice'
 import RazorpayComponent from '../../components/Payment/RazorpayComponent'
+import OtpModal from './OtpModal'
 
 
 function PaymentDetailsSection() {
@@ -13,6 +14,7 @@ function PaymentDetailsSection() {
         paypal: true,
         razorpay: false
     })
+    const [otpModal, setOtpModal] = useState(false)
 
     const [travellerData, setTravellerData] = useState({
         gender: "male",
@@ -49,7 +51,7 @@ function PaymentDetailsSection() {
                         <h2 className='text-2xl font-semibold text-darktext'>Lead Passenger Details</h2>
                     </div>
 
-                    <div className='lg:flex gap-5 text-darktext space-y-3 lg:space-y-0'>
+                    <div className='lg:flex gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2'>
                         <div className=''>
                             <div className=''>
                                 <label className=''>Mr/Mrs</label>
@@ -96,7 +98,7 @@ function PaymentDetailsSection() {
                             </div>
                         </div>
                     </div>
-                    <div className='lg:flex gap-5 text-darktext space-y-3 lg:space-y-0'>
+                    <div className='lg:flex gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2'>
                         <div className='lg:w-4/12'>
                             <div className=''>
                                 <label className=''>Email</label>
@@ -145,7 +147,7 @@ function PaymentDetailsSection() {
                             </div>
                         </div>
                     </div>
-                    <div className='text-darktext'>
+                    <div className='text-darktext py-1'>
                         <div className=''>
                             <label className=''>Special Request</label>
                         </div>
@@ -185,13 +187,13 @@ function PaymentDetailsSection() {
                     </div>
                 )}
             </div>
-            <div className='bg-light rounded-2xl w-full p-5 space-y-5'>
+            {/* <div className='bg-light rounded-2xl w-full p-5 space-y-5'>
                 <div className='border-b pb-3 my-2 flex justify-between'>
                     <h2 className='text-xl font-medium'>Choose Payment Method</h2>
-                    <div className='space-x-2 bg-[#E6e6e6] rounded'>
-                        <button className={` ${paymentSection.paypal ? "bg-lightblue text-white" : "text-darktext font-medium"} w-[100px] py-1 rounded`}
+                    <div className='md:space-x-2 block md:flex bg-[#E6e6e6] rounded'>
+                        <button className={` ${paymentSection.paypal ? "bg-lightblue text-white" : "text-darktext font-medium"} md:w-[100px] w-full py-1 rounded`}
                             onClick={() => setPaymentSection({ paypal: true, razorpay: false })}>Paypal</button>
-                        <button className={`${paymentSection.razorpay ? "bg-lightblue text-white" : "text-darktext font-medium"} w-[100px] py-1 rounded`}
+                        <button className={`${paymentSection.razorpay ? "bg-lightblue text-white" : "text-darktext font-medium"} md:w-[100px] w-full py-1 rounded`}
                             onClick={() => setPaymentSection({ paypal: false, razorpay: true })}>Razor Pay</button>
                     </div>
                 </div>
@@ -202,16 +204,25 @@ function PaymentDetailsSection() {
                     <RazorpayComponent />
                 )}
 
-            </div>
-            <div className='bg-light my-5 p-7 rounded-2xl lg:flex '>
+            </div> */}
+            <div className='bg-light my-5 p-7 rounded-2xl lg:flex -z-10'>
                 <div className='{" "}'>
                     <span className='cursor-default '>By Clicking Pay Now You agree that you have read and understood our {" "}</span>
                     <span className='text-lightblue underline cursor-pointer'>Terms & Conditions</span>
                 </div>
                 <div className='text-center fixed lg:static bottom-0 left-0 right-0 rounded-t-3xl lg:rounded-none py-8 bg-light lg:bg-none px-10 lg:px-0 z-10'>
-                    <button className='text-light bg-lightblue px-3 py-2 rounded-lg text whitespace-nowrap w-full'>Pay Now</button>
+                    <button className='text-light bg-lightblue px-3 py-2 rounded-lg text whitespace-nowrap w-full'
+                    onClick={() => {
+                        setOtpModal(true)
+                    }}
+                    >Pay Now</button>
                 </div>
             </div>
+            {otpModal && (
+                <OtpModal 
+                setOtpModal={setOtpModal}
+                />
+            )}
         </>
     )
 }

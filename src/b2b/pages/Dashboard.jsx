@@ -18,7 +18,7 @@ import TopCard from "../components/features/TopCard";
 import WalletCard from "../components/features/WalletCard";
 
 export default function Dashboard() {
-    const { user } = useSelector((state) => state.users);
+    const { agent } = useSelector((state) => state.agents);
 
     return (
         <div className="">
@@ -36,7 +36,7 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between gap-[10px] mb-5">
                     <div>
                         <span className="font-medium text-textColor">
-                            Good morning, {user?.name}
+                            Good morning, {agent?.name}
                         </span>
                         <span className="block mt-1 text-[13px] text-grayColor">
                             Here's what's happening with your website today.

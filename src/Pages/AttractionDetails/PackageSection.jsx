@@ -30,6 +30,9 @@ function PackageSection() {
                             ))}
                         </tbody>
                     </table>
+                    <div className='flex justify-end items-center mt-2'>
+                        <button className='button w-[100px]'>Add to cart</button>
+                    </div>
                 </div>
             </div>
         </>

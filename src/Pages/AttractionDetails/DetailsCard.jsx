@@ -49,12 +49,12 @@ function DetailsCard() {
     }, [excursion])
 
     const navigator = () => {
-        const isDateExist =  recievedActivities.filter(item => {
+        const isDateExist = recievedActivities.filter(item => {
             return item?.isChecked === true && item?.date !== ""
         })
         if (isDateExist.length > 0 && !location.pathname.includes('/b2b')) {
             navigate(`/payment/${excursion?._id}`)
-        } else if(isDateExist.length > 0 && location.pathname.includes('/b2b')){
+        } else if (isDateExist.length > 0 && location.pathname.includes('/b2b')) {
             navigate(`/b2b/attractions/payment/${excursion?._id}`)
         } else {
             setError("Fill the tour Date")
@@ -64,24 +64,27 @@ function DetailsCard() {
 
     return (
         <>
+            <div className='bg-light  lg:rounded-xl p-5 space-y-2 mb-2'>
+                {/* cutted price without offer */}
+                <div className=''>
+                    {excursion?.isOffer && (
+                        <p className='text-main text-xs'><s>{priceConversion(excursion?.activities && (excursion?.activities[0]?.adultPrice), selectedCurrency, true)}</s></p>
+                    )}
+                </div>
+                <div className='flex justify-between items-center'>
+                    <span className='flex items-center space-x-2'>
+                        <h2 className='text-darktext font-bold text-3xl'>{selectedCurrency?.isocode + ' ' + priceConversion(offerAmount, selectedCurrency, false)}</h2>
+                        <p className='text-xs text-text'>cheapest price*</p>
+                    </span>
+                    {/* offer percentage  */}
+                    {excursion?.isOffer && (
+                        <span className='bg-soft px-3 py-2 rounded-full text-blue'>{priceConversion(excursion?.offerAmount && excursion?.offerAmount, selectedCurrency, false)} {excursion?.offerAmountType && excursion?.offerAmountType === "flat" ? selectedCurrency?.isocode : "%"} OFF</span>
+                    )}
+                </div>
+            </div>
+
             <div className='bg-light  lg:rounded-xl p-5 space-y-2 '>
                 <div className=''>
-                    {/* cutted price without offer */}
-                    <div className=''>
-                        {excursion?.isOffer && (
-                            <p className='text-main text-xs'><s>{priceConversion(excursion?.activities && (excursion?.activities[0]?.adultPrice),selectedCurrency,true)}</s></p>
-                        )}
-                    </div>
-                    <div className='flex justify-between items-center'>
-                        <span className='flex items-center space-x-2'>
-                            <h2 className='text-darktext font-bold text-3xl'>{selectedCurrency?.isocode + ' ' + priceConversion(offerAmount, selectedCurrency, false)}</h2>
-                            <p className='text-xs text-text'>cheapest price*</p>
-                        </span>
-                        {/* offer percentage  */}
-                        {excursion?.isOffer && (
-                            <span className='bg-soft px-3 py-2 rounded-full text-blue'>{priceConversion(excursion?.offerAmount && excursion?.offerAmount, selectedCurrency,false)} {excursion?.offerAmountType && excursion?.offerAmountType === "flat" ? selectedCurrency?.isocode : "%"} OFF</span>
-                        )}
-                    </div>
                     <div>
                         <div className='inputs space-y-5 my-4'>
 
@@ -92,9 +95,9 @@ function DetailsCard() {
 
                                 <div>
                                     {recievedActivities?.map((item, index) => (
-                                        <div className='flex justify-between gap-2 text-sm' key={index}>
+                                        <div className='flex justify-between items-center gap-2 space-y-1 text-sm' key={index}>
                                             <span className='text-darktext ml-1'>{item?.isChecked === true && (item?.name)}</span>
-                                            <span className=''>{item?.isChecked === true && priceConversion(item?.price, selectedCurrency, true)}</span>
+                                            <span className='whitespace-nowrap'>{item?.isChecked === true && priceConversion(item?.price, selectedCurrency, true)}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -115,7 +118,7 @@ function DetailsCard() {
                                 </div> */}
                                 <div className='flex justify-between text-darktext'>
                                     <span className='font-semibold text-lg'>Grand Total</span>
-                                    <span className='font-bold text-xl'>{priceConversion(price,selectedCurrency, true)}</span>
+                                    <span className='font-bold text-xl'>{priceConversion(price, selectedCurrency, true)}</span>
                                 </div>
                             </div>
                             {error && (

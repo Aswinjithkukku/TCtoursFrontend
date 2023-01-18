@@ -1,25 +1,25 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
-    blogReducer,
-    // currencyReducer,
-    excursionReducer,
-    generalReducer,
-    homeReducer,
-    paymentReducer,
-    usersReducer,
+  agentReducer,
+  blogReducer,
+  excursionReducer,
+  generalReducer,
+  homeReducer,
+  paymentReducer,
+  usersReducer,
 } from "./slices";
 
 const store = configureStore({
-    reducer: {
-        excursion: excursionReducer,
-        general: generalReducer,
-        payment: paymentReducer,
-        users: usersReducer,
-        home: homeReducer,
-        blog: blogReducer,
-        // currency: currencyReducer,
-    },
-    devTools: true,
+  reducer: {
+    excursion: excursionReducer,
+    general: generalReducer,
+    payment: paymentReducer,
+    users: usersReducer,
+    home: homeReducer,
+    blog: blogReducer,
+    agents: agentReducer,
+  },
+  devTools: true,
 });
 
 export default store;

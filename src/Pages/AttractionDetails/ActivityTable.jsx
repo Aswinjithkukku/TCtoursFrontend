@@ -50,11 +50,11 @@ function ActivityTable({ item, index }) {
             <td className='py-3 px-1 max-w-[13em] w-[13em] space-x-2'>
                 <span className=''>
 
-                    {/* <input type='checkbox' className=''
+                     <input type='checkbox' className=''
                         name='isChecked'
                         checked={item?.isChecked}
                         onChange={(e) => handleChange({ value: e.target.checked, name: e.target.name, index })}
-                    /> */}
+                    /> 
                 </span>
                 <span className=''>
                     {item?.name}
@@ -119,7 +119,7 @@ function ActivityTable({ item, index }) {
             </td>
             <td className='py-3 px-1 min-w-[4em] pl-5'>
                 <h2 className='font-medium'>{priceConversion(price, selectedCurrency,true)}</h2>
-                <div className='relative'>
+                {/* <div className='relative'>
                     <input type='checkbox'
                         className='peer absolute top-0 inset-x-0 w-full h-6 opacity-0  cursor-pointer'
                         name='isChecked'
@@ -130,7 +130,7 @@ function ActivityTable({ item, index }) {
                         <span className=''> {item?.isChecked === false ? "Add to cart" : "Remove from cart"} </span>
                     <span className='text-lg'> <IoMdCart /> </span>
                     </button>
-                </div>
+                </div> */}
             </td>
         </tr>
     )

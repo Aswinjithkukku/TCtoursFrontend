@@ -40,11 +40,12 @@ function PaymentCardSection() {
             <div className=''>
                 {activities?.map((item) => (
                     <div className='bg-light w-full pb-3 rounded-2xl mb-5'>
-                        <div className='p-5 border-b'>
+                        <div className='p-5 border-b flex justify-between items-center'>
                             <h1 className='text-lg font-semibold text-darktext'>{excursion?.title} </h1>
+                            <button className='rounded-full h-6 w-6 bg-slate-300 text-red-600 flex justify-center items-center text-lg font-semibold'>-</button>
                         </div>
                         <div className='text-darktext p-5 space-y-3 '>
-                            <div className='flex items-center justify-between font-medium'>
+                            <div className='flex items-start justify-between font-medium space-x-2'>
                                 <span className=''>Option:</span>
 
                                 <span className=''>{item.name}</span>

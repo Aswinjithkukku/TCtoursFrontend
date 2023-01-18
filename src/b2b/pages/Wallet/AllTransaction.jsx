@@ -8,6 +8,7 @@ function AllTransaction() {
         <tr>
           <th className="font-[500] p-3">Ref No.</th>
           <th className="font-[500] p-3">Gateway</th>
+          <th className="font-[500] p-3">Purchase</th>
           <th className="font-[500] p-3">Date</th>
           <th className="font-[500] p-3">Time</th>
           <th className="font-[500] p-3">Status</th>
@@ -19,6 +20,7 @@ function AllTransaction() {
         <tr className="border-b border-tableBorderColor">
           <td className="p-3">#63b2cc</td>
           <td className="p-3">paypal</td>
+          <td className="p-3">N/A</td>
           <td className="p-3 whitespace-nowrap">2022-12-15</td>
           <td className="p-3 ">11:00</td>
           <td className="p-3 flex space-x-1 items-center text-green-600">
@@ -36,6 +38,7 @@ function AllTransaction() {
         <tr className="border-b border-tableBorderColor">
           <td className="p-3">#63b2cc</td>
           <td className="p-3">paypal</td>
+          <td className="p-3">Dubai Frame</td>
           <td className="p-3">2022-12-15</td>
           <td className="p-3 ">11:00</td>
           <td className="p-3 flex space-x-1 items-center text-main">
@@ -53,6 +56,7 @@ function AllTransaction() {
         <tr className="border-b border-tableBorderColor">
           <td className="p-3">#63b2cc</td>
           <td className="p-3">paypal</td>
+          <td className="p-3">Fly High</td>
           <td className="p-3">2022-12-15</td>
           <td className="p-3 ">11:00</td>
           <td className="p-3 flex space-x-1 items-center text-main">

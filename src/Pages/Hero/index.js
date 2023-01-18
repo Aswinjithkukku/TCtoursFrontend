@@ -11,6 +11,7 @@ import PaymentPage from "./PaymentPage";
 import ProfileMainPage from "./ProfileMainPage";
 import ProfileSettingsPage from "./ProfileSettingsPage";
 import ProfilePasswordPage from "./ProfilePasswordPage";
+import PaymentApproval from "../PaymentApproval/PaymentApproval";
 
 export {
   AttractionLandingPage,
@@ -26,4 +27,5 @@ export {
   ProfileMainPage,
   ProfileSettingsPage,
   ProfilePasswordPage,
+  PaymentApproval,
 };

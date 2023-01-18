@@ -12,17 +12,20 @@ export default function Header({ setSidebarView, sidebarView }) {
     const [walletDropdown, setWalletDropdown] = useState(false)
     const [currency, setCurrency] = useState(false)
 
-    const { user } = useSelector((state) => state.users);
+    const { agent } = useSelector((state) => state.agents);
     const { selectedCurrency } = useSelector(state => state.home)
 
     const currencyRef = useRef()
     useHandleClickOutside(currencyRef, () => setCurrency(false))
 
+    const wrapperRef = useRef();
+    useHandleClickOutside(wrapperRef, () => setIsAdminDropdownOpen(false));
+
     return (
         <>
-                <div className={`${sidebarView ? "block" : "hidden"} lg:hidden lightglass absolute top-0 bottom-0 left-0 right-0 z-20`}
+            <div className={`${sidebarView ? "block" : "hidden"} lg:hidden lightglass absolute top-0 bottom-0 left-0 right-0 z-20`}
                 onClick={() => setSidebarView(false)}
-                ></div>
+            ></div>
             <div className="sticky top-0 w-full bg-white h-[70px] px-5 z-10">
                 <div className="h-full flex items-center justify-between">
                     <div className="text-xl" onClick={() => setSidebarView(true)}>
@@ -54,6 +57,7 @@ export default function Header({ setSidebarView, sidebarView }) {
                                 {/* absolute modal */}
                             </div>
 
+
                             <div className="hidden lg:flex bg-primaryColor h-[100%] gap-[10px] items-center px-[12px] cursor-pointer"
                                 onClick={() => setWalletDropdown(!walletDropdown)} >
                                 <div className="">
@@ -69,9 +73,12 @@ export default function Header({ setSidebarView, sidebarView }) {
                                 <WalletDepositModal
                                     setWalletDropdown={setWalletDropdown} />
                             )}
+
+
                             <div
+                                ref={wrapperRef}
                                 className="bg-[#f3f3f9] h-[100%] flex gap-[10px] items-center px-[12px] cursor-pointer"
-                                onClick={() => setIsAdminDropdownOpen(true)}
+                                onClick={() => setIsAdminDropdownOpen(!isAdminDropdownOpen)}
                             >
                                 <div className="w-[30px] h-[30px] rounded-full overflow-hidden">
                                     <img
@@ -82,19 +89,21 @@ export default function Header({ setSidebarView, sidebarView }) {
                                 </div>
                                 <div className="">
                                     <span className="block text-sm font-medium">
-                                        {user?.name}
+                                        {agent?.name}
                                     </span>
                                     <span className="block text-[12px] text-grayColor">
-                                        {user?.email}
+                                        {agent?.email}
                                     </span>
                                 </div>
+                                {/* absolute modal */}
+                                {isAdminDropdownOpen && (
+                                    <AdminDropdown
+                                        setIsAdminDropdownOpen={setIsAdminDropdownOpen}
+                                    />
+                                )}
+                                {/* absolute modal */}
                             </div>
 
-                            {/* {isAdminDropdownOpen && (
-                            <AdminDropdown
-                                setIsAdminDropdownOpen={setIsAdminDropdownOpen}
-                            />
-                        )} */}
                         </div>
                     </div>
                 </div>

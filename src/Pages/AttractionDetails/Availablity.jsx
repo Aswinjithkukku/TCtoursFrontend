@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import { BsDoorClosedFill, BsDoorOpenFill } from 'react-icons/bs'
+import { MdOutlineMoreTime} from 'react-icons/md'
+import { RxCountdownTimer } from 'react-icons/rx'
 import { useSelector } from 'react-redux'
 // import hours from '../../static/images/hours.png'
 
@@ -27,11 +29,11 @@ function Availablity() {
                     <div className='mt-2'>
                       <div className=''>
                         <div className='flex space-x-1 justify-center'>
-                          <span className='text-gray-300 '><BsDoorOpenFill />  </span>
+                          <span className='text-2xl text-gray-300 '><MdOutlineMoreTime />  </span>
                           <span className=''>{item?.open} </span>
                         </div>
                         <div className='flex space-x-1 justify-center'>
-                          <span className='text-gray-300'><BsDoorClosedFill /> </span>
+                          <span className='text-xl text-gray-300'><RxCountdownTimer /> </span>
                           <span className=''>{item?.close} </span>
                         </div>
                       </div>

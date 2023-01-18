@@ -12,8 +12,8 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
     return (
         <>
         <div className={`z-20 sidebar top-0 left-0 flex h-[100vh] ${sidebarView ? "w-[250px]" : "w-[0px] lg:w-[250px]"} overflow-hidden fixed bg-primaryColor flex-col transition-all `}>
-            <div className="flex items-center justify-between lg:justify-around px-5 lg:px-0 py-5 ">
-                <h2 className="text-lg font-[600] text-white uppercase " onClick={() => navigate('/')}>
+            <div className="flex items-center justify-between lg:justify-around px-5 lg:px-0 py-5 cursor-pointer ">
+                <h2 className="text-lg font-[600] text-white uppercase " onClick={() => navigate('/b2b')}>
                     Travellers{" "}
                     <span className="text-sm text-red-500">Choice</span>
                 </h2>

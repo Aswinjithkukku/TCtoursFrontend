@@ -15,8 +15,9 @@ import {
   ProfileMainPage,
   ProfileSettingsPage,
   ProfilePasswordPage,
+  PaymentApproval,
 } from "../Pages/Hero";
-import { PageNotFound } from "../Pages/Errors";
+import { PageNotFound, PaymentDecline } from "../Pages/Errors";
 import {
   Attraction,
   AttractionDetails,
@@ -49,6 +50,7 @@ const ThemeRoutes = [
       { path: "/blog/detail/:slug", element: <BlogDetailsPage /> },
       { path: "/search/:slug", element: <SearchingResultPage /> },
       { path: "/payment/:id", element: <PaymentPage /> },
+      { path: "/payment/approval", element: <PaymentApproval /> },
       { path: "/Profile", element: <ProfileMainPage /> },
       { path: "/Profile/settings", element: <ProfileSettingsPage /> },
       { path: "/Profile/password", element: <ProfilePasswordPage /> },
@@ -83,6 +85,10 @@ const ThemeRoutes = [
   {
     path: "/*",
     element: <PageNotFound />,
+  },
+  {
+    path: "/payment-decline",
+    element: <PaymentDecline />,
   },
 ];
 

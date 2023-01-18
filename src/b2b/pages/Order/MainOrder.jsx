@@ -7,12 +7,17 @@ import { MdDelete } from 'react-icons/md'
 import Pagination from '../../components/Pagination'
 import OrderModal from './OrderModal'
 import { useHandleClickOutside } from '../../../hooks'
+import TransactionModal from './TransactionModal'
 
 function MainOrder() {
   const [orderType, setOrderType] = useState(false)
+  const [transactionType, setTransactionType] = useState(false)
 
   const dropdownRef = useRef()
   useHandleClickOutside(dropdownRef, () => setOrderType(false))
+
+  const transactionRef = useRef()
+  useHandleClickOutside(transactionRef, () => setTransactionType(false))
   return (
     <div>
       <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
@@ -52,6 +57,26 @@ function MainOrder() {
                   <OrderModal />
                 )}
               </div>
+
+              <div
+                className='relative'
+                ref={transactionRef}
+              >
+                <button className="button w-[150px] bg-orange-500 flex items-center justify-center"
+                  onClick={() => setTransactionType(!transactionType)}
+                >
+                  Transaction
+                  <AiOutlineDown />
+                </button>
+                {transactionType && (
+                  <TransactionModal />
+                )}
+              </div>
+
+              <button className="  bg-green-600 h-[40px] rounded-[0.25rem] w-[220px] text-sm text-light flex items-center justify-center">
+                Download
+              </button>
+
             </div>
           </div>
           {/* <div className="p-6 flex flex-col items-center">
@@ -70,10 +95,16 @@ function MainOrder() {
                     Agent
                   </th>
                   <th className="font-[500] p-3 whitespace-nowrap">
+                    Agent
+                  </th>
+                  <th className="font-[500] p-3 whitespace-nowrap">
                     Activity
                   </th>
                   <th className="font-[500] p-3 whitespace-nowrap">
                     Booking Date
+                  </th>
+                  <th className="font-[500] p-3 whitespace-nowrap">
+                    Purchase Date
                   </th>
                   <th className="font-[500] p-3 whitespace-nowrap">
                     Adults
@@ -99,11 +130,13 @@ function MainOrder() {
                 <tr className="border-b border-tableBorderColor">
                   <td className="p-3">#63b2cc</td>
                   <td className="p-3">Agent320</td>
+                  <td className="p-3">11001</td>
                   <td className="p-3 ">
                     <div className='w-[150px] md:w-auto'>
                       Dubai Frame
                     </div>
                   </td>
+                  <td className="p-3 whitespace-nowrap">2023-2-12</td>
                   <td className="p-3 whitespace-nowrap">2023-2-12</td>
                   <td className="p-3">1</td>
                   <td className="p-3">0</td>
@@ -117,9 +150,11 @@ function MainOrder() {
                 <tr className="border-b border-tableBorderColor">
                   <td className="p-3">#63b2cc</td>
                   <td className="p-3">Agent200</td>
+                  <td className="p-3">10201</td>
                   <td className="p-3">
                     Dubai Frame
                   </td>
+                  <td className="p-3 ">2023-2-12</td>
                   <td className="p-3 ">2023-2-12</td>
                   <td className="p-3">1</td>
                   <td className="p-3">0</td>

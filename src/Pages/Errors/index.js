@@ -1,2 +1,4 @@
 import PageNotFound from "./PageNotFound";
-export {PageNotFound}
+import PaymentDecline from "./PaymentDecline";
+
+export { PageNotFound, PaymentDecline };

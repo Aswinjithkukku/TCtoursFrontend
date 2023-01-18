@@ -7,6 +7,7 @@ import ticketBoughtPng from "./ticket-bought.png";
 import ticketCancelledPng from "./ticket-cancelled.png";
 import ticketConfirmedPng from "./ticket-confirmed.png";
 import usersPng from "./users.png";
+import warningPng from './warning.png'
 
 export {
     logoPng,
@@ -18,4 +19,5 @@ export {
     ticketConfirmedPng,
     totalRevenuePng,
     usersPng,
+    warningPng,
 };

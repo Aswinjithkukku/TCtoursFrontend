@@ -5,7 +5,6 @@ import axios from "../../axios";
 const initialState = {
     isSiteLoading: true,
     user: {},
-    countries: [],
     jwtToken: localStorage.getItem("random-string") || "",
     isLoggedIn: false,
 };

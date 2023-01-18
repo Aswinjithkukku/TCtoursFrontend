@@ -44,7 +44,7 @@ export default function Pagination({
                                 key={index}
                                 onClick={() => updateSkip(index)}
                             >
-                                {index + 1}
+                                {index + 1}1
                             </button>
                         );
                     }

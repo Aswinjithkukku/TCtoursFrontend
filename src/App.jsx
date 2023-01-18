@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "./redux/slices/usersSlice";
 import { getInitialData } from "./redux/slices/homeSlice";
+import { fetchAgent } from "./redux/slices/agentSlice";
 
 export default function App() {
     const { isSiteLoading } = useSelector((state) => state.users);
@@ -13,6 +14,7 @@ export default function App() {
 
     useEffect(() => {
         dispatch(fetchUser());
+        dispatch(fetchAgent());
         dispatch(getInitialData());
     }, []);
 
