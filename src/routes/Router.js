@@ -16,6 +16,7 @@ import {
   ProfileSettingsPage,
   ProfilePasswordPage,
   PaymentApproval,
+  Invoice,
 } from "../Pages/Hero";
 import { PageNotFound, PaymentDecline } from "../Pages/Errors";
 import {
@@ -34,6 +35,7 @@ import {
   Settings,
   Wallet,
 } from "../b2b/pages";
+import B2BPrivateRoute from "./B2BPrivateRoute";
 
 const ThemeRoutes = [
   {
@@ -58,7 +60,11 @@ const ThemeRoutes = [
   },
   {
     path: "",
-    element: <B2BMainLayout />,
+    element: (
+      <B2BPrivateRoute>
+        <B2BMainLayout />
+      </B2BPrivateRoute>
+    ),
     children: [
       { path: "/b2b", element: <Dashboard /> },
       { path: "/b2b/reseller/add", element: <NewRegisters /> },
@@ -89,6 +95,10 @@ const ThemeRoutes = [
   {
     path: "/payment-decline",
     element: <PaymentDecline />,
+  },
+  {
+    path: "/print",
+    element: <Invoice />,
   },
 ];
 

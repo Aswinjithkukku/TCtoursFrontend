@@ -5,8 +5,8 @@ import { BtnLoader } from '../../components';
 import Swal from 'sweetalert2'
 
 function CompanySettings() {
-  
-  const { agent,token } = useSelector(state => state.agents)
+
+  const { agent, token } = useSelector(state => state.agents)
   const [companyDetails, setCompanyDetails] = useState({
     companyName: agent?.companyName || "",
     address: agent?.address || "",
@@ -40,7 +40,7 @@ function CompanySettings() {
         }
       }
 
-      const response = await axios.patch("/b2b/resellers/auth/update/comapnySettings", companyDetails, config );
+      const response = await axios.patch("/b2b/resellers/auth/update/comapnySettings", companyDetails, config);
       setIsLoading(false);
       Swal.fire({
         icon: 'success',
@@ -90,7 +90,7 @@ function CompanySettings() {
               value={country}
               onChange={(e) => setCountry(e.target.value)}
             >
-              <option>Ex: United Arab Emirates</option>
+              <option>select</option>
               {countries?.map((item, index) => (
                 <option className='capitalize' value={item?._id} key={index}>{item?.countryName} </option>
               ))}
@@ -143,20 +143,21 @@ function CompanySettings() {
               onChange={handleChange}
             />
           </div>
-          <div className=''>
-            <label className='label'>Zip Code</label>
-            <input className='input'
-              type='text'
-              placeholder=''
-              name='zipCode'
-              value={companyDetails.zipCode}
-              onChange={handleChange}
-            />
-          </div>
-
+          {country && country !== "63ac33ecff04e5652a2583f5" && (
+            <div className=''>
+              <label className='label'>Zip Code</label>
+              <input className='input'
+                type='text'
+                placeholder=''
+                name='zipCode'
+                value={companyDetails.zipCode}
+                onChange={handleChange}
+              />
+            </div>
+          )}
         </div>
         <div className="mt-4 flex items-center justify-end gap-[12px]">
-        {error && (
+          {error && (
             <div className='flex justify-end'>
               <p className='text-main text-xs capitalize'>{error} </p>
             </div>
@@ -165,7 +166,7 @@ function CompanySettings() {
             className="button w-[100px] "
             type="submit"
           >
-           {isLoading ? <BtnLoader /> : "Update"}
+            {isLoading ? <BtnLoader /> : "Update"}
           </button>
         </div>
       </form>

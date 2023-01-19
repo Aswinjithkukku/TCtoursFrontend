@@ -4,7 +4,7 @@ import { IoPeopleSharp } from 'react-icons/io5'
 
 function OrderModal() {
   return (
-    <div className=' absolute bg-gray-300 w-[250px] right-0 text-darktext rounded-sm py-3 cursor-pointer'>
+    <div className=' absolute bg-gray-200 w-[250px] right-0 text-darktext rounded-sm py-3 cursor-pointer'>
       <div className='flex space-x-2 items-center hover:bg-gray-200 py-1 px-2 '>
         <span className=''><BsPersonFill /> </span>
         <span className='font-[500] uppercase'>My Orders</span>

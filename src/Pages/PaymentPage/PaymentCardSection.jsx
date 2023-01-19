@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { getExcursion } from '../../redux/slices/excursionSlice'
+import { getExcursion, removeFromCart } from '../../redux/slices/excursionSlice'
 import priceConversion from '../../utils/PriceConversion'
+import { BsDash } from 'react-icons/bs'
 
 function PaymentCardSection() {
     const dispatch = useDispatch()
@@ -21,9 +22,9 @@ function PaymentCardSection() {
 
 
     useEffect(() => {
-        let array = JSON.parse(localStorage.getItem('tour_order')) || []
+        let array = JSON.parse(localStorage.getItem('excursionCart')) || []
         setActivities(array)
-    }, [])
+    }, [activities])
 
     const finalPayment = activities.reduce((acc, item) => {
         const vatPrice = item?.vat && item?.isVat && (item?.price * item?.vat) / 100
@@ -39,12 +40,16 @@ function PaymentCardSection() {
         <>
             <div className=''>
                 {activities?.map((item) => (
-                    <div className='bg-light w-full pb-3 rounded-2xl mb-5'>
-                        <div className='p-5 border-b flex justify-between items-center'>
-                            <h1 className='text-lg font-semibold text-darktext'>{excursion?.title} </h1>
-                            <button className='rounded-full h-6 w-6 bg-slate-300 text-red-600 flex justify-center items-center text-lg font-semibold'>-</button>
+                    <div className='bg-light w-full rounded-xl mb-2'>
+                        <div className='p-3 border-b flex justify-between items-center'>
+                            <h1 className=' font-semibold text-darktext'>{excursion?.title} </h1>
+                            <button className='rounded-full h-5 w-5 bg-gray-300 text-main flex justify-center items-center text-lg font-bold'
+                            onClick={() => dispatch(removeFromCart(item?._id)) }
+                            >
+                                <BsDash />
+                            </button>
                         </div>
-                        <div className='text-darktext p-5 space-y-3 '>
+                        <div className='text-darktext p-5 space-y-3 text-sm'>
                             <div className='flex items-start justify-between font-medium space-x-2'>
                                 <span className=''>Option:</span>
 
@@ -89,8 +94,8 @@ function PaymentCardSection() {
                     </div>
                 ))}
 
-                <div className='bg-light rounded-2xl mt-5'>
-                    <div className='p-5 border-b'>
+                <div className='bg-light rounded-2xl mt-5 text-sm'>
+                    <div className='p-4 border-b'>
                         <h1 className='text-lg font-semibold text-darktext'>Final Payment</h1>
                     </div>
                     <div className='text-darktext p-5 space-y-3'>

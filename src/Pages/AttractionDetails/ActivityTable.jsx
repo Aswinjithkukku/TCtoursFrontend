@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { IoMdCart } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActivities } from '../../redux/slices/excursionSlice';
+import { setActivities, setSelectionArray } from '../../redux/slices/excursionSlice';
 import priceConversion from '../../utils/PriceConversion'
 
 function ActivityTable({ item, index }) {
@@ -41,13 +41,14 @@ function ActivityTable({ item, index }) {
 
         const result = recievedActivities?.filter(item => item?.isChecked === true)
         localStorage.setItem('tour_order', JSON.stringify(result))
+        dispatch(setSelectionArray(result))
 
-    }, [recievedActivities])
+    }, [recievedActivities, dispatch])
 
 
     return (
         <tr className='text-darktext border-b' key={index}>
-            <td className='py-3 px-1 max-w-[13em] w-[13em] space-x-2'>
+            <td className='py-3 px-1 max-w-[13em] w-[13em] space-x-2 '>
                 <span className=''>
 
                      <input type='checkbox' className=''

@@ -46,13 +46,13 @@ function PaymentDetailsSection() {
     return (
         <>
             <div className='bg-light  w-full p-5 rounded-2xl space-y-5'>
-                <form >
+                <form className='text-sm'>
                     <div className=' cursor-default'>
                         <h2 className='text-2xl font-semibold text-darktext'>Lead Passenger Details</h2>
                     </div>
 
-                    <div className='lg:flex gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2'>
-                        <div className=''>
+                    <div className='lg:grid grid-cols-12 gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2'>
+                        <div className='col-span-2'>
                             <div className=''>
                                 <label className=''>Mr/Mrs</label>
                             </div>
@@ -69,7 +69,7 @@ function PaymentDetailsSection() {
                                 </select>
                             </div>
                         </div>
-                        <div className='lg:w-5/12'>
+                        <div className='col-span-5'>
                             <div className=''>
                                 <label className=''>First Name</label>
                             </div>
@@ -83,7 +83,7 @@ function PaymentDetailsSection() {
                                 />
                             </div>
                         </div>
-                        <div className='lg:w-5/12'>
+                        <div className='col-span-5'>
                             <div className=''>
                                 <label className=''>Last Name</label>
                             </div>
@@ -98,8 +98,8 @@ function PaymentDetailsSection() {
                             </div>
                         </div>
                     </div>
-                    <div className='lg:flex gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2'>
-                        <div className='lg:w-4/12'>
+                    <div className='lg:grid grid-cols-12 gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2'>
+                        <div className='col-span-4'>
                             <div className=''>
                                 <label className=''>Email</label>
                             </div>
@@ -113,7 +113,7 @@ function PaymentDetailsSection() {
                                 />
                             </div>
                         </div>
-                        <div className='lg:w-4/12'>
+                        <div className='col-span-4'>
                             <div className=''>
                                 <label className=''>Country</label>
                             </div>
@@ -132,7 +132,7 @@ function PaymentDetailsSection() {
                                 </select>
                             </div>
                         </div>
-                        <div className='lg:w-4/12'>
+                        <div className='col-span-4'>
                             <div className=''>
                                 <label className=''>Phone</label>
                             </div>

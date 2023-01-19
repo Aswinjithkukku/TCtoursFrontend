@@ -61,7 +61,9 @@ function B2BLoginPage() {
         <div className='bg-white px-10 py-5 rounded-lg '>
 
           <div className='flex justify-center pb-4 mb-7 border-b'>
-            <img src={logoPng} alt='logo' className='h-[65px]' />
+            <img src={logoPng} alt='logo' className='h-[65px]'
+            onClick={() => navigate('/')}
+             />
           </div>
 
           <div className="grid lg:grid-cols-2 gap-[20px]">

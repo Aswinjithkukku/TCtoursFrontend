@@ -2,9 +2,8 @@ import React from "react";
 import { BiLogOut } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
+import { logoutAgent } from "../../../redux/slices/agentSlice";
 
-// import { useHandleClickOutside } from "../../../hooks";
-// import { logoutAdmin } from "../../../redux/slices/adminSlice";
 
 export default function AdminDropdown() {
     const { agent } = useSelector((state) => state.agents);
@@ -23,7 +22,7 @@ export default function AdminDropdown() {
             </span>
             <span
                 className="flex items-center gap-[10px] text-sm py-[6px] px-4 cursor-pointer hover:bg-[#f3f6f9]"
-                onClick={() => console.log('jhjhjh')}
+                onClick={() => dispatch(logoutAgent())}
             >
                 <BiLogOut />
                 Logout

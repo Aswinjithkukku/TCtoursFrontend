@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const initialState = {
   loading: false,
@@ -10,14 +10,16 @@ const initialState = {
   excursions: [],
   excursionAll: [],
   recievedActivities: [],
+  selectedActivities: [],
   favourites: [],
   review: {},
+  excursionCart: localStorage.getItem("excursionCart") ? JSON.parse(localStorage.getItem("excursionCart")) || [] : [],
 };
 
 export const excursionall = createAsyncThunk(
   "excursion/excursionall",
   async (args, { getState }) => {
-    // const { token } = getState().user
+    // const { token } = getState().users
     // const config = {
     //   headers: {
     //     "Content-Type": "application/json",
@@ -78,33 +80,33 @@ export const getCategories = createAsyncThunk(
 export const addReview = createAsyncThunk(
   "excursion/addReview",
   async (args, { getState }) => {
-     const { jwtToken } = getState().users
+    const { jwtToken } = getState().users;
     const config = {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${jwtToken}`
+        Authorization: `Bearer ${jwtToken}`,
       },
     };
     try {
-      const response = await axios.post("/attractions/reviews/add",args, config);
+      const response = await axios.post(
+        "/attractions/reviews/add",
+        args,
+        config
+      );
       Swal.fire({
-        icon: 'success',
-        title: 'Review Submitted',
-        text: 'You have successfully Submitted your review',
-      })
+        icon: "success",
+        title: "Review Submitted",
+        text: "You have successfully Submitted your review",
+      });
       return response.data;
-
-      
     } catch (error) {
-
       Swal.fire({
-        icon: 'error',
-        title: 'Something went wrong!',
+        icon: "error",
+        title: "Something went wrong!",
         text: error?.response?.data?.error,
-      })
+      });
       console.log(error?.response?.data?.error);
     }
-    
   }
 );
 
@@ -141,9 +143,42 @@ const excursionSlice = createSlice({
       state.favourites = localStorage.getItem("favourites")
         ? JSON.parse(localStorage.getItem("favourites"))
         : [];
-      // state.favourites = JSON.parse(localStorage.getItem('favourites')) || []
-      console.log(".");
     },
+
+    setSelectionArray: (state, action) => {
+      state.selectedActivities = action.payload;
+    },
+    addToCart: (state, action) => {
+      var excursionArray = [];
+      var selectedArray = action.payload;
+      excursionArray = JSON.parse(localStorage.getItem("excursionCart")) || [];
+      console.log('excursion array:',excursionArray);
+      // merge two array
+      let data = [...selectedArray,...excursionArray]
+
+      let array = []
+      let uniqueObj = {}
+      for(let i in data) {
+        let id = data[i]['_id']
+        uniqueObj[id] = data[i]
+      }
+
+      // unique object of array
+      for(let i in uniqueObj) {
+        array.push(uniqueObj[i])
+      }
+
+      localStorage.setItem("excursionCart", JSON.stringify(array))
+
+      state.excursionCart =
+        JSON.parse(localStorage.getItem("excursionCart")) || [];
+    },
+    removeFromCart: (state, action) => {
+      state.excursionCart = state.excursionCart.filter((item) => {
+        return item._id !== action.payload
+      })
+      localStorage.setItem("excursionCart", JSON.stringify(state.excursionCart))
+    }
   },
   extraReducers: {
     [getExcursion.pending]: (state, action) => {
@@ -200,7 +235,13 @@ const excursionSlice = createSlice({
   },
 });
 
-export const { setActivities, setFavourites, stateFavourites } =
-  excursionSlice.actions;
+export const {
+  setActivities,
+  setFavourites,
+  stateFavourites,
+  setSelectionArray,
+  addToCart,
+  removeFromCart,
+} = excursionSlice.actions;
 
 export default excursionSlice.reducer;

@@ -97,7 +97,9 @@ function B2BRegisterPage() {
     <div className='max-w-screen-xl mx-auto lg:my-10'>
       <div className='bg-white lg:rounded-xl px-10 py-5'>
         <div className='flex justify-center pb-5 border-b'>
-          <img src={logoPng} alt='logo' className='h-[65px]' />
+          <img src={logoPng} alt='logo' className='h-[65px]'
+          onClick={() => navigate('/')}
+           />
         </div>
         <form onSubmit={handleSubmit}>
           <div className='lg:grid grid-cols-12 gap-0 pt-4'>
@@ -172,7 +174,7 @@ function B2BRegisterPage() {
                       >
                         <option>Ex: United Arab Emirates</option>
                         {countries?.map((item, index) => (
-                          <option className='' value={item?._id} key={index}>{item?.countryName} </option>
+                          <option className='capitalize' value={item?._id} key={index}>{item?.countryName} </option>
                         ))}
                       </select>
                     </div>
@@ -212,15 +214,17 @@ function B2BRegisterPage() {
                         value={data.city}
                         onChange={onChangeHandler} />
                     </div>
-                    <div className=''>
-                      <label className='label'>Zip Code</label>
-                      <input className='input'
-                        type='number'
-                        placeholder=''
-                        name='zipCode'
-                        value={data.zipCode}
-                        onChange={onChangeHandler} />
-                    </div>
+                    {data.country !== "63ac33ecff04e5652a2583f5" && (
+                      <div className=''>
+                        <label className='label'>Zip Code</label>
+                        <input className='input'
+                          type='number'
+                          placeholder=''
+                          name='zipCode'
+                          value={data.zipCode}
+                          onChange={onChangeHandler} />
+                      </div>
+                    )}
                   </div>
                 </li>
                 <li className={`mb-10 ml-6 ${register.profile ? 'h-full' : 'h-8'} overflow-hidden `}>
@@ -406,13 +410,13 @@ function B2BRegisterPage() {
               )}
 
               <div className=''>
-              <p className="text-sm font-semibold mt-2 pt-1 mb-0">
-                    Already have an account?
-                    <Link
-                      to="/b2b/login"
-                      className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
-                    >Login</Link>
-                  </p>
+                <p className="text-sm font-semibold mt-2 pt-1 mb-0">
+                  Already have an account?
+                  <Link
+                    to="/b2b/login"
+                    className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+                  >Login</Link>
+                </p>
               </div>
             </div>
             <div className='2 col-span-5 text-darktext space-y-4 lg:mx-3 lg:p-5 text-sm lg:border-l'>

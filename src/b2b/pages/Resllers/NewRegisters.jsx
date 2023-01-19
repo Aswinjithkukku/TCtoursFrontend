@@ -121,7 +121,7 @@ function NewRegisters() {
                   value={data.country}
                   onChange={onChangeHandler}
                 >
-                  <option className='text-text'>Ex: United Arab Emirates</option>
+                  <option className='text-text'>select</option>
                   {countries?.map((item, index) => (
                     <option className='capitalize' value={item?._id} key={index}>{item?.countryName} </option>
                   ))}
@@ -174,6 +174,7 @@ function NewRegisters() {
                   onChange={onChangeHandler}
                 />
               </div>
+              {data.country && data.country !== "63ac33ecff04e5652a2583f5" && (
               <div className=''>
                 <label className='label'>Zip Code</label>
                 <input className='input'
@@ -184,6 +185,7 @@ function NewRegisters() {
                   onChange={onChangeHandler}
                 />
               </div>
+              )}
             </div>
             <div className='pt-5 lg:pt-3 flex items-center justify-between border-b border-dashed p-4'>
               <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>

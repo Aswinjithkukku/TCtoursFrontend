@@ -10,6 +10,7 @@ import CurrencyModal from "../Header/CurrencyModal";
 import LanguageModal from "../Header/LanguageModal";
 import RegisterCard from "../Authentication/RegisterCard";
 import { useHandleClickOutside } from "../../hooks";
+import CartModal from "../Navbar/CartModal";
 
 function Navbar() {
 
@@ -19,6 +20,7 @@ function Navbar() {
         viewRegister: false,
         viewLogin: false,
     })
+    const [cart, setCart] = useState(false)
 
     const [profileView, setProfileView] = useState(false)
 
@@ -36,6 +38,9 @@ function Navbar() {
 
     const languageRef = useRef()
     useHandleClickOutside(languageRef, () => setLanguage(false))
+
+    const cartRef = useRef()
+    useHandleClickOutside(cartRef, () => setCart(false))
 
     return (
         <>
@@ -98,11 +103,19 @@ function Navbar() {
                                         )}
                                         {/* absolute modal */}
                                     </div>
-                                    <div className="cursor-pointer whitespace-nowrap font-medium text-sm lg:text-base">
-                                        <Link className="flex space-x-1 items-center w-[20px] rounded justify-center py-1" to="#">
-                                            <span className='text-xl text-darktext'><IoMdCart /> </span>
-                                            {/* <span className=''>Cart</span> */}
-                                        </Link>
+                                    <div 
+                                    ref={cartRef}
+                                    className="cursor-pointer whitespace-nowrap font-medium text-sm lg:text-base relative">
+                                        <div className="flex space-x-1 items-center w-[20px] rounded justify-center py-1" >
+                                            <span className='text-xl text-darktext' 
+                                            onClick={() => setCart(!cart)}
+                                            ><IoMdCart /> </span>
+                                            {/* absolute cart modal */}
+                                            {cart && (
+                                                <CartModal setCart={setCart} />
+                                            )}
+                                            {/* absolute cart modal */}
+                                        </div>
                                     </div>
 
                                 </div>

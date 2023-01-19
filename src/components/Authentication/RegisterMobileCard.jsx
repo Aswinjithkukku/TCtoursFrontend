@@ -96,7 +96,7 @@ function RegisterMobileCard({ view, setView }) {
               {countries?.map((country, index) => {
                 return (
                   <option
-                    className="text-darktext"
+                    className="text-darktext capitalize"
                     value={country?._id}
                     key={index}
                   >
