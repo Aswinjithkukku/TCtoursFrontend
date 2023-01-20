@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { AiOutlineClose } from 'react-icons/ai'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { removeFromCart } from '../../redux/slices/excursionSlice'
 import priceConversion from '../../utils/PriceConversion'
 
 function DetailsCard() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [error, setError] = useState('')
     const location = useLocation()
 
     const { excursion } = useSelector(state => state.excursion)
-    const { recievedActivities } = useSelector(state => state.excursion)
+    const { excursionCart } = useSelector(state => state.excursion)
     const { selectedCurrency } = useSelector(state => state.home)
 
     const [price, setPrice] = useState(0)
@@ -26,11 +29,11 @@ function DetailsCard() {
     // }, [data.adult, data.child, excursion])
 
     useEffect(() => {
-        const sum = recievedActivities?.filter((item) => item?.isChecked)?.reduce((acc, data) => {
+        const sum = excursionCart?.reduce((acc, data) => {
             return Number(acc) + Number(data?.price)
         }, 0)
         setPrice(sum)
-    }, [recievedActivities])
+    }, [excursionCart])
 
     useEffect(() => {
         if (excursion?.activities) {
@@ -49,13 +52,13 @@ function DetailsCard() {
     }, [excursion])
 
     const navigator = () => {
-        const isDateExist = recievedActivities.filter(item => {
+        const isDateExist = excursionCart.filter(item => {
             return item?.isChecked === true && item?.date !== ""
         })
         if (isDateExist.length > 0 && !location.pathname.includes('/b2b')) {
-            navigate(`/payment/${excursion?._id}`)
+            navigate(`/payment`)
         } else if (isDateExist.length > 0 && location.pathname.includes('/b2b')) {
-            navigate(`/b2b/attractions/payment/${excursion?._id}`)
+            navigate(`/b2b/attractions/payment`)
         } else {
             setError("Fill the tour Date")
         }
@@ -90,14 +93,19 @@ function DetailsCard() {
 
                             <div className='space-y-1'>
                                 <div className='flex items-center space-x-2 text-darktext'>
-                                    <span className='text-lg '>Tours</span>
+                                    <span className='text-lg '>Cart Items</span>
                                 </div>
 
                                 <div>
-                                    {recievedActivities?.map((item, index) => (
+                                    {excursionCart?.map((item, index) => (
                                         <div className='flex justify-between items-center gap-2 space-y-1 text-sm' key={index}>
                                             <span className='text-darktext ml-1'>{item?.isChecked === true && (item?.name)}</span>
-                                            <span className='whitespace-nowrap'>{item?.isChecked === true && priceConversion(item?.price, selectedCurrency, true)}</span>
+                                            <span className='whitespace-nowrap flex items-center'>
+                                                {item?.isChecked === true && priceConversion(item?.price, selectedCurrency, true)}
+                                                <span className='ml-1 text-main'
+                                                onClick={() => dispatch(removeFromCart(item?._id))}
+                                                ><AiOutlineClose /></span>
+                                            </span>
                                         </div>
                                     ))}
                                 </div>

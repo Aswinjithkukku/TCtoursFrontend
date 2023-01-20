@@ -121,7 +121,7 @@ function NewRegisters() {
                   value={data.country}
                   onChange={onChangeHandler}
                 >
-                  <option className='text-text'>select</option>
+                  <option className='text-text' hidden>select Country</option>
                   {countries?.map((item, index) => (
                     <option className='capitalize' value={item?._id} key={index}>{item?.countryName} </option>
                   ))}

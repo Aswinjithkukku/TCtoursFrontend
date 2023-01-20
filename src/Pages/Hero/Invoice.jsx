@@ -1,7 +1,7 @@
 import React from 'react'
 import { barcodepng } from '../../static/images'
 import { logoPng } from '../../static/imagesB2B'
-import Barcode from 'react-barcode';
+// import Barcode from 'react-barcode';
 
 function Invoice() {
   return (
@@ -42,7 +42,7 @@ function Invoice() {
               </div>
                 <p className='uppercase text-[10px] text-center mt-1'>5F86477C76F74680A095FF7668B3943B</p>*/}
               <div className=''>
-                <Barcode value="5F86477C76F74680A095FF7668B3943B" width={.6} textMargin= {0}  fontSize={10} />
+                {/* <Barcode value="5F86477C76F74680A095FF7668B3943B" width={.6} textMargin= {0}  fontSize={10} /> */}
               </div>
             </div>
           </div>

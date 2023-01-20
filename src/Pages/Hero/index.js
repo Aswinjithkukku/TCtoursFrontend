@@ -11,7 +11,7 @@ import PaymentPage from "./PaymentPage";
 import ProfileMainPage from "./ProfileMainPage";
 import ProfileSettingsPage from "./ProfileSettingsPage";
 import ProfilePasswordPage from "./ProfilePasswordPage";
-import PaymentApproval from "../PaymentApproval/PaymentApproval";
+import PaymentApprovalPage from "./PaymentApprovalPage";
 import Invoice from "./Invoice";
 
 export {
@@ -28,6 +28,6 @@ export {
   ProfileMainPage,
   ProfileSettingsPage,
   ProfilePasswordPage,
-  PaymentApproval,
+  PaymentApprovalPage,
   Invoice,
 };

@@ -12,7 +12,10 @@ function PaymentApproval() {
           <div className='1 col-span-3 bg-primaryColor p-6 text-white'>
             <div className='h-12 bg-bluetrans flex justify-center items-center font-medium tracking-wide rounded-md'>Payments</div>
             <div className='h-10 hover:bg-bluetrans flex tracking-wide items-center cursor-pointer px-2 mt-5'>Paypal</div>
-            <div className='h-10 hover:bg-bluetrans flex tracking-wide items-center cursor-pointer px-2'>Razorpay</div>
+            <div className='h-10 hover:bg-bluetrans  tracking-wide items-center cursor-pointer px-2'>
+              <p className=''>Razorpay</p>
+              <p className='text-xs text-text'>(credit/debit-card, UPI payment)</p>
+            </div>
             <div className='h-10 hover:bg-bluetrans flex tracking-wide items-center cursor-pointer px-2'>Stripe</div>
           </div>
           <div className='2 col-span-9 p-6'>

@@ -5,6 +5,7 @@ import {
   excursionReducer,
   generalReducer,
   homeReducer,
+  markupReducer,
   paymentReducer,
   usersReducer,
 } from "./slices";
@@ -18,6 +19,7 @@ const store = configureStore({
     home: homeReducer,
     blog: blogReducer,
     agents: agentReducer,
+    markups: markupReducer
   },
   devTools: true,
 });

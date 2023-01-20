@@ -5,6 +5,7 @@ import usersReducer from "./usersSlice";
 import homeReducer from "./homeSlice";
 import blogReducer from "./blogSlice";
 import agentReducer from './agentSlice'
+import markupReducer from './markupSlice'
 
 export {
   excursionReducer,
@@ -13,5 +14,6 @@ export {
   usersReducer,
   homeReducer,
   blogReducer,
-  agentReducer
+  agentReducer,
+  markupReducer,
 };

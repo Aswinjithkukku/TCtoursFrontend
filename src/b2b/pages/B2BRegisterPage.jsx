@@ -14,6 +14,7 @@ import axios from '../../axios.js'
 import { setAgent } from '../../redux/slices/agentSlice'
 import { BtnLoader } from '../components'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 function B2BRegisterPage() {
   const navigate = useNavigate()
@@ -67,7 +68,10 @@ function B2BRegisterPage() {
         const response = await axios.post("/b2b/resellers/auth/signup", data);
         dispatch(setAgent(response.data));
         setIsLoading(false);
-        navigate('/b2b')
+        Swal.fire({
+          icon : 'success',
+          title: 'Successfully Regsitered'
+        })
       }
     } catch (err) {
       setError(
@@ -79,9 +83,11 @@ function B2BRegisterPage() {
 
   useEffect(() => {
     if (data.password !== confirmPassword) {
-      setError('password you have entered is not similiar')
+      setTimeout(() => {
+        setError('password you have entered is not similiar')
+      },2000)
     }
-  }, [confirmPassword, data.password])
+  }, [confirmPassword])
 
   const country = countries?.filter((item) => item._id === data.country)
 
@@ -172,7 +178,7 @@ function B2BRegisterPage() {
                         onChange={onChangeHandler}
                         required
                       >
-                        <option>Ex: United Arab Emirates</option>
+                        <option className='text-text' hidden>select country</option>
                         {countries?.map((item, index) => (
                           <option className='capitalize' value={item?._id} key={index}>{item?.countryName} </option>
                         ))}
@@ -341,7 +347,8 @@ function B2BRegisterPage() {
                         placeholder='Ex: 000000000'
                         name='whatsappNumber'
                         value={data.whatsappNumber}
-                        onChange={onChangeHandler} />
+                        onChange={onChangeHandler}
+                        required />
                     </div>
 
                   </div>

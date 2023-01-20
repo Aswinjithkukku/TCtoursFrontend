@@ -1,12 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart, setActivities } from '../../redux/slices/excursionSlice';
+import Swal from 'sweetalert2';
+import { addToCart } from '../../redux/slices/excursionSlice';
 import ActivityTable from './ActivityTable';
 
 function PackageSection() {
     const dispatch = useDispatch()
+    const [error, setError] = useState('')
 
     const { recievedActivities, selectedActivities } = useSelector(state => state.excursion)
+
+    const carting = () => {
+
+        const isDateExist = selectedActivities?.filter(item => {
+            return item?.isChecked === true && item?.date !== ""
+        })
+        if (isDateExist.length > 0) {
+            setError('')
+            dispatch(addToCart(selectedActivities))
+            Swal.fire({
+                icon: 'success',
+                title: 'Added to Cart!',
+                text: 'The selected item added to cart',
+                timer: 1500
+            })
+        } else {
+            setError("Fill the tour Date")
+        }
+    }
 
     return (
         <>
@@ -32,10 +53,11 @@ function PackageSection() {
                         </tbody>
                     </table>
                     <div className='flex justify-end items-center mt-2'>
+                        {error && (
+                            <p className='text-main text-xs mr-5'>{error}</p>
+                        )}
                         <button className='button w-[100px]'
-                        onClick={() => {
-                            dispatch(addToCart(selectedActivities))
-                        }}
+                            onClick={carting}
                         >Add to cart</button>
                     </div>
                 </div>

@@ -1,14 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import AddMarkupModal from './AddMarkupModal'
-import EditMarkupModal from './EditMarkupModal'
+import { fetchMarkups } from '../../../redux/slices/markupSlice'
+import AgentMarkupModal from './AgentMarkupModal'
+import ClientMarkupModal from './ClientMarkupModal'
 
 function MarkUpList() {
+  const dispatch = useDispatch()
   const [markup, setMarkup] = useState({
-    add: false,
-    edit: false
+    client: false,
+    agent: false
   })
+
+  useEffect(() => {
+    dispatch(fetchMarkups())
+  }, [dispatch])
+
+  const { markups } = useSelector(state => state.markups)
+  console.log(markups);
+
   return (
     <>
       <div className=' '>
@@ -28,58 +39,83 @@ function MarkUpList() {
           <div className="bg-white rounded shadow-sm mt-2 lg:mt-6">
             <div className="flex items-center justify-between border-b border-dashed p-4">
               <h1 className="font-medium">Markup Lists</h1>
-              <span className=''>
+              {/* <span className=''>
                 <button className='button w-[100px]'
                   onClick={() => setMarkup({ add: true, edit: false })}>
                   Add Markup
                 </button>
-              </span>
+              </span> */}
             </div>
             <div className='overflow-x-auto'>
               <table className="w-full">
                 <thead className="bg-[#f3f6f9] text-grayColor text-[14px] text-left">
                   <tr>
-                    <th className="font-[500] p-3 whitespace-nowrap">Attraction Id</th>
                     <th className="font-[500] p-3 whitespace-nowrap">Attraction</th>
-                    <th className="font-[500] p-3 whitespace-nowrap">Previous Price</th>
-                    <th className="font-[500] p-3 whitespace-nowrap">Flat</th>
-                    <th className="font-[500] p-3 whitespace-nowrap">Percentage</th>
-                    <th className="font-[500] p-3 whitespace-nowrap">Current Price</th>
-                    <th className="font-[500] p-3 whitespace-nowrap">Status</th>
+                    <th className="font-[500] p-3 whitespace-nowrap">Booking Type</th>
+                    <th className="font-[500] p-3 whitespace-nowrap">Destination</th>
+                    <th className="font-[500] p-3 whitespace-nowrap">Agent MarkUp</th>
+                    <th className="font-[500] p-3 whitespace-nowrap">Client MarkUp</th>
                   </tr>
                 </thead>
                 <tbody className="text-sm">
-                  <tr className="border-b border-tableBorderColor">
-                    <td className="p-3">#63b2cc</td>
-                    <td className="p-3">
-                      SKy Fly
-                    </td>
-                    <td className="p-3">120</td>
-                    <td className="p-3 ">50</td>
-                    <td className="p-3">N/A</td>
-                    <td className="p-3">170</td>
-                    <td className="p-3 flex space-x-1">
-                      <span className='text-xl text-lightblue'
-                        onClick={() => setMarkup({
-                          add: false,
-                          edit: true
-                        })}><AiFillEdit /> </span>
-                      <span className='text-xl text-main'><AiFillDelete /> </span>
-                    </td>
-                  </tr>
+                  {markups?.data?.map((item, index) => (
+                    <tr className="border-b border-tableBorderColor" key={index}>
+                      <td className="p-3">
+                        {item?.title}
+                      </td>
+                      <td className="p-3">{item?.bookingType}</td>
+                      <td className="p-3 ">Dubai</td>
+                      <td className="p-3">
+                        <span className='flex space-x-2'>
+                          <p className=''>
+                            {item?.isOffer === true ?
+                              item?.offerType === ("flat" && `FLAT ${item?.markupClient}`) ||
+                              (item?.offerType === "percentage" && `${item?.markupClient} %`) :
+                              'N/A'
+                            }
+                          </p>
+                          {/* <p className=''></p> */}
+                          <p className='underline text-lightblue cursor-pointer'
+                            onClick={() => setMarkup({
+                              client: false,
+                              agent: true
+                            })}
+                          >Edit</p>
+                        </span>
+                      </td>
+                      <td className="p-3">
+                        <span className='flex space-x-2'>
+                          <p className=''>
+                            {item?.isOffer === true ?
+                              (item?.offerType === "flat" && `FLAT ${item?.markupClient}`) ||
+                              (item?.offerType === "percentage" && `${item?.markupClient} %`) :
+                              'N/A'
+                            }
+                          </p>
+                          {/* <p className=''></p> */}
+                          <p className='underline text-lightblue cursor-pointer'
+                            onClick={() => setMarkup({
+                              client: true,
+                              agent: false
+                            })}
+                          >Edit</p>
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
-      {markup.edit && (
-        <EditMarkupModal
+      {markup.client && (
+        <ClientMarkupModal
           setMarkup={setMarkup}
         />
       )}
-      {markup.add && (
-        <AddMarkupModal
+      {markup.agent && (
+        <AgentMarkupModal
           setMarkup={setMarkup}
         />
       )}
