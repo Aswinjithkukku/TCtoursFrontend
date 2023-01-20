@@ -1,24 +1,29 @@
 import React, { useRef, useState } from 'react'
 import { MdClose } from 'react-icons/md';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from '../../../axios';
 import { useHandleClickOutside } from '../../../hooks';
+import { removeSubagentMarkup } from '../../../redux/slices/markupSlice';
+import { BtnLoader } from '../../components'
 
-function AgentMarkupModal({ setMarkup }) {
+function AgentMarkupModal({ setMarkup, setMarkupData }) {
+  const dispatch = useDispatch()
 
   const wrapperRef = useRef();
   useHandleClickOutside(wrapperRef, () =>
-    setMarkup({client: false, agent: false})
+    setMarkup({ client: false, agent: false })
   );
 
-  const [markupType, setMarkupType] = useState('')
-  const [markupAmount, setMarkupAmount] = useState('')
+  const { token } = useSelector(state => state.agents)
+  const { agentMarkup } = useSelector(state => state.markups)
+
+  const [markupType, setMarkupType] = useState(agentMarkup?.agentMarkup?.markupType || '')
+  const [markupAmount, setMarkupAmount] = useState(agentMarkup?.agentMarkup?.markup || 0)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const { token } = useSelector(state => state.agents)
 
-  const submitHandler = async(e) => {
+  const submitHandler = async (e) => {
     try {
       e.preventDefault();
       setError('')
@@ -30,13 +35,17 @@ function AgentMarkupModal({ setMarkup }) {
         }
       }
 
-      const response = await axios.patch("/b2b/resellers/client/markup/upsert", {
+      const response = await axios.patch("/b2b/resellers/subagent/markup/upsert", {
         markup: markupAmount,
         markupType: markupType,
-        attraction: ''
+        attraction: agentMarkup?._id
       }, config);
 
       setIsLoading(false);
+      setMarkup({ client: false, agent: false })
+      setMarkupData((prev) => {
+        return {...prev, agent: response.data }
+      })
       return response.data;
     } catch (err) {
       setError(
@@ -67,8 +76,8 @@ function AgentMarkupModal({ setMarkup }) {
             </button>
           </div>
           <div className="p-6">
-          <form onSubmit={submitHandler} className='space-y-3'>
-              <h2 className='font-medium'>Attraction Name</h2>
+            <form onSubmit={submitHandler} className='space-y-3'>
+              <h2 className='font-medium'>{agentMarkup?.name}</h2>
               <div>
                 <label htmlFor="" className='label'>Markup Type*</label>
                 <select
@@ -77,11 +86,10 @@ function AgentMarkupModal({ setMarkup }) {
                   placeholder="Enter Flat Amount"
                   value={markupType}
                   onChange={(e) => setMarkupType(e.target.value)}
-                  required
                 >
                   <option className='text-text' hidden>Choose Markup Type</option>
-                  <option value={'flat'}>flat</option>
-                  <option value={'percentage'}>percentage</option>
+                  <option value={'flat'}>Flat</option>
+                  <option value={'percentage'}>Percentage</option>
                 </select>
               </div>
               <div>
@@ -92,12 +100,29 @@ function AgentMarkupModal({ setMarkup }) {
                   placeholder="Enter Percentage"
                   value={markupAmount}
                   onChange={(e) => setMarkupAmount(e.target.value)}
-                  required
                 />
               </div>
               <div className="mt-4 flex items-center justify-end gap-[12px]">
-                <button className="w-[100px] button" type='submit'> 
-                Mark
+                {error && (
+                  <p className='text-main text-xs'> {error}</p>
+                )}
+                <span className="w-[100px] h-[40px] text-[14px] bg-orange-600 text-white rounded-[0.25rem] flex justify-center items-center font-[600] cursor-pointer" 
+                onClick={() => {
+                  dispatch(removeSubagentMarkup({
+                    _id: agentMarkup?._id,
+                    name: agentMarkup?.name,
+                    id: agentMarkup?.agentMarkup?._id
+                  }))
+                  setMarkupData((prev) => {
+                    return {...prev, agent: '' }
+                  })
+                  setMarkup({ client: false, agent: false })
+                }}
+                >
+                  Remove
+                </span>
+                <button className="w-[100px] button" type='submit'>
+                {isLoading ? <BtnLoader /> : 'Mark'}
                 </button>
               </div>
             </form>

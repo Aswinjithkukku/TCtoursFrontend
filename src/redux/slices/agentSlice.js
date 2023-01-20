@@ -27,7 +27,7 @@ const fetchAgent = createAsyncThunk(
 );
 
 const logoutAgent = createAsyncThunk(
-    '/agentSlice/logoutAgent',
+    'agentSlice/logoutAgent',
     async (dispatch,  getState ) => {
         // const response = await axios.get('/user/logout');
         localStorage.removeItem('agent-string')

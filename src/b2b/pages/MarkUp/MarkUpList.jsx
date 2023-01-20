@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchMarkups } from '../../../redux/slices/markupSlice'
-import AgentMarkupModal from './AgentMarkupModal'
-import ClientMarkupModal from './ClientMarkupModal'
+import { fetchMarkups,  } from '../../../redux/slices/markupSlice'
+import MarkupListSingleRow from './MarkupListSingleRow'
 
 function MarkUpList() {
   const dispatch = useDispatch()
-  const [markup, setMarkup] = useState({
-    client: false,
-    agent: false
-  })
+
+  const [search, setSearch] = useState('')
+  const { markups } = useSelector(state => state.markups)
 
   useEffect(() => {
-    dispatch(fetchMarkups())
-  }, [dispatch])
+    dispatch(fetchMarkups(search))
+  }, [dispatch,search])
 
-  const { markups } = useSelector(state => state.markups)
-  console.log(markups);
+  // console.log(markups);
 
   return (
     <>
@@ -39,12 +35,13 @@ function MarkUpList() {
           <div className="bg-white rounded shadow-sm mt-2 lg:mt-6">
             <div className="flex items-center justify-between border-b border-dashed p-4">
               <h1 className="font-medium">Markup Lists</h1>
-              {/* <span className=''>
-                <button className='button w-[100px]'
-                  onClick={() => setMarkup({ add: true, edit: false })}>
-                  Add Markup
-                </button>
-              </span> */}
+              <span className='w-[400px]'>
+                <input type="search" 
+                className='input w-full' 
+                placeholder='search!!!!!'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)} />
+              </span>
             </div>
             <div className='overflow-x-auto'>
               <table className="w-full">
@@ -57,51 +54,12 @@ function MarkUpList() {
                     <th className="font-[500] p-3 whitespace-nowrap">Client MarkUp</th>
                   </tr>
                 </thead>
-                <tbody className="text-sm">
+                <tbody className="text-sm text-textColor">
                   {markups?.data?.map((item, index) => (
-                    <tr className="border-b border-tableBorderColor" key={index}>
-                      <td className="p-3">
-                        {item?.title}
-                      </td>
-                      <td className="p-3">{item?.bookingType}</td>
-                      <td className="p-3 ">Dubai</td>
-                      <td className="p-3">
-                        <span className='flex space-x-2'>
-                          <p className=''>
-                            {item?.isOffer === true ?
-                              item?.offerType === ("flat" && `FLAT ${item?.markupClient}`) ||
-                              (item?.offerType === "percentage" && `${item?.markupClient} %`) :
-                              'N/A'
-                            }
-                          </p>
-                          {/* <p className=''></p> */}
-                          <p className='underline text-lightblue cursor-pointer'
-                            onClick={() => setMarkup({
-                              client: false,
-                              agent: true
-                            })}
-                          >Edit</p>
-                        </span>
-                      </td>
-                      <td className="p-3">
-                        <span className='flex space-x-2'>
-                          <p className=''>
-                            {item?.isOffer === true ?
-                              (item?.offerType === "flat" && `FLAT ${item?.markupClient}`) ||
-                              (item?.offerType === "percentage" && `${item?.markupClient} %`) :
-                              'N/A'
-                            }
-                          </p>
-                          {/* <p className=''></p> */}
-                          <p className='underline text-lightblue cursor-pointer'
-                            onClick={() => setMarkup({
-                              client: true,
-                              agent: false
-                            })}
-                          >Edit</p>
-                        </span>
-                      </td>
-                    </tr>
+                    <MarkupListSingleRow
+                    item={item}
+                    key={index}
+                    />
                   ))}
                 </tbody>
               </table>
@@ -109,16 +67,6 @@ function MarkUpList() {
           </div>
         </div>
       </div>
-      {markup.client && (
-        <ClientMarkupModal
-          setMarkup={setMarkup}
-        />
-      )}
-      {markup.agent && (
-        <AgentMarkupModal
-          setMarkup={setMarkup}
-        />
-      )}
     </>
   )
 }

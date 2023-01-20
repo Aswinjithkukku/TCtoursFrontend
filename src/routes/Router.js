@@ -36,11 +36,16 @@ import {
   Wallet,
 } from "../b2b/pages";
 import B2BPrivateRoute from "./B2BPrivateRoute";
+import LoadingWrapper from "./LoadingWrapper";
 
 const ThemeRoutes = [
   {
     path: "",
-    element: <MainLayout />,
+    element: (
+      <LoadingWrapper>
+        <MainLayout />
+      </LoadingWrapper>
+    ),
     children: [
       { path: "", element: <AttractionHomePage /> },
       { path: "/attraction", element: <AttractionLandingPage /> },

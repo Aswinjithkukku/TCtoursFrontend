@@ -8,7 +8,7 @@ import { getInitialData } from "./redux/slices/homeSlice";
 import { fetchAgent } from "./redux/slices/agentSlice";
 
 export default function App() {
-    const { isSiteLoading } = useSelector((state) => state.users);
+    // const { isSiteLoading } = useSelector((state) => state.users);
 
     const dispatch = useDispatch();
 
@@ -19,5 +19,5 @@ export default function App() {
     }, []);
 
     const routing = useRoutes(ThemeRoutes);
-    return isSiteLoading ? <div>Loading...</div> : routing;
+    return routing;
 }
