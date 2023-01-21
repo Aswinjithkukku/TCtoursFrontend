@@ -3,7 +3,7 @@ import { BsDash, BsPersonFill } from 'react-icons/bs'
 import { IoMdCart } from 'react-icons/io'
 import { FaBaby, FaChild } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import priceConversion from '../../utils/PriceConversion'
 import { removeFromCart } from '../../redux/slices/excursionSlice'
 
@@ -18,10 +18,10 @@ function CartModal({ setCart }) {
 
   useEffect(() => {
     const sum = excursionCart?.reduce((acc, data) => {
-        return Number(acc) + Number(data?.price)
+      return Number(acc) + Number(data?.price)
     }, 0)
     setPrice(sum)
-}, [excursionCart])
+  }, [excursionCart])
 
   return (
     <div className="absolute z-20 top-7 md:top-10 right-0 bg-[#EFF5F5] rounded-xl w-[400px]  max-h-[70vh] overflow-y-auto"  >
@@ -92,9 +92,14 @@ function CartModal({ setCart }) {
               <p className='text-[13px] tracking-tight'>Grand Total:</p>
               <p className='text-lg  font-semibold'>{priceConversion(price, selectedCurrency, true)}</p>
             </span>
-            <button className='h-[35px] w-[150px] rounded-md bg-lightblue text-white text-[14px]'>
-              Book Now
-            </button>
+              <button className='h-[35px] w-[150px] rounded-md bg-lightblue text-white text-[14px]'
+              onClick={() => {
+                navigate('/payment')
+                setCart(false)
+              }}
+              >
+                Book Now
+              </button>
           </div>
         </div>
       </div>

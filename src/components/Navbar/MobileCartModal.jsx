@@ -95,7 +95,12 @@ function MobileCartModal({ mobileCart, setMobileCart }) {
               <p className='text-[13px] tracking-tight'>Grand Total:</p>
               <p className='text-lg  font-semibold'>{priceConversion(price, selectedCurrency, true)}</p>
             </span>
-            <button className='h-[35px] w-[150px] rounded-md bg-lightblue text-white text-[14px]'>
+            <button className='h-[35px] w-[150px] rounded-md bg-lightblue text-white text-[14px]'
+              onClick={() => {
+                navigate('/payment')
+                setMobileCart(false)
+              }}
+            >
               Book Now
             </button>
           </div>
