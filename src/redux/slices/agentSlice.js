@@ -45,6 +45,13 @@ const agentSlice = createSlice({
 
             localStorage.setItem("agent-string", action.payload?.jwtToken);
         },
+        setRegisterAgent: (state, action) => {
+            state.agent = action.payload?.reseller;
+            state.token = action.payload?.jwtToken;
+            state.isLoggedIn = false;
+
+            localStorage.setItem("agent-string", action.payload?.jwtToken);
+        },
     },
     extraReducers: {
         [fetchAgent.fulfilled]: (state, action) => {
@@ -68,6 +75,6 @@ const agentSlice = createSlice({
 
 export { fetchAgent, logoutAgent };
 
-export const { setAgent } = agentSlice.actions;
+export const { setAgent, setRegisterAgent } = agentSlice.actions;
 
 export default agentSlice.reducer;

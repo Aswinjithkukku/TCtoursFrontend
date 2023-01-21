@@ -11,7 +11,7 @@ import { TbBuildingWarehouse } from 'react-icons/tb'
 import { logoPng } from '../../static/imagesB2B'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from '../../axios.js'
-import { setAgent } from '../../redux/slices/agentSlice'
+import { setAgent, setRegisterAgent } from '../../redux/slices/agentSlice'
 import { BtnLoader } from '../components'
 import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
@@ -62,15 +62,19 @@ function B2BRegisterPage() {
     try {
       e.preventDefault();
       setError('')
+        if (data.password !== confirmPassword) {
+          setError('password you have entered is not similiar')
+        }
       if (data.password === confirmPassword) {
         setIsLoading(true);
 
         const response = await axios.post("/b2b/resellers/auth/signup", data);
-        dispatch(setAgent(response.data));
+        dispatch(setRegisterAgent(response.data));
         setIsLoading(false);
         Swal.fire({
           icon : 'success',
-          title: 'Successfully Regsitered'
+          title: 'Successfully Regsitered',
+          text: 'You should wait until allow approve',
         })
       }
     } catch (err) {
@@ -80,14 +84,6 @@ function B2BRegisterPage() {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    if (data.password !== confirmPassword) {
-      setTimeout(() => {
-        setError('password you have entered is not similiar')
-      },2000)
-    }
-  }, [confirmPassword])
 
   const country = countries?.filter((item) => item._id === data.country)
 
