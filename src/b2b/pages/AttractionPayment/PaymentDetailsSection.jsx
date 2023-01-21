@@ -45,15 +45,15 @@ function PaymentDetailsSection() {
     return (
         <>
             <div className='bg-light  w-full p-5 rounded-2xl space-y-5'>
-                <form >
+                <form className='lg:space-y-3'>
                     <div className=' cursor-default'>
                         <h2 className='text-2xl font-semibold text-darktext'>Lead Passenger Details</h2>
                     </div>
 
-                    <div className='lg:flex gap-5 text-darktext space-y-3 lg:space-y-0'>
-                        <div className=''>
+                    <div className='lg:grid grid-cols-12 gap-5 text-darktext space-y-3 lg:space-y-0'>
+                        <div className='col-span-2'>
                             <div className=''>
-                                <label className=''>Mr/Mrs</label>
+                                <label className='label'>Mr/Mrs</label>
                             </div>
                             <div className=''>
                                 <select
@@ -68,9 +68,9 @@ function PaymentDetailsSection() {
                                 </select>
                             </div>
                         </div>
-                        <div className='lg:w-5/12'>
+                        <div className='col-span-5'>
                             <div className=''>
-                                <label className=''>First Name</label>
+                                <label className='label'>First Name</label>
                             </div>
                             <div className=''>
                                 <input
@@ -82,9 +82,9 @@ function PaymentDetailsSection() {
                                 />
                             </div>
                         </div>
-                        <div className='lg:w-5/12'>
+                        <div className='col-span-5'>
                             <div className=''>
-                                <label className=''>Last Name</label>
+                                <label className='label'>Last Name</label>
                             </div>
                             <div className=''>
                                 <input
@@ -97,10 +97,10 @@ function PaymentDetailsSection() {
                             </div>
                         </div>
                     </div>
-                    <div className='lg:flex gap-5 text-darktext space-y-3 lg:space-y-0'>
-                        <div className='lg:w-4/12'>
+                    <div className='lg:grid grid-cols-3 gap-5 text-darktext space-y-3 lg:space-y-0'>
+                        <div className=''>
                             <div className=''>
-                                <label className=''>Email</label>
+                                <label className='label'>Email</label>
                             </div>
                             <div className=''>
                                 <input
@@ -112,9 +112,9 @@ function PaymentDetailsSection() {
                                 />
                             </div>
                         </div>
-                        <div className='lg:w-4/12'>
+                        <div className=''>
                             <div className=''>
-                                <label className=''>Country</label>
+                                <label className='label'>Country</label>
                             </div>
                             <div className=''>
                                 <select
@@ -131,9 +131,9 @@ function PaymentDetailsSection() {
                                 </select>
                             </div>
                         </div>
-                        <div className='lg:w-4/12'>
+                        <div className=''>
                             <div className=''>
-                                <label className=''>Phone</label>
+                                <label className='label'>Phone</label>
                             </div>
                             <div className=''>
                                 <input
@@ -148,7 +148,7 @@ function PaymentDetailsSection() {
                     </div>
                     <div className='text-darktext'>
                         <div className=''>
-                            <label className=''>Special Request</label>
+                            <label className='label'>Special Request</label>
                         </div>
                         <div className=''>
                             <textarea
@@ -186,7 +186,7 @@ function PaymentDetailsSection() {
                     </div>
                 )}
             </div>
-            <div className='bg-light rounded-2xl w-full p-5 space-y-5'>
+            {/* <div className='bg-light rounded-2xl w-full p-5 space-y-5'>
                 <div className='border-b pb-3 my-2 flex justify-between'>
                     <h2 className='text-xl font-medium'>Choose Payment Method</h2>
                     <div className='space-x-2 bg-[#E6e6e6] rounded'>
@@ -203,7 +203,7 @@ function PaymentDetailsSection() {
                     <RazorpayComponent />
                 )}
 
-            </div>
+            </div> */}
             <div className='bg-light my-5 p-7 rounded-2xl lg:flex '>
                 <div className='{" "}'>
                     <span className='cursor-default '>By Clicking Pay Now You agree that you have read and understood our {" "}</span>

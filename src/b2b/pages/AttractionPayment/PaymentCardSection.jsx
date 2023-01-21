@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { getExcursion, removeFromCart } from '../../../redux/slices/agentExcursionSlice'
+import priceConversion from '../../../utils/PriceConversion'
 
 function PaymentCardSection() {
     const dispatch = useDispatch()
@@ -7,7 +9,7 @@ function PaymentCardSection() {
     const [vatAmount, setVatAmount] = useState(0)
     const [activities, setActivities] = useState([])
 
-    const { selectedCurrency } = useSelector(state =>  state.home)
+    const { selectedCurrency } = useSelector(state => state.home)
 
     useEffect(() => {
         let array = JSON.parse(localStorage.getItem('agentExcursionCart')) || []
@@ -53,7 +55,7 @@ function PaymentCardSection() {
                             </div>
                             <div className='flex items-center justify-between font-medium'>
                                 <span className=''>Amount :</span>
-                                <span className=''>{item?.price} AED</span>
+                                <span className=''>{priceConversion(item?.price,selectedCurrency, true)}</span>
                             </div>
                             {item?.isVat && (
                                 <>
@@ -65,7 +67,7 @@ function PaymentCardSection() {
                                         <span className=''>VAT amount :</span>
                                         <span className=''>
                                             {
-                                                (item?.vat && item?.isVat && (item?.price * item?.vat) / 100).toFixed(2)
+                                                priceConversion((item?.vat && item?.isVat && (item?.price * item?.vat) / 100),selectedCurrency, false)
                                             }
                                         </span>
                                     </div>
@@ -73,7 +75,7 @@ function PaymentCardSection() {
                             )}
                             <div className='flex items-center justify-between font-medium text-lightblue text-lg'>
                                 <span className=''>Total :</span>
-                                <span className=''>{((item?.vat && item?.isVat && (item?.price * item?.vat) / 100) + item?.price).toFixed(2)}  AED</span>
+                                <span className=''>{priceConversion((item?.vat && item?.isVat && (item?.price * item?.vat) / 100) + item?.price, selectedCurrency, true)}</span>
                             </div>
                         </div>
                     </div>
@@ -86,15 +88,15 @@ function PaymentCardSection() {
                     <div className='text-darktext p-5 space-y-3'>
                             <div className='flex items-center justify-between font-medium'>
                                 <span className=''>VAT Amount :</span>
-                                <span className=''>{totalVat.toFixed(2)} AED</span>
+                                <span className=''>{priceConversion(totalVat, selectedCurrency, true)}</span>
                             </div>
                         <div className='flex items-center justify-between font-medium'>
                             <span className=''>Total :</span>
-                            <span className=''>{finalPayment.toFixed(2)} AED</span>
+                            <span className=''>{priceConversion(finalPayment, selectedCurrency, true)}</span>
                         </div>
                         <div className='flex items-center justify-between font-bold text-xl'>
                             <span className=''>Final Payment :</span>
-                            <span className=''>{finalPayment.toFixed(2)} AED</span>
+                            <span className=''>{priceConversion(finalPayment, selectedCurrency, true)}</span>
                         </div>
                     </div>
                 </div>

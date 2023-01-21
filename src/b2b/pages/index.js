@@ -4,7 +4,7 @@ import B2BRegisterPage from "./B2BRegisterPage";
 import NewRegisters from "./Resllers/NewRegisters";
 import Resellers from "./Resllers/Resellers";
 import Attraction from "./Attraction/Attraction";
-import HeroSearch from "./Attraction/HeroSearch";
+// import HeroSearch from "./Attraction/HeroSearch";
 import AttractionDetails from "./AttractionDetails/AttractionDetails";
 import PaymentHomePage from "./AttractionPayment/PaymentHomePage";
 import MarkUpList from "./MarkUp/MarkUpList";
@@ -20,7 +20,7 @@ export {
   NewRegisters,
   Resellers,
   Attraction,
-  HeroSearch,
+  // HeroSearch,
   AttractionDetails,
   PaymentHomePage,
   MarkUpList,

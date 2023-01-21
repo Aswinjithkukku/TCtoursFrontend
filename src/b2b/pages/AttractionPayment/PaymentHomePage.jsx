@@ -1,11 +1,14 @@
 import React from 'react'
 import { AiOutlineLeft } from 'react-icons/ai'
+import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import PaymentCardSection from './PaymentCardSection'
 import PaymentDetailsSection from './PaymentDetailsSection'
 
 function PaymentHomePage() {
     const navigate = useNavigate()
+
+    const { agentExcursionCart } = useSelector(state => state.agentExcursions)
     return (
         <>
             <div className="bg-white flex items-center justify-between gap-[10px] px-6 shadow-sm border-t py-2">
@@ -44,7 +47,7 @@ function PaymentHomePage() {
                                     <div className=''>Best Price Guarantee</div>
                                 </div>
                                 <div className='lg:space-y-5 space-y-2 font-medium'>
-                                    <div className='font-light lg:text-xl'>Currently, you have 1 item(s) in your cart</div>
+                                    <div className='font-light lg:text-xl'>Currently, you have {agentExcursionCart?.length} item(s) in your cart</div>
                                     <div className=''>
                                         <button className='px-3 py-2 bg-lightblue rounded-lg text-light flex items-center space-x-2 hover:border border-lightblue hover:bg-light hover:text-lightblue'
                                             onClick={() => {

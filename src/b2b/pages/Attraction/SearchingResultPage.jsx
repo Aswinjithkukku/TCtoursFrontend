@@ -9,8 +9,6 @@ const SearchListViewSection = React.lazy(() => import('./SearchListViewSection')
 
 function SearchingResultPage() {
     const dispatch = useDispatch()
-    const params = useParams()
-    console.log(params);
 
     const [viewCategory, setViewCategory] = useState(false)
     const [category, setCategory] = useState('')
