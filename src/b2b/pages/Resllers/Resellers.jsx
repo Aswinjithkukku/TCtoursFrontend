@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { fetchResellers } from '../../../redux/slices/resellerSlice'
 
 function Resellers() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { resellers } = useSelector(state => state.resellers)
+
+  useEffect(() => {
+    dispatch(fetchResellers())
+  },[dispatch])
+
+  console.log(resellers);
+
   return (
     <div className=''>
       <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
@@ -27,25 +39,30 @@ function Resellers() {
             <table className="w-full">
               <thead className="bg-[#f3f6f9] text-grayColor text-[14px] text-left">
                 <tr>
-                  <th className="font-[500] p-3 whitespace-nowrap">Reseller Id</th>
+                  <th className="font-[500] p-3 whitespace-nowrap">Agent Code</th>
                   <th className="font-[500] p-3 whitespace-nowrap">Company</th>
                   <th className="font-[500] p-3 whitespace-nowrap">Representative Name</th>
                   <th className="font-[500] p-3 whitespace-nowrap">Phone</th>
+                  <th className="font-[500] p-3 whitespace-nowrap">Whatsapp</th>
                   <th className="font-[500] p-3 whitespace-nowrap">Email</th>
-                  <th className="font-[500] p-3 whitespace-nowrap">Status</th>
+                  <th className="font-[500] p-3 whitespace-nowrap">Designation</th>
+                  <th className="font-[500] p-3 whitespace-nowrap">Action</th>
                 </tr>
               </thead>
               <tbody className="text-sm">
-                <tr className="border-b border-tableBorderColor">
-                  <td className="p-3">#63b2cc</td>
+                {resellers?.map((item,index) => (
+                <tr className="border-b border-tableBorderColor" key={index}>
+                  <td className="p-3">{item?.agentCode}</td>
                   <td className="p-3">
                     <div className='w-[150px] md:w-auto'>
-                    Travllers Choice Tours
+                    {item?.companyName}
                     </div>
                   </td>
-                  <td className="p-3">Sam Philipie</td>
-                  <td className="p-3 ">9800456123</td>
-                  <td className="p-3">test@email.com</td>
+                  <td className="p-3">{item?.name}</td>
+                  <td className="p-3 ">{item?.phoneNumber}</td>
+                  <td className="p-3 ">{item?.whatsappNumber}</td>
+                  <td className="p-3">{item?.email}</td>
+                  <td className="p-3">{item?.designation}</td>
                   <td className="p-3 flex space-x-1">
                     <span className='text-xl text-lightblue'
                       onClick={() => navigate('/b2b/reseller/edit')}
@@ -53,6 +70,7 @@ function Resellers() {
                     <span className='text-xl text-main'><AiFillDelete /> </span>
                   </td>
                 </tr>
+                ))}
               </tbody>
             </table>
           </div>

@@ -5,7 +5,7 @@ import RegisterMobileCard from '../Authentication/RegisterMobileCard'
 function Auth({ view, setView }) {
   const [mobile, setMobile] = useState({
     viewRegisterMobile: false,
-    viewloginMobile: false,
+    viewloginMobile: true,
   })
   return (
     <>

@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
+  agentExcursionReducer,
   agentReducer,
   blogReducer,
   excursionReducer,
@@ -7,6 +8,7 @@ import {
   homeReducer,
   markupReducer,
   paymentReducer,
+  resellerReducer,
   usersReducer,
 } from "./slices";
 
@@ -19,7 +21,9 @@ const store = configureStore({
     home: homeReducer,
     blog: blogReducer,
     agents: agentReducer,
-    markups: markupReducer
+    markups: markupReducer,
+    resellers: resellerReducer,
+    agentExcursions: agentExcursionReducer,
   },
   devTools: true,
 });

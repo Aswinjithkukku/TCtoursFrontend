@@ -14,7 +14,7 @@ function NewRegisters() {
     address: '',
     country: '',
     trnNumber: '',
-    registrationNumber: '',
+    companyRegistration: '',
     website: '',
     city: '',
     zipCode: '',
@@ -145,8 +145,8 @@ function NewRegisters() {
                     <input className='input'
                       type='number'
                       placeholder=''
-                      name='registrationNumber'
-                      value={data.registrationNumber}
+                      name='companyRegistration'
+                      value={data.companyRegistration}
                       onChange={onChangeHandler}
                     />
                   </div>

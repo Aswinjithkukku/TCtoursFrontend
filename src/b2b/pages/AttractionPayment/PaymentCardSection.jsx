@@ -1,27 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { getExcursion } from '../../../redux/slices/excursionSlice'
 
 function PaymentCardSection() {
     const dispatch = useDispatch()
-    const { id } = useParams()
 
     const [vatAmount, setVatAmount] = useState(0)
     const [activities, setActivities] = useState([])
 
-
-    const { excursion } = useSelector(state => state.excursion)
-
-    useEffect(() => {
-        dispatch(getExcursion(id))
-    }, [dispatch, id])
-
+    const { selectedCurrency } = useSelector(state =>  state.home)
 
     useEffect(() => {
-        let array = JSON.parse(localStorage.getItem('tour_order')) || []
+        let array = JSON.parse(localStorage.getItem('agentExcursionCart')) || []
         setActivities(array)
-    }, [])
+    }, [activities])
 
     const finalPayment = activities.reduce((acc, item) => {
         const vatPrice = item?.vat && item?.isVat && (item?.price * item?.vat) / 100
@@ -37,11 +28,11 @@ function PaymentCardSection() {
         <>
             <div className=''>
                 {activities?.map((item) => (
-                    <div className='bg-light w-full pb-3 rounded-2xl mb-5'>
-                        <div className='p-5 border-b'>
-                            <h1 className='text-lg font-semibold text-darktext'>{excursion?.title} </h1>
+                    <div className='bg-light w-full pb-3 rounded-2xl'>
+                        <div className='p-3 border-b'>
+                            <h1 className='text-lg font-semibold text-darktext'>{item?.name} </h1>
                         </div>
-                        <div className='text-darktext p-5 space-y-3 '>
+                        <div className='text-darktext p-4 space-y-2 '>
                             <div className='flex items-center justify-between font-medium'>
                                 <span className=''>Option:</span>
 

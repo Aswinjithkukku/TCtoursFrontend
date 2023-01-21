@@ -42,7 +42,7 @@ function PaymentCardSection() {
                 {activities?.map((item) => (
                     <div className='bg-light w-full rounded-xl mb-2'>
                         <div className='p-3 border-b flex justify-between items-center'>
-                            <h1 className=' font-semibold text-darktext'>{excursion?.title} </h1>
+                            <h1 className=' font-semibold text-darktext'>{item?.name} </h1>
                             <button className='rounded-full h-5 w-5 bg-gray-300 text-main flex justify-center items-center text-lg font-bold'
                             onClick={() => dispatch(removeFromCart(item?._id)) }
                             >

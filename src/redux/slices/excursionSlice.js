@@ -11,7 +11,7 @@ const initialState = {
   excursionAll: [],
   recievedActivities: [],
   selectedActivities: [],
-  favourites: [],
+  favourites: localStorage.getItem("favourites") ? JSON.parse(localStorage.getItem("favourites"))|| [] : [],
   review: {},
   excursionCart: localStorage.getItem("excursionCart") ? JSON.parse(localStorage.getItem("excursionCart")) || [] : [],
 };

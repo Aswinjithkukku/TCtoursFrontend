@@ -11,6 +11,7 @@ import LanguageModal from "../Header/LanguageModal";
 import RegisterCard from "../Authentication/RegisterCard";
 import { useHandleClickOutside } from "../../hooks";
 import CartModal from "../Navbar/CartModal";
+import MobileCartModal from "../Navbar/MobileCartModal";
 
 function Navbar() {
 
@@ -23,6 +24,7 @@ function Navbar() {
     const [cart, setCart] = useState(false)
 
     const [profileView, setProfileView] = useState(false)
+    const [mobileCart, setMobileCart] = useState(false)
 
     const dispatch = useDispatch();
     const { home } = useSelector((state) => state.general);
@@ -103,12 +105,12 @@ function Navbar() {
                                         )}
                                         {/* absolute modal */}
                                     </div>
-                                    <div 
-                                    ref={cartRef}
-                                    className="cursor-pointer whitespace-nowrap font-medium text-sm lg:text-base relative">
+                                    <div
+                                        ref={cartRef}
+                                        className="cursor-pointer whitespace-nowrap font-medium text-sm lg:text-base relative">
                                         <div className="flex space-x-1 items-center w-[20px] rounded justify-center py-1" >
-                                            <span className='text-xl text-darktext' 
-                                            onClick={() => setCart(!cart)}
+                                            <span className='text-xl text-darktext'
+                                                onClick={() => setCart(!cart)}
                                             ><IoMdCart /> </span>
                                             {/* absolute cart modal */}
                                             {cart && (
@@ -116,6 +118,16 @@ function Navbar() {
                                             )}
                                             {/* absolute cart modal */}
                                         </div>
+                                    </div>
+
+                                </div>
+                            </span>
+                            <span className="flex text-lg md:hidden items-center">
+                                <div className="cursor-pointer whitespace-nowrap font-medium text-sm lg:text-base relative">
+                                    <div className="flex space-x-1 items-center w-[20px] rounded justify-center py-1" >
+                                        <span className='text-xl text-darktext'
+                                            onClick={() => setMobileCart(!mobileCart)}
+                                        ><IoMdCart /> </span>
                                     </div>
 
                                 </div>
@@ -182,6 +194,17 @@ function Navbar() {
                         viewAuth={viewAuth}
                     />
                 )}
+                {/* absolute cart modal */}
+                <div className="">
+                    <MobileCartModal setMobileCart={setMobileCart} mobileCart={mobileCart} />
+                </div>
+                {mobileCart && (
+                    <div
+                        className={`fixed top-0 bottom-0 left-0 right-0 lightglass z-20`}
+                        onClick={() => setMobileCart(!mobileCart)}
+                    ></div>
+                )}
+                {/* absolute cart modal */}
             </>
         </>
     );

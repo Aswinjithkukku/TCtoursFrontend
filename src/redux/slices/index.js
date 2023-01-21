@@ -6,6 +6,8 @@ import homeReducer from "./homeSlice";
 import blogReducer from "./blogSlice";
 import agentReducer from './agentSlice'
 import markupReducer from './markupSlice'
+import resellerReducer from "./resellerSlice";
+import agentExcursionReducer from "./agentExcursionSlice";
 
 export {
   excursionReducer,
@@ -16,4 +18,6 @@ export {
   blogReducer,
   agentReducer,
   markupReducer,
+  resellerReducer,
+  agentExcursionReducer,
 };

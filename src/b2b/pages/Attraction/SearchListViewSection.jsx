@@ -12,7 +12,8 @@ function SearchListViewSection() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const { excursions, favourites } = useSelector(state => state.excursion)
+    const { agentExcursions } = useSelector(state => state.agentExcursions)
+    const { favourites } = useSelector(state => state.excursion)
     const { selectedCurrency } = useSelector(state => state.home)
 
     const saveDatatoLocalStorage = (data) => {
@@ -26,9 +27,9 @@ function SearchListViewSection() {
 
     return (
         <div>
-            {excursions?.attractions?.data[0] ? (
-                <div className='md:grid md:grid-cols-2 lg:grid-cols-4 gap-5'>
-                    {excursions?.attractions?.data[0] && excursions?.attractions?.data?.map((item, index) => (
+            {agentExcursions?.attractions?.data?.length > 0 ? (
+                <div className='md:grid md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-1'>
+                    {agentExcursions?.attractions?.data?.length > 0 && agentExcursions?.attractions?.data?.map((item, index) => (
                         <div key={index} className='h-full snap-start mt-2 bg-light shadow-md p-3 rounded-3xl cursor-pointer md:mx-0' onClick={() => {
                             saveDatatoLocalStorage({
                                 _id: item?._id,

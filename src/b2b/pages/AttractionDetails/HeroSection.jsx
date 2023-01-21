@@ -2,21 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { CiLocationOn } from 'react-icons/ci'
 import { AiOutlineHeart, AiOutlineClose, AiFillHeart } from 'react-icons/ai'
 import { RxShare2 } from 'react-icons/rx'
-import PackageSection from '../../../Pages/AttractionDetails/PackageSection'
-import MapSection from '../../../Pages/AttractionDetails/MapSection'
-import ReviewSection from '../../../Pages/AttractionDetails/ReviewSection'
-import FaqSection from '../../../Pages/AttractionDetails/FaqSection'
-import DetailsCard from '../../../Pages/AttractionDetails/DetailsCard'
-import FeatureSection from '../../../Pages/AttractionDetails/FeatureSection'
+import PackageSection from './PackageSection'
+import MapSection from './MapSection'
+import ReviewSection from './ReviewSection'
+import FaqSection from './FaqSection'
+import DetailsCard from './DetailsCard'
+import FeatureSection from './FeatureSection'
 import { useDispatch, useSelector } from 'react-redux'
 import { getExcursion, setFavourites, stateFavourites } from '../../../redux/slices/excursionSlice'
 import { useNavigate, useParams } from 'react-router-dom'
 import Rating from '../../../components/Rating/Rating'
-import CarousalMobile from '../../../Pages/AttractionDetails/CarousalMobile'
-import ShareModal from '../../../Pages/AttractionDetails/ShareModal'
+import CarousalMobile from './CarousalMobile'
+import ShareModal from './ShareModal'
 import { FaChevronLeft } from 'react-icons/fa'
 import MetaData from '../../../utils/MetaData'
-import Availablity from '../../../Pages/AttractionDetails/Availablity'
+import Availablity from './Availablity'
+import { getAgentExcursion } from '../../../redux/slices/agentExcursionSlice'
 
 function HeroSection() {
   const dispatch = useDispatch()
@@ -24,9 +25,10 @@ function HeroSection() {
   const { id } = useParams()
 
   const { excursion, favourites } = useSelector(state => state.excursion)
+  const { agentExcursion } = useSelector(state => state.agentExcursions)
 
   useEffect(() => {
-    dispatch(getExcursion(id))
+    dispatch(getAgentExcursion(id))
     dispatch(stateFavourites())
   }, [dispatch, id])
 
@@ -36,7 +38,7 @@ function HeroSection() {
 
   return (
     <>
-      <MetaData title={excursion?.title} link_title={excursion?.title} description={'Get best deals on Travel and Tourism online with us'} thumbnail={excursion?.images ? excursion?.images[0] : ''} />
+      <MetaData title={agentExcursion?.title} link_title={agentExcursion?.title} description={'Get best deals on Travel and Tourism online with us'} thumbnail={agentExcursion?.images ? agentExcursion?.images[0] : ''} />
       <div className='bg-white'>
         <div className='p-0 lg:p-6'>
           <div className=''>
@@ -49,10 +51,10 @@ function HeroSection() {
                       {/* tags */}
                       <div className='text-xs text-text   flex space-x-1 items-center'>
                         <div className=''>
-                          <button className='bg-yellow-500 w-16 px-2 py-1 text-light rounded-md capitalize'>{excursion?.bookingType}</button>
+                          <button className='bg-yellow-500 w-16 px-2 py-1 text-light rounded-md capitalize'>{agentExcursion?.bookingType}</button>
                         </div>
                         <div className='flex space-x-3 items-center'>
-                          {excursion?.cancellationType === "freeCancellation" && (
+                          {agentExcursion?.cancellationType === "freeCancellation" && (
                             <div className='flex space-x-1 items-center'>
                               {/* <span className='text-lightblue'><TiTick /></span> */}
                               <span className='text-green-600 text-sm'>Free Cancellation </span>
@@ -61,23 +63,23 @@ function HeroSection() {
 
                         </div>
                         <div className='flex space-x-1 items-center'>
-                          <span className='text-light bg-lightblue w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{excursion?.category?.categoryName} </span>
-                          {excursion?.isOffer === true && excursion?.offerAmountType === 'flat' && (
-                            <span className='text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{excursion?.offerAmountType === 'flat' ? `$ ${excursion?.offerAmount} OFF` : ''} </span>
+                          <span className='text-light bg-lightblue w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{agentExcursion?.category?.categoryName} </span>
+                          {agentExcursion?.isOffer === true && agentExcursion?.offerAmountType === 'flat' && (
+                            <span className='text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{agentExcursion?.offerAmountType === 'flat' ? `$ ${agentExcursion?.offerAmount} OFF` : ''} </span>
                           )}
-                          {excursion?.isOffer === true && excursion?.offerAmountType === 'percentage' && (
-                            <span className='text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{excursion?.offerAmountType === 'percentage' ? `${excursion?.offerAmount} % OFF` : ''} </span>
+                          {agentExcursion?.isOffer === true && agentExcursion?.offerAmountType === 'percentage' && (
+                            <span className='text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{agentExcursion?.offerAmountType === 'percentage' ? `${agentExcursion?.offerAmount} % OFF` : ''} </span>
                           )}
                         </div>
                       </div>
                       <div className='text-3xl font-bold '>
-                        {excursion?.title}
+                        {agentExcursion?.title}
                       </div>
                       <div className='flex items-center space-x-3 text-sm'>
                         <span className=' text-yellow-500 flex space-x-1 '>
-                          <Rating value={excursion?.averageRating} text={excursion?.totalReviews} color={"#FED049"} />
+                          <Rating value={agentExcursion?.averageRating} text={agentExcursion?.totalReviews} color={"#FED049"} />
                         </span>
-                        <span className='flex items-center text-blue capitalize'><CiLocationOn /> {excursion?.destination?.name} </span>
+                        <span className='flex items-center text-blue capitalize'><CiLocationOn /> {agentExcursion?.destination?.name} </span>
                       </div>
 
                     </div>
@@ -89,10 +91,10 @@ function HeroSection() {
                       {/* like button */}
                       <button className='h-10 w-10 rounded-full bg-soft text-main border-main border flex justify-center items-center text-2xl' onClick={() => {
                         dispatch(setFavourites({
-                          _id: excursion?._id,
-                          name: excursion?.title,
-                          image: excursion?.images[0],
-                          price: excursion?.activities[0]?.adultPrice
+                          _id: agentExcursion?._id,
+                          name: agentExcursion?.title,
+                          image: agentExcursion?.images[0],
+                          price: agentExcursion?.activities[0]?.adultPrice
                         }))
                       }
                       } >
@@ -114,10 +116,10 @@ function HeroSection() {
                 <div className='mx-2 lg:mx-0'>
                   <div className='bg-light py-5 px-4 rounded-2xl md:my-4 w-full  lg:mx-0 my-2 lg:my-0 text-darktext'>
                     <div className='py-3'>
-                      <span className='text-xl font-semibold text-blue '>{excursion?.title} {excursion?.title && 'Highlights'}</span>
+                      <span className='text-xl font-semibold text-blue '>{agentExcursion?.title} {agentExcursion?.title && 'Highlights'}</span>
                     </div>
                     <div className='space-y-6 text-gray-500 mt-3'>
-                      <div dangerouslySetInnerHTML={{ __html: excursion?.highlights }} className='text-sm lg:text-base'>
+                      <div dangerouslySetInnerHTML={{ __html: agentExcursion?.highlights }} className='text-sm lg:text-base'>
                       </div>
                     </div>
                   </div>
@@ -142,7 +144,7 @@ function HeroSection() {
                       <MapSection />
                     </div>
 
-                    {excursion?.sections?.map((item) => (
+                    {agentExcursion?.sections?.map((item) => (
                       <div className='bg-light py-3 px-4 rounded-2xl md:my-4 w-full my-2' key={item.title} >
                         <div className='py-3'>
                           <span className='text-xl text-darktext font-bold tracking-wider'>{item?.title}</span>
@@ -158,9 +160,9 @@ function HeroSection() {
                     <div id='faqSection' className=''>
                       <FaqSection />
                     </div>
-                    <div id='reviewSection' className=''>
+                    {/* <div id='reviewSection' className=''>
                       <ReviewSection />
-                    </div>
+                    </div> */}
 
                   </>
                 </div>
