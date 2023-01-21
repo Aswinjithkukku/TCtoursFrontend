@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import PaypalComponent from '../../../components/Payment/PaypalComponent'
 import { getPassengerDetails } from '../../../redux/slices/paymentSlice'
 import RazorpayComponent from '../../../components/Payment/RazorpayComponent'
+import OtpModal from './OtpModal'
 
 
 
@@ -14,6 +15,7 @@ function PaymentDetailsSection() {
         paypal: true,
         razorpay: false
     })
+    const [otpModal, setOtpModal] = useState(false)
 
     const [travellerData, setTravellerData] = useState({
         gender: "male",
@@ -210,9 +212,17 @@ function PaymentDetailsSection() {
                     <span className='text-lightblue underline cursor-pointer'>Terms & Conditions</span>
                 </div>
                 <div className='text-center fixed lg:static bottom-0 left-0 right-0 rounded-t-3xl lg:rounded-none py-8 bg-light lg:bg-none px-10 lg:px-0 z-10'>
-                    <button className='text-light bg-lightblue px-3 py-2 rounded-lg text whitespace-nowrap w-full'>Pay Now</button>
+                    <button className='text-light bg-lightblue px-3 py-2 rounded-lg text whitespace-nowrap w-full'
+                    onClick={() => {
+                        setOtpModal(true)
+                    }}>Pay Now</button>
                 </div>
             </div>
+            {otpModal && (
+                <OtpModal 
+                setOtpModal={setOtpModal}
+                />
+            )}
         </>
     )
 }

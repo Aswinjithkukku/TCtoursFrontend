@@ -12,6 +12,7 @@ import EditResellers from "./Resllers/EditResellers";
 import Settings from "./Settings/Settings";
 import MainOrder from "./Order/MainOrder";
 import Wallet from "./Wallet/Wallet";
+import PaymentApproval from './PaymentApproval/PaymentApproval'
 
 export {
   Dashboard,
@@ -28,4 +29,5 @@ export {
   Settings,
   MainOrder,
   Wallet,
+  PaymentApproval,
 };

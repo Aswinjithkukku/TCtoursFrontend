@@ -9,12 +9,13 @@ const SearchListViewSection = React.lazy(() => import('./SearchListViewSection')
 
 function SearchingResultPage() {
     const dispatch = useDispatch()
+    const params = useParams()
 
     const [viewCategory, setViewCategory] = useState(false)
     const [category, setCategory] = useState('')
     const [search, setSearch] = useState('')
 
-    let destination = ''
+    let destination = params.slug
     useEffect(() => {
         dispatch(getAllAgentExcursions({ destination, category, search }))
     }, [dispatch, destination, category, search])
