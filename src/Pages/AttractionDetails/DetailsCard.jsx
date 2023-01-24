@@ -11,7 +11,7 @@ function DetailsCard() {
     const [error, setError] = useState('')
     const location = useLocation()
 
-    const { excursion } = useSelector(state => state.excursion)
+    const { excursion, selectedActivities } = useSelector(state => state.excursion)
     const { excursionCart } = useSelector(state => state.excursion)
     const { selectedCurrency } = useSelector(state => state.home)
 
@@ -93,18 +93,18 @@ function DetailsCard() {
 
                             <div className='space-y-1'>
                                 <div className='flex items-center space-x-2 text-darktext'>
-                                    <span className='text-lg '>Cart Items</span>
+                                    <span className='text-lg '>Tours </span>
                                 </div>
 
                                 <div>
-                                    {excursionCart?.map((item, index) => (
+                                    {selectedActivities?.map((item, index) => (
                                         <div className='flex justify-between items-center gap-2 space-y-1 text-sm' key={index}>
                                             <span className='text-darktext ml-1'>{item?.isChecked === true && (item?.name)}</span>
                                             <span className='whitespace-nowrap flex items-center'>
                                                 {item?.isChecked === true && priceConversion(item?.price, selectedCurrency, true)}
-                                                <span className='ml-1 text-main'
+                                                {/* <span className='ml-1 text-main'
                                                 onClick={() => dispatch(removeFromCart(item?._id))}
-                                                ><AiOutlineClose /></span>
+                                                ><AiOutlineClose /></span> */}
                                             </span>
                                         </div>
                                     ))}

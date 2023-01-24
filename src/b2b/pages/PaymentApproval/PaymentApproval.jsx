@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Lottie from 'lottie-react'
 import { PaymentAnimation } from '../../../data'
-import PaypalComponent from '../../../components/Payment/PaypalComponent'
 import { paypalpng, stripepng, atmcardpng } from '../../../static/images'
+import AddWalletPaypalComponent from '../../components/Payment/AddWalletPaypalComponent'
 
 function PaymentApproval() {
+
   return (
     <div className='lg:max-w-screen-xl lg:mx-auto'>
       <div className='bg-light shadow-sm rounded-md overflow-hidden w-full my-6'>
@@ -21,15 +22,16 @@ function PaymentApproval() {
           <div className='2 col-span-9 p-6'>
             <div className='flex justify-around items-center border-b border-dashed mb-5'>
               <div className=''>
-                <h2 className='text-3xl font-bold tracking-wider text-darktext underline'>Make Payment</h2>
+                <h2 className='text-3xl font-bold tracking-wider text-darktext underline'>Add to wallet</h2>
               </div>
               <div className=' w-[150px] '>
                 <Lottie animationData={PaymentAnimation} />
               </div>
             </div>
+
             <div className='flex justify-center'>
-              <div className='w-8/12'>
-                <PaypalComponent />
+              <div className='w-7/12'>
+                <AddWalletPaypalComponent />
               </div>
             </div>
             <div className='flex justify-center items-center space-x-10 border-t border-dashed'>

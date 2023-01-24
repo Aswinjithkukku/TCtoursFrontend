@@ -1,48 +1,30 @@
 // import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
-import React, { useEffect, useRef } from 'react'
-import axios from '../../axios';
+import React, { useEffect, useRef, useState } from 'react'
+import axios from '../../../axios';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-function PaypalComponent() {
+function AddWalletPaypalComponent() {
   const navigate = useNavigate()
+  const { token } = useSelector(state => state.agents)
 
-  const tour_order = JSON.parse(localStorage.getItem('tour_order'))
-  const { passengerDetails } = useSelector(state => state.payment)
-
-  let order_data
-  if (tour_order) {
-   order_data = tour_order.map((item) => {
-      return {
-        activity: item?._id,
-        date: item?.date,
-        adultsCount: Number(item?.adult),
-        childrenCount: Number(item?.child),
-        infantCount: Number(item?.infant),
-        transferType: item?.transfer
-      }
-    })
-  }
-
-  let createOrderData
-  useEffect(() => {
-
-    createOrderData = {
-      name: passengerDetails?.firstname + ' ' + passengerDetails?.lastname,
-      email: passengerDetails?.email,
-      country: passengerDetails?.country,
-      phoneNumber: passengerDetails?.phone,
-      selectedActivities: order_data
-    }
-  }, [passengerDetails])
+  const [inputAmount, setInputAmount] = useState(0)
 
   const paypal = useRef()
   useEffect(() => {
     window.paypal.Buttons({
       createOrder: async (data, actions, err) => {
         try {
-          const response = await axios.post("/attractions/orders/create", createOrderData);
+          const config = {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+          const response = await axios.post("/b2b/resellers/wallet/deposit", {
+            paymentProcessor: "paypal",
+            amount: 200
+          }, config);
 
           console.log(response.data.id);
           return response.data.id;
@@ -53,7 +35,6 @@ function PaypalComponent() {
             title: 'Something went wrong!',
             text: 'Error Creating Paypal Order',
           })
-          console.log("Error Creating Paypal Order");
           return "";
         }
       },
@@ -91,10 +72,20 @@ function PaypalComponent() {
   }, [])
   return (
     <div>
+      <div className='flex justify-center my-3'>
+        <div className='w-full'>
+          <input className='input '
+            type='number'
+            placeholder='Enter Amount to be added to wallet'
+            value={inputAmount === 0 ? "Enter Amount to be added to wallet" : inputAmount}
+            onChange={(e) => setInputAmount(e.target.value)}
+          />
+        </div>
+      </div>
       <div className='' ref={paypal}></div>
     </div>
   )
 }
 
 
-export default PaypalComponent
+export default AddWalletPaypalComponent

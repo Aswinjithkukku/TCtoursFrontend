@@ -50,11 +50,8 @@ function HeroSection() {
                     <main className='md:mb-28 '>
                         <div className=' relative'>
 
-                            <div className='overflow-hidden lg:rounded-[4em] lg:h-[42em]  relative bg-cover '>
-                                <div className='absolute top-0 text-center w-full z-10'>
-                                    {/* <div className='text-3xl lg:text-6xl font-bold text-light heading pt-20'>{home?.heroTitle}</div> */}
-                                    {/* <div className='text-light md:text-lg '>{home?.heroDescription}</div> */}
-                                    {/* <div className='hidden md:block text-light bg-trans text-2xl mt-24 py-10'>Explore Your Destination </div> */}
+                            <div className='overflow-hidden lg:rounded-[4em] lg:h-[42em]  relative bg-cover'>
+                            <div className='absolute top-0 text-center w-full z-10'>
                                     <div className='flex items-end h-[40em] '>
                                         <div className='hidden md:flex justify-between w-full items-center mx-10 max-w-8xl'>
                                             <span className='text-3xl font-bold text-darktext bg-trans hover:bg-soft h-16 w-16 rounded-full flex justify-center items-center' onClick={() => setCurrentSlide(currentSlide - 1)}><AiOutlineLeft /> </span>
@@ -76,7 +73,7 @@ function HeroSection() {
                                     onChange={updateCurrentSlide}
                                 >
                                     {home?.heros?.map((item, index) => (
-                                        <div className='bg-inherit h-full relative' key={index}>
+                                        <div className='bg-inherit h-[15em] md:h-[25em] lg:h-[42em] relative object-cover' key={index}>
                                             <p className='absolute top-0 text-center w-full z-10'>
                                                 <div className='text-3xl lg:text-6xl font-bold text-light heading pt-20 uppercase'>{item?.title} </div>
                                                 <div className='text-light md:text-lg '>{item?.description} </div>
@@ -88,7 +85,7 @@ function HeroSection() {
                                                     </div>
                                                 </div>
                                             </p>
-                                            <img src={process.env.REACT_APP_SERVER_URL + item.image} alt='banner' className='bg-cover h-full ' />
+                                            <img src={process.env.REACT_APP_SERVER_URL + item.image} alt='banner' className='object-cover h-full' />
                                         </div>
                                     ))}
 
@@ -96,7 +93,7 @@ function HeroSection() {
 
 
                             </div>
-                            <div className=' md:absolute z-10 bottom-36 w-full md:flex justify-center '>
+                            <div className=' md:absolute z-10 md:bottom-10 lg:bottom-36 w-full md:flex justify-center '>
                                 <div className='md:w-9/12 relative'>
                                     <div className='md:ml-14  md:w-8/12 bg-light rounded-t-2xl md:rounded-t-[1em] overflow-x-auto'>
                                         <div className=' flex md:grid md:grid-cols-5 space-x-1 px-1 md:px-10 py-3 md:py-1 items-center '>
