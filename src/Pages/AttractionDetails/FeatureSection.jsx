@@ -7,7 +7,6 @@ import { GiClockwork, GiSandsOfTime, GiSurferVan } from 'react-icons/gi'
 import { useSelector } from 'react-redux'
 
 function FeatureSection() {
-    const [avail, setAvail] = useState([])
     const { excursion } = useSelector(state => state.excursion)
 
         // const enabledDays = excursion?.availability?.filter(item => item?.isEnabled === true)
@@ -42,7 +41,7 @@ function FeatureSection() {
     )}
     <div className='text-center bg-soft lg:bg-light py-5 lg:py-0 rounded-lg lg:rounded-none'>
         <span className='text-2xl lg:text-4xl text-lightblue flex justify-center'><GiClockwork /> </span>
-        <span className='text-xs text-text'>Time slot: 8:00 - 11:30</span>
+        <span className='text-xs text-text'>Time slot: {excursion?.availability && excursion?.availability[0]?.open}- {excursion?.availability && excursion?.availability[0]?.close}</span>
     </div>
     {/* <div className='text-center bg-soft lg:bg-light py-5 lg:py-0 rounded-lg lg:rounded-none'>
         <span className='text-2xl lg:text-4xl text-lightblue flex justify-center'><GiSurferVan /> </span>

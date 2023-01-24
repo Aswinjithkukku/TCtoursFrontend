@@ -93,7 +93,7 @@ function HeroSection() {
 
 
                             </div>
-                            <div className=' md:absolute z-10 md:bottom-10 lg:bottom-36 w-full md:flex justify-center '>
+                            <div className=' md:absolute z-10 md:-bottom-20 lg:-bottom-24 w-full md:flex justify-center '>
                                 <div className='md:w-9/12 relative'>
                                     <div className='md:ml-14  md:w-8/12 bg-light rounded-t-2xl md:rounded-t-[1em] overflow-x-auto'>
                                         <div className=' flex md:grid md:grid-cols-5 space-x-1 px-1 md:px-10 py-3 md:py-1 items-center '>
