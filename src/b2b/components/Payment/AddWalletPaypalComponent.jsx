@@ -42,7 +42,7 @@ function AddWalletPaypalComponent() {
         const order = await actions.order.capture()
         let messageFromServer = ''
         try {
-          const resFromServer = await axios.post("/attractions/orders/paypal/capture",
+          const resFromServer = await axios.post("/b2b/resellers/wallet/paypal/capture",
             {
               orderId: order.id,
               paymentId: order.purchase_units[0]?.payments["captures"][0]?.id
