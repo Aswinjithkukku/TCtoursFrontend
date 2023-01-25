@@ -3,7 +3,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { AiOutlineClose, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import axios from "../../axios";
 import { setUser } from "../../redux/slices/usersSlice";
@@ -16,6 +16,8 @@ function Login({ setViewAuth, viewAuth }) {
     });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
+
+    const { home } = useSelector(state => state.general)
 
     const dispatch = useDispatch();
 
@@ -61,11 +63,20 @@ function Login({ setViewAuth, viewAuth }) {
                             <div className="w-[24em] loginCard h-[95%] shadow-md  rounded-2xl">
                                 <div className="p-5 space-y-3"
                                 >
-                                    <div className="text-4xl text-main font-semibold">
+                                    {/* <div className="text-4xl text-main font-semibold">
                                         Welcome Back...
+                                    </div> */}
+                                    <div className="flex justify-center items-center pb-1 border-text border-b-2 space-x-5">
+                                        <div className="">
+                                            <img
+                                                src={process.env.REACT_APP_SERVER_URL + home?.logo}
+                                                alt="tc"
+                                                className="h-10 md:h-14"
+                                            />
+                                        </div>
                                     </div>
 
-                                    {/* <div className="space-y-5 py-4 invisible" >
+                                    <div className="space-y-5 py-4" >
                                     <button className="flex items-center shadow-md space-x-2 bg-trans w-full  justify-center py-4 rounded-xl hover:bg-light hover:text-main text-maintrans duration-200">
                                         <span className="text-3xl">
                                             <FcGoogle />
@@ -82,7 +93,7 @@ function Login({ setViewAuth, viewAuth }) {
                                             Continue with facebook
                                         </span>
                                     </button>
-                                </div> */}
+                                </div>
 
                                     {resetPassword ? (
                                         <>

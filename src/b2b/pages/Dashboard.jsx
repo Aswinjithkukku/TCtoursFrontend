@@ -71,7 +71,7 @@ export default function Dashboard() {
                         isAmount={true}
                     />
                     <WalletCard
-                        title={"Withdraw Withdraw"}
+                        title={"Wallet Withdraw"}
                         value={300}
                         link="/b2b/wallet"
                         linkText="Withdraw from wallet"

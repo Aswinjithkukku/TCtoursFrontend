@@ -60,10 +60,12 @@ function Wallet() {
                         </button>
                       </div>
                       <div className=''>
-                        <button className='w-[15em] bg-dark text-light py-3 rounded-[0.25rem] text-xs lg:text-sm'
-                        >
-                          WITHDRAW
-                        </button>
+                        <Link to='/b2b/payment/approval' className=''>
+                          <button className='w-[15em] bg-dark text-light py-3 rounded-[0.25rem] text-xs lg:text-sm'
+                          >
+                            WITHDRAW
+                          </button>
+                        </Link>
                       </div>
                       {/* <div className='flex justify-end items-end'>
                         <img src={totalRevenuePng} alt='revenue' className='w-[70px]' />
@@ -145,12 +147,12 @@ function Wallet() {
               )}
               {component.completed && (
                 <div className='overflow-x-auto'>
-                <CompletedTransaction />
+                  <CompletedTransaction />
                 </div>
               )}
               {component.failed && (
                 <div className='overflow-x-auto'>
-                <FailedTransaction />
+                  <FailedTransaction />
                 </div>
               )}
             </div>

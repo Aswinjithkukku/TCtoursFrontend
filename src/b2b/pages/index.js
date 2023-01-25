@@ -4,7 +4,6 @@ import B2BRegisterPage from "./B2BRegisterPage";
 import NewRegisters from "./Resllers/NewRegisters";
 import Resellers from "./Resllers/Resellers";
 import Attraction from "./Attraction/Attraction";
-// import HeroSearch from "./Attraction/HeroSearch";
 import AttractionDetails from "./AttractionDetails/AttractionDetails";
 import PaymentHomePage from "./AttractionPayment/PaymentHomePage";
 import MarkUpList from "./MarkUp/MarkUpList";
@@ -13,6 +12,7 @@ import Settings from "./Settings/Settings";
 import MainOrder from "./Order/MainOrder";
 import Wallet from "./Wallet/Wallet";
 import PaymentApproval from './PaymentApproval/PaymentApproval'
+import SingleSubAgent from "./Resllers/SingleSubAgent";
 
 export {
   Dashboard,
@@ -21,7 +21,6 @@ export {
   NewRegisters,
   Resellers,
   Attraction,
-  // HeroSearch,
   AttractionDetails,
   PaymentHomePage,
   MarkUpList,
@@ -30,4 +29,5 @@ export {
   MainOrder,
   Wallet,
   PaymentApproval,
+  SingleSubAgent,
 };

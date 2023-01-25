@@ -10,6 +10,9 @@ function AddWalletPaypalComponent() {
   const { token } = useSelector(state => state.agents)
 
   const [inputAmount, setInputAmount] = useState(0)
+  console.log(inputAmount);
+
+  const inputRef = useRef(null)
 
   const paypal = useRef()
   useEffect(() => {
@@ -23,7 +26,7 @@ function AddWalletPaypalComponent() {
           }
           const response = await axios.post("/b2b/resellers/wallet/deposit", {
             paymentProcessor: "paypal",
-            amount: 200
+            amount: inputRef.current.value
           }, config);
 
           console.log(response.data.id);
@@ -42,11 +45,17 @@ function AddWalletPaypalComponent() {
         const order = await actions.order.capture()
         let messageFromServer = ''
         try {
+          const config = {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
           const resFromServer = await axios.post("/b2b/resellers/wallet/paypal/capture",
             {
               orderId: order.id,
               paymentId: order.purchase_units[0]?.payments["captures"][0]?.id
-            }
+            },
+            config
           );
           messageFromServer = resFromServer.message;
           // Make Calls to backend to changes in react state corresponding to successful payment here
@@ -56,10 +65,10 @@ function AddWalletPaypalComponent() {
             title: 'Success!',
             text: 'Payment Successful',
           })
-          navigate('/')
+          navigate('/b2b')
         } catch {
           console.log(
-            "Error enrolling student, please contact tech@xyz.com"
+            "Error in payment"
           );
         }
         console.log(data);
@@ -74,11 +83,13 @@ function AddWalletPaypalComponent() {
     <div>
       <div className='flex justify-center my-3'>
         <div className='w-full'>
-          <input className='input '
+          <input
+            ref={inputRef}
+            className='input '
             type='number'
             placeholder='Enter Amount to be added to wallet'
-            value={inputAmount === 0 ? "Enter Amount to be added to wallet" : inputAmount}
-            onChange={(e) => setInputAmount(e.target.value)}
+            // value={inputAmount === 0 ? "Enter Amount to be added to wallet" : inputAmount}
+            // onChange={(e) => setInputAmount(e.target.value)}
           />
         </div>
       </div>

@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import axios from "../../axios";
 import { setUser } from "../../redux/slices/usersSlice";
+import { IoCall } from "react-icons/io5";
+import { RiCustomerService2Fill } from 'react-icons/ri'
 
 function RegisterCard({ setViewAuth, viewAuth }) {
     const [data, setData] = useState({
@@ -70,17 +72,18 @@ function RegisterCard({ setViewAuth, viewAuth }) {
                         <div className=" bgdubai h-[100%]  bg-right rounded-2xl flex justify-between items-center pr-6">
                             <div className="h-full flex items-end z-20">
                                 <div className="mb-7">
-                                    <div className="text-2xl text-darktext font-bold">
+                                    <div className="text-2xl text-darktext font-bold flex items-center gap-2">
+                                        <RiCustomerService2Fill />
                                         Helpline
                                     </div>
                                     <div className=" flex items-end space-x-2 ">
                                         <div className="text-sm text-text">
                                             <div className="flex space-x-2 text-lightblue">
-                                                <span className=""> <BsFillTelephoneInboundFill /> </span>
+                                                <span className=""> <IoCall /> </span>
                                                 <span className="">{home?.phoneNumber1}</span>
                                             </div>
                                             <div className="flex space-x-2 text-lightblue">
-                                                <span className=""><BsFillTelephoneInboundFill /></span>
+                                                <span className=""><IoCall /></span>
                                                 <span className="">{home?.phoneNumber2}</span>
                                             </div>
                                         </div>
@@ -95,13 +98,23 @@ function RegisterCard({ setViewAuth, viewAuth }) {
                             <div className="w-[24em] h-[97%] loginCard shadow-md  rounded-2xl">
                                 <form
                                     onSubmit={handleSubmit}
-                                    className="p-5 space-y-1"
+                                    className="p-5 space-y-3"
                                 >
-                                    <div className="text-4xl text-blue font-semibold">
+                                    {/* <div className="text-4xl text-blue font-semibold">
                                         Greetings...
+                                    </div> */}
+                                    <div className="flex justify-center items-center pb-1 border-text border-b-2 space-x-5">
+                                        <div className="">
+                                            <img
+                                                src={process.env.REACT_APP_SERVER_URL + home?.logo}
+                                                alt="tc"
+                                                className="h-10 md:h-14"
+                                            />
+                                        </div>
                                     </div>
+
                                     <div className="space-y-1">
-                                        <label className="text-text ">Name</label>
+                                        {/* <label className="text-text ">Name</label> */}
                                         <input
                                             type="text"
                                             placeholder="Tell us Your Name"
@@ -112,7 +125,7 @@ function RegisterCard({ setViewAuth, viewAuth }) {
                                         />
                                     </div>
                                     <div className="space-y-1">
-                                        <label className="text-text ">Email</label>
+                                        {/* <label className="text-text ">Email</label> */}
                                         <input
                                             type="email"
                                             placeholder="Enter Your Email"
@@ -122,39 +135,39 @@ function RegisterCard({ setViewAuth, viewAuth }) {
                                             onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="flex ">
-                                    <div className="space-y-1">
-                                        <label className="text-text ">
-                                            code
-                                        </label>
-                                        <select
-                                            name="country"
-                                            id=""
-                                            className="text-darktext placeholder:text-bluetrans bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-bluetrans"
-                                            onChange={handleChange}
-                                            value={data.country || ""}
-                                        >
-                                            <option value="" hidden>
-                                                code
-                                            </option>
-                                            {countries?.map((country, index) => {
-                                                return (
-                                                    <option
-                                                    className="text-darktext capitalize"
-                                                        value={country?._id}
-                                                        key={index}
-                                                    >
-                                                        {country?.phonecode}
-                                                    </option>
-                                                );
-                                            })}
-                                        </select>
-                                    </div>
-
+                                    <div className="flex  ">
                                         <div className="space-y-1">
-                                            <label className="text-text ">
+                                            {/* <label className="text-text ">
+                                                code
+                                            </label> */}
+                                            <select
+                                                name="country"
+                                                id=""
+                                                className="text-darktext placeholder:text-bluetrans bg-trans py-3 text-sm rounded-xl px-2 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-bluetrans"
+                                                onChange={handleChange}
+                                                value={data.country || ""}
+                                            >
+                                                <option value="" hidden>
+                                                    code
+                                                </option>
+                                                {countries?.map((country, index) => {
+                                                    return (
+                                                        <option
+                                                            className="text-darktext capitalize"
+                                                            value={country?._id}
+                                                            key={index}
+                                                        >
+                                                            {country?.phonecode}
+                                                        </option>
+                                                    );
+                                                })}
+                                            </select>
+                                        </div>
+
+                                        <div className="space-y-1 w-full">
+                                            {/* <label className="text-text ">
                                                 PhoneNumber
-                                            </label>
+                                            </label> */}
                                             <input
                                                 type="number"
                                                 placeholder="Enter Your Phone Number"
@@ -166,9 +179,9 @@ function RegisterCard({ setViewAuth, viewAuth }) {
                                         </div>
                                     </div>
                                     <div className="space-y-1">
-                                        <label className="text-text ">
+                                        {/* <label className="text-text ">
                                             Password
-                                        </label>
+                                        </label> */}
                                         <input
                                             type="password"
                                             placeholder="Give a password"
@@ -179,7 +192,7 @@ function RegisterCard({ setViewAuth, viewAuth }) {
                                         />
                                     </div>
                                     {error && (
-                                    <p className="text-main text-sm">{error}</p>
+                                        <p className="text-main text-sm">{error}</p>
                                     )}
                                     {/* <div className="text-text">
                                         <span className="text-xs">
@@ -200,7 +213,7 @@ function RegisterCard({ setViewAuth, viewAuth }) {
                                             </span>
                                         </button>
                                     </div>
-                                    {/* <div className="flex items-center justify-between pt-2">
+                                     <div className="flex items-center justify-between pt-2">
                                         <button className="flex items-center space-x-2 bg-trans w-full mx-3 justify-center py-2 rounded-xl hover:bg-light hover:text-blue text-bluetrans duration-200">
                                             <span className="">
                                                 <FcGoogle />
@@ -213,7 +226,7 @@ function RegisterCard({ setViewAuth, viewAuth }) {
                                             </span>
                                             <span className="">Facebook</span>
                                         </button>
-                                    </div> */}
+                                    </div> 
                                     <div className="text-sm pt-1">
                                         <span className="text-bluetrans">
                                             Already have an account?{" "}

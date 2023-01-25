@@ -51,7 +51,10 @@ function Resellers() {
               </thead>
               <tbody className="text-sm">
                 {resellers?.map((item,index) => (
-                <tr className="border-b border-tableBorderColor" key={index}>
+                <tr className="border-b border-tableBorderColor cursor-default" 
+                key={index}
+                onClick={() => navigate(`/b2b/reseller/${item?._id}`)}
+                >
                   <td className="p-3">{item?.agentCode}</td>
                   <td className="p-3">
                     <div className='w-[150px] md:w-auto'>

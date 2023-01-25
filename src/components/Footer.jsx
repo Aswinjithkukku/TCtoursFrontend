@@ -17,7 +17,7 @@ function Footer() {
                 </div>
 
                 <div className="flex justify-center items-center py-7 border-text border-b-2 space-x-5">
-                    <div className="">
+                    <div className=" bg-slate-400 rounded-md shadow-sm">
                         <img
                             src={process.env.REACT_APP_SERVER_URL + home?.logo}
                             alt="tc"

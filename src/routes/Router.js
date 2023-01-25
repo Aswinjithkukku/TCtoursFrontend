@@ -34,6 +34,7 @@ import {
   PaymentHomePage,
   Resellers,
   Settings,
+  SingleSubAgent,
   Wallet,
 } from "../b2b/pages";
 import B2BPrivateRoute from "./B2BPrivateRoute";
@@ -76,7 +77,7 @@ const ThemeRoutes = [
       { path: "/b2b/reseller/add", element: <NewRegisters /> },
       { path: "/b2b/resellers", element: <Resellers /> },
       { path: "/b2b/reseller/edit", element: <EditResellers /> },
-      // { path: "/b2b/attractions", element: <HeroSearch /> },
+      { path: "/b2b/reseller/:id", element: <SingleSubAgent /> },
       { path: "/b2b/attractions/:slug", element: <Attraction /> },
       { path: "/b2b/attractions/details/:id", element: <AttractionDetails /> },
       { path: "/b2b/attractions/payment", element: <PaymentHomePage /> },
