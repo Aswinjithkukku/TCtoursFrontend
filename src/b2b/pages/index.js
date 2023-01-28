@@ -11,8 +11,10 @@ import EditResellers from "./Resllers/EditResellers";
 import Settings from "./Settings/Settings";
 import MainOrder from "./Order/MainOrder";
 import Wallet from "./Wallet/Wallet";
-import PaymentApproval from './PaymentApproval/PaymentApproval'
+import PaymentApproval from "./PaymentApproval/PaymentApproval";
 import SingleSubAgent from "./Resllers/SingleSubAgent";
+import VisaHomeScreen from "./Visa/VisaHomeScreen";
+import VisaActionPage from "./Visa/VisaActionPage";
 
 export {
   Dashboard,
@@ -30,4 +32,6 @@ export {
   Wallet,
   PaymentApproval,
   SingleSubAgent,
+  VisaHomeScreen,
+  VisaActionPage,
 };

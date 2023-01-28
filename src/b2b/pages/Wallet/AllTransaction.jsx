@@ -1,7 +1,13 @@
 import React from 'react'
 import { MdBlockFlipped, MdOutlineArrowDownward, MdOutlineArrowUpward } from 'react-icons/md'
+import { useSelector } from 'react-redux'
+import priceConversion from '../../../utils/PriceConversion'
 
 function AllTransaction() {
+
+  const { transaction } = useSelector(state => state.wallet)
+  const { selectedCurrency } = useSelector(state => state.home)
+
   return (
     <table className="w-full">
       <thead className="bg-[#f3f6f9] text-grayColor text-[14px] text-left">
@@ -13,64 +19,42 @@ function AllTransaction() {
           <th className="font-[500] p-3">Time</th>
           <th className="font-[500] p-3">Status</th>
           <th className="font-[500] p-3">Price</th>
-          <th className="font-[500] p-3">Balance</th>
         </tr>
       </thead>
       <tbody className="text-sm">
-        <tr className="border-b border-tableBorderColor">
-          <td className="p-3">#63b2cc</td>
-          <td className="p-3">paypal</td>
-          <td className="p-3">N/A</td>
-          <td className="p-3 whitespace-nowrap">2022-12-15</td>
-          <td className="p-3 ">11:00</td>
-          <td className="p-3 flex space-x-1 items-center text-green-600">
-            <span className=''>
-              <MdOutlineArrowUpward />
-            </span>
-            <span className=''>
-              Credited
-            </span>
-          </td>
-          <td className="p-3">170</td>
-          <td className="p-3 font-semibold">470</td>
+        {transaction?.transactions?.map((item, index) => (
+          <tr className="border-b border-tableBorderColor" key={index} >
+            <td className="p-3">{item?._id?.slice(0, 10)} </td>
+            <td className="p-3 capitalize">{item?.paymentProcessor}</td>
+            <td className="p-3">N/A</td>
+            <td className="p-3 whitespace-nowrap">{item?.createdAt?.slice(0,10)} </td>
+            <td className="p-3 ">{ new Date(item?.createdAt)?.toLocaleTimeString() }</td>
+            <td className="p-3 flex space-x-1 items-center ">
+              {item?.transactionType === "deposit" ? (
+                <>
+                  <span className='text-green-600'>
+                    <MdOutlineArrowUpward />
+                  </span>
+                  <span className='text-green-600 capitalize'>
+                    Credited
+                  </span>
+                </>
+              ) : item?.transactionType === "deduct" ? (
+                <>
+                  <span className='text-main'>
+                    <MdOutlineArrowDownward />
+                  </span>
+                  <span className='text-main capitalize'>
+                    Debited
+                  </span>
+                </>
+              ) : "N/A"}
+            </td>
+            <td className="p-3">{priceConversion(item?.amount, selectedCurrency, true)}</td>
 
-        </tr>
-        <tr className="border-b border-tableBorderColor">
-          <td className="p-3">#63b2cc</td>
-          <td className="p-3">paypal</td>
-          <td className="p-3">Dubai Frame</td>
-          <td className="p-3">2022-12-15</td>
-          <td className="p-3 ">11:00</td>
-          <td className="p-3 flex space-x-1 items-center text-main">
-            <span className=''>
-              <MdOutlineArrowDownward />
-            </span>
-            <span className=''>
-              Debited
-            </span>
-          </td>
-          <td className="p-3">170</td>
-          <td className="p-3 font-semibold">300</td>
+          </tr>
+        ))}
 
-        </tr>
-        <tr className="border-b border-tableBorderColor">
-          <td className="p-3">#63b2cc</td>
-          <td className="p-3">paypal</td>
-          <td className="p-3">Fly High</td>
-          <td className="p-3">2022-12-15</td>
-          <td className="p-3 ">11:00</td>
-          <td className="p-3 flex space-x-1 items-center text-main">
-            <span className=''>
-              <MdBlockFlipped />
-            </span>
-            <span className=''>
-              Failed
-            </span>
-          </td>
-          <td className="p-3">270</td>
-          <td className="p-3 font-semibold">300</td>
-
-        </tr>
       </tbody>
     </table>
   )

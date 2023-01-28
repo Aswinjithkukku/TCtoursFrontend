@@ -17,6 +17,7 @@ import {
   ProfilePasswordPage,
   PaymentApprovalPage,
   Invoice,
+  VisaActionPage,
 } from "../Pages/Hero";
 import { PageNotFound, PaymentDecline } from "../Pages/Errors";
 import {
@@ -35,6 +36,7 @@ import {
   Resellers,
   Settings,
   SingleSubAgent,
+  VisaHomeScreen,
   Wallet,
 } from "../b2b/pages";
 import B2BPrivateRoute from "./B2BPrivateRoute";
@@ -55,6 +57,7 @@ const ThemeRoutes = [
       { path: "/combo", element: <ComboLandingPage /> },
       { path: "/specialoffer", element: <SpecialOfferLandingPage /> },
       { path: "/visa", element: <VisaLandingPage /> },
+      { path: "/visa/apply", element: <VisaActionPage /> },
       { path: "/blog", element: <BlogLandingPage /> },
       { path: "/blog/detail/:slug", element: <BlogDetailsPage /> },
       { path: "/search/:slug", element: <SearchingResultPage /> },
@@ -86,6 +89,7 @@ const ThemeRoutes = [
       { path: "/b2b/settings", element: <Settings /> },
       { path: "/b2b/order", element: <MainOrder /> },
       { path: "/b2b/wallet", element: <Wallet /> },
+      { path: "/b2b/Visa", element: <VisaHomeScreen /> },
     ],
   },
   {

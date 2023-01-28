@@ -36,7 +36,7 @@ function SearchListViewSection() {
             const { data } = await axios.post('/subscribers/subscribe', email)
             console.log(data);
             Swal.fire('You have successfully Subscribed!!')
-        
+
         } catch (error) {
             console.log(error?.response?.data?.error);
         }
@@ -44,7 +44,7 @@ function SearchListViewSection() {
 
     return (
         <div>
-            {excursions?.attractions?.data[0] ? (
+            {excursions?.attractions?.data?.length > 0 && (
                 <div className='md:grid md:grid-cols-2 gap-5'>
                     {excursions?.attractions?.data[0] && excursions?.attractions?.data?.map((item, index) => (
                         <div key={index} className='h-full snap-start mt-2 bg-light shadow-md p-3 rounded-3xl cursor-pointer mx-2 md:mx-0' onClick={() => {
@@ -115,7 +115,7 @@ function SearchListViewSection() {
                                                     <s> AED {item?.activity?.adultPrice}</s>
                                                 </div>}
                                             <div className='text-xl font-bold text-darktext'>
-                                                 {priceConversion(item?.isOffer === true ? (item?.isOffer === true && item?.offerAmountType === "flat" ? Number(item?.activity?.adultPrice) - Number(item?.offerAmount) :
+                                                {priceConversion(item?.isOffer === true ? (item?.isOffer === true && item?.offerAmountType === "flat" ? Number(item?.activity?.adultPrice) - Number(item?.offerAmount) :
                                                     Number(item?.activity?.adultPrice) - ((Number(item?.activity?.adultPrice) * Number(item?.offerAmount)) / 100)) : item?.activity?.adultPrice, selectedCurrency, true)}
 
                                             </div>
@@ -140,37 +140,40 @@ function SearchListViewSection() {
                         </div>
                     ))}
                 </div>
-            ) : (
-                <div className="p-6 shadow-lg rounded-lg bg-gray-100 text-gray-700">
-                    <h2 className="font-semibold text-3xl mb-5">Found Nothing!</h2>
-                    <p>
-                        The data that you are seeking is currently unavailable right now. We will be progressing on that. It will be found as soon as possible.
-                    </p>
-                    <hr className="my-6 border-gray-300" />
-                    <p>
-                        For letting you to know the availbalility of data. Share your
-                        <span className='text-lightblue underline'>
-                            {' '}email Id
-                        </span>   with us!
-                    </p>
-                    <form onSubmit={submitHandler}>
-                    <input
-                    type='email'
-                    required
-                    value={subEmail}
-                    onChange={(e) => setSubEmail(e.target.value)} 
-                    className='outline-none text-darktext border-lightblue placeholder:text-text border text-sm py-2 rounded-md px-2 w-[20em] ' placeholder='Enter your email' />
-                    <button
-                        type="submit"
-                        className="inline-block px-6 py-2.5 mt-4 bg-blue text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                        data-mdb-ripple="true"
-                        data-mdb-ripple-color="light"
-                    >
-                        Subscribe
-                    </button>
-                    </form>
-                </div>
             )}
+            <>
+                {excursions?.attractions?.data?.length < 1 && (
+                    <div className="p-6 shadow-lg rounded-lg bg-gray-100 text-gray-700">
+                        <h2 className="font-semibold text-3xl mb-5">Found Nothing!</h2>
+                        <p>
+                            The data that you are seeking is currently unavailable right now. We will be progressing on that. It will be found as soon as possible.
+                        </p>
+                        <hr className="my-6 border-gray-300" />
+                        <p>
+                            For letting you to know the availbalility of data. Share your
+                            <span className='text-lightblue underline'>
+                                {' '}email Id
+                            </span>   with us!
+                        </p>
+                        <form onSubmit={submitHandler}>
+                            <input
+                                type='email'
+                                required
+                                value={subEmail}
+                                onChange={(e) => setSubEmail(e.target.value)}
+                                className='outline-none text-darktext border-lightblue placeholder:text-text border text-sm py-2 rounded-md px-2 w-[20em] ' placeholder='Enter your email' />
+                            <button
+                                type="submit"
+                                className="inline-block px-6 py-2.5 mt-4 bg-blue text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                data-mdb-ripple="true"
+                                data-mdb-ripple-color="light"
+                            >
+                                Subscribe
+                            </button>
+                        </form>
+                    </div>
+                )}
+            </>
         </div>
     )
 }

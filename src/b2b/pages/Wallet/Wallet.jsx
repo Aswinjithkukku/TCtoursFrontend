@@ -1,18 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { totalRevenuePng } from '../../../static/imagesB2B'
 import AllTransaction from './AllTransaction'
 import CompletedTransaction from './CompletedTransaction'
 import FailedTransaction from './FailedTransaction'
+import priceConversion from '../../../utils/PriceConversion'
+import { getTransaction } from '../../../redux/slices/walletSlice'
+import BtnLoader from '../../components/BtnLoader'
 
 function Wallet() {
 
+  const dispatch = useDispatch()
   const [component, setComponent] = useState({
     all: true,
     completed: false,
     failed: false
   })
+
+  const { balance, loading } = useSelector(state => state.wallet)
+  const { selectedCurrency } = useSelector(state => state.home)
+
+  useEffect(() => {
+    dispatch(getTransaction())
+  }, [dispatch])
+
   return (
     <>
       <div className=' '>
@@ -42,8 +55,11 @@ function Wallet() {
                       <h2 className='lg:text-3xl text-2xl text-center lg:text-start font-black text-darktext tracking-wider mb-3'>Wallet Balance</h2>
                       <h5 className='text-xs lg:text-sm text-text mb-3'>My balance*</h5>
                       <div className='flex space-x-2 text-2xl tracking-wider font-bold  '>
-                        <p className='text-main'>202</p>
-                        <p className='text-text'>AED</p>
+                        {loading ? (
+                          <BtnLoader />
+                        ) : (
+                          <p className='text-main'>{priceConversion(balance?.balance, selectedCurrency, true)}</p>
+                        )}
                       </div>
                       <div className='mb-5'>
                         <h5 className='text-xs lg:text-sm text-text mb-3'>is left on your wallet!</h5>
@@ -54,13 +70,15 @@ function Wallet() {
 
                     <div className='lg:space-y-6 py-7 flex lg:block space-x-3 lg:space-x-0'>
                       <div className=''>
-                        <button className='w-[15em] bg-dark text-light py-3 rounded-[0.25rem] text-xs lg:text-sm'
-                        >
-                          ADD MONEY
-                        </button>
+                        <Link to='/b2b/payment/approval'>
+                          <button className='w-[15em] bg-dark text-light py-3 rounded-[0.25rem] text-xs lg:text-sm'
+                          >
+                            ADD MONEY
+                          </button>
+                        </Link>
                       </div>
                       <div className=''>
-                        <Link to='/b2b/payment/approval' className=''>
+                        <Link to='#' className=''>
                           <button className='w-[15em] bg-dark text-light py-3 rounded-[0.25rem] text-xs lg:text-sm'
                           >
                             WITHDRAW
@@ -83,8 +101,11 @@ function Wallet() {
                       <h2 className='lg:text-3xl text-2xl text-center lg:text-start font-black text-darktext tracking-wider mb-3'>Pending Balance</h2>
                       <h5 className='text-xs lg:text-sm text-text mb-3'>Pending balance*</h5>
                       <div className='flex space-x-2 text-2xl tracking-wider font-bold  '>
-                        <p className='text-main'>100</p>
-                        <p className='text-text'>AED</p>
+                        {loading ? (
+                          <BtnLoader />
+                        ) : (
+                          <p className='text-main'>{priceConversion(balance?.pendingBalance, selectedCurrency, true)}</p>
+                        )}
                       </div>
                       <div className='mb-5'>
                         <h5 className='text-xs lg:text-sm text-text mb-3'>amount is pending!</h5>

@@ -27,7 +27,7 @@ function SearchListViewSection() {
 
     return (
         <div>
-            {agentExcursions?.attractions?.data?.length > 0 ? (
+            {agentExcursions?.attractions?.data?.length > 0 && (
                 <div className='md:grid md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-1'>
                     {agentExcursions?.attractions?.data?.length > 0 && agentExcursions?.attractions?.data?.map((item, index) => (
                         <div key={index} className='h-full snap-start mt-2 bg-light shadow-md p-3 rounded-3xl cursor-pointer md:mx-0' onClick={() => {
@@ -95,7 +95,7 @@ function SearchListViewSection() {
                                             <div className='text-xs text-text font-light'>Starting from</div>
                                             {item?.isOffer === true &&
                                                 <div className='text-xs text-main font-light'>
-                                                    <s>{priceConversion(item?.activity?.adultPrice,selectedCurrency, true)}</s>
+                                                    <s>{priceConversion(item?.activity?.adultPrice, selectedCurrency, true)}</s>
                                                 </div>}
                                             <div className='text-xl font-bold text-darktext'>
                                                 {priceConversion(item?.isOffer === true ? (item?.isOffer === true && item?.offerAmountType === "flat" ? Number(item?.activity?.adultPrice) - Number(item?.offerAmount) :
@@ -123,19 +123,22 @@ function SearchListViewSection() {
                         </div>
                     ))}
                 </div>
-            ) : (
-                <div className='flex justify-center mt-20'>
-                    <div className='bg-semisoft rounded-md p-10 text-xl'>
-                        <h1 className='text-darktext'>The data you looking for is not available right now!!</h1>
-                        <p className='text-text text-sm underline'>notify me when it is available*</p>
-                        <input className='w-8/12 py-2 rounded-lg mt-2 placeholder:text-bluetrans  text-sm  px-2 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-text' type="email" />
-                        <div className='pt-2'>
-                            <button className='text-sm text-light bg-lightblue px-3 py-1 rounded-sm'>Notify</button>
-                        </div>
-
-                    </div>
-                </div>
             )}
+            <>
+                {agentExcursions?.attractions?.data?.length < 1 && (
+                    <div className='flex justify-center mt-20'>
+                        <div className='bg-semisoft rounded-md p-10 text-xl'>
+                            <h1 className='text-darktext'>The data you looking for is not available right now!!</h1>
+                            <p className='text-text text-sm underline'>notify me when it is available*</p>
+                            <input className='w-8/12 py-2 rounded-lg mt-2 placeholder:text-bluetrans  text-sm  px-2 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-text' type="email" />
+                            <div className='pt-2'>
+                                <button className='text-sm text-light bg-lightblue px-3 py-1 rounded-sm'>Notify</button>
+                            </div>
+
+                        </div>
+                    </div>
+                )}
+            </>
         </div>
     )
 }

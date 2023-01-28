@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { AiOutlineClose, AiOutlineRight } from 'react-icons/ai'
+import { BsFacebook } from 'react-icons/bs';
+import { FcGoogle } from 'react-icons/fc';
 // import { BsFacebook } from 'react-icons/bs'
 // import { FcGoogle } from 'react-icons/fc'
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,6 +23,8 @@ function RegisterMobileCard({ view, setView }) {
   const { countries } = useSelector((state) => state.home);
 
   const dispatch = useDispatch();
+
+  const { home } = useSelector(state => state.general)
 
   const handleChange = (e) => {
     setData((prev) => {
@@ -53,9 +57,13 @@ function RegisterMobileCard({ view, setView }) {
   return (
     <form onSubmit={handleSubmit}>
       <div className=' space-y-4'>
-        <div className=' flex justify-between items-center'>
-          <div className=''>
-            <h2 className='text-3xl text-darktext font-bold'>Greetings..</h2>
+        <div className="flex justify-center items-center pb-1 space-x-5">
+          <div className="">
+            <img
+              src={process.env.REACT_APP_SERVER_URL + home?.logo}
+              alt="tc"
+              className="h-12 md:h-14"
+            />
           </div>
         </div>
         <div className='space-y-2'>
@@ -146,7 +154,7 @@ function RegisterMobileCard({ view, setView }) {
           </button>
 
         </div>
-        {/* <div className='flex items-center justify-between pt-2'>
+        <div className='flex items-center justify-between pt-2'>
             <button className='flex items-center border border-lightblue space-x-2 bg-trans w-full mx-3 justify-center py-2 rounded-xl hover:bg-light hover:text-blue text-bluetrans duration-200'>
               <span className=''><FcGoogle /></span>
               <span className=''>Google</span>
@@ -155,7 +163,7 @@ function RegisterMobileCard({ view, setView }) {
               <span className='text-blue'><BsFacebook /> </span>
               <span className=''>Facebook</span>
             </button>
-          </div> */}
+          </div>
       </div>
     </form>
   )

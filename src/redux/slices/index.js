@@ -4,10 +4,11 @@ import paymentReducer from "./paymentSlice";
 import usersReducer from "./usersSlice";
 import homeReducer from "./homeSlice";
 import blogReducer from "./blogSlice";
-import agentReducer from './agentSlice'
-import markupReducer from './markupSlice'
+import agentReducer from "./agentSlice";
+import markupReducer from "./markupSlice";
 import resellerReducer from "./resellerSlice";
 import agentExcursionReducer from "./agentExcursionSlice";
+import walletReducer from "./walletSlice";
 
 export {
   excursionReducer,
@@ -20,4 +21,5 @@ export {
   markupReducer,
   resellerReducer,
   agentExcursionReducer,
+  walletReducer,
 };

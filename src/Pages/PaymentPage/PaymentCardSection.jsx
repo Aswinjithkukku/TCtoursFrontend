@@ -9,11 +9,8 @@ function PaymentCardSection() {
     const dispatch = useDispatch()
     const { id } = useParams()
 
-    // const [vatAmount, setVatAmount] = useState(0)
-    const [activities, setActivities] = useState([])
 
-
-    const { excursion } = useSelector(state => state.excursion)
+    const { excursionCart } = useSelector(state => state.excursion)
     const { selectedCurrency } = useSelector(state => state.home)
 
     useEffect(() => {
@@ -21,17 +18,13 @@ function PaymentCardSection() {
     }, [dispatch, id])
 
 
-    useEffect(() => {
-        let array = JSON.parse(localStorage.getItem('excursionCart')) || []
-        setActivities(array)
-    }, [activities])
 
-    const finalPayment = activities.reduce((acc, item) => {
+    const finalPayment = excursionCart?.length > 0 && excursionCart.reduce((acc, item) => {
         const vatPrice = item?.vat && item?.isVat && (item?.price * item?.vat) / 100
         const sum = vatPrice + item?.price
         return acc + sum
     }, 0)
-    const totalVat = activities.reduce((acc, item) => {
+    const totalVat = excursionCart?.length > 0 && excursionCart.reduce((acc, item) => {
         const vatPrice = item?.vat && item?.isVat && (item?.price * item?.vat) / 100
         return acc + vatPrice
     }, 0)
@@ -39,7 +32,7 @@ function PaymentCardSection() {
     return (
         <>
             <div className=''>
-                {activities?.map((item) => (
+                {excursionCart?.map((item) => (
                     <div className='bg-light w-full rounded-xl mb-2'>
                         <div className='p-3 border-b flex justify-between items-center'>
                             <h1 className=' font-semibold text-darktext'>{item?.name} </h1>

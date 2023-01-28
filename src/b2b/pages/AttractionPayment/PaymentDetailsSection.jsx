@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { AiOutlineDown } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-import PaypalComponent from '../../../components/Payment/PaypalComponent'
 import { getPassengerDetails } from '../../../redux/slices/paymentSlice'
-import RazorpayComponent from '../../../components/Payment/RazorpayComponent'
 import OtpModal from './OtpModal'
+import axios from '../../../axios'
+import Swal from 'sweetalert2'
+import priceConversion from '../../../utils/PriceConversion'
+import { BtnLoader } from '../../components'
 
 
 
 function PaymentDetailsSection() {
     const dispatch = useDispatch()
 
-    const [paymentSection, setPaymentSection] = useState({
-        paypal: true,
-        razorpay: false
-    })
     const [otpModal, setOtpModal] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState('')
+    const [orderId, setOrderId] = useState('')
 
     const [travellerData, setTravellerData] = useState({
         gender: "male",
@@ -28,21 +29,64 @@ function PaymentDetailsSection() {
     })
     const [viewRedeem, setViewRedeem] = useState(false)
     const { countries } = useSelector(state => state.home)
+    const { agentExcursionCart } = useSelector(state => state.agentExcursions)
+    const { token } = useSelector(state => state.agents)
+    const { selectedCurrency } = useSelector(state => state.home)
+    const { balance,loading } = useSelector(state => state.wallet)
 
     const onChange = (e) => {
         setTravellerData({ ...travellerData, [e.target.name]: e.target.value })
     }
 
-    useEffect(() =>{
-        dispatch(getPassengerDetails(travellerData))
-    }, [travellerData])
-    // const submitHandler = (e) => {
-    //     e.preventDefault()
+    // useEffect(() => {
     //     dispatch(getPassengerDetails(travellerData))
-    //     localStorage.setItem('passenger', JSON.stringify(travellerData))
-    //     console.log(travellerData);
-    //     console.log("hiiii");
-    // }
+    // }, [travellerData])
+
+    const activity = agentExcursionCart.map((item) => {
+        return {
+            activity: item?._id,
+            date: item?.date,
+            adultsCount: item?.adult,
+            childrenCount: item?.child,
+            infantCount: item?.infant,
+            transferType: item?.transfer
+        }
+    })
+
+    const submitHandler = async (e) => {
+        try {
+            e.preventDefault()
+
+            setIsLoading(true);
+            const config = {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                  },
+            }
+            const response = await axios.post("/b2b/attractions/orders/create", {
+                selectedActivities: activity,
+                country: travellerData?.country,
+                name: travellerData?.firstname + ' ' + travellerData?.lastname,
+                email: travellerData?.email,
+                phoneNumber: travellerData?.phone
+            }, config);
+
+            setIsLoading(false);
+            setOtpModal(true)
+            setOrderId(response.data?._id)
+        } catch (err) {
+
+            if (err?.response?.data?.error) {
+                setError(err?.response?.data?.error)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Something went wrong!',
+                    text: error,
+                })
+                setIsLoading(false);
+            }
+        }
+    }
 
     return (
         <>
@@ -210,17 +254,21 @@ function PaymentDetailsSection() {
                 <div className='{" "}'>
                     <span className='cursor-default '>By Clicking Pay Now You agree that you have read and understood our {" "}</span>
                     <span className='text-lightblue underline cursor-pointer'>Terms & Conditions</span>
+                    {loading ? (
+                        <BtnLoader />
+                    ) : (
+                        <p className='font-[500] text-darktext'>Your Wallet Balance is {priceConversion(balance?.balance, selectedCurrency, true)} </p>
+                    )}
                 </div>
                 <div className='text-center fixed lg:static bottom-0 left-0 right-0 rounded-t-3xl lg:rounded-none py-8 bg-light lg:bg-none px-10 lg:px-0 z-10'>
                     <button className='text-light bg-lightblue px-3 py-2 rounded-lg text whitespace-nowrap w-full'
-                    onClick={() => {
-                        setOtpModal(true)
-                    }}>Pay Now</button>
+                        onClick={submitHandler}>Pay Now</button>
                 </div>
             </div>
             {otpModal && (
-                <OtpModal 
-                setOtpModal={setOtpModal}
+                <OtpModal
+                    setOtpModal={setOtpModal}
+                    orderId={orderId}
                 />
             )}
         </>

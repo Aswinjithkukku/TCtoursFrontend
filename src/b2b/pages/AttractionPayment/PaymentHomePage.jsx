@@ -13,7 +13,7 @@ function PaymentHomePage() {
         <>
             <div className="bg-white flex items-center justify-between gap-[10px] px-6 shadow-sm border-t py-2">
                 <h1 className="font-[600] text-[15px] uppercase">
-                    Settings
+                    Attraction
                 </h1>
                 <div className="text-sm text-grayColor cursor-pointer">
                     <Link to="/b2b" className="text-textColor">

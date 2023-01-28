@@ -31,7 +31,7 @@ function VisaCard() {
     </div>
     <div className='md:col-span-2 flex justify-center items-center'>
         <div className=''>
-            <Link to='/visa'>
+            <Link to='/b2b/visa'>
             <button className='h-14 w-14 bg-blue rounded-xl text-light text-3xl flex justify-center items-center'>
                 <AiOutlineSearch />
             </button>

@@ -13,6 +13,7 @@ import ProfileSettingsPage from "./ProfileSettingsPage";
 import ProfilePasswordPage from "./ProfilePasswordPage";
 import PaymentApprovalPage from "./PaymentApprovalPage";
 import Invoice from "./Invoice";
+import VisaActionPage from "./VisaActionPage";
 
 export {
   AttractionLandingPage,
@@ -30,4 +31,5 @@ export {
   ProfilePasswordPage,
   PaymentApprovalPage,
   Invoice,
+  VisaActionPage,
 };

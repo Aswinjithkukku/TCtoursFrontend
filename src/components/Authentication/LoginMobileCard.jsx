@@ -3,7 +3,7 @@ import { AiOutlineClose, AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
 import { BsFacebook } from 'react-icons/bs'
 import { FcGoogle } from 'react-icons/fc'
 import { RiLockPasswordLine } from 'react-icons/ri'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from '../../axios'
 import { setUser } from '../../redux/slices/usersSlice'
 
@@ -17,6 +17,8 @@ function LoginMobileCard({ setView, view }) {
     const [error, setError] = useState("");
 
     const dispatch = useDispatch();
+
+    const { home } = useSelector(state =>  state.general)
 
     const handleChange = (e) => {
         setData((prev) => {
@@ -51,12 +53,16 @@ function LoginMobileCard({ setView, view }) {
     return (
         <form onSubmit={handleSubmit}>
             <div className=' space-y-5'>
-                <div className=' flex justify-between items-center'>
-                    <div className=''>
-                        <h2 className='text-3xl text-darktext font-bold'>Welcome Back!!</h2>
+                <div className="flex justify-center items-center pb-1  space-x-5">
+                    <div className="">
+                        <img
+                            src={process.env.REACT_APP_SERVER_URL + home?.logo}
+                            alt="tc"
+                            className="h-12 md:h-14"
+                        />
                     </div>
                 </div>
-                {/*    <div className='space-y-5 py-4 invisible'>
+                   <div className='space-y-5 py-4 '>
                         <button className='flex items-center border border-main space-x-2 bg-trans w-full  justify-center py-4 rounded-xl hover:bg-light hover:text-main text-maintrans duration-200'>
                             <span className='text-3xl'><FcGoogle /></span>
                             <span className=''>Continue with google</span>
@@ -65,7 +71,7 @@ function LoginMobileCard({ setView, view }) {
                             <span className=' text-3xl text-blue'><BsFacebook /> </span>
                             <span className=''>Continue with facebook</span>
                         </button>
-                    </div> */}
+                    </div>
                 {resetPassword ? (
                     <>
                         <div className='space-y-2  py-4'>

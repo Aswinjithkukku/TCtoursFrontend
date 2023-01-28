@@ -1,25 +1,39 @@
-import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AdminDropdown from "./AdminDropdown";
-import WalletDepositModal from "./WalletDepositModal";
+import WalletDropDown from "./WalletDropDown";
 import CurrencyModal from './CurrencyModal'
 import { useHandleClickOutside } from "../../../hooks";
 import { AiOutlineDown } from "react-icons/ai";
 import { GrMenu } from "react-icons/gr";
+import { getWalletBalance } from '../../../redux/slices/walletSlice'
+import priceConversion from '../../../utils/PriceConversion'
+import BtnLoader from "../BtnLoader";
 
 export default function Header({ setSidebarView, sidebarView }) {
+
+    const dispatch = useDispatch()
     const [isAdminDropdownOpen, setIsAdminDropdownOpen] = useState(false);
     const [walletDropdown, setWalletDropdown] = useState(false)
     const [currency, setCurrency] = useState(false)
 
     const { agent } = useSelector((state) => state.agents);
     const { selectedCurrency } = useSelector(state => state.home)
+    const { balance, loading } = useSelector(state => state.wallet)
 
     const currencyRef = useRef()
     useHandleClickOutside(currencyRef, () => setCurrency(false))
 
     const wrapperRef = useRef();
     useHandleClickOutside(wrapperRef, () => setIsAdminDropdownOpen(false));
+
+    const walletRef = useRef();
+    useHandleClickOutside(walletRef, () => setWalletDropdown(false));
+
+    useEffect(() => {
+        dispatch(getWalletBalance())
+    }, [dispatch])
+
 
     return (
         <>
@@ -58,21 +72,31 @@ export default function Header({ setSidebarView, sidebarView }) {
                             </div>
 
 
-                            <div className="hidden lg:flex bg-primaryColor h-[100%] gap-[10px] items-center px-[12px] cursor-pointer"
+                            <div 
+                            ref={walletRef}
+                            className="hidden lg:flex bg-primaryColor h-[100%] gap-[10px] items-center px-[12px] cursor-pointer"
                                 onClick={() => setWalletDropdown(!walletDropdown)} >
                                 <div className="">
                                     <span className="block text-light text-sm font-medium">
                                         WALLET BALANCE
                                     </span>
                                     <span className="block text-[12px] font-semibold tracking-wide text-secondaryColor">
-                                        120 AED
+                                        {loading ? (
+                                            <BtnLoader />
+                                        ) : (
+                                            <>
+                                                {priceConversion(balance?.balance, selectedCurrency, true)}
+                                            </>
+                                        )}
                                     </span>
                                 </div>
-                            </div>
+                                {/* absolute modal */}
                             {walletDropdown && (
-                                <WalletDepositModal
-                                    setWalletDropdown={setWalletDropdown} />
-                            )}
+                                <WalletDropDown
+                                setWalletDropdown={setWalletDropdown} />
+                                )}
+                                {/* absolute modal */}
+                            </div>
 
 
                             <div

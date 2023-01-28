@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { BsDash } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { getExcursion, removeFromCart } from '../../../redux/slices/agentExcursionSlice'
 import priceConversion from '../../../utils/PriceConversion'
@@ -6,22 +7,24 @@ import priceConversion from '../../../utils/PriceConversion'
 function PaymentCardSection() {
     const dispatch = useDispatch()
 
+    const { agentExcursionCart } = useSelector(state => state.agentExcursions)
+
     const [vatAmount, setVatAmount] = useState(0)
-    const [activities, setActivities] = useState([])
+    // const [activities, setActivities] = useState(agentExcursionCart ? agentExcursionCart || [] : [])
 
     const { selectedCurrency } = useSelector(state => state.home)
 
-    useEffect(() => {
-        let array = JSON.parse(localStorage.getItem('agentExcursionCart')) || []
-        setActivities(array)
-    }, [activities])
+    // useEffect(() => {
+    //     const array = JSON.parse(localStorage.getItem('agentExcursionCart')) || []
+    //     setActivities(array)
+    // }, [activities])
 
-    const finalPayment = activities.reduce((acc, item) => {
+    const finalPayment = agentExcursionCart && agentExcursionCart.reduce((acc, item) => {
         const vatPrice = item?.vat && item?.isVat && (item?.price * item?.vat) / 100
         const sum = vatPrice + item?.price
         return acc + sum
     }, 0)
-    const totalVat = activities.reduce((acc, item) => {
+    const totalVat = agentExcursionCart && agentExcursionCart.reduce((acc, item) => {
         const vatPrice = item?.vat && item?.isVat && (item?.price * item?.vat) / 100
         return acc + vatPrice
     }, 0)
@@ -29,10 +32,15 @@ function PaymentCardSection() {
     return (
         <>
             <div className=''>
-                {activities?.map((item) => (
-                    <div className='bg-light w-full pb-3 rounded-2xl'>
-                        <div className='p-3 border-b'>
+                {agentExcursionCart?.map((item, index) => (
+                    <div className='bg-light w-full pb-3 rounded-2xl' key={index}>
+                        <div className='p-3 border-b flex justify-between items-center'>
                             <h1 className='text-lg font-semibold text-darktext'>{item?.name} </h1>
+                            <button className='rounded-full h-5 w-5 bg-gray-300 text-main flex justify-center items-center text-lg font-bold'
+                                onClick={() => dispatch(removeFromCart(item?._id))}
+                            >
+                                <BsDash />
+                            </button>
                         </div>
                         <div className='text-darktext p-4 space-y-2 '>
                             <div className='flex items-center justify-between font-medium'>
@@ -55,7 +63,7 @@ function PaymentCardSection() {
                             </div>
                             <div className='flex items-center justify-between font-medium'>
                                 <span className=''>Amount :</span>
-                                <span className=''>{priceConversion(item?.price,selectedCurrency, true)}</span>
+                                <span className=''>{priceConversion(item?.price, selectedCurrency, true)}</span>
                             </div>
                             {item?.isVat && (
                                 <>
@@ -67,7 +75,7 @@ function PaymentCardSection() {
                                         <span className=''>VAT amount :</span>
                                         <span className=''>
                                             {
-                                                priceConversion((item?.vat && item?.isVat && (item?.price * item?.vat) / 100),selectedCurrency, false)
+                                                priceConversion((item?.vat && item?.isVat && (item?.price * item?.vat) / 100), selectedCurrency, false)
                                             }
                                         </span>
                                     </div>
@@ -86,10 +94,10 @@ function PaymentCardSection() {
                         <h1 className='text-lg font-semibold text-darktext'>Final Payment</h1>
                     </div>
                     <div className='text-darktext p-5 space-y-3'>
-                            <div className='flex items-center justify-between font-medium'>
-                                <span className=''>VAT Amount :</span>
-                                <span className=''>{priceConversion(totalVat, selectedCurrency, true)}</span>
-                            </div>
+                        <div className='flex items-center justify-between font-medium'>
+                            <span className=''>VAT Amount :</span>
+                            <span className=''>{priceConversion(totalVat, selectedCurrency, true)}</span>
+                        </div>
                         <div className='flex items-center justify-between font-medium'>
                             <span className=''>Total :</span>
                             <span className=''>{priceConversion(finalPayment, selectedCurrency, true)}</span>
