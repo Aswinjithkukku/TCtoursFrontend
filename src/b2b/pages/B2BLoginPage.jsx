@@ -7,6 +7,7 @@ import { setAgent } from '../../redux/slices/agentSlice'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { BtnLoader } from '../components'
+import { BiHide, BiShow } from 'react-icons/bi';
 
 function B2BLoginPage() {
   const navigate = useNavigate()
@@ -16,6 +17,7 @@ function B2BLoginPage() {
     agentCode: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -62,8 +64,8 @@ function B2BLoginPage() {
 
           <div className='flex justify-center pb-4 mb-7 border-b'>
             <img src={logoPng} alt='logo' className='h-[65px]'
-            onClick={() => navigate('/')}
-             />
+              onClick={() => navigate('/')}
+            />
           </div>
 
           <div className="grid lg:grid-cols-2 gap-[20px]">
@@ -104,16 +106,23 @@ function B2BLoginPage() {
                 </div>
 
                 <div className="mb-6">
-                  <input
-                    type="password"
-                    className="input"
-                    id="exampleFormControlInput2"
-                    placeholder="Password"
-                    name='password'
-                    value={data.password}
-                    onChange={handleChange}
-                    required
-                  />
+                  <div className='relative text-gray-400 focus-within:text-gray-600'>
+                    <p className='pointer-events-none text-2xl absolute top-1/2 transform -translate-y-1/2 right-3'
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <BiShow /> : <BiHide />}
+                    </p>
+                    <input
+                      type="password"
+                      className="input"
+                      id="exampleFormControlInput2"
+                      placeholder="Password"
+                      name='password'
+                      value={data.password}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
                 </div>
 
                 <div className="flex justify-end items-center mb-6">
@@ -127,7 +136,7 @@ function B2BLoginPage() {
                     type="submit"
                     className="inline-block px-7 py-3 bg-lightblue text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                   >
-                    {isLoading ? <BtnLoader /> :"Login"}
+                    {isLoading ? <BtnLoader /> : "Login"}
                   </button>
                   <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                     Don't have an account?

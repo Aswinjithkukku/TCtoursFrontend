@@ -4,5 +4,14 @@ import BtnLoader from "./BtnLoader";
 import RichTextEditor from "./RichTextEditor";
 import PageLoader from "./PageLoader";
 import Pagination from "./Pagination";
+import InfoModal from "./InfoModal";
 
-export { Header, Sidebar, BtnLoader, RichTextEditor, PageLoader, Pagination };
+export {
+  Header,
+  Sidebar,
+  BtnLoader,
+  RichTextEditor,
+  PageLoader,
+  Pagination,
+  InfoModal,
+};

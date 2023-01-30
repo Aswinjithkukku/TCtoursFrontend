@@ -32,17 +32,6 @@ function PaymentDetailsSection() {
         setTravellerData({ ...travellerData, [e.target.name]: e.target.value })
     }
 
-    useEffect(() =>{
-        dispatch(getPassengerDetails(travellerData))
-    }, [travellerData])
-    // const submitHandler = (e) => {
-    //     e.preventDefault()
-    //     dispatch(getPassengerDetails(travellerData))
-    //     localStorage.setItem('passenger', JSON.stringify(travellerData))
-    //     console.log(travellerData);
-    //     console.log("hiiii");
-    // }
-
     return (
         <>
             <div className='bg-light  w-full p-5 rounded-2xl space-y-5'>

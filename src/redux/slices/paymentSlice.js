@@ -4,7 +4,7 @@ import axios from "../../axios";
 const initialState = {
   order: {},
   orderPayloadData: {},
-  passengerDetails: {},
+  // passengerDetails: {},
 };
 
 export const getOrder = createAsyncThunk(
@@ -29,9 +29,9 @@ const paymentSlice = createSlice({
     orderPayload: (state,action) => {
       state.orderPayloadData = action.payload
     },
-    getPassengerDetails: (state,action) => {
-      state.passengerDetails = action.payload
-    },
+    // getPassengerDetails: (state,action) => {
+    //   state.passengerDetails = action.payload
+    // },
   },
   extraReducers: {
     [getOrder.pending]: (state, action) => {
@@ -46,7 +46,7 @@ const paymentSlice = createSlice({
 
 export const {
   orderPayload,
-  getPassengerDetails,
+  // getPassengerDetails,
 } = paymentSlice.actions
 
 export default paymentSlice.reducer;

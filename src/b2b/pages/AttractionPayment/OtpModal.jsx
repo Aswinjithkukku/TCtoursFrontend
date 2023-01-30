@@ -1,47 +1,31 @@
 import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import axios from '../../../axios'
 import Swal from 'sweetalert2'
 import { useEffect } from 'react'
+import { emptyCart } from '../../../redux/slices/agentExcursionSlice'
+import { useRef } from 'react'
 
 function OtpModal({ setOtpModal, orderId }) {
+  const dispatch = useDispatch()
 
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [otp, setOtp] = useState({
     one: '',
     two: '',
-    three:'',
+    three: '',
     four: '',
     five: ''
   })
 
+  const oneRef = useRef(null)
+  useEffect(() => {
+    oneRef.current.focus();
+}, []);
 
-  // useEffect(() => {
-  // const inputs = document.querySelectorAll('#otp > *[id]');
-  // for (let i = 0; i < inputs.length; i++) {
-  //   inputs[i].addEventListener('keydown', function (event) {
-  //     if (event.key === "Backspace") {
-  //       inputs[i].value = '';
-  //       if (i !== 0) inputs[i - 1].focus();
-  //     } else {
-  //       if (i === inputs.length - 1 && inputs[i].value !== '') {
-  //         return true;
-  //       } else if (event.keyCode > 47 && event.keyCode < 58) {
-  //         inputs[i].value = event.key;
-  //         if (i !== inputs.length - 1) inputs[i + 1].focus();
-  //         event.preventDefault();
-  //       } else if (event.keyCode > 64 && event.keyCode < 91) {
-  //         inputs[i].value = String.fromCharCode(event.keyCode);
-  //         if (i !== inputs.length - 1) inputs[i + 1].focus();
-  //         event.preventDefault();
-  //       }
-  //     }
-  //   });
-  // }
-  // })
 
   const { token } = useSelector(state => state.agents)
   // const { balance } = useSelector(state => state.wallet)
@@ -67,6 +51,7 @@ function OtpModal({ setOtpModal, orderId }) {
         title: 'Order Completed Successfully',
         // text: `You have ${balance?.balance} amount left in your Wallet`,
       })
+      dispatch(emptyCart())
     } catch (err) {
 
       if (err?.response?.data?.error) {
@@ -82,9 +67,23 @@ function OtpModal({ setOtpModal, orderId }) {
   }
 
   const onChangeHandler = (e) => {
+    if (!otp[e.target.name] || !e.target.value) {
     setOtp((prev) => {
       return { ...prev, [e.target.name]: e.target.value }
     })
+  }
+
+    if (e.target.value) {
+      const next = e.target.tabIndex;
+      if (next < 5) {
+          e.target.parentNode.childNodes[next].focus();
+      }
+  } else {
+      const next = e.target.tabIndex - 2;
+      if (next > -1) {
+          e.target.parentNode.childNodes[next].focus();
+      }
+  }
   }
 
   return (
@@ -98,63 +97,72 @@ function OtpModal({ setOtpModal, orderId }) {
           </button>
         </div>
 
-        <div class=" py-3 rounded text-center">
-          <h1 class="text-2xl font-bold">OTP Verification</h1>
-          <div class="mt-2">
+        <div className=" py-3 rounded text-center">
+          <h1 className="text-2xl font-bold">OTP Verification</h1>
+          <div className="mt-2">
             <span>Enter the OTP you received at</span>
-            <span class="font-bold">+91 ******876</span>
+            <span className="font-bold">+91 ******876</span>
           </div>
           <form onSubmit={submitHandler}>
-            <div id="otp" class="flex flex-row justify-center text-center  mt-5">
+            <div id="otp" className="flex flex-row justify-center text-center  mt-5">
               <input
-                class="m-2 border h-10 w-10 text-center form-control rounded"
-                type="number"
+                ref={oneRef}
+                className="m-2 no-spinner border h-10 w-10 text-center form-control rounded"
+                type="text"
                 id="first"
-                maxlength="1"
+                maxLength={1}
+                tabIndex={1}
                 name='one'
                 value={otp.one}
                 onChange={onChangeHandler}
               />
               <input
-                class="m-2 border h-10 w-10 text-center form-control rounded"
+                className="m-2 no-spinner border h-10 w-10 text-center form-control rounded"
                 type="text"
                 id="second"
-                maxlength="1"
+                maxLength={1}
+                tabIndex={2}
                 name='two'
                 value={otp.two}
                 onChange={onChangeHandler} />
-              <input class="m-2 border h-10 w-10 text-center form-control rounded"
+              <input
+                className="m-2 no-spinner border h-10 w-10 text-center form-control rounded"
                 type="text"
                 id="third"
-                maxlength="1"
+                maxLength={1}
+                tabIndex={3}
                 name='three'
                 value={otp.three}
                 onChange={onChangeHandler} />
-              <input class="m-2 border h-10 w-10 text-center form-control rounded"
+              <input
+                className="m-2 no-spinner border h-10 w-10 text-center form-control rounded"
                 type="text"
                 id="fourth"
-                maxlength="1"
+                maxLength={1}
+                tabIndex={4}
                 name='four'
                 value={otp.four}
                 onChange={onChangeHandler} />
-              <input class="m-2 border h-10 w-10 text-center form-control rounded"
+              <input
+                className="m-2 no-spinner border h-10 w-10 text-center form-control rounded"
                 type="text"
                 id="fifth"
-                maxlength="1"
+                maxLength={1}
+                tabIndex={5}
                 name='five'
                 value={otp.five}
                 onChange={onChangeHandler} />
             </div>
 
-            <div class="flex justify-center text-center mt-2">
-              <div class="flex items-center text-blue-700 hover:text-blue-900 cursor-pointer">
-                <button class="bg-blue text-light h-9 rounded-[.25rem] w-[100px]">Submit</button><i class='bx bx-caret-right ml-1'></i>
+            <div className="flex justify-center text-center mt-2">
+              <div className="flex items-center text-blue-700 hover:text-blue-900 cursor-pointer">
+                <button className="bg-blue text-light h-9 rounded-[.25rem] w-[100px]">Submit</button><i className='bx bx-caret-right ml-1'></i>
               </div>
             </div>
           </form>
-          <div class="flex justify-center text-center mt-5">
-            <Link class="flex items-center text-blue-700 hover:text-blue-900 cursor-pointer">
-              <span class="font-bold">Resend OTP</span><i class='bx bx-caret-right ml-1'></i>
+          <div className="flex justify-center text-center mt-5">
+            <Link className="flex items-center text-blue-700 hover:text-blue-900 cursor-pointer">
+              <span className="font-bold">Resend OTP</span><i className='bx bx-caret-right ml-1'></i>
             </Link>
           </div>
         </div>

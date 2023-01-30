@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { AiOutlineDown } from 'react-icons/ai'
-import { useDispatch, useSelector } from 'react-redux'
-import { getPassengerDetails } from '../../../redux/slices/paymentSlice'
+import { useSelector } from 'react-redux'
 import OtpModal from './OtpModal'
 import axios from '../../../axios'
 import Swal from 'sweetalert2'
@@ -11,7 +10,6 @@ import { BtnLoader } from '../../components'
 
 
 function PaymentDetailsSection() {
-    const dispatch = useDispatch()
 
     const [otpModal, setOtpModal] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -38,9 +36,6 @@ function PaymentDetailsSection() {
         setTravellerData({ ...travellerData, [e.target.name]: e.target.value })
     }
 
-    // useEffect(() => {
-    //     dispatch(getPassengerDetails(travellerData))
-    // }, [travellerData])
 
     const activity = agentExcursionCart.map((item) => {
         return {
@@ -70,12 +65,12 @@ function PaymentDetailsSection() {
                 email: travellerData?.email,
                 phoneNumber: travellerData?.phone
             }, config);
-
+            
             setIsLoading(false);
             setOtpModal(true)
             setOrderId(response.data?._id)
         } catch (err) {
-
+            
             if (err?.response?.data?.error) {
                 setError(err?.response?.data?.error)
                 Swal.fire({
@@ -87,7 +82,9 @@ function PaymentDetailsSection() {
             }
         }
     }
-
+    
+    const country = countries?.filter((item) => item._id === travellerData?.country)
+    
     return (
         <>
             <div className='bg-light  w-full p-5 rounded-2xl space-y-5'>
@@ -160,7 +157,7 @@ function PaymentDetailsSection() {
                         </div>
                         <div className=''>
                             <div className=''>
-                                <label className='label'>Country</label>
+                                <label className='label'>Nationality</label>
                             </div>
                             <div className=''>
                                 <select
@@ -172,25 +169,32 @@ function PaymentDetailsSection() {
                                 >
                                     <option >Choose Country</option>
                                     {countries?.map((item) => (
-                                        <option key={item._id} value={item._id}>{item.countryName} </option>
+                                        <option className='capitalize' key={item._id} value={item._id}>{item.countryName} </option>
                                     ))}
                                 </select>
                             </div>
                         </div>
-                        <div className=''>
-                            <div className=''>
-                                <label className='label'>Phone</label>
-                            </div>
-                            <div className=''>
-                                <input
-                                    type='number'
-                                    className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
-                                    name='phone'
-                                    value={travellerData.phone}
-                                    onChange={onChange}
-                                />
-                            </div>
-                        </div>
+
+                        <div className=' flex space-x-1'>
+                      <div className='w-3/12'>
+                        <label className='label'>Code</label>
+                        <input className='input'
+                          value={country?.map((item) => item?.phonecode) || ''}
+                          readOnly
+                        />
+                      </div>
+                      <div className='w-9/12'>
+                        <label className='label'>Phone Number</label>
+                        <input className='input no-spinner'
+                          type='number'
+                          placeholder='Ex: 0000000000'
+                          name='phone'
+                          value={travellerData.phone}
+                          onChange={onChange}
+                          
+                        />
+                      </div>
+                    </div>
                     </div>
                     <div className='text-darktext'>
                         <div className=''>

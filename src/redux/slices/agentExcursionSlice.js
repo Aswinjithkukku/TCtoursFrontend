@@ -9,7 +9,9 @@ const initialState = {
   agentRecievedActivities: [],
   agentSelectedActivities: [],
   // favourites: localStorage.getItem("favourites") ? JSON.parse(localStorage.getItem("favourites"))|| [] : [],
-  agentExcursionCart: localStorage.getItem("agentExcursionCart") ? JSON.parse(localStorage.getItem("agentExcursionCart")) || [] : [],
+  agentExcursionCart: localStorage.getItem("agentExcursionCart")
+    ? JSON.parse(localStorage.getItem("agentExcursionCart")) || []
+    : [],
 };
 
 export const getAllAgentExcursions = createAsyncThunk(
@@ -35,15 +37,16 @@ export const getAllAgentExcursions = createAsyncThunk(
 export const getAgentExcursion = createAsyncThunk(
   "agentExcursionSlice/getAgentExcursion",
   async (args, { getState }) => {
-    const { token } = getState().agents
-    if( token ) {
-
-      const response = await axios.get(`/b2b/resellers/client/attraction/single/${args}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const { token } = getState().agents;
+    if (token) {
+      const response = await axios.get(
+        `/b2b/resellers/client/attraction/single/${args}`,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
       console.log(response.data);
       return response.data;
     } else {
@@ -51,7 +54,6 @@ export const getAgentExcursion = createAsyncThunk(
     }
   }
 );
-
 
 const agentExcursionSlice = createSlice({
   name: "agentExcursion",
@@ -65,28 +67,28 @@ const agentExcursionSlice = createSlice({
       state.agentRecievedActivities[action.payload.index][action.payload.sum] =
         action.payload.value;
     },
-  //   setFavourites: (state, action) => {
-  //     var array = [];
-  //     array = JSON.parse(localStorage.getItem("favourites")) || [];
-  //     const isItemExist = array.find(
-  //       (item) => item?._id === action.payload._id
-  //     );
-  //     if (isItemExist) {
-  //       const result = array.filter((item) => item?._id !== action.payload._id);
-  //       array = result;
-  //       state.favourites = array;
-  //       localStorage.setItem("favourites", JSON.stringify(array));
-  //     } else {
-  //       array = [action.payload, ...array];
-  //       state.favourites = array;
-  //       localStorage.setItem("favourites", JSON.stringify(array));
-  //     }
-  //   },
-  //   stateFavourites: (state, action) => {
-  //     state.favourites = localStorage.getItem("favourites")
-  //       ? JSON.parse(localStorage.getItem("favourites"))
-  //       : [];
-  //   },
+    //   setFavourites: (state, action) => {
+    //     var array = [];
+    //     array = JSON.parse(localStorage.getItem("favourites")) || [];
+    //     const isItemExist = array.find(
+    //       (item) => item?._id === action.payload._id
+    //     );
+    //     if (isItemExist) {
+    //       const result = array.filter((item) => item?._id !== action.payload._id);
+    //       array = result;
+    //       state.favourites = array;
+    //       localStorage.setItem("favourites", JSON.stringify(array));
+    //     } else {
+    //       array = [action.payload, ...array];
+    //       state.favourites = array;
+    //       localStorage.setItem("favourites", JSON.stringify(array));
+    //     }
+    //   },
+    //   stateFavourites: (state, action) => {
+    //     state.favourites = localStorage.getItem("favourites")
+    //       ? JSON.parse(localStorage.getItem("favourites"))
+    //       : [];
+    //   },
 
     setSelectionArray: (state, action) => {
       state.agentSelectedActivities = action.payload;
@@ -94,34 +96,45 @@ const agentExcursionSlice = createSlice({
     addToCart: (state, action) => {
       var excursionArray = [];
       var selectedArray = action.payload;
-      excursionArray = JSON.parse(localStorage.getItem("agentExcursionCart")) || [];
-      console.log('excursion array:',excursionArray);
+      excursionArray =
+        JSON.parse(localStorage.getItem("agentExcursionCart")) || [];
+      console.log("excursion array:", excursionArray);
       // merge two array
-      let data = [...selectedArray,...excursionArray]
+      let data = [...selectedArray, ...excursionArray];
 
-      let array = []
-      let uniqueObj = {}
-      for(let i in data) {
-        let id = data[i]['_id']
-        uniqueObj[id] = data[i]
+      let array = [];
+      let uniqueObj = {};
+      for (let i in data) {
+        let id = data[i]["_id"];
+        uniqueObj[id] = data[i];
       }
 
       // unique object of array
-      for(let i in uniqueObj) {
-        array.push(uniqueObj[i])
+      for (let i in uniqueObj) {
+        array.push(uniqueObj[i]);
       }
 
-      localStorage.setItem("agentExcursionCart", JSON.stringify(array))
+      localStorage.setItem("agentExcursionCart", JSON.stringify(array));
 
       state.agentExcursionCart =
         JSON.parse(localStorage.getItem("agentExcursionCart")) || [];
     },
     removeFromCart: (state, action) => {
       state.agentExcursionCart = state.agentExcursionCart.filter((item) => {
-        return item._id !== action.payload
-      })
-      localStorage.setItem("agentExcursionCart", JSON.stringify(state.agentExcursionCart))
-    }
+        return item._id !== action.payload;
+      });
+      localStorage.setItem(
+        "agentExcursionCart",
+        JSON.stringify(state.agentExcursionCart)
+      );
+    },
+    emptyCart: (state, action) => {
+      state.agentExcursionCart = [];
+      localStorage.setItem(
+        "agentExcursionCart",
+        JSON.stringify(state.agentExcursionCart)
+      );
+    },
   },
   extraReducers: {
     [getAgentExcursion.fulfilled]: (state, action) => {
@@ -154,6 +167,7 @@ export const {
   setSelectionArray,
   addToCart,
   removeFromCart,
+  emptyCart,
 } = agentExcursionSlice.actions;
 
 export default agentExcursionSlice.reducer;

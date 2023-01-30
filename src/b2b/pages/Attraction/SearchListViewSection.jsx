@@ -1,9 +1,8 @@
 import React from 'react'
-// import NearbyDestinations from '../../data/NearbyDestinations'
-import { AiFillHeart, AiFillStar, AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai'
+import { AiFillHeart, AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai'
 import { TiTick } from 'react-icons/ti'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Rating from '../../../components/Rating/Rating'
 import { setFavourites } from '../../../redux/slices/excursionSlice'
 import priceConversion from '../../../utils/PriceConversion'
@@ -11,6 +10,8 @@ import priceConversion from '../../../utils/PriceConversion'
 function SearchListViewSection() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location = useLocation()
+    const date = new URLSearchParams(location.search).get('date')
 
     const { agentExcursions } = useSelector(state => state.agentExcursions)
     const { favourites } = useSelector(state => state.excursion)
@@ -36,7 +37,7 @@ function SearchListViewSection() {
                                 title: item?.title,
                                 image: item?.images[0]
                             })
-                            navigate(`/b2b/attractions/details/${item?._id}`)
+                            navigate(`/b2b/attractions/details/${item?._id}?date=${date}`)
                         }}>
                             <div className=' relative space-y-3'>
                                 <div className='overflow-hidden rounded-2xl '>

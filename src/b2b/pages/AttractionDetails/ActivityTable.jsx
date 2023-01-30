@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { IoMdCart } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { setActivities, setSelectionArray } from '../../../redux/slices/agentExcursionSlice';
 import priceConversion from '../../../utils/PriceConversion'
+
 
 function ActivityTable({ item, index }) {
     const [price, setPrice] = useState(0)
     const dispatch = useDispatch()
+    const location = useLocation()
+    const date = new URLSearchParams(location.search).get('date')
 
     const { agentRecievedActivities } = useSelector(state => state.agentExcursions)
     const { selectedCurrency } = useSelector(state => state.home)
@@ -30,11 +34,20 @@ function ActivityTable({ item, index }) {
             }
         }
         setPrice(sum)
-        dispatch(setActivities({
-            value: sum,
-            name: "price",
-            index,
-        }))
+        dispatch(setActivities(
+            {
+                value: sum,
+                name: "price",
+                index,
+            },
+        ))
+        dispatch(setActivities(
+            {
+                value: date,
+                name: "date",
+                index,
+            },
+        ))
     }, [item.adult, item.child, item.infant, agentRecievedActivities, dispatch])
 
     useEffect(() => {
@@ -51,11 +64,11 @@ function ActivityTable({ item, index }) {
             <td className='py-3 px-1 max-w-[13em] w-[13em] space-x-2 '>
                 <span className=''>
 
-                     <input type='checkbox' className=''
+                    <input type='checkbox' className=''
                         name='isChecked'
                         checked={item?.isChecked}
                         onChange={(e) => handleChange({ value: e.target.checked, name: e.target.name, index })}
-                    /> 
+                    />
                 </span>
                 <span className=''>
                     {item?.name}
@@ -65,7 +78,7 @@ function ActivityTable({ item, index }) {
                 <input type='date' className=''
                     name='date'
                     value={item.date}
-                    onChange={(e) => handleChange({ value: e.target.value , name: e.target.name, index })}
+                // onChange={(e) => handleChange({ value: e.target.value , name: e.target.name, index })}
                 />
             </td>
             <td className='py-3 px-1 '>
@@ -119,7 +132,7 @@ function ActivityTable({ item, index }) {
                 </select>
             </td>
             <td className='py-3 px-1 min-w-[4em] pl-5'>
-                <h2 className='font-medium'>{priceConversion(price, selectedCurrency,true)}</h2>
+                <h2 className='font-medium'>{priceConversion(price, selectedCurrency, true)}</h2>
                 {/* <div className='relative'>
                     <input type='checkbox'
                         className='peer absolute top-0 inset-x-0 w-full h-6 opacity-0  cursor-pointer'

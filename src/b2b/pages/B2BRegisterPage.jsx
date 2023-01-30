@@ -12,9 +12,10 @@ import { logoPng } from '../../static/imagesB2B'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from '../../axios.js'
 import { setAgent, setRegisterAgent } from '../../redux/slices/agentSlice'
-import { BtnLoader } from '../components'
+import { BtnLoader, InfoModal } from '../components'
 import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { BiHide, BiShow } from 'react-icons/bi'
 
 function B2BRegisterPage() {
   const navigate = useNavigate()
@@ -44,6 +45,10 @@ function B2BRegisterPage() {
     whatsappNumber: '',
     password: '',
   })
+  const [showPassword, setShowPasword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [info, setInfo] = useState(false)
+  const [result, setResult] = useState({})
 
   const { countries } = useSelector(state => state.home)
 
@@ -62,20 +67,23 @@ function B2BRegisterPage() {
     try {
       e.preventDefault();
       setError('')
-        if (data.password !== confirmPassword) {
-          setError('password you have entered is not similiar')
-        }
+      if (data.password !== confirmPassword) {
+        setError('password you have entered is not similiar')
+      }
       if (data.password === confirmPassword) {
         setIsLoading(true);
 
         const response = await axios.post("/b2b/resellers/auth/signup", data);
         dispatch(setRegisterAgent(response.data));
+        setResult(response.data)
         setIsLoading(false);
         Swal.fire({
-          icon : 'success',
+          icon: 'success',
           title: 'Successfully Regsitered',
           text: 'You should wait until allow approve',
+          timer: 1000,
         })
+        setInfo(true)
       }
     } catch (err) {
       setError(
@@ -100,328 +108,391 @@ function B2BRegisterPage() {
       <div className='bg-white lg:rounded-xl px-10 py-5'>
         <div className='flex justify-center pb-5 border-b'>
           <img src={logoPng} alt='logo' className='h-[65px]'
-          onClick={() => navigate('/')}
-           />
+            onClick={() => navigate('/')}
+          />
         </div>
         <form onSubmit={handleSubmit}>
           <div className='lg:grid grid-cols-12 gap-0 pt-4'>
-            <div className='1 col-span-7 text-darktext space-y-2 text-sm'>
+            {!info ? (
+              <div className='1 col-span-7 text-darktext space-y-2 text-sm'>
 
-              <ol className="relative  border-l border-gray-200 ">
-                <li className={`mb-10 ml-6 ${register.comapny ? 'h-full' : 'h-6'} overflow-hidden `}>
-                  <span className={`absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 ring-4 ring-white ${register.comapny ? "bg-green-200" : "bg-gray-100"} `}
-                    onClick={() => setRegister({
-                      comapny: true,
-                      profile: false,
-                      password: false
-                    })}>
-                    {register.comapny ? (
-                      <svg aria-hidden="true" className="w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
-                    ) : (
-                      <svg aria-hidden="true" className="w-5 h-5 text-gray-500 lg:w-6 lg:h-6 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path><path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd"></path></svg>
-                    )}
-                  </span>
-                  <div className='cursor-pointer'
-                    onClick={() => setRegister({
-                      comapny: true,
-                      profile: false,
-                      password: false
-                    })}>
-                    <h2 className='text-[15px] uppercase font-semibold tracking-wide space-x-2 flex pt-2'>
-                      <span className=''><GiFactory /> </span>
-                      <span className=''>Company Details</span>
-                    </h2>
-                  </div>
-
-                  <div className='lg:grid grid-cols-2 space-y-2 lg:space-y-0 gap-[10px] pt-3'>
-                    <div className=''>
-                      <label className='label'>Travel Agency Name</label>
-                      <input className='input'
-                        type='text'
-                        placeholder='Ex: TravellerChoice'
-                        name='companyName'
-                        value={data.companyName}
-                        onChange={onChangeHandler}
-                        required
-                      />
-                    </div>
-                    <div className=''>
-                      <label className='label'>Address</label>
-                      <input className='input'
-                        type='text'
-                        placeholder='Ex: Tc, North california'
-                        name='address'
-                        value={data.address}
-                        onChange={onChangeHandler}
-                        required
-                      />
+                <ol className="relative  border-l border-gray-200 ">
+                  <li className={`mb-10 ml-6 ${register.comapny ? 'h-full' : 'h-6'} overflow-hidden `}>
+                    <span className={`absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 ring-4 ring-white ${register.comapny ? "bg-green-200" : "bg-gray-100"} `}
+                      onClick={() => setRegister({
+                        comapny: true,
+                        profile: false,
+                        password: false
+                      })}>
+                      {register.comapny ? (
+                        <svg aria-hidden="true" className="w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
+                      ) : (
+                        <svg aria-hidden="true" className="w-5 h-5 text-gray-500 lg:w-6 lg:h-6 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path><path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd"></path></svg>
+                      )}
+                    </span>
+                    <div className='cursor-pointer'
+                      onClick={() => setRegister({
+                        comapny: true,
+                        profile: false,
+                        password: false
+                      })}>
+                      <h2 className='text-[15px] uppercase font-semibold tracking-wide space-x-2 flex pt-2'>
+                        <span className=''><GiFactory /> </span>
+                        <span className=''>Company Details</span>
+                      </h2>
                     </div>
 
-                    <div className=''>
-                      <label className='label'>Website</label>
-                      <input className='input'
-                        type='text'
-                        placeholder='Ex: TravellerChoice.ae'
-                        name='website'
-                        value={data.website}
-                        onChange={onChangeHandler} />
-                    </div>
-                    <div className=''>
-                      <label className='label'>Country</label>
-                      <select className='select'
-                        name='country'
-                        value={data.country}
-                        onChange={onChangeHandler}
-                        required
-                      >
-                        <option className='text-text' hidden>select country</option>
-                        {countries?.map((item, index) => (
-                          <option className='capitalize' value={item?._id} key={index}>{item?.countryName} </option>
-                        ))}
-                      </select>
-                    </div>
-                    {data.country === "63ac33ecff04e5652a2583f5" && (
-                      <>
+                    <div className='lg:grid grid-cols-2 space-y-2 lg:space-y-0 gap-[10px] pt-3'>
+                      <div className=''>
+                        <label className='label'>Travel Agency Name</label>
+                        <input className='input'
+                          type='text'
+                          placeholder='Ex: TravellerChoice'
+                          name='companyName'
+                          value={data.companyName}
+                          onChange={onChangeHandler}
+
+                        />
+                      </div>
+                      <div className=''>
+                        <label className='label'>Address</label>
+                        <input className='input'
+                          type='text'
+                          placeholder='Ex: Tc, North california'
+                          name='address'
+                          value={data.address}
+                          onChange={onChangeHandler}
+
+                        />
+                      </div>
+
+                      <div className=''>
+                        <label className='label'>Website</label>
+                        <input className='input'
+                          type='text'
+                          placeholder='Ex: TravellerChoice.ae'
+                          name='website'
+                          value={data.website}
+                          onChange={onChangeHandler} />
+                      </div>
+                      <div className=''>
+                        <label className='label'>Country</label>
+                        <select className='select'
+                          name='country'
+                          value={data.country}
+                          onChange={onChangeHandler}
+
+                        >
+                          <option className='text-text' hidden>select country</option>
+                          {countries?.map((item, index) => (
+                            <option className='capitalize' value={item?._id} key={index}>{item?.countryName} </option>
+                          ))}
+                        </select>
+                      </div>
+                      {data.country === "63ac33ecff04e5652a2583f5" && (
+                        <>
+                          <div className=''>
+                            <label className='label'>TRN Number</label>
+                            <input
+                              className='input'
+                              type='number'
+                              placeholder='Ex: Dubai'
+                              name='trnNumber'
+                              value={data.trnNumber}
+                              onChange={onChangeHandler}
+                            />
+                          </div>
+
+                          <div className=''>
+                            <label className='label'>Company Registration Number</label>
+                            <input className='input'
+                              type='number'
+                              placeholder='Ex: Dubai'
+                              name='companyRegistration'
+                              value={data.companyRegistration}
+                              onChange={onChangeHandler}
+                            />
+                          </div>
+                        </>
+                      )}
+
+                      <div className=''>
+                        <label className='label'>City</label>
+                        <input className='input'
+                          type='text'
+                          placeholder='Ex: Dubai'
+                          name='city'
+                          value={data.city}
+                          onChange={onChangeHandler} />
+                      </div>
+                      {data.country !== "63ac33ecff04e5652a2583f5" && (
                         <div className=''>
-                          <label className='label'>TRN Number</label>
-                          <input
-                            className='input'
-                            type='number'
-                            placeholder='Ex: Dubai'
-                            name='trnNumber'
-                            value={data.trnNumber}
-                            onChange={onChangeHandler}
-                          />
-                        </div>
-
-                        <div className=''>
-                          <label className='label'>Company Registration Number</label>
+                          <label className='label'>Zip Code</label>
                           <input className='input'
                             type='number'
-                            placeholder='Ex: Dubai'
-                            name='companyRegistration'
-                            value={data.companyRegistration}
-                            onChange={onChangeHandler}
+                            placeholder=''
+                            name='zipCode'
+                            value={data.zipCode}
+                            onChange={onChangeHandler} />
+                        </div>
+                      )}
+                    </div>
+                  </li>
+                  <li className={`mb-10 ml-6 ${register.profile ? 'h-full' : 'h-8'} overflow-hidden `}>
+                    <span className={`absolute flex items-center justify-center w-8 h-8  rounded-full -left-4 ring-4 ring-white ${register.profile ? "bg-green-200" : "bg-gray-100"}`}
+                      onClick={() => setRegister({
+                        comapny: false,
+                        profile: true,
+                        password: false
+                      })}>
+                      {register.profile ? (
+                        <svg aria-hidden="true" className="w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
+                      ) : (
+                        <svg aria-hidden="true" className="w-5 h-5 text-gray-500 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 4h3a3 3 0 006 0h3a2 2 0 012 2v9a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm2.5 7a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm2.45 4a2.5 2.5 0 10-4.9 0h4.9zM12 9a1 1 0 100 2h3a1 1 0 100-2h-3zm-1 4a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
+                      )}
+                    </span>
+                    <div className='pt-2 cursor-pointer'
+                      onClick={() => setRegister({
+                        comapny: false,
+                        profile: true,
+                        password: false
+                      })}>
+                      <h2 className='text-[15px] uppercase font-semibold tracking-wide space-x-2 flex'>
+                        <span className=''><GoPerson /> </span>
+                        <span className=''>Profile Details</span>
+                      </h2>
+                    </div>
+
+                    <div className='lg:grid grid-cols-2 gap-[10px] space-y-2 lg:space-y-0 pt-2'>
+                      <div className=''>
+                        <label className='label'>Agent Name</label>
+                        <input className='input'
+                          type='text'
+                          placeholder='Ex: Name'
+                          name='name'
+                          value={data.name}
+                          onChange={onChangeHandler}
+
+                        />
+                      </div>
+                      <div className=' flex space-x-1'>
+                        <div className='w-3/12'>
+                          <label className='label'>Code</label>
+                          <input className='input'
+                            value={country?.map((item) => item?.phonecode) || ''}
+                            readOnly
                           />
                         </div>
-                      </>
-                    )}
+                        <div className='w-9/12'>
+                          <label className='label'>Number</label>
+                          <input className='input no-spinner'
+                            type='number'
+                            placeholder='Ex: 0000000000'
+                            name='phoneNumber'
+                            value={data.phoneNumber}
+                            onChange={onChangeHandler}
 
-                    <div className=''>
-                      <label className='label'>City</label>
-                      <input className='input'
-                        type='text'
-                        placeholder='Ex: Dubai'
-                        name='city'
-                        value={data.city}
-                        onChange={onChangeHandler} />
-                    </div>
-                    {data.country !== "63ac33ecff04e5652a2583f5" && (
+                          />
+                        </div>
+                      </div>
+
+                      <div className=' flex space-x-1'>
+                        <div className='w-3/12'>
+                          <label className='label'>Code</label>
+                          <input className='select'
+                            value={country?.map((item) => item?.phonecode) || ''}
+                            readOnly
+                          />
+                        </div>
+                        <div className='w-9/12'>
+                          <label className='label'> Telephone Number</label>
+                          <input className='input no-spinner'
+                            type='number'
+                            placeholder='Ex: 0000000000'
+                            name='telephoneNumber'
+                            value={data.telephoneNumber}
+                            onChange={onChangeHandler} />
+                        </div>
+                      </div>
                       <div className=''>
-                        <label className='label'>Zip Code</label>
+                        <label className='label'>Email</label>
                         <input className='input'
-                          type='number'
-                          placeholder=''
-                          name='zipCode'
-                          value={data.zipCode}
-                          onChange={onChangeHandler} />
-                      </div>
-                    )}
-                  </div>
-                </li>
-                <li className={`mb-10 ml-6 ${register.profile ? 'h-full' : 'h-8'} overflow-hidden `}>
-                  <span className={`absolute flex items-center justify-center w-8 h-8  rounded-full -left-4 ring-4 ring-white ${register.profile ? "bg-green-200" : "bg-gray-100"}`}
-                    onClick={() => setRegister({
-                      comapny: false,
-                      profile: true,
-                      password: false
-                    })}>
-                    {register.profile ? (
-                      <svg aria-hidden="true" className="w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
-                    ) : (
-                      <svg aria-hidden="true" className="w-5 h-5 text-gray-500 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 4h3a3 3 0 006 0h3a2 2 0 012 2v9a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm2.5 7a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm2.45 4a2.5 2.5 0 10-4.9 0h4.9zM12 9a1 1 0 100 2h3a1 1 0 100-2h-3zm-1 4a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
-                    )}
-                  </span>
-                  <div className='pt-2 cursor-pointer'
-                    onClick={() => setRegister({
-                      comapny: false,
-                      profile: true,
-                      password: false
-                    })}>
-                    <h2 className='text-[15px] uppercase font-semibold tracking-wide space-x-2 flex'>
-                      <span className=''><GoPerson /> </span>
-                      <span className=''>Profile Details</span>
-                    </h2>
-                  </div>
-
-                  <div className='lg:grid grid-cols-2 gap-[10px] space-y-2 lg:space-y-0 pt-2'>
-                    <div className=''>
-                      <label className='label'>Agent Name</label>
-                      <input className='input'
-                        type='text'
-                        placeholder='Ex: Name'
-                        name='name'
-                        value={data.name}
-                        onChange={onChangeHandler}
-                        required
-                      />
-                    </div>
-                    <div className=' flex space-x-1'>
-                      <div className='w-3/12'>
-                        <label className='label'>Code</label>
-                        <input className='input'
-                          value={country?.map((item) => item?.phonecode) || ''}
-                          readOnly
-                        />
-                      </div>
-                      <div className='w-9/12'>
-                        <label className='label'>Number</label>
-                        <input className='input'
-                          type='number'
-                          placeholder='Ex: 0000000000'
-                          name='phoneNumber'
-                          value={data.phoneNumber}
+                          type='email'
+                          placeholder='Ex: example@email.com'
+                          name='email'
+                          value={data.email}
                           onChange={onChangeHandler}
-                          required
-                        />
-                      </div>
-                    </div>
 
-                    <div className=' flex space-x-1'>
-                      <div className='w-3/12'>
-                        <label className='label'>Code</label>
-                        <input className='select'
-                          value={country?.map((item) => item?.phonecode) || ''}
-                          readOnly
                         />
                       </div>
-                      <div className='w-9/12'>
-                        <label className='label'> Telephone Number</label>
+
+                      <div className=''>
+                        <label className='label'>Designation</label>
                         <input className='input'
-                          type='number'
-                          placeholder='Ex: 0000000000'
-                          name='telephoneNumber'
-                          value={data.telephoneNumber}
+                          type='text'
+                          placeholder='Designation'
+                          name='designation'
+                          value={data.designation}
                           onChange={onChangeHandler} />
                       </div>
-                    </div>
-                    <div className=''>
-                      <label className='label'>Email</label>
-                      <input className='input'
-                        type='email'
-                        placeholder='Ex: example@email.com'
-                        name='email'
-                        value={data.email}
-                        onChange={onChangeHandler}
-                        required
-                      />
-                    </div>
+                      <div className=''>
+                        <label className='label'>Skype Id</label>
+                        <input className='input'
+                          type='text'
+                          placeholder='skypeid'
+                          name='skypeId'
+                          value={data.skypeId}
+                          onChange={onChangeHandler} />
+                      </div>
 
-                    <div className=''>
-                      <label className='label'>Designation</label>
-                      <input className='input'
-                        type='text'
-                        placeholder='Designation'
-                        name='designation'
-                        value={data.designation}
-                        onChange={onChangeHandler} />
-                    </div>
-                    <div className=''>
-                      <label className='label'>Skype Id</label>
-                      <input className='input'
-                        type='text'
-                        placeholder='skypeid'
-                        name='skypeId'
-                        value={data.skypeId}
-                        onChange={onChangeHandler} />
-                    </div>
+                      <div className=''>
+                        <label className='label'>Whatsapp</label>
+                        <input className='input no-spinner'
+                          type='number'
+                          placeholder='Ex: 000000000'
+                          name='whatsappNumber'
+                          value={data.whatsappNumber}
+                          onChange={onChangeHandler}
+                        />
+                      </div>
 
-                    <div className=''>
-                      <label className='label'>Whatsapp</label>
-                      <input className='input'
-                        type='number'
-                        placeholder='Ex: 000000000'
-                        name='whatsappNumber'
-                        value={data.whatsappNumber}
-                        onChange={onChangeHandler}
-                        required />
                     </div>
+                  </li>
+                  <li className={`mb-10 ml-6 ${register.password ? 'h-full' : 'h-8'} overflow-hidden `}>
+                    <span className={`absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 ring-4 ring-white ${register.password ? "bg-green-200" : "bg-gray-100"} `}
+                      onClick={() => setRegister({
+                        comapny: false,
+                        profile: false,
+                        password: true
+                      })}>
+                      {register.password ? (
+                        <svg aria-hidden="true" className="w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
+                      ) : (
+                        <svg aria-hidden="true" className="w-5 h-5 text-gray-500 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd"></path></svg>
+                      )}
+                    </span>
+                    <div className='pt-2 cursor-pointer'
+                      onClick={() => setRegister({
+                        comapny: false,
+                        profile: false,
+                        password: true
+                      })}>
+                      <h2 className='text-[15px] uppercase font-semibold tracking-wide space-x-2 flex'>
+                        <span className=''><FaLock /> </span>
+                        <span className=''>Password Settings</span>
+                      </h2>
+                    </div>
+                    <div className='lg:grid grid-cols-2 gap-[10px] space-y-2 lg:space-y-0 pt-2'>
+                      <div className=''>
+                        <label className='label'>Password</label>
+                        <div className='relative text-gray-400 focus-within:text-gray-600'>
+                          <p className='pointer-events-none text-2xl absolute top-1/2 transform -translate-y-1/2 right-3'
+                            onClick={() => setShowPasword(!showPassword)}
+                          >
+                            {showPassword ? <BiShow /> : <BiHide />}
+                          </p>
+                          <input className='input'
+                            type={showPassword ? "text" : "password"}
+                            placeholder='***********'
+                            name='password'
+                            value={data.password}
+                            onChange={onChangeHandler}
+                            required
+                          />
+                        </div>
+                      </div>
 
-                  </div>
-                </li>
-                <li className={`mb-10 ml-6 ${register.password ? 'h-full' : 'h-8'} overflow-hidden `}>
-                  <span className={`absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 ring-4 ring-white ${register.password ? "bg-green-200" : "bg-gray-100"} `}
-                    onClick={() => setRegister({
-                      comapny: false,
-                      profile: false,
-                      password: true
-                    })}>
-                    {register.password ? (
-                      <svg aria-hidden="true" className="w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
-                    ) : (
-                      <svg aria-hidden="true" className="w-5 h-5 text-gray-500 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd"></path></svg>
-                    )}
+                      <div className=''>
+                        <label className='label'>Confirm Password</label>
+                        <div className='relative text-gray-400 focus-within:text-gray-600'>
+                          <p className='pointer-events-none text-2xl absolute top-1/2 transform -translate-y-1/2 right-3'
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          >
+                            {showConfirmPassword ? <BiShow /> : <BiHide />}
+                          </p>
+                          <input className='input'
+                            type={showConfirmPassword ? "text" : "password"}
+                            placeholder='***********'
+                            name='confirmPassword'
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                          />
+                        </div>
+                      </div>
+
+                    </div>
+                    <div className='pt-3 flex justify-end'>
+                      <button className='text-sm font-medium text-light bg-lightblue w-[100px] py-2 rounded'>
+                        {isLoading ? <BtnLoader /> : 'Signup'}
+                      </button>
+                    </div>
+                  </li>
+                </ol>
+                <div className={`${register.password === true && 'hidden'} flex justify-end`}>
+                  <span className='flex justify-center items-center text-sm font-medium text-light bg-lightblue w-[100px] py-2 rounded cursor-pointer'
+                    onClick={() => {
+                      if (register.comapny === true) {
+                        setRegister({ comapny: false, profile: true, password: false })
+                      }
+                      if (register.profile === true) {
+                        setRegister({ comapny: false, profile: false, password: true })
+                      }
+
+                    }}
+                  >
+                    Next
                   </span>
-                  <div className='pt-2 cursor-pointer'
-                    onClick={() => setRegister({
-                      comapny: false,
-                      profile: false,
-                      password: true
-                    })}>
-                    <h2 className='text-[15px] uppercase font-semibold tracking-wide space-x-2 flex'>
-                      <span className=''><FaLock /> </span>
-                      <span className=''>Password Settings</span>
-                    </h2>
-                  </div>
-                  <div className='lg:grid grid-cols-2 gap-[10px] space-y-2 lg:space-y-0 pt-2'>
-                    <div className=''>
-                      <label className='label'>Password</label>
-                      <input className='input'
-                        type='password'
-                        placeholder='***********'
-                        name='password'
-                        value={data.password}
-                        onChange={onChangeHandler}
-                        required
-                      />
-                    </div>
-
-                    <div className=''>
-                      <label className='label'>Confirm Password</label>
-                      <input className='input'
-                        type='password'
-                        placeholder='***********'
-                        name='confirmPassword'
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                      />
-                    </div>
-
-                  </div>
-                  <div className='pt-3'>
-                    <button className='text-sm font-medium text-light bg-lightblue w-[100px] py-2 rounded'>
-                      {isLoading ? <BtnLoader /> : 'Signup'}
-                    </button>
-                  </div>
-                </li>
-              </ol>
-              {error && (
-                <div className='flex justify-center'>
-                  <p className='text-main text-xs capitalize'>{error} </p>
                 </div>
-              )}
+                {error && (
+                  <div className='flex justify-center'>
+                    <p className='text-main text-xs capitalize'>{error} </p>
+                  </div>
+                )}
 
-              <div className=''>
-                <p className="text-sm font-semibold mt-2 pt-1 mb-0">
-                  Already have an account?
-                  <Link
-                    to="/b2b/login"
-                    className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
-                  >Login</Link>
-                </p>
+                <div className=''>
+                  <p className="text-sm font-semibold mt-2 pt-1 mb-0">
+                    Already have an account?
+                    <Link
+                      to="/b2b/login"
+                      className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+                    >
+                      Login
+                    </Link>
+                  </p>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className='col-span-7 text-darktext space-y-2 text-sm'>
+                <div className='flex justify-center mt-4'>
+                  <h3 className='text-xl font-[700] text-green-700 uppercase'>Thank You for registering our B2B Portal</h3>
+                </div>
+                <div className=' mx-10 space-y-2'>
+                  <p className=''>You will be allowed to access the business portal only after getting confirmation from the managemant side.</p>
+                  <p className=''>Please wait until you get confirmation email.Then proceed to login our B2B portal.</p>
+                  <p className=''> You will be only allowed to access this email for another registraion either access confirmation from management side nor rejection from the management side </p>
+                </div>
+                <div className='text-center py-7'>
+                  <h4 className='uppercase text-text font-[700]'>Your Agent Code is</h4>
+                  <p className='text-green-700 font-[700]'>{result?.data?.agentCode} </p>
+                </div>
+                <div className='mx-10 bg-gray-200 p-6 text-gray-500 space-y-1'>
+                  <p className=''>Please save this for further login purposes. You can access other details from the corresponding email you have provided</p>
+                  <p className=''>You can move to
+                    <Link
+                      to="/b2b/login">
+                      <span className='text-main font-[550] cursor-pointer'>Login</span>
+                    </Link> from here.Click!! </p>
+                  <div className='flex justify-end'>
+                    <p className='text-lightblue font-[550] cursor-pointer' 
+                    onClick={() => {
+                      setInfo(false)
+                    }}>Reregister</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className='2 col-span-5 text-darktext space-y-4 lg:mx-3 lg:p-5 text-sm lg:border-l'>
 
               <div className=''>

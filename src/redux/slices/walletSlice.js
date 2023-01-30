@@ -19,7 +19,6 @@ export const getWalletBalance = createAsyncThunk(
         },
       }
     );
-      console.log(response.data);
       return response.data;
     } else {
       throw Error("cant find Wallet balance");
@@ -39,7 +38,6 @@ export const getTransaction = createAsyncThunk(
         },
       }
     );
-      console.log(response.data);
       return response.data;
     } else {
       throw Error("cant find Transactions");
