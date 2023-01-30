@@ -46,7 +46,7 @@ export default function Header({ setSidebarView, sidebarView }) {
                     <div className="text-xl" onClick={() => setSidebarView(true)}>
                         <GrMenu />
                     </div>
-                    <div className="lg:ml-[250px] capitalize text-lg font-[700] tracking-wide text-gray-500">
+                    <div className="lg:ml-[250px] uppercase text-sm font-[700] tracking-wide text-gray-500">
                         {agent?.companyName}
                     </div>
                     </div>

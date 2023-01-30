@@ -87,9 +87,9 @@ function OtpModal({ setOtpModal, orderId }) {
   }
 
   return (
-    <div className='lightglass fixed top-0 bottom-0 right-0 left-0 flex justify-center items-center z-10'>
-      <div className='bg-white text-darktext w-3/12'>
-        <div className='flex justify-end p-2'>
+    <div className='lightglass fixed top-0 bottom-0 right-0 left-0 lg:flex justify-center items-center z-10'>
+      <div className='absolute lg:static  bottom-0 bg-white text-darktext w-full lg:w-3/12 rounded-t-3xl lg:rounded-t-none'>
+        <div className='flex justify-end p-5 lg:p-2'>
           <button className=' text-2xl'
             onClick={() => setOtpModal(false)}
           >
