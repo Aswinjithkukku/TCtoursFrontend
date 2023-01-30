@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchMarkups,  } from '../../../redux/slices/markupSlice'
+import { fetchMarkups, clearMarkups  } from '../../../redux/slices/markupSlice'
 import MarkupListSingleRow from './MarkupListSingleRow'
 
 function MarkUpList() {
@@ -12,9 +12,13 @@ function MarkUpList() {
 
   useEffect(() => {
     dispatch(fetchMarkups(search))
+    console.log("hi");
   }, [dispatch,search])
-
-  // console.log(markups);
+  useEffect(() => {
+    return () => {
+      dispatch(clearMarkups())
+    }
+  },[])
 
   return (
     <>

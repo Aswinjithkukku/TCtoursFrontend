@@ -42,12 +42,22 @@ export default function Header({ setSidebarView, sidebarView }) {
             ></div>
             <div className="sticky top-0 w-full bg-white h-[70px] px-5 z-10">
                 <div className="h-full flex items-center justify-between">
+                    <div className="">
                     <div className="text-xl" onClick={() => setSidebarView(true)}>
                         <GrMenu />
                     </div>
+                    <div className="lg:ml-[250px] capitalize text-lg font-[700] tracking-wide text-gray-500">
+                        {agent?.companyName}
+                    </div>
+                    </div>
+                    <div className="md:block hidden">
+                        <div className="border lg:w-[500px] h-[50px] text-darktext shadow-sm bg-gray-100 rounded-[.25rem] p-1">
+                            <p className="text-xs  text-lightblue">Notice board comes here</p>
+                        </div>
+                    </div>
+                    
                     <div className="h-full">
                         <div className="relative h-full flex">
-
                             <div
                                 ref={currencyRef}
                                 className="flex space-x-1 items-center cursor-pointer relative mr-4"

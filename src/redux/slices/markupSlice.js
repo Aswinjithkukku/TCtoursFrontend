@@ -68,6 +68,9 @@ const markupSlice = createSlice({
       setAgentMarkup: (state, action) => {
           state.agentMarkup = action.payload;
       },
+      clearMarkups: (state, action) => {
+        state.markups = []
+      }
   },
   extraReducers: {
     [fetchMarkups.fulfilled]: (state, action) => {
@@ -92,6 +95,6 @@ const markupSlice = createSlice({
 });
 
 
-export const {setClientMarkup, setAgentMarkup } = markupSlice.actions;
+export const {setClientMarkup, setAgentMarkup, clearMarkups } = markupSlice.actions;
 
 export default markupSlice.reducer;
