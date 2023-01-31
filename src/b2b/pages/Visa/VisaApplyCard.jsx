@@ -4,8 +4,11 @@ import { BsFillPersonFill, BsPhone } from 'react-icons/bs'
 import { FaChild, FaWpforms } from 'react-icons/fa'
 import { IoIosMan } from 'react-icons/io'
 import { MdPeopleAlt } from 'react-icons/md'
+import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 
 function VisaApplyCard() {
+    const navigate = useNavigate()
     return (
         <>
             <div className=''>
@@ -71,7 +74,8 @@ function VisaApplyCard() {
                             </div>
                             <div className='flex justify-center font-medium lg:justify-end px-2 py-2 text-lg text-lightblue'>AED 0.00</div>
                             <div className='flex justify-end px-2 my-3 text-lg text-lightblue'>
-                                <button className='bg-blue w-full lg:w-auto text-light px-2 py-1 rounded-md'>Submit</button>
+                                <button className='bg-blue w-full lg:w-auto text-light px-2 py-1 rounded-md'
+                                onClick={() => navigate('/b2b/visa/apply')}>Submit</button>
                             </div>
                         </div>
                     </div>
@@ -110,7 +114,7 @@ function VisaApplyCard() {
                                 </div>
                             </div>
                             <div className='flex justify-end px-2 my-3 text-lg text-lightblue'>
-                                <button className='bg-blue text-light px-2 py-1 rounded-md'>Submit</button>
+                                    <button className='bg-blue text-light px-2 py-1 rounded-md'>Submit</button>
                             </div>
                         </div>
                     </div>

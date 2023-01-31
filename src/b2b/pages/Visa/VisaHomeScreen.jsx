@@ -35,7 +35,7 @@ function VisaHomeScreen() {
           <div className="bg-white rounded shadow-sm">
 
 
-            <div className={`fixed  w-full bg-light rounded-t-2xl transition-all duration-500 ${viewCard ? '-bottom-full' : 'bottom-0'}  z-20 px-10 py-8 lg:hidden`}>
+            <div className={`fixed  left-0 right-0 bg-light rounded-t-2xl transition-all duration-500 ${viewCard ? '-bottom-full' : 'bottom-0'}  z-20 px-10 py-8 lg:hidden`}>
               <button className='bg-blue text-light w-full rounded-lg py-2' onClick={() => setViewCard(!viewCard)}>Apply Online</button>
             </div>
             {/* <div className='visabanner object-cover bg-center h-[40vh]'>

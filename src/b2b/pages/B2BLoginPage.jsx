@@ -107,17 +107,17 @@ function B2BLoginPage() {
 
                 <div className="mb-6">
                   <div className='relative text-gray-400 focus-within:text-gray-600'>
-                    <p className='pointer-events-none text-2xl absolute top-1/2 transform -translate-y-1/2 right-3'
+                    <p className='text-2xl absolute top-1/2 transform -translate-y-1/2 right-3'
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? <BiShow /> : <BiHide />}
                     </p>
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       className="input"
                       id="exampleFormControlInput2"
                       placeholder="Password"
-                      name='password'
+                      name="password"
                       value={data.password}
                       onChange={handleChange}
                       required

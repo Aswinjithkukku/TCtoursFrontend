@@ -27,15 +27,7 @@ export default function Dashboard() {
                 <h1 className="font-[600] text-[15px] uppercase">
                     Dashboard
                 </h1>
-                <div className="w-full border flex items-center bg-gray-200 text-main rounded-[.25rem]">
-                    <div className=' mx-2 text-gray-600 flex items-center gap-1'>
-                        <p className="text-sm font-[600]">Alert</p>
-                        <p className="text-lg">
-                            <AiFillAlert />
-                        </p>
-                    </div>
-                    <marquee>Alert Content moves here</marquee>
-                </div>
+
                 <div className="text-sm text-grayColor">
                     <Link to="/b2b" className="text-textColor">
                         Dashboard{" "}

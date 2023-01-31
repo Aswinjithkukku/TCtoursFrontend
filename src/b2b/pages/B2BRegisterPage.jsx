@@ -58,8 +58,6 @@ function B2BRegisterPage() {
     })
   }
 
-  console.log(data);
-
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -386,8 +384,11 @@ function B2BRegisterPage() {
                       <div className=''>
                         <label className='label'>Password</label>
                         <div className='relative text-gray-400 focus-within:text-gray-600'>
-                          <p className='pointer-events-none text-2xl absolute top-1/2 transform -translate-y-1/2 right-3'
-                            onClick={() => setShowPasword(!showPassword)}
+                          <p className=' text-2xl absolute top-1/2 transform -translate-y-1/2 right-3'
+                            onClick={() => {
+                              setShowPasword(!showPassword)
+                              console.log('hi');
+                            }}
                           >
                             {showPassword ? <BiShow /> : <BiHide />}
                           </p>
@@ -405,7 +406,7 @@ function B2BRegisterPage() {
                       <div className=''>
                         <label className='label'>Confirm Password</label>
                         <div className='relative text-gray-400 focus-within:text-gray-600'>
-                          <p className='pointer-events-none text-2xl absolute top-1/2 transform -translate-y-1/2 right-3'
+                          <p className=' text-2xl absolute top-1/2 transform -translate-y-1/2 right-3'
                             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                           >
                             {showConfirmPassword ? <BiShow /> : <BiHide />}
@@ -487,7 +488,7 @@ function B2BRegisterPage() {
                     <p className='text-lightblue font-[550] cursor-pointer' 
                     onClick={() => {
                       setInfo(false)
-                    }}>Reregister</p>
+                    }}>Back</p>
                   </div>
                 </div>
               </div>

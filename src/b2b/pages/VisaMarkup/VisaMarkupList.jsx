@@ -1,25 +1,38 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { fetchMarkups, clearMarkups  } from '../../../redux/slices/markupSlice'
-import MarkupListSingleRow from './MarkupListSingleRow'
+import axios from '../../../axios';
+import VisaMarkupListSingleRow from './VisaMarkupListSingleRow'
 
-function MarkUpList() {
-  const dispatch = useDispatch()
+function VisaMarkupList() {
+  const [isLoading, setIsLoading] = useState(false)
+  const [allVisa, setAllVisa] = useState([])
 
-  const [search, setSearch] = useState('')
-  const { markups } = useSelector(state => state.markups)
+  const { token } = useSelector(state => state.agents)
 
-  useEffect(() => {
-    dispatch(fetchMarkups(search))
-    console.log("hi");
-  }, [dispatch,search])
-  useEffect(() => {
-    return () => {
-      dispatch(clearMarkups())
+  const fetchAllVisa = async () => {
+    try {
+      setIsLoading(true);
+      if (token) {
+        const response = await axios.get(`/b2b/visa/list`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+        setIsLoading(false);
+        setAllVisa(response.data || [])
+      }
+    } catch (err) {
+      console.log(err);
+      throw Error("Cant find markups");
     }
-  },[])
+  };
 
+  useEffect(() => {
+    fetchAllVisa()
+  },[])
+  console.log(allVisa);
   return (
     <>
       <div className=' '>
@@ -34,7 +47,7 @@ function MarkUpList() {
             <span>{">"} </span>
             <span>Markups</span>
             <span>{">"} </span>
-            <span>Attraction</span>
+            <span>Visa</span>
           </div>
         </div>
         <div className='p-2 lg:p-6'>
@@ -42,31 +55,25 @@ function MarkUpList() {
             <div className="flex items-center justify-between border-b border-dashed p-4">
               <h1 className="font-medium">Markup Lists</h1>
               <span className='w-[400px]'>
-                <input type="search" 
-                className='input w-full' 
-                placeholder='search!!!!!'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)} />
+                <input type="search"
+                  className='input w-full'
+                  placeholder='search!!!!!' />
               </span>
             </div>
             <div className='overflow-x-auto'>
               <table className="w-full">
                 <thead className="bg-[#f3f6f9] text-grayColor text-[14px] text-left">
                   <tr>
-                    <th className="font-[500] p-3 whitespace-nowrap">Attraction</th>
-                    <th className="font-[500] p-3 whitespace-nowrap">Booking Type</th>
-                    <th className="font-[500] p-3 whitespace-nowrap">Destination</th>
-                    <th className="font-[500] p-3 whitespace-nowrap">Default price</th>
+                    <th className="font-[500] p-3 whitespace-nowrap">Visa Type Name</th>
+                    <th className="font-[500] p-3 whitespace-nowrap">Country</th>
+                    <th className="font-[500] p-3 whitespace-nowrap">Default Price</th>
                     <th className="font-[500] p-3 whitespace-nowrap">Agent MarkUp</th>
                     <th className="font-[500] p-3 whitespace-nowrap">Client MarkUp</th>
                   </tr>
                 </thead>
                 <tbody className="text-sm text-textColor">
-                  {markups?.data?.map((item, index) => (
-                    <MarkupListSingleRow
-                    item={item}
-                    key={index}
-                    />
+                  {allVisa?.map((item,index) => (
+                    <VisaMarkupListSingleRow key={index} item={item} />
                   ))}
                 </tbody>
               </table>
@@ -78,4 +85,4 @@ function MarkUpList() {
   )
 }
 
-export default MarkUpList
+export default VisaMarkupList

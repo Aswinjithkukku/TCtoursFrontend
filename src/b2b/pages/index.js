@@ -15,6 +15,8 @@ import PaymentApproval from "./PaymentApproval/PaymentApproval";
 import SingleSubAgent from "./Resllers/SingleSubAgent";
 import VisaHomeScreen from "./Visa/VisaHomeScreen";
 import VisaActionPage from "./Visa/VisaActionPage";
+import VisaIndex from "./VisaApplyPage/VisaIndex";
+import VisaMarkupList from "./VisaMarkup/VisaMarkupList";
 
 export {
   Dashboard,
@@ -34,4 +36,6 @@ export {
   SingleSubAgent,
   VisaHomeScreen,
   VisaActionPage,
+  VisaIndex,
+  VisaMarkupList,
 };

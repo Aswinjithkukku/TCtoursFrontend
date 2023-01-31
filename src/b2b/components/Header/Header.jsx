@@ -6,9 +6,11 @@ import CurrencyModal from './CurrencyModal'
 import { useHandleClickOutside } from "../../../hooks";
 import { AiOutlineDown } from "react-icons/ai";
 import { GrMenu } from "react-icons/gr";
+import { HiBellAlert } from "react-icons/hi2";
 import { getWalletBalance } from '../../../redux/slices/walletSlice'
 import priceConversion from '../../../utils/PriceConversion'
 import BtnLoader from "../BtnLoader";
+import NotificationDropdown from "./NotificationDropdown";
 
 export default function Header({ setSidebarView, sidebarView }) {
 
@@ -16,6 +18,7 @@ export default function Header({ setSidebarView, sidebarView }) {
     const [isAdminDropdownOpen, setIsAdminDropdownOpen] = useState(false);
     const [walletDropdown, setWalletDropdown] = useState(false)
     const [currency, setCurrency] = useState(false)
+    const [notificationModal, setNotificationModal] = useState(false)
 
     const { agent } = useSelector((state) => state.agents);
     const { selectedCurrency } = useSelector(state => state.home)
@@ -30,6 +33,9 @@ export default function Header({ setSidebarView, sidebarView }) {
     const walletRef = useRef();
     useHandleClickOutside(walletRef, () => setWalletDropdown(false));
 
+    const notificationRef = useRef();
+    useHandleClickOutside(notificationRef, () => setNotificationModal(false));
+
     useEffect(() => {
         dispatch(getWalletBalance())
     }, [dispatch])
@@ -42,7 +48,7 @@ export default function Header({ setSidebarView, sidebarView }) {
             ></div>
             <div className="sticky top-0 w-full bg-white h-[70px] px-5 z-10">
                 <div className="h-full flex items-center justify-between">
-                    <div className="">
+                    <div className="flex gap-2">
                     <div className="text-xl" onClick={() => setSidebarView(true)}>
                         <GrMenu />
                     </div>
@@ -50,14 +56,26 @@ export default function Header({ setSidebarView, sidebarView }) {
                         {agent?.companyName}
                     </div>
                     </div>
-                    <div className="md:block hidden">
-                        <div className="border lg:w-[500px] h-[50px] text-darktext shadow-sm bg-gray-100 rounded-[.25rem] p-1">
-                            <p className="text-xs  text-lightblue">Notice board comes here</p>
-                        </div>
-                    </div>
                     
                     <div className="h-full">
                         <div className="relative h-full flex">
+                            <div
+                                ref={notificationRef}
+                                className="flex space-x-1 items-center cursor-pointer relative mr-4"
+                                onClick={() => setNotificationModal(true)}
+                            >
+                                <span className="text-xl text-darktext">
+                                    <HiBellAlert />
+                                </span>
+                                {/* absolute modal */}
+                                {notificationModal && (
+                                    <div className="absolute z-20  -right-20  top-7 md:top-14 bg-light rounded-md w-[200px]">
+                                        <NotificationDropdown  />
+                                    </div>
+                                )}
+                                {/* absolute modal */}
+                            </div>
+
                             <div
                                 ref={currencyRef}
                                 className="flex space-x-1 items-center cursor-pointer relative mr-4"
@@ -121,7 +139,7 @@ export default function Header({ setSidebarView, sidebarView }) {
                                         className="w-full h-full object-cover"
                                     />
                                 </div>
-                                <div className="">
+                                <div className="hidden md:block">
                                     <span className="block text-sm font-medium">
                                         {agent?.name}
                                     </span>

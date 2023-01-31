@@ -41,13 +41,17 @@ const sidebarMenus = [
   {
     name: "Markups",
     icon: <RiMarkupFill />,
-    link: "/b2b/markup/attraction",
-    // dropdown: [
-    //   {
-    //     name: "Markups",
-    //     link: ,
-    //   },
-    // ],
+    link: "#",
+    dropdown: [
+      {
+        name: "Attraction",
+        link: "/b2b/markup/attraction",
+      },
+      {
+        name: "Visa",
+        link: "/b2b/markup/visa",
+      },
+    ],
   },
   {
     name: "Resellers",
