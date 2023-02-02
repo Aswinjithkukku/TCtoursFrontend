@@ -14,10 +14,10 @@ function ClientVisaMarkupModal({ setMarkup, setMarkupData }) {
     setMarkup({ client: false, agent: false })
   );
   const { token } = useSelector(state => state.agents)
-  const { clientMarkup } = useSelector(state => state.markups)
+  const { visaClientMarkup } = useSelector(state => state.markups)
 
-  const [markupType, setMarkupType] = useState(clientMarkup?.clientMarkup?.markupType || '')
-  const [markupAmount, setMarkupAmount] = useState(clientMarkup?.clientMarkup?.markup|| 0)
+  const [markupType, setMarkupType] = useState(visaClientMarkup?.clientMarkup?.markupType || '')
+  const [markupAmount, setMarkupAmount] = useState(visaClientMarkup?.clientMarkup?.markup|| 0)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -33,10 +33,10 @@ function ClientVisaMarkupModal({ setMarkup, setMarkupData }) {
           Authorization: `Bearer ${token}`
         }
       }
-      const response = await axios.patch("/b2b/resellers/client/markup/upsert", {
+      const response = await axios.patch("/b2b/client/visa/markup/upsert", {
         markup: markupAmount,
         markupType: markupType,
-        attraction: clientMarkup?._id
+        visaType: visaClientMarkup?._id
       }, config);
 
       setIsLoading(false);
@@ -63,7 +63,7 @@ function ClientVisaMarkupModal({ setMarkup, setMarkupData }) {
         >
           <div className="flex items-center justify-between border-b p-4">
             <h2 className="font-medium mb-2">
-              Client Markup
+             Visa Client Markup
             </h2>
             <button
               className="h-auto bg-transparent text-textColor text-xl"
@@ -74,7 +74,7 @@ function ClientVisaMarkupModal({ setMarkup, setMarkupData }) {
           </div>
           <div className="p-6">
             <form onSubmit={submitHandler} className='space-y-3'>
-              <h2 className='font-medium'>{clientMarkup?.name}</h2>
+              <h2 className='font-medium'>{visaClientMarkup?.name}</h2>
               <div>
                 <label htmlFor="" className='label'>Markup Type*</label>
                 <select
@@ -104,17 +104,17 @@ function ClientVisaMarkupModal({ setMarkup, setMarkupData }) {
                   <p className='text-main text-xs'> {error}</p>
                 )}
                 <span className="cursor-pointer w-[100px] h-[40px] text-[14px] bg-orange-600 text-white rounded-[0.25rem] flex justify-center items-center font-[600]"
-                // onClick={() => {
-                //   dispatch(removeClientMarkup({
-                //     _id: clientMarkup?._id,
-                //     name: clientMarkup?.name,
-                //     id: clientMarkup?.clientMarkup?._id
-                //   }))
-                //   setMarkupData((prev) => {
-                //     return {...prev, client: '' }
-                //   })
-                //   setMarkup({ client: false, agent: false })
-                // }}
+                onClick={() => {
+                  // dispatch(removeClientMarkup({
+                  //   _id: clientMarkup?._id,
+                  //   name: clientMarkup?.name,
+                  //   id: clientMarkup?.clientMarkup?._id
+                  // }))
+                  setMarkupData((prev) => {
+                    return {...prev, client: '' }
+                  })
+                  setMarkup({ client: false, agent: false })
+                }}
                 >
                   Remove
                 </span>

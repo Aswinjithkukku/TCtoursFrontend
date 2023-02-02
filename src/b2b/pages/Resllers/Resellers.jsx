@@ -32,8 +32,11 @@ function Resellers() {
       </div>
       <div className='p-2 lg:p-6'>
         <div className="bg-white rounded shadow-sm mt-2 lg:mt-6">
-          <div className="flex items-center justify-between border-b border-dashed p-3 lg:p-6">
+          <div className="flex items-center justify-between border-b border-dashed p-3 lg:p-4">
             <h1 className="font-medium">Resellers Lists</h1>
+            <span className='w-[400px]'>
+              <input type='search' className='input w-full' placeholder='search !!!' />
+            </span>
           </div>
           <div className='overflow-x-auto'>
             <table className="w-full">

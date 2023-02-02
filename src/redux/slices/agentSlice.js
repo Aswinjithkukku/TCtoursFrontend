@@ -61,7 +61,7 @@ const agentSlice = createSlice({
         },
         [fetchAgent.rejected]: (state, action) => {
             state.isSiteLoading = false;
-            localStorage.removeItem("agent-string");
+            // localStorage.removeItem("agent-string");
         },
         [logoutAgent.fulfilled]: (state, action) => {
             state.isLoggedIn = false;

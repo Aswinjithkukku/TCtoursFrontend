@@ -1,24 +1,50 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchMarkups, clearMarkups  } from '../../../redux/slices/markupSlice'
+import axios from '../../../axios'
+// import { fetchMarkups, clearMarkups  } from '../../../redux/slices/markupSlice'
 import MarkupListSingleRow from './MarkupListSingleRow'
 
 function MarkUpList() {
-  const dispatch = useDispatch()
 
   const [search, setSearch] = useState('')
-  const { markups } = useSelector(state => state.markups)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [markups, setMarkups] = useState([])
+  const { token } = useSelector(state => state.agents)
+  // const { markups } = useSelector(state => state.markups)
 
-  useEffect(() => {
-    dispatch(fetchMarkups(search))
-    console.log("hi");
-  }, [dispatch,search])
-  useEffect(() => {
-    return () => {
-      dispatch(clearMarkups())
+  const fetchMarkups = async(e) => {
+    try {
+      setIsLoading(true)
+      setError('')
+        const response = await axios.get(`/b2b/resellers/client/attraction/listall?search=${search||''}`, {
+            headers: {
+                authorization: `Bearer ${token}`,
+            },
+        });
+        setMarkups(response.data)
+        setIsLoading(false)
+    } catch (error) {
+      setError(
+        error?.response?.data?.error || "Something went wrong, Try again"
+      );
+      setIsLoading(false);
     }
-  },[])
+  }
+console.log(markups);
+  useEffect(() => {
+    fetchMarkups()
+  },[search])
+  // useEffect(() => {
+  //   dispatch(fetchMarkups(search))
+  // }, [dispatch,search])
+
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(clearMarkups())
+  //   }
+  // },[])
 
   return (
     <>
@@ -62,7 +88,7 @@ function MarkUpList() {
                   </tr>
                 </thead>
                 <tbody className="text-sm text-textColor">
-                  {markups?.data?.map((item, index) => (
+                  {markups?.attractions?.data?.map((item, index) => (
                     <MarkupListSingleRow
                     item={item}
                     key={index}

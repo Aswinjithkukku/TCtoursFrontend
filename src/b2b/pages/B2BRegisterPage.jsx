@@ -109,7 +109,7 @@ function B2BRegisterPage() {
             onClick={() => navigate('/')}
           />
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="off">
           <div className='lg:grid grid-cols-12 gap-0 pt-4'>
             {!info ? (
               <div className='1 col-span-7 text-darktext space-y-2 text-sm'>
@@ -160,7 +160,7 @@ function B2BRegisterPage() {
                           name='address'
                           value={data.address}
                           onChange={onChangeHandler}
-
+                          autoComplete="off"
                         />
                       </div>
 
@@ -399,6 +399,7 @@ function B2BRegisterPage() {
                             value={data.password}
                             onChange={onChangeHandler}
                             required
+                            autoComplete="new-password"
                           />
                         </div>
                       </div>
@@ -418,6 +419,7 @@ function B2BRegisterPage() {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
+                            autoComplete="new-password"
                           />
                         </div>
                       </div>

@@ -93,7 +93,7 @@ function PaymentDetailsSection() {
                         <h2 className='text-2xl font-semibold text-darktext'>Lead Passenger Details</h2>
                     </div>
 
-                    <div className='lg:grid grid-cols-12 gap-5 text-darktext space-y-3 lg:space-y-0'>
+                    <div className='lg:grid grid-cols-12 gap-4 text-darktext space-y-3 lg:space-y-0'>
                         <div className='col-span-2'>
                             <div className=''>
                                 <label className='label'>Mr/Mrs</label>
@@ -104,7 +104,7 @@ function PaymentDetailsSection() {
                                     name='gender'
                                     value={travellerData.gender}
                                     onChange={onChange}
-                                    className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light' >
+                                    className='select w-full ' >
                                     <option value={"male"}>Mr.</option>
                                     <option value={"female"}>Mrs.</option>
                                     <option value={"other"}>Ms.</option>
@@ -118,7 +118,7 @@ function PaymentDetailsSection() {
                             <div className=''>
                                 <input
                                     type='text'
-                                    className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
+                                    className='input w-full '
                                     name='firstname'
                                     value={travellerData.firstname}
                                     onChange={onChange}
@@ -132,7 +132,7 @@ function PaymentDetailsSection() {
                             <div className=''>
                                 <input
                                     type='text'
-                                    className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
+                                    className='input w-full '
                                     name='lastname'
                                     value={travellerData.lastname}
                                     onChange={onChange}
@@ -140,7 +140,7 @@ function PaymentDetailsSection() {
                             </div>
                         </div>
                     </div>
-                    <div className='lg:grid grid-cols-3 gap-5 text-darktext space-y-3 lg:space-y-0'>
+                    <div className='lg:grid grid-cols-3 gap-4 text-darktext space-y-3 lg:space-y-0'>
                         <div className=''>
                             <div className=''>
                                 <label className='label'>Email</label>
@@ -148,7 +148,7 @@ function PaymentDetailsSection() {
                             <div className=''>
                                 <input
                                     type='text'
-                                    className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
+                                    className='input w-full '
                                     name='email'
                                     value={travellerData.email}
                                     onChange={onChange}
@@ -162,7 +162,7 @@ function PaymentDetailsSection() {
                             <div className=''>
                                 <select
                                     type='text'
-                                    className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
+                                    className='select w-full '
                                     name='country'
                                     value={travellerData.country}
                                     onChange={onChange}
@@ -175,7 +175,7 @@ function PaymentDetailsSection() {
                             </div>
                         </div>
 
-                        <div className=' flex space-x-1'>
+                        <div className=' flex gap-1'>
                       <div className='w-3/12'>
                         <label className='label'>Code</label>
                         <input className='input'
@@ -203,7 +203,7 @@ function PaymentDetailsSection() {
                         <div className=''>
                             <textarea
                                 type='text'
-                                className='border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light'
+                                className='textarea w-full '
                                 name='special_request_text'
                                 value={travellerData.special_request_text}
                                 onChange={onChange}

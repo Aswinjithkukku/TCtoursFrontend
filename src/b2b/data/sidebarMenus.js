@@ -54,16 +54,16 @@ const sidebarMenus = [
     ],
   },
   {
-    name: "Resellers",
+    name: "Sub Agents",
     icon: <FaHandsHelping />,
     link: "#",
     dropdown: [
       {
-        name: "New Register",
+        name: "New Sub Agent",
         link: "/b2b/reseller/add",
       },
       {
-        name: "Total Resellers",
+        name: "Total Sub Agent",
         link: "/b2b/resellers",
       },
     ],

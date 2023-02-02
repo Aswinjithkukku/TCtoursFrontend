@@ -10,6 +10,7 @@ import {
   paymentReducer,
   resellerReducer,
   usersReducer,
+  visaReducer,
   walletReducer,
 } from "./slices";
 
@@ -26,6 +27,7 @@ const store = configureStore({
     resellers: resellerReducer,
     agentExcursions: agentExcursionReducer,
     wallet: walletReducer,
+    visa: visaReducer,
   },
   devTools: true,
 });

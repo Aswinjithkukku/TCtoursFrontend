@@ -23,6 +23,8 @@ import { PageNotFound, PaymentDecline } from "../Pages/Errors";
 import {
   Attraction,
   AttractionDetails,
+  AttractionInvoice,
+  AttractionOrderInvoice,
   B2BLoginPage,
   B2BRegisterPage,
   Dashboard,
@@ -94,6 +96,7 @@ const ThemeRoutes = [
       { path: "/b2b/wallet", element: <Wallet /> },
       { path: "/b2b/visa", element: <VisaHomeScreen /> },
       { path: "/b2b/visa/apply", element: <VisaIndex /> },
+      { path: "/b2b/attractions/invoice", element: <AttractionInvoice /> },
     ],
   },
   {
@@ -115,6 +118,10 @@ const ThemeRoutes = [
   {
     path: "/print",
     element: <Invoice />,
+  },
+  {
+    path: "/attractions/invoice",
+    element: <AttractionOrderInvoice />,
   },
 ];
 

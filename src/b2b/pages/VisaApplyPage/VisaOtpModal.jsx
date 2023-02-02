@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom'
 import axios from '../../../axios'
 import Swal from 'sweetalert2'
 import { useEffect } from 'react'
-import { emptyCart } from '../../../redux/slices/agentExcursionSlice'
 import { useRef } from 'react'
-import { reduceWalletManipulation } from '../../../redux/slices/walletSlice'
+// import { reduceWalletManipulation } from '../../../redux/slices/walletSlice'
 
-function OtpModal({ setOtpModal, orderId }) {
+function VisaOtpModal({ setOtpModal, orderId }) {
   const dispatch = useDispatch()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -29,11 +28,11 @@ function OtpModal({ setOtpModal, orderId }) {
 
 
   const { token } = useSelector(state => state.agents)
-  const { agentExcursionCart } = useSelector(state => state.agentExcursions)
+  // const { agentExcursionCart } = useSelector(state => state.agentExcursions)
   // const { balance } = useSelector(state => state.wallet)
-  const activity = agentExcursionCart.reduce((sum,item) => {
-    return sum + item?.price
-  },0)
+  // const activity = agentExcursionCart.reduce((sum,item) => {
+  //   return sum + item?.price
+  // },0)
 
   const submitHandler = async (e) => {
     try {
@@ -45,18 +44,17 @@ function OtpModal({ setOtpModal, orderId }) {
           authorization: `Bearer ${token}`,
         },
       }
-      const response = await axios.post(`/b2b/attractions/orders/complete/${orderId}`, {
+      const response = await axios.post(`/b2b/visa/payment/${orderId}`, {
         otp: otp?.one + otp?.two + otp?.three + otp?.four + otp?.five
       }, config);
 
       setIsLoading(false);
       setOtpModal(false)
-      dispatch(reduceWalletManipulation(activity))
+      // dispatch(reduceWalletManipulation(activity))
       Swal.fire({
         icon: 'success',
-        title: 'Order Completed Successfully',
+        title: 'VISA Payment Completed Successfully',
       })
-      dispatch(emptyCart())
     } catch (err) {
 
       if (err?.response?.data?.error) {
@@ -177,4 +175,4 @@ function OtpModal({ setOtpModal, orderId }) {
   )
 }
 
-export default OtpModal
+export default VisaOtpModal

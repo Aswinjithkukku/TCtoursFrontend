@@ -86,15 +86,15 @@ function ProfileSettings() {
               ))}
             </select>
           </div>
-          <div className='flex'>
-            <div className='w-3/12'>
+          <div className='flex gap-2'>
+            <div className='w-2/12'>
               <label className='label'>code</label>
               <input className='input'
                 type='text'
                 value={countryArray?.map((item) => item?.phonecode) || ''}
                 readOnly />
             </div>
-            <div className='w-9/12'>
+            <div className='w-10/12'>
               <label className='label'>Number</label>
               <input className='input'
                 type='number'
@@ -105,8 +105,8 @@ function ProfileSettings() {
               />
             </div>
           </div>
-          <div className='flex'>
-            <div className='w-3/12'>
+          <div className='flex gap-2'>
+            <div className='w-2/12'>
               <label className='label'>code</label>
               <input className='input'
                 readOnly
@@ -114,7 +114,7 @@ function ProfileSettings() {
                 value={countryArray?.map((item) => item?.phonecode) || ''}
               />
             </div>
-            <div className='w-9/12'>
+            <div className='w-10/12'>
               <label className='label'> Telephone Number</label>
               <input className='input'
                 type='number'

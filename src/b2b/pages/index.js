@@ -17,6 +17,8 @@ import VisaHomeScreen from "./Visa/VisaHomeScreen";
 import VisaActionPage from "./Visa/VisaActionPage";
 import VisaIndex from "./VisaApplyPage/VisaIndex";
 import VisaMarkupList from "./VisaMarkup/VisaMarkupList";
+import AttractionOrderInvoice from "./OrderInvoices/AttractionOrderInvoice";
+import AttractionInvoice from "./OrderInvoices/AttractionInvoice";
 
 export {
   Dashboard,
@@ -38,4 +40,6 @@ export {
   VisaActionPage,
   VisaIndex,
   VisaMarkupList,
+  AttractionOrderInvoice,
+  AttractionInvoice,
 };

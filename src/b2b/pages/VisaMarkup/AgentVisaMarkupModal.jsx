@@ -15,10 +15,10 @@ function AgentVisaMarkupModal({ setMarkup, setMarkupData }) {
   );
 
   const { token } = useSelector(state => state.agents)
-  const { agentMarkup } = useSelector(state => state.markups)
+  const { visaAgentMarkup } = useSelector(state => state.markups)
 
-  const [markupType, setMarkupType] = useState(agentMarkup?.agentMarkup?.markupType || '')
-  const [markupAmount, setMarkupAmount] = useState(agentMarkup?.agentMarkup?.markup || 0)
+  const [markupType, setMarkupType] = useState(visaAgentMarkup?.agentMarkup?.markupType || '')
+  const [markupAmount, setMarkupAmount] = useState(visaAgentMarkup?.agentMarkup?.markup || 0)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -35,10 +35,10 @@ function AgentVisaMarkupModal({ setMarkup, setMarkupData }) {
         }
       }
 
-      const response = await axios.patch("/b2b/resellers/subagent/markup/upsert", {
+      const response = await axios.patch("/b2b/subagent/visa/markup/upsert", {
         markup: markupAmount,
         markupType: markupType,
-        attraction: agentMarkup?._id
+        visaType: visaAgentMarkup?._id
       }, config);
 
       setIsLoading(false);
@@ -66,7 +66,7 @@ function AgentVisaMarkupModal({ setMarkup, setMarkupData }) {
         >
           <div className="flex items-center justify-between border-b p-4">
             <h2 className="font-medium mb-2">
-              Agent Markup
+             Visa Agent Markup
             </h2>
             <button
               className="h-auto bg-transparent text-textColor text-xl"
@@ -77,7 +77,7 @@ function AgentVisaMarkupModal({ setMarkup, setMarkupData }) {
           </div>
           <div className="p-6">
             <form onSubmit={submitHandler} className='space-y-3'>
-              <h2 className='font-medium'>{agentMarkup?.name}</h2>
+              <h2 className='font-medium'>{visaAgentMarkup?.name}</h2>
               <div>
                 <label htmlFor="" className='label'>Markup Type*</label>
                 <select
@@ -108,11 +108,11 @@ function AgentVisaMarkupModal({ setMarkup, setMarkupData }) {
                 )}
                 <span className="w-[100px] h-[40px] text-[14px] bg-orange-600 text-white rounded-[0.25rem] flex justify-center items-center font-[600] cursor-pointer" 
                 onClick={() => {
-                  dispatch(removeSubagentMarkup({
-                    _id: agentMarkup?._id,
-                    name: agentMarkup?.name,
-                    id: agentMarkup?.agentMarkup?._id
-                  }))
+                  // dispatch(removeSubagentMarkup({
+                  //   _id: visaAgentMarkup?._id,
+                  //   name: visaAgentMarkup?.name,
+                  //   id: visaAgentMarkup?.agentMarkup?._id
+                  // }))
                   setMarkupData((prev) => {
                     return {...prev, agent: '' }
                   })

@@ -6,7 +6,9 @@ const initialState = {
   loading: true,
   markups: [],
   agentMarkup: {},
-  clientMarkup: {}
+  clientMarkup: {},
+  visaAgentMarkup: {},
+  visaClientMarkup: {},
 };
 
 export const fetchMarkups = createAsyncThunk(
@@ -68,11 +70,20 @@ const markupSlice = createSlice({
       setAgentMarkup: (state, action) => {
           state.agentMarkup = action.payload;
       },
+      setVisaClientMarkup: (state, action) => {
+          state.visaClientMarkup = action.payload;
+      },
+      setVisaAgentMarkup: (state, action) => {
+          state.visaAgentMarkup = action.payload;
+      },
       clearMarkups: (state, action) => {
         state.markups = []
-      }
+      },
   },
   extraReducers: {
+    // [fetchMarkups.pending]: (state, action) => {
+    //   state.loading = true;
+    // },
     [fetchMarkups.fulfilled]: (state, action) => {
       state.markups = action.payload?.attractions;
       state.loading = false;
@@ -95,6 +106,6 @@ const markupSlice = createSlice({
 });
 
 
-export const {setClientMarkup, setAgentMarkup, clearMarkups } = markupSlice.actions;
+export const {setClientMarkup, setAgentMarkup, clearMarkups, setVisaAgentMarkup, setVisaClientMarkup } = markupSlice.actions;
 
 export default markupSlice.reducer;

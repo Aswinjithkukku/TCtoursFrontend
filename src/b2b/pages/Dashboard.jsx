@@ -45,7 +45,7 @@ export default function Dashboard() {
                         </span>
                     </div>
                     <div>
-                        <select name="" id="" className="lg:w-[150px] w-[100px]">
+                        <select name="" id="" className="select lg:w-[150px] w-[100px]">
                             <option value="">All Time</option>
                         </select>
                     </div>

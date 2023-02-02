@@ -49,12 +49,14 @@ export const getTransaction = createAsyncThunk(
 const walletSlice = createSlice({
   name: "Wallet",
   initialState,
-  // reducers: {
-  //   setActivities: (state, action) => {
-  //     state.agentRecievedActivities[action.payload.index][action.payload.name] =
-  //       action.payload.value;
-  //   },
-  // },
+  reducers: {
+    reduceWalletManipulation: (state, action) => {
+      state.balance =  state.balance - action.payload
+    },
+    addWalletManipulation: (state, action) => {
+      state.balance =  state.balance - action.payload
+    },
+  },
   extraReducers: {
     [getWalletBalance.pending]: (state, action) => {
       state.loading = true;
@@ -70,8 +72,9 @@ const walletSlice = createSlice({
   },
 });
 
-// export const {
-// setActivities,
-// } = walletSlice.actions;
+export const {
+  reduceWalletManipulation,
+  addWalletManipulation
+} = walletSlice.actions;
 
 export default walletSlice.reducer;

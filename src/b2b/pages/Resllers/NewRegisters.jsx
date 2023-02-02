@@ -207,14 +207,14 @@ function NewRegisters() {
                   required
                 />
               </div>
-              <div className=' flex space-x-1'>
-                <div className='w-3/12'>
+              <div className=' flex gap-2'>
+                <div className='w-2/12'>
                   <label className='label'>Code</label>
                   <input className='input'
                     value={countryArray?.map((item) => item?.phonecode) || ''}
                     readOnly />
                 </div>
-                <div className='w-9/12'>
+                <div className='w-10/12'>
                   <label className='label'>Number</label>
                   <input className='input'
                     type='number'
@@ -227,14 +227,14 @@ function NewRegisters() {
                 </div>
               </div>
 
-              <div className=' flex space-x-1'>
-                <div className='w-3/12'>
+              <div className=' flex gap-2'>
+                <div className='w-2/12'>
                   <label className='label'>Code</label>
                   <input className='input'
                     value={countryArray?.map((item) => item?.phonecode) || ''}
                     readOnly />
                 </div>
-                <div className='w-9/12'>
+                <div className='w-10/12'>
                   <label className='label'> Telephone Number</label>
                   <input className='input'
                     type='number'

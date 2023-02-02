@@ -3,14 +3,15 @@ import React, { useEffect, useRef, useState } from 'react'
 import axios from '../../../axios';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addWalletManipulation } from '../../../redux/slices/walletSlice';
 
 function AddWalletPaypalComponent() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { token } = useSelector(state => state.agents)
 
   const [inputAmount, setInputAmount] = useState(0)
-  console.log(inputAmount);
 
   const inputRef = useRef(null)
 
@@ -65,6 +66,7 @@ function AddWalletPaypalComponent() {
             title: 'Success!',
             text: 'Payment Successful',
           })
+          dispatch(addWalletManipulation(inputRef.current.value))
           navigate('/b2b')
         } catch {
           console.log(
