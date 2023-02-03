@@ -1,2 +1,3 @@
 import useHandleClickOutside from "./useHandleClickOutside";
-export {useHandleClickOutside}
+import useImageChange from "./useImageChange";
+export {useHandleClickOutside, useImageChange}

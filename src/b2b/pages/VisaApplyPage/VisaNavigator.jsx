@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ItenarySection from './ItenarySection'
 import TravellerDetails from './TravellerDetails'
 import { BsArrowRightCircle } from 'react-icons/bs'
 import MakePaymentSection from './MakePaymentSection'
 import UploadDetailSection from './UploadDetailSection'
+import { useParams } from 'react-router-dom'
+import { fetchVisas } from '../../../redux/slices/visaSlice'
+import { useDispatch } from 'react-redux'
 
 function VisaNavigator() {
+  const dispatch = useDispatch()
+
+  const { id } = useParams()
+
+  useEffect(() => {
+    dispatch(fetchVisas(id))
+  },[dispatch, id])
+
   return (
     <>
       <div className='bg-gray-300 sticky top-0 z-10'>

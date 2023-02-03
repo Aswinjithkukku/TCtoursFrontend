@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 import { useRef } from 'react'
 // import { reduceWalletManipulation } from '../../../redux/slices/walletSlice'
 
-function VisaOtpModal({ setOtpModal, orderId }) {
+function VisaOtpModal({ setOtpModal, order }) {
   const dispatch = useDispatch()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -44,12 +44,13 @@ function VisaOtpModal({ setOtpModal, orderId }) {
           authorization: `Bearer ${token}`,
         },
       }
-      const response = await axios.post(`/b2b/visa/payment/${orderId}`, {
+      const response = await axios.post(`/b2b/visa/application/payment/${order._id}`, {
         otp: otp?.one + otp?.two + otp?.three + otp?.four + otp?.five
       }, config);
 
       setIsLoading(false);
       setOtpModal(false)
+      localStorage.setItem("visaOrder", JSON.stringify(response.data))
       // dispatch(reduceWalletManipulation(activity))
       Swal.fire({
         icon: 'success',

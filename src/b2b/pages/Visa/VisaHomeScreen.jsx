@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TermsConditionSection from './TermsConditionSection'
 import VisaApplyCard from './VisaApplyCard'
 import VisaComponentPage from './VisaComponentPage'
@@ -9,12 +9,20 @@ import { HiOutlineDocumentDuplicate } from 'react-icons/hi'
 import { GiEncirclement } from 'react-icons/gi'
 import { VscTasklist } from 'react-icons/vsc'
 import { FaQuoteRight, FaWpforms } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import SearchCards from '../../components/Cards/SearchCards'
+import { useDispatch } from 'react-redux'
+import { fetchVisas } from '../../../redux/slices/visaSlice'
 
 function VisaHomeScreen() {
-
+  const dispatch = useDispatch()
+  const { id } = useParams()
   const [viewCard, setViewCard] = useState(false)
+
+useEffect(() => {
+  dispatch(fetchVisas(id))
+},[dispatch, id])
+
   return (
     <>
       <div>
@@ -104,7 +112,7 @@ function VisaHomeScreen() {
                 </div>
               </div>
               <div className='bg-light'>
-                <div className='md:max-w-screen-xl md:mx-auto'>
+                <div className='p-6'>
                   <TermsConditionSection />
                 </div>
               </div>

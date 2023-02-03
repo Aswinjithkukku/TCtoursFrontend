@@ -14,33 +14,35 @@ const initialState = {
       lastName: "",
       email: "",
       country: "",
-      contactNumber: "",
-      passportNumber: "",
-      day: "",
-      month: "",
-      year: "",
+      contactNo: "",
+      passportNo: "",
+      dateOfBirth: {
+        day: "",
+        month: "",
+        year: "",
+      },
     },
   ],
+  imageRows: [{}],
+  visa: [],
 };
 
-// export const getWalletBalance = createAsyncThunk(
-//    visaSlice/getWalletBalance",
-//   async (args, { getState }) => {
-//     const { token } = getState().agents
-//     if( token ) {
-
-//       const response = await axios.get(`/b2b/transactions/balance`, {
-//         headers: {
-//           authorization: `Bearer ${token}`,
-//         },
-//       }
-//     );
-//       return response.data;
-//     } else {
-//       throw Error("cant find Wallet balance");
-//     }
-//   }
-// );
+export const fetchVisas = createAsyncThunk(
+  "visaSlice/fetchVisas",
+  async (args, { getState }) => {
+    const { token } = getState().agents;
+    if (token) {
+      const response = await axios.get(`/b2b/visa/list/${args}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } else {
+      throw Error("Cannot Find Visa Types");
+    }
+  }
+);
 
 const visaSlice = createSlice({
   name: "visa",
@@ -54,29 +56,30 @@ const visaSlice = createSlice({
           lastName: "",
           email: "",
           country: "",
-          contactNumber: "",
-          passportNumber: "",
-          day: "",
-          month: "",
-          year: "",
+          contactNo: "",
+          passportNo: "",
+          dateOfBirth: {
+            day: "",
+            month: "",
+            year: "",
+          },
         },
       ];
 
-      const sum =
-        Number(state.visaEnquiry?.adult) + Number(state.visaEnquiry?.children);
-
-      for (let i = 1; i < sum; i++) {
+      for (let i = 1; i < Number(state.visaEnquiry?.traveller); i++) {
         state.rows.push({
           title: "",
           firstName: "",
           lastName: "",
           email: "",
           country: "",
-          contactNumber: "",
-          passportNumber: "",
-          day: "",
-          month: "",
-          year: "",
+          contactNo: "",
+          passportNo: "",
+          dateOfBirth: {
+            day: "",
+            month: "",
+            year: "",
+          },
         });
       }
     },
@@ -84,18 +87,44 @@ const visaSlice = createSlice({
       state.rows[action.payload.index][action.payload.name] =
         action.payload.value;
     },
+    addImageRows: (state, action) => {
+      state.imageRows = [{}];
+
+      const data = localStorage.getItem("visaOrder")
+        ? JSON.parse(localStorage.getItem("visaOrder"))
+        : {};
+
+      for (let i = 1; i < Number(state.visaEnquiry?.traveller); i++) {
+        state.imageRows.push({});
+      }
+    },
+    handleRowImageChange: (state, action) => {
+      state.imageRows[action.payload.index][action.payload.name] =
+        action.payload.file;
+    },
+    handleDOBChange: (state, action) => {
+      state.rows[action.payload.index].dateOfBirth[action.payload.name] =
+        action.payload.value;
+    },
     setVisaEnquiry: (state, action) => {
       state.visaEnquiry = JSON.parse(localStorage.getItem("visaEnquiry"));
     },
   },
-  // extraReducers: {
-  // [getWalletBalance.pending]: (state, action) => {
-  //   state.loading = true;
-  // },
-  // },
+  extraReducers: {
+    [fetchVisas.fulfilled]: (state, action) => {
+      state.visa = action.payload;
+      state.loading = false;
+    },
+  },
 });
 
-export const { addRows, handleRowItemChange, setVisaEnquiry } =
-  visaSlice.actions;
+export const {
+  addRows,
+  handleRowItemChange,
+  setVisaEnquiry,
+  handleDOBChange,
+  addImageRows,
+  handleRowImageChange,
+} = visaSlice.actions;
 
 export default visaSlice.reducer;

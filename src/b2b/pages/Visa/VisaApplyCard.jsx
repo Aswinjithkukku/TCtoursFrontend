@@ -1,30 +1,31 @@
 import React, { useState } from 'react'
 import { AiOutlineContacts, AiOutlineMail, AiOutlinePlus } from 'react-icons/ai'
 import { BsFillPersonFill, BsPhone } from 'react-icons/bs'
-import { FaChild, FaWpforms } from 'react-icons/fa'
-import { IoIosMan } from 'react-icons/io'
-import { MdPeopleAlt } from 'react-icons/md'
-import { useNavigate } from 'react-router'
-import { Link } from 'react-router-dom'
+import { FaWpforms } from 'react-icons/fa'
+import { IoIosPeople } from 'react-icons/io'
+import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router'
 
 function VisaApplyCard() {
     const navigate = useNavigate()
+    const { id } = useParams()
     const [data, setData] = useState({
         email: "",
         phoneNumber: "",
         visaType: "",
-        adult: "",
-        children: ""
+        traveller: "",
     })
+
+    const { visa } = useSelector(state => state.visa)
 
     const onChangeHandler = (e) => {
         e.preventDefault()
         setData({ ...data, [e.target.name]: e.target.value })
     }
-
+console.log(data.visaType);
     const submitHandler = () => {
         localStorage.setItem("visaEnquiry", JSON.stringify(data))
-        navigate('/b2b/visa/apply')
+        navigate(`/b2b/visa/${id}/apply`)
     }
 
     return (
@@ -52,6 +53,7 @@ function VisaApplyCard() {
                                             name='email'
                                             value={data.email}
                                             onChange={onChangeHandler}
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -68,6 +70,7 @@ function VisaApplyCard() {
                                             name='contactNo'
                                             value={data.contactNo}
                                             onChange={onChangeHandler}
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -83,48 +86,32 @@ function VisaApplyCard() {
                                             name='visaType'
                                             value={data.visaType}
                                             onChange={onChangeHandler}
+                                            required
                                         >
-                                            <option>choose one</option>
-                                            <option>30 Days Single Entry Tourist Visa </option>
-                                            <option>90 Days Single Entry Tourist Visa </option>
-                                            <option>14 Days Single Entry Tourist Visa </option>
+                                            <option hidden>choose one</option>
+                                            {visa?.visaType?.map((item, index) => (
+                                            <option key={index} value={item?._id}>{item?.visaName} </option>
+                                            ))}
                                         </select>
                                     </div>
                                 </div>
-                                <div className=' flex space-x-2'>
-                                    <div className='space-y-1'>
+                                    <div className='space-y-2 w-full px-2'>
                                         <div className='flex items-center space-x-2 text-lightblue'>
-                                            <span className='text-lg text-lightblue'><IoIosMan /> </span>
-                                            <span className='text-lg'>Adult</span>
+                                            <span className='text-lg text-lightblue'><IoIosPeople /> </span>
+                                            <span className='text-lg'>Travellers</span>
                                         </div>
                                         <div className=''>
                                             <input
                                                 type='number'
                                                 placeholder='Adult number'
                                                 className='px-3 w-full border-none placeholder:text-sm placeholder:text-text py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-xl text-darktext'
-                                                name='adult'
-                                                value={data.adult}
+                                                name='traveller'
+                                                value={data.traveller}
                                                 onChange={onChangeHandler}
+                                                required
                                             />
                                         </div>
                                     </div>
-                                    <div className='space-y-1'>
-                                        <div className='flex items-center space-x-2 text-lightblue'>
-                                            <span className='text-lg text-lightblue'><FaChild /> </span>
-                                            <span className='text-lg'>Children</span>
-                                        </div>
-                                        <div className=''>
-                                            <input
-                                                type='number'
-                                                placeholder='Children number'
-                                                className='px-3 w-full border-none placeholder:text-sm placeholder:text-text py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-xl text-darktext'
-                                                name='children'
-                                                value={data.children}
-                                                onChange={onChangeHandler}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
                                 <div className='flex justify-center font-medium lg:justify-end px-2 py-2 text-lg text-lightblue'>AED 0.00</div>
                                 <div className='flex justify-end px-2 my-3 text-lg text-lightblue'>
                                     <button
