@@ -1,12 +1,15 @@
-import React from 'react'
-import VisaNavigator from '../VisaApplyPage/VisaNavigator'
+import React from "react";
+import { useLocation } from "react-router-dom";
+import VisaNavigator from "../VisaApplyPage/VisaNavigator";
 
 function VisaActionPage() {
+  const location = useLocation();
+
   return (
     <div>
-      <VisaNavigator />
+      <VisaNavigator travellerInfo={location.state} />
     </div>
-  )
+  );
 }
 
-export default VisaActionPage
+export default VisaActionPage;
