@@ -14,7 +14,7 @@ function WalletDepositModal({ setWalletDropdown }) {
     setWalletDropdown(false)
   );
   return (
-    <div className="fixed inset-0 w-full h-full lightglass flex items-center justify-center z-20 " on>
+    <div className="fixed inset-0 w-full h-full lightglass flex items-center justify-center z-20 " >
       <div
         ref={wrapperRef}
         className="bg-[#fff] w-full max-h-[90vh] max-w-[500px]  shadow-[0_1rem_3rem_rgb(0_0_0_/_18%)] overflow-y-auto"

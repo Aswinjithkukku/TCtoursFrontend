@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 import { useRef } from 'react'
 // import { reduceWalletManipulation } from '../../../redux/slices/walletSlice'
 
-function VisaOtpModal({ setOtpModal, order }) {
+function VisaOtpModal({ setOtpModal, order, setNavigation }) {
   const dispatch = useDispatch()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -55,6 +55,12 @@ function VisaOtpModal({ setOtpModal, order }) {
       Swal.fire({
         icon: 'success',
         title: 'VISA Payment Completed Successfully',
+      })
+      setNavigation({
+        itenary: false,
+        details: false,
+        payment: false,
+        upload: true,
       })
     } catch (err) {
 

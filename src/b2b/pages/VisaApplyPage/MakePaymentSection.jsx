@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import axios from '../../../axios'
 import priceConversion from '../../../utils/PriceConversion'
 
-function MakePaymentSection() {
+function MakePaymentSection({ navigation, setNavigation }) {
   const [otpModal, setOtpModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
@@ -53,33 +53,36 @@ function MakePaymentSection() {
   return (
     <>
       <div className='p-6 text-darktext'>
-        <div className='my-2 border px-3 py-4 bg-lightblue rounded-[.25rem]'>
+        <div className={`my-2 border px-3 py-4 ${navigation.payment ? "bg-lightblue " : "bg-slate-400"} rounded-[.25rem]`}>
           <p className='font-[600] text-[20px] text-soft'>Make Payment</p>
         </div>
+        {navigation.payment && (
         <form onSubmit={submitHandler}>
           <div className='flex justify-between gap-3 rounded-md shadow bg-white p-6'>
             <div className='space-y-2'>
               <p className='text-gray-500 text-sm font-[500]'>Make use of our Wallet system to purchase which is help for faster transaction.</p>
               <p className=''>Make payment through your wallet.</p>
-              <p className='text-gray-500 font-[500] text-sm'>Your wallet amount is : <span className='text-main font-[600]'>1000 AED</span> </p>
+              <p className='text-gray-500 font-[500] text-sm'>Your wallet amount is : <span className='text-main font-[600]'>{priceConversion(balance?.balance, selectedCurrency, true)}</span> </p>
               <button className='bg-lightblue rounded-[.25rem] text-white w-[100px] h-9'
                 onClick={() => setOtpModal(true)}
               >Pay</button>
             </div>
             <div className='text-center'>
               <p className='text-gray-500  font-[500]'>Purchase Cost: </p>
-              <p className='text-lightblue underline text-xl font-[750]'>{priceConversion(balance, selectedCurrency, true)} </p>
+              <p className='text-lightblue underline text-xl font-[750]'>{priceConversion(balance?.balance, selectedCurrency, true)} </p>
             </div>
             <div className=' w-[170px] '>
               <Lottie animationData={PaymentAnimation} />
             </div>
           </div>
         </form>
+        )}
       </div>
       {otpModal && (
         <VisaOtpModal
           order={order}
           setOtpModal={setOtpModal}
+          setNavigation={setNavigation}
         />
       )}
     </>

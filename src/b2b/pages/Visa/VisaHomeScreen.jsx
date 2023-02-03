@@ -13,6 +13,7 @@ import { Link, useParams } from 'react-router-dom'
 import SearchCards from '../../components/Cards/SearchCards'
 import { useDispatch } from 'react-redux'
 import { fetchVisas } from '../../../redux/slices/visaSlice'
+import VisaIncludes from './VisaIncludes'
 
 function VisaHomeScreen() {
   const dispatch = useDispatch()
@@ -99,6 +100,7 @@ useEffect(() => {
                 <div className='lg:grid grid-cols-12 gap-10'>
                   <div className='col-span-8'>
                     <VisaComponentPage />
+                    <VisaIncludes />
                     <VisaDocumentSection />
                     <VisaFAQsSection />
                   </div>

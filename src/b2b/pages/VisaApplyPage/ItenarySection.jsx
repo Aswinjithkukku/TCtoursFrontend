@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setVisaEnquiry } from '../../../redux/slices/visaSlice'
 
-function ItenarySection() {
+function ItenarySection({ navigation, setNavigation }) {
   const dispatch = useDispatch()
 
   const [data, setData] = useState({
@@ -27,15 +27,21 @@ function ItenarySection() {
     e.preventDefault()
     localStorage.setItem("visaEnquiry", JSON.stringify(data))
     dispatch(setVisaEnquiry())
-    dispatch(setVisaEnquiry())
+    setNavigation({
+      itenary: false,
+      details: true,
+      payment: false,
+      upload: false,
+    })
   }
 
   return (
     <div className='p-6 text-darktext'>
       <form onSubmit={submitHandler}>
-        <div className='my-2 border px-3 py-4 bg-lightblue rounded-[.25rem]'>
+        <div className={`my-2 border px-3 py-4 ${navigation.itenary ?  "bg-lightblue " : "bg-slate-400" } rounded-[.25rem]`}>
           <p className='font-[600] text-[20px] text-soft'>Itenary</p>
         </div>
+        {navigation.itenary && (
         <div className='rounded-md shadow bg-white p-6'>
           <div className='grid grid-cols-12 gap-3 '>
             <div className='col-span-4 flex flex-col'>
@@ -45,6 +51,7 @@ function ItenarySection() {
                 name='visaType'
                 value={data.visaType}
                 onChange={onChangeHandler}
+                required
               >
                 <option hidden>Choose Visa Type</option>
                 {visa?.visaType?.map((item,index) => (
@@ -60,6 +67,7 @@ function ItenarySection() {
                 name='onwardDate'
                 value={data.onwardDate}
                 onChange={onChangeHandler}
+                required
               />
             </div>
             <div className='col-span-3'>
@@ -70,6 +78,7 @@ function ItenarySection() {
                 name='returnDate'
                 value={data.returnDate}
                 onChange={onChangeHandler}
+                required
               />
             </div>
             <div className='col-span-2 flex flex-col'>
@@ -79,6 +88,7 @@ function ItenarySection() {
                 name='traveller'
                 value={data.traveller}
                 onChange={onChangeHandler}
+                required
               >
                 <option hidden>Choose</option>
                 {Array.from(Array(50).keys(), n => n + 1).map((item) => (
@@ -91,6 +101,7 @@ function ItenarySection() {
             <button type='submit' className='bg-lightblue text-[14px] text-white px-3 py-2 rounded'>Move to Details</button>
           </div>
         </div>
+        )}
       </form>
     </div>
   )

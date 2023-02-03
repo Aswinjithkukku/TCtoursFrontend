@@ -23,7 +23,15 @@ const initialState = {
       },
     },
   ],
-  imageRows: [{}],
+  imageRows: [
+    {
+      passportFistPagePhoto: "",
+      passportLastPagePhoto: "",
+      passportSizePhoto: "",
+      supportiveDoc1: "",
+      supportiveDoc2: "",
+    },
+  ],
   visa: [],
 };
 
@@ -31,16 +39,12 @@ export const fetchVisas = createAsyncThunk(
   "visaSlice/fetchVisas",
   async (args, { getState }) => {
     const { token } = getState().agents;
-    if (token) {
-      const response = await axios.get(`/b2b/visa/list/${args}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      return response.data;
-    } else {
-      throw Error("Cannot Find Visa Types");
-    }
+    const response = await axios.get(`/b2b/visa/list/${args}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
   }
 );
 
@@ -65,6 +69,15 @@ const visaSlice = createSlice({
           },
         },
       ];
+      state.imageRows = [
+        {
+          passportFistPagePhoto: "",
+          passportLastPagePhoto: "",
+          passportSizePhoto: "",
+          supportiveDoc1: "",
+          supportiveDoc2: "",
+        },
+      ];
 
       for (let i = 1; i < Number(state.visaEnquiry?.traveller); i++) {
         state.rows.push({
@@ -81,23 +94,41 @@ const visaSlice = createSlice({
             year: "",
           },
         });
+
+        state.imageRows.push({
+          passportFistPagePhoto: "",
+          passportLastPagePhoto: "",
+          passportSizePhoto: "",
+          supportiveDoc1: "",
+          supportiveDoc2: "",
+        });
       }
     },
     handleRowItemChange: (state, action) => {
       state.rows[action.payload.index][action.payload.name] =
         action.payload.value;
     },
-    addImageRows: (state, action) => {
-      state.imageRows = [{}];
+    // addImageRows: (state, action) => {
+    //   state.imageRows = [
+    //     {
+    //       passportFistPagePhoto: "",
+    //       passportLastPagePhoto: "",
+    //       passportSizePhoto: "",
+    //       supportiveDoc1: "",
+    //       supportiveDoc2: "",
+    //     },
+    //   ];
 
-      const data = localStorage.getItem("visaOrder")
-        ? JSON.parse(localStorage.getItem("visaOrder"))
-        : {};
-
-      for (let i = 1; i < Number(state.visaEnquiry?.traveller); i++) {
-        state.imageRows.push({});
-      }
-    },
+    //   for (let i = 1; i < Number(state.visaEnquiry?.traveller); i++) {
+    //     state.imageRows.push({
+    //       passportFistPagePhoto: "",
+    //       passportLastPagePhoto: "",
+    //       passportSizePhoto: "",
+    //       supportiveDoc1: "",
+    //       supportiveDoc2: "",
+    //     });
+    //   }
+    // },
     handleRowImageChange: (state, action) => {
       state.imageRows[action.payload.index][action.payload.name] =
         action.payload.file;
@@ -123,7 +154,6 @@ export const {
   handleRowItemChange,
   setVisaEnquiry,
   handleDOBChange,
-  addImageRows,
   handleRowImageChange,
 } = visaSlice.actions;
 

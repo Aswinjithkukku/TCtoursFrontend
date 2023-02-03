@@ -28,16 +28,9 @@ export const getInitialData = createAsyncThunk(
 export const getInitialVisaCountryList = createAsyncThunk(
   "homeSlice/getInitialVisaCountryList",
   async (args, { getState }) => {
-    const { token } = getState().agents;
-    if (token) {
-      const response = await axios.get(`/b2b/visa/country/all`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(`/b2b/visa/country/all`);
 
       return response.data;
-    }
   }
 );
 
