@@ -67,10 +67,10 @@ function MakePaymentSection({ navigation, setNavigation }) {
                 onClick={() => setOtpModal(true)}
               >Pay</button>
             </div>
-            <div className='text-center'>
+            {/* <div className='text-center'>
               <p className='text-gray-500  font-[500]'>Purchase Cost: </p>
-              <p className='text-lightblue underline text-xl font-[750]'>{priceConversion(balance?.balance, selectedCurrency, true)} </p>
-            </div>
+              <p className='text-lightblue underline text-xl font-[750]'> </p>
+            </div> */}
             <div className=' w-[170px] '>
               <Lottie animationData={PaymentAnimation} />
             </div>

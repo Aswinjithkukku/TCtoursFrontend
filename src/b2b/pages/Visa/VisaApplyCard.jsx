@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AiOutlineContacts,
   AiOutlineMail,
@@ -9,6 +9,7 @@ import { FaWpforms } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
+import priceConversion from "../../../utils/PriceConversion"
 
 function VisaApplyCard() {
   const navigate = useNavigate();
@@ -19,8 +20,10 @@ function VisaApplyCard() {
     visaType: "",
     traveller: "",
   });
+  const [price, setPrice] = useState(0);
 
   const { visa } = useSelector((state) => state.visa);
+  const { selectedCurrency } = useSelector(state => state.visa)
 
   const onChangeHandler = (e) => {
     e.preventDefault();
@@ -31,6 +34,23 @@ function VisaApplyCard() {
     localStorage.setItem("visaEnquiry", JSON.stringify(data));
     navigate(`/b2b/visa/${id}/apply`);
   };
+
+  let day = [];
+  for (let i = 1; i <= 9; i++) {
+    day.push(i);
+  }
+
+  useEffect(() => {
+    if (data.visaType !== "") {
+      visa?.visaType?.filter((item) => {
+        if (item?._id === data?.visaType) {
+          let sum = item?.totalPrice + item?.tax;
+          sum = sum * Number(data?.traveller);
+          setPrice(sum);
+        }
+      });
+    }
+  }, [data]);
 
   return (
     <>
@@ -121,19 +141,25 @@ function VisaApplyCard() {
                     <span className="text-lg">Travellers</span>
                   </div>
                   <div className="">
-                    <input
-                      type="number"
+                    <select
                       placeholder="Travellers Number"
-                      className="px-3 w-full border-none placeholder:text-sm placeholder:text-text py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-xl text-darktext"
+                      className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
                       name="traveller"
                       value={data.traveller}
                       onChange={onChangeHandler}
                       required
-                    />
+                    >
+                      <option hidden>choose one</option>
+                      {day.map((item, index) => (
+                        <option key={index} value={item}>
+                          {item}{" "}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
                 <div className="flex justify-center font-medium lg:justify-end px-2 py-2 text-lg text-lightblue">
-                  AED 0.00
+                    {price} AED
                 </div>
                 <div className="flex justify-end px-2 my-3 text-lg text-lightblue">
                   <button

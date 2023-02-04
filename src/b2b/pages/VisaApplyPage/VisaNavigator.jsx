@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ItenarySection from "./ItenarySection";
 import TravellerDetails from "./TravellerDetails";
-import { BsArrowRightCircle } from "react-icons/bs";
+import { BsArrowRightCircle, BsCheck2Circle } from "react-icons/bs";
 import MakePaymentSection from "./MakePaymentSection";
 import UploadDetailSection from "./UploadDetailSection";
 import { useParams } from "react-router-dom";
@@ -28,49 +28,96 @@ function VisaNavigator() {
       <div className="bg-gray-300 sticky top-0 z-10">
         <div className=" text-darktext ">
           <div className=" overflow-x-auto">
-            <div className=" flex md:grid md:grid-cols-7 space-x-1 px-1 md:px-10 py-3 md:py-1 items-center ">
+            <div className=" flex md:grid md:grid-cols-11  px-1 md:px-10 py-3 md:py-1 items-center ">
               <button
-                className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-3  hover:text-lightblue  ${navigation.details || navigation.itenary || navigation.upload || navigation.payment  ? "border-b-4 border-blue text-lightblue" : ""} border-blue  hover:border-b-4 duration-300 space-x-1 `}
+                className={`col-span-2 flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-3  hover:text-lightblue  ${
+                  navigation.details ||
+                  navigation.itenary ||
+                  navigation.upload ||
+                  navigation.payment
+                    ? "border-b-4  text-lightblue"
+                    : ""
+                } border-blue  hover:border-b-4 duration-300 space-x-1 `}
               >
                 {/* <span className=''><FaWpforms /></span> */}
                 <span className="">Itenary</span>
               </button>
 
               <button
-                className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3   duration-300 space-x-1  `}
+                className={`col-span-1 flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3   duration-300 space-x-1 ${
+                  navigation.details || navigation.upload || navigation.payment
+                    ? "border-b-4 text-lightblue"
+                    : ""
+                } border-blue  `}
               >
-                <span className="">
-                  <BsArrowRightCircle />{" "}
-                </span>
+                {navigation.details ||
+                navigation.upload ||
+                navigation.payment ? (
+                  <span className="text-2xl text-lightblue">
+                    <BsCheck2Circle />
+                  </span>
+                ) : (
+                  <span className="text-2xl">
+                    <BsArrowRightCircle />{" "}
+                  </span>
+                )}
               </button>
               <button
-                className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3  hover:text-lightblue  ${navigation.details || navigation.upload || navigation.payment  ? "border-b-4 border-blue text-lightblue" : ""} border-blue hover:border-b-4 duration-300 space-x-1  `}
+                className={`col-span-2 flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3  hover:text-lightblue  ${
+                  navigation.details || navigation.upload || navigation.payment
+                    ? "border-b-4 text-lightblue"
+                    : ""
+                } border-blue hover:border-b-4 duration-300 space-x-1  `}
               >
                 {/* <span className=''><HiOutlineDocumentDuplicate /> </span> */}
                 <span className="">Traveller Details</span>
               </button>
               <button
-                className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3   duration-300 space-x-1  `}
+                className={`col-span-1 flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3   duration-300 space-x-1 ${
+                  navigation.upload || navigation.payment
+                    ? "border-b-4 text-lightblue"
+                    : ""
+                } border-blue`}
               >
-                <span className="">
-                  <BsArrowRightCircle />{" "}
-                </span>
+                {navigation.upload || navigation.payment ? (
+                  <span className="text-2xl text-lightblue">
+                    <BsCheck2Circle />
+                  </span>
+                ) : (
+                  <span className="text-2xl">
+                    <BsArrowRightCircle />{" "}
+                  </span>
+                )}
               </button>
               <button
-                className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3  hover:text-lightblue  ${ navigation.upload || navigation.payment ? "border-b-4 border-blue text-lightblue" : ""} border-blue hover:border-b-4 duration-300 space-x-1  `}
+                className={`col-span-2 flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3  hover:text-lightblue  ${
+                  navigation.upload || navigation.payment
+                    ? "border-b-4 text-lightblue"
+                    : ""
+                } border-blue hover:border-b-4 duration-300 space-x-1  `}
               >
                 {/* <span className=''><GiEncirclement/></span> */}
                 <span className="">Make Payment</span>
               </button>
               <button
-                className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3  duration-300 space-x-1  `}
+                className={`col-span-1 flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3  duration-300 space-x-1 ${
+                  navigation.upload ? "border-b-4  text-lightblue" : ""
+                } border-blue`}
               >
-                <span className="">
-                  <BsArrowRightCircle />{" "}
-                </span>
+                {navigation.upload ? (
+                  <span className="text-2xl text-lightblue">
+                    <BsCheck2Circle />
+                  </span>
+                ) : (
+                  <span className="text-2xl">
+                    <BsArrowRightCircle />{" "}
+                  </span>
+                )}
               </button>
               <button
-                className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-3  hover:text-lightblue ${ navigation.upload  ? "border-b-4  text-lightblue" : ""} border-blue hover:border-b-4 duration-300 space-x-1  `}
+                className={`col-span-2 flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-3  hover:text-lightblue ${
+                  navigation.upload ? "border-b-4  text-lightblue" : ""
+                } border-blue hover:border-b-4 duration-300 space-x-1  `}
               >
                 {/* <span className=''><FaQuoteRight /></span> */}
                 <span className="">Upload Details</span>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import axios from "../../../axios";
 import Swal from "sweetalert2";
+import { setVisaResponseData } from "../../../redux/slices/visaSlice";
 
 function UploadDetailSection({ navigation }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [passportFistPagePhoto, setPassportFistPagePhoto] = useState([]);
   const [passportLastPagePhoto, setPassportLastPagePhoto] = useState([]);
@@ -16,14 +18,8 @@ function UploadDetailSection({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { imageRows } = useSelector((state) => state.visa);
+  const { imageRows, rows, visaEnquiry } = useSelector((state) => state.visa);
   const { token } = useSelector((state) => state.agents);
-
-  console.log(passportFistPagePhoto);
-  console.log(passportLastPagePhoto);
-  console.log(passportSizePhoto);
-  console.log(supportiveDoc1);
-  console.log(supportiveDoc2);
 
   const onChangePassportFistPagePhotoHandler = (e, index) => {
     let temp_images = passportFistPagePhoto;
@@ -86,13 +82,13 @@ function UploadDetailSection({ navigation }) {
       );
 
       setIsLoading(false);
-      // dispatch(reduceWalletManipulation(activity))
+      dispatch(setVisaResponseData(response.data));
       Swal.fire({
         icon: "success",
         title: "VISA Document submission Completed Successfully",
-        timer: 1000
+        timer: 1000,
       });
-      navigate('/b2b/visa/apply/invoice')
+      navigate("/b2b/visa/apply/invoice");
     } catch (err) {
       if (err?.response?.data?.error) {
         setError(err?.response?.data?.error);
@@ -118,12 +114,73 @@ function UploadDetailSection({ navigation }) {
       {navigation.upload && (
         <form onSubmit={submitHandler} encType="multipart/form-data">
           <div className="rounded-md shadow bg-white p-6">
+            <div className="mb-2">
+              <p className="font-[300] text-xs text-[#12acfd]">
+                Note: Ensure that all names matches that in the passport
+              </p>
+              <p className="font-[300] text-xs text-[#12acfd]">
+                Ensure that all passports are valid for atleast 6 months from
+                the date of visit
+              </p>
+            </div>
             {imageRows?.map((row, index) => (
               <div key={index} className="pb-6 ">
                 <div className="py-2 text-gray-500 font-[550]  bg-gray-100 border-dashed px-1">
                   <p className="">
                     {index === 0 ? "Lead passenger" : `${index + 1} passenger`}{" "}
                   </p>
+                  <div className="flex gap-4 my-2">
+                    <span className="flex gap-2 font-[400] text-sm">
+                      <p className="">Title: </p>
+                      <p className="text-[#12acfd] capitalize">
+                        {rows[index]?.title}{" "}
+                      </p>
+                    </span>
+                    <span className="flex gap-2 font-[400] text-sm">
+                      <p className="">First Name: </p>
+                      <p className="text-[#12acfd] capitalize">
+                        {rows[index]?.firstName}
+                      </p>
+                    </span>
+                    <span className="flex gap-2 font-[400] text-sm">
+                      <p className="">Last Name: </p>
+                      <p className="text-[#12acfd] capitalize">
+                        {rows[index]?.lastName}
+                      </p>
+                    </span>
+                    <span className="flex gap-2 font-[400] text-sm">
+                      <p className="">Dob: </p>
+                      <p className="text-[#12acfd]">
+                        {rows[index]?.dateOfBirth?.day +
+                          "/" +
+                          rows[index]?.dateOfBirth?.month +
+                          "/" +
+                          rows[index]?.dateOfBirth?.year}
+                      </p>
+                    </span>
+                  </div>
+                  <div className="flex gap-4 my-2">
+                    <span className="flex gap-2 font-[400] text-sm">
+                      <p className="">Visit Date: </p>
+                      <p className="text-[#12acfd] capitalize">
+                        {visaEnquiry?.onwardDate}{" "}
+                      </p>
+                    </span>
+                    <span className="flex gap-2 font-[400] text-sm">
+                      <p className="">Password Number: </p>
+                      <p className="text-[#12acfd] capitalize">
+                        {rows[index]?.passportNo}
+                      </p>
+                    </span>
+                    <span className="flex gap-2 font-[400] text-sm">
+                      <p className="">Password Expiry: </p>
+                      <p className="text-[#12acfd] capitalize">
+                        {rows[index]?.expiryDate?.month +
+                          "/" +
+                          rows[index]?.expiryDate?.year}
+                      </p>
+                    </span>
+                  </div>
                 </div>
                 <div className="grid grid-cols-5 gap-3 mt-4" key={index}>
                   <div className=" flex flex-col">

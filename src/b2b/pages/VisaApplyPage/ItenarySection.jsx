@@ -60,7 +60,7 @@ function ItenarySection({ navigation, setNavigation }) {
               </select>
             </div>
             <div className='col-span-3'>
-              <label htmlFor="" className='label'>From Date</label>
+              <label htmlFor="" className='label'>Onward Date</label>
               <input
                 type='date'
                 className='w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none'
@@ -71,7 +71,7 @@ function ItenarySection({ navigation, setNavigation }) {
               />
             </div>
             <div className='col-span-3'>
-              <label htmlFor="" className='label'>To Date</label>
+              <label htmlFor="" className='label'>Return Date</label>
               <input
                 type='date'
                 className='w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none'
