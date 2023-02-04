@@ -11,25 +11,39 @@ import { IoIosMan, IoIosPeople } from "react-icons/io";
 import { MdPeopleAlt } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-function VisaApplyCard() {
+function VisaApplyCard({ visaDetails }) {
   const navigate = useNavigate();
 
-  const [formDate, setFormData] = useState({});
+  const [formData, setFormData] = useState({});
+  const [price, setPrice] = useState(null);
 
   const onChangeHandler = (e) => {
-    const {
+    let {
       target: { name, value },
     } = e;
+
+    if (name === "visaType") {
+      for (let x of visaDetails?.visaType) {
+        if (x._id === value) {
+          setPrice(x.visaPrice);
+        }
+      }
+    }
 
     setFormData((state) => ({ ...state, [name]: value }));
   };
 
   const onApplyVisa = (e) => {
     e.preventDefault();
-    console.log(formDate);
-    navigate("/visa/apply", { state: formDate });
+    if (
+      formData?.email &&
+      formData?.phone &&
+      formData?.visaType &&
+      formData?.travellersCount
+    ) {
+      navigate("/visa/apply", { state: { formData, visaDetails } });
+    }
   };
-
   return (
     <>
       <div className="">
@@ -61,7 +75,7 @@ function VisaApplyCard() {
                   <input
                     type="email"
                     name="email"
-                    value={formDate.email}
+                    value={formData.email}
                     onChange={onChangeHandler}
                     placeholder="Email Id"
                     className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
@@ -78,9 +92,9 @@ function VisaApplyCard() {
                 </div>
                 <div className="">
                   <input
-                    type="text"
+                    type="number"
                     name="phone"
-                    value={formDate.phone}
+                    value={formData.phone}
                     placeholder="Contact No"
                     onChange={onChangeHandler}
                     required
@@ -99,7 +113,7 @@ function VisaApplyCard() {
                   <select
                     type="s"
                     name="visaType"
-                    value={formDate.visaType}
+                    value={formData.visaType}
                     required
                     onChange={onChangeHandler}
                     placeholder="Visa type"
@@ -108,15 +122,11 @@ function VisaApplyCard() {
                     <option selected disabled>
                       choose one
                     </option>
-                    <option value={"14 Days Single Entry Tourist Visa "}>
-                      14 Days Single Entry Tourist Visa
-                    </option>
-                    <option value={"30 Days Single Entry Tourist Visa"}>
-                      30 Days Single Entry Tourist Visa
-                    </option>
-                    <option value={"90 Days Single Entry Tourist Visa"}>
-                      90 Days Single Entry Tourist Visa
-                    </option>
+                    {visaDetails?.visaType?.map((ele) => (
+                      <>
+                        <option value={ele?._id}>{ele.visaName}</option>
+                      </>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -128,21 +138,30 @@ function VisaApplyCard() {
                   <span className="text-lg">Travellers</span>
                 </div>
                 <div className="">
-                  <input
-                    type="number"
-                    placeholder="Adult number"
-                    className="px-3 w-full border-none placeholder:text-sm placeholder:text-text py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-xl text-darktext"
-                    name="traveller"
-                    min="0"
-                    value={formDate.traveller}
-                    onChange={onChangeHandler}
+                  <select
+                    name="travellersCount"
+                    value={formData.travellersCount}
                     required
-                  />
+                    onChange={onChangeHandler}
+                    placeholder="Travellers"
+                    className="cursor-pointer px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
+                  >
+                    <option selected disabled>
+                      Travellers
+                    </option>
+                    {Array(9)
+                      .fill(1)
+                      .map((ele, i) => (
+                        <option value={i + 1}>{i + 1}</option>
+                      ))}
+                  </select>
                 </div>
               </div>
 
               <div className="flex justify-center font-medium lg:justify-end px-2 py-2 text-lg text-lightblue">
-                AED 0.00
+                {price && formData?.travellersCount
+                  ? +price * +formData.travellersCount
+                  : "AED 0.00"}
               </div>
               <div className="flex justify-end px-2 my-3 text-lg text-lightblue">
                 <button

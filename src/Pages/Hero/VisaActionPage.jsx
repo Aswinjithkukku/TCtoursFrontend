@@ -4,10 +4,11 @@ import VisaNavigator from "../VisaApplyPage/VisaNavigator";
 
 function VisaActionPage() {
   const location = useLocation();
+  const { visaDetails, formData } = location.state;
 
   return (
     <div>
-      <VisaNavigator travellerInfo={location.state} />
+      <VisaNavigator travellerInfo={formData} visaDetails={visaDetails} />
     </div>
   );
 }

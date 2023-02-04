@@ -1,8 +1,13 @@
 import React from "react";
+import { useState } from "react";
 import ItenarySection from "./ItenarySection";
+import PaymentSection from "./PaymentSection";
 import TravellerDetails from "./TravellerDetails";
+import UploadDetailsSection from "./UploadDetailsSection";
 
-function VisaNavigator({ travellerInfo }) {
+function VisaNavigator({ travellerInfo, visaDetails }) {
+  const [itenaryInfo, setItenaryInfo] = useState({ ...travellerInfo });
+  console.log(visaDetails);
   return (
     <>
       <div className="bg-semisoft sticky top-0 z-10">
@@ -37,12 +42,46 @@ function VisaNavigator({ travellerInfo }) {
           </div>
         </div>
       </div>
-      <div className="main">
-        <div className="">
-          <ItenarySection travellerInfo={travellerInfo} />
+      <div className="main  flex justify-center space-x-8">
+        <div className="main">
+          <div className="">
+            <ItenarySection
+              itenaryInfo={itenaryInfo}
+              setItenaryInfo={setItenaryInfo}
+              visaTypes={visaDetails.visaType}
+            />
+          </div>
+          <div className="">
+            <TravellerDetails itenaryInfo={itenaryInfo} />
+          </div>
+          <div className="">
+            <PaymentSection itenaryInfo={itenaryInfo} />
+          </div>
+          <div className="">
+            <UploadDetailsSection itenaryInfo={itenaryInfo} />
+          </div>
         </div>
-        <div className="">
-          <TravellerDetails travellerInfo={travellerInfo} />
+        <div className="main w-[300px] pt-5 ">
+          <div className=" w-[300px] h-[210px] bg-white rounded-md p-4">
+            <h2 className="text-primaryColor text-lg ">Fare Deatils</h2>
+            <ul className="list-none  text-primaryColor flex flex-col space-y-2 py-3 text-sm">
+              <li className="flex justify-between">
+                Base Fare <span>AED 1200</span>
+              </li>
+              <li className="flex justify-between">
+                Surcharges & Taxes <span>AED 1200</span>
+              </li>
+              <li className="flex justify-between">
+                Insurance <span>AED 1200</span>
+              </li>
+              <li className="mt-2 pt-2  flex justify-between border-t-[1px] border-gray-600 border-solid">
+                Total <span>AED 1200</span>
+              </li>
+              <li className="mt-1   text-[#039BE5] flex justify-end  underline text-[9px] ">
+                Fare BreakUp
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </>
