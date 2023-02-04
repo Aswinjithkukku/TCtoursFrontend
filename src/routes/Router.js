@@ -28,6 +28,7 @@ import {
   B2BLoginPage,
   B2BRegisterPage,
   Dashboard,
+  DubaiDolphinarium,
   EditResellers,
   HeroSearch,
   MainOrder,
@@ -124,6 +125,10 @@ const ThemeRoutes = [
   {
     path: "/attractions/invoice",
     element: <AttractionOrderInvoice />,
+  },
+  {
+    path: "/attractions/invoice/dolphin",
+    element: <DubaiDolphinarium />,
   },
 ];
 

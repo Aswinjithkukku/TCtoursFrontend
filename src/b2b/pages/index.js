@@ -19,6 +19,7 @@ import VisaMarkupList from "./VisaMarkup/VisaMarkupList";
 import AttractionOrderInvoice from "./OrderInvoices/AttractionOrderInvoice";
 import AttractionInvoice from "./OrderInvoices/AttractionInvoice";
 import VisaApplySuccessPage from "./VisaApplyPage/VisaApplySuccessPage";
+import DubaiDolphinarium from "./OrderInvoices/DubaiDolphinarium";
 
 export {
   Dashboard,
@@ -42,4 +43,5 @@ export {
   AttractionOrderInvoice,
   AttractionInvoice,
   VisaApplySuccessPage,
+  DubaiDolphinarium,
 };
