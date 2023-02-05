@@ -43,6 +43,8 @@ import {
   VisaHomeScreen,
   VisaIndex,
   VisaMarkupList,
+  VisaOrderDetailsPage,
+  VisaOrderPage,
   Wallet,
 } from "../b2b/pages";
 import B2BPrivateRoute from "./B2BPrivateRoute";
@@ -98,6 +100,8 @@ const ThemeRoutes = [
       { path: "/b2b/wallet", element: <Wallet /> },
       { path: "/b2b/visa/:id", element: <VisaHomeScreen /> },
       { path: "/b2b/visa/:id/apply", element: <VisaIndex /> },
+      { path: "/b2b/visa/order", element: <VisaOrderPage /> },
+      { path: "/b2b/visa/order/details", element: <VisaOrderDetailsPage /> },
       { path: "/b2b/visa/apply/invoice", element: <VisaApplySuccessPage /> },
       { path: "/b2b/attractions/invoice", element: <AttractionInvoice /> },
     ],
