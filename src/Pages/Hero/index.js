@@ -15,6 +15,7 @@ import PaymentApprovalPage from "./PaymentApprovalPage";
 import Invoice from "./Invoice";
 import VisaActionPage from "./VisaActionPage";
 import OrderListPage from "./OrderListPage";
+import VisaApplyInvoicePage from "./VisaApplyInvoicePage";
 
 export {
   AttractionLandingPage,
@@ -33,5 +34,6 @@ export {
   PaymentApprovalPage,
   Invoice,
   VisaActionPage,
+  VisaApplyInvoicePage,
   OrderListPage,
 };

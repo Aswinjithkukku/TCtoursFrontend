@@ -19,6 +19,7 @@ import {
   Invoice,
   VisaActionPage,
   OrderListPage,
+  VisaApplyInvoicePage,
 } from "../Pages/Hero";
 import { PageNotFound, PaymentDecline } from "../Pages/Errors";
 import {
@@ -67,6 +68,7 @@ const ThemeRoutes = [
       { path: "/specialoffer", element: <SpecialOfferLandingPage /> },
       { path: "/visa", element: <VisaLandingPage /> },
       { path: "/visa/apply", element: <VisaActionPage /> },
+      { path: "/visa/invoice", element: <VisaApplyInvoicePage /> },
       { path: "/blog", element: <BlogLandingPage /> },
       { path: "/blog/detail/:slug", element: <BlogDetailsPage /> },
       { path: "/search/:slug", element: <SearchingResultPage /> },
@@ -103,7 +105,10 @@ const ThemeRoutes = [
       { path: "/b2b/visa/:id", element: <VisaHomeScreen /> },
       { path: "/b2b/visa/:id/apply", element: <VisaIndex /> },
       { path: "/b2b/visa/order", element: <VisaOrderPage /> },
-      { path: "/b2b/visa/order/:id/details", element: <VisaOrderDetailsPage /> },
+      {
+        path: "/b2b/visa/order/:id/details",
+        element: <VisaOrderDetailsPage />,
+      },
       { path: "/b2b/visa/apply/invoice", element: <VisaApplySuccessPage /> },
       { path: "/b2b/attractions/invoice", element: <AttractionInvoice /> },
     ],

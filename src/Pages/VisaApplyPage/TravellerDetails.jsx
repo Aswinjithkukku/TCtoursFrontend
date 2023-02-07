@@ -1,169 +1,71 @@
-import React from 'react'
-import { Month } from '../../utils/Month'
+import React from "react";
+import { useEffect } from "react";
+import { BsPerson } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { addRows } from "../../redux/slices/b2cvisaSlice";
+import TravellerDetailsForm from "./TravellerDetailsForm";
 
-function TravellerDetails() {
-  let limit =  new Date().getFullYear() 
-  let year = []
-  for(let i = limit ; i > limit - 100; i--){
-   year.push(i)
+function TravellerDetails({ itenaryFlag, navigation, setNavigation }) {
+  const dispatch = useDispatch();
+
+  const visa = useSelector((state) => state.b2cVisa);
+  const { rows } = visa;
+
+  useEffect(() => {
+    dispatch(addRows());
+  }, [itenaryFlag]);
+
+  let limit = new Date().getFullYear();
+  let year = [];
+  for (let i = limit; i > limit - 100; i--) {
+    year.push(i);
   }
 
-  let day = []
-  for(let i = 1 ; i <= 31; i++){
-    day.push(i)
+  let day = [];
+  for (let i = 1; i <= 31; i++) {
+    day.push(i);
   }
+
   return (
-    <div className='md:max-w-screen-xl md:mx-auto text-darktext my-5'>
-      <div className='my-2 border px-3 py-4 bg-primaryColor rounded-lg'>
-        <p className='font-[600] text-[20px] text-soft'>Traveller Details</p>
+    <div className="md:max-w-screen-xl md:mx-auto text-darktext my-5">
+      <div
+        className={`my-2 border px-3 py-4  rounded-lg ${
+          navigation?.details ? "bg-primaryColor " : "bg-slate-400"
+        } rounded-[.25rem]`}
+      >
+        <p className="font-[600] text-[20px] text-soft">Traveller Details</p>
       </div>
-      <div className='bg-white p-6 rounded-md shadow-sm'>
-        <div className='lg:grid grid-cols-12 gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2'>
-          <div className='col-span-2'>
-            <div className=''>
-              <label className='label'>Mr/Mrs</label>
+      {navigation?.details && (
+        <div className="bg-white p-6 rounded-md shadow-sm">
+          {rows?.map((ele, i) => (
+            <div className="flex space-x-4 border-dashed border-b-2 border-gray-300 py-4">
+              <div className="flex  space-x-1 w-[150px]">
+                <span>
+                  <BsPerson />
+                </span>
+                <span className="text-xs w-[100px]">
+                  {i === 0 ? "Leading Passenger" : `Traveller ${i + 1}`}
+                </span>
+              </div>
+              <div className="w-[100%] ">
+                <TravellerDetailsForm index={i} info={ele} />
+              </div>
             </div>
-            <div className=''>
-              <select
-                type='text'
-                name='gender'
-                className='w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none' >
-                <option value={"male"}>Mr.</option>
-                <option value={"female"}>Mrs.</option>
-                <option value={"other"}>Ms.</option>
-              </select>
-            </div>
-          </div>
-          <div className='col-span-5'>
-            <div className=''>
-              <label className='label'>First Name</label>
-            </div>
-            <div className=''>
-              <input
-                type='text'
-                className='w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none'
-                name='firstname'
-              />
-            </div>
-          </div>
-          <div className='col-span-5'>
-            <div className=''>
-              <label className='label'>Last Name</label>
-            </div>
-            <div className=''>
-              <input
-                type='text'
-                className='w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none'
-                name='lastname'
-              />
-            </div>
+          ))}
+          <div className=" flex justify-end mt-4">
+            <button
+              onClick={() => {
+                setNavigation({ payment: !navigation.payment });
+              }}
+              className="bg-lightblue rounded-[.25rem] text-white px-5 h-9"
+            >
+              Go To Payment
+            </button>
           </div>
         </div>
-        <div className='lg:grid grid-cols-12 gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2'>
-          <div className='col-span-4'>
-            <div className=''>
-              <label className='label'>Email</label>
-            </div>
-            <div className=''>
-              <input
-                type='text'
-                className='w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none'
-                name='email'
-              />
-            </div>
-          </div>
-          <div className='col-span-4'>
-            <div className=''>
-              <label className='label'>Country</label>
-            </div>
-            <div className=''>
-              <select
-                type='text'
-                className='w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none'
-                name='country'
-              >
-                <option >Choose Country</option>
-              </select>
-            </div>
-          </div>
-          <div className='col-span-4'>
-            <div className=''>
-              <label className='label'>Contact Number</label>
-            </div>
-            <div className=''>
-              <input
-                type='number'
-                className='w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none'
-                name='phone'
-              />
-            </div>
-          </div>
-        </div>
-        <div className='lg:grid grid-cols-12 gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2'>
-          <div className='col-span-6'>
-            <div className=''>
-              <label className='label'>Passport Number</label>
-            </div>
-            <div className=''>
-              <input
-                type='number'
-                className='w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none'
-                name='email'
-              />
-            </div>
-          </div>
-          <div className='col-span-2'>
-            <div className='w-full'>
-              <label className='label'>Date of Birth</label>
-            </div>
-            <div className=''>
-              <select
-                type='number'
-                placeholder='Day'
-                className='w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none'
-                name='email'
-              >
-                <option hidden> Day</option>
-                {day.map((item,index) => (
-                  <option key={index} value={item}>{item}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className='col-span-2 flex items-end'>
-            <div className='w-full'>
-              <select
-                type='number'
-                placeholder='Month'
-                className='w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none'
-                name='email'
-              >
-                <option hidden>Month</option>
-                {Month.map((item,index) => (
-                  <option key={index} value={item} className='capitalize'>{item} </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className='col-span-2 flex items-end'>
-            <div className='w-full'>
-              <select
-                type='number'
-                className='w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none'
-                name='email'
-              >
-                <option hidden>Year</option>
-                {year.map((item,index) => (
-                  <option key={index} value={item}>{item}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
-
-      </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default TravellerDetails
+export default TravellerDetails;

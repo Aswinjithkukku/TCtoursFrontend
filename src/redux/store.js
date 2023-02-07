@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import {
   agentExcursionReducer,
   agentReducer,
+  b2cVisaReducer,
   blogReducer,
   excursionReducer,
   generalReducer,
@@ -28,6 +29,7 @@ const store = configureStore({
     agentExcursions: agentExcursionReducer,
     wallet: walletReducer,
     visa: visaReducer,
+    b2cVisa: b2cVisaReducer,
   },
   devTools: true,
 });

@@ -223,10 +223,10 @@ function TravellerDetails({ navigation, setNavigation }) {
                       >
                         <option hidden>Day</option>
                         {day.map((item, index) => (
-                        <option key={index} value={item}>
-                          {item}
-                        </option>
-                      ))}
+                          <option key={index} value={item}>
+                            {item}
+                          </option>
+                        ))}
                       </select>
                     </div>
                     <div className="">
