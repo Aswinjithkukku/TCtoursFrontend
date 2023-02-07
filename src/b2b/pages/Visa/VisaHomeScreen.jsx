@@ -106,7 +106,7 @@ useEffect(() => {
                   </div>
                   <div className='col-span-4 relative'>
                     <div className={`lightglass  top-0 bottom-0 left-0 right-0 z-10 ${viewCard ? "fixed" : "hidden"}`} onClick={() => setViewCard(!viewCard)}></div>
-                    <div className={`${viewCard ? "fixed bottom-0 w-full z-10 bg-white" : "-bottom-full invisible h-0 overflow-hidden"} transition-all duration-500  rounded-t-3xl lg:rounded-none lg:block   lg:visible lg:h-auto  lg:sticky lg:top-20`}>
+                    <div className={`${viewCard ? "fixed bottom-0 left-0 right-0 z-10 bg-white" : "-bottom-full invisible h-0 overflow-hidden"} transition-all duration-500  rounded-t-3xl lg:rounded-none lg:block   lg:visible lg:h-auto  lg:sticky lg:top-20`}>
                       <div className='flex lg:hidden justify-end pt-5 px-7 text-4xl' onClick={() => setViewCard(!viewCard)}><AiOutlineClose /></div>
                       <VisaApplyCard />
                     </div>

@@ -18,19 +18,25 @@ const sidebarMenus = [
     link: "/b2b/wallet",
   },
   {
-    name: "Orders",
+    name: "Attraction Orders",
     icon: <HiOutlineShoppingCart />,
-    link: "/b2b/order",
+    link: "/b2b/order/attraction",
     // dropdown: [
     //   {
-    //     name: "Order History",
-    //     link: "/b2b/order",
+    //     name: "Attraction",
+    //     link: "",
     //   },
     //   {
-    //     name: "Sub-Agent History",
-    //     link: "/b2b/order/sub",
+    //     name: "Visa",
+    //     link: "",
     //   },
     // ],
+  },
+  
+  {
+    name: "Visa Orders",
+    icon: <BsNewspaper />,
+    link: "/b2b/visa/order",
   },
   {
     name: "Markups",
@@ -61,11 +67,6 @@ const sidebarMenus = [
         link: "/b2b/resellers",
       },
     ],
-  },
-  {
-    name: "Visa Orders",
-    icon: <BsNewspaper />,
-    link: "/b2b/visa/order",
   },
   {
     name: "Settings",

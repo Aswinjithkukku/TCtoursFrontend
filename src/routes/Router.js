@@ -18,6 +18,7 @@ import {
   PaymentApprovalPage,
   Invoice,
   VisaActionPage,
+  OrderListPage,
 } from "../Pages/Hero";
 import { PageNotFound, PaymentDecline } from "../Pages/Errors";
 import {
@@ -31,7 +32,7 @@ import {
   DubaiDolphinarium,
   EditResellers,
   HeroSearch,
-  MainOrder,
+  AttractionOrder,
   MarkUpList,
   NewRegisters,
   PaymentApproval,
@@ -70,10 +71,11 @@ const ThemeRoutes = [
       { path: "/blog/detail/:slug", element: <BlogDetailsPage /> },
       { path: "/search/:slug", element: <SearchingResultPage /> },
       { path: "/payment", element: <PaymentPage /> },
-      { path: "/payment/approval", element: <PaymentApprovalPage /> },
+      { path: "/payment/approval/:id", element: <PaymentApprovalPage /> },
       { path: "/Profile", element: <ProfileMainPage /> },
       { path: "/Profile/settings", element: <ProfileSettingsPage /> },
       { path: "/Profile/password", element: <ProfilePasswordPage /> },
+      { path: "/order", element: <OrderListPage /> },
     ],
   },
   {
@@ -96,12 +98,12 @@ const ThemeRoutes = [
       { path: "/b2b/markup/attraction", element: <MarkUpList /> },
       { path: "/b2b/markup/visa", element: <VisaMarkupList /> },
       { path: "/b2b/settings", element: <Settings /> },
-      { path: "/b2b/order", element: <MainOrder /> },
+      { path: "/b2b/order/attraction", element: <AttractionOrder /> },
       { path: "/b2b/wallet", element: <Wallet /> },
       { path: "/b2b/visa/:id", element: <VisaHomeScreen /> },
       { path: "/b2b/visa/:id/apply", element: <VisaIndex /> },
       { path: "/b2b/visa/order", element: <VisaOrderPage /> },
-      { path: "/b2b/visa/order/details", element: <VisaOrderDetailsPage /> },
+      { path: "/b2b/visa/order/:id/details", element: <VisaOrderDetailsPage /> },
       { path: "/b2b/visa/apply/invoice", element: <VisaApplySuccessPage /> },
       { path: "/b2b/attractions/invoice", element: <AttractionInvoice /> },
     ],
@@ -128,6 +130,10 @@ const ThemeRoutes = [
   },
   {
     path: "/attractions/invoice",
+    element: <AttractionOrderInvoice />,
+  },
+  {
+    path: "/b2b/attractions/invoice",
     element: <AttractionOrderInvoice />,
   },
   {

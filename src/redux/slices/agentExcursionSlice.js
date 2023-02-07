@@ -67,28 +67,6 @@ const agentExcursionSlice = createSlice({
       state.agentRecievedActivities[action.payload.index][action.payload.sum] =
         action.payload.value;
     },
-    //   setFavourites: (state, action) => {
-    //     var array = [];
-    //     array = JSON.parse(localStorage.getItem("favourites")) || [];
-    //     const isItemExist = array.find(
-    //       (item) => item?._id === action.payload._id
-    //     );
-    //     if (isItemExist) {
-    //       const result = array.filter((item) => item?._id !== action.payload._id);
-    //       array = result;
-    //       state.favourites = array;
-    //       localStorage.setItem("favourites", JSON.stringify(array));
-    //     } else {
-    //       array = [action.payload, ...array];
-    //       state.favourites = array;
-    //       localStorage.setItem("favourites", JSON.stringify(array));
-    //     }
-    //   },
-    //   stateFavourites: (state, action) => {
-    //     state.favourites = localStorage.getItem("favourites")
-    //       ? JSON.parse(localStorage.getItem("favourites"))
-    //       : [];
-    //   },
 
     setSelectionArray: (state, action) => {
       state.agentSelectedActivities = action.payload;
@@ -162,8 +140,6 @@ const agentExcursionSlice = createSlice({
 
 export const {
   setActivities,
-  // setFavourites,
-  // stateFavourites,
   setSelectionArray,
   addToCart,
   removeFromCart,

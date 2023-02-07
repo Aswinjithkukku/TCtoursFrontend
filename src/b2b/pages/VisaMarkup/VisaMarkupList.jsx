@@ -32,7 +32,7 @@ function VisaMarkupList() {
   useEffect(() => {
     fetchAllVisa()
   },[])
-  console.log(allVisa);
+  
   return (
     <>
       <div className=' '>

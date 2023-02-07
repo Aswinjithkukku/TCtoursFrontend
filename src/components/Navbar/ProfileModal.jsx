@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { logoutUser } from '../../redux/slices/usersSlice'
 import { useNavigate } from 'react-router-dom'
 import { useHandleClickOutside } from '../../hooks'
+import { BsFillBagCheckFill } from 'react-icons/bs'
 
 function ProfileModal({ profileView, setProfileView }) {
   const navigate = useNavigate()
@@ -39,6 +40,13 @@ function ProfileModal({ profileView, setProfileView }) {
         }}>
           <span className='text-xl'><FaUserShield /></span>
           <span className=''>Update Password</span>
+        </div>
+        <div className='flex space-x-3 items-center hover:bg-darktext px-5 py-3 cursor-pointer hover:text-text' onClick={() => {
+          navigate('/order')
+          setProfileView(!profileView)
+        }}>
+          <span className='text-xl'><BsFillBagCheckFill /></span>
+          <span className=''>Orders</span>
         </div>
         <div className='flex space-x-3 items-center hover:bg-darktext px-5 py-3 cursor-pointer hover:text-text' onClick={() => {
           navigate('/profile')

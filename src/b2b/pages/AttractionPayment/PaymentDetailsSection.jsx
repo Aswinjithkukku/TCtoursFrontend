@@ -73,7 +73,7 @@ function PaymentDetailsSection() {
             
             if (err?.response?.data?.error) {
                 setError(err?.response?.data?.error)
-                Swal.fire({
+                await Swal.fire({
                     icon: 'error',
                     title: 'Something went wrong!',
                     text: error,
@@ -210,9 +210,6 @@ function PaymentDetailsSection() {
                             />
                         </div>
                     </div>
-                    {/* <div className='flex justify-end' >
-                        <button type='submit' className='text-sm text-light bg-lightblue px-3 py-1 rounded-[4px]'>Submit</button>
-                    </div> */}
                 </form>
             </div>
             <div className='bg-light  w-full px-5 py-10 rounded-2xl lg:my-5'>
@@ -236,24 +233,6 @@ function PaymentDetailsSection() {
                     </div>
                 )}
             </div>
-            {/* <div className='bg-light rounded-2xl w-full p-5 space-y-5'>
-                <div className='border-b pb-3 my-2 flex justify-between'>
-                    <h2 className='text-xl font-medium'>Choose Payment Method</h2>
-                    <div className='space-x-2 bg-[#E6e6e6] rounded'>
-                        <button className={` ${paymentSection.paypal ? "bg-lightblue text-white" : "text-darktext font-medium"} w-[100px] py-1 rounded`}
-                            onClick={() => setPaymentSection({ paypal: true, razorpay: false })}>Paypal</button>
-                        <button className={`${paymentSection.razorpay ? "bg-lightblue text-white" : "text-darktext font-medium"} w-[100px] py-1 rounded`}
-                            onClick={() => setPaymentSection({ paypal: false, razorpay: true })}>Razor Pay</button>
-                    </div>
-                </div>
-                {paymentSection.paypal && (
-                    <PaypalComponent />
-                )}
-                {paymentSection.razorpay && (
-                    <RazorpayComponent />
-                )}
-
-            </div> */}
             <div className='bg-light my-5 p-7 rounded-2xl lg:flex '>
                 <div className='{" "}'>
                     <span className='cursor-default '>By Clicking Pay Now You agree that you have read and understood our {" "}</span>
@@ -261,7 +240,7 @@ function PaymentDetailsSection() {
                     {loading ? (
                         <BtnLoader />
                     ) : (
-                        <p className='font-[500] text-darktext'>Your Wallet Balance is {priceConversion(balance?.balance, selectedCurrency, true)} </p>
+                        <p className='font-[500] text-darktext'>Your Wallet Balance is {priceConversion(balance, selectedCurrency, true)} </p>
                     )}
                 </div>
                 <div className='text-center fixed lg:static bottom-0 left-0 right-0 rounded-t-3xl lg:rounded-none py-8 bg-light lg:bg-none px-10 lg:px-0 z-10'>

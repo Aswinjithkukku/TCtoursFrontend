@@ -9,7 +9,7 @@ import PaymentHomePage from "./AttractionPayment/PaymentHomePage";
 import MarkUpList from "./MarkUp/MarkUpList";
 import EditResellers from "./Resllers/EditResellers";
 import Settings from "./Settings/Settings";
-import MainOrder from "./Order/MainOrder";
+import AttractionOrder from "./Order/AttractionOrder";
 import Wallet from "./Wallet/Wallet";
 import PaymentApproval from "./PaymentApproval/PaymentApproval";
 import SingleSubAgent from "./Resllers/SingleSubAgent";
@@ -35,7 +35,7 @@ export {
   MarkUpList,
   EditResellers,
   Settings,
-  MainOrder,
+  AttractionOrder,
   Wallet,
   PaymentApproval,
   SingleSubAgent,

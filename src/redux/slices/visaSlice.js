@@ -17,6 +17,7 @@ const initialState = {
       contactNo: "",
       passportNo: "",
       passportExpiry: {
+        day: "",
         month: "",
         year: "",
       },
@@ -68,6 +69,7 @@ const visaSlice = createSlice({
           contactNo: "",
           passportNo: "",
           expiryDate: {
+            day: "",
             month: "",
             year: "",
           },
@@ -98,6 +100,7 @@ const visaSlice = createSlice({
           contactNo: "",
           passportNo: "",
           expiryDate: {
+            day: "",
             month: "",
             year: "",
           },

@@ -38,13 +38,13 @@ export default function Pagination({
                                 className={
                                     "h-[32px] min-w-[32px] px-[10px] " +
                                     (skip === index
-                                        ? "font-medium  "
+                                        ? "font-medium  bg-primaryColor text-white"
                                         : "bg-transparent text-textColor font-normal border hover:bg-[#f3f6f9] ")
                                 }
                                 key={index}
                                 onClick={() => updateSkip(index)}
                             >
-                                {index + 1}1
+                                {index + 1}
                             </button>
                         );
                     }

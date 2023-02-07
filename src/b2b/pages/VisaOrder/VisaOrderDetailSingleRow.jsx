@@ -1,39 +1,39 @@
 import React, { useState } from "react";
 
-function VisaOrderDetailSInglePage() {
+function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isUploadDropdownOpen, setIsUploadDropdownOpen] = useState(false);
   return (
     <>
       <tr onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
         <td className="capitalize p-3 text-[14px] text-textColor">
-          {/* {index + 1}{" "} */}1
+          {index + 1}{" "}
         </td>
         <td className="capitalize p-3 text-[14px] text-textColor">
-          {/* {item?.title}{" "} */}rtrt
+          {item?.title}{" "}
         </td>
         <td className="capitalize p-3 text-[14px] text-textColor">
-          {/* {item?.firstName}{" "} */}fdfdg
+          {item?.firstName}{" "}
         </td>
         <td className="capitalize p-3 text-[14px] text-textColor">
-          {/* {item?.lastName}{" "} */}fgfgfg
+          {item?.lastName}{" "}
         </td>
         <td className="capitalize p-3 text-[14px] text-textColor">
-          {/* {item?.passportNo}{" "} */}scsdsd
+          {item?.passportNo}{" "}
         </td>
         <td className="capitalize p-3 text-[14px] text-textColor">
-          {/* {item?.country?.countryName}{" "} */}sdsds
+          {item?.country?.countryName}{" "}
         </td>
         <td className="capitalize p-3 text-[14px] text-textColor">
-          {/* {item?.contactNo}{" "} */}sddds
+          {item?.contactNo}{" "}
         </td>
         <td className="capitalize p-3 text-[14px] text-textColor">
-          {/* {item?.contactNo}{" "} */}Not Uploaded
+          {visaOrderDetail?.isDocumentUplaoded === true ? "Uploaded" : "Not Uploaded"}{" "}
         </td>
         <td className="capitalize p-3 text-[14px] underline text-lightblue"
         onClick={() => setIsUploadDropdownOpen(!isUploadDropdownOpen)}
         >
-          {/* {item?.contactNo}{" "} */}Upload
+          Upload
         </td>
       </tr>
       <>
@@ -105,7 +105,7 @@ function VisaOrderDetailSInglePage() {
                         Title
                       </span>
                       <span className="block text-[15px] capitalize">
-                        {/* {item?.title} */} 5454
+                        {item?.title}
                       </span>
                     </div>
                     <div className="">
@@ -113,7 +113,7 @@ function VisaOrderDetailSInglePage() {
                         First Name
                       </span>
                       <span className="block text-[14px]">
-                        {/* {item?.firstName} */} 5454
+                        {item?.firstName}
                       </span>
                     </div>
                     <div className="">
@@ -121,7 +121,7 @@ function VisaOrderDetailSInglePage() {
                         Last Name
                       </span>
                       <span className="block text-[15px]">
-                        {/* {item?.lastName} */}64646
+                        {item?.lastName}
                       </span>
                     </div>
                   </div>
@@ -132,12 +132,11 @@ function VisaOrderDetailSInglePage() {
                         Date Of Birth
                       </span>
                       <span className="block text-[15px]">
-                        {/* {item?.dateOfBirth?.day +
+                        {item?.dateOfBirth?.day +
                         " / " +
                         item?.dateOfBirth?.month +
                         " / " +
-                        item?.dateOfBirth?.year} */}
-                        4455454
+                        item?.dateOfBirth?.year}
                       </span>
                     </div>
                     <div className="">
@@ -145,7 +144,7 @@ function VisaOrderDetailSInglePage() {
                         Contact Number
                       </span>
                       <span className="block text-[15px] capitalize">
-                        {/* {item?.contactNo} */} 45454
+                        {item?.contactNo}
                       </span>
                     </div>
                     <div className="">
@@ -153,7 +152,7 @@ function VisaOrderDetailSInglePage() {
                         Passport Number
                       </span>
                       <span className="block text-[14px]">
-                        {/* {item?.passportNo} */}465465
+                        {item?.passportNo}
                       </span>
                     </div>
                   </div>
@@ -164,10 +163,9 @@ function VisaOrderDetailSInglePage() {
                         Passport Expiry
                       </span>
                       <span className="block text-[15px]">
-                        {/* {item?.expiryDate?.month +
+                        {item?.expiryDate?.month +
                         " / " +
-                        item?.expiryDate?.year} */}
-                        1212
+                        item?.expiryDate?.year}
                       </span>
                     </div>
                   </div>
@@ -175,10 +173,10 @@ function VisaOrderDetailSInglePage() {
                   <div className="mt-4">
                     <div className="w-[130px] h-[130px] overflow-hidden rounded-md relative">
                       <img
-                        //   src={
-                        //     process.env.REACT_APP_SERVER_URL +
-                        //     item?.documents?.passportFistPagePhoto
-                        //   }
+                          src={
+                            process.env.REACT_APP_SERVER_URL +
+                            item?.documents?.passportFistPagePhoto
+                          }
                         alt=""
                         className="w-full h-full object-cover"
                       />
@@ -186,18 +184,18 @@ function VisaOrderDetailSInglePage() {
                   </div>
                   <div className="mt-4">
                     <a
-                    // href={
-                    //   process.env.REACT_APP_SERVER_URL +
-                    //   item?.documents?.passportLastPagePhoto
-                    // }
-                    // download
+                    href={
+                      process.env.REACT_APP_SERVER_URL +
+                      item?.documents?.passportLastPagePhoto + ".jpg"
+                    }
+                    download
                     >
                       <div className="w-[130px] h-[130px] overflow-hidden rounded-md relative">
                         <img
-                          // src={
-                          //   process.env.REACT_APP_SERVER_URL +
-                          //   item?.documents?.passportLastPagePhoto
-                          // }
+                          src={
+                            process.env.REACT_APP_SERVER_URL +
+                            item?.documents?.passportLastPagePhoto
+                          }
                           alt=""
                           className="w-full h-full object-cover"
                         />
@@ -207,10 +205,10 @@ function VisaOrderDetailSInglePage() {
                   <div className="mt-4">
                     <div className="w-[130px] h-[130px] overflow-hidden rounded-md relative">
                       <img
-                        //   src={
-                        //     process.env.REACT_APP_SERVER_URL +
-                        //     item?.documents?.passportSizePhoto
-                        //   }
+                          src={
+                            process.env.REACT_APP_SERVER_URL +
+                            item?.documents?.passportSizePhoto
+                          }
                         alt=""
                         className="w-full h-full object-cover"
                       />
@@ -219,10 +217,10 @@ function VisaOrderDetailSInglePage() {
                   <div className="mt-4">
                     <div className="w-[130px] h-[130px] overflow-hidden rounded-md relative">
                       <img
-                        //   src={
-                        //     process.env.REACT_APP_SERVER_URL +
-                        //     item?.documents?.supportiveDoc1
-                        //   }
+                          src={
+                            process.env.REACT_APP_SERVER_URL +
+                            item?.documents?.supportiveDoc1
+                          }
                         alt=""
                         className="w-full h-full object-cover"
                       />
@@ -231,10 +229,10 @@ function VisaOrderDetailSInglePage() {
                   <div className="mt-4">
                     <div className="w-[130px] h-[130px] overflow-hidden rounded-md relative">
                       <img
-                        //   src={
-                        //     process.env.REACT_APP_SERVER_URL +
-                        //     item?.documents?.supportiveDoc2
-                        //   }
+                          src={
+                            process.env.REACT_APP_SERVER_URL +
+                            item?.documents?.supportiveDoc2
+                          }
                         alt=""
                         className="w-full h-full object-cover"
                       />
@@ -250,4 +248,4 @@ function VisaOrderDetailSInglePage() {
   );
 }
 
-export default VisaOrderDetailSInglePage;
+export default VisaOrderDetailSingleRow;

@@ -38,6 +38,15 @@ function VisaNavigator() {
                     ? "border-b-4  text-lightblue"
                     : ""
                 } border-blue  hover:border-b-4 duration-300 space-x-1 `}
+                onClick={() => {
+                  navigation.details &&
+                    setNavigation({
+                      itenary: true,
+                      details: false,
+                      payment: false,
+                      upload: false,
+                    }) 
+                }}
               >
                 {/* <span className=''><FaWpforms /></span> */}
                 <span className="">Itenary</span>

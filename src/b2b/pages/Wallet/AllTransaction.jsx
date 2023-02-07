@@ -22,7 +22,7 @@ function AllTransaction() {
         </tr>
       </thead>
       <tbody className="text-sm">
-        {transaction?.transactions?.map((item, index) => (
+        {transaction?.result?.data?.map((item, index) => (
           <tr className="border-b border-tableBorderColor" key={index} >
             <td className="p-3">{item?._id?.slice(0, 10)} </td>
             <td className="p-3 capitalize">{item?.paymentProcessor}</td>

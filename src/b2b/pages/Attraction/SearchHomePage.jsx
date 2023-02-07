@@ -4,7 +4,7 @@ import { GiIsland } from 'react-icons/gi'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategories } from '../../../redux/slices/excursionSlice'
 
-function SearchHomePage({ viewCategory, setViewCategory, setCategory, setSearch }) {
+function SearchHomePage({  setCategory, setSearch }) {
     const dispatch = useDispatch()
 
     const [viewFilter, setViewFilter] = useState(false)
@@ -16,10 +16,6 @@ function SearchHomePage({ viewCategory, setViewCategory, setCategory, setSearch 
         dispatch(getCategories())
     }, [dispatch])
 
-    // const searchHandler = (e) => {
-    //     e.preventDefault()
-    //     setSearch(keyword)
-    // }
     useEffect(() => {
         setSearch(keyword)
     },[keyword])

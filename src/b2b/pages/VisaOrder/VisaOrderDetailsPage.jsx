@@ -1,10 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsFillFileEarmarkPersonFill } from 'react-icons/bs'
 import { GrNotes } from 'react-icons/gr'
-import { Link } from 'react-router-dom'
-import VisaOrderDetailSInglePage from './VisaOrderDetailSInglePage'
+import { useSelector } from 'react-redux'
+import { Link, useParams } from 'react-router-dom'
+import axios from '../../../axios'
+import VisaOrderDetailSingleRow from './VisaOrderDetailSingleRow'
+import priceConversion from '../../../utils/PriceConversion'
 
 function VisaOrderDetailsPage() {
+  const { id } = useParams()
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [visaOrderDetail, setVisaOrderDetail] = useState({})
+
+  const { token } = useSelector(state => state.agents)
+  const { selectedCurrency } = useSelector(state => state.home)
+
+  const fetchSingleVisaOrder = async () => {
+    try {
+      setIsLoading(true);
+      if (token) {
+        const response = await axios.get(`/b2b/visa/application/list/${id}`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+        setIsLoading(false);
+        setVisaOrderDetail(response.data || []);
+      }
+    } catch (err) {
+      console.log(err);
+      throw Error("Cant find Order Detail");
+    }
+  };
+  
+  useEffect(() => {
+    fetchSingleVisaOrder()
+  },[])
+
   return (
     <div>
       <div className="bg-white flex items-center justify-between gap-[10px] px-6 shadow-sm border-t py-2">
@@ -44,7 +77,7 @@ function VisaOrderDetailsPage() {
                     Visa Name
                   </span>
                   <span className="block text-[15px]">
-                    {/* {singleVisaApplication?.visaType?.visaName} */}bbh
+                    {visaOrderDetail?.visaType?.visaName}
                   </span>
                 </div>
                 <div className="mt-3">
@@ -52,10 +85,10 @@ function VisaOrderDetailsPage() {
                     Visa Country
                   </span>
                   <span className="block text-[15px] capitalize">
-                    {/* {
-                      singleVisaApplication?.visaType?.visa?.country
+                    {
+                      visaOrderDetail?.visaType?.visa?.country
                         ?.countryName
-                    } */}kjkj
+                    }
                   </span>
                 </div>
                 <div className="mt-3">
@@ -63,9 +96,9 @@ function VisaOrderDetailsPage() {
                     Visa Age Limit
                   </span>
                   <span className="block text-[15px]">
-                    {/* {singleVisaApplication?.visaType?.ageFrom +
+                    {visaOrderDetail?.visaType?.ageFrom +
                       " - " +
-                      singleVisaApplication?.visaType?.ageTo} */}hjhjh
+                      visaOrderDetail?.visaType?.ageTo}
                   </span>
                 </div>
                 <div className="mt-3">
@@ -73,7 +106,7 @@ function VisaOrderDetailsPage() {
                     Entry Type
                   </span>
                   <span className="block text-[15px] capitalize">
-                    {/* {singleVisaApplication?.visaType?.entryType} */}jhjh
+                    {visaOrderDetail?.visaType?.entryType}
                   </span>
                 </div>
                 <div className="mt-3">
@@ -81,9 +114,9 @@ function VisaOrderDetailsPage() {
                     Validity Time
                   </span>
                   <span className="block text-[15px]">
-                    {/* {singleVisaApplication?.visaType?.validity +
+                    {visaOrderDetail?.visaType?.validity +
                       " " +
-                      singleVisaApplication?.visaType?.validityTimeFormat} */}jhjhj
+                      visaOrderDetail?.visaType?.validityTimeFormat}
                   </span>
                 </div>
                 <div className="mt-3">
@@ -91,9 +124,9 @@ function VisaOrderDetailsPage() {
                     Stay period
                   </span>
                   <span className="block text-[15px]">
-                    {/* {singleVisaApplication?.visaType?.stayPeriod +
+                    {visaOrderDetail?.visaType?.stayPeriod +
                       " " +
-                      singleVisaApplication?.visaType?.stayPeriodFormat} */}nhjgjjgh
+                      visaOrderDetail?.visaType?.stayPeriodFormat}
                   </span>
                 </div>
                 <div className="mt-3">
@@ -101,9 +134,9 @@ function VisaOrderDetailsPage() {
                     Processing Time
                   </span>
                   <span className="block text-[15px]">
-                    {/* {singleVisaApplication?.visaType?.processingTime +
+                    {visaOrderDetail?.visaType?.processingTime +
                       " " +
-                      singleVisaApplication?.visaType?.processingTimeFormat} */}mjbjbbj
+                      visaOrderDetail?.visaType?.processingTimeFormat}
                   </span>
                 </div>
                 <div className="mt-3">
@@ -111,11 +144,11 @@ function VisaOrderDetailsPage() {
                     Visa Price
                   </span>
                   <span className="block text-[15px]">
-                    {/* {priceConversion(
-                      singleVisaApplication?.visaType?.visaPrice,
+                    {priceConversion(
+                      visaOrderDetail?.visaType?.visaPrice,
                       selectedCurrency,
                       true
-                    )} */}kjhjh
+                    )}
                   </span>
                 </div>
               </div>
@@ -133,7 +166,7 @@ function VisaOrderDetailsPage() {
                     Reference Number
                   </span>
                   <span className="block text-[15px]">
-                  {/* {singleVisaApplication?.referenceNumber} */}bjhjhj
+                  {visaOrderDetail?.referenceNumber}
                   </span>
                 </div>
                 <div className="">
@@ -141,7 +174,7 @@ function VisaOrderDetailsPage() {
                     Reseller
                   </span>
                   <span className="block text-[15px]">
-                    {/* {singleVisaApplication?.reseller?.name} */}njhjhj
+                    {visaOrderDetail?.reseller?.name}
                   </span>
                 </div>
                 <div className="">
@@ -149,7 +182,7 @@ function VisaOrderDetailsPage() {
                     Reseller Agent Code
                   </span>
                   <span className="block text-[15px]">
-                    {/* {singleVisaApplication?.reseller?.agentCode} */}hghghg
+                    {visaOrderDetail?.reseller?.agentCode}
                   </span>
                 </div>
                 <div className="">
@@ -157,7 +190,7 @@ function VisaOrderDetailsPage() {
                     Reseller Company Name
                   </span>
                   <span className="block text-[15px] capitalize">
-                    {/* {singleVisaApplication?.reseller?.companyName} */}hghghg
+                    {visaOrderDetail?.reseller?.companyName}
                   </span>
                 </div>
                 <div className="mt-3">
@@ -165,7 +198,7 @@ function VisaOrderDetailsPage() {
                     Reseller Phone Number
                   </span>
                   <span className="block text-[15px]">
-                    {/* {singleVisaApplication?.reseller?.phoneNumber} */}jhjhj
+                    {visaOrderDetail?.reseller?.phoneNumber}
                   </span>
                 </div>
                 <div className="mt-3">
@@ -173,7 +206,7 @@ function VisaOrderDetailsPage() {
                     Applied at
                   </span>
                   <span className="block text-[15px]">
-                    {/* {singleVisaApplication?.createdAt?.slice(0, 10)} */}jgghg
+                    {visaOrderDetail?.createdAt?.slice(0, 10)}
                   </span>
                 </div>
                 <div className="mt-3">
@@ -181,9 +214,9 @@ function VisaOrderDetailsPage() {
                     Document Status
                   </span>
                   <span className="block text-[15px]">
-                    {/* {singleVisaApplication?.isDocumentUplaoded === true
+                    {visaOrderDetail?.isDocumentUplaoded === true
                       ? "Uploaded"
-                      : "Not Uploaded"} */},kjhkhjkh
+                      : "Not Uploaded"}
                   </span>
                 </div>
                 <div className="mt-3">
@@ -191,7 +224,7 @@ function VisaOrderDetailsPage() {
                     Total Amount
                   </span>
                   <span className="text-[15px] flex items-center gap-[10px]">
-                    {/* {singleVisaApplication?.totalAmount} */}hjh
+                    {visaOrderDetail?.totalAmount}
                   </span>
                 </div>
                 <div className="mt-3">
@@ -199,7 +232,7 @@ function VisaOrderDetailsPage() {
                     Status
                   </span>
                   <span className="text-[15px] flex items-center gap-[10px] capitalize">
-                    {/* {singleVisaApplication?.status} */}hjhjhjh
+                    {visaOrderDetail?.status}
                   </span>
                 </div>
               </div>
@@ -223,7 +256,9 @@ function VisaOrderDetailsPage() {
                   </tr>
                 </thead>
                 <tbody className="text-sm">
-                  <VisaOrderDetailSInglePage />
+                  {visaOrderDetail?.travellers?.map((item,index) => (
+                  <VisaOrderDetailSingleRow key={index} item={item} index={index} visaOrderDetail={visaOrderDetail} />
+                  ))}
                 </tbody>
               </table>
             </div>
