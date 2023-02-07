@@ -5,6 +5,7 @@ import { AiFillMail } from 'react-icons/ai'
 import { CgUserlane } from 'react-icons/cg'
 import { FaUserCog, FaUserShield } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { BsFillBagCheckFill } from 'react-icons/bs'
 
 function ProfileSidebar() {
 
@@ -44,6 +45,12 @@ function ProfileSidebar() {
           <div className='flex py-2 items-center space-x-2 hover:bg-semisoft cursor-pointer px-5 border-b'>
             <span className=''><FaUserShield /></span>
             <span className=''>Update Password</span>
+          </div>
+        </Link>
+        <Link to='/order'>
+          <div className='flex py-2 items-center space-x-2 hover:bg-semisoft cursor-pointer px-5 border-b'>
+            <span className=''><BsFillBagCheckFill /></span>
+            <span className=''>Orders</span>
           </div>
         </Link>
       </div>

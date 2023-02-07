@@ -28,11 +28,6 @@ function VisaOtpModal({ setOtpModal, order, setNavigation }) {
 
 
   const { token } = useSelector(state => state.agents)
-  // const { agentExcursionCart } = useSelector(state => state.agentExcursions)
-  // const { balance } = useSelector(state => state.wallet)
-  // const activity = agentExcursionCart.reduce((sum,item) => {
-  //   return sum + item?.price
-  // },0)
 
   const submitHandler = async (e) => {
     try {
@@ -66,7 +61,7 @@ function VisaOtpModal({ setOtpModal, order, setNavigation }) {
 
       if (err?.response?.data?.error) {
         setError(err?.response?.data?.error)
-        Swal.fire({
+        await Swal.fire({
           icon: 'error',
           title: 'Something went wrong!',
           text: error,

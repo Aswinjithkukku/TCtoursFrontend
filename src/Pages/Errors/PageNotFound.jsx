@@ -7,7 +7,7 @@ function PageNotFound() {
   const navigate = useNavigate()
   return (
 
-    <div className='h-[100vh]  bg-slate-500'>
+    <div className='h-[100vh] bg-slate-500'>
       <div className='flex justify-center items-center h-full'>
         <div className='w-[40em] '>
           <Lottie animationData={ErrorAnimation} />

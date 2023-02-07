@@ -3,7 +3,8 @@ import axios from "../../axios";
 
 const initialState = {
   walletloading: false,
-  balance: {},
+  balance: 0,
+  pendingBalance: 0,
   transaction: [],
 };
 
@@ -54,7 +55,7 @@ const walletSlice = createSlice({
       state.balance =  state.balance - action.payload
     },
     addWalletManipulation: (state, action) => {
-      state.balance =  state.balance - action.payload
+      state.balance =  state.balance + action.payload
     },
   },
   extraReducers: {
@@ -63,7 +64,8 @@ const walletSlice = createSlice({
     },
     [getWalletBalance.fulfilled]: (state, action) => {
       state.loading = false;
-      state.balance = action.payload;
+      state.balance = action.payload?.balance;
+      state.pendingBalance = action.payload?.pendingBalance;
     },
     [getTransaction.fulfilled]: (state, action) => {
       state.loading = false;

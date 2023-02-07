@@ -14,6 +14,7 @@ import ProfilePasswordPage from "./ProfilePasswordPage";
 import PaymentApprovalPage from "./PaymentApprovalPage";
 import Invoice from "./Invoice";
 import VisaActionPage from "./VisaActionPage";
+import OrderListPage from "./OrderListPage";
 import VisaApplyInvoicePage from "./VisaApplyInvoicePage";
 
 export {
@@ -34,4 +35,5 @@ export {
   Invoice,
   VisaActionPage,
   VisaApplyInvoicePage,
+  OrderListPage,
 };

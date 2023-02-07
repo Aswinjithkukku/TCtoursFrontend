@@ -41,6 +41,9 @@ function ActivityTable({ item, index }) {
                 index,
             },
         ))
+    }, [item.adult, item.child, item.infant, agentRecievedActivities, dispatch])
+
+    useEffect(() => {
         dispatch(setActivities(
             {
                 value: date,
@@ -48,7 +51,7 @@ function ActivityTable({ item, index }) {
                 index,
             },
         ))
-    }, [item.adult, item.child, item.infant, agentRecievedActivities, dispatch])
+    },[dispatch])
 
     useEffect(() => {
 
@@ -78,7 +81,7 @@ function ActivityTable({ item, index }) {
                 <input type='date' className=''
                     name='date'
                     value={item.date}
-                // onChange={(e) => handleChange({ value: e.target.value , name: e.target.name, index })}
+                onChange={(e) => handleChange({ value: e.target.value , name: e.target.name, index })}
                 />
             </td>
             <td className='py-3 px-1 '>

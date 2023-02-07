@@ -93,18 +93,18 @@ function DetailsCard() {
 
                             <div className='space-y-1'>
                                 <div className='flex items-center space-x-2 text-darktext'>
-                                    <span className='text-lg '>Tours </span>
+                                    <span className='text-lg text-gray-500 font-[700]'>Cart </span>
                                 </div>
 
                                 <div>
-                                    {selectedActivities?.map((item, index) => (
+                                    {excursionCart?.map((item, index) => (
                                         <div className='flex justify-between items-center gap-2 space-y-1 text-sm' key={index}>
                                             <span className='text-darktext ml-1'>{item?.isChecked === true && (item?.name)}</span>
                                             <span className='whitespace-nowrap flex items-center'>
                                                 {item?.isChecked === true && priceConversion(item?.price, selectedCurrency, true)}
-                                                {/* <span className='ml-1 text-main'
+                                                <span className='ml-1 text-main'
                                                 onClick={() => dispatch(removeFromCart(item?._id))}
-                                                ><AiOutlineClose /></span> */}
+                                                ><AiOutlineClose /></span>
                                             </span>
                                         </div>
                                     ))}

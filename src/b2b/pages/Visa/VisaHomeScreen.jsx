@@ -139,7 +139,7 @@ function VisaHomeScreen() {
                     <div
                       className={`${
                         viewCard
-                          ? "fixed bottom-0 w-full z-10 bg-white"
+                          ? "fixed bottom-0 left-0 right-0 z-10 bg-white"
                           : "-bottom-full invisible h-0 overflow-hidden"
                       } transition-all duration-500  rounded-t-3xl lg:rounded-none lg:block   lg:visible lg:h-auto  lg:sticky lg:top-20`}
                     >

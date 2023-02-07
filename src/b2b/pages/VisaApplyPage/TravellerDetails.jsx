@@ -5,6 +5,7 @@ import {
   addRows,
   handleRowItemChange,
   handleDOBChange,
+  handleExpiryChange,
 } from "../../../redux/slices/visaSlice";
 
 function TravellerDetails({ navigation, setNavigation }) {
@@ -14,6 +15,12 @@ function TravellerDetails({ navigation, setNavigation }) {
   let year = [];
   for (let i = limit; i > limit - 100; i--) {
     year.push(i);
+  }
+
+  let explimit = new Date().getFullYear();
+  let expYear = [];
+  for (let i = explimit; i < explimit + 100; i++) {
+    expYear.push(i);
   }
 
   let day = [];
@@ -40,6 +47,15 @@ function TravellerDetails({ navigation, setNavigation }) {
   const handleChange = ({ value, name, index }) => {
     dispatch(
       handleDOBChange({
+        value,
+        name,
+        index,
+      })
+    );
+  };
+  const handleExpChange = ({ value, name, index }) => {
+    dispatch(
+      handleExpiryChange({
         value,
         name,
         index,
@@ -131,7 +147,7 @@ function TravellerDetails({ navigation, setNavigation }) {
                 </div>
                 <div className="col-span-4">
                   <div className="">
-                    <label className="label">Country</label>
+                    <label className="label">Nationality</label>
                   </div>
                   <div className="">
                     <select
@@ -187,21 +203,96 @@ function TravellerDetails({ navigation, setNavigation }) {
                 </div>
               </div>
               <div className="lg:grid grid-cols-12 gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2">
-                <div className="col-span-6">
+                <div className="col-span-4">
+                  <div className="w-full">
+                    <label className="label">passport Expiry</label>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="">
+                      <select
+                        className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                        name="day"
+                        value={row?.expiryDate?.day}
+                        onChange={(e) => {
+                          handleExpChange({
+                            value: e.target.value,
+                            name: e.target.name,
+                            index,
+                          });
+                        }}
+                      >
+                        <option hidden>Day</option>
+                        {day.map((item, index) => (
+                          <option key={index} value={item}>
+                            {item}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="">
+                      <select
+                        className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                        name="month"
+                        value={row?.expiryDate?.month}
+                        onChange={(e) => {
+                          handleExpChange({
+                            value: e.target.value,
+                            name: e.target.name,
+                            index,
+                          });
+                        }}
+                      >
+                        <option hidden>Month</option>
+                        {MonthNames.map((item, index) => (
+                          <option
+                            key={index}
+                            value={item.value}
+                            className="capitalize"
+                          >
+                            {item.name}{" "}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="">
+                      <select
+                        className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                        name="year"
+                        value={row?.expiryDate?.year}
+                        onChange={(e) => {
+                          handleExpChange({
+                            value: e.target.value,
+                            name: e.target.name,
+                            index,
+                          });
+                        }}
+                      >
+                        <option hidden>Year</option>
+                        {expYear.map((item, index) => (
+                          <option key={index} value={item}>
+                            {item}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-span-5">
                   <div className="">
                     <label className="label">Passport Number</label>
                   </div>
                   <div className="">
                     <input
                       type="number"
-                      className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                      className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none no-spinner"
                       name="passportNo"
                       value={row.passportNo}
                       onChange={(e) => onRowChange(e, index)}
                     />
                   </div>
                 </div>
-                <div className="col-span-2">
+
+                <div className="col-span-1">
                   <div className="w-full">
                     <label className="label">Date of Birth</label>
                   </div>
@@ -228,7 +319,7 @@ function TravellerDetails({ navigation, setNavigation }) {
                     </select>
                   </div>
                 </div>
-                <div className="col-span-2 flex items-end">
+                <div className="col-span-1 flex items-end">
                   <div className="w-full">
                     <select
                       placeholder="Month"
@@ -256,7 +347,7 @@ function TravellerDetails({ navigation, setNavigation }) {
                     </select>
                   </div>
                 </div>
-                <div className="col-span-2 flex items-end">
+                <div className="col-span-1 flex items-end">
                   <div className="w-full">
                     <select
                       className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"

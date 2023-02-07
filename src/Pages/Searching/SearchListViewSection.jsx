@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { AiFillHeart, AiFillStar, AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai'
 import { TiTick } from 'react-icons/ti'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import axios from '../../axios'
 import Rating from '../../components/Rating/Rating'
@@ -13,6 +13,8 @@ import priceConversion from '../../utils/PriceConversion'
 function SearchListViewSection() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [searchParams] = useSearchParams()
+    const queryDate = searchParams.get('date');
 
     const [subEmail, setSubEmail] = useState('')
 
@@ -53,7 +55,7 @@ function SearchListViewSection() {
                                 title: item?.title,
                                 image: item?.images[0]
                             })
-                            navigate(`/details/${item?._id}`)
+                            navigate(`/details/${item?._id}?date=${queryDate}`)
                         }}>
                             <div className=' relative space-y-3'>
                                 <div className='overflow-hidden rounded-2xl '>

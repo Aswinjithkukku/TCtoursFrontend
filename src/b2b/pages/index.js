@@ -9,7 +9,7 @@ import PaymentHomePage from "./AttractionPayment/PaymentHomePage";
 import MarkUpList from "./MarkUp/MarkUpList";
 import EditResellers from "./Resllers/EditResellers";
 import Settings from "./Settings/Settings";
-import MainOrder from "./Order/MainOrder";
+import AttractionOrder from "./Order/AttractionOrder";
 import Wallet from "./Wallet/Wallet";
 import PaymentApproval from "./PaymentApproval/PaymentApproval";
 import SingleSubAgent from "./Resllers/SingleSubAgent";
@@ -19,6 +19,9 @@ import VisaMarkupList from "./VisaMarkup/VisaMarkupList";
 import AttractionOrderInvoice from "./OrderInvoices/AttractionOrderInvoice";
 import AttractionInvoice from "./OrderInvoices/AttractionInvoice";
 import VisaApplySuccessPage from "./VisaApplyPage/VisaApplySuccessPage";
+import DubaiDolphinarium from "./OrderInvoices/DubaiDolphinarium";
+import VisaOrderPage from "./VisaOrder/VisaOrderPage";
+import VisaOrderDetailsPage from "./VisaOrder/VisaOrderDetailsPage";
 
 export {
   Dashboard,
@@ -32,7 +35,7 @@ export {
   MarkUpList,
   EditResellers,
   Settings,
-  MainOrder,
+  AttractionOrder,
   Wallet,
   PaymentApproval,
   SingleSubAgent,
@@ -42,4 +45,7 @@ export {
   AttractionOrderInvoice,
   AttractionInvoice,
   VisaApplySuccessPage,
+  DubaiDolphinarium,
+  VisaOrderPage,
+  VisaOrderDetailsPage,
 };

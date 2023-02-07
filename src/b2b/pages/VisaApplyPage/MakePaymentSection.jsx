@@ -62,15 +62,15 @@ function MakePaymentSection({ navigation, setNavigation }) {
             <div className='space-y-2'>
               <p className='text-gray-500 text-sm font-[500]'>Make use of our Wallet system to purchase which is help for faster transaction.</p>
               <p className=''>Make payment through your wallet.</p>
-              <p className='text-gray-500 font-[500] text-sm'>Your wallet amount is : <span className='text-main font-[600]'>{priceConversion(balance?.balance, selectedCurrency, true)}</span> </p>
+              <p className='text-gray-500 font-[500] text-sm'>Your wallet amount is : <span className='text-main font-[600]'>{priceConversion(balance, selectedCurrency, true)}</span> </p>
               <button className='bg-lightblue rounded-[.25rem] text-white w-[100px] h-9'
                 onClick={() => setOtpModal(true)}
               >Pay</button>
             </div>
-            <div className='text-center'>
+            {/* <div className='text-center'>
               <p className='text-gray-500  font-[500]'>Purchase Cost: </p>
-              <p className='text-lightblue underline text-xl font-[750]'>{priceConversion(balance?.balance, selectedCurrency, true)} </p>
-            </div>
+              <p className='text-lightblue underline text-xl font-[750]'> </p>
+            </div> */}
             <div className=' w-[170px] '>
               <Lottie animationData={PaymentAnimation} />
             </div>

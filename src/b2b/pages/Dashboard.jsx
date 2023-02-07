@@ -20,6 +20,7 @@ import { AiFillAlert } from "react-icons/ai";
 
 export default function Dashboard() {
     const { agent } = useSelector((state) => state.agents);
+    const { balance } = useSelector(state => state.wallet)
 
     return (
         <div className="">
@@ -58,7 +59,7 @@ export default function Dashboard() {
                 <div className="md:grid md:grid-cols-2 space-y-2 md:space-y-0 lg:grid-cols-4 gap-6">
                     <WalletCard
                         title={"Wallet Balance"}
-                        value={300}
+                        value={balance}
                         link="/b2b/wallet"
                         linkText="View all details"
                         icon={totalRevenuePng}
@@ -66,7 +67,7 @@ export default function Dashboard() {
                     />
                     <WalletCard
                         title={"Wallet Deposit"}
-                        value={300}
+                        value={balance}
                         link="/b2b/wallet"
                         linkText="Deposit to wallet"
                         icon={totalRevenuePng}
@@ -74,7 +75,7 @@ export default function Dashboard() {
                     />
                     <WalletCard
                         title={"Wallet Withdraw"}
-                        value={300}
+                        value={balance}
                         link="/b2b/wallet"
                         linkText="Withdraw from wallet"
                         icon={totalRevenuePng}

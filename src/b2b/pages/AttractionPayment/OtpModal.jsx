@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from '../../../axios'
 import Swal from 'sweetalert2'
 import { useEffect } from 'react'
@@ -11,6 +11,7 @@ import { reduceWalletManipulation } from '../../../redux/slices/walletSlice'
 
 function OtpModal({ setOtpModal, orderId }) {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
@@ -30,7 +31,6 @@ function OtpModal({ setOtpModal, orderId }) {
 
   const { token } = useSelector(state => state.agents)
   const { agentExcursionCart } = useSelector(state => state.agentExcursions)
-  // const { balance } = useSelector(state => state.wallet)
   const activity = agentExcursionCart.reduce((sum,item) => {
     return sum + item?.price
   },0)
@@ -56,12 +56,13 @@ function OtpModal({ setOtpModal, orderId }) {
         icon: 'success',
         title: 'Order Completed Successfully',
       })
+      navigate('/b2b/attractions/invoice')
       dispatch(emptyCart())
     } catch (err) {
 
       if (err?.response?.data?.error) {
         setError(err?.response?.data?.error)
-        Swal.fire({
+        await Swal.fire({
           icon: 'error',
           title: 'Something went wrong!',
           text: error,

@@ -2,47 +2,18 @@
 import React, { useEffect, useRef } from 'react'
 import axios from '../../axios';
 import Swal from 'sweetalert2'
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function PaypalComponent() {
   const navigate = useNavigate()
-
-  const tour_order = JSON.parse(localStorage.getItem('tour_order'))
-  const { passengerDetails } = useSelector(state => state.payment)
-
-  let order_data
-  if (tour_order) {
-   order_data = tour_order.map((item) => {
-      return {
-        activity: item?._id,
-        date: item?.date,
-        adultsCount: Number(item?.adult),
-        childrenCount: Number(item?.child),
-        infantCount: Number(item?.infant),
-        transferType: item?.transfer
-      }
-    })
-  }
-
-  let createOrderData
-  useEffect(() => {
-
-    createOrderData = {
-      name: passengerDetails?.firstname + ' ' + passengerDetails?.lastname,
-      email: passengerDetails?.email,
-      country: passengerDetails?.country,
-      phoneNumber: passengerDetails?.phone,
-      selectedActivities: order_data
-    }
-  }, [passengerDetails])
+  const { id } = useParams()
 
   const paypal = useRef()
   useEffect(() => {
     window.paypal.Buttons({
-      createOrder: async (data, actions, err) => {
+      createOrder: async ( actions, err) => {
         try {
-          const response = await axios.post("/attractions/orders/create", createOrderData);
+          const response = await axios.post(`/attractions/orders/initiate/${id}`,{paymentProcessor: "paypal"});
 
           console.log(response.data.id);
           return response.data.id;
@@ -51,9 +22,9 @@ function PaypalComponent() {
           Swal.fire({
             icon: 'error',
             title: 'Something went wrong!',
-            text: 'Error Creating Paypal Order',
+            text: 'Error Creating Paypal Initiation',
           })
-          console.log("Error Creating Paypal Order");
+          console.log("Error Creating Paypal Initiation");
           return "";
         }
       },
@@ -63,7 +34,8 @@ function PaypalComponent() {
         try {
           const resFromServer = await axios.post("/attractions/orders/paypal/capture",
             {
-              orderId: order.id,
+              orderId: id,
+              paymentOrderId: order.id,
               paymentId: order.purchase_units[0]?.payments["captures"][0]?.id
             }
           );

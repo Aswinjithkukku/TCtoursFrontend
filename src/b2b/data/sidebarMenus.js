@@ -1,10 +1,10 @@
-import { FaGlobe, FaHandsHelping } from "react-icons/fa";
+import { FaHandsHelping } from "react-icons/fa";
 import { AiFillSetting } from "react-icons/ai";
-import { MdAttractions, MdSubscriptions } from "react-icons/md";
 import { RxDashboard } from "react-icons/rx";
 import { GiWallet } from "react-icons/gi";
-import { HiOutlineShoppingCart, HiOutlineUsers } from "react-icons/hi";
-import { RiMarkupFill, RiSteeringFill } from "react-icons/ri";
+import { HiOutlineShoppingCart } from "react-icons/hi";
+import { RiMarkupFill } from "react-icons/ri";
+import { BsNewspaper } from "react-icons/bs";
 
 const sidebarMenus = [
   {
@@ -16,27 +16,27 @@ const sidebarMenus = [
     name: "Wallet",
     icon: <GiWallet />,
     link: "/b2b/wallet",
+  },
+  {
+    name: "Attraction Orders",
+    icon: <HiOutlineShoppingCart />,
+    link: "/b2b/order/attraction",
     // dropdown: [
     //   {
-    //     name: "Wallet",
-    //     link: "/b2b/wallet",
+    //     name: "Attraction",
+    //     link: "",
+    //   },
+    //   {
+    //     name: "Visa",
+    //     link: "",
     //   },
     // ],
   },
+  
   {
-    name: "Orders",
-    icon: <HiOutlineShoppingCart />,
-    link: "/b2b/order",
-    // dropdown: [
-    //   {
-    //     name: "Order History",
-    //     link: "/b2b/order",
-    //   },
-    //   {
-    //     name: "Sub-Agent History",
-    //     link: "/b2b/order/sub",
-    //   },
-    // ],
+    name: "Visa Orders",
+    icon: <BsNewspaper />,
+    link: "/b2b/visa/order",
   },
   {
     name: "Markups",
@@ -72,12 +72,6 @@ const sidebarMenus = [
     name: "Settings",
     icon: <AiFillSetting />,
     link: "/b2b/settings",
-    // dropdown: [
-    //   {
-    //     name: "Attractions",
-    //     link: "/b2b/attractions",
-    //   },
-    // ],
   },
 ];
 

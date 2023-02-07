@@ -19,7 +19,7 @@ function Wallet() {
     failed: false
   })
 
-  const { balance, loading } = useSelector(state => state.wallet)
+  const { balance,pendingBalance, loading } = useSelector(state => state.wallet)
   const { selectedCurrency } = useSelector(state => state.home)
 
   useEffect(() => {
@@ -58,7 +58,7 @@ function Wallet() {
                         {loading ? (
                           <BtnLoader />
                         ) : (
-                          <p className='text-main'>{priceConversion(balance?.balance, selectedCurrency, true)}</p>
+                          <p className='text-main'>{priceConversion(balance, selectedCurrency, true)}</p>
                         )}
                       </div>
                       <div className='mb-5'>
@@ -104,7 +104,7 @@ function Wallet() {
                         {loading ? (
                           <BtnLoader />
                         ) : (
-                          <p className='text-main'>{priceConversion(balance?.pendingBalance, selectedCurrency, true)}</p>
+                          <p className='text-main'>{priceConversion(pendingBalance, selectedCurrency, true)}</p>
                         )}
                       </div>
                       <div className='mb-5'>

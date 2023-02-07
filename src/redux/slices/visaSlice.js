@@ -16,6 +16,11 @@ const initialState = {
       country: "",
       contactNo: "",
       passportNo: "",
+      passportExpiry: {
+        day: "",
+        month: "",
+        year: "",
+      },
       dateOfBirth: {
         day: "",
         month: "",
@@ -33,6 +38,7 @@ const initialState = {
     },
   ],
   visa: [],
+  visaApplyResponse: {},
 };
 
 export const fetchVisas = createAsyncThunk(
@@ -62,6 +68,11 @@ const visaSlice = createSlice({
           country: "",
           contactNo: "",
           passportNo: "",
+          expiryDate: {
+            day: "",
+            month: "",
+            year: "",
+          },
           dateOfBirth: {
             day: "",
             month: "",
@@ -88,6 +99,11 @@ const visaSlice = createSlice({
           country: "",
           contactNo: "",
           passportNo: "",
+          expiryDate: {
+            day: "",
+            month: "",
+            year: "",
+          },
           dateOfBirth: {
             day: "",
             month: "",
@@ -108,27 +124,6 @@ const visaSlice = createSlice({
       state.rows[action.payload.index][action.payload.name] =
         action.payload.value;
     },
-    // addImageRows: (state, action) => {
-    //   state.imageRows = [
-    //     {
-    //       passportFistPagePhoto: "",
-    //       passportLastPagePhoto: "",
-    //       passportSizePhoto: "",
-    //       supportiveDoc1: "",
-    //       supportiveDoc2: "",
-    //     },
-    //   ];
-
-    //   for (let i = 1; i < Number(state.visaEnquiry?.traveller); i++) {
-    //     state.imageRows.push({
-    //       passportFistPagePhoto: "",
-    //       passportLastPagePhoto: "",
-    //       passportSizePhoto: "",
-    //       supportiveDoc1: "",
-    //       supportiveDoc2: "",
-    //     });
-    //   }
-    // },
     handleRowImageChange: (state, action) => {
       state.imageRows[action.payload.index][action.payload.name] =
         action.payload.file;
@@ -137,8 +132,15 @@ const visaSlice = createSlice({
       state.rows[action.payload.index].dateOfBirth[action.payload.name] =
         action.payload.value;
     },
+    handleExpiryChange: (state, action) => {
+      state.rows[action.payload.index].expiryDate[action.payload.name] =
+        action.payload.value;
+    },
     setVisaEnquiry: (state, action) => {
       state.visaEnquiry = JSON.parse(localStorage.getItem("visaEnquiry"));
+    },
+    setVisaResponseData: (state, action) => {
+      state.visaApplyResponse = action.payload?.visaApplication;
     },
   },
   extraReducers: {
@@ -155,6 +157,8 @@ export const {
   setVisaEnquiry,
   handleDOBChange,
   handleRowImageChange,
+  setVisaResponseData,
+  handleExpiryChange,
 } = visaSlice.actions;
 
 export default visaSlice.reducer;

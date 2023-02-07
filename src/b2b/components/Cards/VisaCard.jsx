@@ -10,10 +10,9 @@ function VisaCard({ setView }) {
     const navigate = useNavigate()
     const [value, setValue] = useState("")
     const [showValue, setShowValue] = useState('')
-    const [date, setDate] = useState('')
+    // const [date, setDate] = useState('')
     const [datalist, setDatalist] = useState(false)
     const [filteredData, setFilteredData] = useState([])
-    const [validate, setValidate] = useState(false)
 
     const dropdownWrapperRef = useRef()
     useHandleClickOutside(dropdownWrapperRef, () => setDatalist(false))
@@ -21,19 +20,13 @@ function VisaCard({ setView }) {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if (value !== "" && date !== '') {
-            navigate(`/b2b/visa/${showValue}?date=${date}`)
+            navigate(`/b2b/visa/${showValue}`)
             setView && setView({
                 favourite: false,
                 search: false,
                 profile: false,
                 help: false
             })
-        } else if (value !== "" && date === "") {
-            setValidate(true)
-        } else {
-            console.log("good to go");;
-        }
     }
 
     const handleFocus = (e) => {
@@ -52,16 +45,11 @@ function VisaCard({ setView }) {
         setFilteredData(list)
     }, [value, visaCountries])
 
-    useEffect(() => {
-        if (date.length > 1) {
-            setValidate(false)
-        }
-    }, [date])
     return (
         <>
             <form onSubmit={submitHandler}>
                 <div className='md:grid md:grid-cols-12 gap-0 py-7 space-y-4 md:space-y-0'>
-                    <div className='md:col-span-5 flex justify-center items-center md:border-r-2 border-bluetrans'>
+                    <div className='md:col-span-10 flex justify-center items-center md:border-r-2 border-bluetrans'>
                         <div className='space-y-2 w-10/12 '>
                             <div className='flex items-center space-x-2 text-darktext'>
                                 <span className='text-2xl text-blue'><IoLocationOutline /> </span>
@@ -98,7 +86,7 @@ function VisaCard({ setView }) {
                             </div>
                         </div>
                     </div>
-                    <div className='md:col-span-5 flex justify-center items-center md:border-r-2 border-bluetrans'>
+                    {/* <div className='md:col-span-5 flex justify-center items-center md:border-r-2 border-bluetrans'>
                         <div className='space-y-2 w-10/12 '>
                             <div className='flex items-center space-x-2 text-darktext'>
                                 <span className='text-2xl text-blue'><BsCalendar2Date /> </span>
@@ -113,7 +101,7 @@ function VisaCard({ setView }) {
                                     className={`px-3 w-full  placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl  ${validate ? "text-red-500 border-red-600 border" : "border-none text-darktext"}`} />
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className='md:col-span-2 flex justify-center items-center'>
                         <div className=''>
                             {/* <Link to='/b2b/visa'> */}
