@@ -10,6 +10,7 @@ import resellerReducer from "./resellerSlice";
 import agentExcursionReducer from "./agentExcursionSlice";
 import walletReducer from "./walletSlice";
 import visaReducer from "./visaSlice";
+import b2cVisaReducer from "./b2cvisaSlice";
 
 export {
   excursionReducer,
@@ -24,4 +25,5 @@ export {
   agentExcursionReducer,
   walletReducer,
   visaReducer,
+  b2cVisaReducer,
 };

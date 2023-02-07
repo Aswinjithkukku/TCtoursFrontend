@@ -9,10 +9,13 @@ import { BsFillPersonFill, BsPhone } from "react-icons/bs";
 import { FaChild, FaWpforms } from "react-icons/fa";
 import { IoIosMan, IoIosPeople } from "react-icons/io";
 import { MdPeopleAlt } from "react-icons/md";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setVisaEnquiry } from "../../redux/slices/b2cvisaSlice";
 
 function VisaApplyCard({ visaDetails }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({});
   const [price, setPrice] = useState(null);
@@ -22,7 +25,7 @@ function VisaApplyCard({ visaDetails }) {
       target: { name, value },
     } = e;
 
-    if (name === "visaType") {
+    if (name === "selectedVisaType") {
       for (let x of visaDetails?.visaType) {
         if (x._id === value) {
           setPrice(x.visaPrice);
@@ -38,12 +41,16 @@ function VisaApplyCard({ visaDetails }) {
     if (
       formData?.email &&
       formData?.phone &&
-      formData?.visaType &&
+      formData?.selectedVisaType &&
       formData?.travellersCount
     ) {
-      navigate("/visa/apply", { state: { formData, visaDetails } });
+      const details = { ...formData, ...visaDetails };
+      localStorage.setItem("visaEnquiry", JSON.stringify(details));
+      dispatch(setVisaEnquiry({ ...details }));
+      navigate("/visa/apply");
     }
   };
+
   return (
     <>
       <div className="">
@@ -112,8 +119,8 @@ function VisaApplyCard({ visaDetails }) {
                 <div className="">
                   <select
                     type="s"
-                    name="visaType"
-                    value={formData.visaType}
+                    name="selectedVisaType"
+                    value={formData.selectedVisaType}
                     required
                     onChange={onChangeHandler}
                     placeholder="Visa type"
@@ -160,7 +167,7 @@ function VisaApplyCard({ visaDetails }) {
 
               <div className="flex justify-center font-medium lg:justify-end px-2 py-2 text-lg text-lightblue">
                 {price && formData?.travellersCount
-                  ? +price * +formData.travellersCount
+                  ? `AED ${+price * +formData.travellersCount}`
                   : "AED 0.00"}
               </div>
               <div className="flex justify-end px-2 my-3 text-lg text-lightblue">

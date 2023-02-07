@@ -110,7 +110,7 @@ function VisaHomeScreen() {
         <div className="md:max-w-screen-xl md:mx-auto">
           <div className="lg:grid grid-cols-12 gap-10">
             <div className="col-span-8">
-              <VisaComponentPage />
+              <VisaComponentPage visaDetails={visaDetails} />
               <VisaDocumentSection />
               <VisaFAQsSection />
             </div>

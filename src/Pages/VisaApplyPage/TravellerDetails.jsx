@@ -1,19 +1,19 @@
 import React from "react";
 import { useEffect } from "react";
-import { useState } from "react";
 import { BsPerson } from "react-icons/bs";
-import { Month } from "../../utils/Month";
+import { useDispatch, useSelector } from "react-redux";
+import { addRows } from "../../redux/slices/b2cvisaSlice";
 import TravellerDetailsForm from "./TravellerDetailsForm";
 
-function TravellerDetails({ itenaryInfo }) {
-  console.log(itenaryInfo);
-  const [travellerList, setTravellerList] = useState([]);
+function TravellerDetails({ itenaryFlag, navigation, setNavigation }) {
+  const dispatch = useDispatch();
+
+  const visa = useSelector((state) => state.b2cVisa);
+  const { rows } = visa;
 
   useEffect(() => {
-    const list = Array(+itenaryInfo?.travellersCount).fill({});
-    list[0] = { email: itenaryInfo?.email, phone: itenaryInfo?.phone };
-    setTravellerList([...list]);
-  }, [itenaryInfo]);
+    dispatch(addRows());
+  }, [itenaryFlag]);
 
   let limit = new Date().getFullYear();
   let year = [];
@@ -26,43 +26,44 @@ function TravellerDetails({ itenaryInfo }) {
     day.push(i);
   }
 
-  const handleTravellerChange = (e, i) => {
-    const {
-      target: { value, name },
-    } = e;
-
-    let list = [...travellerList];
-    list[i] = { ...list[i], [name]: value };
-
-    setTravellerList([...list]);
-  };
-
   return (
     <div className="md:max-w-screen-xl md:mx-auto text-darktext my-5">
-      <div className="my-2 border px-3 py-4 bg-primaryColor rounded-lg">
+      <div
+        className={`my-2 border px-3 py-4  rounded-lg ${
+          navigation?.details ? "bg-primaryColor " : "bg-slate-400"
+        } rounded-[.25rem]`}
+      >
         <p className="font-[600] text-[20px] text-soft">Traveller Details</p>
       </div>
-      <div className="bg-white p-6 rounded-md shadow-sm">
-        {travellerList?.map((ele, i) => (
-          <div className="flex space-x-4 border-dashed border-b-2 border-gray-300 py-4">
-            <div className="flex  space-x-1 w-[150px]">
-              <span>
-                <BsPerson />
-              </span>
-              <span className="text-xs w-[100px]">
-                {i === 0 ? "Leading Passenger" : `Traveller ${i + 1}`}
-              </span>
+      {navigation?.details && (
+        <div className="bg-white p-6 rounded-md shadow-sm">
+          {rows?.map((ele, i) => (
+            <div className="flex space-x-4 border-dashed border-b-2 border-gray-300 py-4">
+              <div className="flex  space-x-1 w-[150px]">
+                <span>
+                  <BsPerson />
+                </span>
+                <span className="text-xs w-[100px]">
+                  {i === 0 ? "Leading Passenger" : `Traveller ${i + 1}`}
+                </span>
+              </div>
+              <div className="w-[100%] ">
+                <TravellerDetailsForm index={i} info={ele} />
+              </div>
             </div>
-            <div className="w-[100%] ">
-              <TravellerDetailsForm
-                index={i}
-                info={travellerList[i]}
-                onchange={handleTravellerChange}
-              />
-            </div>
+          ))}
+          <div className=" flex justify-end mt-4">
+            <button
+              onClick={() => {
+                setNavigation({ payment: !navigation.payment });
+              }}
+              className="bg-lightblue rounded-[.25rem] text-white px-5 h-9"
+            >
+              Go To Payment
+            </button>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
