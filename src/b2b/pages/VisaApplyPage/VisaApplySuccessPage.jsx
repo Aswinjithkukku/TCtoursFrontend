@@ -1,20 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Lottie from "lottie-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { successAnimation } from "../../../data";
 import { useSelector } from "react-redux";
 import priceConversion from "../../../utils/PriceConversion";
+import axios from "../../../axios";
 
 function VisaApplySuccessPage() {
   const navigate = useNavigate();
+  const { id } = useParams()
 
-  const { visaApplyResponse } = useSelector((state) => state.visa);
-  const { agent } = useSelector((state) => state.agents);
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [visaApplyResponse, setVisaApplyResponse] = useState({})
+
+
+  // const { visaApplyResponse } = useSelector((state) => state.visa);
+  const { token, agent } = useSelector((state) => state.agents);
   const { selectedCurrency } = useSelector((state) => state.home);
 
-  if(!visaApplyResponse) {
-    navigate('/b2b')
+  // if(!visaApplyResponse) {
+  //   navigate('/b2b')
+  // }
+
+  const fetchData = async () => {
+    try {
+      setIsLoading(true)
+      setError('')
+
+      const config = {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.get(`/b2b/visa/application/invoice/${id}`, config);
+      setIsLoading(false)
+      setVisaApplyResponse(response.data)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      setError(
+        error?.response?.data?.error || "Something went wrong, Try again"
+      );
+      setIsLoading(false);
+    }
   }
+
+  useEffect(() => {
+    fetchData()
+  },[])
 
   return (
     <div className=" ">
@@ -65,7 +99,7 @@ function VisaApplySuccessPage() {
                   <div className="flex justify-between items-end">
                     <div>
                       <p className="text-sm text-gray-500 font-[600]">
-                        {visaApplyResponse?.createdAt.slice(0, 10)}
+                        {/* {visaApplyResponse?.createdAt.slice(0, 10)} */}
                       </p>
                       <div className="flex gap-2 items-center">
                         <p className="text-[16px] font-[650]">
@@ -154,7 +188,7 @@ function VisaApplySuccessPage() {
                           </div>
                           <div className="grid__first col-span-5 flex justify-end items-end">
                             <p className="text-[13px] text-text font-[500]">
-                              15/04/2001
+                              {item?.expiryDate?.day + " / " + item?.expiryDate?.month + " / " + item?.expiryDate?.year}
                             </p>
                           </div>
                         </div>

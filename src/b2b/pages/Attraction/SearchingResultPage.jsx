@@ -29,6 +29,7 @@ function SearchingResultPage() {
                     <SearchHomePage
                         viewCategory={viewCategory}
                         setViewCategory={setViewCategory}
+                        category={category}
                         setCategory={setCategory}
                         setSearch={setSearch}
                     />

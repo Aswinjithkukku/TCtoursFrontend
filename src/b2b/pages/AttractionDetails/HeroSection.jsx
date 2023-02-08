@@ -42,10 +42,10 @@ function HeroSection() {
       <div className='bg-white'>
         <div className='p-0 lg:p-6'>
           <div className=''>
-            <div className='relative lg:grid lg:grid-cols-12 gap-5 py-2 lg:my-0 lg:py-7'>
+            <div className='relative lg:grid lg:grid-cols-12 gap-5 py-2 lg:my-0 lg:py-5'>
               <div className='1st lg:col-span-8'>
 
-                <div className='bg-light rounded-2xl p-5 py-7 mx-2 my-2 lg:my-0 lg:mx-0 text-darktext'>
+                <div className='bg-light rounded-2xl p-5 mx-2 my-2 lg:my-0 lg:mx-0 text-darktext'>
                   <div className='flex justify-between'>
                     <div className='space-y-3'>
                       {/* tags */}
@@ -113,7 +113,11 @@ function HeroSection() {
                   <FeatureSection />
                 </div>
 
-                <div className='mx-2 lg:mx-0'>
+                <div id='packageSection' className='p-5  bg-light rounded-2xl '>
+                      <PackageSection />
+                    </div>
+
+                <div className='mx-2 lg:mx-0 mt-2 '>
                   <div className='bg-light py-5 px-4 rounded-2xl md:my-4 w-full  lg:mx-0 my-2 lg:my-0 text-darktext'>
                     <div className='py-3'>
                       <span className='text-xl font-semibold text-blue '>{agentExcursion?.title} {agentExcursion?.title && 'Highlights'}</span>
@@ -130,10 +134,6 @@ function HeroSection() {
 
                     <div id='availability' className='p-5 mb-2 lg:mb-5  bg-gray-300 text-darktext rounded-2xl '>
                       <Availablity />
-                    </div>
-
-                    <div id='packageSection' className='p-5  bg-light rounded-2xl '>
-                      <PackageSection />
                     </div>
 
                     <>

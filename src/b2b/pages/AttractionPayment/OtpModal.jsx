@@ -56,7 +56,7 @@ function OtpModal({ setOtpModal, orderId }) {
         icon: 'success',
         title: 'Order Completed Successfully',
       })
-      navigate('/b2b/attractions/invoice')
+      navigate(`/b2b/attractions/invoice/${response.data?._id}`)
       dispatch(emptyCart())
     } catch (err) {
 

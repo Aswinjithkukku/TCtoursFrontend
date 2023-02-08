@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-// import NearbyDestinations from '../../data/NearbyDestinations'
-import { AiFillHeart, AiFillStar, AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai'
+import { AiFillHeart, AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai'
 import { TiTick } from 'react-icons/ti'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import axios from '../../axios'
 import Rating from '../../components/Rating/Rating'
@@ -13,8 +12,6 @@ import priceConversion from '../../utils/PriceConversion'
 function SearchListViewSection() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [searchParams] = useSearchParams()
-    const queryDate = searchParams.get('date');
 
     const [subEmail, setSubEmail] = useState('')
 
@@ -55,7 +52,7 @@ function SearchListViewSection() {
                                 title: item?.title,
                                 image: item?.images[0]
                             })
-                            navigate(`/details/${item?._id}?date=${queryDate}`)
+                            navigate(`/details/${item?._id}`)
                         }}>
                             <div className=' relative space-y-3'>
                                 <div className='overflow-hidden rounded-2xl '>
@@ -99,7 +96,7 @@ function SearchListViewSection() {
 
                                     </div>
                                     <div className='flex space-x-1 items-center'>
-                                        <span className='text-light bg-lightblue w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{item?.category?.categoryName} </span>
+                                        <span className='text-light bg-lightblue px-4 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{item?.category?.categoryName} </span>
                                         {item?.isOffer === true && item?.offerAmountType === 'flat' && (
                                             <span className='text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{item?.offerAmountType === 'flat' ? `$ ${item?.offerAmount} OFF` : ''} </span>
                                         )}

@@ -203,7 +203,7 @@ function TravellerDetails({ navigation, setNavigation }) {
                 </div>
               </div>
               <div className="lg:grid grid-cols-12 gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2">
-                <div className="col-span-4">
+                <div className="col-span-3">
                   <div className="w-full">
                     <label className="label">passport Expiry</label>
                   </div>
@@ -275,9 +275,9 @@ function TravellerDetails({ navigation, setNavigation }) {
                         ))}
                       </select>
                     </div>
+                    </div>
                   </div>
-                </div>
-                <div className="col-span-5">
+                <div className="col-span-6">
                   <div className="">
                     <label className="label">Passport Number</label>
                   </div>
@@ -291,11 +291,11 @@ function TravellerDetails({ navigation, setNavigation }) {
                     />
                   </div>
                 </div>
-
-                <div className="col-span-1">
+                <div className="col-span-3">
                   <div className="w-full">
                     <label className="label">Date of Birth</label>
                   </div>
+                  <div className="grid grid-cols-3 gap-3">
                   <div className="">
                     <select
                       placeholder="Day"
@@ -318,8 +318,6 @@ function TravellerDetails({ navigation, setNavigation }) {
                       ))}
                     </select>
                   </div>
-                </div>
-                <div className="col-span-1 flex items-end">
                   <div className="w-full">
                     <select
                       placeholder="Month"
@@ -346,8 +344,6 @@ function TravellerDetails({ navigation, setNavigation }) {
                       ))}
                     </select>
                   </div>
-                </div>
-                <div className="col-span-1 flex items-end">
                   <div className="w-full">
                     <select
                       className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
@@ -369,9 +365,10 @@ function TravellerDetails({ navigation, setNavigation }) {
                       ))}
                     </select>
                   </div>
-                </div>
+                  </div>
               </div>
             </div>
+          </div>
           ))}
           <div className="flex justify-end">
             <button

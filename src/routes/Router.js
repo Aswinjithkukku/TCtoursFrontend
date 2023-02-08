@@ -109,8 +109,8 @@ const ThemeRoutes = [
         path: "/b2b/visa/order/:id/details",
         element: <VisaOrderDetailsPage />,
       },
-      { path: "/b2b/visa/apply/invoice", element: <VisaApplySuccessPage /> },
-      { path: "/b2b/attractions/invoice", element: <AttractionInvoice /> },
+      { path: "/b2b/visa/apply/invoice/:id", element: <VisaApplySuccessPage /> },
+      { path: "/b2b/attractions/invoice/:id", element: <AttractionInvoice /> },
     ],
   },
   {

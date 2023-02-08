@@ -10,10 +10,8 @@ import { useHandleClickOutside } from '../../../hooks'
 function AttractionCard({ setView }) {
     const navigate = useNavigate()
     const [value, setValue] = useState("")
-    const [date, setDate] = useState('')
     const [datalist, setDatalist] = useState(false)
     const [filteredData, setFilteredData] = useState([])
-    const [validate, setValidate] = useState(false)
 
     const dropdownWrapperRef = useRef()
     useHandleClickOutside(dropdownWrapperRef, () => setDatalist(false))
@@ -21,19 +19,13 @@ function AttractionCard({ setView }) {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if (value !== "" && date !== '') {
-            navigate(`/b2b/attractions/${value}?date=${date}`)
+            navigate(`/b2b/attractions/${value}`)
            setView && setView({
                 favourite: false,
                 search: false,
                 profile: false,
                 help: false
             })
-        } else if (value !== "" && date === "") {
-            setValidate(true)
-        } else {
-            console.log("good to go");;
-        }
     }
 
     const handleFocus = (e) => {
@@ -52,17 +44,12 @@ function AttractionCard({ setView }) {
         setFilteredData(list)
     }, [value, destinations])
 
-    useEffect(() => {
-        if (date.length > 1) {
-            setValidate(false)
-        }
-    }, [date])
 
     return (
         <>
             <form onSubmit={submitHandler}>
                 <div className='md:grid md:grid-cols-12 gap-0 py-7 space-y-4 md:space-y-0'>
-                    <div className='md:col-span-5 flex justify-center items-center md:border-r-2 border-bluetrans'>
+                    <div className='md:col-span-10 flex justify-center items-center md:border-r-2 border-bluetrans'>
                         <div className='space-y-2 w-10/12 '>
                             <div className='flex items-center space-x-2 text-darktext'>
                                 <span className='text-2xl text-blue'><IoLocationOutline /> </span>
@@ -76,7 +63,7 @@ function AttractionCard({ setView }) {
                                         placeholder='Where do you want to go?'
                                         onChange={(e) => setValue(e.target.value)}
                                         onFocus={handleFocus}
-                                        // onBlur={handleBlur}
+                                        required
                                         className='capitalize px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
                                 </div>
                                 {datalist && (
@@ -95,22 +82,6 @@ function AttractionCard({ setView }) {
                                         </div>
                                     </div>
                                 )}
-                            </div>
-                        </div>
-                    </div>
-                    <div className='md:col-span-5 flex justify-center items-center md:border-r-2 border-bluetrans'>
-                        <div className='space-y-2 w-10/12 '>
-                            <div className='flex items-center space-x-2 text-darktext'>
-                                <span className='text-2xl text-blue'><BsCalendar2Date /> </span>
-                                <span className='text-lg'>Date</span>
-                            </div>
-                            <div className=''>
-                                <input
-                                    type='date'
-                                    placeholder='Choose date'
-                                    value={date}
-                                    onChange={(e) => setDate(e.target.value)}
-                                    className={`px-3 w-full  placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl  ${validate ? "text-red-500 border-red-600 border" : "border-none text-darktext"}`} />
                             </div>
                         </div>
                     </div>

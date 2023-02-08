@@ -2,7 +2,7 @@ import React from 'react'
 import { AiFillHeart, AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai'
 import { TiTick } from 'react-icons/ti'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Rating from '../../../components/Rating/Rating'
 import { setFavourites } from '../../../redux/slices/excursionSlice'
 import priceConversion from '../../../utils/PriceConversion'
@@ -10,8 +10,6 @@ import priceConversion from '../../../utils/PriceConversion'
 function SearchListViewSection() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const location = useLocation()
-    const date = new URLSearchParams(location.search).get('date')
 
     const { agentExcursions } = useSelector(state => state.agentExcursions)
     const { favourites } = useSelector(state => state.excursion)
@@ -29,7 +27,7 @@ function SearchListViewSection() {
     return (
         <div>
             {agentExcursions?.attractions?.data?.length > 0 && (
-                <div className='md:grid md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-1'>
+                <div className='md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-2'>
                     {agentExcursions?.attractions?.data?.length > 0 && agentExcursions?.attractions?.data?.map((item, index) => (
                         <div key={index} className='h-full snap-start mt-2 bg-light shadow-md p-3 rounded-3xl cursor-pointer md:mx-0' onClick={() => {
                             saveDatatoLocalStorage({
@@ -37,7 +35,7 @@ function SearchListViewSection() {
                                 title: item?.title,
                                 image: item?.images[0]
                             })
-                            navigate(`/b2b/attractions/details/${item?._id}?date=${date}`)
+                            navigate(`/b2b/attractions/details/${item?._id}`)
                         }}>
                             <div className=' relative space-y-3'>
                                 <div className='overflow-hidden rounded-2xl '>
@@ -81,7 +79,7 @@ function SearchListViewSection() {
 
                                     </div>
                                     <div className='flex space-x-1 items-center'>
-                                        <span className='text-light bg-lightblue w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{item?.category?.categoryName} </span>
+                                        <span className='text-light bg-lightblue px-4 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{item?.category?.categoryName} </span>
                                         {item?.isOffer === true && item?.offerAmountType === 'flat' && (
                                             <span className='text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{item?.offerAmountType === 'flat' ? `$ ${item?.offerAmount} OFF` : ''} </span>
                                         )}
