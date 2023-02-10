@@ -108,7 +108,7 @@ function SearchListViewSection() {
                                                 <Rating value={item?.averageRating} color={"#FED049"} />
                                             </div>
                                             <div className='text-xs text-text flex justify-end'>
-                                                {item?.averageRating + ' '} ({item?.totalReviews})
+                                                {item?.averageRating?.toFixed(2) + ' '} ({item?.totalReviews})
                                             </div>
                                             <div className='flex space-x-1 items-center'>
                                                 <span className='text-lightblue'> <AiOutlineClockCircle /></span>
