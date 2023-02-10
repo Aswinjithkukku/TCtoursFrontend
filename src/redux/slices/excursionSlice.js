@@ -1,18 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
-import Swal from "sweetalert2";
 
 const initialState = {
   loading: false,
   excursion: {},
-  reviews: [],
   categories: [],
   excursions: [],
   excursionAll: [],
   recievedActivities: [],
   selectedActivities: [],
   favourites: localStorage.getItem("favourites") ? JSON.parse(localStorage.getItem("favourites"))|| [] : [],
-  review: {},
   excursionCart: localStorage.getItem("excursionCart") ? JSON.parse(localStorage.getItem("excursionCart")) || [] : [],
 };
 
@@ -61,13 +58,6 @@ export const getExcursion = createAsyncThunk(
   }
 );
 
-export const getReviews = createAsyncThunk(
-  "excursion/getReviews",
-  async (args, { getState }) => {
-    const response = await axios.get(`/attractions/reviews/single/${args}`);
-    return response.data;
-  }
-);
 
 export const getCategories = createAsyncThunk(
   "excursion/getCategories",
@@ -77,38 +67,7 @@ export const getCategories = createAsyncThunk(
   }
 );
 
-export const addReview = createAsyncThunk(
-  "excursion/addReview",
-  async (args, { getState }) => {
-    const { jwtToken } = getState().users;
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwtToken}`,
-      },
-    };
-    try {
-      const response = await axios.post(
-        "/attractions/reviews/add",
-        args,
-        config
-      );
-      Swal.fire({
-        icon: "success",
-        title: "Review Submitted",
-        text: "You have successfully Submitted your review",
-      });
-      return response.data;
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Something went wrong!",
-        text: error?.response?.data?.error,
-      });
-      console.log(error?.response?.data?.error);
-    }
-  }
-);
+
 
 const excursionSlice = createSlice({
   name: "excursion",
@@ -200,13 +159,6 @@ const excursionSlice = createSlice({
       }
       state.recievedActivities = array;
     },
-    [getReviews.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [getReviews.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.reviews = action.payload;
-    },
     [getCategories.pending]: (state, action) => {
       state.loading = true;
     },
@@ -227,10 +179,6 @@ const excursionSlice = createSlice({
     [excursionall.fulfilled]: (state, action) => {
       state.loading = false;
       state.excursionAll = action.payload;
-    },
-    [addReview.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.review = action.payload;
     },
   },
 });

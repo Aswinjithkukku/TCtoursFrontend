@@ -22,7 +22,7 @@ function Availablity() {
             <span className=''>
               <div className='grid lg:grid-cols-4 grid-cols-2 gap-4'>
                 {excursion?.availability?.map((item, index) => (
-                  <div className='bg-[#00337C] text-white rounded-2xl shadow-sm lg:w-[190px] h-[100px] ' key={index}>
+                  <div className='bg-[#00337C] text-white rounded-2xl shadow-sm lg:w-full h-[100px] ' key={index}>
                     <div className='py-1 border-b border-dashed'>
                       <p className='text-center font-bold uppercase ' >{item?.day}</p>
                     </div>

@@ -192,7 +192,7 @@ function B2BRegisterPage() {
                           <div className=''>
                             <label className='label'>TRN Number</label>
                             <input
-                              className='input'
+                              className='input no-spinner'
                               type='number'
                               placeholder='Ex: Dubai'
                               name='trnNumber'
@@ -203,7 +203,7 @@ function B2BRegisterPage() {
 
                           <div className=''>
                             <label className='label'>Company Registration Number</label>
-                            <input className='input'
+                            <input className='input no-spinner'
                               type='number'
                               placeholder='Ex: Dubai'
                               name='companyRegistration'

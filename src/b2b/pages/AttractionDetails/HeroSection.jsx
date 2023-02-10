@@ -4,12 +4,11 @@ import { AiOutlineHeart, AiOutlineClose, AiFillHeart } from 'react-icons/ai'
 import { RxShare2 } from 'react-icons/rx'
 import PackageSection from './PackageSection'
 import MapSection from './MapSection'
-import ReviewSection from './ReviewSection'
 import FaqSection from './FaqSection'
 import DetailsCard from './DetailsCard'
 import FeatureSection from './FeatureSection'
 import { useDispatch, useSelector } from 'react-redux'
-import { getExcursion, setFavourites, stateFavourites } from '../../../redux/slices/excursionSlice'
+import {  setFavourites, stateFavourites } from '../../../redux/slices/excursionSlice'
 import { useNavigate, useParams } from 'react-router-dom'
 import Rating from '../../../components/Rating/Rating'
 import CarousalMobile from './CarousalMobile'
@@ -24,7 +23,7 @@ function HeroSection() {
   const navigate = useNavigate()
   const { id } = useParams()
 
-  const { excursion, favourites } = useSelector(state => state.excursion)
+  const { favourites } = useSelector(state => state.excursion)
   const { agentExcursion } = useSelector(state => state.agentExcursions)
 
   useEffect(() => {
@@ -160,9 +159,6 @@ function HeroSection() {
                     <div id='faqSection' className=''>
                       <FaqSection />
                     </div>
-                    {/* <div id='reviewSection' className=''>
-                      <ReviewSection />
-                    </div> */}
 
                   </>
                 </div>
