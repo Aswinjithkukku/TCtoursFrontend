@@ -62,7 +62,7 @@ function HeroSection() {
 
                         </div>
                         <div className='flex space-x-1 items-center'>
-                          <span className='text-light bg-lightblue w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{agentExcursion?.category?.categoryName} </span>
+                          <span className='text-light bg-lightblue px-3 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{agentExcursion?.category?.categoryName} </span>
                           {agentExcursion?.isOffer === true && agentExcursion?.offerAmountType === 'flat' && (
                             <span className='text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{agentExcursion?.offerAmountType === 'flat' ? `$ ${agentExcursion?.offerAmount} OFF` : ''} </span>
                           )}
