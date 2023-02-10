@@ -81,6 +81,12 @@ function AttractionInvoice() {
                     You have Ordered Successfully!
                   </h2>
                 </div>
+              <div className="mt-4 text-center space-y-2">
+                <p className="text-[14px] font-[500] text-gray-600">Download the E-Ticket from here</p>
+                <button className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded"
+                onClick={() => navigate(`/ticket/attraction/${id}`)}
+                >Download Ticket</button>
+              </div>
               </div>
             </div>
             <div className="flex justify-center w-full mt-5">

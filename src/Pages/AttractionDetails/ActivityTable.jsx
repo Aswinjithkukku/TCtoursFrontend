@@ -10,7 +10,9 @@ function ActivityTable({ item, index }) {
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
 
-  const { recievedActivities } = useSelector((state) => state.excursion);
+  const { recievedActivities, excursion } = useSelector(
+    (state) => state.excursion
+  );
   const { selectedCurrency } = useSelector((state) => state.home);
 
   const handleChange = ({ value, name, index }) => {
@@ -57,14 +59,18 @@ function ActivityTable({ item, index }) {
     dispatch(setSelectionArray(result));
   }, [recievedActivities, dispatch]);
 
-  
-    let date = new Date()
-    let dd = String(date.getDate() + 2).padStart(2, '0')
-    let mm = String(date.getMonth() + 1).padStart(2, '0')
-    let yyyy = date.getFullYear()
-    const res = yyyy+"-"+mm+"-"+dd
-    console.log(res)
-  
+  let date = new Date();
+  let dd = excursion?.bookingPriorDays
+    ? String(date.getDate() + Number(excursion?.bookingPriorDays)).padStart(
+        2,
+        "0"
+      )
+    : String(date.getDate() + 1).padStart(2, "0");
+  let mm = String(date.getMonth() + 1).padStart(2, "0");
+  let yyyy = date.getFullYear();
+  const res = yyyy + "-" + mm + "-" + dd;
+  console.log(res);
+
   return (
     <tr className="text-darktext border-b" key={index}>
       <td className="py-3 px-1 max-w-[13em] w-[13em] space-x-2 ">

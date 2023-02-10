@@ -48,6 +48,7 @@ import {
   VisaOrderPage,
   Wallet,
   ReapplyIndividual,
+  AttractionSingleTicketPage,
 } from "../b2b/pages";
 import B2BPrivateRoute from "./B2BPrivateRoute";
 import LoadingWrapper from "./LoadingWrapper";
@@ -145,6 +146,10 @@ const ThemeRoutes = [
   {
     path: "/attractions/invoice/dolphin",
     element: <DubaiDolphinarium />,
+  },
+  {
+    path: "/ticket/attraction/:id",
+    element: <AttractionSingleTicketPage />,
   },
 ];
 
