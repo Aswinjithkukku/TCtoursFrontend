@@ -54,14 +54,14 @@ function SearchFunctionalitySection({
                 </div>
                 <div className="flex items-center space-x-4 w-full">
                   {/* <input type='range' min={'0'} max={'100'} className='w-full' /> */}
-                  <InputRange
+                  {/* <InputRange
                     draggableTrack
                     maxValue={20}
                     minValue={0}
                     onChange={(value) => this.setState({ value })}
                     onChangeComplete={(val) => console.log(val)}
                     // value={value}
-                  />
+                  /> */}
                 </div>
                 <div className="flex items-center space-x-4 justify-start">
                   <input
