@@ -22,6 +22,7 @@ import VisaApplySuccessPage from "./VisaApplyPage/VisaApplySuccessPage";
 import DubaiDolphinarium from "./OrderInvoices/DubaiDolphinarium";
 import VisaOrderPage from "./VisaOrder/VisaOrderPage";
 import VisaOrderDetailsPage from "./VisaOrder/VisaOrderDetailsPage";
+import ReapplyIndividual from "./VisaOrder/ReapplyIndividual";
 
 export {
   Dashboard,
@@ -48,4 +49,5 @@ export {
   DubaiDolphinarium,
   VisaOrderPage,
   VisaOrderDetailsPage,
+  ReapplyIndividual,
 };

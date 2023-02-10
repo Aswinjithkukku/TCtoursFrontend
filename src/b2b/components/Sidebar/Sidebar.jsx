@@ -41,7 +41,7 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
             <div id="sidebar" className="flex-1 overflow-y-auto mt-4 mr-[3px]">
                 <ul className="h-[100%]">
                     {sidebarMenus.map((item, index) => {
-                        return <SidebarMenu key={index} {...item} />;
+                        return <SidebarMenu key={index} {...item} setSidebarView={setSidebarView} sidebarView={sidebarView} />;
                     })}
                 </ul>
             </div>

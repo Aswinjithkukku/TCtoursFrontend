@@ -1,48 +1,56 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { BsCalendar2Date, BsEmojiHeartEyes } from 'react-icons/bs'
 import { IoLocationOutline } from 'react-icons/io5'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useHandleClickOutside } from '../../../hooks'
+import { getSearchQuery } from '../../../redux/slices/homeSlice'
 
 
 function AttractionCard({ setView }) {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [value, setValue] = useState("")
     const [datalist, setDatalist] = useState(false)
-    const [filteredData, setFilteredData] = useState([])
+
+    const { searchQuery } = useSelector((state) => state.home);
 
     const dropdownWrapperRef = useRef()
     useHandleClickOutside(dropdownWrapperRef, () => setDatalist(false))
 
 
     const submitHandler = (e) => {
-        e.preventDefault()
-            navigate(`/b2b/attractions/${value}`)
-           setView && setView({
-                favourite: false,
-                search: false,
-                profile: false,
-                help: false
-            })
-    }
-
-    const handleFocus = (e) => {
-        setDatalist(true)
-    }
-
-    const { destinations } = useSelector(state => state.home)
-
-
-
-    useEffect(() => {
-        const list = destinations?.filter((data) => {
-            return data.name?.toLowerCase().startsWith(value)
-        })
-
-        setFilteredData(list)
-    }, [value, destinations])
+        e.preventDefault();
+        let result = searchQuery?.destinations?.find((item) => {
+          return value === item?.name;
+        });
+        if (result) {
+          navigate(`/b2b/attractions/${value}`);
+        } else {
+          let data = searchQuery?.attractions?.find((item) => {
+            if(value?.toLowerCase() === item?.title?.toLowerCase())  {
+              return item?._id
+            }
+          });
+          console.log(data?._id)
+          navigate(`/b2b/attractions/details/${data?._id}`);
+        }
+        setView &&
+          setView({
+            favourite: false,
+            search: false,
+            profile: false,
+            help: false,
+          });
+      };
+    
+      const handleFocus = (e) => {
+        setDatalist(true);
+      };
+    
+      useEffect(() => {
+        dispatch(getSearchQuery(value));
+      }, [dispatch, value]);
 
 
     return (
@@ -67,21 +75,47 @@ function AttractionCard({ setView }) {
                                         className='capitalize px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
                                 </div>
                                 {datalist && (
-
-                                    <div className='absolute max-h-[17em] w-[21em] mt-1  bg-light rounded-lg overflow-y-auto z-20'>
-                                        <div className='w-full p-2 overflow-y-auto'>
-                                            {filteredData?.map((item) => (
-                                                <div key={item.name} className='bg-soft py-2 px-2 cursor-pointer capitalize  z-30' onClick={() => {
-                                                    setValue(item.name)
-                                                    setDatalist(!datalist)
-                                                }
-                                                }>
-                                                    {item.name}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
+                  <div className="absolute max-h-[17em] w-[21em] mt-1  bg-light rounded-lg overflow-y-auto">
+                    <div className="w-full p-2 overflow-y-auto">
+                      <div className="">
+                        <p className="bg-gray-200 py-[2px] px-2 text-[14px] font-[600] text-textColor">
+                          Destinations
+                        </p>
+                        {searchQuery?.destinations.map((item) => (
+                          <>
+                            <div
+                              key={item.name}
+                              className=" py-2 px-2 cursor-pointer capitalize text-darktext z-30 border-b text-sm"
+                              onClick={() => {
+                                setValue(item.name);
+                                setDatalist(!datalist);
+                              }}
+                            >
+                              {item.name}
+                            </div>
+                          </>
+                        ))}
+                      </div>
+                      <div className="">
+                        <p className="bg-gray-200 py-[2px] px-2 text-[14px] font-[600] text-textColor">
+                          Attractions
+                        </p>
+                        {searchQuery?.attractions.map((item) => (
+                          <div
+                            key={item.title}
+                            className=" py-2 px-2 cursor-pointer capitalize text-darktext z-30 border-b text-sm"
+                            onClick={() => {
+                              setValue(item.title);
+                              setDatalist(!datalist);
+                            }}
+                          >
+                            {item.title}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
                             </div>
                         </div>
                     </div>

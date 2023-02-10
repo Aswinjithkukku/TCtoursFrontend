@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isUploadDropdownOpen, setIsUploadDropdownOpen] = useState(false);
+  const { id } = useParams()
+  const navigate = useNavigate()
   return (
     <>
       <tr onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
@@ -30,14 +32,14 @@ function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
         <td className="capitalize p-3 text-[14px] text-textColor">
           {visaOrderDetail?.isDocumentUplaoded === true ? "Uploaded" : "Not Uploaded"}{" "}
         </td>
-        <td className="capitalize p-3 text-[14px] underline text-lightblue"
-        onClick={() => setIsUploadDropdownOpen(!isUploadDropdownOpen)}
+        <td className="capitalize p-3 text-[14px] underline text-lightblue cursor-pointer"
+        onClick={() => navigate(`/b2b/visa/order/${id}/details/${item?._id}`)}
         >
-          Upload
+      Edit
         </td>
       </tr>
       <>
-        {isUploadDropdownOpen && (
+        {/* {isUploadDropdownOpen && (
           <tr className="border-b border-tableBorderColor">
             <td colSpan="8" className="p-3 py-5">
               <div className="grid grid-cols-5 gap-2">
@@ -89,7 +91,7 @@ function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
               </div>
             </td>
           </tr>
-        )}
+        )} */}
 
         {isDropdownOpen && (
           <tr className="border-b border-tableBorderColor">

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiFillStar, AiOutlineClose } from "react-icons/ai";
 import { RiCloseLine } from "react-icons/ri";
+import InputRange from "react-input-range";
 import { NeedHelp } from "../../components/Layouts";
 
 function SearchFunctionalitySection({
@@ -10,6 +11,12 @@ function SearchFunctionalitySection({
   setDuration,
   rating,
 }) {
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(100);
+  const [value, setValue] = useState({
+      min: 3,
+      max: 7,
+  })
   return (
     <>
       <div
@@ -45,14 +52,16 @@ function SearchFunctionalitySection({
                 <div className="text-text font-medium">
                   <p className="">Price Range</p>
                 </div>
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-4 w-full">
                   {/* <input type='range' min={'0'} max={'100'} className='w-full' /> */}
-                  {/* <RangeSlider
-                                        min={5}
-                                        max={100}
-                                        // value={price}
-                                        defaultValue={[0, 50]}
-                                    /> */}
+                  <InputRange
+                    draggableTrack
+                    maxValue={20}
+                    minValue={0}
+                    onChange={(value) => this.setState({ value })}
+                    onChangeComplete={(val) => console.log(val)}
+                    // value={value}
+                  />
                 </div>
                 <div className="flex items-center space-x-4 justify-start">
                   <input
@@ -136,22 +145,23 @@ function SearchFunctionalitySection({
               <div className="5 space-y-3">
                 <div className="text-text font-medium flex gap-4 items-center">
                   <p className="">Tour Rating</p>
-                {rating && (
-                  <span className="relative bg-gray-200 px-3 py-1 rounded-full">
-                    <p className="text-xs flex gap-1 text-yellow-500">
-                      {rating}
-                      <span className=" text-[15px]">
-                        <AiFillStar />
-                      </span>
-                    </p>
-                    <span className="absolute -top-2 -right-2 h-[16px] w-[16px] bg-gray-500 rounded-full flex justify-center items-center"
-                    onClick={() => setRating('')}
-                    >
-                      <p className="text-sm text-white">
-                        <RiCloseLine />{" "}
+                  {rating && (
+                    <span className="relative bg-gray-200 px-3 py-1 rounded-full">
+                      <p className="text-xs flex gap-1 text-yellow-500">
+                        {rating}
+                        <span className=" text-[15px]">
+                          <AiFillStar />
+                        </span>
                       </p>
+                      <span
+                        className="absolute -top-2 -right-2 h-[16px] w-[16px] bg-gray-500 rounded-full flex justify-center items-center"
+                        onClick={() => setRating("")}
+                      >
+                        <p className="text-sm text-white">
+                          <RiCloseLine />{" "}
+                        </p>
+                      </span>
                     </span>
-                  </span>
                   )}
                 </div>
                 <div className="space-y-3">
