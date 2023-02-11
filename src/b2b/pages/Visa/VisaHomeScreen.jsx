@@ -76,7 +76,7 @@ function VisaHomeScreen() {
               <div className="bg-semisoft sticky top-0 z-10">
                 <div className="md:max-w-screen-xl md:mx-auto text-darktext ">
                   <div className=" overflow-x-auto">
-                    <div className=" flex md:grid md:grid-cols-5 space-x-1 px-1 md:px-10 py-3 md:py-1 items-center ">
+                    <div className=" flex md:grid md:grid-cols-4 space-x-1 px-1 md:px-10 py-3 md:py-1 items-center ">
                       <button
                         className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-3 border-b-4 border-blue hover:text-lightblue text-lightblue  hover:border-b-4 duration-300 space-x-1 `}
                       >
@@ -92,14 +92,6 @@ function VisaHomeScreen() {
                           <HiOutlineDocumentDuplicate />{" "}
                         </span>
                         <span className="">Documents</span>
-                      </button>
-                      <button
-                        className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1  `}
-                      >
-                        <span className="">
-                          <GiEncirclement />
-                        </span>
-                        <span className="">Process</span>
                       </button>
                       <button
                         className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1  `}

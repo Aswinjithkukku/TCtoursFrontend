@@ -20,7 +20,7 @@ function AttractionSingleTicketPage() {
             setIsLoading(true);
 
             const response = await axios.get(
-                `/b2b/attractions/orders/single/${id}`,
+                `/b2b/attractions/tickets/single/${id}`,
                 {
                     headers: { authorization: `Bearer ${token}` },
                 }
