@@ -11,7 +11,7 @@ import { IoIosMan, IoIosPeople } from "react-icons/io";
 import { MdPeopleAlt } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setVisaEnquiry } from "../../redux/slices/b2cvisaSlice";
+import { setb2cVisaEnquiry } from "../../redux/slices/b2cvisaSlice";
 
 function VisaApplyCard({ visaDetails }) {
   const navigate = useNavigate();
@@ -38,15 +38,10 @@ function VisaApplyCard({ visaDetails }) {
 
   const onApplyVisa = (e) => {
     e.preventDefault();
-    if (
-      formData?.email &&
-      formData?.phone &&
-      formData?.selectedVisaType &&
-      formData?.travellersCount
-    ) {
+    if (formData?.selectedVisaType && formData?.travellersCount) {
       const details = { ...formData, ...visaDetails };
       localStorage.setItem("visaEnquiry", JSON.stringify(details));
-      dispatch(setVisaEnquiry({ ...details }));
+      dispatch(setb2cVisaEnquiry({ ...details }));
       navigate("/visa/apply");
     }
   };
@@ -71,7 +66,7 @@ function VisaApplyCard({ visaDetails }) {
               onSubmit={onApplyVisa}
               className="peer-checked:max-h-[100vh] max-h-0 transition-all duration-500 overflow-hidden"
             >
-              <div className="space-y-2 w-full px-2">
+              <div className=" w-full px-2">
                 <div className="flex items-center space-x-2 text-lightblue">
                   <span className="text-lg text-lightblue">
                     <AiOutlineMail />
@@ -90,7 +85,7 @@ function VisaApplyCard({ visaDetails }) {
                   />
                 </div>
               </div>
-              <div className="space-y-2 w-full px-2">
+              <div className="pt-2 w-full px-2">
                 <div className="flex items-center space-x-2 text-lightblue">
                   <span className="text-lg text-lightblue">
                     <AiOutlineContacts />{" "}
@@ -100,8 +95,8 @@ function VisaApplyCard({ visaDetails }) {
                 <div className="">
                   <input
                     type="number"
-                    name="phone"
-                    value={formData.phone}
+                    name="contactNo"
+                    value={formData.contactNo}
                     placeholder="Contact No"
                     onChange={onChangeHandler}
                     required
@@ -109,7 +104,7 @@ function VisaApplyCard({ visaDetails }) {
                   />
                 </div>
               </div>
-              <div className="space-y-2 w-full px-2">
+              <div className="pt-2 w-full px-2">
                 <div className="flex items-center space-x-2 text-lightblue">
                   <span className="text-lg text-lightblue">
                     <FaWpforms />{" "}
@@ -137,7 +132,7 @@ function VisaApplyCard({ visaDetails }) {
                   </select>
                 </div>
               </div>
-              <div className="space-y-2 w-full px-2">
+              <div className=" pt-2 w-full px-2">
                 <div className="flex items-center space-x-2 text-lightblue">
                   <span className="text-lg text-lightblue">
                     <IoIosPeople />{" "}
@@ -170,17 +165,17 @@ function VisaApplyCard({ visaDetails }) {
                   ? `AED ${+price * +formData.travellersCount}`
                   : "AED 0.00"}
               </div>
-              <div className="flex justify-end px-2 my-3 text-lg text-lightblue">
+              <div className="  flex justify-end px-2 my-3 text-lg text-lightblue">
                 <button
                   type="submit"
-                  className="bg-blue w-full lg:w-auto text-light px-2 py-1 rounded-md"
-                  onClick={onApplyVisa}
+                  className="bg-blue w-full  text-light px-2 py-1 rounded-md"
                 >
                   Submit
                 </button>
               </div>
             </form>
           </div>
+
           <div className="hidden lg:block rounded-2xl space-y-4 border border-text px-4 relative mt-5">
             <input
               type="checkbox"

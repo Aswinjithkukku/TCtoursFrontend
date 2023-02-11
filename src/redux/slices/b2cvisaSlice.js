@@ -56,15 +56,15 @@ const b2cVisaSlice = createSlice({
   name: "visa",
   initialState,
   reducers: {
-    addRows: (state, action) => {
+    addb2cRows: (state, action) => {
       state.rows = [
         {
           title: "",
           firstName: "",
           lastName: "",
-          email: "",
+          email: state?.visaEnquiry?.email || "",
           country: "",
-          contactNo: "",
+          contactNo: state?.visaEnquiry?.contactNo || "",
           passportNo: "",
           expiryDate: {
             day: "",
@@ -118,7 +118,7 @@ const b2cVisaSlice = createSlice({
         });
       }
     },
-    handleRowItemChange: (state, action) => {
+    handleb2cRowItemChange: (state, action) => {
       state.rows[action.payload.index][action.payload.name] =
         action.payload.value;
     },
@@ -143,19 +143,19 @@ const b2cVisaSlice = createSlice({
     //     });
     //   }
     // },
-    handleRowImageChange: (state, action) => {
+    handleb2cRowImageChange: (state, action) => {
       state.imageRows[action.payload.index][action.payload.name] =
         action.payload.file;
     },
-    handleDOBChange: (state, action) => {
+    handleb2cDOBChange: (state, action) => {
       state.rows[action.payload.index].dateOfBirth[action.payload.name] =
         action.payload.value;
     },
-    handlePEDChange: (state, action) => {
+    handleb2cPEDChange: (state, action) => {
       state.rows[action.payload.index].expiryDate[action.payload.name] =
         action.payload.value;
     },
-    setVisaEnquiry: (state, action) => {
+    setb2cVisaEnquiry: (state, action) => {
       state.visaEnquiry = {
         ...action.payload,
       };
@@ -170,12 +170,12 @@ const b2cVisaSlice = createSlice({
 });
 
 export const {
-  addRows,
-  handleRowItemChange,
-  setVisaEnquiry,
-  handleDOBChange,
-  handlePEDChange,
-  handleRowImageChange,
+  addb2cRows,
+  handleb2cRowItemChange,
+  setb2cVisaEnquiry,
+  handleb2cDOBChange,
+  handleb2cPEDChange,
+  handleb2cRowImageChange,
 } = b2cVisaSlice.actions;
 
 export default b2cVisaSlice.reducer;

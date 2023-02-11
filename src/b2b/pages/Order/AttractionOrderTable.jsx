@@ -18,7 +18,9 @@ function AttractionOrderTable({ item }) {
         <td className="p-3">{item?.referenceNumber} </td>
         <td className="p-3">{item?.reseller?.companyName} </td>
         <td className="p-3">{item?.reseller?.agentCode}</td>
-        <td className="p-3 min-w-[200px]">{item?.activities?.activity?.name} </td>
+        <td className="p-3 min-w-[200px]">
+          {item?.activities?.activity?.name}{" "}
+        </td>
         <td className="p-3 capitalize">{item?.activities?.bookingType}</td>
         <td className="p-3 ">{item?.activities?.date?.slice(0, 10)}</td>
         <td className="p-3 ">{item?.createdAt?.slice(0, 10)} </td>
@@ -43,6 +45,11 @@ function AttractionOrderTable({ item }) {
               {item?.activities?.status}
             </span>
           )}
+        </td>
+        <td className="">
+          <button className="bg-green-500 text-white rounded text-xs px-1">
+            Download All
+          </button>
         </td>
       </tr>
       {orderDetails && (
@@ -117,19 +124,19 @@ function AttractionOrderTable({ item }) {
                 <span className="block mt-2">
                   Adults Count:{" "}
                   <span className="text-sm font-medium">
-                  {item?.activities?.adultsCount}
+                    {item?.activities?.adultsCount}
                   </span>
                 </span>
                 <span className="block mt-2">
                   Children Count:{" "}
                   <span className="text-sm font-medium">
-                  {item?.activities?.childrenCount}
+                    {item?.activities?.childrenCount}
                   </span>
                 </span>
                 <span className="block mt-2">
                   Infants Count:{" "}
                   <span className="text-sm font-medium">
-                  {item?.activities?.infantCount}
+                    {item?.activities?.infantCount}
                   </span>
                 </span>
               </div>
