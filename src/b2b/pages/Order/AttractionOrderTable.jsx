@@ -57,7 +57,6 @@ function AttractionOrderTable({ item }) {
   };
 
   const list = tickets();
-  console.log(item);
   return (
     <>
       <div className=" absolute left-[2000px]">
