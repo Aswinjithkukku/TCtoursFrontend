@@ -88,7 +88,9 @@ function UploadDetailSection({ navigation }) {
         title: "VISA Document submission Completed Successfully",
         timer: 1000,
       });
-      navigate("/b2b/visa/apply/invoice");
+      navigate(
+        `/b2b/visa/apply/invoice/${response.data?.visaApplication?._id}`
+      );
     } catch (err) {
       if (err?.response?.data?.error) {
         setError(err?.response?.data?.error);

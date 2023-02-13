@@ -4,12 +4,11 @@ import { AiOutlineHeart, AiOutlineClose, AiFillHeart } from 'react-icons/ai'
 import { RxShare2 } from 'react-icons/rx'
 import PackageSection from './PackageSection'
 import MapSection from './MapSection'
-import ReviewSection from './ReviewSection'
 import FaqSection from './FaqSection'
 import DetailsCard from './DetailsCard'
 import FeatureSection from './FeatureSection'
 import { useDispatch, useSelector } from 'react-redux'
-import { getExcursion, setFavourites, stateFavourites } from '../../../redux/slices/excursionSlice'
+import {  setFavourites, stateFavourites } from '../../../redux/slices/excursionSlice'
 import { useNavigate, useParams } from 'react-router-dom'
 import Rating from '../../../components/Rating/Rating'
 import CarousalMobile from './CarousalMobile'
@@ -24,7 +23,7 @@ function HeroSection() {
   const navigate = useNavigate()
   const { id } = useParams()
 
-  const { excursion, favourites } = useSelector(state => state.excursion)
+  const { favourites } = useSelector(state => state.excursion)
   const { agentExcursion } = useSelector(state => state.agentExcursions)
 
   useEffect(() => {
@@ -42,10 +41,10 @@ function HeroSection() {
       <div className='bg-white'>
         <div className='p-0 lg:p-6'>
           <div className=''>
-            <div className='relative lg:grid lg:grid-cols-12 gap-5 py-2 lg:my-0 lg:py-7'>
+            <div className='relative lg:grid lg:grid-cols-12 gap-5 py-2 lg:my-0 lg:py-5'>
               <div className='1st lg:col-span-8'>
 
-                <div className='bg-light rounded-2xl p-5 py-7 mx-2 my-2 lg:my-0 lg:mx-0 text-darktext'>
+                <div className='bg-light rounded-2xl p-5 mx-2 my-2 lg:my-0 lg:mx-0 text-darktext'>
                   <div className='flex justify-between'>
                     <div className='space-y-3'>
                       {/* tags */}
@@ -63,7 +62,7 @@ function HeroSection() {
 
                         </div>
                         <div className='flex space-x-1 items-center'>
-                          <span className='text-light bg-lightblue w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{agentExcursion?.category?.categoryName} </span>
+                          <span className='text-light bg-lightblue px-3 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{agentExcursion?.category?.categoryName} </span>
                           {agentExcursion?.isOffer === true && agentExcursion?.offerAmountType === 'flat' && (
                             <span className='text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs'>{agentExcursion?.offerAmountType === 'flat' ? `$ ${agentExcursion?.offerAmount} OFF` : ''} </span>
                           )}
@@ -113,7 +112,11 @@ function HeroSection() {
                   <FeatureSection />
                 </div>
 
-                <div className='mx-2 lg:mx-0'>
+                <div id='packageSection' className='p-5  bg-light rounded-2xl '>
+                      <PackageSection />
+                    </div>
+
+                <div className='mx-2 lg:mx-0 mt-2 '>
                   <div className='bg-light py-5 px-4 rounded-2xl md:my-4 w-full  lg:mx-0 my-2 lg:my-0 text-darktext'>
                     <div className='py-3'>
                       <span className='text-xl font-semibold text-blue '>{agentExcursion?.title} {agentExcursion?.title && 'Highlights'}</span>
@@ -130,10 +133,6 @@ function HeroSection() {
 
                     <div id='availability' className='p-5 mb-2 lg:mb-5  bg-gray-300 text-darktext rounded-2xl '>
                       <Availablity />
-                    </div>
-
-                    <div id='packageSection' className='p-5  bg-light rounded-2xl '>
-                      <PackageSection />
                     </div>
 
                     <>
@@ -160,9 +159,6 @@ function HeroSection() {
                     <div id='faqSection' className=''>
                       <FaqSection />
                     </div>
-                    {/* <div id='reviewSection' className=''>
-                      <ReviewSection />
-                    </div> */}
 
                   </>
                 </div>

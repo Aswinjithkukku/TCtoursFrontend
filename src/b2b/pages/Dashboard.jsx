@@ -35,7 +35,7 @@ export default function Dashboard() {
                     </Link>
                 </div>
             </div>
-            <div className="lg:p-6 p-2 bg-bodyColor">
+            <div className="lg:p-6 p-2 ">
                 <div className="flex items-center justify-between gap-[10px] mb-5">
                     <div>
                         <span className="font-medium text-textColor">
@@ -56,7 +56,7 @@ export default function Dashboard() {
                     <SearchCards />
                 </div>
 
-                <div className="md:grid md:grid-cols-2 space-y-2 md:space-y-0 lg:grid-cols-4 gap-6">
+                {/* <div className="md:grid md:grid-cols-2 space-y-2 md:space-y-0 lg:grid-cols-4 gap-6">
                     <WalletCard
                         title={"Wallet Balance"}
                         value={balance}
@@ -89,9 +89,9 @@ export default function Dashboard() {
                         icon={totalRevenuePng}
                         isAmount={true}
                     />
-                </div>
+                </div> */}
 
-                <div className="md:grid md:grid-cols-2 lg:grid-cols-4 space-y-2 lg:space-y-0 gap-6 mt-2 lg:mt-6">
+                {/* <div className="md:grid md:grid-cols-2 lg:grid-cols-4 space-y-2 lg:space-y-0 gap-6 mt-2 lg:mt-6">
                     <TopCard
                         title={"Total Revenue"}
                         value={300}
@@ -149,7 +149,7 @@ export default function Dashboard() {
                         linkText="View all booking"
                         icon={ticketCancelledPng}
                     />
-                </div>
+                </div> */}
 
             </div>
         </div>

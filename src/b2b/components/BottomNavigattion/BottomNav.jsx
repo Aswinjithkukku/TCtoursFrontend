@@ -63,7 +63,7 @@ function BottomNav() {
           </div>
           <div className=' flex justify-center items-center'>
             <div className=''
-              onClick={() => navigate('/b2b/order')}>
+              onClick={() => navigate('/b2b/order/attraction')}>
               <div className='flex justify-center items-center text-2xl'>
                 <HiOutlineShoppingCart />
               </div>

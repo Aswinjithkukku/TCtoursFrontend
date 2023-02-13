@@ -1,12 +1,9 @@
 import React from 'react'
-import { AiOutlineLeft } from 'react-icons/ai'
-import { Link, useNavigate } from 'react-router-dom'
-// import HeroSearch from './HeroSearch'
+import { Link } from 'react-router-dom'
 import SearchCards from '../../components/Cards/SearchCards'
 import SearchingResultPage from './SearchingResultPage'
 
 function Attraction() {
-  const navigate = useNavigate()
   return (
     <div className=''>
       <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">

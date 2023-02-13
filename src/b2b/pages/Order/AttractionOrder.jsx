@@ -108,7 +108,7 @@ function AttractionOrder() {
         <div className="bg-white rounded shadow-sm">
           <div className="flex items-center justify-between border-b border-dashed p-4">
             <h1 className="font-medium hidden md:block">Orders</h1>
-            <div className="flex items-center gap-[10px]">
+            <div className="md:flex items-center gap-[10px] space-y-1 md:space-y-0 w-full md:w-auto">
               <input
                 type="text"
                 placeholder="Search Refernce here..."
@@ -120,39 +120,41 @@ function AttractionOrder() {
                   })
                 }
               />
-              <div className="relative" ref={dropdownRef}>
-                <button
-                  className="button w-[150px] bg-orange-500 flex items-center justify-center"
-                  onClick={() => setOrderType(!orderType)}
-                >
-                  Orders
-                  <AiOutlineDown />
-                </button>
-                {orderType && <OrderModal />}
-              </div>
+              <div className="flex items-center justify-between gap-[10px]">
+                <div className="relative" ref={dropdownRef}>
+                  <button
+                    className="button w-[120px] md:w-[150px] bg-orange-500 flex items-center justify-center"
+                    onClick={() => setOrderType(!orderType)}
+                  >
+                    Orders
+                    <AiOutlineDown />
+                  </button>
+                  {orderType && <OrderModal />}
+                </div>
 
-              <div className="relative" ref={transactionRef}>
-                <button
-                  className="button w-[150px] bg-orange-500 flex items-center justify-center"
-                  onClick={() => setTransactionType(!transactionType)}
-                >
-                  Transaction
-                  <AiOutlineDown />
-                </button>
-                {transactionType && (
-                  <TransactionModal
-                    setFilters={setFilters}
-                    setTransactionType={setTransactionType}
-                  />
-                )}
-              </div>
+                <div className="relative" ref={transactionRef}>
+                  <button
+                    className="button w-[120px] md:w-[150px] bg-orange-500 flex items-center justify-center"
+                    onClick={() => setTransactionType(!transactionType)}
+                  >
+                    Transaction
+                    <AiOutlineDown />
+                  </button>
+                  {transactionType && (
+                    <TransactionModal
+                      setFilters={setFilters}
+                      setTransactionType={setTransactionType}
+                    />
+                  )}
+                </div>
 
               <button
-                className="  bg-green-600 h-[40px] rounded-[0.25rem] w-[220px] text-sm text-light flex items-center justify-center"
+                className="  bg-green-600 h-[40px] rounded-[0.25rem] w-[120px] md:w-[220px] text-sm text-light flex items-center justify-center"
                 onClick={handleDownload}
-              >
+                >
                 Download
               </button>
+                </div>
             </div>
           </div>
           {/* <div className="p-6 flex flex-col items-center">

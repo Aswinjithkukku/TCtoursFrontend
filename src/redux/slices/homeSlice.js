@@ -9,6 +9,7 @@ const initialState = {
   currencies: [],
   destinations: [],
   countries: [],
+  searchQuery: [],
   visaCountries: [],
   selectedCurrency: {
     isocode: "AED",
@@ -28,9 +29,17 @@ export const getInitialData = createAsyncThunk(
 export const getInitialVisaCountryList = createAsyncThunk(
   "homeSlice/getInitialVisaCountryList",
   async (args, { getState }) => {
-      const response = await axios.get(`/b2b/visa/country/all`);
+    const response = await axios.get(`/b2b/visa/country/all`);
 
-      return response.data;
+    return response.data;
+  }
+);
+export const getSearchQuery = createAsyncThunk(
+  "homeSlice/getSearchQuery",
+  async (args, { getState }) => {
+    const response = await axios.get(`/search/list?search=${args}`);
+
+    return response.data;
   }
 );
 
@@ -93,6 +102,10 @@ const homeSlice = createSlice({
     },
     [getInitialVisaCountryList.fulfilled]: (state, action) => {
       state.visaCountries = action.payload;
+      state.loading = false;
+    },
+    [getSearchQuery.fulfilled]: (state, action) => {
+      state.searchQuery = action.payload;
       state.loading = false;
     },
   },

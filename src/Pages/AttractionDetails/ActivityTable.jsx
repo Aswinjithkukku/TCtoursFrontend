@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { IoMdCart } from "react-icons/io";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
 import {
   setActivities,
   setSelectionArray,
@@ -11,10 +9,10 @@ import priceConversion from "../../utils/PriceConversion";
 function ActivityTable({ item, index }) {
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
-  const location = useLocation()
-  const date = new URLSearchParams(location.search).get('date')
 
-  const { recievedActivities } = useSelector((state) => state.excursion);
+  const { recievedActivities, excursion } = useSelector(
+    (state) => state.excursion
+  );
   const { selectedCurrency } = useSelector((state) => state.home);
 
   const handleChange = ({ value, name, index }) => {
@@ -54,22 +52,24 @@ function ActivityTable({ item, index }) {
   }, [item.adult, item.child, item.infant, recievedActivities, dispatch]);
 
   useEffect(() => {
-    dispatch(
-      setActivities({
-        value: date,
-        name: "date",
-        index,
-      })
-    );
-  }, [dispatch]);
-
-  useEffect(() => {
     const result = recievedActivities?.filter(
       (item) => item?.isChecked === true
     );
     localStorage.setItem("tour_order", JSON.stringify(result));
     dispatch(setSelectionArray(result));
   }, [recievedActivities, dispatch]);
+
+  let date = new Date();
+  let dd = excursion?.bookingPriorDays
+    ? String(date.getDate() + Number(excursion?.bookingPriorDays)).padStart(
+        2,
+        "0"
+      )
+    : String(date.getDate() + 1).padStart(2, "0");
+  let mm = String(date.getMonth() + 1).padStart(2, "0");
+  let yyyy = date.getFullYear();
+  const res = yyyy + "-" + mm + "-" + dd;
+  console.log(res);
 
   return (
     <tr className="text-darktext border-b" key={index}>
@@ -96,6 +96,7 @@ function ActivityTable({ item, index }) {
           type="date"
           className=""
           name="date"
+          min={res}
           value={item.date}
           onChange={(e) =>
             handleChange({ value: e.target.value, name: e.target.name, index })
@@ -172,18 +173,6 @@ function ActivityTable({ item, index }) {
         <h2 className="font-medium">
           {priceConversion(price, selectedCurrency, true)}
         </h2>
-        {/* <div className='relative'>
-                    <input type='checkbox'
-                        className='peer absolute top-0 inset-x-0 w-full h-6 opacity-0  cursor-pointer'
-                        name='isChecked'
-                        checked={item?.isChecked}
-                        onChange={(e) => handleChange({ value: e.target.checked, name: e.target.name, index })} />
-                    <button className='text-light bg-lightblue px-1 py-1 rounded-md space-x-1 hover:bg-blue text-xs flex items-center whitespace-nowrap'
-                    >
-                        <span className=''> {item?.isChecked === false ? "Add to cart" : "Remove from cart"} </span>
-                    <span className='text-lg'> <IoMdCart /> </span>
-                    </button>
-                </div> */}
       </td>
     </tr>
   );

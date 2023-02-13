@@ -33,7 +33,6 @@ import {
   Dashboard,
   DubaiDolphinarium,
   EditResellers,
-  HeroSearch,
   AttractionOrder,
   MarkUpList,
   NewRegisters,
@@ -49,6 +48,8 @@ import {
   VisaOrderDetailsPage,
   VisaOrderPage,
   Wallet,
+  ReapplyIndividual,
+  AttractionSingleTicketPage,
 } from "../b2b/pages";
 import B2BPrivateRoute from "./B2BPrivateRoute";
 import LoadingWrapper from "./LoadingWrapper";
@@ -114,8 +115,9 @@ const ThemeRoutes = [
         path: "/b2b/visa/order/:id/details",
         element: <VisaOrderDetailsPage />,
       },
-      { path: "/b2b/visa/apply/invoice", element: <VisaApplySuccessPage /> },
-      { path: "/b2b/attractions/invoice", element: <AttractionInvoice /> },
+      { path: "/b2b/visa/order/:id/details/:passenger", element: <ReapplyIndividual /> },
+      { path: "/b2b/visa/apply/invoice/:id", element: <VisaApplySuccessPage /> },
+      { path: "/b2b/attractions/invoice/:id", element: <AttractionInvoice /> },
     ],
   },
   {
@@ -149,6 +151,10 @@ const ThemeRoutes = [
   {
     path: "/attractions/invoice/dolphin",
     element: <DubaiDolphinarium />,
+  },
+  {
+    path: "/ticket/attraction/:id",
+    element: <AttractionSingleTicketPage />,
   },
 ];
 

@@ -52,7 +52,7 @@ function HeroSection() {
 
                             <div className='overflow-hidden lg:rounded-[4em] lg:h-[42em]  relative bg-cover'>
                             <div className='absolute top-0 text-center w-full z-10'>
-                                    <div className='flex items-end h-[40em] '>
+                                    <div className='flex items-end h-[35em] '>
                                         <div className='hidden md:flex justify-between w-full items-center mx-10 max-w-8xl'>
                                             <span className='text-3xl font-bold text-darktext bg-trans hover:bg-soft h-16 w-16 rounded-full flex justify-center items-center' onClick={() => setCurrentSlide(currentSlide - 1)}><AiOutlineLeft /> </span>
                                             <span className='text-3xl font-bold text-darktext bg-trans hover:bg-soft h-16 w-16 rounded-full flex justify-center items-center' onClick={() => setCurrentSlide(currentSlide + 1)}><AiOutlineRight /></span>

@@ -4,12 +4,13 @@ import {
   AiOutlineMail,
   AiOutlinePlus,
 } from "react-icons/ai";
-import { BsFillPersonFill, BsPhone } from "react-icons/bs";
+import { BsPhone } from "react-icons/bs";
+import { MdEmail } from "react-icons/md";
 import { FaWpforms } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import priceConversion from "../../../utils/PriceConversion"
+// import priceConversion from "../../../utils/PriceConversion"
 
 function VisaApplyCard() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ function VisaApplyCard() {
   const [price, setPrice] = useState(0);
 
   const { visa } = useSelector((state) => state.visa);
-  const { selectedCurrency } = useSelector(state => state.visa)
+  const { home } = useSelector((state) => state.general);
 
   const onChangeHandler = (e) => {
     e.preventDefault();
@@ -69,7 +70,7 @@ function VisaApplyCard() {
               </span>
             </div>
             <div className="peer-checked:max-h-[100vh] max-h-0 transition-all duration-500 overflow-hidden">
-              <form onSubmit={submitHandler}>
+              <form onSubmit={submitHandler} className="space-y-2">
                 <div className="space-y-2 w-full px-2">
                   <div className="flex items-center space-x-2 text-lightblue">
                     <span className="text-lg text-lightblue">
@@ -81,7 +82,7 @@ function VisaApplyCard() {
                     <input
                       type="email"
                       placeholder="Email Id"
-                      className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
+                      className="px-3 w-full border-none placeholder:text-text py-2 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
                       name="email"
                       value={data.email}
                       onChange={onChangeHandler}
@@ -100,7 +101,7 @@ function VisaApplyCard() {
                     <input
                       type="number"
                       placeholder="Contact No"
-                      className="no-spinner px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
+                      className="no-spinner px-3 w-full border-none placeholder:text-text py-2 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
                       name="contactNo"
                       value={data.contactNo}
                       onChange={onChangeHandler}
@@ -118,7 +119,7 @@ function VisaApplyCard() {
                   <div className="">
                     <select
                       placeholder="Visa type"
-                      className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
+                      className="px-3 w-full border-none placeholder:text-text py-2 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
                       name="visaType"
                       value={data.visaType}
                       onChange={onChangeHandler}
@@ -143,7 +144,7 @@ function VisaApplyCard() {
                   <div className="">
                     <select
                       placeholder="Travellers Number"
-                      className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
+                      className="px-3 w-full border-none placeholder:text-text py-2 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
                       name="traveller"
                       value={data.traveller}
                       onChange={onChangeHandler}
@@ -159,12 +160,12 @@ function VisaApplyCard() {
                   </div>
                 </div>
                 <div className="flex justify-center font-medium lg:justify-end px-2 py-2 text-lg text-lightblue">
-                    {price} AED
+                  {price} AED
                 </div>
                 <div className="flex justify-end px-2 my-3 text-lg text-lightblue">
                   <button
                     type="submit"
-                    className="bg-blue w-full  text-light px-2 py-1 rounded-md"
+                    className="bg-blue w-full  text-light px-2 py-1 rounded-md mb-2"
                   >
                     Submit
                   </button>
@@ -178,61 +179,44 @@ function VisaApplyCard() {
               className="peer absolute top-5 w-full h-5 inset-x-0  cursor-pointer opacity-0"
             />
             <div className="flex justify-between text-lightblue ">
-              <span className="text-xl">Let Us call You</span>
+              <span className="text-xl">Contact Us</span>
               <span className="text-xl">
                 <AiOutlinePlus />{" "}
               </span>
             </div>
-            <div className="peer-checked:max-h-[100vh] max-h-0 transition-all duration-500 overflow-hidden ">
-              <div className="space-y-2 w-full px-2">
+            <div className="peer-checked:max-h-[100vh] max-h-0 transition-all duration-500 overflow-hidden space-y-3">
+              <div className="space-y-1 w-full px-2">
                 <div className="flex items-center space-x-2 text-lightblue">
-                  <span className="text-lg text-lightblue">
-                    <BsFillPersonFill />{" "}
-                  </span>
-                  <span className="text-lg">Name</span>
-                </div>
-                <div className="">
-                  <input
-                    type="email"
-                    placeholder="Name"
-                    className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
-                  />
-                </div>
-              </div>
-              <div className="space-y-2 w-full px-2">
-                <div className="flex items-center space-x-2 text-lightblue">
-                  <span className="text-lg text-lightblue">
-                    <AiOutlineMail />
-                  </span>
-                  <span className="text-lg">Email</span>
-                </div>
-                <div className="">
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
-                  />
-                </div>
-              </div>
-              <div className="space-y-2 w-full px-2">
-                <div className="flex items-center space-x-2 text-lightblue">
-                  <span className="text-lg text-lightblue">
+                  <span className=" text-lightblue">
                     <BsPhone />
                   </span>
-                  <span className="text-lg">Phone Number</span>
+                  <span className="text-xs uppercase">Phone Number</span>
                 </div>
                 <div className="">
-                  <input
-                    type="email"
-                    placeholder="Phone Number"
-                    className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
-                  />
+                  <p className="text-gray-500 font-[500] text-sm">+{home?.phoneNumber1} </p>
                 </div>
               </div>
-              <div className="w-full px-2 my-3 text-lg text-lightblue">
-                <button className="w-full bg-blue text-light px-2 py-1 rounded-md">
-                  Submit
-                </button>
+              <div className="space-y-2 w-full px-2">
+                <div className="flex items-center space-x-2 text-lightblue">
+                  <span className=" text-lightblue">
+                    <BsPhone />
+                  </span>
+                  <span className="text-xs uppercase">Phone Number</span>
+                </div>
+                <div className="">
+                  <p className="text-gray-500 font-[500] text-sm">+{home?.phoneNumber2} </p>
+                </div>
+              </div>
+              <div className="space-y-2 w-full px-2  mb-3">
+                <div className="flex items-center space-x-2 text-lightblue">
+                  <span className=" text-lightblue">
+                    <MdEmail />
+                  </span>
+                  <span className="text-xs uppercase">Email Id</span>
+                </div>
+                <div className="">
+                  <p className="text-gray-500 font-[500] text-sm">{home?.email} </p>
+                </div>
               </div>
             </div>
           </div>
