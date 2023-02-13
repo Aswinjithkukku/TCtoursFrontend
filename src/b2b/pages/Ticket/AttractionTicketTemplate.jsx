@@ -21,7 +21,6 @@ const AttractionTicketTemplate = ({ ticket }) => {
   }
 
   const baseUrl = process.env.REACT_APP_SERVER_URL;
-  console.log(baseUrl);
 
   return (
     <>
@@ -32,7 +31,7 @@ const AttractionTicketTemplate = ({ ticket }) => {
               <div className="w-[400px] h-[150px] ">
                 <img
                   className="w-[400px] h-[150px]"
-                  src={`https://secure.mytravellerschoice.com${ticket?.attraction?.logo}`}
+                  src={`${baseUrl}${ticket?.attraction?.logo}`}
                   alt=""
                 />
               </div>
@@ -109,7 +108,7 @@ const AttractionTicketTemplate = ({ ticket }) => {
               return (
                 <div className=" h-[300px]  ">
                   <img
-                    src={`https://secure.mytravellerschoice.com${link}`}
+                    src={`${baseUrl}${link}`}
                     alt="images"
                     className="h-[300px] w-[100%]"
                   />
