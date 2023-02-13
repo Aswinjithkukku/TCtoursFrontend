@@ -33,78 +33,112 @@ const AttractionInvoicePdfTemplate = () => {
       </div>
       <div className="pb-5 ">
         <div className="table">
-          <table id="invoice">
+          <table id="invoice" className="w-[100%] border-collapse">
             <thead>
               <tr className="text-white text-left bg-[#4f4f4f]">
-                <th className="p-2 border-white border-solid border-[1px] pb-3 ">
-                  Excursion
+                <th className="p-2 border-white border-solid border-[1px] py-3 ">
+                  Name
                 </th>
-                <th className="">Adult</th>
-                <th className="">Child</th>
-                <th className="">Infant</th>
-                <th className="">Transfer</th>
-                <th className="">Amount</th>
+                <th className="p-2 border-white border-solid border-[1px] py-3">
+                  Adult
+                </th>
+                <th className="p-2 border-white border-solid border-[1px] py-3">
+                  Child
+                </th>
+                <th className="p-2 border-white border-solid border-[1px] py-3">
+                  Infant
+                </th>
+                <th className="p-2 border-white border-solid border-[1px] py-3">
+                  Transfer
+                </th>
+                <th className="p-2 border-white border-solid border-[1px] py-3">
+                  Amount
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Name of Excursion</td>
-                <td>1</td>
-                <td>2</td>
-                <td>0</td>
-                <td>Without</td>
-                <td>1200 INR</td>
+                <td className="p-2 border-solid border-white border-[1px]">
+                  Name of Excursion
+                </td>
+                <td className="p-2 border-solid border-white border-[1px]">
+                  1
+                </td>
+                <td className="p-2 border-solid border-white border-[1px]">
+                  2
+                </td>
+                <td className="p-2 border-solid border-white border-[1px]">
+                  0
+                </td>
+                <td className="p-2 border-solid border-white border-[1px]">
+                  Without
+                </td>
+                <td className="p-2 border-solid border-white border-[1px]">
+                  1200 INR
+                </td>
               </tr>
               <tr>
-                <td>Name of Excursion</td>
-                <td>1</td>
-                <td>2</td>
-                <td>0</td>
-                <td>Without</td>
-                <td>1200 INR</td>
+                <td className="p-2 border-solid border-white border-[1px]">
+                  Name of Excursion
+                </td>
+                <td className="p-2 border-solid border-white border-[1px]">
+                  1
+                </td>
+                <td className="p-2 border-solid border-white border-[1px]">
+                  2
+                </td>
+                <td className="p-2 border-solid border-white border-[1px]">
+                  0
+                </td>
+                <td className="p-2 border-solid border-white border-[1px]">
+                  Without
+                </td>
+                <td className="p-2 border-solid border-white border-[1px]">
+                  1200 INR
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div className="grand">
-          <div className="grand_total">
-            <div className="">
+        <div className="pt-2.5 flex justify-end w-[100%]">
+          <div className="grand_total w-[300px]">
+            <div className="flex justify-between">
               <p className="">Sub Total</p>
               <p className="">2400 INR</p>
             </div>
-            <div className="">
+            <div className="flex justify-between ">
               <p className="">VAT Amount</p>
               <p className="">100 INR</p>
             </div>
-            <div className="">
-              <p className="grand_text">Grand Total</p>
-              <p className="grand_text">2500 INR</p>
+            <div className="flex justify-between">
+              <p className="text-[17px] font-bold">Grand Total</p>
+              <p className="text-[17px] font-bold ">2500 INR</p>
             </div>
           </div>
         </div>
       </div>
-      <div className="payment_info__section">
-        <div className="payment">
+      <div className="pt-2.5 flex justify-start ">
+        <div className="payment w-[300px]">
           <div className="">
             <h4 className="">Payment Info</h4>
           </div>
-          <div className="">
+          <div className="flex justify-between">
             <p className="">Account</p>
             <p className="">145556545</p>
           </div>
-          <div className="">
+          <div className="flex justify-between">
             <p className="">Account Name</p>
             <p className="">Name of User</p>
           </div>
-          <div className="">
-            <p className="grand_text">Bank Details</p>
-            <p className="grand_text">FEderal</p>
+          <div className="flex justify-between">
+            <p className="font-bold">Bank Details</p>
+            <p className="font-bold">FEderal</p>
           </div>
         </div>
       </div>
-      <div className="Terms__section">
-        <div className="condition">
-          <div classNameName="">
+      <div className="pt-2.5 flex justify-start">
+        <div className=" flex flex-col">
+          <div className=" font-bold">
             <h4 className="">Terms & Condition</h4>
           </div>
           <p className="">

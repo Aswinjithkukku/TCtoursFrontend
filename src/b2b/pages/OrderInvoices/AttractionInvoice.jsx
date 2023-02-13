@@ -93,7 +93,14 @@ function AttractionInvoice() {
     });
   };
 
-  const handleDownloadInvoice = () => {};
+  const handleDownloadInvoice = () => {
+    var node = document.getElementById("attraction_invoice_pdf_template");
+
+    var options = {
+      filename: `${"Invoice"}.pdf`,
+    };
+    domToPdf(node, options, function (pdf) {});
+  };
 
   const list = tickets();
   return (
@@ -106,7 +113,9 @@ function AttractionInvoice() {
             </div>
           </>
         ))}
-        <AttractionInvoicePdfTemplate />
+        <div id="attraction_invoice_pdf_template">
+          <AttractionInvoicePdfTemplate />
+        </div>
       </div>
       <div className=" ">
         <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
