@@ -8,6 +8,8 @@ import priceConversion from "../../../utils/PriceConversion";
 import AttractionTicketTemplate from "../Ticket/AttractionTicketTemplate";
 import { useMemo } from "react";
 import domToPdf from "dom-to-pdf";
+import { FcDownload } from "react-icons/fc";
+import AttractionInvoicePdfTemplate from "./AttractionInvoicePdfTemplate";
 
 function AttractionInvoice() {
   const { id } = useParams();
@@ -68,6 +70,7 @@ function AttractionInvoice() {
             ...tkt,
             attraction: ele?.attraction,
             activity: ele?.activity,
+            destination: ele?.destination,
           };
         });
         return tickets;
@@ -90,17 +93,20 @@ function AttractionInvoice() {
     });
   };
 
+  const handleDownloadInvoice = () => {};
+
   const list = tickets();
   return (
     <>
-      <div className="absolute left-[200000000px]">
+      <div className="absolute right-[20000000px]">
         {list?.map((ele) => (
           <>
-            <div id={ele?.ticketNo} className="w-[100%] ">
+            <div id={ele?.ticketNo} className="w-[100%] pt-[200px]">
               <AttractionTicketTemplate ticket={ele} />
             </div>
           </>
         ))}
+        <AttractionInvoicePdfTemplate />
       </div>
       <div className=" ">
         <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
@@ -155,7 +161,7 @@ function AttractionInvoice() {
                                 Ticket No. : <span>{ele?.ticketNo}</span>
                               </span>
                               <button
-                                className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded"
+                                className="text-[18px] font-[500] uppercase text-white px-3 py-1 rounded"
                                 onClick={() => {
                                   downloadTicket(ele?.ticketNo);
                                   // navigate(
@@ -163,7 +169,7 @@ function AttractionInvoice() {
                                   // );
                                 }}
                               >
-                                Download
+                                <FcDownload />
                               </button>
                             </li>
                           </>
@@ -290,7 +296,10 @@ function AttractionInvoice() {
                     </p>
                   </div>
                   <div className="">
-                    <button className="bg-[#12acfd] rounded px-3 py-2 text-white">
+                    <button
+                      onClick={handleDownloadInvoice}
+                      className="bg-[#12acfd] rounded px-3 py-2 text-white"
+                    >
                       Download
                     </button>
                   </div>

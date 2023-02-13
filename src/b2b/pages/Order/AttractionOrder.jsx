@@ -190,7 +190,7 @@ function AttractionOrder() {
                   <th className="font-[500] p-3 whitespace-nowrap">Download</th>
                 </tr>
               </thead>
-              <tbody className="text-sm">
+              <tbody className="text-sm overflow-hidden">
                 {orders?.map((item, index) => (
                   <AttractionOrderTable item={item} key={index} />
                 ))}

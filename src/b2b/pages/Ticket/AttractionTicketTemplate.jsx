@@ -1,16 +1,41 @@
 import React from "react";
+import { useRef } from "react";
 import Barcode from "react-barcode";
-import { FaHandPointRight } from "react-icons/fa";
 import QRCode from "react-qr-code";
 import formatDate from "../../../utils/formatDate";
 
 const AttractionTicketTemplate = ({ ticket }) => {
+  console.log(ticket);
+  const ticketDescRef = useRef();
+  let parser = new DOMParser();
+
+  const dom = parser.parseFromString(
+    ticket?.activity?.description,
+    "text/html"
+  );
+  if (ticketDescRef?.current) {
+    const description = dom.getElementsByTagName("body").item(0);
+    ticketDescRef.current.innerHTML = description?.innerHTML;
+    console.log(description);
+    console.log(ticketDescRef.current);
+  }
+
+  const baseUrl = process.env.REACT_APP_SERVER_URL;
+  console.log(baseUrl);
+
   return (
     <>
       <div id="ticket_template" className="w-[100%] min-h-screen p-[40px] ">
         <section className="w-[100%] mx-auto flex flex-col items-center">
           <div className="primary__section w-[90%]">
-            <div className="flex justify-end pt-7">
+            <div className="flex justify-between pt-7">
+              <div className="w-[400px] h-[150px] ">
+                <img
+                  className="w-[400px] h-[150px]"
+                  src={`https://secure.mytravellerschoice.com${ticket?.attraction?.logo}`}
+                  alt=""
+                />
+              </div>
               <div className="">
                 <Barcode
                   value={ticket?.ticketNo}
@@ -36,7 +61,7 @@ const AttractionTicketTemplate = ({ ticket }) => {
                     <div className="capitalize">{ticket?.ticketFor}</div>
                     <div className="">Destination :</div>
                     <div className="capitalize">
-                      {ticket?.activity?.attraction?.destination?.name}
+                      {ticket?.destination?.name}
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-x-1 gap-y-16">
@@ -79,57 +104,20 @@ const AttractionTicketTemplate = ({ ticket }) => {
               </div>
             </div>
           </div>
-          <div className="my-[100px] w-[90%]">
-            <div>
-              <span className="text-[30px] ">
-                General Rules and Regulations :-
-              </span>
-            </div>
-            <ul className="list-none pl-[10px] list-outside  text-[26px] flex flex-col gap-4 mt-2">
-              <li className="flex gap-4">
-                <span className="pt-2 text-blue">
-                  <FaHandPointRight />
-                </span>
-                Guests are required to carry a printed copy of the ticket which
-                needs to be presented at the Entrance to gain the entry.
-              </li>
-              <li className="flex gap-4">
-                <span className="pt-2 text-blue">
-                  <FaHandPointRight />
-                </span>
-                Guests are required to carry a printed copy of the ticket which
-                needs to be presented at the Entrance to gain the entry.
-              </li>
-              <li className="flex gap-4">
-                <span className="pt-2 text-blue">
-                  <FaHandPointRight />
-                </span>
-                Guests are required to carry a printed copy of the ticket which
-                needs to be presented at the Entrance to gain the entry.
-              </li>
-              <li className="flex gap-4 ">
-                <span className="pt-2 text-blue">
-                  <FaHandPointRight />
-                </span>
-                Guests are required to carry a printed copy of the ticket which
-                needs to be presented at the Entrance to gain the entry.
-              </li>
-              <li className="flex gap-4">
-                <span className="pt-2 text-blue">
-                  <FaHandPointRight />
-                </span>
-                Guests are required to carry a printed copy of the ticket which
-                needs to be presented at the Entrance to gain the entry.
-              </li>
-              <li className="flex gap-4">
-                <span className="pt-2 text-blue">
-                  <FaHandPointRight />
-                </span>
-                Guests are required to carry a printed copy of the ticket which
-                needs to be presented at the Entrance to gain the entry.
-              </li>
-            </ul>
+          <div className=" grid grid-cols-3  w-[90%]  h-[300px] rounded-2xl overflow-hidden ">
+            {ticket?.attraction?.images?.map((link) => {
+              return (
+                <div className=" h-[300px]  ">
+                  <img
+                    src={`https://secure.mytravellerschoice.com${link}`}
+                    alt="images"
+                    className="h-[300px] w-[100%]"
+                  />
+                </div>
+              );
+            })}
           </div>
+          <div ref={ticketDescRef} className="my-[100px] w-[90%]"></div>
         </section>
       </div>
     </>
