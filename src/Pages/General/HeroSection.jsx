@@ -95,8 +95,8 @@ function HeroSection() {
                             </div>
                             <div className=' md:absolute z-10 md:-bottom-20 lg:-bottom-24 w-full md:flex justify-center '>
                                 <div className='md:w-9/12 relative'>
-                                    <div className='md:ml-14  md:w-8/12 bg-light rounded-t-2xl md:rounded-t-[1em] overflow-x-auto'>
-                                        <div className=' flex md:grid md:grid-cols-5 space-x-1 px-1 md:px-10 py-3 md:py-1 items-center '>
+                                    <div className='md:ml-14  md:w-4/12 bg-light rounded-t-2xl md:rounded-t-[1em] overflow-x-auto'>
+                                        <div className=' flex md:grid md:grid-cols-2 space-x-1 px-1  py-3 md:py-1 items-center '>
                                             <button className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blue duration-300 space-x-1 ${viewAttraction ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
                                                 setViewFlight(false)
                                                 setViewHotel(false)
@@ -107,7 +107,7 @@ function HeroSection() {
                                                 <span className=''><MdAttractions /> </span>
                                                 <span className=''>Attraction</span>
                                             </button>
-                                            <button className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blue duration-300 space-x-1  ${viewFlight ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
+                                            {/* <button className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blue duration-300 space-x-1  ${viewFlight ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
                                                 setViewAttraction(false)
                                                 setViewHotel(false)
                                                 setViewVisa(false)
@@ -126,7 +126,7 @@ function HeroSection() {
                                             }}>
                                                 <span className=''><FaHotel /> </span>
                                                 <span className=''>Hotel</span>
-                                            </button>
+                                            </button> */}
                                             <button className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blue duration-300 space-x-1  ${viewVisa ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
                                                 setViewAttraction(false)
                                                 setViewHotel(false)
@@ -137,7 +137,7 @@ function HeroSection() {
                                                 <span className=''><FaWpforms /> </span>
                                                 <span className=''>Visa</span>
                                             </button>
-                                            <button className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blue duration-300 space-x-1  ${viewCar ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
+                                            {/* <button className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blue duration-300 space-x-1  ${viewCar ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
                                                 setViewAttraction(false)
                                                 setViewHotel(false)
                                                 setViewVisa(false)
@@ -146,7 +146,7 @@ function HeroSection() {
                                             }}>
                                                 <span className=''><IoIosCar /> </span>
                                                 <span className=''>Transfer</span>
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </div>
 
