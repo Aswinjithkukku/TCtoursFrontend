@@ -8,6 +8,8 @@ const initialState = {
   agentExcursions: [],
   agentRecievedActivities: [],
   agentSelectedActivities: [],
+  ticketCount: 0,
+  ticketStatus: false,
   // favourites: localStorage.getItem("favourites") ? JSON.parse(localStorage.getItem("favourites"))|| [] : [],
   agentExcursionCart: localStorage.getItem("agentExcursionCart")
     ? JSON.parse(localStorage.getItem("agentExcursionCart")) || []
@@ -48,7 +50,7 @@ export const getAgentExcursion = createAsyncThunk(
         }
       );
       console.log(response.data);
-      return response.data;
+      return response?.data;
     } else {
       throw Error("cant find attraction");
     }
@@ -117,7 +119,9 @@ const agentExcursionSlice = createSlice({
   extraReducers: {
     [getAgentExcursion.fulfilled]: (state, action) => {
       state.loading = false;
-      state.agentExcursion = action.payload;
+      state.agentExcursion = action.payload?.attraction;
+      state.ticketCount = action.payload?.ticketCount;
+      state.ticketStatus = action.payload?.ticketStatus
       let array = [];
       for (let i = 0; i < state.agentExcursion.activities.length; i++) {
         state.agentExcursion.activities[i].isChecked = i === 0 ? true : false;
