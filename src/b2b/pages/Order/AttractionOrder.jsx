@@ -148,13 +148,13 @@ function AttractionOrder() {
                   )}
                 </div>
 
-              <button
-                className="  bg-green-600 h-[40px] rounded-[0.25rem] w-[120px] md:w-[220px] text-sm text-light flex items-center justify-center"
-                onClick={handleDownload}
+                <button
+                  className="  bg-green-600 h-[40px] rounded-[0.25rem] w-[120px] md:w-[220px] text-sm text-light flex items-center justify-center"
+                  onClick={handleDownload}
                 >
-                Download
-              </button>
-                </div>
+                  Download
+                </button>
+              </div>
             </div>
           </div>
           {/* <div className="p-6 flex flex-col items-center">
@@ -187,6 +187,7 @@ function AttractionOrder() {
                   <th className="font-[500] p-3 whitespace-nowrap">Price</th>
                   {/* <th className="font-[500] p-3 whitespace-nowrap">Profit</th> */}
                   <th className="font-[500] p-3 whitespace-nowrap">Status</th>
+                  <th className="font-[500] p-3 whitespace-nowrap">Download</th>
                 </tr>
               </thead>
               <tbody className="text-sm">

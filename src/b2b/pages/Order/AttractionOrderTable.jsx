@@ -5,12 +5,61 @@ import { FiMapPin } from "react-icons/fi";
 import { MdNoTransfer, MdOutlineEmail } from "react-icons/md";
 import { useSelector } from "react-redux";
 import priceConversion from "../../../utils/PriceConversion";
+import AttractionTicketTemplate from "../Ticket/AttractionTicketTemplate";
+import { useMemo } from "react";
+import domToPdf from "dom-to-pdf";
 
 function AttractionOrderTable({ item }) {
   const [orderDetails, setOrderDetails] = useState(false);
   const { selectedCurrency } = useSelector((state) => state.home);
+
+  const tickets = useMemo(() => {
+    return () => {
+      const ele = item?.activities;
+      console.log(item);
+      let ticketList = [];
+      if (ele?.adultTickets) ticketList = [...ticketList, ...ele?.adultTickets];
+      if (ele?.childTickets) ticketList = [...ticketList, ...ele?.childTickets];
+
+      ticketList = ticketList?.map((tkt) => {
+        return {
+          ...tkt,
+          attraction: item?.attraction,
+          activity: ele?.activity,
+        };
+      });
+      if (ticketList) return ticketList;
+      return [];
+    };
+  }, [item]);
+
+  const handleTicketsDownload = () => {
+    const ticketList = tickets();
+
+    ticketList?.forEach((ele) => {
+      var node = document.getElementById(ele?.ticketNo);
+
+      var options = {
+        filename: `${ele?.ticketNo}.pdf`,
+      };
+      domToPdf(node, options, function (pdf) {});
+    });
+  };
+
+  const list = tickets();
+  console.log(list);
+
   return (
     <>
+      <div className=" absolute left-[2000000px]">
+        {list?.map((ele) => (
+          <>
+            <div id={ele?.ticketNo} className="w-[100%] ">
+              <AttractionTicketTemplate ticket={ele} />
+            </div>
+          </>
+        ))}
+      </div>
       <tr
         className="border-b border-tableBorderColor"
         onClick={() => setOrderDetails(!orderDetails)}
@@ -18,7 +67,9 @@ function AttractionOrderTable({ item }) {
         <td className="p-3">{item?.referenceNumber} </td>
         <td className="p-3">{item?.reseller?.companyName} </td>
         <td className="p-3">{item?.reseller?.agentCode}</td>
-        <td className="p-3 min-w-[200px]">{item?.activities?.activity?.name} </td>
+        <td className="p-3 min-w-[200px]">
+          {item?.activities?.activity?.name}{" "}
+        </td>
         <td className="p-3 capitalize">{item?.activities?.bookingType}</td>
         <td className="p-3 ">{item?.activities?.date?.slice(0, 10)}</td>
         <td className="p-3 ">{item?.createdAt?.slice(0, 10)} </td>
@@ -43,6 +94,15 @@ function AttractionOrderTable({ item }) {
               {item?.activities?.status}
             </span>
           )}
+        </td>
+
+        <td className="p-3">
+          <button
+            onClick={handleTicketsDownload}
+            className="w-[100px] bg-green-500 text-white px-2 py-1 text-xs rounded"
+          >
+            Download Tickets
+          </button>{" "}
         </td>
       </tr>
       {orderDetails && (
@@ -117,19 +177,19 @@ function AttractionOrderTable({ item }) {
                 <span className="block mt-2">
                   Adults Count:{" "}
                   <span className="text-sm font-medium">
-                  {item?.activities?.adultsCount}
+                    {item?.activities?.adultsCount}
                   </span>
                 </span>
                 <span className="block mt-2">
                   Children Count:{" "}
                   <span className="text-sm font-medium">
-                  {item?.activities?.childrenCount}
+                    {item?.activities?.childrenCount}
                   </span>
                 </span>
                 <span className="block mt-2">
                   Infants Count:{" "}
                   <span className="text-sm font-medium">
-                  {item?.activities?.infantCount}
+                    {item?.activities?.infantCount}
                   </span>
                 </span>
               </div>
