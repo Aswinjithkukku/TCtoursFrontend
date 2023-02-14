@@ -114,7 +114,7 @@ function AttractionInvoice() {
           </>
         ))}
         <div id="attraction_invoice_pdf_template">
-          <AttractionInvoicePdfTemplate />
+          <AttractionInvoicePdfTemplate data={output} />
         </div>
       </div>
       <div className=" ">

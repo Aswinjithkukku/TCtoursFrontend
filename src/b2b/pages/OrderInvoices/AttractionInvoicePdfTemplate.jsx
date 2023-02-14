@@ -2,30 +2,34 @@ import React from "react";
 
 const AttractionInvoicePdfTemplate = ({ data }) => {
   console.log(data);
+
+  const totalAmount = data?.activites
+    ?.map((ele) => {
+      return ele?.amount;
+    })
+    .reduce((acc, x) => {
+      return acc + x;
+    });
+
   return (
     <div className="p-[80px]">
       <div className="p-5 flex justify-between">
         <h1 className="text-[80px]">INVOICE</h1>
-        {/* <h2 className="text-[40px]">Brand Name</h2> */}
       </div>
       <div className="p-5 flex justify-between align-bottom">
         <div className="text-3 font-normal">
-          <p className="text-[40px]">Bill To:</p>
-          <p className="text-[40px] font-semibold">{data?.name}</p>
+          <p className="text-[40px] font-semibold">Bill To:</p>
+          <p className="text-[40px] font-normal capitalize">{data?.name}</p>
           <p className="text-[25px] font-normal">{data?.email}</p>
           <p className="text-[25px] font-normal">{data?.phoneNumber}</p>
-          <p className="text-[25px] font-normal">
+          <p className="text-[25px] font-normal capitalize">
             {data?.country?.countryName}
           </p>
         </div>
-        <div className="text-[12px] font-normal flex flex-col  justify-end">
+        <div className="text-[12px] font-normal flex flex-col pt-[60px] ">
           <p className="text-[40px] font-semibold">Invoice Details</p>
           <p className="text-[25px] font-normal">
             <span>Invoice Date: </span>
-            <span></span>
-          </p>
-          <p className="text-[25px] font-normal">
-            <span>Due Date</span>
             <span></span>
           </p>
           <p className="text-[25px] font-normal">
@@ -78,31 +82,28 @@ const AttractionInvoicePdfTemplate = ({ data }) => {
                     {ele?.transferType}
                   </td>
                   <td className="p-2 border-solid border-white border-[1px]">
-                    1200 INR
+                    {ele?.amount} AED
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <div className="pt-2.5 flex justify-end w-[100%] text-[25px] mt-10">
-          <div className="grand_total w-[300px]">
-            <div className="flex justify-between">
+        <div className="pt-[60px] flex justify-end w-[100%] text-[25px] mt-10">
+          <div className="grand_total w-[600px]">
+            <div className="flex justify-between text-[30px]">
               <p className="">Sub Total</p>
-              <p className="">2400 INR</p>
+              <p className="w-[40%]  text-right">{totalAmount} AED</p>
             </div>
-            <div className="flex justify-between ">
-              <p className="">VAT Amount</p>
-              <p className="">100 INR</p>
-            </div>
-            <div className="flex justify-between">
-              <p className="text-[17px] font-bold">Grand Total</p>
-              <p className="text-[17px] font-bold ">2500 INR</p>
+
+            <div className="flex justify-between text-[40px] font-bold">
+              <p className=" ">Grand Total</p>
+              <p className="w-[40%] text-right">{totalAmount} AED</p>
             </div>
           </div>
         </div>
       </div>
-      <div className="pt-2.5 flex justify-start text-[25px]">
+      {/* <div className="pt-2.5 flex justify-start text-[25px]">
         <div className="payment w-[300px]">
           <div className="">
             <h4 className="">Payment Info</h4>
@@ -120,7 +121,7 @@ const AttractionInvoicePdfTemplate = ({ data }) => {
             <p className="font-bold">FEderal</p>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="pt-2.5 flex justify-start text-[25px] mt-10">
         <div className=" flex flex-col">
           <div className=" font-bold">
