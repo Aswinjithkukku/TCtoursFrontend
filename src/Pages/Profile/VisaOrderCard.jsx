@@ -1,9 +1,4 @@
 import React from "react";
-import { BiUser, BiPhone } from "react-icons/bi";
-import { MdOutlineEmail } from "react-icons/md";
-import { FiMapPin } from "react-icons/fi";
-import { FaMoneyBillAlt } from "react-icons/fa";
-import { BsFillBagCheckFill } from "react-icons/bs";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "../../axios";

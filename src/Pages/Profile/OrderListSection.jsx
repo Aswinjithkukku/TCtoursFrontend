@@ -1,12 +1,7 @@
 import React from "react";
-import { BiUser, BiPhone } from "react-icons/bi";
-import { MdNoTransfer, MdOutlineEmail } from "react-icons/md";
-import { FiMapPin } from "react-icons/fi";
-import { FaBus, FaMoneyBillAlt } from "react-icons/fa";
-import { BsFillBagCheckFill } from "react-icons/bs";
+
 import AttractionOrderCard from "./AttractionOrderCard";
 import VisaOrderCard from "./VisaOrderCard";
-import { useState } from "react";
 
 function OrderListSection({ navigation }) {
   const title = [
