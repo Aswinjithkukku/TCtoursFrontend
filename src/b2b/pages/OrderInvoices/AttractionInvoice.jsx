@@ -167,13 +167,6 @@ function AttractionInvoice() {
                         )}
                         content={() => listRef.current}
                       />
-                      {/* <button
-                        
-                        // onClick={() => navigate(`/ticket/attraction/${id}`)}
-                        onClick={downloadAllTickets}
-                      >
-                        Download All Tickets
-                      </button> */}
                       <ul className="flex flex-col gap-1 py-2 list-none w-[100%]">
                         {list?.map((ele, i) => (
                           <>
