@@ -58,7 +58,7 @@ function ItenarySection({ navigation, setNavigation }) {
         </div>
         {navigation.itenary && (
           <div className="rounded-md shadow bg-white p-6">
-            <div className="grid grid-cols-12 gap-3 ">
+            <div className="lg:grid grid-cols-12 gap-3 ">
               <div className="col-span-4 flex flex-col">
                 <label htmlFor="" className="label">
                   Visa Type
