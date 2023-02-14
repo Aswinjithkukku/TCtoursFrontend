@@ -207,8 +207,8 @@ function AttractionOrderTable({ item }) {
             </td>
           </tr>
           <tr className="border-b border-tableBorderColor">
-            <td colSpan="12">
-              <ul className="flex">
+            <td colSpan="12 max-w-[1600px]">
+              <ul className="flex flex-wrap">
                 {list?.map((ele) => (
                   <>
                     <button
