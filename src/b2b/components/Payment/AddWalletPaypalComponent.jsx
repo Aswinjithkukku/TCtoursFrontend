@@ -6,14 +6,21 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addWalletManipulation } from "../../../redux/slices/walletSlice";
 
-function AddWalletPaypalComponent() {
+function AddWalletPaypalComponent({ price, onSuccess, place }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.agents);
 
-  const [inputAmount, setInputAmount] = useState(0);
+  const [inputAmount, setInputAmount] = useState(price);
 
-  const inputRef = useRef(null);
+  const inputRef = useRef(price);
+  const body =
+    place === "b2cvisa"
+      ? {
+          paymentProcessor: "paypal",
+          amount: inputRef.current.value,
+        }
+      : { paymentProcessor: "paypal", amount: inputRef.current.value };
 
   const paypal = useRef();
   useEffect(() => {
@@ -28,10 +35,7 @@ function AddWalletPaypalComponent() {
             };
             const response = await axios.post(
               "/b2b/resellers/wallet/deposit",
-              {
-                paymentProcessor: "paypal",
-                amount: inputRef.current.value,
-              },
+              {},
               config
             );
 

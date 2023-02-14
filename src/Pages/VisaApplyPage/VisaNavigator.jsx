@@ -9,7 +9,7 @@ import PaymentSection from "./PaymentSection";
 import TravellerDetails from "./TravellerDetails";
 import UploadDetailsSection from "./UploadDetailsSection";
 
-function VisaNavigator({ travellerInfo }) {
+function VisaNavigator({}) {
   const { visaEnquiry } = useSelector((state) => state.b2cVisa);
   const { visaType, selectedVisaType, travellersCount } = visaEnquiry;
   const [itenaryFlag, setItenaryFlag] = useState(false);

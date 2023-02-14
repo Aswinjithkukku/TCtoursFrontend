@@ -27,6 +27,8 @@ function VisaHomeScreen() {
     })();
   }, [location.state]);
 
+  console.log(visaDetails);
+
   return (
     <>
       <div
@@ -112,7 +114,7 @@ function VisaHomeScreen() {
             <div className="col-span-8">
               <VisaComponentPage visaDetails={visaDetails} />
               <VisaDocumentSection />
-              <VisaFAQsSection />
+              <VisaFAQsSection faqList={visaDetails?.visa?.faqs || []} />
             </div>
             <div className="col-span-4 relative">
               <div
