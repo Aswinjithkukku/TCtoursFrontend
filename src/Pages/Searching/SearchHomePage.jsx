@@ -70,7 +70,7 @@ function SearchHomePage({
             </div>
             <div className="relative lg:px-7">
               <div
-                className="hidden absolute left-0 top-5 z-10 h-7 w-7 rounded-full bg-main lg:flex justify-center items-center text-white"
+                className="hidden absolute left-0 top-5 z-10 h-7 w-7 rounded-full bg-gray-400 lg:flex justify-center items-center text-white"
                 onClick={() => {
                   document.querySelector(".containerBAL").scrollLeft -= 200;
                 }}
@@ -78,7 +78,7 @@ function SearchHomePage({
                 <AiOutlineLeft />
               </div>
               <div
-                className="hidden absolute right-0 top-5 z-10 h-7 w-7 rounded-full bg-main lg:flex justify-center items-center text-white"
+                className="hidden absolute right-0 top-5 z-10 h-7 w-7 rounded-full bg-gray-400 lg:flex justify-center items-center text-white"
                 onClick={() => {
                   document.querySelector(".containerBAL").scrollLeft += 200;
                 }}

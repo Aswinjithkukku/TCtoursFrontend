@@ -33,7 +33,7 @@ function SearchRecentlyViewedSection() {
             <div className='containerRV scroll-smooth snap-x flex gap-5 overflow-x-auto'>
               {data?.map((item, index) => (
                 <div key={index} className=' snap-start'>
-                  <Link to={`/details/${item._id}`}>
+                  <Link to={`/b2b/attractions/details/${item._id}`}>
                     <div className='w-[24.8em] lg:w-[24.5em] space-y-4 snap-start'>
                       <div className=''>
                         <img src={process.env.REACT_APP_SERVER_URL + item?.image} alt='demo'

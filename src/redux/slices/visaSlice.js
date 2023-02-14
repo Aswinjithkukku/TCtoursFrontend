@@ -120,19 +120,15 @@ const visaSlice = createSlice({
         });
       }
     },
-    handleRowItemChange: (state, action) => {
+    b2bhandleRowItemChange: (state, action) => {
       state.rows[action.payload.index][action.payload.name] =
         action.payload.value;
     },
-    handleRowImageChange: (state, action) => {
-      state.imageRows[action.payload.index][action.payload.name] =
-        action.payload.file;
-    },
-    handleDOBChange: (state, action) => {
+    b2bhandleDOBChange: (state, action) => {
       state.rows[action.payload.index].dateOfBirth[action.payload.name] =
         action.payload.value;
     },
-    handleExpiryChange: (state, action) => {
+    b2bhandleExpiryChange: (state, action) => {
       state.rows[action.payload.index].expiryDate[action.payload.name] =
         action.payload.value;
     },
@@ -153,12 +149,11 @@ const visaSlice = createSlice({
 
 export const {
   addRows,
-  handleRowItemChange,
+  b2bhandleRowItemChange,
   setVisaEnquiry,
-  handleDOBChange,
-  handleRowImageChange,
+  b2bhandleDOBChange,
   setVisaResponseData,
-  handleExpiryChange,
+  b2bhandleExpiryChange,
 } = visaSlice.actions;
 
 export default visaSlice.reducer;

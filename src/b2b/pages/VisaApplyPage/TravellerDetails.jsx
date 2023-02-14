@@ -3,9 +3,9 @@ import MonthNames from "../../../data/MonthNames";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addRows,
-  handleRowItemChange,
-  handleDOBChange,
-  handleExpiryChange,
+  b2bhandleRowItemChange,
+  b2bhandleDOBChange,
+  b2bhandleExpiryChange,
 } from "../../../redux/slices/visaSlice";
 
 function TravellerDetails({ navigation, setNavigation }) {
@@ -36,7 +36,7 @@ function TravellerDetails({ navigation, setNavigation }) {
 
   const onRowChange = (e, index) => {
     dispatch(
-      handleRowItemChange({
+      b2bhandleRowItemChange({
         value: e.target.value,
         name: e.target.name,
         index,
@@ -46,7 +46,7 @@ function TravellerDetails({ navigation, setNavigation }) {
 
   const handleChange = ({ value, name, index }) => {
     dispatch(
-      handleDOBChange({
+      b2bhandleDOBChange({
         value,
         name,
         index,
@@ -55,7 +55,7 @@ function TravellerDetails({ navigation, setNavigation }) {
   };
   const handleExpChange = ({ value, name, index }) => {
     dispatch(
-      handleExpiryChange({
+      b2bhandleExpiryChange({
         value,
         name,
         index,
