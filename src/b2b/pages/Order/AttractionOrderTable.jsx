@@ -9,8 +9,6 @@ import priceConversion from "../../../utils/PriceConversion";
 import AttractionTicketTemplate from "../Ticket/AttractionTicketTemplate";
 import { useMemo } from "react";
 import domToPdf from "dom-to-pdf";
-import domToImage from "dom-to-image";
-import ReactToPdf from "react-to-pdf";
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
 
