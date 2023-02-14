@@ -9,6 +9,7 @@ import AttractionTicketTemplate from "../Ticket/AttractionTicketTemplate";
 import { useMemo } from "react";
 import domToPdf from "dom-to-pdf";
 import { FcDownload } from "react-icons/fc";
+import { MdDownload } from "react-icons/md";
 import AttractionInvoicePdfTemplate from "./AttractionInvoicePdfTemplate";
 import ReactToPrint from "react-to-print";
 
@@ -111,7 +112,7 @@ function AttractionInvoice() {
         <div ref={listRef}>
           {list?.map((ele) => (
             <>
-              <div id={ele?.ticketNo} className="w-[100%] pt-[200px]">
+              <div id={ele?.ticketNo} className="w-[100%] pt-[20px]">
                 <AttractionTicketTemplate ticket={ele} />
               </div>
             </>
@@ -161,8 +162,11 @@ function AttractionInvoice() {
                     <div className="flex flex-col">
                       <ReactToPrint
                         trigger={() => (
-                          <button className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded">
-                            Download All Tickets <FcDownload />
+                          <button className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded flex justify-center items-center gap-4">
+                            Download All Tickets{" "}
+                            <span className="text-white text-[18px]">
+                              <MdDownload />
+                            </span>
                           </button>
                         )}
                         content={() => listRef.current}
@@ -183,7 +187,9 @@ function AttractionInvoice() {
                                   // );
                                 }}
                               >
-                                <FcDownload />
+                                <span className="">
+                                  <FcDownload />
+                                </span>
                               </button>
                             </li>
                           </>
