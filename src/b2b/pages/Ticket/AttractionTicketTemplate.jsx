@@ -33,7 +33,7 @@ const AttractionTicketTemplate = ({ ticket }) => {
 
   return (
     <>
-      <div id="ticket_template" className=" p-[20px] w-[1000px] min-h-[1150px]">
+      <div id="ticket_template" className=" p-[20px] w-[1000px] min-h-[30cm]">
         <section className="w-[100%] mx-auto flex flex-col items-center">
           <div className="primary__section w-[90%]">
             <div className="flex justify-between pt-7">
@@ -125,7 +125,7 @@ const AttractionTicketTemplate = ({ ticket }) => {
               );
             })}
           </div>
-          <div ref={ticketDescRef} className="my-[100px] w-[90%]"></div>
+          <div ref={ticketDescRef} className="my-[10px] w-[90%]"></div>
         </section>
       </div>
     </>
