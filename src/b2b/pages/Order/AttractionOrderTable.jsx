@@ -57,7 +57,6 @@ function AttractionOrderTable({ item }) {
   };
 
   const list = tickets();
-
   return (
     <>
       <div className=" absolute left-[2000px]">
@@ -90,7 +89,7 @@ function AttractionOrderTable({ item }) {
         </td>
         {/* <td className="p-3">5 AED</td> */}
         <td className="">
-          {item?.activities?.status === "booked" ? (
+          {item?.activities?.status === "confirmed" ? (
             <span className="bg-green-400 text-sm text-light px-4 rounded capitalize">
               {item?.activities?.status}
             </span>
@@ -107,6 +106,7 @@ function AttractionOrderTable({ item }) {
 
         <td className="p-3">
           <button
+            disabled={item?.activities?.status !== "confirmed"}
             onClick={handleTicketsDownload}
             className=" px-2 py-1  rounded text-white text-[20px] flex justify-center w-[100%]"
           >
@@ -211,7 +211,11 @@ function AttractionOrderTable({ item }) {
               <ul className="flex">
                 {list?.map((ele) => (
                   <>
-                    <li
+                    <button
+                      disabled={
+                        !ele?.validity ||
+                        item?.activities?.status !== "confirmed"
+                      }
                       className="px-3 py-1 flex gap-2 items-center cursor-pointer "
                       onClick={() => {
                         handleSingleTicketDownload(ele?.ticketNo);
@@ -221,7 +225,7 @@ function AttractionOrderTable({ item }) {
                       <span>
                         <FcDownload />
                       </span>
-                    </li>
+                    </button>
                   </>
                 ))}
               </ul>
