@@ -234,3 +234,13 @@ button:disabled {
     margin: 0;
     -webkit-appearance: none;
   }
+
+  @page ticket {
+    size: A4 portrait;
+    margin: 2cm;
+}
+
+.ticketPage {
+    page: ticket;
+    page-break-after: always;
+}

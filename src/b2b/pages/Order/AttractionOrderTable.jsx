@@ -34,6 +34,16 @@ function AttractionOrderTable({ item }) {
     };
   }, [item]);
 
+  const handleAllTicketDownload = () => {
+    var node = document.getElementById("all-ticket");
+    console.log(node);
+
+    var options = {
+        filename: `tickets.pdf`,
+    };
+    domToPdf(node, options, function (pdf) {});
+};
+
   const handleTicketsDownload = () => {
     const ticketList = tickets();
 
@@ -59,13 +69,11 @@ function AttractionOrderTable({ item }) {
   const list = tickets();
   return (
     <>
-      <div className=" absolute left-[2000px]">
+      <div className=" absolute left-[2000px] ticketPage" id="all-ticket">
         {list?.map((ele) => (
-          <>
-            <div id={ele?.ticketNo} className="w-[100%] pt-[200px] ">
-              <AttractionTicketTemplate ticket={ele} />
-            </div>
-          </>
+          <div id={ele?.ticketNo} className="w-[100%] pt-[200px] ">
+            <AttractionTicketTemplate ticket={ele} />
+          </div>
         ))}
       </div>
       <tr
@@ -107,7 +115,8 @@ function AttractionOrderTable({ item }) {
         <td className="p-3">
           <button
             disabled={item?.activities?.status !== "confirmed"}
-            onClick={handleTicketsDownload}
+            // onClick={handleTicketsDownload}
+            onClick={handleAllTicketDownload}
             className=" px-2 py-1  rounded text-white text-[20px] flex justify-center w-[100%]"
           >
             <FcDownload />
@@ -207,8 +216,8 @@ function AttractionOrderTable({ item }) {
             </td>
           </tr>
           <tr className="border-b border-tableBorderColor">
-            <td colSpan="12">
-              <ul className="flex">
+            <td colSpan="12 max-w-[1600px]">
+              <ul className="flex flex-wrap">
                 {list?.map((ele) => (
                   <>
                     <button

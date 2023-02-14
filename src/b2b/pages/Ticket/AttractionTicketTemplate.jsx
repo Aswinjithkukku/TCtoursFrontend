@@ -54,7 +54,7 @@ const AttractionTicketTemplate = ({ ticket }) => {
                     Tour Name : {ticket?.activity?.name}
                   </h1>
                 </div>
-                <div className="grid grid-cols-2 text-[30px] mt-8">
+                <div className="grid grid-cols-2 text-[25px] mt-8">
                   <div className="grid grid-cols-2 gap-x-3 gap-y-16">
                     <div className="">Ticket Type :</div>
                     <div className="capitalize">{ticket?.ticketFor}</div>
