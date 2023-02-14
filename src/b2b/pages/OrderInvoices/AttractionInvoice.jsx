@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Lottie from "lottie-react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { successAnimation } from "../../../data";
@@ -9,7 +9,9 @@ import AttractionTicketTemplate from "../Ticket/AttractionTicketTemplate";
 import { useMemo } from "react";
 import domToPdf from "dom-to-pdf";
 import { FcDownload } from "react-icons/fc";
+import { MdDownload } from "react-icons/md";
 import AttractionInvoicePdfTemplate from "./AttractionInvoicePdfTemplate";
+import ReactToPrint from "react-to-print";
 
 function AttractionInvoice() {
   const { id } = useParams();
@@ -103,16 +105,19 @@ function AttractionInvoice() {
   };
 
   const list = tickets();
+  const listRef = useRef();
   return (
     <>
       <div className="absolute right-[20000000px]">
-        {list?.map((ele) => (
-          <>
-            <div id={ele?.ticketNo} className="w-[100%] pt-[200px]">
-              <AttractionTicketTemplate ticket={ele} />
-            </div>
-          </>
-        ))}
+        <div ref={listRef}>
+          {list?.map((ele) => (
+            <>
+              <div id={ele?.ticketNo} className="w-[100%] pt-[20px]">
+                <AttractionTicketTemplate ticket={ele} />
+              </div>
+            </>
+          ))}
+        </div>
         <div id="attraction_invoice_pdf_template">
           <AttractionInvoicePdfTemplate data={output} />
         </div>
@@ -155,13 +160,17 @@ function AttractionInvoice() {
                       Download the E-Ticket from here
                     </p>
                     <div className="flex flex-col">
-                      <button
-                        className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded"
-                        // onClick={() => navigate(`/ticket/attraction/${id}`)}
-                        onClick={downloadAllTickets}
-                      >
-                        Download All Tickets
-                      </button>
+                      <ReactToPrint
+                        trigger={() => (
+                          <button className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded flex justify-center items-center gap-4">
+                            Download All Tickets{" "}
+                            <span className="text-white text-[18px]">
+                              <MdDownload />
+                            </span>
+                          </button>
+                        )}
+                        content={() => listRef.current}
+                      />
                       <ul className="flex flex-col gap-1 py-2 list-none w-[100%]">
                         {list?.map((ele, i) => (
                           <>
@@ -178,7 +187,9 @@ function AttractionInvoice() {
                                   // );
                                 }}
                               >
-                                <FcDownload />
+                                <span className="">
+                                  <FcDownload />
+                                </span>
                               </button>
                             </li>
                           </>
