@@ -9,6 +9,8 @@ import priceConversion from "../../../utils/PriceConversion";
 import AttractionTicketTemplate from "../Ticket/AttractionTicketTemplate";
 import { useMemo } from "react";
 import domToPdf from "dom-to-pdf";
+import { useRef } from "react";
+import ReactToPrint from "react-to-print";
 
 function AttractionOrderTable({ item }) {
   const [orderDetails, setOrderDetails] = useState(false);
@@ -34,19 +36,6 @@ function AttractionOrderTable({ item }) {
     };
   }, [item]);
 
-  const handleTicketsDownload = () => {
-    const ticketList = tickets();
-
-    ticketList?.forEach((ele) => {
-      var node = document.getElementById(ele?.ticketNo);
-
-      var options = {
-        filename: `${ele?.ticketNo}.pdf`,
-      };
-      domToPdf(node, options, function (pdf) {});
-    });
-  };
-
   const handleSingleTicketDownload = (ticketNo) => {
     var node = document.getElementById(ticketNo);
 
@@ -57,16 +46,19 @@ function AttractionOrderTable({ item }) {
   };
 
   const list = tickets();
+  const listRef = useRef();
   return (
     <>
-      <div className=" absolute left-[2000px]">
-        {list?.map((ele) => (
-          <>
-            <div id={ele?.ticketNo} className="w-[100%] pt-[200px] ">
-              <AttractionTicketTemplate ticket={ele} />
-            </div>
-          </>
-        ))}
+      <div className="h-fit absolute left-[20000px]" id="all_tickets">
+        <div ref={listRef}>
+          {list?.map((ele) => (
+            <>
+              <div id={ele?.ticketNo} className="w-[100%] ">
+                <AttractionTicketTemplate ticket={ele} />
+              </div>
+            </>
+          ))}
+        </div>
       </div>
       <tr
         className="border-b border-tableBorderColor"
@@ -105,13 +97,17 @@ function AttractionOrderTable({ item }) {
         </td>
 
         <td className="p-3">
-          <button
-            disabled={item?.activities?.status !== "confirmed"}
-            onClick={handleTicketsDownload}
-            className=" px-2 py-1  rounded text-white text-[20px] flex justify-center w-[100%]"
-          >
-            <FcDownload />
-          </button>{" "}
+          <ReactToPrint
+            trigger={() => (
+              <button
+                disabled={item?.activities?.status !== "confirmed"}
+                className=" px-2 py-1  rounded text-white text-[20px] flex justify-center w-[100%]"
+              >
+                <FcDownload />
+              </button>
+            )}
+            content={() => listRef.current}
+          />
         </td>
       </tr>
       {orderDetails && (
