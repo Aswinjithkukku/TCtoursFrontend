@@ -20,6 +20,7 @@ import {
   VisaActionPage,
   OrderListPage,
   VisaApplyInvoicePage,
+  ReApplyVisaPage,
 } from "../Pages/Hero";
 import { PageNotFound, PaymentDecline } from "../Pages/Errors";
 import {
@@ -69,7 +70,11 @@ const ThemeRoutes = [
       { path: "/specialoffer", element: <SpecialOfferLandingPage /> },
       { path: "/visa", element: <VisaLandingPage /> },
       { path: "/visa/apply", element: <VisaActionPage /> },
-      { path: "/visa/invoice", element: <VisaApplyInvoicePage /> },
+      { path: "/visa/invoice/:orderId", element: <VisaApplyInvoicePage /> },
+      {
+        path: "/visa/reapply",
+        element: <ReApplyVisaPage />,
+      },
       { path: "/blog", element: <BlogLandingPage /> },
       { path: "/blog/detail/:slug", element: <BlogDetailsPage /> },
       { path: "/search/:slug", element: <SearchingResultPage /> },
