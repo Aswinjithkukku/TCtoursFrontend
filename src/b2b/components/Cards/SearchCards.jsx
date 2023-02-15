@@ -23,7 +23,7 @@ function SearchCards() {
     <>
       <div className=' w-full  '>
         <div className=' relative'>
-          <div className='  md:w-4/12 bg-light rounded-t-md md:rounded-t-md overflow-x-auto shadow'>
+          <div className='  md:w-4/12 bg-light rounded-t-md md:rounded-t-md overflow-x-auto shadow scrollbar-hide'>
             <div className=' flex md:grid md:grid-cols-2 space-x-1 px-1 py-3 md:py-1 items-center '>
               <button className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-2 rounded-t-md  hover:text-light hover:bg-blue duration-300 space-x-1 ${view.attraction ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
                 setView((prev) => {

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { AiOutlineClose } from 'react-icons/ai'
 import { BsCheck2, BsFacebook, BsTwitter, BsWhatsapp } from 'react-icons/bs'
 import { FiCopy } from 'react-icons/fi'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import banner from '../../static/images/banner.jpg'
 
 function ShareModal({ setShareModal, shareModal }) {
   const location = useLocation()

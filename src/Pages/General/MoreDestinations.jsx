@@ -22,7 +22,7 @@ function MoreDestinations() {
         </div>
         <p className='text-text my-1'>Find things to do in cities around the world</p>
       </div>
-      <div className='overflow-x-auto flex space-x-4 my-5 border-b-2'>
+      <div className='overflow-x-auto flex space-x-4 my-5 border-b-2 scrollbar-hide'>
         <button className='hover:bg-stone-300 p-3 focus:border-2 border-semi'>Dubai</button>
         {/* <button className='hover:bg-stone-300 p-3 focus:border-2 border-semi whitespace-nowrap'>North America</button>
             <button className='hover:bg-stone-300 p-3 focus:border-2 border-semi'>Asia</button>

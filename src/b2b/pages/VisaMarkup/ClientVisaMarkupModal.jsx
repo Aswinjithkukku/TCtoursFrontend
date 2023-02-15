@@ -3,6 +3,7 @@ import { MdClose } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from '../../../axios';
 import { useHandleClickOutside } from '../../../hooks';
+import { removeClientVisaMarkup } from '../../../redux/slices/markupSlice';
 import { BtnLoader } from '../../components'
 
 function ClientVisaMarkupModal({ setMarkup, setMarkupData }) {
@@ -105,11 +106,11 @@ function ClientVisaMarkupModal({ setMarkup, setMarkupData }) {
                 )}
                 <span className="cursor-pointer w-[100px] h-[40px] text-[14px] bg-orange-600 text-white rounded-[0.25rem] flex justify-center items-center font-[600]"
                 onClick={() => {
-                  // dispatch(removeClientMarkup({
-                  //   _id: clientMarkup?._id,
-                  //   name: clientMarkup?.name,
-                  //   id: clientMarkup?.clientMarkup?._id
-                  // }))
+                  dispatch(removeClientVisaMarkup({
+                    _id: visaClientMarkup?._id,
+                    name: visaClientMarkup?.name,
+                    id: visaClientMarkup?.clientMarkup?._id
+                  }))
                   setMarkupData((prev) => {
                     return {...prev, client: '' }
                   })

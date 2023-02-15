@@ -33,7 +33,7 @@ function SearchModal({setView, view}) {
         <>
           <div className=' md:absolute z-10 bottom-36 w-full md:flex justify-center '>
             <div className='md:w-9/12 relative'>
-              <div className='md:ml-14  md:w-8/12 bg-light rounded-t-2xl md:rounded-t-[1em] overflow-x-auto'>
+              <div className='md:ml-14  md:w-8/12 bg-light rounded-t-2xl md:rounded-t-[1em] overflow-x-auto scrollbar-hide'>
                 <div className=' flex md:grid md:grid-cols-5 space-x-1 px-1 md:px-10 py-3 md:py-1 items-center '>
                   <button className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blue duration-300 space-x-1 ${view.attraction ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
                     setViewCard((prev) => {

@@ -41,7 +41,7 @@ function MarkupListSingleRow({
           </td>
           <td className="p-3">{item?.bookingType}</td>
           <td className="p-3 capitalize">{item?.destination?.name} </td>
-          <td className='p-3'>N/A</td>
+          <td className='p-3'>{priceConversion(item?.activities?.adultPrice,selectedCurrency, true) || "N/A"} </td>
           <td className="p-3">
             <span className='flex space-x-2'>
               <p className=''>

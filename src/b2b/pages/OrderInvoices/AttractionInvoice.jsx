@@ -112,7 +112,7 @@ function AttractionInvoice() {
         <div ref={listRef}>
           {list?.map((ele) => (
             <>
-              <div id={ele?.ticketNo} className="w-[100%] pt-[20px]">
+              <div id={ele?.ticketNo} className="w-[100%] bg-white pt-[20px]">
                 <AttractionTicketTemplate ticket={ele} />
               </div>
             </>

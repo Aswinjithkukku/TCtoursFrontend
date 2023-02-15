@@ -32,8 +32,12 @@ body {
     background: hsl(120 100% 10% / 1);
 } */
 ::-webkit-scrollbar:horizontal {
-  display: none;
+  width: 7px;
+  height: 1em;
 }
+/* ::-webkit-scrollbar:horizontal {
+  display: none;
+} */
 
 .heading {
   font-family: "Josefin Sans", sans-serif;

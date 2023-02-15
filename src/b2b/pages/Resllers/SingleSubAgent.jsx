@@ -68,7 +68,7 @@ export default function SingleSubAgent() {
                                 {reseller?.name}
                             </span>
                             <span className="block text-sm text-grayColor">
-                                {formatDate(reseller?.createdAt)}
+                                {reseller?.createdAt && formatDate(reseller?.createdAt)}
                             </span>
                         </div>
                     </div>

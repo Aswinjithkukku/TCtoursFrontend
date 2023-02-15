@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BsDash } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
-import { getExcursion, removeFromCart } from '../../../redux/slices/agentExcursionSlice'
+import { removeFromCart } from '../../../redux/slices/agentExcursionSlice'
 import priceConversion from '../../../utils/PriceConversion'
 
 function PaymentCardSection() {

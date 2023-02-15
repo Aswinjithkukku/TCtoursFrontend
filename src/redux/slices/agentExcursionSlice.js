@@ -16,47 +16,6 @@ const initialState = {
     : [],
 };
 
-export const getAllAgentExcursions = createAsyncThunk(
-  "agentExcursionSlice/getAllAgentExcursions",
-  async (args, { getState }) => {
-    const { token } = getState().agents;
-    if (token) {
-      const response = await axios.get(
-        `/b2b/resellers/client/attraction/all?search=${args.search}&limit=100&destination=${args.destination}&category=${args.category}`,
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      return response.data;
-    } else {
-      throw Error("cant find attractions");
-    }
-  }
-);
-export const getAgentExcursion = createAsyncThunk(
-  "agentExcursionSlice/getAgentExcursion",
-  async (args, { getState }) => {
-    const { token } = getState().agents;
-    if (token) {
-      const response = await axios.get(
-        `/b2b/resellers/client/attraction/single/${args}`,
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(response.data);
-      return response?.data;
-    } else {
-      throw Error("cant find attraction");
-    }
-  }
-);
-
 const agentExcursionSlice = createSlice({
   name: "agentExcursion",
   initialState,
@@ -115,13 +74,10 @@ const agentExcursionSlice = createSlice({
         JSON.stringify(state.agentExcursionCart)
       );
     },
-  },
-  extraReducers: {
-    [getAgentExcursion.fulfilled]: (state, action) => {
-      state.loading = false;
+    setAgentExcursion: (state, action) => {
       state.agentExcursion = action.payload?.attraction;
-      // state.ticketCount = action.payload?.ticketCount;
-      state.ticketStatus = action.payload?.ticketStatus
+      state.ticketCount = action.payload?.ticketCount;
+      state.ticketStatus = action.payload?.ticketStatus;
       let array = [];
       for (let i = 0; i < state.agentExcursion.activities.length; i++) {
         state.agentExcursion.activities[i].isChecked = i === 0 ? true : false;
@@ -135,8 +91,7 @@ const agentExcursionSlice = createSlice({
       }
       state.agentRecievedActivities = array;
     },
-    [getAllAgentExcursions.fulfilled]: (state, action) => {
-      state.loading = false;
+    setAgentAllExcursions: (state, action) => {
       state.agentExcursions = action.payload;
     },
   },
@@ -148,6 +103,8 @@ export const {
   addToCart,
   removeFromCart,
   emptyCart,
+  setAgentExcursion,
+  setAgentAllExcursions,
 } = agentExcursionSlice.actions;
 
 export default agentExcursionSlice.reducer;

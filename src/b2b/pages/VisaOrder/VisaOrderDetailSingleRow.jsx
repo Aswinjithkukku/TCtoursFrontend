@@ -37,6 +37,9 @@ function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
           {visaOrderDetail?.status === "paid" && item?.isStatus === "initiated" && (
             <span className=" underline text-lightblue cursor-pointer"onClick={() => navigate(`/b2b/visa/order/${id}/details/${item?._id}`)} >Edit</span>
           )}
+          {item?.isStatus === "initiated" && visaOrderDetail?.status !== "paid" && (
+            <span className="bg-orange-100 text-orange-500 cursor-pointer text-[12px] p-1 rounded" >Not Paid</span>
+          )}
           {item?.isStatus === "approved" && (
             <span className="bg-green-300/60 text-green-600 cursor-pointer text-[12px] p-1 rounded" >Approved</span>
           )}

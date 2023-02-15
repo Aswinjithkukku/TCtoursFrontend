@@ -54,11 +54,11 @@ function VisaMarkupList() {
           <div className="bg-white rounded shadow-sm mt-2 ">
             <div className="flex items-center justify-between border-b border-dashed p-4">
               <h1 className="font-medium">Markup Lists</h1>
-              <span className='w-[400px]'>
+              {/* <span className='w-[400px]'>
                 <input type="search"
                   className='input w-full'
                   placeholder='search!!!!!' />
-              </span>
+              </span> */}
             </div>
             <div className='overflow-x-auto'>
               <table className="w-full">
@@ -73,7 +73,7 @@ function VisaMarkupList() {
                 </thead>
                 <tbody className="text-sm text-textColor">
                   {allVisa?.map((item,index) => (
-                    <VisaMarkupListSingleRow key={index} item={item} />
+                    <VisaMarkupListSingleRow key={item?._id} item={item} />
                   ))}
                 </tbody>
               </table>
