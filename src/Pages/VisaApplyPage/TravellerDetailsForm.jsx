@@ -3,18 +3,16 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { monthNames } from "../../data";
 import {
-  handleDOBChange,
-  handleRowItemChange,
-  handlePEDChange,
+  handleb2cDOBChange,
+  handleb2cRowItemChange,
+  handleb2cPEDChange,
 } from "../../redux/slices/b2cvisaSlice";
-import { Month } from "../../utils/Month";
 
 const TravellerDetailsForm = ({ index, info }) => {
   const { countries } = useSelector((state) => state.home);
   const dispatch = useDispatch();
 
   const visa = useSelector((state) => state.b2cVisa);
-  console.log(visa);
 
   let limit = new Date().getFullYear();
   let year = [];
@@ -31,21 +29,21 @@ const TravellerDetailsForm = ({ index, info }) => {
     const {
       target: { name, value },
     } = e;
-    dispatch(handleRowItemChange({ index, name, value }));
+    dispatch(handleb2cRowItemChange({ index, name, value }));
   };
 
   const handledobChange = (e) => {
     const {
       target: { name, value },
     } = e;
-    dispatch(handleDOBChange({ index, name, value }));
+    dispatch(handleb2cDOBChange({ index, name, value }));
   };
 
   const handlePEChange = (e) => {
     const {
       target: { name, value },
     } = e;
-    dispatch(handlePEDChange({ index, name, value }));
+    dispatch(handleb2cPEDChange({ index, name, value }));
   };
 
   return (
@@ -60,6 +58,7 @@ const TravellerDetailsForm = ({ index, info }) => {
               type="text"
               name="title"
               value={info?.title}
+              required
               className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
               onChange={handleChange}
             >
@@ -82,6 +81,7 @@ const TravellerDetailsForm = ({ index, info }) => {
               className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
               name="firstName"
               onChange={handleChange}
+              required
             />
           </div>
         </div>
@@ -96,6 +96,7 @@ const TravellerDetailsForm = ({ index, info }) => {
               className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
               name="lastName"
               onChange={handleChange}
+              required
             />
           </div>
         </div>
@@ -112,6 +113,7 @@ const TravellerDetailsForm = ({ index, info }) => {
               name="email"
               value={info?.email}
               onChange={handleChange}
+              required
             />
           </div>
         </div>
@@ -126,12 +128,11 @@ const TravellerDetailsForm = ({ index, info }) => {
               name="country"
               value={info?.country}
               onChange={handleChange}
+              required
             >
-              <option disabled selected>
-                Ex: United Arab Emirates
-              </option>
+              <option hidden>Ex: United Arab Emirates</option>
               {countries?.map((item, index) => (
-                <option className="capitalize" value={item?._id} key={index}>
+                <option className="capitalize " value={item?._id} key={index}>
                   {item?.countryName}{" "}
                 </option>
               ))}
@@ -149,6 +150,7 @@ const TravellerDetailsForm = ({ index, info }) => {
               name="contactNo"
               value={info?.contactNo}
               onChange={handleChange}
+              required
             />
           </div>
         </div>
@@ -165,6 +167,7 @@ const TravellerDetailsForm = ({ index, info }) => {
               name="passportNo"
               value={info?.passportNumber}
               onChange={handleChange}
+              required
             />
           </div>
         </div>
@@ -180,6 +183,7 @@ const TravellerDetailsForm = ({ index, info }) => {
               name="day"
               value={info?.dateOfBirth?.day}
               onChange={handledobChange}
+              required
             >
               <option hidden> Day</option>
               {day.map((item, index) => (
@@ -199,6 +203,7 @@ const TravellerDetailsForm = ({ index, info }) => {
               name="month"
               value={info?.dateOfBirth?.month}
               onChange={handledobChange}
+              required
             >
               <option hidden>Month</option>
               {monthNames.map((item, index) => (
@@ -217,6 +222,7 @@ const TravellerDetailsForm = ({ index, info }) => {
               name="year"
               value={info?.dateOfBirth?.year}
               onChange={handledobChange}
+              required
             >
               <option hidden>Year</option>
               {year.map((item, index) => (
@@ -239,6 +245,7 @@ const TravellerDetailsForm = ({ index, info }) => {
               name="day"
               value={info?.expiryDate?.day}
               onChange={handlePEChange}
+              required
             >
               <option hidden> Day</option>
               {day.map((item, index) => (
@@ -259,6 +266,7 @@ const TravellerDetailsForm = ({ index, info }) => {
               name="month"
               value={info?.expiryDate?.month}
               onChange={handlePEChange}
+              required
             >
               <option hidden>Month</option>
               {monthNames.map((item, index) => (
@@ -271,20 +279,16 @@ const TravellerDetailsForm = ({ index, info }) => {
         </div>
         <div className="col-span-2 flex items-end">
           <div className="w-full">
-            <select
+            <input
               type="number"
-              className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
+              max={9999}
+              className="w-full py-2 rounded-md p-1 placeholder-gray-900 text-primaryColor border border-lightblue outline-none"
               name="year"
-              value={info?.expiryDate?.year}
               onChange={handlePEChange}
-            >
-              <option hidden>Year</option>
-              {year.map((item, index) => (
-                <option key={index} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
+              value={info?.expiryDate?.year}
+              required
+              placeholder="Year"
+            />
           </div>
         </div>
       </div>

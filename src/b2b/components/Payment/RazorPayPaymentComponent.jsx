@@ -4,76 +4,52 @@ import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import axios from "../../../axios";
 
-const RazorPayPaymentComponent = ({
-  price,
-  place,
-  setNavigation,
-  navigation,
-}) => {
+const RazorPayPaymentComponent = ({ price, place, onSuccess }) => {
   const inputRef = useRef(null);
-  const { token } = useSelector((state) => state.agents);
 
-  const { visaEnquiry, rows } = useSelector((state) => state.b2cVisa);
+  const visaOrder = JSON.parse(localStorage.getItem("visaOrder"));
+
+  const { visaEnquiry } = useSelector((state) => state.b2cVisa);
 
   const verifyPayment = async (ids) => {
-    // if (ids) {
-    //   const reqData = {
-    //     ids: {
-    //       razorpay_order_id: ids.razorpay_order_id,
-    //       razorpay_payment_id: ids.razorpay_payment_id,
-    //       razorpay_signature: ids.razorpay_signature,
-    //     },
-    //   };
-
-    //   const res = await axios.post(
-    //     "visa/razorpay/paymentVerification",
-    //     reqData
-    //   );
-
-    if (true) {
-      const config = {
-        headers: {
-          authorization: `Bearer ${token}`,
+    if (ids) {
+      const reqData = {
+        ids: {
+          razorpay_order_id: ids.razorpay_order_id,
+          razorpay_payment_id: ids.razorpay_payment_id,
+          razorpay_signature: ids.razorpay_signature,
         },
       };
-      const body = {
-        visaType: visaEnquiry?.selectedVisaType,
-        email: visaEnquiry?.email,
-        contactNo: visaEnquiry?.phone,
-        onwardDate: visaEnquiry?.fromDate,
-        returnDate: visaEnquiry?.toDate,
-        noOfTravellers: visaEnquiry?.travellersCount,
-        travellers: rows,
-        country: rows[0]["country"],
-      };
-      const data = await axios.post("visa/application/create", body, config);
-      console.log(data);
-      if (data.status === 200) {
-        localStorage.setItem("visaOrder", JSON.stringify(data.data));
 
-        Swal.fire({
-          icon: "success",
-          title: "VISA Payment Completed Successfully",
-        });
-        setNavigation({ ...navigation, upload: !navigation?.upload });
+      const res = await axios.post(
+        "visa/razorpay/paymentVerification",
+        reqData
+      );
+      if (res?.status === 200) {
+        onSuccess();
       } else {
         Swal.fire({
           icon: "error",
           title: "Something went wrong!",
-          text: data?.data?.error,
+          // text: error,
         });
       }
-      // }
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Something went wrong!",
+        // text: error,
+      });
     }
   };
 
   const handlePayByRazorPay = async () => {
     const {
       data: { key },
-    } = await axios.get("visa/razorpay/getkey", {});
+    } = await axios.get("visa/razorpay/getkey");
 
     const res = await axios.post("/visa/razorpay/setOrder", {
-      price: +price,
+      visaOrderId: visaOrder._id,
     });
 
     const {
@@ -90,7 +66,6 @@ const RazorPayPaymentComponent = ({
         "https://a.walletbot.online/public/images/home/logo-1675491174743-311966466.png",
       order_id: order.id,
       handler: function (response) {
-        console.log(res);
         verifyPayment({
           ids: response,
           amount: price,
@@ -127,9 +102,8 @@ const RazorPayPaymentComponent = ({
           // onChange={(e) => setInputAmount(e.target.value)}
         />
         <button
-          // onClick={handlePayByRazorPay}
-
-          onClick={verifyPayment}
+          onClick={handlePayByRazorPay}
+          // onClick={verifyPayment}
           className="italic rounded-md px-4 w-[100%] tracking-wide text-white bg-primaryColor h-[40px]"
         >
           Razorpay
