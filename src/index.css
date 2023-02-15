@@ -118,6 +118,17 @@ body {
   -webkit-backdrop-filter: blur(8px) saturate(134%);
   background-color: rgba(17, 25, 40, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.125);
+<<<<<<< HEAD
+=======
+}
+
+select {
+  cursor: pointer;
+>>>>>>> da0afe445393fe1c9615e4d700c262eea522e85e
+}
+
+select {
+  cursor: pointer;
 }
 
 .loginCard {
@@ -233,14 +244,4 @@ button:disabled {
 .no-spinner::-webkit-inner-spin-button {
   margin: 0;
   -webkit-appearance: none;
-}
-
-@page ticket {
-  size: A4 portrait;
-  margin: 2cm;
-}
-
-.ticketPage {
-  page: ticket;
-  page-break-after: always;
 }

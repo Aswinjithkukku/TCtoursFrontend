@@ -6,7 +6,9 @@ import Barcode from "react-barcode";
 import QRCode from "react-qr-code";
 import formatDate from "../../../utils/formatDate";
 
-const AttractionTicketTemplate = ({ ticket }) => {
+const AttractionTicketTemplate = ({ ticket, index }) => {
+  const ticketBoxRef = useRef();
+  const [minHeight, setminHeight] = useState("min-h-[30cm]");
   const ticketDescRef = useRef();
   let parser = new DOMParser();
 
@@ -27,13 +29,20 @@ const AttractionTicketTemplate = ({ ticket }) => {
       .getElementsByTagName("body")
       .item(0);
     setDescription(dom);
+    if (ticketBoxRef.current.clientHeight >= 1150) {
+      setminHeight("min-h-[66cm]");
+    }
   }, []);
 
   const baseUrl = process.env.REACT_APP_SERVER_URL;
 
   return (
     <>
-      <div id="ticket_template" className=" p-[20px] w-[1000px] min-h-[30cm]">
+      <div
+        id="ticket_template"
+        className={`p-[20px] w-[1000px] ${minHeight} `}
+        ref={ticketBoxRef}
+      >
         <section className="w-[100%] mx-auto flex flex-col items-center">
           <div className="primary__section w-[90%]">
             <div className="flex justify-between pt-7">

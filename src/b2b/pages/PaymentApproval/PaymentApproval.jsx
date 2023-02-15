@@ -6,7 +6,8 @@ import AddWalletPaypalComponent from "../../components/Payment/AddWalletPaypalCo
 import { Link } from "react-router-dom";
 import RazorPayPaymentComponent from "../../components/Payment/RazorPayPaymentComponent";
 
-function PaymentApproval({ place, price, navigation, setNavigation }) {
+function PaymentApproval({ place, price, onSuccess }) {
+  const [payMethod, setPayMethod] = useState("razorpay");
   return (
     <>
       {place !== "b2cvisa" && (
@@ -40,16 +41,31 @@ function PaymentApproval({ place, price, navigation, setNavigation }) {
                     Payments
                   </div>
 
-                  <div className="h-10 hover:bg-bluetrans  tracking-wide items-center cursor-pointer px-2 mt-5">
+                  <div
+                    onClick={() => {
+                      setPayMethod("razorpay");
+                    }}
+                    className="h-10 hover:bg-bluetrans  tracking-wide items-center cursor-pointer px-2 mt-5"
+                  >
                     <p className="">Razorpay</p>
                     <p className="text-[8px] text-text">
                       (credit/debit-card, UPI payment)
                     </p>
                   </div>
-                  <div className="h-10 hover:bg-bluetrans flex tracking-wide items-center cursor-pointer px-2">
+                  <div
+                    onClick={() => {
+                      setPayMethod("paypal");
+                    }}
+                    className="h-10 hover:bg-bluetrans flex tracking-wide items-center cursor-pointer px-2"
+                  >
                     Paypal
                   </div>
-                  <div className="h-10 hover:bg-bluetrans flex tracking-wide items-center cursor-pointer px-2">
+                  <div
+                    onClick={() => {
+                      setPayMethod("stripe");
+                    }}
+                    className="h-10 hover:bg-bluetrans flex tracking-wide items-center cursor-pointer px-2"
+                  >
                     Stripe
                   </div>
                 </div>
@@ -70,13 +86,26 @@ function PaymentApproval({ place, price, navigation, setNavigation }) {
 
                   <div className="md:flex justify-center">
                     <div className="md:w-7/12">
-                      {/* <AddWalletPaypalComponent price={price} place="b2cvisa" /> */}
-                      <RazorPayPaymentComponent
-                        price={price}
-                        place="b2cvisa"
-                        navigation={navigation}
-                        setNavigation={setNavigation}
-                      />
+                      {payMethod === "paypal" && (
+                        <AddWalletPaypalComponent
+                          price={price}
+                          place="b2cvisa"
+                        />
+                      )}
+                      {payMethod === "razorpay" && (
+                        <RazorPayPaymentComponent
+                          price={price}
+                          place="b2cvisa"
+                          onSuccess={onSuccess}
+                        />
+                      )}
+                      {payMethod === "stripe" && (
+                        <RazorPayPaymentComponent
+                          price={price}
+                          place="b2cvisa"
+                          onSuccess={onSuccess}
+                        />
+                      )}
                     </div>
                   </div>
                   <div className="flex justify-center items-center space-x-10 border-t border-dashed">
