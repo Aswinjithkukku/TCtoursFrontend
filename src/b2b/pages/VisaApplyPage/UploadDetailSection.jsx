@@ -184,7 +184,7 @@ function UploadDetailSection({ navigation }) {
                     </span>
                   </div>
                 </div>
-                <div className="grid grid-cols-5 gap-3 mt-4" key={index}>
+                <div className="lg:grid grid-cols-5 gap-3 mt-4" key={index}>
                   <div className=" flex flex-col">
                     <label htmlFor="" className="label">
                       Passport First Page

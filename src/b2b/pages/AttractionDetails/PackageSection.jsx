@@ -14,6 +14,7 @@ function PackageSection() {
     agentSelectedActivities,
     ticketStatus,
     ticketCount,
+    agentExcursion
   } = useSelector((state) => state.agentExcursions);
 
   const carting = () => {
@@ -61,8 +62,8 @@ function PackageSection() {
             </tbody>
           </table>
           <div className="flex justify-end items-center mt-2">
-            {ticketCount === 0 && <p className="text-main text-xs mr-5 font-[500]">No tickets left</p>}
-            {ticketCount > 0 && ticketCount < 10 && <p className="text-gray-600 text-xs mr-5 font-[500]">Only below {ticketCount} tickets are left</p>}
+             {agentExcursion?.bookingType == "ticket" && ticketCount === 0 && <p className="text-main text-xs mr-5 font-[500]">No tickets left</p>}
+            {ticketCount > 0 && ticketCount < 10 && <p className="text-gray-600 text-xs mr-5 font-[500]">Only below {ticketCount && ticketCount} tickets are left</p>}
             {error && <p className="text-main text-xs mr-5">{error}</p>}
             {ticketStatus ? (
               <button className="button w-[100px]" onClick={carting}>
@@ -73,6 +74,9 @@ function PackageSection() {
                 <ImBlocked />
               </button>
             )}
+            {/* <button className="button w-[100px]" onClick={carting}>
+              Add to cart
+            </button> */}
           </div>
         </div>
       </div>

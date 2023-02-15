@@ -30,7 +30,7 @@ function VisaNavigator() {
           <div className=" overflow-x-auto">
             <div className=" flex md:grid md:grid-cols-11  px-1 md:px-10 py-3 md:py-1 items-center ">
               <button
-                className={`col-span-2 flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-3  hover:text-lightblue  ${
+                className={`col-span-2 flex justify-center text-[10px] lg:text-sm md:text-base items-center px-2 md:px-3 py-3  hover:text-lightblue  ${
                   navigation.details ||
                   navigation.itenary ||
                   navigation.upload ||
@@ -53,7 +53,7 @@ function VisaNavigator() {
               </button>
 
               <button
-                className={`col-span-1 flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3   duration-300 space-x-1 ${
+                className={`col-span-1 hidden lg:flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3   duration-300 space-x-1 ${
                   navigation.details || navigation.upload || navigation.payment
                     ? "border-b-4 text-lightblue"
                     : ""
@@ -72,17 +72,16 @@ function VisaNavigator() {
                 )}
               </button>
               <button
-                className={`col-span-2 flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3  hover:text-lightblue  ${
+                className={`col-span-2 flex justify-center text-[10px] lg:text-sm md:text-base items-center px-5 md:px-3 py-3  hover:text-lightblue  ${
                   navigation.details || navigation.upload || navigation.payment
                     ? "border-b-4 text-lightblue"
                     : ""
-                } border-blue hover:border-b-4 duration-300 space-x-1  `}
+                } border-blue hover:border-b-4 duration-300 space-x-1  whitespace-nowrap`}
               >
-                {/* <span className=''><HiOutlineDocumentDuplicate /> </span> */}
                 <span className="">Traveller Details</span>
               </button>
               <button
-                className={`col-span-1 flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3   duration-300 space-x-1 ${
+                className={`col-span-1 hidden lg:flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3   duration-300 space-x-1 ${
                   navigation.upload || navigation.payment
                     ? "border-b-4 text-lightblue"
                     : ""
@@ -99,17 +98,16 @@ function VisaNavigator() {
                 )}
               </button>
               <button
-                className={`col-span-2 flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3  hover:text-lightblue  ${
+                className={`col-span-2 flex justify-center text-[10px] lg:text-sm md:text-base items-center px-5 md:px-3 py-3  hover:text-lightblue  ${
                   navigation.upload || navigation.payment
                     ? "border-b-4 text-lightblue"
                     : ""
-                } border-blue hover:border-b-4 duration-300 space-x-1  `}
+                } border-blue hover:border-b-4 duration-300 space-x-1  whitespace-nowrap`}
               >
-                {/* <span className=''><GiEncirclement/></span> */}
                 <span className="">Make Payment</span>
               </button>
               <button
-                className={`col-span-1 flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3  duration-300 space-x-1 ${
+                className={`col-span-1 hidden lg:flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3  duration-300 space-x-1 ${
                   navigation.upload ? "border-b-4  text-lightblue" : ""
                 } border-blue`}
               >
@@ -124,9 +122,9 @@ function VisaNavigator() {
                 )}
               </button>
               <button
-                className={`col-span-2 flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-3  hover:text-lightblue ${
+                className={`col-span-2 flex justify-center text-[10px] lg:text-sm md:text-base items-center px-6 md:px-3 py-3  hover:text-lightblue ${
                   navigation.upload ? "border-b-4  text-lightblue" : ""
-                } border-blue hover:border-b-4 duration-300 space-x-1  `}
+                } border-blue hover:border-b-4 duration-300 space-x-1  whitespace-nowrap`}
               >
                 {/* <span className=''><FaQuoteRight /></span> */}
                 <span className="">Upload Details</span>
