@@ -6,10 +6,42 @@ import { FaMoneyBillAlt } from "react-icons/fa";
 import { BsFillBagCheckFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { useEffect } from "react";
+import axios from "../../axios";
+import Swal from "sweetalert2";
 
 const AttractionOrderCard = ({ orderInfo }) => {
   const [list, setList] = useState([]);
   const { jwtToken } = useSelector((state) => state.users);
+
+  useEffect(() => {
+    const getAttractionList = async () => {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        };
+
+        const response = await axios.get("/attractions/orders/all", config);
+        if (response.status === 200) {
+          if (response.data.length === 0) {
+            Swal.fire({
+              icon: "error",
+              title: "No Visa Application",
+              text: "Given user do not have any application",
+            });
+          } else {
+            setList([...response.data]);
+          }
+        }
+
+        console.log(response);
+      } catch (error) {}
+    };
+
+    getAttractionList();
+  }, []);
 
   return (
     <div className="grid grid-cols-12 bg-[#f4f7ff] w-full rounded-lg shadow-md p-3 mt-3">

@@ -2,368 +2,193 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import axios from "../../axios";
-import { monthNames } from "../../data";
 
-const ReApplyVisaApplication = ({ orderId, userId }) => {
-  console.log(orderId);
-  console.log(userId);
-  const { countries } = useSelector((state) => state.home);
+const ReApplyVisaApplication = ({ data }) => {
+  const navigate = useNavigate();
   const { jwtToken } = useSelector((state) => state.users);
+  const [docs, setDocs] = useState({});
 
-  const [visaApplication, setVisaApplication] = useState({});
-  const [traveller, setTraveller] = useState({});
-
-  const day = [];
-  for (let i = 1; i <= 31; i++) {
-    day.push(i);
-  }
-
-  const limit = new Date().getFullYear();
-  const year = [];
-  for (let i = limit; i > limit - 100; i--) {
-    year.push(i);
-  }
-
-  useEffect(() => {
-    const config = {
-      headers: {
-        authorization: `Bearer ${jwtToken}`,
-      },
-    };
-    const getOrderInfo = async () => {
-      try {
-        const data = await axios.get(
-          `/visa/application/${orderId}/single/${userId}`,
-          config
-        );
-        console.log(data);
-      } catch (error) {}
-    };
-    getOrderInfo();
-  }, []);
-
-  const handleChange = (e) => {
+  const handleDocChange = (e) => {
     const {
-      target: { value, name },
+      target: { files, name },
     } = e;
-
-    setTraveller({ ...traveller, [name]: value });
+    setDocs({ ...docs, [name]: files[0] });
   };
 
-  const handledobChange = (e) => {
-    const {
-      target: { value, name },
-    } = e;
+  const handleUploadDocs = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
 
-    setTraveller({
-      ...traveller,
-      dateOfBirth: { ...traveller.dateOfBirth, [name]: value },
-    });
-  };
-  const handlePEChange = (e) => {
-    const {
-      target: { value, name },
-    } = e;
+      formData.append("passportFistPagePhoto", docs.passportFistPagePhoto);
+      formData.append("passportLastPagePhoto", docs.passportLastPagePhoto);
+      formData.append("passportSizePhoto", docs.passportSizePhoto);
+      formData.append("supportiveDoc1", docs.supportiveDoc1);
+      formData.append("supportiveDoc2", docs.supportiveDoc2);
 
-    setTraveller({
-      ...traveller,
-      expiryDate: { ...traveller.expiryDate, [name]: value },
-    });
+      const config = {
+        headers: {
+          authorization: `Bearer ${jwtToken}`,
+        },
+      };
+
+      const response = await axios.post(
+        `/visa/application//${data?._id}/reapply/${data?.travellers?._id}`,
+        formData,
+        config
+      );
+
+      console.log(response);
+      if (response?.status === 200) {
+        Swal.fire({
+          icon: "success",
+          title: "Successfully submitted.",
+          text: "Documents successfully uploaded.",
+        });
+        navigate("/order");
+      }
+    } catch (error) {}
   };
+
   return (
-    <div className="bg-[whitesmoke] flex justify-center">
-      <div className="flex flex-col w-[70%] bg-white p-4">
-        <div>
+    <div className="bg-[whitesmoke] flex justify-center min-h-[62vh]">
+      <div className="  w-[100%]   p-4 grid place-items-center px-[10%]">
+        <div className="bg-white">
           <div
             className={`my-2 border px-3 py-4  rounded-lg ${
               true ? "bg-primaryColor " : "bg-slate-400"
             } rounded-[.25rem]`}
           >
-            <p className="font-[600] text-[20px] text-soft">Visa Order Info</p>
+            <p className="font-[600] text-[20px] text-soft">Upload Documents</p>
           </div>
-          <form action=""></form>
-        </div>
-        <div>
-          <div
-            className={`my-2 border px-3 py-4  rounded-lg ${
-              true ? "bg-primaryColor " : "bg-slate-400"
-            } rounded-[.25rem]`}
-          >
-            <p className="font-[600] text-[20px] text-soft">Traveller Info</p>
-          </div>
-          <form action="">
-            <div className="w-[100%] px-2">
-              <div className="lg:grid grid-cols-12 gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2">
-                <div className="col-span-2">
-                  <div className="">
-                    <label className="label">Mr/Mrs</label>
-                  </div>
-                  <div className="">
-                    <select
-                      type="text"
-                      name="title"
-                      value={traveller?.title}
-                      required
-                      className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
-                      onChange={handleChange}
-                    >
-                      <option hidden>choose title</option>
-                      <option value={"mr"}>Mr.</option>
-                      <option value={"ms"}>Ms.</option>
-                      <option value={"mrs"}>Mrs.</option>
-                      <option value={"mstr"}>Mstr.</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="col-span-5">
-                  <div className="">
-                    <label className="label">First Name</label>
-                  </div>
-                  <div className="">
-                    <input
-                      type="text"
-                      value={traveller?.firstName}
-                      className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
-                      name="firstName"
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="col-span-5">
-                  <div className="">
-                    <label className="label">Last Name</label>
-                  </div>
-                  <div className="">
-                    <input
-                      type="text"
-                      value={traveller?.lastName}
-                      className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
-                      name="lastName"
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="lg:grid grid-cols-12 gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2">
-                <div className="col-span-4">
-                  <div className="">
-                    <label className="label">Email</label>
-                  </div>
-                  <div className="">
-                    <input
-                      type="text"
-                      className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
-                      name="email"
-                      value={traveller?.email}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="col-span-4">
-                  <div className="">
-                    <label className="label">Contact Number</label>
-                  </div>
-                  <div className="">
-                    <input
-                      type="number"
-                      className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
-                      name="contactNo"
-                      value={traveller?.contactNo}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="col-span-4">
-                  <div className="">
-                    <label className="label">Nationality</label>
-                  </div>
-                  <div className="">
-                    <select
-                      type="text"
-                      className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
-                      name="country"
-                      value={traveller?.country}
-                      onChange={handleChange}
-                      required
-                    >
-                      <option hidden>Ex: United Arab Emirates</option>
-                      {countries?.map((item, index) => (
-                        <option
-                          className="capitalize "
-                          value={item?._id}
-                          key={index}
-                        >
-                          {item?.countryName}{" "}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div className="lg:grid grid-cols-12 gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2">
-                <div className="col-span-6">
-                  <div className="">
-                    <label className="label">Passport Number</label>
-                  </div>
-                  <div className="">
-                    <input
-                      type="number"
-                      className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
-                      name="passportNo"
-                      value={traveller?.passportNumber}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="col-span-2">
-                  <div className="w-full">
-                    <label className="label">Date of Birth</label>
-                  </div>
-                  <div className="">
-                    <select
-                      type="number"
-                      placeholder="Day"
-                      className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
-                      name="day"
-                      value={traveller?.dateOfBirth?.day}
-                      onChange={handledobChange}
-                      required
-                    >
-                      <option hidden> Day</option>
-                      {day.map((item, index) => (
-                        <option key={index} value={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="col-span-2 flex items-end">
-                  <div className="w-full">
-                    <select
-                      type="number"
-                      placeholder="Month"
-                      className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
-                      name="month"
-                      value={traveller?.dateOfBirth?.month}
-                      onChange={handledobChange}
-                      required
-                    >
-                      <option hidden>Month</option>
-                      {monthNames.map((item, index) => (
-                        <option
-                          key={index}
-                          value={item.value}
-                          className="capitalize"
-                        >
-                          {item.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="col-span-2 flex items-end">
-                  <div className="w-full">
-                    <select
-                      type="number"
-                      className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
-                      name="year"
-                      value={traveller?.dateOfBirth?.year}
-                      onChange={handledobChange}
-                      required
-                    >
-                      <option hidden>Year</option>
-                      {year.map((item, index) => (
-                        <option key={index} value={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="col-span-2">
-                  <div className="w-full">
-                    <label className="label">Passport Expiry</label>
-                  </div>
-                  <div className="">
-                    <select
-                      type="number"
-                      placeholder="Day"
-                      className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
-                      name="day"
-                      value={traveller?.expiryDate?.day}
-                      onChange={handlePEChange}
-                      required
-                    >
-                      <option hidden> Day</option>
-                      {day.map((item, index) => (
-                        <option key={index} value={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div className="col-span-2 flex items-end">
-                  <div className="w-full">
-                    <select
-                      type="number"
-                      placeholder="Month"
-                      className="w-full py-2 rounded-md p-1 text-primaryColor border border-lightblue outline-none"
-                      name="month"
-                      value={traveller?.expiryDate?.month}
-                      onChange={handlePEChange}
-                      required
-                    >
-                      <option hidden>Month</option>
-                      {monthNames.map((item, index) => (
-                        <option
-                          key={index}
-                          value={item.value}
-                          className="capitalize"
-                        >
-                          {item.name}{" "}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="col-span-2 flex items-end">
-                  <div className="w-full">
-                    <input
-                      type="number"
-                      max={9999}
-                      className="w-full py-2 rounded-md p-1 placeholder-gray-900 text-primaryColor border border-lightblue outline-none"
-                      name="year"
-                      onChange={handlePEChange}
-                      value={traveller?.expiryDate?.year}
-                      required
-                      placeholder="Year"
-                    />
-                  </div>
-                </div>
-              </div>
+          <div className="flex w-[45%] flex-wrap gap-2 mt-2 px-2">
+            <div className="text-xs">
+              Gender :
+              <span className="text-[#00ffff] capitalize">
+                {data?.travellers?.gender}
+              </span>
             </div>
-          </form>
-        </div>
-        <div>
-          <div
-            className={`my-2 border px-3 py-4  rounded-lg ${
-              true ? "bg-primaryColor " : "bg-slate-400"
-            } rounded-[.25rem]`}
-          >
-            <p className="font-[600] text-[20px] text-soft">
-              Traveller Documents
-            </p>
+            <div className="text-xs">
+              First Name :
+              <span className="text-[#00ffff] capitalize ml-1">
+                {data?.travellers?.firstName}
+              </span>
+            </div>
+            <div className="text-xs">
+              Last Name :
+              <span className="text-[#00ffff] capitalize ml-1">
+                {data?.travellers?.lastName}
+              </span>
+            </div>
+            <div className="text-xs">
+              Dob :
+              <span className="text-[#00ffff] capitalize ml-1">
+                {data?.travellers?.dateOfBirth.day +
+                  "/" +
+                  data?.travellers?.dateOfBirth.month +
+                  "/" +
+                  data?.travellers?.dateOfBirth.year}
+              </span>
+            </div>
+            <div className="text-xs">
+              Visit Date :
+              <span className="text-[#00ffff] capitalize ml-1">
+                {data?.onwardDate.split("T")[0]}
+              </span>
+            </div>
+            <div className="text-xs">
+              Passport Number :
+              <span className="text-[#00ffff] capitalize ml-1">
+                {data?.travellers?.passportNo}
+              </span>
+            </div>
+            <div className="text-xs">
+              Passport Expiry :
+              <span className="text-[#00ffff] capitalize ml-1">
+                {data?.travellers?.expiryDate.day +
+                  "/" +
+                  data?.travellers?.expiryDate.month +
+                  "/" +
+                  data?.travellers?.expiryDate.year}
+              </span>
+            </div>
           </div>
-          <form action=""></form>
+          <div className="p-2 ">
+            <form action="" onSubmit={handleUploadDocs}>
+              <div className="grid grid-cols-5 gap-3 mt-4">
+                <div className=" flex flex-col">
+                  <label htmlFor="" className="label">
+                    Passport First Page
+                  </label>
+                  <input
+                    className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                    name="passportFistPagePhoto"
+                    type={"file"}
+                    required
+                    onChange={handleDocChange}
+                  />
+                </div>
+                <div className="">
+                  <label htmlFor="" className="label">
+                    Passport Second Page
+                  </label>
+                  <input
+                    className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none "
+                    name="passportLastPagePhoto"
+                    type={"file"}
+                    required
+                    onChange={handleDocChange}
+                  />
+                </div>
+                <div className="">
+                  <label htmlFor="" className="label">
+                    Passport Size Photo
+                  </label>
+                  <input
+                    className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none "
+                    name="passportSizePhoto"
+                    type={"file"}
+                    required
+                    onChange={handleDocChange}
+                  />
+                </div>
+                <div className="">
+                  <label htmlFor="" className="label">
+                    Supportive Document 1
+                  </label>
+                  <input
+                    className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none "
+                    name="supportiveDoc1"
+                    type={"file"}
+                    required
+                    onChange={handleDocChange}
+                  />
+                </div>
+                <div className="">
+                  <label htmlFor="" className="label">
+                    Supportive Document 2
+                  </label>
+                  <input
+                    className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none "
+                    name="supportiveDoc2"
+                    type={"file"}
+                    onChange={handleDocChange}
+                  />
+                </div>
+              </div>
+              <div className="h-[40px] flex justify-end py-2">
+                <button
+                  className="bg-lightblue rounded-[.25rem] text-white px-5 h-9"
+                  type="submit"
+                >
+                  Upload Docs
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

@@ -4,10 +4,10 @@ import ReApplyVisaApplication from "../Profile/ReApplyVisaApplication";
 
 const ReApplyVisaPage = () => {
   const location = useLocation();
-  const { orderId, userId } = location?.state;
+  const user = location?.state;
   return (
     <div className="bg-[whitesmoke] w-[100%] px-8">
-      <ReApplyVisaApplication orderId={orderId} userId={userId} />
+      <ReApplyVisaApplication data={user} />
     </div>
   );
 };

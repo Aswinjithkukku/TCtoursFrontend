@@ -76,7 +76,6 @@ const UploadDetailsSection = ({ navigation }) => {
         },
       };
       const data = JSON.parse(localStorage.getItem("visaOrder"));
-      console.log(data);
       const response = await axios.post(
         `/visa/application/document/${data?._id}`,
         formData,
