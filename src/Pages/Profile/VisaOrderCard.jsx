@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { BiUser, BiPhone } from "react-icons/bi";
 import { MdOutlineEmail } from "react-icons/md";
 import { FiMapPin } from "react-icons/fi";
@@ -10,8 +10,11 @@ import axios from "../../axios";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import VisaOrderTemplate from "../VisaApplyPage/visaTemplate/VisaOrderTemplate";
+import ReactToPrint from "react-to-print";
 
 const VisaOrderCard = ({ orderInfo }) => {
+  const templateRef = useRef();
   const navigate = useNavigate();
   const [list, setList] = useState([]);
   const { jwtToken } = useSelector((state) => state.users);
@@ -47,13 +50,11 @@ const VisaOrderCard = ({ orderInfo }) => {
       state: user,
     });
   };
-  const handleMakePayment = (user) => {
-    navigate(`/visa/reapply`, {
-      state: user,
-    });
-  };
   return (
     <>
+      <div ref={templateRef}>
+        <VisaOrderTemplate />
+      </div>
       {list?.map((ele, orderIndex) => {
         const user = ele?.travellers;
         return (
@@ -126,9 +127,14 @@ const VisaOrderCard = ({ orderInfo }) => {
                         </button>
                       )}
                     {user?.isStatus === "approved" && (
-                      <button className=" bg-green-300 text-green-700 px-4 py-1 rounded w-[50%] ">
-                        Download Visa
-                      </button>
+                      <ReactToPrint
+                        trigger={() => (
+                          <button className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded flex justify-center items-center gap-4">
+                            Download
+                          </button>
+                        )}
+                        content={() => templateRef.current}
+                      />
                     )}
                   </div>
                 </div>
