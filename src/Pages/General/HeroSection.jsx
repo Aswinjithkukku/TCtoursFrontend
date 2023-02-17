@@ -77,7 +77,7 @@ function HeroSection() {
                                             <p className='absolute top-0 text-center w-full z-10'>
                                                 <div className='text-3xl lg:text-6xl font-bold text-light heading pt-20 uppercase'>{item?.title} </div>
                                                 <div className='text-light md:text-lg '>{item?.description} </div>
-                                                <div className='flex items-end h-[30em] '>
+                                                <div className='flex items-end h-[25em] '>
                                                     <div className='hidden md:flex justify-center w-full items-center mx-10 max-w-8xl'>
                                                         <span className='text-3xl text-light font-lg space-x-1 flex '><IoLocationOutline />
                                                             {item?.place}
@@ -95,7 +95,7 @@ function HeroSection() {
                             </div>
                             <div className=' md:absolute z-10 md:-bottom-20 lg:-bottom-24 w-full md:flex justify-center '>
                                 <div className='md:w-9/12 relative'>
-                                    <div className='md:ml-14  md:w-4/12 bg-light rounded-t-2xl md:rounded-t-[1em] overflow-x-auto'>
+                                    <div className='md:ml-14  md:w-4/12 bg-light rounded-t-2xl md:rounded-t-[1em] overflow-x-auto scrollbar-hide'>
                                         <div className=' flex md:grid md:grid-cols-2 space-x-1 px-1  py-3 md:py-1 items-center '>
                                             <button className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blue duration-300 space-x-1 ${viewAttraction ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
                                                 setViewFlight(false)

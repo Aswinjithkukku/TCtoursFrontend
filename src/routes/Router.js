@@ -143,6 +143,10 @@ const ThemeRoutes = [
     element: <PageNotFound />,
   },
   {
+    path: "/error",
+    element: <PageNotFound />,
+  },
+  {
     path: "/payment-decline",
     element: <PaymentDecline />,
   },

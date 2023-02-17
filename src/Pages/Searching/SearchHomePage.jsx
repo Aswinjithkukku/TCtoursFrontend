@@ -86,7 +86,7 @@ function SearchHomePage({
                 <AiOutlineRight />
               </div>
               <div
-                className={`containerBAL scroll-smooth flex overflow-x-auto snap-x `}
+                className={`containerBAL scroll-smooth flex overflow-x-auto snap-x scrollbar-hide`}
               >
                 <div className=" justify-between lg:space-x-3 lg:flex w-full  px-1">
                   {categories?.map((item) => (

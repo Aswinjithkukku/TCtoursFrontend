@@ -28,7 +28,7 @@ function BestSellingSection() {
             </div>
           )}
         </div>
-        <div className='containerBAL scroll-smooth flex overflow-x-auto snap-x overflow-y-hidden  gap-5'>
+        <div className='containerBAL scroll-smooth flex overflow-x-auto snap-x overflow-y-hidden  gap-5 scrollbar-hide'>
           {bestSellingAttractions?.map((item, index) => (
             <Link to={`/details/${item?._id}`} key={index}>
               <div className=' snap-start mt-2 bg-light p-3 rounded-3xl cursor-pointer h-[96%] ' >

@@ -181,7 +181,7 @@ function Wallet() {
                   {component.completed && "Completed Transactions"}
                   {component.failed && "Failed Transactions"}
                 </h1>
-                <div className="flex items-center gap-2 lg:gap-4 overflow-x-auto">
+                <div className="flex items-center gap-2 lg:gap-4 overflow-x-auto scrollbar-hide">
                   <button
                     className={`px-2 bg-transparent whitespace-nowrap ${
                       component.all ? "font-bold" : "font-normal"

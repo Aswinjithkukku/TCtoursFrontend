@@ -26,7 +26,7 @@ function TopSellingSection() {
           </div>
         )}
       </div>
-      <div className='containertop scroll-smooth flex overflow-x-auto snap-x overflow-y-hidden  gap-5'>
+      <div className='containertop scroll-smooth flex overflow-x-auto snap-x overflow-y-hidden  gap-5 scrollbar-hide'>
         {topAttractions?.map((item) => (
           <Link to={`/details/${item?._id}`} key={item?._id}>
             <div className=' snap-start mt-2 bg-light p-3 rounded-3xl cursor-pointer h-[96%]' >

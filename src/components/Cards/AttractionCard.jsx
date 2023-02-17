@@ -77,7 +77,7 @@ function AttractionCard({ setView }) {
                   />
                 </div>
                 {datalist && (
-                  <div className="absolute max-h-[17em] w-[21em] mt-1  bg-light rounded-lg overflow-y-auto">
+                  <div className="absolute max-h-[17em] w-[21em] mt-1  bg-light rounded-lg overflow-y-auto z-20">
                     <div className="w-full p-2 overflow-y-auto">
                       <div className="">
                         <p className="bg-gray-200 py-[2px] px-2 text-[14px] font-[600] text-textColor">

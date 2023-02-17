@@ -27,7 +27,7 @@ function VisaNavigator() {
     <>
       <div className="bg-gray-300 sticky top-0 z-10">
         <div className=" text-darktext ">
-          <div className=" overflow-x-auto">
+          <div className=" overflow-x-auto scrollbar-hide">
             <div className=" flex md:grid md:grid-cols-11  px-1 md:px-10 py-3 md:py-1 items-center ">
               <button
                 className={`col-span-2 flex justify-center text-[10px] lg:text-sm md:text-base items-center px-2 md:px-3 py-3  hover:text-lightblue  ${

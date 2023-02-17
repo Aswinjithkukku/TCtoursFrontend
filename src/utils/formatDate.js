@@ -4,7 +4,7 @@ const formatDate = (date, time = false) => {
   const dt = new Date(date);
 
   const string = `${
-    monthNames[dt.getMonth()].name
+    monthNames[dt.getMonth()]?.name
   } ${dt.getDate()}, ${dt.getFullYear()}`;
 
   const timeString = ` ${dt.toLocaleTimeString([], {

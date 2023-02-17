@@ -4,9 +4,7 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { BsCalendar2Date } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useHandleClickOutside } from "../../hooks";
 
@@ -64,6 +62,7 @@ function VisaCard() {
                 placeholder="Where do you want to go?"
                 onChange={(e) => setCountry(e.target.value)}
                 onFocus={handleFocus}
+                required
                 className="capitalize px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext"
               />
             </div>

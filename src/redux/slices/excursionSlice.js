@@ -9,51 +9,18 @@ const initialState = {
   excursionAll: [],
   recievedActivities: [],
   selectedActivities: [],
-  favourites: localStorage.getItem("favourites") ? JSON.parse(localStorage.getItem("favourites"))|| [] : [],
-  excursionCart: localStorage.getItem("excursionCart") ? JSON.parse(localStorage.getItem("excursionCart")) || [] : [],
+  favourites: localStorage.getItem("favourites")
+    ? JSON.parse(localStorage.getItem("favourites")) || []
+    : [],
+  excursionCart: localStorage.getItem("excursionCart")
+    ? JSON.parse(localStorage.getItem("excursionCart")) || []
+    : [],
 };
 
 export const excursionall = createAsyncThunk(
   "excursion/excursionall",
   async (args, { getState }) => {
-    // const { token } = getState().users
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // };
     const response = await axios.get(`/attractions/all?limit=20`);
-    return response.data;
-  }
-);
-
-export const getAllExcursions = createAsyncThunk(
-  "excursion/getAllExcursions",
-  async (args, { getState }) => {
-    if (args.isOffer) {
-      const response = await axios.get(
-        `/attractions/all?search=${args.search}&limit=100&isOffer=${args.isOffer}&category=${args.category}&rating=${args.rating}&duration=${args.duration}`
-      );
-      return response.data;
-    }
-    if (args.isCombo) {
-      const response = await axios.get(
-        `/attractions/all?search=${args.search}&limit=100&isCombo=${args.isCombo}&category=${args.category}&rating=${args.rating}&duration=${args.duration}`
-      );
-      return response.data;
-    }
-    if (args.destination) {
-      const response = await axios.get(
-        `/attractions/all?search=${args.search}&limit=100&destination=${args.destination}&category=${args.category}&rating=${args.rating}&duration=${args.duration}`
-      );
-      return response.data;
-    }
-  }
-);
-export const getExcursion = createAsyncThunk(
-  "excursion/getExcursion",
-  async (args, { getState }) => {
-    const response = await axios.get(`/attractions/single/${args}`);
     return response.data;
   }
 );
@@ -66,8 +33,6 @@ export const getCategories = createAsyncThunk(
     return response.data;
   }
 );
-
-
 
 const excursionSlice = createSlice({
   name: "excursion",
@@ -111,40 +76,40 @@ const excursionSlice = createSlice({
       var excursionArray = [];
       var selectedArray = action.payload;
       excursionArray = JSON.parse(localStorage.getItem("excursionCart")) || [];
-      console.log('excursion array:',excursionArray);
+      console.log("excursion array:", excursionArray);
       // merge two array
-      let data = [...selectedArray,...excursionArray]
+      let data = [...selectedArray, ...excursionArray];
 
-      let array = []
-      let uniqueObj = {}
-      for(let i in data) {
-        let id = data[i]['_id']
-        uniqueObj[id] = data[i]
+      let array = [];
+      let uniqueObj = {};
+      for (let i in data) {
+        let id = data[i]["_id"];
+        uniqueObj[id] = data[i];
       }
 
       // unique object of array
-      for(let i in uniqueObj) {
-        array.push(uniqueObj[i])
+      for (let i in uniqueObj) {
+        array.push(uniqueObj[i]);
       }
 
-      localStorage.setItem("excursionCart", JSON.stringify(array))
+      localStorage.setItem("excursionCart", JSON.stringify(array));
 
       state.excursionCart =
         JSON.parse(localStorage.getItem("excursionCart")) || [];
     },
     removeFromCart: (state, action) => {
       state.excursionCart = state.excursionCart.filter((item) => {
-        return item._id !== action.payload
-      })
-      localStorage.setItem("excursionCart", JSON.stringify(state.excursionCart))
-    }
-  },
-  extraReducers: {
-    [getExcursion.pending]: (state, action) => {
-      state.loading = true;
+        return item._id !== action.payload;
+      });
+      localStorage.setItem(
+        "excursionCart",
+        JSON.stringify(state.excursionCart)
+      );
     },
-    [getExcursion.fulfilled]: (state, action) => {
-      state.loading = false;
+    setAllExcursions: (state, action) => {
+      state.excursions = action.payload;
+    },
+    setExcursion: (state, action) => {
       state.excursion = action.payload;
       let array = [];
       for (let i = 0; i < state.excursion.activities.length; i++) {
@@ -159,19 +124,14 @@ const excursionSlice = createSlice({
       }
       state.recievedActivities = array;
     },
+  },
+  extraReducers: {
     [getCategories.pending]: (state, action) => {
       state.loading = true;
     },
     [getCategories.fulfilled]: (state, action) => {
       state.loading = false;
       state.categories = action.payload;
-    },
-    [getAllExcursions.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [getAllExcursions.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.excursions = action.payload;
     },
     [excursionall.pending]: (state, action) => {
       state.loading = true;
@@ -190,6 +150,8 @@ export const {
   setSelectionArray,
   addToCart,
   removeFromCart,
+  setExcursion,
+  setAllExcursions,
 } = excursionSlice.actions;
 
 export default excursionSlice.reducer;
