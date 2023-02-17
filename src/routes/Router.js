@@ -66,6 +66,10 @@ const ThemeRoutes = [
       { path: "", element: <AttractionHomePage /> },
       { path: "/attraction", element: <AttractionLandingPage /> },
       { path: "/details/:id", element: <AttractionDetailsPage /> },
+      {
+        path: "/print/:id",
+        element: <Invoice />,
+      },
       { path: "/combo", element: <ComboLandingPage /> },
       { path: "/specialoffer", element: <SpecialOfferLandingPage /> },
       { path: "/visa", element: <VisaLandingPage /> },
@@ -115,8 +119,14 @@ const ThemeRoutes = [
         path: "/b2b/visa/order/:id/details",
         element: <VisaOrderDetailsPage />,
       },
-      { path: "/b2b/visa/order/:id/details/:passenger", element: <ReapplyIndividual /> },
-      { path: "/b2b/visa/apply/invoice/:id", element: <VisaApplySuccessPage /> },
+      {
+        path: "/b2b/visa/order/:id/details/:passenger",
+        element: <ReapplyIndividual />,
+      },
+      {
+        path: "/b2b/visa/apply/invoice/:id",
+        element: <VisaApplySuccessPage />,
+      },
       { path: "/b2b/attractions/invoice/:id", element: <AttractionInvoice /> },
     ],
   },
@@ -139,10 +149,6 @@ const ThemeRoutes = [
   {
     path: "/payment-decline",
     element: <PaymentDecline />,
-  },
-  {
-    path: "/print",
-    element: <Invoice />,
   },
   {
     path: "/attractions/invoice",

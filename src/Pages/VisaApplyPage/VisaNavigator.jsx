@@ -46,7 +46,7 @@ function VisaNavigator({}) {
           <div className=" overflow-x-auto scrollbar-hide">
             <div className=" flex md:grid md:grid-cols-7  px-1 md:px-10 py-3 md:py-1 items-center  ">
               <button
-                className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-3 border-b-4 border-blue hover:text-lightblue text-lightblue  hover:border-b-4 duration-300 space-x-1 `}
+                className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-3 border-b-4 border-blue hover:text-lightblue text-lightblue  hover:border-b-4 duration-300 space-x-1 h-[100%]`}
                 onClick={() => {
                   setNavigation({ itenary: true });
                 }}
@@ -75,7 +75,7 @@ function VisaNavigator({}) {
                 onClick={() => {
                   setNavigation({ details: true });
                 }}
-                className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1 ${
+                className={`h-[100%] flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1 ${
                   navigation?.payment || navigation?.upload
                     ? " border-blue border-b-4"
                     : ""
@@ -111,7 +111,7 @@ function VisaNavigator({}) {
                 onClick={() => {
                   setNavigation({ payment: true });
                 }}
-                className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1  ${
+                className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1 h-[100%] ${
                   navigation?.upload ? " border-blue border-b-4" : ""
                 } `}
               >
@@ -140,7 +140,7 @@ function VisaNavigator({}) {
                 onClick={() => {
                   setNavigation({ upload: true });
                 }}
-                className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1  `}
+                className={`h-[100%] flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1  `}
               >
                 <span className="">Upload Details</span>
               </button>
@@ -148,8 +148,8 @@ function VisaNavigator({}) {
           </div>
         </div>
       </div>
-      <div className="main  flex justify-center space-x-8 ">
-        <div className="main">
+      <div className="main  flex justify-center pr-4">
+        <div className="main px-4 w-[70vw]">
           <div className="">
             <ItenarySection
               itenaryFlag={itenaryFlag}

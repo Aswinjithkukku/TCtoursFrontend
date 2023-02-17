@@ -14,7 +14,7 @@ function PaymentSection({ price, navigation, setNavigation }) {
     setNavigation({ upload: !navigation?.upload });
   };
   return (
-    <div className="md:max-w-screen-xl md:mx-auto text-darktext my-5">
+    <div className="md:max-w-screen-xl md:mx-auto text-darktext my-5 w-[100%]">
       <div
         className={`my-2 border px-3 py-4  rounded-lg ${
           navigation?.payment ? "bg-primaryColor " : "bg-slate-400"

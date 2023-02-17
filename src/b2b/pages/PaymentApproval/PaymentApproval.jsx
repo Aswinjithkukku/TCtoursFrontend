@@ -6,31 +6,25 @@ import AddWalletPaypalComponent from "../../components/Payment/AddWalletPaypalCo
 import { Link } from "react-router-dom";
 import RazorPayPaymentComponent from "../../components/Payment/RazorPayPaymentComponent";
 
-function PaymentApproval({ place, price, onSuccess }) {
+function PaymentApproval() {
   const [payMethod, setPayMethod] = useState("razorpay");
   return (
     <>
-      {place !== "b2cvisa" && (
-        <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
-          <h1 className="font-[600] text-[15px] uppercase">Payment</h1>
-          <div className="text-sm text-grayColor">
-            <Link to="/b2b" className="text-textColor">
-              Dashboard{" "}
-            </Link>
-            <span>{">"} </span>
-            <span>Withdraw</span>
-          </div>
+      <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
+        <h1 className="font-[600] text-[15px] uppercase">Payment</h1>
+        <div className="text-sm text-grayColor">
+          <Link to="/b2b" className="text-textColor">
+            Dashboard{" "}
+          </Link>
+          <span>{">"} </span>
+          <span>Withdraw</span>
         </div>
-      )}
+      </div>
+
       <div className="p-2 lg:p-6">
         <div className="bg-white rounded shadow-sm mt-2 lg:mt-6">
           <div className="flex items-center justify-between border-b border-dashed p-3 lg:p-6">
-            <h1 className="font-medium">
-              {" "}
-              {place !== "b2cvisa"
-                ? "Withdraw Money"
-                : `Make payment of AED ${price}`}
-            </h1>
+            <h1 className="font-medium">"Withdraw Money"</h1>
           </div>
 
           <div className="p-6">
@@ -73,7 +67,7 @@ function PaymentApproval({ place, price, onSuccess }) {
                   <div className="md:flex justify-between items-center border-b border-dashed mb-5">
                     <div className="">
                       <h2 className="text-3xl font-bold tracking-wider text-darktext underline">
-                        {place !== "b2cvisa" ? "Add to wallet" : "Make payment"}
+                        "Add to wallet"
                       </h2>
                     </div>
                     <div className=" w-[150px] ">
@@ -86,26 +80,9 @@ function PaymentApproval({ place, price, onSuccess }) {
 
                   <div className="md:flex justify-center">
                     <div className="md:w-7/12">
-                      {payMethod === "paypal" && (
-                        <AddWalletPaypalComponent
-                          price={price}
-                          place="b2cvisa"
-                        />
-                      )}
-                      {payMethod === "razorpay" && (
-                        <RazorPayPaymentComponent
-                          price={price}
-                          place="b2cvisa"
-                          onSuccess={onSuccess}
-                        />
-                      )}
-                      {payMethod === "stripe" && (
-                        <RazorPayPaymentComponent
-                          price={price}
-                          place="b2cvisa"
-                          onSuccess={onSuccess}
-                        />
-                      )}
+                      {payMethod === "paypal" && <AddWalletPaypalComponent />}
+                      {payMethod === "razorpay" && <RazorPayPaymentComponent />}
+                      {payMethod === "stripe" && <RazorPayPaymentComponent />}
                     </div>
                   </div>
                   <div className="flex justify-center items-center space-x-10 border-t border-dashed">
