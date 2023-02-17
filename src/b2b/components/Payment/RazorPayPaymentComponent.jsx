@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import axios from "../../../axios";
 
-const RazorPayPaymentComponent = ({ price, place, onSuccess }) => {
+const RazorPayPaymentComponent = () => {
   const inputRef = useRef(null);
 
   const visaOrder = JSON.parse(localStorage.getItem("visaOrder"));
@@ -26,7 +26,6 @@ const RazorPayPaymentComponent = ({ price, place, onSuccess }) => {
         reqData
       );
       if (res?.status === 200) {
-        onSuccess();
       } else {
         Swal.fire({
           icon: "error",
@@ -58,7 +57,7 @@ const RazorPayPaymentComponent = ({ price, place, onSuccess }) => {
 
     const options = {
       key: key,
-      amount: price * 100,
+      amount: 100,
       currency: "AED",
       name: "Travellers Choice",
       description: ``,
@@ -68,7 +67,7 @@ const RazorPayPaymentComponent = ({ price, place, onSuccess }) => {
       handler: function (response) {
         verifyPayment({
           ids: response,
-          amount: price,
+          amount: 100,
         });
       },
       prefill: {
@@ -92,12 +91,12 @@ const RazorPayPaymentComponent = ({ price, place, onSuccess }) => {
       <div className="flex justify-center flex-col gap-4 my-3">
         <input
           ref={inputRef}
-          value={price}
+          value={100}
           className="input"
           type="number"
           placeholder="Enter Amount to be added to wallet"
           min="0"
-          disabled={!!price}
+          // disabled={!!}
           // value={inputAmount === 0 ? "Enter Amount to be added to wallet" : inputAmount}
           // onChange={(e) => setInputAmount(e.target.value)}
         />

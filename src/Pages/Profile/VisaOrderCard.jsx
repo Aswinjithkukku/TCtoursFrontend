@@ -50,11 +50,18 @@ const VisaOrderCard = ({ orderInfo }) => {
       state: user,
     });
   };
+
+  const handleVisaDownload = async (url) => {
+    try {
+      const data = await axios.get(url);
+      console.log(data);
+    } catch (error) {}
+  };
+
+  const baseUrl = process.env.REACT_APP_SERVER_URL;
+
   return (
     <>
-      <div ref={templateRef}>
-        <VisaOrderTemplate />
-      </div>
       {list?.map((ele, orderIndex) => {
         const user = ele?.travellers;
         return (
@@ -62,6 +69,13 @@ const VisaOrderCard = ({ orderInfo }) => {
             key={ele?._id}
             className="  bg-[#f4f7ff] w-full rounded-lg shadow-md p-3 mt-3"
           >
+            <div className="absolute left-[20000px]">
+              {user?.isStatus === "approved" && (
+                <div ref={templateRef}>
+                  <VisaOrderTemplate data={ele} />
+                </div>
+              )}
+            </div>
             <div className="flex flex-wrap w-full px-[1em] text-sm text-darktext">
               <div className="flex flex-wrap items-start  w-[100%]">
                 <div className="flex bg-gray-300 w-[100%] items-start justify-between py-1 px-2 text-black border-b border-spacing-1 border-dashed border-white rounded">
@@ -127,14 +141,13 @@ const VisaOrderCard = ({ orderInfo }) => {
                         </button>
                       )}
                     {user?.isStatus === "approved" && (
-                      <ReactToPrint
-                        trigger={() => (
-                          <button className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded flex justify-center items-center gap-4">
-                            Download
-                          </button>
-                        )}
-                        content={() => templateRef.current}
-                      />
+                      <a
+                        href={`${baseUrl}${user?.visaUpload}`}
+                        download="nikhil.pdf"
+                        className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded flex justify-center items-center gap-4"
+                      >
+                        Download
+                      </a>
                     )}
                   </div>
                 </div>

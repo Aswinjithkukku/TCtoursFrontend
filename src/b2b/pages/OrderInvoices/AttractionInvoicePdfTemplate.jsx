@@ -1,38 +1,33 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import priceConversion from "../../../../src/utils/PriceConversion";
 
 const AttractionInvoicePdfTemplate = ({ data }) => {
+  const { selectedCurrency } = useSelector((state) => state.home);
   console.log(data);
 
-  const totalAmount = data?.activites
-    ?.map((ele) => {
-      return ele?.amount;
-    })
-    .reduce((acc, x) => {
-      return acc + x;
-    });
-
   return (
-    <div className="p-[80px]">
+    <div className="p-[80px] w-[21cm]">
       <div className="p-5 flex justify-between">
-        <h1 className="text-[80px]">INVOICE</h1>
+        <h1 className="text-[30px] font-semibold">INVOICE</h1>
       </div>
       <div className="p-5 flex justify-between align-bottom">
         <div className="text-3 font-normal">
-          <p className="text-[40px] font-semibold">Bill To:</p>
-          <p className="text-[40px] font-normal capitalize">{data?.name}</p>
-          <p className="text-[25px] font-normal">{data?.email}</p>
-          <p className="text-[25px] font-normal">{data?.phoneNumber}</p>
-          <p className="text-[25px] font-normal capitalize">
+          <p className="text-[20px] font-semibold">Bill To:</p>
+          <p className="text-[20px] font-normal capitalize">{data?.name}</p>
+          <p className="text-[16px] font-normal">{data?.email}</p>
+          <p className="text-[16px] font-normal">{data?.phoneNumber}</p>
+          <p className="text-[16px] font-normal capitalize">
             {data?.country?.countryName}
           </p>
         </div>
-        <div className="text-[12px] font-normal flex flex-col pt-[60px] ">
-          <p className="text-[40px] font-semibold">Invoice Details</p>
-          <p className="text-[25px] font-normal">
+        <div className="text-[12px] font-normal flex flex-col  ">
+          <p className="text-[20px] font-semibold">Invoice Details</p>
+          <p className="text-[16px] font-normal">
             <span>Invoice Date: </span>
             <span></span>
           </p>
-          <p className="text-[25px] font-normal">
+          <p className="text-[16px] font-normal">
             <span>Invoice No: {data?.referenceNumber}</span>
             <span></span>
           </p>
@@ -41,30 +36,52 @@ const AttractionInvoicePdfTemplate = ({ data }) => {
       <div className="pb-5 mt-5 w-[100%] ">
         <div className="table w-[100%]">
           <table id="invoice" className="w-[100%] border-collapse">
-            <thead className="text-[30px]">
+            <thead className="text-[16px]">
               <tr className="text-white text-left bg-[#4f4f4f]">
-                <th className="p-2 border-white border-solid border-[1px] py-3 ">
+                <th className="p-2 border-white border-solid border-[1px]  ">
                   Name
                 </th>
-                <th className="p-2 border-white border-solid border-[1px] py-3">
+                <th className="p-2 border-white border-solid border-[1px] ">
                   Adult
                 </th>
-                <th className="p-2 border-white border-solid border-[1px] py-3">
+                <th className="p-2 border-white border-solid border-[1px] ">
                   Child
                 </th>
-                <th className="p-2 border-white border-solid border-[1px] py-3">
+                <th className="p-2 border-white border-solid border-[1px] ">
                   Infant
                 </th>
-                <th className="p-2 border-white border-solid border-[1px] py-3">
+                <th className="p-2 border-white border-solid border-[1px] ">
                   Transfer
                 </th>
-                <th className="p-2 border-white border-solid border-[1px] py-3">
+                <th className="p-2 border-white border-solid border-[1px] ">
                   Amount
                 </th>
               </tr>
             </thead>
-            <tbody className="text-[25px]">
+            <tbody className="text-[16px]">
               {data?.activites?.map((ele) => (
+                <tr>
+                  <td className="p-2 border-solid border-white border-[1px]">
+                    {ele?.activity?.name}
+                  </td>
+                  <td className="p-2 border-solid border-white border-[1px]">
+                    {ele?.adultsCount}
+                  </td>
+                  <td className="p-2 border-solid border-white border-[1px]">
+                    {ele?.childrenCount}
+                  </td>
+                  <td className="p-2 border-solid border-white border-[1px]">
+                    {ele?.infantCount}
+                  </td>
+                  <td className="p-2 border-solid border-white border-[1px]">
+                    {ele?.transferType}
+                  </td>
+                  <td className="p-2 border-solid border-white border-[1px]">
+                    {ele?.amount} AED
+                  </td>
+                </tr>
+              ))}
+              {data?.activities?.map((ele) => (
                 <tr>
                   <td className="p-2 border-solid border-white border-[1px]">
                     {ele?.activity?.name}
@@ -89,21 +106,25 @@ const AttractionInvoicePdfTemplate = ({ data }) => {
             </tbody>
           </table>
         </div>
-        <div className="pt-[60px] flex justify-end w-[100%] text-[25px] mt-10">
-          <div className="grand_total w-[600px]">
-            <div className="flex justify-between text-[30px]">
+        <div className="pt-[20px] flex justify-end w-[100%] text-[16px] mt-10">
+          <div className="grand_total w-[250px]">
+            <div className="flex justify-between text-[16px]">
               <p className="">Sub Total</p>
-              <p className="w-[40%]  text-right">{totalAmount} AED</p>
+              <p className="w-[40%]  text-right">
+                {priceConversion(data?.totalAmount, selectedCurrency, true)}{" "}
+              </p>
             </div>
 
-            <div className="flex justify-between text-[40px] font-bold">
+            <div className="flex justify-between text-[18px] font-bold">
               <p className=" ">Grand Total</p>
-              <p className="w-[40%] text-right">{totalAmount} AED</p>
+              <p className="w-[40%] text-right">
+                {priceConversion(data?.totalAmount, selectedCurrency, true)}
+              </p>
             </div>
           </div>
         </div>
       </div>
-      {/* <div className="pt-2.5 flex justify-start text-[25px]">
+      {/* <div className="pt-2.5 flex justify-start text-[16px]">
         <div className="payment w-[300px]">
           <div className="">
             <h4 className="">Payment Info</h4>
@@ -122,10 +143,10 @@ const AttractionInvoicePdfTemplate = ({ data }) => {
           </div>
         </div>
       </div> */}
-      <div className="pt-2.5 flex justify-start text-[25px] mt-10">
-        <div className=" flex flex-col">
+      <div className="pt-2 flex justify-start text-[16px] mt-4">
+        <div className=" flex flex-col text-[14px]">
           <div className=" font-bold">
-            <h4 className="text-[30px]">Terms & Condition</h4>
+            <h4 className="text-[20px]">Terms & Condition</h4>
           </div>
           <p className="">
             By default, Tailwind includes grid-template-column utilities f

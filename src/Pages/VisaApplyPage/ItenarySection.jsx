@@ -23,7 +23,7 @@ function ItenarySection({
   };
 
   return (
-    <div className="md:max-w-screen-xl md:mx-auto text-darktext my-5 w-[1280px]">
+    <div className="md:max-w-screen-xl md:mx-auto text-darktext my-5 w-[100%]">
       <div
         className={`my-2 border px-3 py-4  rounded-lg ${
           navigation?.itenary ? "bg-primaryColor " : "bg-slate-400"
@@ -39,8 +39,8 @@ function ItenarySection({
         }}
       >
         {navigation?.itenary && (
-          <div className="grid grid-cols-10 gap-3 rounded-md shadow-sm bg-white p-6">
-            <div className="col-span-4 flex flex-col">
+          <div className="lg:grid grid-cols-10 gap-3  rounded-md shadow-sm bg-white p-6">
+            <div className="col-span-4 flex flex-col  ">
               <label htmlFor="" className="label">
                 Visa Type
               </label>
