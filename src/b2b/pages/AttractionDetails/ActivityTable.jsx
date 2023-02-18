@@ -139,12 +139,7 @@ function ActivityTable({ item, bookingType, index }) {
           />
         </span>
         <span className="">{item?.name}</span>
-<<<<<<< HEAD
         {bookingType === "ticket" && (
-=======
-
-        {item?.bookingType === "ticket" && (
->>>>>>> 4eeee4a997d883f961278bfdd5e7c56648d2d3bb
           <>
             <p className="text-main text-xs mr-5 font-[500]">
               Adult Tickets left : {item?.adultTicketCount}
@@ -197,14 +192,7 @@ function ActivityTable({ item, bookingType, index }) {
           }
         >
           {Array.from({
-<<<<<<< HEAD
             length: bookingType === "ticket" ? item?.commonTicketCount + item?.adultTicketCount : 50,
-=======
-            length:
-              item?.bookingType === "ticket"
-                ? item?.commonTicketCount + item?.adultTicketCount
-                : 50,
->>>>>>> 4eeee4a997d883f961278bfdd5e7c56648d2d3bb
           }).map((_, index) => (
             <option value={index + 1} key={index}>
               {index + 1}
@@ -222,14 +210,7 @@ function ActivityTable({ item, bookingType, index }) {
           }
         >
           {Array.from({
-<<<<<<< HEAD
             length: bookingType === "ticket" ? item?.commonTicketCount + item?.childTicketCount || 1 : 50,
-=======
-            length:
-              item?.bookingType === "ticket"
-                ? item?.commonTicketCount + item?.childTicketCount || 1
-                : 50,
->>>>>>> 4eeee4a997d883f961278bfdd5e7c56648d2d3bb
           }).map((_, index) => (
             <option value={index} key={index}>
               {index}
