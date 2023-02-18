@@ -118,7 +118,12 @@ function ActivityTable({ item, index }) {
       <td className="py-3 px-1 max-w-[13em] w-[13em] space-x-2 ">
         <span className="">
           <input
-            disabled={item?.ticketCount === 0}
+            disabled={
+              item?.adultTicketCount === 0 &&
+              item?.childTicketCount === 0 &&
+              item?.commonTicketCount === 0 &&
+              item?.bookingType === "ticket"
+            }
             type="checkbox"
             className=""
             name="isChecked"
@@ -133,12 +138,16 @@ function ActivityTable({ item, index }) {
           />
         </span>
         <span className="">{item?.name}</span>
-        <p className="text-main text-xs mr-5 font-[500]">
-          Adult Tickets left : {item?.adultTicketCount}
-        </p>
-        <p className="text-main text-xs mr-5 font-[500]">
-          Child Tickets left : {item?.childTicketCount}
-        </p>
+        {item?.bookingType === "ticket" && (
+          <>
+            <p className="text-main text-xs mr-5 font-[500]">
+              Adult Tickets left : {item?.adultTicketCount}
+            </p>
+            <p className="text-main text-xs mr-5 font-[500]">
+              Child Tickets left : {item?.childTicketCount}
+            </p>
+          </>
+        )}
       </td>
       <td className="py-3 px-1 text-sm">
         <input
@@ -174,7 +183,7 @@ function ActivityTable({ item, index }) {
       </td>
       <td className="py-3 px-1">
         <select
-          className="border py-1 px-1"
+          className="border py-1 px-1 min-w-[55px]"
           name="adult"
           value={item.adult}
           onChange={(e) =>
@@ -182,7 +191,10 @@ function ActivityTable({ item, index }) {
           }
         >
           {Array.from({
-            length: item?.commonTicketCount + item?.adultTicketCount,
+            length:
+              item?.bookingType === "ticket"
+                ? item?.commonTicketCount + item?.adultTicketCount
+                : 50,
           }).map((_, index) => (
             <option value={index + 1} key={index}>
               {index + 1}
@@ -192,7 +204,7 @@ function ActivityTable({ item, index }) {
       </td>
       <td className="py-3 px-1">
         <select
-          className="border py-1 px-1"
+          className="border py-1 px-1 min-w-[55px]"
           name="child"
           value={item.child}
           onChange={(e) =>
@@ -200,7 +212,10 @@ function ActivityTable({ item, index }) {
           }
         >
           {Array.from({
-            length: item?.commonTicketCount + item?.childTicketCount || 1,
+            length:
+              item?.bookingType === "ticket"
+                ? item?.commonTicketCount + item?.childTicketCount || 1
+                : 50,
           }).map((_, index) => (
             <option value={index} key={index}>
               {index}
@@ -210,7 +225,7 @@ function ActivityTable({ item, index }) {
       </td>
       <td className="py-3 px-1">
         <select
-          className="border py-1 px-1"
+          className="border py-1 px-1 min-w-[55px]"
           name="infant"
           value={item.infant}
           onChange={(e) =>
