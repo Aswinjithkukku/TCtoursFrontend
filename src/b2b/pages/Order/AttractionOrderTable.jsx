@@ -89,6 +89,10 @@ function AttractionOrderTable({ item }) {
             <span className="bg-orange-400 text-sm text-light px-4 rounded capitalize">
               {item?.activities?.status}
             </span>
+          ) : item?.activities?.status === "booked" ? (
+            <span className="bg-lightblue text-sm text-light px-4 rounded capitalize">
+              {item?.activities?.status}
+            </span>
           ) : (
             <span className="bg-red-400 text-sm text-light px-4 rounded capitalize">
               {item?.activities?.status}
@@ -172,6 +176,10 @@ function AttractionOrderTable({ item }) {
                       </span>
                     ) : item?.activities?.status === "pending" ? (
                       <span className="bg-orange-100 text-xs text-orange-500 px-4 rounded capitalize">
+                        {item?.activities?.status}
+                      </span>
+                    )  : item?.activities?.status === "confirmed" ? (
+                      <span className="bg-green-100 text-xs text-green-500 px-4 rounded capitalize">
                         {item?.activities?.status}
                       </span>
                     ) : (

@@ -1,21 +1,37 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { getExcursion, removeFromCart } from '../../redux/slices/excursionSlice'
+// import { useParams } from 'react-router-dom'
+import { setExcursion, removeFromCart } from '../../redux/slices/excursionSlice'
 import priceConversion from '../../utils/PriceConversion'
 import { BsDash } from 'react-icons/bs'
+// import axios from '../../axios'
 
 function PaymentCardSection() {
     const dispatch = useDispatch()
-    const { id } = useParams()
+    // const { id } = useParams()
 
 
     const { excursionCart } = useSelector(state => state.excursion)
     const { selectedCurrency } = useSelector(state => state.home)
 
-    useEffect(() => {
-        dispatch(getExcursion(id))
-    }, [dispatch, id])
+    // const [error, setError] = useState('')
+    // const [isLoading,setIsLoading] = useState(false)
+  
+    // const fetchData = async() => {
+    //   try {
+    //     setError('')
+    //     setIsLoading(true)
+    //     const response = await axios.get(`/attractions/single/${id}`);
+    //     setExcursion(response.data)
+    //     setIsLoading(false)
+    //   } catch (error) {
+    //     setError(error?.response?.data?.error)
+    //   }
+    // }
+  
+    // useEffect(() => {
+    //   fetchData()
+    // },[id])
 
 
 

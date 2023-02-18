@@ -16,7 +16,7 @@ function CompanySettings() {
     city: agent?.city || "",
     zipCode: agent?.zipCode || "",
   })
-  const [country, setCountry] = useState('')
+  const [country, setCountry] = useState(agent?.country || "")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 

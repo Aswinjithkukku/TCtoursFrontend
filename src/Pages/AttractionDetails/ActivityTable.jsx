@@ -29,17 +29,47 @@ function ActivityTable({ item, index }) {
       item?.adultPrice * Number(item?.adult) +
       item?.childPrice * Number(item?.child) +
       item?.infantPrice * Number(item?.infant);
-    if (item?.isTransferAvailable === true) {
-      if (item?.privateTransferPrice !== null && item?.transfer === "private") {
-        sum = sum + item?.privateTransferPrice;
-      } else if (
-        item?.sharedTransferPrice !== null &&
-        item?.transfer === "shared"
-      ) {
-        sum = sum + item?.sharedTransferPrice;
-      } else {
-        sum = sum;
+    let totalTravellers = Number(item?.adult) + Number(item?.child);
+    console.log(item);
+
+    if (item?.transfer === "private") {
+      if (item?.privateTransfers?.length !== 0) {
+        let priceList = [...item?.privateTransfers];
+        priceList = priceList?.sort((a, b) => {
+          return a.maxCapacity - b.maxCapacity;
+        });
+        let totalPrice = 0;
+        while (totalTravellers > 0) {
+          for (let x = 0; x < priceList.length; x++) {
+            if (x === 0) {
+              if (
+                totalTravellers > 0 &&
+                totalTravellers <= priceList[x].maxCapacity
+              ) {
+                totalPrice = totalPrice + priceList[x].price;
+                totalTravellers = totalTravellers - priceList[x].maxCapacity;
+                break;
+              }
+            } else {
+              if (
+                totalTravellers <= priceList[x].maxCapacity &&
+                totalTravellers > priceList[x - 1].maxCapacity
+              ) {
+                totalPrice = totalPrice + priceList[x].price;
+                totalTravellers = totalTravellers - priceList[x].maxCapacity;
+                break;
+              }
+            }
+            if (x === priceList.length - 1) {
+              totalPrice = totalPrice + priceList[x].price;
+              totalTravellers = totalTravellers - priceList[x].maxCapacity;
+            }
+          }
+        }
+        sum = sum + totalPrice;
       }
+    } else if (item?.transfer === "shared") {
+      sum = sum + Number(totalTravellers) * item?.sharedTransferPrice;
     }
     setPrice(sum);
     dispatch(
@@ -59,6 +89,18 @@ function ActivityTable({ item, index }) {
     dispatch(setSelectionArray(result));
   }, [recievedActivities, dispatch]);
 
+  useEffect(() => {
+    if (item.activityType === "transfer") {
+      dispatch(
+        setActivities({
+          value: "private",
+          name: "transfer",
+          index,
+        })
+      );
+    }
+  }, []);
+
   let date = new Date();
   let dd = excursion?.bookingPriorDays
     ? String(date.getDate() + Number(excursion?.bookingPriorDays)).padStart(
@@ -76,6 +118,12 @@ function ActivityTable({ item, index }) {
       <td className="py-3 px-1 max-w-[13em] w-[13em] space-x-2 ">
         <span className="">
           <input
+            disabled={
+              item?.adultTicketCount === 0 &&
+              item?.childTicketCount === 0 &&
+              item?.commonTicketCount === 0 &&
+              item?.bookingType === "ticket"
+            }
             type="checkbox"
             className=""
             name="isChecked"
@@ -90,6 +138,16 @@ function ActivityTable({ item, index }) {
           />
         </span>
         <span className="">{item?.name}</span>
+        {item?.bookingType === "ticket" && (
+          <>
+            <p className="text-main text-xs mr-5 font-[500]">
+              Adult Tickets left : {item?.adultTicketCount}
+            </p>
+            <p className="text-main text-xs mr-5 font-[500]">
+              Child Tickets left : {item?.childTicketCount}
+            </p>
+          </>
+        )}
       </td>
       <td className="py-3 px-1 text-sm">
         <input
@@ -112,25 +170,32 @@ function ActivityTable({ item, index }) {
             handleChange({ value: e.target.value, name: e.target.name, index })
           }
         >
-          <option value="without">without</option>
-          {item?.isTransferAvailable && item.privateTransferPrice && (
+          {item.activityType !== "transfer" && (
+            <option value="without">without</option>
+          )}
+          {item?.isPrivateTransferAvailable && item.privateTransfers && (
             <option value="private">private</option>
           )}
-          {item?.isTransferAvailable && item.privateTransferPrice && (
+          {item?.isSharedTransferAvailable && item.sharedTransferPrice && (
             <option value="shared">shared</option>
           )}
         </select>
       </td>
       <td className="py-3 px-1">
         <select
-          className="border py-1 px-1"
+          className="border py-1 px-1 min-w-[55px]"
           name="adult"
           value={item.adult}
           onChange={(e) =>
             handleChange({ value: e.target.value, name: e.target.name, index })
           }
         >
-          {Array.from({ length: 50 }).map((_, index) => (
+          {Array.from({
+            length:
+              item?.bookingType === "ticket"
+                ? item?.commonTicketCount + item?.adultTicketCount
+                : 50,
+          }).map((_, index) => (
             <option value={index + 1} key={index}>
               {index + 1}
             </option>
@@ -139,14 +204,19 @@ function ActivityTable({ item, index }) {
       </td>
       <td className="py-3 px-1">
         <select
-          className="border py-1 px-1"
+          className="border py-1 px-1 min-w-[55px]"
           name="child"
           value={item.child}
           onChange={(e) =>
             handleChange({ value: e.target.value, name: e.target.name, index })
           }
         >
-          {Array.from({ length: 50 }).map((_, index) => (
+          {Array.from({
+            length:
+              item?.bookingType === "ticket"
+                ? item?.commonTicketCount + item?.childTicketCount || 1
+                : 50,
+          }).map((_, index) => (
             <option value={index} key={index}>
               {index}
             </option>
@@ -155,18 +225,20 @@ function ActivityTable({ item, index }) {
       </td>
       <td className="py-3 px-1">
         <select
-          className="border py-1 px-1"
+          className="border py-1 px-1 min-w-[55px]"
           name="infant"
           value={item.infant}
           onChange={(e) =>
             handleChange({ value: e.target.value, name: e.target.name, index })
           }
         >
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
+          {Array.from({ length: item?.infantTicketCount || 6 }).map(
+            (_, index) => (
+              <option value={index} key={index}>
+                {index}
+              </option>
+            )
+          )}
         </select>
       </td>
       <td className="py-3 px-1 min-w-[4em] pl-5">

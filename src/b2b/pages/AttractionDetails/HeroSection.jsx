@@ -16,7 +16,6 @@ import ShareModal from './ShareModal'
 import { FaChevronLeft } from 'react-icons/fa'
 import MetaData from '../../../utils/MetaData'
 import Availablity from './Availablity'
-import { getAgentExcursion } from '../../../redux/slices/agentExcursionSlice'
 
 function HeroSection() {
   const dispatch = useDispatch()
@@ -27,9 +26,8 @@ function HeroSection() {
   const { agentExcursion } = useSelector(state => state.agentExcursions)
 
   useEffect(() => {
-    dispatch(getAgentExcursion(id))
     dispatch(stateFavourites())
-  }, [dispatch, id])
+  }, [dispatch])
 
   const [viewBookCard, setViewBookCard] = useState(false)
   const [shareModal, setShareModal] = useState(false)

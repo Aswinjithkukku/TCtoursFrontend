@@ -20,7 +20,7 @@ const UploadDetailsSection = ({ navigation }) => {
   const { imageRows, rows, visaEnquiry } = useSelector(
     (state) => state.b2cVisa
   );
-  const { token } = useSelector((state) => state.agents);
+  const { jwtToken } = useSelector((state) => state.users);
 
   const onChangePassportFistPagePhotoHandler = (e, index) => {
     let temp_images = passportFistPagePhoto;
@@ -72,12 +72,12 @@ const UploadDetailsSection = ({ navigation }) => {
 
       const config = {
         headers: {
-          authorization: `Bearer ${token}`,
+          authorization: `Bearer ${jwtToken}`,
         },
       };
       const data = JSON.parse(localStorage.getItem("visaOrder"));
       const response = await axios.post(
-        `/b2b/visa/application/document/${data?.VisaApplicationOrder?._id}`,
+        `/visa/application/document/${data?._id}`,
         formData,
         config
       );
@@ -89,7 +89,7 @@ const UploadDetailsSection = ({ navigation }) => {
         title: "VISA Document submission Completed Successfully",
         timer: 1000,
       });
-      navigate("/visa/invoice");
+      navigate("/visa/invoice/:orederId");
     } catch (err) {
       if (err?.response?.data?.error) {
         setError(err?.response?.data?.error);
@@ -104,7 +104,7 @@ const UploadDetailsSection = ({ navigation }) => {
   };
 
   return (
-    <div className="md:max-w-screen-xl md:mx-auto text-darktext my-5">
+    <div className="md:max-w-screen-xl md:mx-auto text-darktext my-5 w-[100%]">
       <div
         className={`my-2 border px-3 py-4  rounded-lg ${
           navigation?.upload ? "bg-primaryColor " : "bg-slate-400"
@@ -121,7 +121,7 @@ const UploadDetailsSection = ({ navigation }) => {
                   <p className="">
                     {index === 0 ? "Lead passenger" : `${index + 1} passenger`}{" "}
                   </p>
-                  <div className="flex w-[45%] flex-wrap gap-2 mt-2">
+                  <div className="flex lg:w-[50%] flex-wrap gap-2 mt-2">
                     <div className="text-xs">
                       Gender :
                       <span className="text-[#00ffff] capitalize">
@@ -174,8 +174,11 @@ const UploadDetailsSection = ({ navigation }) => {
                     </div>
                   </div>
                 </div>
-                <div className="grid grid-cols-5 gap-3 mt-4" key={index}>
-                  <div className=" flex flex-col">
+                <div
+                  className="md:flex flex-wrap  gap-4 gap-y-5  mt-4"
+                  key={index}
+                >
+                  <div className=" flex flex-col min-w-[200px]   w-[18.5%]">
                     <label htmlFor="" className="label">
                       Passport First Page
                     </label>
@@ -183,12 +186,13 @@ const UploadDetailsSection = ({ navigation }) => {
                       className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
                       name="passportFistPagePhoto"
                       type={"file"}
+                      required
                       onChange={(e) =>
                         onChangePassportFistPagePhotoHandler(e, index)
                       }
                     />
                   </div>
-                  <div className="">
+                  <div className="min-w-[200px]   w-[18.5%]">
                     <label htmlFor="" className="label">
                       Passport Second Page
                     </label>
@@ -196,12 +200,13 @@ const UploadDetailsSection = ({ navigation }) => {
                       className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none "
                       name="passportLastPagePhoto"
                       type={"file"}
+                      required
                       onChange={(e) =>
                         onChangePassportLastPagePhotoHandler(e, index)
                       }
                     />
                   </div>
-                  <div className="">
+                  <div className="min-w-[200px]   w-[18.5%]">
                     <label htmlFor="" className="label">
                       Passport Size Photo
                     </label>
@@ -209,12 +214,13 @@ const UploadDetailsSection = ({ navigation }) => {
                       className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none "
                       name="passportSizePhoto"
                       type={"file"}
+                      required
                       onChange={(e) =>
                         onChangePassportSizePhotoHandler(e, index)
                       }
                     />
                   </div>
-                  <div className="">
+                  <div className="min-w-[200px]   w-[18.5%]">
                     <label htmlFor="" className="label">
                       Supportive Document 1
                     </label>
@@ -222,10 +228,11 @@ const UploadDetailsSection = ({ navigation }) => {
                       className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none "
                       name="supportiveDoc1"
                       type={"file"}
+                      required
                       onChange={(e) => onChangeSupportiveDoc1Handler(e, index)}
                     />
                   </div>
-                  <div className="">
+                  <div className="min-w-[200px]   w-[18.5%]">
                     <label htmlFor="" className="label">
                       Supportive Document 2
                     </label>
@@ -240,7 +247,10 @@ const UploadDetailsSection = ({ navigation }) => {
               </div>
             ))}
             <div className=" flex justify-end mt-4">
-              <button className="bg-lightblue rounded-[.25rem] text-white px-5 h-9">
+              <button
+                type="submit"
+                className="bg-lightblue rounded-[.25rem] text-white px-5 h-9"
+              >
                 Submit
               </button>
             </div>

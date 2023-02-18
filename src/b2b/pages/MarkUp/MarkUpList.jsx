@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import axios from '../../../axios'
-// import { fetchMarkups, clearMarkups  } from '../../../redux/slices/markupSlice'
 import MarkupListSingleRow from './MarkupListSingleRow'
 
 function MarkUpList() {
@@ -12,7 +11,6 @@ function MarkUpList() {
   const [error, setError] = useState('')
   const [markups, setMarkups] = useState([])
   const { token } = useSelector(state => state.agents)
-  // const { markups } = useSelector(state => state.markups)
 
   const fetchMarkups = async(e) => {
     try {
@@ -36,15 +34,6 @@ console.log(markups);
   useEffect(() => {
     fetchMarkups()
   },[search])
-  // useEffect(() => {
-  //   dispatch(fetchMarkups(search))
-  // }, [dispatch,search])
-
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(clearMarkups())
-  //   }
-  // },[])
 
   return (
     <>
@@ -88,10 +77,10 @@ console.log(markups);
                   </tr>
                 </thead>
                 <tbody className="text-sm text-textColor">
-                  {markups?.attractions?.data?.map((item, index) => (
+                  {markups?.attractions?.data?.map((item) => (
                     <MarkupListSingleRow
                     item={item}
-                    key={index}
+                    key={item?._id}
                     />
                   ))}
                 </tbody>

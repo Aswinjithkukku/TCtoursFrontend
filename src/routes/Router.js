@@ -20,6 +20,7 @@ import {
   VisaActionPage,
   OrderListPage,
   VisaApplyInvoicePage,
+  ReApplyVisaPage,
 } from "../Pages/Hero";
 import { PageNotFound, PaymentDecline } from "../Pages/Errors";
 import {
@@ -65,11 +66,19 @@ const ThemeRoutes = [
       { path: "", element: <AttractionHomePage /> },
       { path: "/attraction", element: <AttractionLandingPage /> },
       { path: "/details/:id", element: <AttractionDetailsPage /> },
+      {
+        path: "/print/:id",
+        element: <Invoice />,
+      },
       { path: "/combo", element: <ComboLandingPage /> },
       { path: "/specialoffer", element: <SpecialOfferLandingPage /> },
       { path: "/visa", element: <VisaLandingPage /> },
       { path: "/visa/apply", element: <VisaActionPage /> },
-      { path: "/visa/invoice", element: <VisaApplyInvoicePage /> },
+      { path: "/visa/invoice/:orderId", element: <VisaApplyInvoicePage /> },
+      {
+        path: "/visa/reapply",
+        element: <ReApplyVisaPage />,
+      },
       { path: "/blog", element: <BlogLandingPage /> },
       { path: "/blog/detail/:slug", element: <BlogDetailsPage /> },
       { path: "/search/:slug", element: <SearchingResultPage /> },
@@ -110,8 +119,14 @@ const ThemeRoutes = [
         path: "/b2b/visa/order/:id/details",
         element: <VisaOrderDetailsPage />,
       },
-      { path: "/b2b/visa/order/:id/details/:passenger", element: <ReapplyIndividual /> },
-      { path: "/b2b/visa/apply/invoice/:id", element: <VisaApplySuccessPage /> },
+      {
+        path: "/b2b/visa/order/:id/details/:passenger",
+        element: <ReapplyIndividual />,
+      },
+      {
+        path: "/b2b/visa/apply/invoice/:id",
+        element: <VisaApplySuccessPage />,
+      },
       { path: "/b2b/attractions/invoice/:id", element: <AttractionInvoice /> },
     ],
   },
@@ -128,12 +143,12 @@ const ThemeRoutes = [
     element: <PageNotFound />,
   },
   {
-    path: "/payment-decline",
-    element: <PaymentDecline />,
+    path: "/error",
+    element: <PageNotFound />,
   },
   {
-    path: "/print",
-    element: <Invoice />,
+    path: "/payment-decline",
+    element: <PaymentDecline />,
   },
   {
     path: "/attractions/invoice",

@@ -9,6 +9,7 @@ import AttractionTicketTemplate from "../Ticket/AttractionTicketTemplate";
 import { useMemo } from "react";
 import domToPdf from "dom-to-pdf";
 import { FcDownload } from "react-icons/fc";
+import { MdDownload } from "react-icons/md";
 import AttractionInvoicePdfTemplate from "./AttractionInvoicePdfTemplate";
 import ReactToPrint from "react-to-print";
 
@@ -105,19 +106,24 @@ function AttractionInvoice() {
 
   const list = tickets();
   const listRef = useRef();
+  const invoiveRef = useRef();
   return (
     <>
       <div className="absolute right-[20000000px]">
         <div ref={listRef}>
           {list?.map((ele) => (
             <>
-              <div id={ele?.ticketNo} className="w-[100%] pt-[200px]">
+              <div id={ele?.ticketNo} className="w-[100%] bg-white pt-[20px]">
                 <AttractionTicketTemplate ticket={ele} />
               </div>
             </>
           ))}
         </div>
-        <div id="attraction_invoice_pdf_template">
+        <div
+          id="attraction_invoice_pdf_template"
+          className="w-[21cm]"
+          ref={invoiveRef}
+        >
           <AttractionInvoicePdfTemplate data={output} />
         </div>
       </div>
@@ -161,19 +167,15 @@ function AttractionInvoice() {
                     <div className="flex flex-col">
                       <ReactToPrint
                         trigger={() => (
-                          <button className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded">
-                            Download All Tickets <FcDownload />
+                          <button className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded flex justify-center items-center gap-4">
+                            Download All Tickets{" "}
+                            <span className="text-white text-[18px]">
+                              <MdDownload />
+                            </span>
                           </button>
                         )}
                         content={() => listRef.current}
                       />
-                      {/* <button
-                        
-                        // onClick={() => navigate(`/ticket/attraction/${id}`)}
-                        onClick={downloadAllTickets}
-                      >
-                        Download All Tickets
-                      </button> */}
                       <ul className="flex flex-col gap-1 py-2 list-none w-[100%]">
                         {list?.map((ele, i) => (
                           <>
@@ -190,7 +192,9 @@ function AttractionInvoice() {
                                   // );
                                 }}
                               >
-                                <FcDownload />
+                                <span className="">
+                                  <FcDownload />
+                                </span>
                               </button>
                             </li>
                           </>
@@ -317,12 +321,14 @@ function AttractionInvoice() {
                     </p>
                   </div>
                   <div className="">
-                    <button
-                      onClick={handleDownloadInvoice}
-                      className="bg-[#12acfd] rounded px-3 py-2 text-white"
-                    >
-                      Download
-                    </button>
+                    <ReactToPrint
+                      trigger={() => (
+                        <button className="bg-[#12acfd] rounded px-3 py-2 text-white">
+                          Download Invoice
+                        </button>
+                      )}
+                      content={() => invoiveRef.current}
+                    />
                   </div>
                 </div>
                 <div className="flex justify-center py-10">

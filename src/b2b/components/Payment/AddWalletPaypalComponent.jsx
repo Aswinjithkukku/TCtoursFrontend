@@ -11,9 +11,9 @@ function AddWalletPaypalComponent() {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.agents);
 
-  const [inputAmount, setInputAmount] = useState(0);
+  const [inputAmount, setInputAmount] = useState();
 
-  const inputRef = useRef(null);
+  const inputRef = useRef();
 
   const paypal = useRef();
   useEffect(() => {

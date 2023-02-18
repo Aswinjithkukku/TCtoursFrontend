@@ -11,6 +11,7 @@ import { getWalletBalance } from "../../../redux/slices/walletSlice";
 import priceConversion from "../../../utils/PriceConversion";
 import BtnLoader from "../BtnLoader";
 import NotificationDropdown from "./NotificationDropdown";
+import { getHome } from "../../../redux/slices/generalSlice";
 
 export default function Header({ setSidebarView, sidebarView }) {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ export default function Header({ setSidebarView, sidebarView }) {
 
   useEffect(() => {
     dispatch(getWalletBalance());
+    dispatch(getHome());
   }, [dispatch]);
 
   return (
@@ -86,6 +88,7 @@ export default function Header({ setSidebarView, sidebarView }) {
                   <img
                     src={selectedCurrency ? selectedCurrency?.flag : ""}
                     className="w-[32px]"
+                    alt="$"
                   />
                 </span>
                 <span className="text-sm">
@@ -117,7 +120,7 @@ export default function Header({ setSidebarView, sidebarView }) {
                   </span>
                   <span className="block text-[12px] font-semibold tracking-wide text-secondaryColor">
                     {loading ? (
-                      <BtnLoader />
+                      <div className="w-full border bg-gray-200 rounded-2xl shadow animate-pulse  h-4"></div>
                     ) : (
                       <>{priceConversion(balance, selectedCurrency, true)}</>
                     )}
@@ -137,7 +140,7 @@ export default function Header({ setSidebarView, sidebarView }) {
               >
                 <div className="w-[30px] h-[30px] rounded-full overflow-hidden">
                   <img
-                    src="https://themesbrand.com/velzon/html/default/assets/images/users/avatar-1.jpg"
+                    src="https://png.pngtree.com/png-vector/20200614/ourlarge/pngtree-businessman-user-avatar-character-vector-illustration-png-image_2242909.jpg"
                     alt=""
                     className="w-full h-full object-cover"
                   />

@@ -30,7 +30,7 @@ function SearchRecentlyViewedSection() {
             </div>
           </div>
           <div className='py-7'>
-            <div className='containerRV scroll-smooth snap-x flex gap-5 overflow-x-auto'>
+            <div className='containerRV scroll-smooth snap-x flex gap-5 overflow-x-auto scrollbar-hide'>
               {data?.map((item, index) => (
                 <div key={index} className=' snap-start'>
                   <Link to={`/b2b/attractions/details/${item._id}`}>

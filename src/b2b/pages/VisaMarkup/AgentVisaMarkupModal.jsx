@@ -3,7 +3,7 @@ import { MdClose } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from '../../../axios';
 import { useHandleClickOutside } from '../../../hooks';
-import { removeSubagentMarkup } from '../../../redux/slices/markupSlice';
+import { removeSubagentVisaMarkup } from '../../../redux/slices/markupSlice';
 import { BtnLoader } from '../../components'
 
 function AgentVisaMarkupModal({ setMarkup, setMarkupData }) {
@@ -108,11 +108,11 @@ function AgentVisaMarkupModal({ setMarkup, setMarkupData }) {
                 )}
                 <span className="w-[100px] h-[40px] text-[14px] bg-orange-600 text-white rounded-[0.25rem] flex justify-center items-center font-[600] cursor-pointer" 
                 onClick={() => {
-                  // dispatch(removeSubagentMarkup({
-                  //   _id: visaAgentMarkup?._id,
-                  //   name: visaAgentMarkup?.name,
-                  //   id: visaAgentMarkup?.agentMarkup?._id
-                  // }))
+                  dispatch(removeSubagentVisaMarkup({
+                    _id: visaAgentMarkup?._id,
+                    name: visaAgentMarkup?.name,
+                    id: visaAgentMarkup?.agentMarkup?._id
+                  }))
                   setMarkupData((prev) => {
                     return {...prev, agent: '' }
                   })

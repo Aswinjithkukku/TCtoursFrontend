@@ -25,7 +25,7 @@ function AttractionOrder() {
     status: "",
     referenceNo: "",
   });
-  const { token } = useSelector((state) => state.agents);
+  const { token, agent } = useSelector((state) => state.agents);
 
   // hooks to handle onClick of modal
   const dropdownRef = useRef();
@@ -121,16 +121,18 @@ function AttractionOrder() {
                 }
               />
               <div className="flex items-center justify-between gap-[10px]">
-                <div className="relative" ref={dropdownRef}>
-                  <button
-                    className="button w-[120px] md:w-[150px] bg-orange-500 flex items-center justify-center"
-                    onClick={() => setOrderType(!orderType)}
-                  >
-                    Orders
-                    <AiOutlineDown />
-                  </button>
-                  {orderType && <OrderModal />}
-                </div>
+                {agent?.role === "reseller" && (
+                  <div className="relative" ref={dropdownRef}>
+                    <button
+                      className="button w-[120px] md:w-[150px] bg-orange-500 flex items-center justify-center"
+                      onClick={() => setOrderType(!orderType)}
+                    >
+                      Orders
+                      <AiOutlineDown />
+                    </button>
+                    {orderType && <OrderModal />}
+                  </div>
+                )}
 
                 <div className="relative" ref={transactionRef}>
                   <button
@@ -162,7 +164,7 @@ function AttractionOrder() {
               Oops.. No Attractions found
             </span>
           </div> */}
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto order__scroll">
             <table className="w-full">
               <thead className="bg-[#f3f6f9] text-grayColor text-[14px] text-left">
                 <tr>
@@ -187,7 +189,7 @@ function AttractionOrder() {
                   <th className="font-[500] p-3 whitespace-nowrap">Price</th>
                   {/* <th className="font-[500] p-3 whitespace-nowrap">Profit</th> */}
                   <th className="font-[500] p-3 whitespace-nowrap">Status</th>
-                  <th className="font-[500] p-3 whitespace-nowrap">Download</th>
+                  <th className="font-[500] p-3 whitespace-nowrap">Tickets</th>
                 </tr>
               </thead>
               <tbody className="text-sm overflow-hidden">

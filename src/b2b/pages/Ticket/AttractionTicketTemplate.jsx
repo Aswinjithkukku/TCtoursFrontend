@@ -6,7 +6,9 @@ import Barcode from "react-barcode";
 import QRCode from "react-qr-code";
 import formatDate from "../../../utils/formatDate";
 
-const AttractionTicketTemplate = ({ ticket }) => {
+const AttractionTicketTemplate = ({ ticket, index }) => {
+  const ticketBoxRef = useRef();
+  const [minHeight, setminHeight] = useState("min-h-[30cm]");
   const ticketDescRef = useRef();
   let parser = new DOMParser();
 
@@ -27,19 +29,27 @@ const AttractionTicketTemplate = ({ ticket }) => {
       .getElementsByTagName("body")
       .item(0);
     setDescription(dom);
+    if (ticketBoxRef.current.clientHeight >= 1150) {
+      setminHeight("min-h-[66cm]");
+    }
   }, []);
 
-  const baseUrl = process.env.REACT_APP_SERVER_URL;
+  const baseUrl = "https://secure.mytravellerschoice.com";
+  // const baseUrl = process.env.REACT_APP_SERVER_URL;
 
   return (
     <>
-      <div id="ticket_template" className=" p-[40px] w-[1000px] min-h-[1150px]">
+      <div
+        id="ticket_template"
+        className={`p-[20px] w-[1000px] ${minHeight} `}
+        ref={ticketBoxRef}
+      >
         <section className="w-[100%] mx-auto flex flex-col items-center">
           <div className="primary__section w-[90%]">
             <div className="flex justify-between pt-7">
               <div className="  ">
                 <img
-                  className="w-[200px] "
+                  className="w-[200px] h-[120px] "
                   src={`${baseUrl}${ticket?.attraction?.logo}`}
                   alt=""
                 />
@@ -55,7 +65,7 @@ const AttractionTicketTemplate = ({ ticket }) => {
               </div>
             </div>
           </div>
-          <div className="secondary__section  w-[90%] py-[40px] ">
+          <div className="secondary__section  w-[90%] py-[10px] ">
             <div className="bg-[#e3f2fd] rounded-2xl mt-4 border-2 border-[#a3c4dc] grid grid-cols-12 items-center h-[250px]">
               <div className="col-span-7 border-r-2 border-dashed border-[#a3c4dc] p-4 h-[250px] flex flex-col justify-center">
                 <div className="  border-b  border-dashed border-[#a3c4dc] ">
@@ -82,7 +92,7 @@ const AttractionTicketTemplate = ({ ticket }) => {
                   </div>
                 </div>
               </div>
-              <div className="col-span-5 py-10 relative h-[250px]">
+              <div className="col-span-5 py-3 relative h-[250px]">
                 <div className="h-5 w-5 rounded-full bg-white absolute -top-2 -left-[10px]"></div>
                 <div className="h-5 w-5 rounded-full bg-white absolute -bottom-2 -left-[10px]"></div>
                 <div className="w-full h-full flex justify-center items-center">
@@ -112,7 +122,7 @@ const AttractionTicketTemplate = ({ ticket }) => {
               </div>
             </div>
           </div>
-          <div className=" grid grid-cols-3  w-[90%]  h-[300px] rounded-2xl overflow-hidden ">
+          <div className=" grid grid-cols-3  w-[90%]  h-[200px] rounded-2xl overflow-hidden ">
             {ticket?.attraction?.images?.map((link) => {
               return (
                 <div className=" h-[300px]  ">
@@ -125,7 +135,7 @@ const AttractionTicketTemplate = ({ ticket }) => {
               );
             })}
           </div>
-          <div ref={ticketDescRef} className="my-[100px] w-[90%]"></div>
+          <div ref={ticketDescRef} className="my-[10px] w-[90%]"></div>
         </section>
       </div>
     </>

@@ -40,6 +40,9 @@ function ReviewSection() {
 
   useEffect(() => {
     getReviews();
+    return () => {
+      setReviews([])
+    }
   }, []);
 
   const submitHandler = async () => {
@@ -61,15 +64,13 @@ function ReviewSection() {
         formData,
         config
       );
+      getReviews()
       Swal.fire({
         icon: "success",
         title: "Review Submitted",
         text: "You have successfully Submitted your review",
       });
-      // setReviews((prev) => {
-      //   return [response.data,...prev]
-      // });
-      // setReviews([response.data, ...reviews])
+
       return response.data;
     } catch (error) {
       Swal.fire({
@@ -80,8 +81,7 @@ function ReviewSection() {
       console.log(error)
     }
   };
-  
-  // console.log(...reviews)
+
 
   return (
     <div className="">

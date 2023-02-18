@@ -32,66 +32,31 @@ function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
         <td className="capitalize p-3 text-[14px] text-textColor">
           {visaOrderDetail?.isDocumentUplaoded === true ? "Uploaded" : "Not Uploaded"}{" "}
         </td>
-        <td className="capitalize p-3 text-[14px] underline text-lightblue cursor-pointer"
-        onClick={() => navigate(`/b2b/visa/order/${id}/details/${item?._id}`)}
+        <td className="capitalize p-3 text-[14px]"
         >
-      Edit
+          {visaOrderDetail?.status === "paid" && item?.isStatus === "initiated" && (
+            <span className=" underline text-lightblue cursor-pointer"onClick={() => navigate(`/b2b/visa/order/${id}/details/${item?._id}`)} >Edit</span>
+          )}
+          {item?.isStatus === "initiated" && visaOrderDetail?.status !== "paid" && (
+            <span className="bg-orange-100 text-orange-500 cursor-pointer text-[12px] p-1 rounded" >Not Paid</span>
+          )}
+          {item?.isStatus === "approved" && (
+            <span className="bg-green-300/60 text-green-600 cursor-pointer text-[12px] p-1 rounded" >Approved</span>
+          )}
+          {item?.isStatus === "rejected" && (
+            <span className="bg-red-300/60 text-red-500 cursor-pointer text-[12px] p-1 rounded" >Rejected</span>
+          )}
         </td>
       </tr>
       <>
-        {/* {isUploadDropdownOpen && (
+        {item?.isStatus === "rejected" && (
           <tr className="border-b border-tableBorderColor">
             <td colSpan="8" className="p-3 py-5">
-              <div className="grid grid-cols-5 gap-2">
-                <div className="space-y-3">
-                  <label
-                    className="text-gray-500 text-[13px] font-[450]"
-                    htmlFor=""
-                  >
-                    Passport First Page
-                  </label>
-                  <input className="border-b" type="file"></input>
-                </div>
-                <div className="space-y-3">
-                  <label
-                    className="text-gray-500 text-[13px] font-[450]"
-                    htmlFor=""
-                  >
-                    Passport Last Page
-                  </label>
-                  <input className="border-b" type="file"></input>
-                </div>
-                <div className="space-y-3">
-                  <label
-                    className="text-gray-500 text-[13px] font-[450]"
-                    htmlFor=""
-                  >
-                    Passport Size Page
-                  </label>
-                  <input className="border-b" type="file"></input>
-                </div>
-                <div className="space-y-3">
-                  <label
-                    className="text-gray-500 text-[13px] font-[450]"
-                    htmlFor=""
-                  >
-                    Supportive Documents 1
-                  </label>
-                  <input className="border-b" type="file"></input>
-                </div>
-                <div className="space-y-3">
-                  <label
-                    className="text-gray-500 text-[13px] font-[450]"
-                    htmlFor=""
-                  >
-                    Supportive Documents 2
-                  </label>
-                  <input className="border-b" type="file"></input>
-                </div>
-              </div>
+              <p className="text-gray-600 text-[10px] underline">Reson for Rejection</p>
+              <p className="text-[13px] text-gray-600">{item?.reason}</p>
             </td>
           </tr>
-        )} */}
+        )}
 
         {isDropdownOpen && (
           <tr className="border-b border-tableBorderColor">

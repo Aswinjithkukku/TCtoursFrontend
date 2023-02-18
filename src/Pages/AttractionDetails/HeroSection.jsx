@@ -10,7 +10,6 @@ import DetailsCard from "./DetailsCard";
 import FeatureSection from "./FeatureSection";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getExcursion,
   setFavourites,
   stateFavourites,
 } from "../../redux/slices/excursionSlice";
@@ -25,21 +24,18 @@ import Availablity from "./Availablity";
 function HeroSection() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams()
 
   const { excursion, favourites } = useSelector((state) => state.excursion);
 
+
   useEffect(() => {
-    dispatch(getExcursion(id));
     dispatch(stateFavourites());
-  }, [dispatch, id]);
+  }, [dispatch]);
 
   const [viewBookCard, setViewBookCard] = useState(false);
   const [shareModal, setShareModal] = useState(false);
 
-  if (excursion === null || excursion === undefined || excursion === {}) {
-    navigate("/error");
-  }
 
   return (
     <>

@@ -19,7 +19,7 @@ export default function SidebarMenu({
     <li className="group relative">
       <div
         className={
-          `relative px-[15px] flex items-center text-[14.8px] justify-between py-[13px] transition-all hover:text-[#fff] ` +
+          `relative px-[15px] flex items-center text-[14.8px] justify-between py-[13px] transition-all hover:text-[#fff] cursor-default ` +
           (location.pathname === link ? "text-[#fff] " : "text-[#b6b2d2] ")
         }
         onClick={() => {
@@ -57,7 +57,7 @@ export default function SidebarMenu({
                   <div
                     to={dropItem.link}
                     className={
-                      "relative flex items-center gap-[15px] px-0 pl-[26px] mb-[15px] text-[14px] hover:text-[#fff] before:w-[6px] before:h-[1px] before:bg-[#a3a6b7] dark:hover:text-darkTextColor " +
+                      "relative cursor-default flex items-center gap-[15px] px-0 pl-[26px] mb-[15px] text-[14px] hover:text-[#fff] before:w-[6px] before:h-[1px] before:bg-[#a3a6b7] dark:hover:text-darkTextColor " +
                       (location.pathname === dropItem.link
                         ? "text-[#fff] "
                         : "text-[#9d96b8] ")

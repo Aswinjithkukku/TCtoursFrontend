@@ -1,9 +1,20 @@
 import React from "react";
-import PaymentApproval from "../../b2b/pages/PaymentApproval/PaymentApproval";
+import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import axios from "../../axios";
+import PaymentApproval from "../PaymentApproval/PaymentApproval";
+// import PaymentApproval from "../../b2b/pages/PaymentApproval/PaymentApproval";
 
 function PaymentSection({ price, navigation, setNavigation }) {
+  const { visaEnquiry, rows } = useSelector((state) => state.b2cVisa);
+
+  // const visaOrder = JSON.parse(localStorage.getItem('visaOrder'));
+
+  const handlePaymentSuccess = async () => {
+    setNavigation({ upload: !navigation?.upload });
+  };
   return (
-    <div className="md:max-w-screen-xl md:mx-auto text-darktext my-5">
+    <div className="md:max-w-screen-xl md:mx-auto text-darktext my-5 w-[100%]">
       <div
         className={`my-2 border px-3 py-4  rounded-lg ${
           navigation?.payment ? "bg-primaryColor " : "bg-slate-400"
@@ -13,12 +24,7 @@ function PaymentSection({ price, navigation, setNavigation }) {
       </div>
       {navigation?.payment && (
         <div className="p-6 flex justify-between flex-col align-middle bg-white rounded-md">
-          <PaymentApproval
-            place="b2cvisa"
-            price={price}
-            setNavigation={setNavigation}
-            navigation={navigation}
-          />
+          <PaymentApproval onSuccess={handlePaymentSuccess} />
           <div className="col-span-10 flex justify-end mt-4 w-[100%]">
             <button
               onClick={() => {

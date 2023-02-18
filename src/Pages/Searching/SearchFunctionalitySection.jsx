@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiFillStar, AiOutlineClose } from "react-icons/ai";
 import { RiCloseLine } from "react-icons/ri";
-import InputRange from "react-input-range";
+// import InputRange from "react-input-range";
 import { NeedHelp } from "../../components/Layouts";
 
 function SearchFunctionalitySection({

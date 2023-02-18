@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     backgroundPosition: {
       bottom: "bottom",
@@ -51,5 +49,6 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/line-clamp"),
+    require("tailwind-scrollbar-hide"),
   ],
 };

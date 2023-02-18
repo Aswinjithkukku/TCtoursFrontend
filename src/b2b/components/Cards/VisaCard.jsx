@@ -63,7 +63,7 @@ function VisaCard({ setView }) {
                                         placeholder='Where do you want to go?'
                                         onChange={(e) => setValue(e.target.value)}
                                         onFocus={handleFocus}
-                                        // onBlur={handleBlur}
+                                        required
                                         className='capitalize px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
                                 </div>
                                 {datalist && (
