@@ -43,14 +43,14 @@ function VisaCard() {
   console.log(filteredData);
 
   return (
-    <div className="md:grid md:grid-cols-12 gap-0 py-7 space-y-4 md:space-y-0">
-      <div className="md:col-span-10 flex justify-center items-center pr-12">
+    <div className="md:grid md:grid-cols-12 gap-0 py-4 space-y-4 md:space-y-0">
+      <div className="md:col-span-10 flex justify-center items-center">
         <div className="space-y-2 w-10/12 ">
           <div className="flex items-center space-x-2 text-darktext">
             <span className="text-2xl text-blue">
               <IoLocationOutline />{" "}
             </span>
-            <span className="text-lg ">Country</span>
+            <span className="text-lg text-white">Country</span>
           </div>
 
           <div className="" ref={dropdownWrapperRef}>
@@ -63,7 +63,7 @@ function VisaCard() {
                 onChange={(e) => setCountry(e.target.value)}
                 onFocus={handleFocus}
                 required
-                className="capitalize px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext"
+                className="capitalize bg-gray-50/80 px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext"
               />
             </div>
             {datalist && (

@@ -3,6 +3,7 @@ import { BiTransferAlt } from "react-icons/bi";
 import { CgSandClock } from "react-icons/cg";
 import { GiConfirmed } from "react-icons/gi";
 import { ImCancelCircle } from "react-icons/im";
+import { BsBookmarkCheck } from "react-icons/bs";
 
 function TransactionModal({ setFilters, setTransactionType }) {
   return (
@@ -57,7 +58,7 @@ function TransactionModal({ setFilters, setTransactionType }) {
         }}
       >
         <span className="">
-          <CgSandClock />{" "}
+          <BsBookmarkCheck />{" "}
         </span>
         <span className="">Booked Transactions</span>
       </div>

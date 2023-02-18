@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { FaHandsHelping } from 'react-icons/fa'
 import { GiWallet } from 'react-icons/gi'
 import { HiOutlineShoppingCart } from 'react-icons/hi'
 import { RiMarkupFill } from 'react-icons/ri'
@@ -15,7 +14,7 @@ function BottomNav() {
   const [searchModal, setSearchModal] = useState(false)
   return (
     <>
-      <div className={`${location.pathname.includes('/b2b/attractions/details/') ? 'hidden' : 'block'} lg:hidden sticky bottom-0 bg-primaryColor text-white h-[60px] flex justify-center items-center`}>
+      <div className={`${location.pathname.includes('/b2b/attractions/details/') ? 'hidden' : 'block'} lg:hidden fixed w-full bottom-0 bg-primaryColor text-white h-[60px] flex justify-center items-center`}>
         <div className='grid grid-cols-5 gap-4 px-2'>
           <div className='flex justify-center items-center'>
             <div className=''

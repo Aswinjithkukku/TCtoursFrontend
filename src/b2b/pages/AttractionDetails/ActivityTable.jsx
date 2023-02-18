@@ -12,7 +12,7 @@ function ActivityTable({ item, bookingType, index }) {
 
   console.log(item);
 
-  const { agentRecievedActivities } = useSelector(
+  const { agentRecievedActivities, agentExcursion } = useSelector(
     (state) => state.agentExcursions
   );
   const { selectedCurrency } = useSelector((state) => state.home);
@@ -104,7 +104,12 @@ function ActivityTable({ item, bookingType, index }) {
   }, []);
 
   let date = new Date();
-  let dd = String(date.getDate() + 2).padStart(2, "0");
+  let dd = agentExcursion?.bookingPriorDays
+    ? String(date.getDate() + Number(agentExcursion?.bookingPriorDays)).padStart(
+        2,
+        "0"
+      )
+    : String(date.getDate() + 1).padStart(2, "0");
   let mm = String(date.getMonth() + 1).padStart(2, "0");
   let yyyy = date.getFullYear();
   const res = yyyy + "-" + mm + "-" + dd;

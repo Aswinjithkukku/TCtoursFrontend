@@ -6,7 +6,7 @@ import {
 } from "../../redux/slices/excursionSlice";
 import priceConversion from "../../utils/PriceConversion";
 
-function ActivityTable({ item, index }) {
+function ActivityTable({ item, bookingType, index }) {
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
 
@@ -111,7 +111,6 @@ function ActivityTable({ item, index }) {
   let mm = String(date.getMonth() + 1).padStart(2, "0");
   let yyyy = date.getFullYear();
   const res = yyyy + "-" + mm + "-" + dd;
-  console.log(res);
 
   return (
     <tr className="text-darktext border-b" key={index}>
@@ -133,12 +132,16 @@ function ActivityTable({ item, index }) {
           />
         </span>
         <span className="">{item?.name}</span>
-        <p className="text-main text-xs mr-5 font-[500]">
-          Adult Tickets left : {item?.adultTicketCount}
-        </p>
-        <p className="text-main text-xs mr-5 font-[500]">
-          Child Tickets left : {item?.childTicketCount}
-        </p>
+        {bookingType === "ticket" && (
+          <>
+            <p className="text-main text-xs mr-5 font-[500]">
+              Adult Tickets left : {item?.adultTicketCount}
+            </p>
+            <p className="text-main text-xs mr-5 font-[500]">
+              Child Tickets left : {item?.childTicketCount}
+            </p>
+          </>
+        )}
       </td>
       <td className="py-3 px-1 text-sm">
         <input
@@ -182,7 +185,7 @@ function ActivityTable({ item, index }) {
           }
         >
           {Array.from({
-            length: item?.commonTicketCount + item?.adultTicketCount,
+            length: bookingType === "ticket" ? item?.commonTicketCount + item?.adultTicketCount : 50,
           }).map((_, index) => (
             <option value={index + 1} key={index}>
               {index + 1}
@@ -200,7 +203,7 @@ function ActivityTable({ item, index }) {
           }
         >
           {Array.from({
-            length: item?.commonTicketCount + item?.childTicketCount || 1,
+            length: bookingType === "ticket" ? item?.commonTicketCount + item?.childTicketCount || 1 : 50,
           }).map((_, index) => (
             <option value={index} key={index}>
               {index}
@@ -217,7 +220,7 @@ function ActivityTable({ item, index }) {
             handleChange({ value: e.target.value, name: e.target.name, index })
           }
         >
-          {Array.from({ length: item?.infantTicketCount || 6 }).map(
+          {Array.from({ length: bookingType === "ticket" ? item?.infantTicketCount || 6 : 9 }).map(
             (_, index) => (
               <option value={index} key={index}>
                 {index}

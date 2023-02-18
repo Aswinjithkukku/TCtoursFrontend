@@ -54,14 +54,14 @@ function AttractionCard({ setView }) {
   return (
     <>
       <form onSubmit={submitHandler}>
-        <div className="md:grid md:grid-cols-12 gap-0 py-7 space-y-4 md:space-y-0">
-          <div className="md:col-span-10 flex justify-center items-center md:border-r-2 border-bluetrans">
+        <div className="md:grid md:grid-cols-12 gap-0 py-4 space-y-4 md:space-y-0">
+          <div className="md:col-span-10 flex justify-center items-center">
             <div className="space-y-2 w-10/12 ">
               <div className="flex items-center space-x-2 text-darktext">
                 <span className="text-2xl text-blue">
                   <IoLocationOutline />{" "}
                 </span>
-                <span className="text-lg ">Destination</span>
+                <span className="text-lg text-white">Destination</span>
               </div>
               <div className="" ref={dropdownWrapperRef}>
                 <div className="relative">
@@ -73,7 +73,7 @@ function AttractionCard({ setView }) {
                     onChange={(e) => setValue(e.target.value)}
                     onFocus={handleFocus}
                     required
-                    className="capitalize px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext"
+                    className="capitalize bg-gray-50/80 px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext"
                   />
                 </div>
                 {datalist && (

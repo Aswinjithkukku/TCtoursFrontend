@@ -45,10 +45,10 @@ function AttractionOrder() {
         headers: { authorization: `Bearer ${token}` },
       });
 
-      if(filters.referenceNo !== ''){
-        setOrders(response?.data?.result?.data)
+      if(filters.referenceNo){
+        response?.data?.result?.data ? setOrders([...new Set([...response?.data?.result?.data])]) : setOrders([])
       } else {
-        setOrders((prev) => [...prev, ...response?.data?.result?.data]);
+        setOrders((prev) => [...new Set([...prev, ...response?.data?.result?.data])]);
       }
 
       setFilters((prev) => {
@@ -111,13 +111,13 @@ function AttractionOrder() {
         document.documentElement.scrollHeight
       ) {
         setIsLoading(true);
-        setFilters((prev) => {
-          return {
-            ...prev,
-            skip: Number(prev.skip) + 1,
-          };
-        });
-      }
+          setFilters((prev) => {
+            return {
+              ...prev,
+              skip: Number(prev.skip) + 1,
+            };
+          });
+        }
     } catch (error) {
       console.log(error);
     }
@@ -229,9 +229,15 @@ function AttractionOrder() {
                 </tr>
               </thead>
               <tbody className="text-sm overflow-hidden text-textColor">
-                {orders?.map((item, index) => (
+                {orders?.length > 0 ? orders?.map((item, index) => (
                   <AttractionOrderTable item={item} key={index} />
-                ))}
+                )) : 
+                <tr>
+                  <td colSpan="13">
+                    <p className="flex justify-center my-5 text-gray-400 font-[500]">Data With this Query not found!!!</p>
+                  </td>
+                  </tr>
+                  }
               </tbody>
             </table>
 
