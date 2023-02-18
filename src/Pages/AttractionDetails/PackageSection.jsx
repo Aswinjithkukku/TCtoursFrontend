@@ -8,10 +8,9 @@ function PackageSection() {
   const dispatch = useDispatch();
   const [error, setError] = useState("");
 
-  const { recievedActivities, selectedActivities } = useSelector(
+  const { recievedActivities, selectedActivities, excursion } = useSelector(
     (state) => state.excursion
   );
-
   const carting = () => {
     const isDateExist = selectedActivities?.filter((item) => {
       return item?.isChecked === true && item?.date !== "";
@@ -52,7 +51,11 @@ function PackageSection() {
             <tbody>
               {recievedActivities &&
                 recievedActivities?.map((item, index) => (
-                  <ActivityTable item={item} index={index} key={index} />
+                  <ActivityTable
+                    item={{ ...item, bookingType: excursion?.bookingType }}
+                    index={index}
+                    key={index}
+                  />
                 ))}
             </tbody>
           </table>
