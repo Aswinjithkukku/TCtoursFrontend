@@ -112,10 +112,13 @@ function ActivityTable({ item, index }) {
   return (
     <tr className="text-darktext border-b" key={index}>
       <td className="py-3 px-1 max-w-[13em] w-[13em] space-x-2 ">
-        <span className="">
+        <span className="cursor-pointer">
           <input
             disabled={
-              item?.adultTicketCount === 0 && item?.childTicketCount === 0
+              item?.adultTicketCount === 0 &&
+              item?.childTicketCount === 0 &&
+              item?.commonTicketCount === 0 &&
+              item?.bookingType === "ticket"
             }
             type="checkbox"
             className=""
@@ -132,12 +135,16 @@ function ActivityTable({ item, index }) {
         </span>
         <span className="">{item?.name}</span>
 
-        <p className="text-main text-xs mr-5 font-[500]">
-          Adult Tickets left : {item?.adultTicketCount}
-        </p>
-        <p className="text-main text-xs mr-5 font-[500]">
-          Child Tickets left : {item?.childTicketCount}
-        </p>
+        {item?.bookingType === "ticket" && (
+          <>
+            <p className="text-main text-xs mr-5 font-[500]">
+              Adult Tickets left : {item?.adultTicketCount}
+            </p>
+            <p className="text-main text-xs mr-5 font-[500]">
+              Child Tickets left : {item?.childTicketCount}
+            </p>
+          </>
+        )}
       </td>
       <td className="py-3 px-1 text-sm">
         <input
@@ -181,7 +188,10 @@ function ActivityTable({ item, index }) {
           }
         >
           {Array.from({
-            length: item?.commonTicketCount + item?.adultTicketCount,
+            length:
+              item?.bookingType === "ticket"
+                ? item?.commonTicketCount + item?.adultTicketCount
+                : 50,
           }).map((_, index) => (
             <option value={index + 1} key={index}>
               {index + 1}
@@ -199,7 +209,10 @@ function ActivityTable({ item, index }) {
           }
         >
           {Array.from({
-            length: item?.commonTicketCount + item?.childTicketCount || 1,
+            length:
+              item?.bookingType === "ticket"
+                ? item?.commonTicketCount + item?.childTicketCount || 1
+                : 50,
           }).map((_, index) => (
             <option value={index} key={index}>
               {index}
