@@ -44,23 +44,23 @@ const AttractionTicketTemplate = ({ ticket, index }) => {
         className={`p-[20px] w-[1000px] ${minHeight} `}
         ref={ticketBoxRef}
       >
-        <section className="w-[100%] mx-auto flex flex-col items-center">
+        <section className="w-[100%] mx-auto flex flex-col items-center ">
           <div className="primary__section w-[90%]">
-            <div className="flex justify-between pt-7">
-              <div className="  ">
+            <div className="grid grid-cols-5 pt-7">
+              <div className=" col-span-2 ">
                 <img
                   className="w-[200px] h-[120px] "
                   src={`${baseUrl}${ticket?.attraction?.logo}`}
                   alt=""
                 />
               </div>
-              <div className="">
+              <div className="col-span-3 flex justify-end">
                 <Barcode
                   value={ticket?.ticketNo}
-                  width={2}
+                  width={1}
                   height={50}
                   textMargin={0}
-                  fontSize={30}
+                  fontSize={20}
                 />
               </div>
             </div>

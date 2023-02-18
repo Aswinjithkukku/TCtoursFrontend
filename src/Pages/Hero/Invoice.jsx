@@ -102,7 +102,25 @@ function Invoice() {
           <AttractionInvoicePdfTemplate data={output} />
         </div>
       </div>
-      <div className=" ">
+      <div className="relative overflow-hidden ">
+        <div className="absolute left-[200000px]">
+          <div ref={listRef}>
+            {list?.map((ele) => (
+              <>
+                <div id={ele?.ticketNo} className="w-[100%] pt-[20px]">
+                  <AttractionTicketTemplate ticket={ele} />
+                </div>
+              </>
+            ))}
+          </div>
+          <div
+            id="attraction_invoice_pdf_template"
+            ref={invoiceRef}
+            className="w-[21cm]"
+          >
+            <AttractionInvoicePdfTemplate data={output} />
+          </div>
+        </div>
         <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
           <h1 className="font-[600] text-[15px] uppercase">Invoice</h1>
           <div className="text-sm text-grayColor flex items-center gap-[7px]">

@@ -117,10 +117,13 @@ function ActivityTable({ item, bookingType, index }) {
   return (
     <tr className="text-darktext border-b" key={index}>
       <td className="py-3 px-1 max-w-[13em] w-[13em] space-x-2 ">
-        <span className="">
+        <span className="cursor-pointer">
           <input
             disabled={
-              item?.adultTicketCount === 0 && item?.childTicketCount === 0
+              item?.adultTicketCount === 0 &&
+              item?.childTicketCount === 0 &&
+              item?.commonTicketCount === 0 &&
+              item?.bookingType === "ticket"
             }
             type="checkbox"
             className=""
@@ -136,7 +139,12 @@ function ActivityTable({ item, bookingType, index }) {
           />
         </span>
         <span className="">{item?.name}</span>
+<<<<<<< HEAD
         {bookingType === "ticket" && (
+=======
+
+        {item?.bookingType === "ticket" && (
+>>>>>>> 4eeee4a997d883f961278bfdd5e7c56648d2d3bb
           <>
             <p className="text-main text-xs mr-5 font-[500]">
               Adult Tickets left : {item?.adultTicketCount}
@@ -189,7 +197,14 @@ function ActivityTable({ item, bookingType, index }) {
           }
         >
           {Array.from({
+<<<<<<< HEAD
             length: bookingType === "ticket" ? item?.commonTicketCount + item?.adultTicketCount : 50,
+=======
+            length:
+              item?.bookingType === "ticket"
+                ? item?.commonTicketCount + item?.adultTicketCount
+                : 50,
+>>>>>>> 4eeee4a997d883f961278bfdd5e7c56648d2d3bb
           }).map((_, index) => (
             <option value={index + 1} key={index}>
               {index + 1}
@@ -207,7 +222,14 @@ function ActivityTable({ item, bookingType, index }) {
           }
         >
           {Array.from({
+<<<<<<< HEAD
             length: bookingType === "ticket" ? item?.commonTicketCount + item?.childTicketCount || 1 : 50,
+=======
+            length:
+              item?.bookingType === "ticket"
+                ? item?.commonTicketCount + item?.childTicketCount || 1
+                : 50,
+>>>>>>> 4eeee4a997d883f961278bfdd5e7c56648d2d3bb
           }).map((_, index) => (
             <option value={index} key={index}>
               {index}

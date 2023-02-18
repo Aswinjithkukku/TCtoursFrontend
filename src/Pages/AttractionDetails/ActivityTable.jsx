@@ -117,7 +117,12 @@ function ActivityTable({ item, bookingType, index }) {
       <td className="py-3 px-1 max-w-[13em] w-[13em] space-x-2 ">
         <span className="">
           <input
-            disabled={item?.ticketCount === 0}
+            disabled={
+              item?.adultTicketCount === 0 &&
+              item?.childTicketCount === 0 &&
+              item?.commonTicketCount === 0 &&
+              item?.bookingType === "ticket"
+            }
             type="checkbox"
             className=""
             name="isChecked"
@@ -177,7 +182,7 @@ function ActivityTable({ item, bookingType, index }) {
       </td>
       <td className="py-3 px-1">
         <select
-          className="border py-1 px-1"
+          className="border py-1 px-1 min-w-[55px]"
           name="adult"
           value={item.adult}
           onChange={(e) =>
@@ -195,7 +200,7 @@ function ActivityTable({ item, bookingType, index }) {
       </td>
       <td className="py-3 px-1">
         <select
-          className="border py-1 px-1"
+          className="border py-1 px-1 min-w-[55px]"
           name="child"
           value={item.child}
           onChange={(e) =>
@@ -213,7 +218,7 @@ function ActivityTable({ item, bookingType, index }) {
       </td>
       <td className="py-3 px-1">
         <select
-          className="border py-1 px-1"
+          className="border py-1 px-1 min-w-[55px]"
           name="infant"
           value={item.infant}
           onChange={(e) =>
