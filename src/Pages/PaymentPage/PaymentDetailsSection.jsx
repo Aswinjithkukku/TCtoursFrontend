@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import OtpModal from "./OtpModal";
 import { useNavigate } from "react-router-dom";
 import axios from "../../axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
+import PaymentApproval from "../PaymentApproval/PaymentApproval";
 
 function PaymentDetailsSection() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function PaymentDetailsSection() {
   const [otpModal, setOtpModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [result, setResult] = useState({});
+  const [result, setResult] = useState(null);
 
   const [travellerData, setTravellerData] = useState({
     gender: "male",
@@ -32,44 +33,45 @@ function PaymentDetailsSection() {
 
   const submitHandler = async () => {
     try {
-      setIsLoading(true);
-      setError("");
-      const tour_order = JSON.parse(localStorage.getItem("tour_order"));
-      let order_data;
-      if (tour_order) {
-        order_data = tour_order.map((item) => {
-          return {
-            activity: item?._id,
-            date: item?.date,
-            adultsCount: Number(item?.adult),
-            childrenCount: Number(item?.child),
-            infantCount: Number(item?.infant),
-            transferType: item?.transfer,
-          };
-        });
-      }
-      let createOrderData = {
-        name: travellerData?.firstname + " " + travellerData?.lastname,
-        email: travellerData?.email,
-        country: travellerData?.country,
-        phoneNumber: travellerData?.phone,
-        selectedActivities: order_data,
-      };
-      const response = await axios.post(
-        "/attractions/orders/create",
-        createOrderData
-      );
+      navigate(`/payment/approval/${"reaponse_id"}`);
+      // setIsLoading(true);
+      // setError("");
+      // const tour_order = JSON.parse(localStorage.getItem("tour_order"));
+      // let order_data;
+      // if (tour_order) {
+      //   order_data = tour_order.map((item) => {
+      //     return {
+      //       activity: item?._id,
+      //       date: item?.date,
+      //       adultsCount: Number(item?.adult),
+      //       childrenCount: Number(item?.child),
+      //       infantCount: Number(item?.infant),
+      //       transferType: item?.transfer,
+      //     };
+      //   });
+      // }
+      // let createOrderData = {
+      //   name: travellerData?.firstname + " " + travellerData?.lastname,
+      //   email: travellerData?.email,
+      //   country: travellerData?.country,
+      //   phoneNumber: travellerData?.phone,
+      //   selectedActivities: order_data,
+      // };
+      // const response = await axios.post(
+      //   "/attractions/orders/create",
+      //   createOrderData
+      // );
 
-      setResult(response.data);
-      setIsLoading(false);
-      navigate(`/payment/approval/${response.data?._id}`);
+      // setResult(response.data);
+      // setIsLoading(false);
+      // navigate(`/payment/approval/${response.data?._id}`);
     } catch (error) {
-        setError(error?.response?.data?.error);
-        await Swal.fire({
-            icon: 'error',
-            title: 'Something went wrong!',
-            text: error?.response?.data?.error,
-          })
+      setError(error?.response?.data?.error);
+      await Swal.fire({
+        icon: "error",
+        title: "Something went wrong!",
+        text: error?.response?.data?.error,
+      });
     }
   };
 
@@ -229,23 +231,29 @@ function PaymentDetailsSection() {
           </div>
         )}
       </div>
-      <div className="bg-light my-5 p-7 rounded-2xl lg:flex -z-10">
-        <div className='{" "}'>
-          <span className="cursor-default ">
-            By Clicking Pay Now You agree that you have read and understood our{" "}
-          </span>
-          <span className="text-lightblue underline cursor-pointer">
-            Terms & Conditions
-          </span>
-        </div>
-        <div className="text-center fixed lg:static bottom-0 left-0 right-0 rounded-t-3xl lg:rounded-none py-8 bg-light lg:bg-none px-10 lg:px-0 z-10">
-          <button
-            className="text-light bg-lightblue px-3 py-2 rounded-lg text whitespace-nowrap w-full"
-            onClick={submitHandler}
-          >
-            Pay Now
-          </button>
-        </div>
+      <div className="bg-light my-5 p-7 rounded-2xl lg:flex -z-10 flex flex-col">
+        {!result && (
+          <>
+            <div className='{" "}'>
+              <span className="cursor-default ">
+                By Clicking Pay Now You agree that you have read and understood
+                our{" "}
+              </span>
+              <span className="text-lightblue underline cursor-pointer">
+                Terms & Conditions
+              </span>
+            </div>
+            <div className="text-center fixed lg:static bottom-0 left-0 right-0 rounded-t-3xl lg:rounded-none py-8 bg-light lg:bg-none px-10 lg:px-0 z-10">
+              <button
+                className="text-light bg-lightblue px-3 py-2 rounded-lg text whitespace-nowrap w-full"
+                onClick={submitHandler}
+              >
+                Pay Now
+              </button>
+            </div>
+          </>
+        )}
+        {result && <PaymentApproval orderId={result.data?._id} />}
       </div>
       {otpModal && <OtpModal setOtpModal={setOtpModal} />}
     </>

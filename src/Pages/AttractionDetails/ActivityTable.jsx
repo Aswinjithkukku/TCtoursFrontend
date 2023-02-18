@@ -7,6 +7,8 @@ import {
 import priceConversion from "../../utils/PriceConversion";
 
 function ActivityTable({ item, index }) {
+  console.log(item);
+
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
 
@@ -140,10 +142,18 @@ function ActivityTable({ item, index }) {
         <span className="">{item?.name}</span>
         {item?.bookingType === "ticket" && (
           <>
-            <p className="text-main text-xs mr-5 font-[500]">
+            <p
+              className={`${
+                item?.adultTicketCount > 10 ? "text-lightblue" : "text-main"
+              } text-xs mr-5 font-[500]`}
+            >
               Adult Tickets left : {item?.adultTicketCount}
             </p>
-            <p className="text-main text-xs mr-5 font-[500]">
+            <p
+              className={`${
+                item?.childTicketCount > 10 ? "text-lightblue" : "text-main"
+              } text-xs mr-5 font-[500]`}
+            >
               Child Tickets left : {item?.childTicketCount}
             </p>
           </>
