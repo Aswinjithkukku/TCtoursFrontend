@@ -29,19 +29,37 @@ function ActivityTable({ item, index }) {
       item?.adultPrice * Number(item?.adult) +
       item?.childPrice * Number(item?.child) +
       item?.infantPrice * Number(item?.infant);
-    if (item?.isTransferAvailable === true) {
-      if (item?.privateTransferPrice !== null && item?.transfer === "private") {
-        sum = sum + item?.privateTransferPrice;
-      } else if (
-        item?.sharedTransferPrice !== null &&
-        item?.transfer === "shared"
-      ) {
-        sum = sum + item?.sharedTransferPrice;
-      } else {
-        sum = sum;
+
+    if (item?.isSharedTransferAvailable && item?.sharedTransferPrice) {
+      let numOfTraveller = Number(item?.adult) + Number(item?.child);
+      sum += Number(item?.sharedTransferPrice) * Number(numOfTraveller);
+    }
+
+    let tempPax = Number(item?.adult) + Number(item?.child);
+    let totalPrice = 0;
+    while (tempPax > 0) {
+      for (let j = 0; j < item?.privateTransfers?.length; j++) {
+        if (
+          tempPax <= item?.privateTransfers[j].maxCapacity ||
+          j === item?.privateTransfers.length - 1
+        ) {
+          let currentPax =
+            tempPax > item?.privateTransfers[j].maxCapacity
+              ? item?.privateTransfers[j].maxCapacity
+              : tempPax;
+          let pvtTransferPrice = item?.privateTransfers[j].price;
+          console.log(pvtTransferPrice);
+          totalPrice += pvtTransferPrice;
+          tempPax -= currentPax;
+
+          if (tempPax <= 0) {
+            break;
+          }
+        }
       }
     }
-    setPrice(sum);
+    setPrice(totalPrice);
+
     dispatch(
       setActivities({
         value: sum,
@@ -64,7 +82,6 @@ function ActivityTable({ item, index }) {
   let mm = String(date.getMonth() + 1).padStart(2, "0");
   let yyyy = date.getFullYear();
   const res = yyyy + "-" + mm + "-" + dd;
-  console.log(res);
 
   return (
     <tr className="text-darktext border-b" key={index}>
@@ -108,10 +125,11 @@ function ActivityTable({ item, index }) {
           }
         >
           <option value="without">without</option>
-          {item?.isTransferAvailable && item.privateTransferPrice && (
-            <option value="private">private</option>
-          )}
-          {item?.isTransferAvailable && item.privateTransferPrice && (
+          {item?.isPrivateTransferAvailable &&
+            item.privateTransfers.length > 0 && (
+              <option value="private">private</option>
+            )}
+          {item?.isSharedTransferAvailable && item.sharedTransferPrice && (
             <option value="shared">shared</option>
           )}
         </select>

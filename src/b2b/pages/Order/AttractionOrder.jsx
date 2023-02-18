@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { BiPhone, BiUser } from "react-icons/bi";
+// import { BiPhone, BiUser } from "react-icons/bi";
 import { AiOutlineDown } from "react-icons/ai";
-import { FiMapPin } from "react-icons/fi";
-import { FaBus } from "react-icons/fa";
-import { MdOutlineEmail } from "react-icons/md";
-import Pagination from "../../components/Pagination";
+// import { FiMapPin } from "react-icons/fi";
+// import { FaBus } from "react-icons/fa";
+// import { MdOutlineEmail } from "react-icons/md";
+// import Pagination from "../../components/Pagination";
 import OrderModal from "./OrderModal";
 import { useHandleClickOutside } from "../../../hooks";
 import TransactionModal from "./TransactionModal";
@@ -19,7 +19,7 @@ function AttractionOrder() {
   const [isLoading, setIsLoading] = useState(false);
   const [orders, setOrders] = useState([]);
   const [filters, setFilters] = useState({
-    limit: 10,
+    limit: 20,
     skip: 0,
     totalOrders: 0,
     status: "",
@@ -39,14 +39,18 @@ function AttractionOrder() {
     try {
       console.log("order fetching...");
       setIsLoading(true);
-
       const searchQuery = `skip=${filters?.skip}&limit=${filters.limit}&referenceNo=${filters.referenceNo}&status=${filters.status}`;
       let response;
       response = await axios.get(`/b2b/attractions/orders/all?${searchQuery}`, {
         headers: { authorization: `Bearer ${token}` },
       });
-      setOrders(response?.data?.result?.data || []);
-      console.log(orders);
+
+      if(filters.referenceNo !== ''){
+        setOrders(response?.data?.result?.data)
+      } else {
+        setOrders((prev) => [...prev, ...response?.data?.result?.data]);
+      }
+
       setFilters((prev) => {
         return {
           ...prev,
@@ -88,9 +92,41 @@ function AttractionOrder() {
   };
 
   useEffect(() => {
-    fetchOrders({ ...filters });
+    if(filters.status !== ""){
+      setOrders([])
+      fetchOrders({ ...filters });
+    }else if (filters.referenceNo !== ""){
+      setOrders([])
+      fetchOrders({ ...filters });
+    }else {
+      fetchOrders({ ...filters });
+    }
     console.log("working");
   }, [filters.skip, filters.status, filters.referenceNo]);
+
+  const handelInfiniteScroll = async () => {
+    try {
+      if (
+        window.innerHeight + document.documentElement.scrollTop + 1 >=
+        document.documentElement.scrollHeight
+      ) {
+        setIsLoading(true);
+        setFilters((prev) => {
+          return {
+            ...prev,
+            skip: Number(prev.skip) + 1,
+          };
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handelInfiniteScroll);
+    return () => window.removeEventListener("scroll", handelInfiniteScroll);
+  }, []);
 
   return (
     <div>
@@ -192,14 +228,14 @@ function AttractionOrder() {
                   <th className="font-[500] p-3 whitespace-nowrap">Tickets</th>
                 </tr>
               </thead>
-              <tbody className="text-sm overflow-hidden">
+              <tbody className="text-sm overflow-hidden text-textColor">
                 {orders?.map((item, index) => (
                   <AttractionOrderTable item={item} key={index} />
                 ))}
               </tbody>
             </table>
 
-            <div className="p-4">
+            {/* <div className="p-4">
               <Pagination
                 limit={filters?.limit}
                 skip={filters?.skip}
@@ -218,7 +254,7 @@ function AttractionOrder() {
                   })
                 }
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

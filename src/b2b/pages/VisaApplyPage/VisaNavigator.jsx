@@ -5,8 +5,10 @@ import { BsArrowRightCircle, BsCheck2Circle } from "react-icons/bs";
 import MakePaymentSection from "./MakePaymentSection";
 import UploadDetailSection from "./UploadDetailSection";
 import { useParams } from "react-router-dom";
-import { fetchVisas } from "../../../redux/slices/visaSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setVisas } from "../../../redux/slices/visaSlice";
+import axios from "../../../axios";
+import priceConversion from "../../../utils/PriceConversion";
 
 function VisaNavigator() {
   const dispatch = useDispatch();
@@ -17,11 +19,65 @@ function VisaNavigator() {
     upload: false,
   });
 
+  const [data, setData] = useState({
+    visaType: JSON.parse(localStorage.getItem("visaEnquiry"))?.visaType || "",
+    email: JSON.parse(localStorage.getItem("visaEnquiry"))?.email || "",
+    contactNo: JSON.parse(localStorage.getItem("visaEnquiry"))?.contactNo || "",
+    traveller: JSON.parse(localStorage.getItem("visaEnquiry"))?.traveller || "",
+    onwardDate:
+      JSON.parse(localStorage.getItem("visaEnquiry"))?.onwardDate || "",
+    returnDate:
+      JSON.parse(localStorage.getItem("visaEnquiry"))?.returnDate || "",
+    country: "",
+  });
+
   const { id } = useParams();
 
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedVisa, setSelectedVisa] = useState({})
+
+  const { token } = useSelector((state) => state.agents);
+  const { visa, visaEnquiry } = useSelector(state => state.visa)
+  const { selectedCurrency } = useSelector(state => state.home)
+
+  const fetchVisas = async (id) => {
+    try {
+      setError("");
+      setIsLoading(true);
+      const response = await axios.get(`/b2b/visa/list/${id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch(setVisas(response.data));
+      setIsLoading(false);
+    } catch (err) {
+      setError(err?.response?.data?.error);
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    dispatch(fetchVisas(id));
-  }, [dispatch, id]);
+    fetchVisas(id);
+  }, [id]);
+
+  useEffect(() => {
+    for (let item of visa?.visaType) {
+      if (item._id === visaEnquiry?.visaType) {
+        setSelectedVisa(item);
+      }
+    }
+  }, [visaEnquiry]);
+
+  useEffect(() => {}, []);
+
+  const totalPrice =
+    +selectedVisa?.totalPrice +
+    selectedVisa?.insurance +
+    selectedVisa?.tax;
+
+  const grandTotal = totalPrice * visaEnquiry?.traveller;
 
   return (
     <>
@@ -45,7 +101,7 @@ function VisaNavigator() {
                       details: false,
                       payment: false,
                       upload: false,
-                    }) 
+                    });
                 }}
               >
                 {/* <span className=''><FaWpforms /></span> */}
@@ -133,31 +189,70 @@ function VisaNavigator() {
           </div>
         </div>
       </div>
-      <div className="main">
-        <div className="">
-          <ItenarySection
-            navigation={navigation}
-            setNavigation={setNavigation}
-          />
-        </div>
+      <div className="main lg:grid grid-cols-12 ">
+        <div className="col-span-10">
+          <div className="">
+            <ItenarySection
+              navigation={navigation}
+              setNavigation={setNavigation}
+              setData={setData}
+              data={data}
+            />
+          </div>
 
-        <div className="">
-          <TravellerDetails
-            navigation={navigation}
-            setNavigation={setNavigation}
-          />
+          <div className="">
+            <TravellerDetails
+              navigation={navigation}
+              setNavigation={setNavigation}
+            />
+          </div>
+          <div className="">
+            <MakePaymentSection
+              navigation={navigation}
+              setNavigation={setNavigation}
+            />
+          </div>
+          <div className="">
+            <UploadDetailSection
+              navigation={navigation}
+              setNavigation={setNavigation}
+            />
+          </div>
         </div>
-        <div className="">
-          <MakePaymentSection
-            navigation={navigation}
-            setNavigation={setNavigation}
-          />
-        </div>
-        <div className="">
-          <UploadDetailSection
-            navigation={navigation}
-            setNavigation={setNavigation}
-          />
+        <div className="col-span-2 py-8 pr-6">
+          <div className="bg-gray-100 shadow-sm rounded p-2 text-darktext">
+            <p className="text-[16px]">Fare Details</p>
+            <div className="border-b border-darktext py-2">
+              <div className="flex justify-between">
+                <p className="text-[14px]">Base Fare</p>
+                <p className="text-[14px]">{priceConversion(selectedVisa?.totalPrice,selectedCurrency,true)} </p>
+              </div>
+              <div className="flex justify-between">
+                <p className="text-[14px]">Tax</p>
+                <p className="text-[14px]">{priceConversion(selectedVisa?.tax,selectedCurrency,true)} </p>
+              </div>
+              <div className="flex justify-between">
+                <p className="text-[14px]">Insurance</p>
+                <p className="text-[14px]">{priceConversion(selectedVisa?.insurance,selectedCurrency,true)} </p>
+              </div>
+            </div>
+            <div className="border-b border-darktext py-2">
+              <div className="flex justify-between">
+                <p className="text-[14px]">Total Fare</p>
+                <p className="text-[14px]">{priceConversion(totalPrice,selectedCurrency,true)} </p>
+              </div>
+              <div className="flex justify-between">
+                <p className="text-[14px]">Traveller</p>
+                <p className="text-[14px]">{visaEnquiry?.traveller} </p>
+              </div>
+            </div>
+            <div className="border-b  border-darktext py-1">
+              <div className="flex justify-between">
+                <p className="text-[14px]">Total Price</p>
+                <p className="text-[14px]">{priceConversion(grandTotal,selectedCurrency,true)} </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
