@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { GoPlus } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchResellers } from "../../../redux/slices/resellerSlice";
@@ -18,7 +19,7 @@ function Resellers() {
 
   return (
     <div className="">
-      <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
+      {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
         <h1 className="font-[600] text-[15px] uppercase">Resellers</h1>
         <div className="text-sm text-grayColor">
           <Link to="/b2b" className="text-textColor">
@@ -27,18 +28,29 @@ function Resellers() {
           <span>{">"} </span>
           <span>Total resellers</span>
         </div>
-      </div>
+      </div> */}
       <div className="p-2 lg:p-6">
-        <div className="bg-white rounded shadow-sm mt-2 lg:mt-6">
+        <div className="">
           <div className="flex items-center justify-between border-b border-dashed p-3 lg:p-4">
-            <h1 className="font-medium">Resellers Lists</h1>
-            <span className="w-[400px]">
-              <input
-                type="search"
-                className="input w-full"
-                placeholder="search !!!"
-              />
-            </span>
+            <h1 className="font-medium"></h1>
+            <div className="flex h-12 gap-2">
+              <button
+                className="flex gap-1 h-full px-5 rounded-lg bg-blue-600 text-white items-center"
+                onClick={() => navigate("/b2b/reseller/add")}
+              >
+                <span className="">
+                  <GoPlus />{" "}
+                </span>
+                <span className="">Create </span>
+              </button>
+              <div className="w-[400px] h-full">
+                <input
+                  type="search"
+                  className="h-full rounded-lg px-2 w-full"
+                  placeholder="search !!!"
+                />
+              </div>
+            </div>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">

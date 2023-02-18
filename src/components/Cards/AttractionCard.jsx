@@ -125,7 +125,7 @@ function AttractionCard({ setView }) {
             <div className="">
               <button
                 type="submit"
-                className="md:h-14 h-12 md:w-14 px-4 md:px-0 bg-blue rounded-xl text-light text-3xl flex justify-center items-center"
+                className="md:h-14 h-12 md:w-14 px-4 md:px-0 bg-blueColor rounded-xl text-light text-3xl flex justify-center items-center"
               >
                 <span className="">
                   <AiOutlineSearch />

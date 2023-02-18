@@ -6,7 +6,7 @@ import SearchingResultPage from './SearchingResultPage'
 function Attraction() {
   return (
     <div className=''>
-      <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
+      {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
         <h1 className="font-[600] text-[15px] uppercase">
           Attraction
         </h1>
@@ -17,7 +17,7 @@ function Attraction() {
           <span>{">"} </span>
           <span>Attraction</span>
         </div>
-      </div>
+      </div> */}
       <div className='p-2 lg:p-6'>
         {/* <HeroSearch /> */}
         <SearchCards />

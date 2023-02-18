@@ -16,11 +16,11 @@ export default function SidebarMenu({
   const location = useLocation();
 
   return (
-    <li className="group relative">
+    <li className="group relative mb-4">
       <div
         className={
-          `relative px-[15px] flex items-center text-[14.8px] justify-between py-[13px] transition-all hover:text-[#fff] cursor-default ` +
-          (location.pathname === link ? "text-[#fff] " : "text-[#b6b2d2] ")
+          `relative p-4 flex items-center text-[14.8px] justify-between  transition-all cursor-default rounded-xl  ` +
+          (location.pathname === link ? "  text-white bg-blue-500 " : "text-gray-300  hover:bg-gray-800  ")
         }
         onClick={() => {
           if(link !== "#") {
@@ -34,16 +34,16 @@ export default function SidebarMenu({
           <i className="transition-all text-lg">{icon}</i>
           {name}
         </span>
-        <span
+        {/* <span
           className={
             "transition-all " + (isDropDownOpen ? "rotate-90" : "rotate-0")
           }
         >
           {dropdown && <FiChevronRight />}
-        </span>
+        </span> */}
       </div>
 
-      {dropdown && (
+      {/* {dropdown && (
         <div className={isDropDownOpen ? "block mt-1 " : "hidden"}>
           <ul
             className={
@@ -74,7 +74,7 @@ export default function SidebarMenu({
             })}
           </ul>
         </div>
-      )}
+      )} */}
     </li>
   );
 }

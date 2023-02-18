@@ -162,7 +162,7 @@ function OtpModal({ setOtpModal, orderId }) {
 
             <div className="flex justify-center text-center mt-2">
               <div className="flex items-center text-blue-700 hover:text-blue-900 cursor-pointer">
-                <button className="bg-blue text-light h-9 rounded-[.25rem] w-[100px]">Submit</button><i className='bx bx-caret-right ml-1'></i>
+                <button className="bg-blueColor text-light h-9 rounded-[.25rem] w-[100px]">Submit</button><i className='bx bx-caret-right ml-1'></i>
               </div>
             </div>
           </form>

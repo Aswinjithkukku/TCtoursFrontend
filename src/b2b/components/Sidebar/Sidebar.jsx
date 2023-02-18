@@ -1,28 +1,42 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BiMenuAltRight } from "react-icons/bi";
 import SidebarMenu from "./SidebarMenu";
 import { sidebarMenus } from "../../data";
 import WalletDepositModal from "../Header/WalletDepositModal";
+import { BsWallet2 } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import priceConversion from "../../../utils/PriceConversion";
+import { useHandleClickOutside } from "../../../hooks";
+import AdminDropdown from "../Header/AdminDropdown";
+import { RxAvatar } from "react-icons/rx";
 
 export default function Sidebar({ setSidebarView, sidebarView }) {
   const navigate = useNavigate();
+  const [isAdminDropdownOpen, setIsAdminDropdownOpen] = useState(false);
+
   const [walletDropdown, setWalletDropdown] = useState(false);
+  const { balance } = useSelector((state) => state.wallet);
+  const { selectedCurrency } = useSelector((state) => state.home);
+  const { agent } = useSelector(state => state.agents)
+
+  const wrapperRef = useRef();
+  useHandleClickOutside(wrapperRef, () => setIsAdminDropdownOpen(false));
 
   return (
     <>
       <div
-        className={`z-20 sidebar top-0 left-0 flex h-[100vh] ${
-          sidebarView ? "w-[250px]" : "w-[0px] lg:w-[250px]"
-        } overflow-hidden fixed bg-primaryColor flex-col transition-all `}
+        className={`z-20 sidebar top-0 left-0 flex h-[100vh] py-8 px-4 bg-[#003580]  ${
+          sidebarView ? "w-[300px]" : "w-[0px] lg:w-[300px]"
+        } overflow-hidden fixed flex-col transition-all `}
       >
         <div className="flex items-center justify-between lg:justify-around px-5 lg:px-0 py-5 cursor-pointer ">
           <h2
-            className="text-lg font-[600] text-white uppercase "
+            className="text-lg font-[600] text-white uppercase  "
             onClick={() => navigate("/b2b")}
           >
-            Travellers <span className="text-sm text-red-500">Choice</span>
-            <span class=" text-white text-[10px] font-medium ml-1  px-1  rounded bg-red-500 relative bottom-3 ">
+            Travellers <span className="text-sm text-red-600">Choice</span>
+            <span class=" text-white text-[10px] font-medium ml-1  px-1  rounded bg-red-600 relative bottom-3 ">
               b2b
             </span>
           </h2>
@@ -52,7 +66,7 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
         )}
 
         <div id="sidebar" className="flex-1 overflow-y-auto mt-4 mr-[3px]">
-          <ul className="h-[100%]">
+          <ul className="">
             {sidebarMenus.map((item, index) => {
               return (
                 <SidebarMenu
@@ -64,6 +78,59 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
               );
             })}
           </ul>
+          <div class="">
+            <Link
+              to="#"
+              class="group block py-6 pl-6 pr-8 mb-4 bg-blue-500 hover:bg-blue-600 rounded-xl transition duration-200"
+              href="#"
+            >
+              <div className="flex justify-around items-center">
+                <div class="flex w-12 h-12 mb-4 items-center justify-center bg-blue-600 group-hover:bg-blue-500 rounded-xl">
+                  <span className="text-white">
+                    <BsWallet2 />
+                  </span>
+                </div>
+                <h5 class="text-sm font-medium text-blue-50 mb-2">
+                  {priceConversion(balance, selectedCurrency, true)}
+                </h5>
+              </div>
+              <p class="text-xs leading-normal font-semibold text-blue-200 text-center">
+                Available balance
+              </p>
+            </Link>
+            <a
+              class="group flex py-5 px-6 items-center bg-gray-600 hover:bg-gray-500 rounded-xl transition duration-200"
+              href="#"
+            >
+              <div class="flex w-12 h-12 mr-2 items-center justify-center bg-gray-500 group-hover:bg-gray-600 rounded-lg text-3xl text-white">
+                <RxAvatar/>
+              </div>
+              <div
+                ref={wrapperRef}
+                className="relative h-[100%] flex gap-[10px] items-center px-[12px] cursor-pointer"
+                onClick={() => setIsAdminDropdownOpen(!isAdminDropdownOpen)}
+              >
+                <div className="hidden md:block">
+                  <span className="block text-[12px] text-grayColor">
+                    {agent?.agentCode}
+                  </span>
+                  <span className="block text-sm font-medium text-white">
+                    {agent?.name}
+                  </span>
+                  <span className="block text-[12px] text-grayColor">
+                    {agent?.email}
+                  </span>
+                </div>
+                {/* absolute modal */}
+                {isAdminDropdownOpen && (
+                  <AdminDropdown
+                    setIsAdminDropdownOpen={setIsAdminDropdownOpen}
+                  />
+                )}
+                {/* absolute modal */}
+              </div>
+            </a>
+          </div>
         </div>
 
         <div className="px-[30px] mt-[2.5em] pb-4">

@@ -177,10 +177,10 @@ function HeroSection() {
         </div>
 
         <div className={`fixed  ${viewBookCard ? "-bottom-full" : "bottom-0"} flex transition-all  duration-500 left-0 right-0 lg:hidden space-x-1 px-7 py-7 bg-[rgb(255,255,255,0)] rounded-t-xl z-10`}>
-          <button className='bg-blue w-2/12 flex justify-center items-center rounded-lg text-lg text-light'
+          <button className='bg-blueColor w-2/12 flex justify-center items-center rounded-lg text-lg text-light'
             onClick={() => navigate(-1)}
           ><FaChevronLeft /></button>
-          <button className='bg-blue w-10/12 py-3 rounded-lg font-semibold tracking-wider shadow-sm text-light' onClick={() => setViewBookCard(!viewBookCard)}>Book Now</button>
+          <button className='bg-blueColor w-10/12 py-3 rounded-lg font-semibold tracking-wider shadow-sm text-light' onClick={() => setViewBookCard(!viewBookCard)}>Book Now</button>
         </div>
       </div>
       {shareModal && (

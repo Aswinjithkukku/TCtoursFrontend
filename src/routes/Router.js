@@ -50,6 +50,8 @@ import {
   Wallet,
   ReapplyIndividual,
   AttractionSingleTicketPage,
+  Temp,
+  Temp2,
 } from "../b2b/pages";
 import B2BPrivateRoute from "./B2BPrivateRoute";
 import LoadingWrapper from "./LoadingWrapper";
@@ -128,8 +130,10 @@ const ThemeRoutes = [
         element: <VisaApplySuccessPage />,
       },
       { path: "/b2b/attractions/invoice/:id", element: <AttractionInvoice /> },
+      { path: "/b2b/temp", element: <Temp /> },
     ],
   },
+  { path: "/b2b/temp2", element: <Temp2 /> },
   {
     path: "/b2b/login",
     element: <B2BLoginPage />,

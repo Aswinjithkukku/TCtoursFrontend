@@ -35,7 +35,7 @@ function SearchModal({setView, view}) {
             <div className='md:w-9/12 relative'>
               <div className='md:ml-14  md:w-8/12 bg-light rounded-t-2xl md:rounded-t-[1em] overflow-x-auto scrollbar-hide'>
                 <div className=' flex md:grid md:grid-cols-5 space-x-1 px-1 md:px-10 py-3 md:py-1 items-center '>
-                  <button className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blue duration-300 space-x-1 ${view.attraction ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
+                  <button className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blueColor duration-300 space-x-1 ${view.attraction ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
                     setViewCard((prev) => {
                       return { ...prev, attraction: true, hotel: false, visa: false, transfer: false, flight: false }
                     })
@@ -43,7 +43,7 @@ function SearchModal({setView, view}) {
                     <span className=''><MdAttractions /> </span>
                     <span className=''>Attraction</span>
                   </button>
-                  <button className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blue duration-300 space-x-1  ${view.flight ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
+                  <button className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blueColor duration-300 space-x-1  ${view.flight ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
                     setViewCard((prev) => {
                       return { ...prev, attraction: false, hotel: false, visa: false, transfer: false, flight: true }
                     })
@@ -51,7 +51,7 @@ function SearchModal({setView, view}) {
                     <span className=''><GiCommercialAirplane /> </span>
                     <span className=''>Flight</span>
                   </button>
-                  <button className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blue duration-300 space-x-1  ${view.hotel ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
+                  <button className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blueColor duration-300 space-x-1  ${view.hotel ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
                     setViewCard((prev) => {
                       return { ...prev, attraction: false, hotel: true, visa: false, transfer: false, flight: false }
                     })
@@ -59,7 +59,7 @@ function SearchModal({setView, view}) {
                     <span className=''><FaHotel /> </span>
                     <span className=''>Hotel</span>
                   </button>
-                  <button className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blue duration-300 space-x-1  ${view.visa ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
+                  <button className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blueColor duration-300 space-x-1  ${view.visa ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
                     setViewCard((prev) => {
                       return { ...prev, attraction: false, hotel: false, visa: true, transfer: false, flight: false }
                     })
@@ -67,7 +67,7 @@ function SearchModal({setView, view}) {
                     <span className=''><FaWpforms /> </span>
                     <span className=''>Visa</span>
                   </button>
-                  <button className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blue duration-300 space-x-1  ${view.transfer ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
+                  <button className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-2 rounded-t-xl  hover:text-light hover:bg-blueColor duration-300 space-x-1  ${view.transfer ? "bg-lightblue text-light" : "text-blue bg-trans"}`} onClick={() => {
                     setViewCard((prev) => {
                       return { ...prev, attraction: false, hotel: false, visa: false, transfer: true, flight: false }
                     })

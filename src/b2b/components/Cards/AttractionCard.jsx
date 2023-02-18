@@ -53,17 +53,11 @@ function AttractionCard({ setView }) {
   return (
     <>
       <form onSubmit={submitHandler}>
-        <div className="md:grid md:grid-cols-12 gap-0 py-7 space-y-4 md:space-y-0">
-          <div className="md:col-span-10 flex justify-center items-center md:border-r-2 border-bluetrans">
-            <div className="space-y-2 w-10/12 ">
-              <div className="flex items-center space-x-2 text-darktext">
-                <span className="text-2xl text-blue">
-                  <IoLocationOutline />{" "}
-                </span>
-                <span className="text-lg ">Destination</span>
-              </div>
+        <div className="md:grid md:grid-cols-12 gap-2 py-5 space-y-4 md:space-y-0 px-6">
+          <div className="md:col-span-11 flex justify-center items-center ">
+            <div className=" w-full ">
               <div className="" ref={dropdownWrapperRef}>
-                <div className="relative">
+                {/* <div className="relative">
                   <input
                     type="text"
                     list="Country"
@@ -73,6 +67,22 @@ function AttractionCard({ setView }) {
                     onFocus={handleFocus}
                     required
                     className="capitalize px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext"
+                  />
+                  
+                </div> */}
+                <div class="relative w-full h-14 py-4 px-3  border border-gray-400 hover:border-white focus-within:border-green-500 rounded-lg">
+                  <span class="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-white rounded px-1 bg-blue-600">
+                    Where do you want to go?
+                  </span>
+                  <input
+                    type="text"
+                    list="Country"
+                    value={value}
+                    // placeholder="Where do you want to go?"
+                    onChange={(e) => setValue(e.target.value)}
+                    onFocus={handleFocus}
+                    required
+                    class="block w-full capitalize outline-none bg-transparent text-sm text-gray-300 font-medium"
                   />
                 </div>
                 {datalist && (
@@ -120,16 +130,16 @@ function AttractionCard({ setView }) {
               </div>
             </div>
           </div>
-          <div className="md:col-span-2 flex justify-center items-center">
+          <div className="md:col-span-1 flex justify-center items-center">
             <div className="">
               <button
                 type="submit"
-                className="md:h-14 h-12 md:w-14 px-4 md:px-0 bg-blue rounded-xl text-light text-3xl flex justify-center items-center"
+                className="md:h-14 h-12  px-4  bg-blueColor rounded-xl text-light text-3xl flex justify-center items-center"
               >
                 <span className="">
                   <AiOutlineSearch />
                 </span>
-                <span className="text-lg md:hidden">Search</span>
+                <span className="text-base uppercase">Search</span>
               </button>
             </div>
           </div>

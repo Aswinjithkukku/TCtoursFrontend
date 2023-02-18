@@ -17,6 +17,7 @@ import {
 import TopCard from "../components/features/TopCard";
 import WalletCard from "../components/features/WalletCard";
 import { AiFillAlert } from "react-icons/ai";
+import TopDestination from "./TopDestination";
 
 export default function Dashboard() {
     const { agent } = useSelector((state) => state.agents);
@@ -24,7 +25,7 @@ export default function Dashboard() {
 
     return (
         <div className="">
-            <div className="bg-white flex items-center justify-between gap-[10px] lg:px-6 px-2 shadow-sm border-t py-2">
+            {/* <div className="bg-white flex items-center justify-between gap-[10px] lg:px-6 px-2 shadow-sm border-t py-2">
                 <h1 className="font-[600] text-[15px] uppercase">
                     Dashboard
                 </h1>
@@ -34,9 +35,9 @@ export default function Dashboard() {
                         Dashboard{" "}
                     </Link>
                 </div>
-            </div>
-            <div className="lg:p-6 p-2 h-[60vh]">
-                <div className="flex items-center justify-between gap-[10px] mb-5">
+            </div> */}
+            <div className="lg:px-6 p-2 h-[60vh]">
+                {/* <div className="flex items-center justify-between gap-[10px] mb-5">
                     <div>
                         <span className="font-medium text-textColor">
                             Good morning, {agent?.name}
@@ -50,10 +51,14 @@ export default function Dashboard() {
                             <option value="">All Time</option>
                         </select>
                     </div>
+                </div> */}
+
+                <div className="my-2 ">
+                    <SearchCards />
                 </div>
 
-                <div className="my-2 lg:my-6 ">
-                    <SearchCards />
+                <div className="my-2">
+                    <TopDestination />
                 </div>
 
                 {/* <div className="md:grid md:grid-cols-2 space-y-2 md:space-y-0 lg:grid-cols-4 gap-6">

@@ -65,7 +65,7 @@ function BlogHeroSection() {
                                         </div>
                                     </div>
                                     {/* <div className='flex justify-end'>
-                                        <button className='py-1 px-2 bg-lightblue hover:bg-blue rounded-md text-light text-sm '>Read more</button>
+                                        <button className='py-1 px-2 bg-lightblue hover:bg-blueColor rounded-md text-light text-sm '>Read more</button>
                                     </div> */}
                                 </div>
                             </div>

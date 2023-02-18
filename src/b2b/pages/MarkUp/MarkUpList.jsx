@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import axios from '../../../axios'
+import MarkupsNavigation from '../MarkupsNavigation'
 import MarkupListSingleRow from './MarkupListSingleRow'
 
 function MarkUpList() {
@@ -38,7 +39,7 @@ console.log(markups);
   return (
     <>
       <div className=' '>
-        <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
+        {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
           <h1 className="font-[600] text-[15px] uppercase">
             Markups
           </h1>
@@ -51,11 +52,12 @@ console.log(markups);
             <span>{">"} </span>
             <span>Attraction</span>
           </div>
-        </div>
-        <div className='p-2 lg:p-6'>
-          <div className="bg-white rounded shadow-sm mt-2 ">
+        </div> */}
+        <MarkupsNavigation />
+        <div className='p-2 lg:px-6'>
+          <div className="">
             <div className="flex items-center justify-between border-b border-dashed p-4">
-              <h1 className="font-medium">Markup Lists</h1>
+              <h1 className="font-medium"></h1>
               <span className='w-[400px]'>
                 <input type="search" 
                 className='input w-full' 

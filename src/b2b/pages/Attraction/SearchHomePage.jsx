@@ -80,8 +80,8 @@ function SearchHomePage({ setCategory, setSearch, category }) {
                     <div
                       key={item?._id}
                       className={`relative my-2 space-x-2 lg:max-w-full lg:min-w-[190px] w-full flex px-3 ${
-                        category === item?._id ? "bg-lightblue" : "bg-gray-200"
-                      }  hover:text-lightblue lg:justify-center items-center py-4 rounded-lg lg:border lg:border-gray-300 cursor-pointer capitalize`}
+                        category === item?._id ? "bg-lightblue" : "bg-blue-100/50"
+                      }  hover:text-lightblue lg:justify-center items-center py-4 rounded-full lg:border lg:border-gray-300 cursor-pointer capitalize`}
                       onClick={() => setCategory(item?._id)}
                     >
                       {category === item?._id && (

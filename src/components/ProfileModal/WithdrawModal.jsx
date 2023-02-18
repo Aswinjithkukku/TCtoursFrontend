@@ -172,7 +172,7 @@ function WithdrawModal({ modal, setModal }) {
                   </div>
                 </div>
                 <div className=' flex justify-end mt-10 mr-10'>
-                  <button type='submit' className='bg-lightblue hover:bg-blue text-white px-5 py-2 rounded-lg'
+                  <button type='submit' className='bg-lightblue hover:bg-blueColor text-white px-5 py-2 rounded-lg'
                   >Withdraw</button>
                 </div>
               </div>

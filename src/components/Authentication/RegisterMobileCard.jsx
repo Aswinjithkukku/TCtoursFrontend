@@ -148,7 +148,7 @@ function RegisterMobileCard({ view, setView }) {
             <span className='text-xs text-blue hover:text-sky-500 cursor-pointer underline'>{' '} Terms and Conditions</span>
           </div> */}
         <div className='flex justify-center pt-2'>
-          <button type='submit' className='py-2 rounded-xl px-10 bg-blue hover:bg-light hover:text-blue text-light duration-300 flex items-center space-x-2 cursor-pointer'>
+          <button type='submit' className='py-2 rounded-xl px-10 bg-blueColor hover:bg-light hover:text-blue text-light duration-300 flex items-center space-x-2 cursor-pointer'>
             <span className=''>Register</span>
             <span className=''><AiOutlineRight /> </span>
           </button>

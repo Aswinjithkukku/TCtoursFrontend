@@ -41,7 +41,7 @@ function CarCard() {
             </div>
             <div className='md:col-span-2 flex justify-center items-center'>
                 <div className=''>
-                    <button className='h-14 w-14 bg-blue rounded-xl text-light text-3xl flex justify-center items-center'>
+                    <button className='h-14 w-14 bg-blueColor rounded-xl text-light text-3xl flex justify-center items-center'>
                         <AiOutlineSearch />
                     </button>
                 </div>

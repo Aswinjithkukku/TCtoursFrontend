@@ -82,7 +82,7 @@ function PaymentDecline() {
               </div>
             </div>
               <div className='flex justify-center'>
-                <button className='text-sm bg-blue text-light w-[100px] py-1 rounded-[0.25rem]'
+                <button className='text-sm bg-blueColor text-light w-[100px] py-1 rounded-[0.25rem]'
                 onClick={() => navigate(-1)}
                 >Try Again</button>
               </div>

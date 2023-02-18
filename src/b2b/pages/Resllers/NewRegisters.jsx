@@ -67,7 +67,7 @@ function NewRegisters() {
 
   return (
     <div className=''>
-      <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
+      {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
         <h1 className="font-[600] text-[15px] uppercase">
           New Reseller Register
         </h1>
@@ -78,10 +78,10 @@ function NewRegisters() {
           <span>{">"} </span>
           <span>New Register</span>
         </div>
-      </div>
+      </div> */}
       <div className='p-2 lg:p-6'>
         <form onSubmit={submitHandler}>
-          <div className="bg-white rounded shadow-sm mt-2 lg:mt-6 p-3 lg:p-6 ">
+          <div className=" lg:mt-6 p-3 lg:p-6 ">
             <div className='flex items-center justify-between border-b border-dashed p-4'>
               <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
                 <span className=''><GiFactory /> </span>
@@ -307,7 +307,10 @@ function NewRegisters() {
                   <p className='text-main text-xs capitalize'>{error} </p>
                 </div>
               )}
-              <button type='submit' className='button w-[100px]'>{isLoading ? <BtnLoader /> : 'Create'}</button>
+              <button className=' h-10 rounded-[.25rem] text-gray-400 bg-gray-200 w-[100px]' 
+              onClick={() => navigate(-1)}
+              >Back</button>
+              <button type='submit' className=' button w-[100px]'>{isLoading ? <BtnLoader /> : 'Create'}</button>
             </div>
 
           </div>

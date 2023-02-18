@@ -205,7 +205,7 @@ function RegisterCard({ setViewAuth, viewAuth }) {
                                     <div className="flex justify-center pt-2">
                                         <button
                                             type="submit"
-                                            className="py-2 rounded-xl px-10 bg-blue hover:bg-light hover:text-blue text-light duration-300 flex items-center space-x-2 cursor-pointer"
+                                            className="py-2 rounded-xl px-10 bg-blueColor hover:bg-light hover:text-blue text-light duration-300 flex items-center space-x-2 cursor-pointer"
                                         >
                                             <span className="">Register</span>
                                             <span className="">

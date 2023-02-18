@@ -12,6 +12,7 @@ import TransactionModal from "./TransactionModal";
 import { useSelector } from "react-redux";
 import axios from "../../../axios";
 import AttractionOrderTable from "./AttractionOrderTable";
+import OrdersNavigator from "../OrdersNavigator";
 
 function AttractionOrder() {
   const [orderType, setOrderType] = useState(false);
@@ -45,10 +46,14 @@ function AttractionOrder() {
         headers: { authorization: `Bearer ${token}` },
       });
 
-      if(filters.referenceNo){
-        response?.data?.result?.data ? setOrders([...new Set([...response?.data?.result?.data])]) : setOrders([])
+      if (filters.referenceNo) {
+        response?.data?.result?.data
+          ? setOrders([...new Set([...response?.data?.result?.data])])
+          : setOrders([]);
       } else {
-        setOrders((prev) => [...new Set([...prev, ...response?.data?.result?.data])]);
+        setOrders((prev) => [
+          ...new Set([...prev, ...response?.data?.result?.data]),
+        ]);
       }
 
       setFilters((prev) => {
@@ -92,13 +97,13 @@ function AttractionOrder() {
   };
 
   useEffect(() => {
-    if(filters.status !== ""){
-      setOrders([])
+    if (filters.status !== "") {
+      setOrders([]);
       fetchOrders({ ...filters });
-    }else if (filters.referenceNo !== ""){
-      setOrders([])
+    } else if (filters.referenceNo !== "") {
+      setOrders([]);
       fetchOrders({ ...filters });
-    }else {
+    } else {
       fetchOrders({ ...filters });
     }
     console.log("working");
@@ -111,13 +116,13 @@ function AttractionOrder() {
         document.documentElement.scrollHeight
       ) {
         setIsLoading(true);
-          setFilters((prev) => {
-            return {
-              ...prev,
-              skip: Number(prev.skip) + 1,
-            };
-          });
-        }
+        setFilters((prev) => {
+          return {
+            ...prev,
+            skip: Number(prev.skip) + 1,
+          };
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -130,7 +135,7 @@ function AttractionOrder() {
 
   return (
     <div>
-      <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
+      {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
         <h1 className="font-[600] text-[15px] uppercase">Orders</h1>
         <div className="text-sm text-grayColor">
           <Link to="/b2b" className="text-textColor">
@@ -139,11 +144,13 @@ function AttractionOrder() {
           <span>{">"} </span>
           <span>orders</span>
         </div>
-      </div>
-      <div className="p-2 lg:p-6">
-        <div className="bg-white rounded shadow-sm">
-          <div className="flex items-center justify-between border-b border-dashed p-4">
-            <h1 className="font-medium hidden md:block">Orders</h1>
+      </div> */}
+
+      <OrdersNavigator />
+      <div className="p-2 lg:px-6">
+        <div className="">
+          <div className="flex items-center justify-between  p-4">
+            <h1 className="font-medium hidden md:block"></h1>
             <div className="md:flex items-center gap-[10px] space-y-1 md:space-y-0 w-full md:w-auto">
               <input
                 type="text"
@@ -205,39 +212,42 @@ function AttractionOrder() {
               <thead className="bg-[#f3f6f9] text-grayColor text-[14px] text-left">
                 <tr>
                   <th className="font-[500] p-3 whitespace-nowrap">Ref.No</th>
-                  <th className="font-[500] p-3 whitespace-nowrap">Agent</th>
+                  {/* <th className="font-[500] p-3 whitespace-nowrap">Agent</th>
                   <th className="font-[500] p-3 whitespace-nowrap">
                     Agent code
-                  </th>
+                  </th> */}
                   <th className="font-[500] p-3 whitespace-nowrap">Activity</th>
-                  <th className="font-[500] p-3 whitespace-nowrap">
+                  {/* <th className="font-[500] p-3 whitespace-nowrap">
                     Booking Type
-                  </th>
+                  </th> */}
                   <th className="font-[500] p-3 whitespace-nowrap">
                     Booking Date
                   </th>
                   <th className="font-[500] p-3 whitespace-nowrap">
                     Purchase Date
                   </th>
-                  <th className="font-[500] p-3 whitespace-nowrap">Adults</th>
+                  {/* <th className="font-[500] p-3 whitespace-nowrap">Adults</th>
                   <th className="font-[500] p-3 whitespace-nowrap">Children</th>
-                  <th className="font-[500] p-3 whitespace-nowrap">Infant</th>
+                  <th className="font-[500] p-3 whitespace-nowrap">Infant</th> */}
                   <th className="font-[500] p-3 whitespace-nowrap">Price</th>
-                  {/* <th className="font-[500] p-3 whitespace-nowrap">Profit</th> */}
                   <th className="font-[500] p-3 whitespace-nowrap">Status</th>
-                  <th className="font-[500] p-3 whitespace-nowrap">Tickets</th>
+                  <th className="font-[500] p-3 whitespace-nowrap">Print</th>
                 </tr>
               </thead>
               <tbody className="text-sm overflow-hidden text-textColor">
-                {orders?.length > 0 ? orders?.map((item, index) => (
-                  <AttractionOrderTable item={item} key={index} />
-                )) : 
-                <tr>
-                  <td colSpan="13">
-                    <p className="flex justify-center my-5 text-gray-400 font-[500]">Data With this Query not found!!!</p>
-                  </td>
+                {orders?.length > 0 ? (
+                  orders?.map((item, index) => (
+                    <AttractionOrderTable item={item} key={index} />
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="13">
+                      <p className="flex justify-center my-5 text-gray-400 font-[500]">
+                        Data With this Query not found!!!
+                      </p>
+                    </td>
                   </tr>
-                  }
+                )}
               </tbody>
             </table>
 

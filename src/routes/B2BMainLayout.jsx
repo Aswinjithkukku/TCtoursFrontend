@@ -15,7 +15,7 @@ export default function B2BMainLayout() {
                     sidebarView={sidebarView}
                     setSidebarView={setSidebarView}
                 />
-                <div className={`${sidebarView ? "ml-[0px]" : "ml-[0px] lg:ml-[250px]"} min-h-screen lg:min-h-0 `}>
+                <div className={`${sidebarView ? "ml-[0px]" : "ml-[0px] lg:ml-[300px]"} min-h-screen lg:min-h-0 `}>
                     <Outlet />
                 </div>
                     <BottomNav />

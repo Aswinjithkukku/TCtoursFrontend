@@ -49,7 +49,7 @@ function SearchingResultPage() {
 
   return (
     <div className="">
-      <div className="bg-white rounded shadow-sm p-6">
+      <div className=" p-6">
         <div className="">
           <SearchHomePage
             viewCategory={viewCategory}

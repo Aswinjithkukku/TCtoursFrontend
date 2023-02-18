@@ -163,7 +163,7 @@ function SearchListViewSection() {
                                 className='outline-none text-darktext border-lightblue placeholder:text-text border text-sm py-2 rounded-md px-2 w-[20em] ' placeholder='Enter your email' />
                             <button
                                 type="submit"
-                                className="inline-block px-6 py-2.5 mt-4 bg-blue text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                className="inline-block px-6 py-2.5 mt-4 bg-blueColor text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                                 data-mdb-ripple="true"
                                 data-mdb-ripple-color="light"
                             >

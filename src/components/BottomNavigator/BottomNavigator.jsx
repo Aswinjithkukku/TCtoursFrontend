@@ -20,7 +20,7 @@ function BottomNavigator() {
   })
   return (
     <>
-      <main className={`${location.pathname.includes('/details/') ? 'hidden' : 'block'} md:hidden fixed bottom-0 bg-blue  w-full shadow-sm border-t rounded-t-xl`}>
+      <main className={`${location.pathname.includes('/details/') ? 'hidden' : 'block'} md:hidden fixed bottom-0 bg-blueColor  w-full shadow-sm border-t rounded-t-xl`}>
         <div className='grid grid-cols-5 gap-5 px-5 place-items-center h-16 text-light text-sm'>
           <Link to='/'>
             <div className="space-y-[1px]">
