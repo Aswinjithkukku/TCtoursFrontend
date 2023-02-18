@@ -109,25 +109,25 @@ function AttractionInvoice() {
   const invoiveRef = useRef();
   return (
     <>
-      <div className="absolute right-[20000000px]">
-        <div ref={listRef}>
-          {list?.map((ele) => (
-            <>
-              <div id={ele?.ticketNo} className="w-[100%] bg-white pt-[20px]">
-                <AttractionTicketTemplate ticket={ele} />
-              </div>
-            </>
-          ))}
+      <div className=" relative overflow-hidden">
+        <div className="absolute right-[20000000px]">
+          <div ref={listRef}>
+            {list?.map((ele) => (
+              <>
+                <div id={ele?.ticketNo} className="w-[100%] bg-white pt-[20px]">
+                  <AttractionTicketTemplate ticket={ele} />
+                </div>
+              </>
+            ))}
+          </div>
+          <div
+            id="attraction_invoice_pdf_template"
+            className="w-[21cm]"
+            ref={invoiveRef}
+          >
+            <AttractionInvoicePdfTemplate data={output} />
+          </div>
         </div>
-        <div
-          id="attraction_invoice_pdf_template"
-          className="w-[21cm]"
-          ref={invoiveRef}
-        >
-          <AttractionInvoicePdfTemplate data={output} />
-        </div>
-      </div>
-      <div className=" ">
         <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
           <h1 className="font-[600] text-[15px] uppercase">Invoice</h1>
           <div className="text-sm text-grayColor flex items-center gap-[7px]">

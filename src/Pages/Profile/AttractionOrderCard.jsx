@@ -93,21 +93,21 @@ const AttractionOrderCard = ({ orderInfo }) => {
         const tickets = getTicketList(ele);
         return (
           <>
-            <div className="absolute left-[2000px]">
-              <div id={ele.referenceNumber}>
-                {tickets?.map((ele) => (
-                  <>
-                    <div id={ele?.ticketNo}>
-                      <AttractionTicketTemplate ticket={ele} />
-                    </div>
-                  </>
-                ))}
-              </div>
-            </div>
             <div
               key={ele?._id}
-              className="grid grid-cols-12 gap-y-2 bg-[#f4f7ff] w-full rounded-lg shadow-md p-3 mt-3"
+              className=" relative overflow-hidden grid grid-cols-12 gap-y-2 bg-[#f4f7ff] w-full rounded-lg shadow-md p-3 mt-3"
             >
+              <div className="absolute left-[2000px]">
+                <div id={ele.referenceNumber}>
+                  {tickets?.map((ele) => (
+                    <>
+                      <div id={ele?.ticketNo}>
+                        <AttractionTicketTemplate ticket={ele} />
+                      </div>
+                    </>
+                  ))}
+                </div>
+              </div>
               <div className=" col-span-12 flex bg-gray-300 w-[100%] items-start justify-between py-1 px-2 text-black border-b border-spacing-1  rounded">
                 Referance No : {ele?.referenceNumber}
               </div>

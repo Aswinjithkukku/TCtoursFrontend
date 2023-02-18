@@ -50,7 +50,6 @@ function AttractionSingleTicketPage() {
       console.log(response);
       if (response?.status === 200) {
         const doc = new jsPDF("p", "pt", "a4");
-        // doc.html(AttractionTicketTemplate(response?.data), {
         doc.html(document.getElementById("ticket_template"), {
           callback: function (pdf) {
             pdf.save(`${response?.data?.ticketNo}.pdf`);

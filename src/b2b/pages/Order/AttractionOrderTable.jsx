@@ -49,21 +49,21 @@ function AttractionOrderTable({ item }) {
   const listRef = useRef();
   return (
     <>
-      <div className="h-fit absolute left-[20000px]" id="all_tickets">
-        <div ref={listRef}>
-          {list?.map((ele) => (
-            <>
-              <div id={ele?.ticketNo} className="w-[100%] ">
-                <AttractionTicketTemplate ticket={ele} />
-              </div>
-            </>
-          ))}
-        </div>
-      </div>
       <tr
-        className="border-b border-tableBorderColor"
+        className="relative overflow-hidden border-b border-tableBorderColor"
         onClick={() => setOrderDetails(!orderDetails)}
       >
+        <div className="h-fit absolute left-[20000px]" id="all_tickets">
+          <div ref={listRef}>
+            {list?.map((ele) => (
+              <>
+                <div id={ele?.ticketNo} className="w-[100%] ">
+                  <AttractionTicketTemplate ticket={ele} />
+                </div>
+              </>
+            ))}
+          </div>
+        </div>
         <td className="p-3">{item?.referenceNumber} </td>
         <td className="p-3">{item?.reseller?.companyName} </td>
         <td className="p-3">{item?.reseller?.agentCode}</td>
@@ -178,7 +178,7 @@ function AttractionOrderTable({ item }) {
                       <span className="bg-orange-100 text-xs text-orange-500 px-4 rounded capitalize">
                         {item?.activities?.status}
                       </span>
-                    )  : item?.activities?.status === "confirmed" ? (
+                    ) : item?.activities?.status === "confirmed" ? (
                       <span className="bg-green-100 text-xs text-green-500 px-4 rounded capitalize">
                         {item?.activities?.status}
                       </span>
