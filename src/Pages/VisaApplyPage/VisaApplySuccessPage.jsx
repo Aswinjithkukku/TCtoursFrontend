@@ -10,7 +10,7 @@ import { successAnimation } from "../../data";
 function VisaApplySuccessPage() {
   const { orderId } = useParams();
   const navigate = useNavigate();
-  const { token } = useSelector((state) => state.agents);
+  const { jwtToken } = useSelector((state) => state.users);
   const [visaOrder, setVisaOrder] = useState(
     JSON.parse(localStorage.getItem("visaOrder")) || {
       status: "",
@@ -24,7 +24,7 @@ function VisaApplySuccessPage() {
 
   const config = {
     headers: {
-      authorization: `Bearer ${token}`,
+      authorization: `Bearer ${jwtToken}`,
     },
   };
   useEffect(() => {

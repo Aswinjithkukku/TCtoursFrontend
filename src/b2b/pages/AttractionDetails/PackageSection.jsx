@@ -14,7 +14,7 @@ function PackageSection() {
     agentSelectedActivities,
     ticketStatus,
     ticketCount,
-    agentExcursion
+    agentExcursion,
   } = useSelector((state) => state.agentExcursions);
 
   const carting = () => {
@@ -57,7 +57,7 @@ function PackageSection() {
             <tbody>
               {agentRecievedActivities &&
                 agentRecievedActivities?.map((item, index) => (
-                  <ActivityTable item={item} index={index} key={index} />
+                  <ActivityTable item={item} bookingType={agentRecievedActivities?.bookingType} index={index} key={index} />
                 ))}
             </tbody>
           </table>
@@ -65,15 +65,10 @@ function PackageSection() {
              {agentExcursion?.bookingType === "ticket" && ticketCount === 0 && <p className="text-main text-xs mr-5 font-[500]">No tickets left</p>}
             {ticketCount > 0 && ticketCount < 10 && <p className="text-gray-600 text-xs mr-5 font-[500]">Only below {ticketCount && ticketCount} tickets are left</p>}
             {error && <p className="text-main text-xs mr-5">{error}</p>}
-            {ticketStatus ? (
-              <button className="button w-[100px]" onClick={carting}>
-                Add to cart
-              </button>
-            ) : (
-              <button className="text-2xl bg-gray-400/80 text-red-500 h-10 rounded-[.25rem] flex justify-center items-center w-[100px]">
-                <ImBlocked />
-              </button>
-            )}
+            <button className="button w-[100px]" onClick={carting}>
+              Add to cart
+            </button>
+
             {/* <button className="button w-[100px]" onClick={carting}>
               Add to cart
             </button> */}

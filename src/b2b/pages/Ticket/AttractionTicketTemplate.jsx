@@ -34,7 +34,8 @@ const AttractionTicketTemplate = ({ ticket, index }) => {
     }
   }, []);
 
-  const baseUrl = process.env.REACT_APP_SERVER_URL;
+  const baseUrl = "https://secure.mytravellerschoice.com";
+  // const baseUrl = process.env.REACT_APP_SERVER_URL;
 
   return (
     <>

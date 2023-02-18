@@ -1,93 +1,334 @@
-import React from 'react'
-import { barcodepng } from '../../static/images'
-import { logoPng } from '../../static/imagesB2B'
-// import Barcode from 'react-barcode';
+import React, { useEffect, useRef, useState } from "react";
+import priceConversion from "../../utils/PriceConversion";
+import Lottie from "lottie-react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { successAnimation } from "../../data";
+import axios from "../../axios";
+import { useSelector } from "react-redux";
+import { useMemo } from "react";
+// import domToPdf from "dom-to-pdf";
+import { FcDownload } from "react-icons/fc";
+import { MdDownload } from "react-icons/md";
+import ReactToPrint from "react-to-print";
+import AttractionTicketTemplate from "../../b2b/pages/Ticket/AttractionTicketTemplate";
+import AttractionInvoicePdfTemplate from "../../b2b/pages/OrderInvoices/AttractionInvoicePdfTemplate";
+import formatDate from "../../utils/formatDate";
 
 function Invoice() {
+  const listRef = useRef();
+  const invoiceRef = useRef();
+
+  const { id } = useParams();
+
+  console.log(id);
+
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [output, setOutput] = useState({});
+
+  const { jwtToken } = useSelector((state) => state.users);
+  const { selectedCurrency } = useSelector((state) => state.home);
+
+  const fetchData = async () => {
+    try {
+      setIsLoading(true);
+      setError("");
+
+      const config = {
+        headers: {
+          authorization: `Bearer ${jwtToken}`,
+        },
+      };
+      const response = await axios.get(
+        `/attractions/orders/single/${id}`,
+        config
+      );
+      setIsLoading(false);
+      setOutput(response.data);
+      return response.data;
+    } catch (error) {
+      setError(
+        error?.response?.data?.error || "Something went wrong, Try again"
+      );
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const tickets = useMemo(() => {
+    return () => {
+      const data = output?.activities?.map((ele) => {
+        let tickets = [];
+        if (ele?.adultTickets) tickets = [...tickets, ...ele?.adultTickets];
+        if (ele?.childTickets) tickets = [...tickets, ...ele?.childTickets];
+        tickets = tickets?.map((tkt) => {
+          return {
+            ...tkt,
+            attraction: ele?.attraction,
+            activity: ele?.activity,
+            destination: ele?.destination,
+          };
+        });
+        return tickets;
+      });
+      if (data) return data.flat(1);
+      return [];
+    };
+  }, [output]);
+
+  const list = tickets();
+
   return (
-    <div>
-      <div className='max-w-screen-lg mx-auto'>
-        <div className='bg-white shadow-sm m-6 p-6'>
-          <div className='flex justify-center space-x-5'>
-            <div className=''>
-              <img src={logoPng} alt='logo' className='h-14' />
-            </div>
-            <div className='w-20 h-20'>
-              <img src='https://scontent.fcok6-1.fna.fbcdn.net/v/t39.30808-6/281160215_10158765241818297_5866626849728248098_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=dpRPOq53pbgAX8Sjw_b&_nc_ht=scontent.fcok6-1.fna&oh=00_AfCj6gKzfUp_21YcHDBTzicTq1fzxcj4KX-NeekeztXcdg&oe=63CE2F6B' alt='logo' className='h-full w-full object-cover' />
-            </div>
+    <>
+      <div className="absolute left-[200000px]">
+        <div ref={listRef}>
+          {list?.map((ele) => (
+            <>
+              <div id={ele?.ticketNo} className="w-[100%] pt-[20px]">
+                <AttractionTicketTemplate ticket={ele} />
+              </div>
+            </>
+          ))}
+        </div>
+        <div
+          id="attraction_invoice_pdf_template"
+          ref={invoiceRef}
+          className="w-[21cm]"
+        >
+          <AttractionInvoicePdfTemplate data={output} />
+        </div>
+      </div>
+      <div className=" ">
+        <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
+          <h1 className="font-[600] text-[15px] uppercase">Invoice</h1>
+          <div className="text-sm text-grayColor flex items-center gap-[7px]">
+            <Link to="/b2b" className="text-textColor">
+              Dashboard{" "}
+            </Link>
+            <span>{">"} </span>
+            <span className="text-textColor">Attraction</span>
+            <span>{">"} </span>
+            <span className="text-textColor">Details</span>
+            <span>{">"} </span>
+            <span>Invoice</span>
           </div>
-          <hr />
-          <div className='grid grid-cols-12 gap-0 my-4'>
-            <div className='col-span-4'>
-              <div className='rounded-md overflow-hidden'>
-                <img src='https://www.visitdubai.com/-/media/gathercontent/article/t/things-to-do-in-ski-dubai-for-kids/fallback-image/things-to-do-in-ski-dubai-for-kids-header.jpg?rev=45da651b2b024175a759fed018cc6401&cx=0.5&cy=0.5&cw=1556&ch=690'
-                  alt='image' className='h-full w-full object-cover' />
-              </div>
-            </div>
-            <div className='col-span-3 text-sm'>
-              <div className='mx-2 font-medium text-darktext'>
-                <div className='flex space-x-2'>
-                  <p className=''>Tour Name:</p>
-                  <p className='capitalize'>Ski Duabi Classic</p>
+        </div>
+        <div className="p-2 lg:p-6">
+          <div className="bg-white rounded shadow-sm mt-2 ">
+            {/* <div className="flex items-center justify-between border-b border-dashed p-4">
+            <h1 className="font-medium">Markup Lists</h1>
+          </div> */}
+            <div className="main__section mt-4">
+              <div className="flex justify-center">
+                <div className="">
+                  <span className="flex justify-center">
+                    <div className=" w-[250px] ">
+                      <Lottie animationData={successAnimation} />
+                    </div>
+                  </span>
+                  <div className="text-center">
+                    <h2 className="text-[25px] text-[#12acfd] font-[650]">
+                      You have Ordered Successfully!
+                    </h2>
+                  </div>
+                  <div className="mt-4 text-center space-y-2">
+                    <p className="text-[14px] font-[500] text-gray-600">
+                      Download the E-Ticket from here
+                    </p>
+                    <div className="flex flex-col">
+                      <ReactToPrint
+                        trigger={() => (
+                          <button className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded flex justify-center items-center gap-4">
+                            Download All Tickets{" "}
+                            <span className="text-white text-[18px]">
+                              <MdDownload />
+                            </span>
+                          </button>
+                        )}
+                        content={() => listRef.current}
+                      />
+                      <ul className="flex flex-col gap-1 py-2 list-none w-[100%]">
+                        {list?.map((ele, i) => (
+                          <>
+                            <li className="flex justify-between  w-[100%] ">
+                              <span className="flex gap-1">
+                                Ticket No. : <span>{ele?.ticketNo}</span>
+                              </span>
+                              <ReactToPrint
+                                trigger={() => (
+                                  <button className="text-[18px] font-[500] uppercase text-white px-3 py-1 rounded">
+                                    <span className="">
+                                      <FcDownload />
+                                    </span>
+                                  </button>
+                                )}
+                                content={() =>
+                                  document.getElementById(ele?.ticketNo)
+                                }
+                              />
+                            </li>
+                          </>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <div className='flex space-x-2'>
-                  <p className=''>Ticket Type:</p>
-                  <p className=''>Adult</p>
+              </div>
+              <div className="flex justify-center w-full mt-5">
+                <div className="first__section  w-full">
+                  <div className="bg-white shadow-sm m-6 rounded-[0.30rem] p-6 w-6/12 mx-auto border">
+                    <div className="text-center">
+                      <h2 className="text-xl font-[600] text-darktext">
+                        {/* {agent?.companyName}{" "} */}
+                      </h2>
+                    </div>
+                    {/* <p className='text-sm text-gray-500 font-[600]'>Dec 3 2023</p> */}
+                    <div className="flex gap-2 items-center">
+                      <p className="text-[16px] font-[650] whitespace-nowrap">
+                        {priceConversion(
+                          output?.totalAmount,
+                          selectedCurrency,
+                          true
+                        )}
+                      </p>
+                      <span className="text-xs bg-[#cbedfd] px-2 rounded text-lightblue py-[2px]">
+                        Success
+                      </span>
+                    </div>
+                    <div className="bg-soft my-2 rounded-[.30rem] p-3">
+                      {output?.activities?.map((item, index) => (
+                        <div key={index}>
+                          <div className="grid grid-cols-12">
+                            <div className="grid__first col-span-7">
+                              <p className="text-[14px]">
+                                {item?.activity?.name}
+                              </p>
+                              <p className="text-[14px] text-[#12acfd] uppercase">
+                                {item?.bookingType}
+                              </p>
+                            </div>
+                            <div className="grid__first col-span-5 text-right">
+                              <p className="text-[14px] capitalize">
+                                {item?.transferType} Transfer
+                              </p>
+                              <p className="text-[14px] text-[#12acfd] uppercase">
+                                {formatDate(item?.date)}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-12 py-3 border-b-2">
+                            <div className="grid__first col-span-7 flex gap-2">
+                              <div>
+                                <p className="text-[14px] text-text">Adults</p>
+                                <p className="text-[10px] text-lightblue bg-[#cbedfd] uppercase w-fit px-2 rounded  py-[2px]">
+                                  {item?.adultsCount} adults
+                                </p>
+                              </div>
+                              <div>
+                                <p className="text-[14px] text-text">
+                                  children
+                                </p>
+                                <p className="text-[10px] text-lightblue bg-[#cbedfd] uppercase w-fit px-2 rounded  py-[2px]">
+                                  {item?.childrenCount} children
+                                </p>
+                              </div>
+                              <div>
+                                <p className="text-[14px] text-text">Infants</p>
+                                <p className="text-[10px] text-lightblue bg-[#cbedfd] uppercase w-fit px-2 rounded  py-[2px]">
+                                  {item?.infantCount} infants
+                                </p>
+                              </div>
+                            </div>
+                            <div className="grid__first col-span-5 flex justify-end items-end">
+                              <p className="text-[16px] text-text whitespace-nowrap">
+                                {priceConversion(
+                                  item?.amount,
+                                  selectedCurrency,
+                                  true
+                                )}{" "}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+
+                      {/* <div className='grid grid-cols-12 py-3 border-b-2'>
+                      <div className='grid__first col-span-7'>
+                        <p className='text-[14px] text-text'>VAT Amount</p>
+                        <p className='text-[10px] text-lightblue bg-[#cbedfd] uppercase w-fit px-2 rounded  py-[2px]'>null</p>
+                      </div>
+                      <div className='grid__first col-span-5 flex justify-end items-end'>
+                        <p className='text-[16px] text-text'>5.00 AED</p>
+                      </div>
+                    </div>  */}
+                      <div className="grid grid-cols-12 py-3">
+                        <div className="grid__first col-span-7">
+                          <p className="text-[16px] font-[650] text-darktext">
+                            Grand Total
+                          </p>
+                        </div>
+                        <div className="grid__first col-span-5 flex justify-end items-end">
+                          <p className="text-[16px] text-darktext">
+                            {priceConversion(
+                              output?.totalAmount,
+                              selectedCurrency,
+                              true
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className='col-span-5'>
-              {/* <div className='h-16' >
-                <img src={barcodepng} alt='barcode' className='w-full h-full object-cover' />
+              <div className="second__section mx-auto w-6/12">
+                <div className="py-4 flex justify-between">
+                  <div className="text-gray-500 text-sm">
+                    <p className="">
+                      Order placed successfull. Further details are given in
+                      your corresponding email
+                    </p>
+                    <p className="text-[#12acfd]">
+                      Download the invoice from here!
+                    </p>
+                  </div>
+                  <div className="">
+                    <ReactToPrint
+                      trigger={() => (
+                        <button className="bg-[#12acfd] rounded px-3 py-2 text-white">
+                          Download Invoice
+                          <span className="text-white text-[18px]"></span>
+                        </button>
+                      )}
+                      content={() => invoiceRef.current}
+                    />
+                    {/* <button
+                      onClick={handleDownloadInvoice}
+                      className="bg-[#12acfd] rounded px-3 py-2 text-white"
+                    >
+                      Download
+                    </button> */}
+                  </div>
+                </div>
+                <div className="flex justify-center py-10">
+                  <button
+                    className="text-light bg-darktext px-2 py-2 rounded"
+                    onClick={() => navigate("/")}
+                  >
+                    Return Home
+                  </button>
+                </div>
               </div>
-                <p className='uppercase text-[10px] text-center mt-1'>5F86477C76F74680A095FF7668B3943B</p>*/}
-              <div className=''>
-                {/* <Barcode value="5F86477C76F74680A095FF7668B3943B" width={.6} textMargin= {0}  fontSize={10} /> */}
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div className=''>
-            <div className='my-4 mx-4'>
-              <ol className='list-decimal list-outside text-darktext text-[12px]'>
-                <li className=''>Guests are required to carry a printed copy of the ticket which needs to be presented at the Entrance to gain the entry.</li>
-                <li>The safety and comfort of all guests is of prime importance to Ski Dubai. Guests are required to familiarize themselves with the
-                  following rules and regulations and to adhere To them at all times. Proper conduct and respect for other guests, staff and Ski Dubai property must be shown at all times.
-                </li>
-                <li>Unacceptable behavior will result in eviction from the facility</li>
-                <li>On entering the premises of Ski Dubai, guests are deemed to agree to comply with the Rules and Regulations and follow all
-                  directions and instructions.</li>
-                <li>Ski Dubai reserves the right to ask any guest to leave the slope if the guest is deemed unable to meet the minimum skill
-                  requirements. Such decisions will be made by Ski Dubai based on its sole and absolute judgment. Refunds will be determined at Ski Dubai's discretion.
-                </li>
-                <li>Ski Dubai is a cold environment. Entry to the cold side is only possible with a valid pass and appropriate winter attire. Guests
-                  must be able to display their pass upon request.
-                  Helmets must be worn by children up to the age of 12 and are compulsory for the use of all features (jumps, rails and any rides that
-                  require you to do so).</li>
-                <li>Advance bookings are recommended to avoid disappointment, in particular for lessons.</li>
-                <li>Ski Dubai reserves the right to refuse admission to the Snow School if guests are late or inappropriately attired. No refund or
-                  transfer will be considered.
-                </li>
-                <li> Instruction on the slopes can only be carried out by certified Ski Dubai instructors.
-                </li>
-                <li>Entry to the cold side, use of the lifts and all other rides is at the guest's own risk. Ski Dubai's owners, management and staff
-                  take no responsibility for personal injury,
-                  Injury to others, and damage to personal equipment, clothing and effects, or lost or stolen belongings. It is the guest's responsibility
-                  to recognize their own abilities and act
-                  Accordingly</li>
-                <li>Ski Dubai is a non-smoking environment and smoking is prohibited anywhere within the premises.</li>
-                <li>Drinking and eating in the cold side is only permitted at the Avalanche Cafe and on the St. Moritz Cafe terrace</li>
-                <li> In the interest of security, Ski Dubai retains the right to check guest bags</li>
-                <li> Ski Dubai does have a first aid clinic available for basic first aid administration and minor injuries.</li>
-                <li> Some rides and features require height and weight restrictions.
-                  As per the new taxation rules of UAE, a 5% VAT will be implemented for all hospitality related services from 1st Jan 2018</li>
-              </ol>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  )
+    </>
+  );
 }
 
-export default Invoice
+export default Invoice;

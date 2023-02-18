@@ -9,7 +9,7 @@ import TravellerDetailsForm from "./TravellerDetailsForm";
 
 function TravellerDetails({ itenaryFlag, navigation, setNavigation }) {
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.agents);
+  const { jwtToken } = useSelector((state) => state.users);
   const visa = useSelector((state) => state.b2cVisa);
   const { rows, visaEnquiry } = visa;
 
@@ -33,7 +33,7 @@ function TravellerDetails({ itenaryFlag, navigation, setNavigation }) {
     try {
       const config = {
         headers: {
-          authorization: `Bearer ${token}`,
+          authorization: `Bearer ${jwtToken}`,
         },
       };
       const body = {
@@ -73,7 +73,7 @@ function TravellerDetails({ itenaryFlag, navigation, setNavigation }) {
   };
 
   return (
-    <div className="md:max-w-screen-xl md:mx-auto text-darktext my-5">
+    <div className="md:max-w-screen-xl md:mx-auto text-darktext my-5 w-[100%]">
       <div
         className={`my-2 border px-3 py-4  rounded-lg ${
           navigation?.details ? "bg-primaryColor " : "bg-slate-400"

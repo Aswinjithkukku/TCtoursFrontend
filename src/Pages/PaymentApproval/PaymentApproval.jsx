@@ -64,6 +64,7 @@ function PaymentApproval({ onSuccess }) {
                   <PaypalComponent
                     visaOrder={visaOrder}
                     onSuccess={onSuccess}
+                    place={"visa"}
                   />
                 </div>
               )}

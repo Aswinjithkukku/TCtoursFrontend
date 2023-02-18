@@ -106,6 +106,7 @@ function AttractionInvoice() {
 
   const list = tickets();
   const listRef = useRef();
+  const invoiveRef = useRef();
   return (
     <>
       <div className="absolute right-[20000000px]">
@@ -118,7 +119,11 @@ function AttractionInvoice() {
             </>
           ))}
         </div>
-        <div id="attraction_invoice_pdf_template">
+        <div
+          id="attraction_invoice_pdf_template"
+          className="w-[21cm]"
+          ref={invoiveRef}
+        >
           <AttractionInvoicePdfTemplate data={output} />
         </div>
       </div>
@@ -316,12 +321,14 @@ function AttractionInvoice() {
                     </p>
                   </div>
                   <div className="">
-                    <button
-                      onClick={handleDownloadInvoice}
-                      className="bg-[#12acfd] rounded px-3 py-2 text-white"
-                    >
-                      Download
-                    </button>
+                    <ReactToPrint
+                      trigger={() => (
+                        <button className="bg-[#12acfd] rounded px-3 py-2 text-white">
+                          Download Invoice
+                        </button>
+                      )}
+                      content={() => invoiveRef.current}
+                    />
                   </div>
                 </div>
                 <div className="flex justify-center py-10">
