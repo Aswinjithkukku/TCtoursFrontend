@@ -207,8 +207,8 @@ function AttractionOrder() {
               Oops.. No Attractions found
             </span>
           </div> */}
-          <div className="overflow-x-auto order__scroll">
-            <table className="w-full">
+          <div className="overflow-x-auto order__scroll ">
+            <table className="w-full relative overflow-hidden">
               <thead className="bg-[#f3f6f9] text-grayColor text-[14px] text-left">
                 <tr>
                   <th className="font-[500] p-3 whitespace-nowrap">Ref.No</th>

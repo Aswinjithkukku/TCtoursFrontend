@@ -139,10 +139,18 @@ function ActivityTable({ item, bookingType, index }) {
         <span className="">{item?.name}</span>
         {bookingType === "ticket" && (
           <>
-            <p className="text-main text-xs mr-5 font-[500]">
+            <p
+              className={`${
+                item?.adultTicketCount > 10 ? "text-lightblue" : "text-main"
+              } text-xs mr-5 font-[500]`}
+            >
               Adult Tickets left : {item?.adultTicketCount}
             </p>
-            <p className="text-main text-xs mr-5 font-[500]">
+            <p
+              className={`${
+                item?.childTicketCount > 10 ? "text-lightblue" : "text-main"
+              } text-xs mr-5 font-[500]`}
+            >
               Child Tickets left : {item?.childTicketCount}
             </p>
           </>
@@ -190,7 +198,10 @@ function ActivityTable({ item, bookingType, index }) {
           }
         >
           {Array.from({
-            length: bookingType === "ticket" ? item?.commonTicketCount + item?.adultTicketCount : 50,
+            length:
+              bookingType === "ticket"
+                ? item?.commonTicketCount + item?.adultTicketCount
+                : 50,
           }).map((_, index) => (
             <option value={index + 1} key={index}>
               {index + 1}
@@ -208,7 +219,10 @@ function ActivityTable({ item, bookingType, index }) {
           }
         >
           {Array.from({
-            length: bookingType === "ticket" ? item?.commonTicketCount + item?.childTicketCount || 1 : 50,
+            length:
+              bookingType === "ticket"
+                ? item?.commonTicketCount + item?.childTicketCount || 1
+                : 50,
           }).map((_, index) => (
             <option value={index} key={index}>
               {index}
@@ -225,13 +239,13 @@ function ActivityTable({ item, bookingType, index }) {
             handleChange({ value: e.target.value, name: e.target.name, index })
           }
         >
-          {Array.from({ length: bookingType === "ticket" ? item?.infantTicketCount || 6 : 9 }).map(
-            (_, index) => (
-              <option value={index} key={index}>
-                {index}
-              </option>
-            )
-          )}
+          {Array.from({
+            length: bookingType === "ticket" ? item?.infantTicketCount || 6 : 9,
+          }).map((_, index) => (
+            <option value={index} key={index}>
+              {index}
+            </option>
+          ))}
         </select>
       </td>
       <td className="py-3 px-1 min-w-[4em] pl-5">

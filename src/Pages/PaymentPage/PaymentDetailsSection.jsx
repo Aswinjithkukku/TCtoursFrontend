@@ -4,15 +4,24 @@ import { useDispatch, useSelector } from "react-redux";
 import OtpModal from "./OtpModal";
 import { useNavigate } from "react-router-dom";
 import axios from "../../axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
+import PaymentApproval from "../PaymentApproval/PaymentApproval";
+import CCAvenue from "../../components/Payment/CCAvenue";
 
 function PaymentDetailsSection() {
   const navigate = useNavigate();
+  const { jwtToken } = useSelector((state) => state.users);
 
   const [otpModal, setOtpModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [result, setResult] = useState({});
+  const [result, setResult] = useState(null);
+
+  const config = {
+    headers: {
+      authorization: `Bearer ${jwtToken}`,
+    },
+  };
 
   const [travellerData, setTravellerData] = useState({
     gender: "male",
@@ -30,7 +39,8 @@ function PaymentDetailsSection() {
     setTravellerData({ ...travellerData, [e.target.name]: e.target.value });
   };
 
-  const submitHandler = async () => {
+  const submitHandler = async (e) => {
+    e.preventDefault();
     try {
       setIsLoading(true);
       setError("");
@@ -55,28 +65,39 @@ function PaymentDetailsSection() {
         phoneNumber: travellerData?.phone,
         selectedActivities: order_data,
       };
+
       const response = await axios.post(
         "/attractions/orders/create",
-        createOrderData
+        {
+          ...createOrderData,
+          paymentProcessor: "ccavenue",
+        },
+        config
       );
 
-      setResult(response.data);
+      const winUrl = URL.createObjectURL(
+        new Blob([response.data], { type: "text/html" })
+      );
+
+      const win = window.open(winUrl, "win");
+
+      // setResult(response);
       setIsLoading(false);
-      navigate(`/payment/approval/${response.data?._id}`);
+      // navigate(`/payment/approval/${response.data?._id}`);
     } catch (error) {
-        setError(error?.response?.data?.error);
-        await Swal.fire({
-            icon: 'error',
-            title: 'Something went wrong!',
-            text: error?.response?.data?.error,
-          })
+      setError(error?.response?.data?.error);
+      await Swal.fire({
+        icon: "error",
+        title: "Something went wrong!",
+        text: error?.response?.data?.error,
+      });
     }
   };
 
   return (
     <>
       <div className="bg-light  w-full p-5 rounded-2xl space-y-5">
-        <form className="text-sm">
+        <form className="text-sm" onSubmit={submitHandler}>
           <div className=" cursor-default">
             <h2 className="text-2xl font-semibold text-darktext">
               Lead Passenger Details
@@ -143,6 +164,7 @@ function PaymentDetailsSection() {
                   name="email"
                   value={travellerData.email}
                   onChange={onChange}
+                  required
                 />
               </div>
             </div>
@@ -155,6 +177,7 @@ function PaymentDetailsSection() {
                   type="text"
                   className="border w-full py-2 rounded-lg px-2 text-darktext placeholder:text-darktext focus:outline-none focus:border-none focus:ring-1 focus:ring-blue bg-light"
                   name="country"
+                  required
                   value={travellerData.country}
                   onChange={onChange}
                 >
@@ -178,6 +201,7 @@ function PaymentDetailsSection() {
                   name="phone"
                   value={travellerData.phone}
                   onChange={onChange}
+                  required
                 />
               </div>
             </div>
@@ -195,6 +219,14 @@ function PaymentDetailsSection() {
                 onChange={onChange}
               />
             </div>
+          </div>
+          <div className="flex justify-end py-4">
+            <button
+              className="text-light bg-lightblue px-3 py-2 rounded-lg text whitespace-nowrap w-[300px]"
+              type="submit"
+            >
+              Pay By CCAvenue
+            </button>
           </div>
         </form>
       </div>
@@ -229,8 +261,14 @@ function PaymentDetailsSection() {
           </div>
         )}
       </div>
-      <div className="bg-light my-5 p-7 rounded-2xl lg:flex -z-10">
-        <div className='{" "}'>
+      <div className="bg-light my-5 p-7 rounded-2xl lg:flex -z-10 flex flex-col">
+        {result && (
+          <>
+            {/* <PaymentApproval data={result} /> */}
+            <CCAvenue data={result} />
+          </>
+        )}
+        {/* <div className='{" "}'>
           <span className="cursor-default ">
             By Clicking Pay Now You agree that you have read and understood our{" "}
           </span>
@@ -245,7 +283,7 @@ function PaymentDetailsSection() {
           >
             Pay Now
           </button>
-        </div>
+        </div> */}
       </div>
       {otpModal && <OtpModal setOtpModal={setOtpModal} />}
     </>
