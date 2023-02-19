@@ -10,7 +10,7 @@ function ShareModal({ setShareModal, shareModal }) {
   const location = useLocation()
   const [isCopied, setIsCopied] = useState(false)
 
-  const { excursion } = useSelector(state => state.excursion)
+  const { agentExcursion } = useSelector(state => state.agentExcursions)
   useEffect(() => {
     setTimeout(() => {
       setIsCopied(false);
@@ -29,8 +29,8 @@ function ShareModal({ setShareModal, shareModal }) {
             Share
           </div>
           <div className='p-5 flex items-center space-x-1 font-semibold text-lg'>
-            <img src={process.env.REACT_APP_SERVER_URL + excursion?.images[0]} alt="banner" className='object-cover h-32 w-32 rounded-2xl ' />
-            <h2 className=''>{excursion?.title} </h2>
+            <img src={agentExcursion?.images?.length > 0 && process.env.REACT_APP_SERVER_URL + agentExcursion?.images[0]} alt="banner" className='object-cover h-32 w-32 rounded-2xl ' />
+            <h2 className=''>{agentExcursion?.title} </h2>
           </div>
           <div className='flex px-5 items-center space-x-2'>
             <div className='w-[20em]  py-2 rounded-lg bg-semisoft px-2 overflow-hidden'>{process.env.REACT_APP_URL + location.pathname} </div>

@@ -11,6 +11,8 @@ import { useHandleClickOutside } from "../../../hooks";
 import AdminDropdown from "../Header/AdminDropdown";
 import { RxAvatar } from "react-icons/rx";
 import { logoPng } from "../../../static/imagesB2B";
+import { IoNotifications } from "react-icons/io5";
+import NotificationDropdown from "../Header/NotificationDropdown";
 
 export default function Sidebar({ setSidebarView, sidebarView }) {
   const navigate = useNavigate();
@@ -24,10 +26,11 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
   const wrapperRef = useRef();
   useHandleClickOutside(wrapperRef, () => setIsAdminDropdownOpen(false));
 
+
   return (
     <>
       <div
-        className={`z-20 sidebar top-0 left-0 flex h-[100vh] py-1 px-4 bg-[#003580]  ${
+        className={`z-20 sidebar top-0 left-0 flex h-[100vh] py-1 lg:px-4 bg-[#003580]  ${
           sidebarView ? "w-[250px]" : "w-[0px] lg:w-[250px]"
         } overflow-hidden fixed flex-col transition-all `}
       >
@@ -63,7 +66,7 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
           <WalletDepositModal setWalletDropdown={setWalletDropdown} />
         )} */}
 
-        <div id="sidebar" className="flex-1 overflow-y-auto mt-2 mr-[3px]">
+        <div id="sidebar" className="flex-1 mt-2 ">
           <ul className="">
             {sidebarMenus.map((item, index) => {
               return (
@@ -96,6 +99,7 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
                 Available balance
               </p>
             </Link>
+
             <div
               ref={wrapperRef}
               className="group flex py-5 px-6 items-center bg-gray-600 hover:bg-gray-500 rounded-xl transition duration-200"

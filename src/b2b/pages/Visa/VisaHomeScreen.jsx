@@ -51,7 +51,7 @@ function VisaHomeScreen() {
   return (
     <>
       <div>
-        <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
+        {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
           <h1 className="font-[600] text-[15px] uppercase">Visa</h1>
           <div className="text-sm text-grayColor flex items-center gap-[5px]">
             <Link to="/b2b" className="text-textColor">
@@ -60,10 +60,10 @@ function VisaHomeScreen() {
             <span>{">"} </span>
             <span>Visa</span>
           </div>
-        </div>
+        </div> */}
 
         <div className="p-2 lg:p-6">
-          <div className="bg-white rounded shadow-sm">
+          <div className="">
             <div
               className={`fixed  left-0 right-0 bg-light rounded-t-2xl transition-all duration-500 ${
                 viewCard ? "-bottom-full" : "bottom-0"
@@ -80,41 +80,49 @@ function VisaHomeScreen() {
               <SearchCards />
             </div>
             <div className="">
-              <div className="bg-semisoft sticky top-0 z-10">
+              <div className="bg-semisoft rounded-lg sticky top-0 z-10">
                 <div className="md:max-w-screen-xl md:mx-auto text-darktext ">
                   <div className=" overflow-x-auto scrollbar-hide">
                     <div className=" flex md:grid md:grid-cols-4 space-x-1 px-1 md:px-10 py-3 md:py-1 items-center ">
-                      <button
-                        className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-3 border-b-4 border-blue hover:text-lightblue text-lightblue  hover:border-b-4 duration-300 space-x-1 `}
-                      >
-                        <span className="">
-                          <FaWpforms />
-                        </span>
-                        <span className="">Visas</span>
-                      </button>
+                        <button
+                          className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-3 border-b-4 border-blue hover:text-lightblue text-lightblue  hover:border-b-4 duration-300 space-x-1 `}
+                        >
+                      <a className="w-full flex justify-center items-center gap-1" href={"#visas"}>
+                          <span className="">
+                            <FaWpforms />
+                          </span>
+                          <span className="">Visas</span>
+                      </a>
+                        </button>
                       <button
                         className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1  `}
                       >
+                        <a className="w-full flex justify-center items-center gap-1" href={"#documents"}>
                         <span className="">
                           <HiOutlineDocumentDuplicate />{" "}
                         </span>
                         <span className="">Documents</span>
+                        </a>
                       </button>
                       <button
                         className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1  `}
                       >
+                        <a className="w-full flex justify-center items-center gap-1" href={"#faqs"}>
                         <span className="">
                           <FaQuoteRight />
                         </span>
                         <span className="">FAQs</span>
+                        </a>
                       </button>
                       <button
                         className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1 `}
                       >
+                        <a className="w-full flex justify-center items-center gap-1" href={"#terms"}>
                         <span className="">
                           <VscTasklist />
                         </span>
                         <span className="">Terms & conditions</span>
+                        </a>
                       </button>
                     </div>
                   </div>
@@ -159,10 +167,18 @@ function VisaHomeScreen() {
                       </div>
                     ) : (
                       <>
-                        <VisaComponentPage />
+                        <div id="visas">
+                          <VisaComponentPage />
+                        </div>
+                        <div id="">
                         <VisaIncludes />
+                        </div>
+                        <div id="documents">
                         <VisaDocumentSection />
+                        </div>
+                        <div id="faqs">
                         <VisaFAQsSection />
+                        </div>
                       </>
                     )}
                   </div>
@@ -192,7 +208,7 @@ function VisaHomeScreen() {
                 </div>
               </div>
               <div className="bg-light">
-                <div className="p-6">
+                <div id="terms" className="p-6">
                   <TermsConditionSection />
                 </div>
               </div>

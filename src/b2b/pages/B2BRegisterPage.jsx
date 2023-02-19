@@ -205,7 +205,6 @@ function B2BRegisterPage() {
                             <input
                               className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                               type="text"
-                              placeholder="Ex: TravellerChoice"
                               name="companyName"
                               value={data.companyName}
                               onChange={onChangeHandler}
@@ -219,7 +218,6 @@ function B2BRegisterPage() {
                             <input
                               className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                               type="text"
-                              placeholder="Ex: Tc, North california"
                               name="address"
                               value={data.address}
                               onChange={onChangeHandler}
@@ -233,7 +231,6 @@ function B2BRegisterPage() {
                             <input
                               className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                               type="text"
-                              placeholder="Ex: TravellerChoice.ae"
                               name="website"
                               value={data.website}
                               onChange={onChangeHandler}
@@ -251,7 +248,7 @@ function B2BRegisterPage() {
                               onChange={onChangeHandler}
                             >
                               <option className="text-text" hidden>
-                                select country
+                                
                               </option>
                               {countries?.map((item, index) => (
                                 <option
@@ -273,7 +270,6 @@ function B2BRegisterPage() {
                                 <input
                                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                                   type="number"
-                                  placeholder="Ex: Dubai"
                                   name="trnNumber"
                                   value={data.trnNumber}
                                   onChange={onChangeHandler}
@@ -286,7 +282,6 @@ function B2BRegisterPage() {
                                 <input
                                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                                   type="number"
-                                  placeholder="Ex: Dubai"
                                   name="companyRegistration"
                                   value={data.companyRegistration}
                                   onChange={onChangeHandler}
@@ -301,7 +296,6 @@ function B2BRegisterPage() {
                             <input
                               className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                               type="text"
-                              placeholder="Ex: Dubai"
                               name="city"
                               value={data.city}
                               onChange={onChangeHandler}
@@ -315,7 +309,6 @@ function B2BRegisterPage() {
                               <input
                                 className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                                 type="number"
-                                placeholder=""
                                 name="zipCode"
                                 value={data.zipCode}
                                 onChange={onChangeHandler}
@@ -397,7 +390,6 @@ function B2BRegisterPage() {
                             <input
                               className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                               type="text"
-                              placeholder="Ex: Name"
                               name="name"
                               value={data.name}
                               onChange={onChangeHandler}
@@ -424,7 +416,6 @@ function B2BRegisterPage() {
                               <input
                                 className="block no-spinner w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                                 type="number"
-                                placeholder="Ex: 0000000000"
                                 name="phoneNumber"
                                 value={data.phoneNumber}
                                 onChange={onChangeHandler}
@@ -452,7 +443,6 @@ function B2BRegisterPage() {
                               <input
                                 className="block no-spinner w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                                 type="number"
-                                placeholder="Ex: 0000000000"
                                 name="telephoneNumber"
                                 value={data.telephoneNumber}
                                 onChange={onChangeHandler}
@@ -467,7 +457,6 @@ function B2BRegisterPage() {
                             <input
                               className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                               type="email"
-                              placeholder="Ex: example@email.com"
                               name="email"
                               value={data.email}
                               onChange={onChangeHandler}
@@ -481,7 +470,6 @@ function B2BRegisterPage() {
                             <input
                               className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                               type="text"
-                              placeholder="Designation"
                               name="designation"
                               value={data.designation}
                               onChange={onChangeHandler}
@@ -494,7 +482,6 @@ function B2BRegisterPage() {
                             <input
                               className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                               type="text"
-                              placeholder="skypeid"
                               name="skypeId"
                               value={data.skypeId}
                               onChange={onChangeHandler}
@@ -508,7 +495,6 @@ function B2BRegisterPage() {
                             <input
                               className="block no-spinner w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                               type="number"
-                              placeholder="Ex: 000000000"
                               name="whatsappNumber"
                               value={data.whatsappNumber}
                               onChange={onChangeHandler}
@@ -598,7 +584,6 @@ function B2BRegisterPage() {
                             <input
                               className="block no-spinner w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                               type={showPassword ? "text" : "password"}
-                              placeholder="***********"
                               name="password"
                               value={data.password}
                               onChange={onChangeHandler}
@@ -622,7 +607,6 @@ function B2BRegisterPage() {
                             <input
                               className="block no-spinner w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                               type={showConfirmPassword ? "text" : "password"}
-                              placeholder="***********"
                               name="confirmPassword"
                               value={confirmPassword}
                               onChange={(e) =>

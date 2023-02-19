@@ -16,6 +16,7 @@ import { useLocation } from "react-router";
 import { RiUserAddFill, RiUserFill } from "react-icons/ri";
 import { BsCartCheckFill, BsFileEarmarkMedicalFill } from "react-icons/bs";
 import { GoPlus } from "react-icons/go";
+import { IoNotifications } from "react-icons/io5";
 
 export default function Header({ setSidebarView, sidebarView }) {
   const dispatch = useDispatch();
@@ -49,8 +50,8 @@ export default function Header({ setSidebarView, sidebarView }) {
 
   return (
     <section>
-      <div className="p-8 bg-[#003580] pl-[350px]">
-        <div className="flex flex-wrap items-center justify-between -mx-2">
+      <div className="lg:p-8 p-4 bg-[#003580] lg:pl-[260px]">
+        <div className="flex  items-center justify-between -mx-2">
           <div className="w-full md:w-auto px-2 mb-6 md:mb-0">
             <h4
               className="text-2xl font-bold text-white leading-5 capitalize "
@@ -100,7 +101,23 @@ export default function Header({ setSidebarView, sidebarView }) {
               )}
             </h4>
           </div>
-          <div className="w-full md:w-auto px-2">
+          <div className="w-full md:w-auto px-2 flex ">
+          <div
+                ref={notificationRef}
+                className="flex space-x-1 items-center cursor-pointer relative mr-4"
+                onClick={() => setNotificationModal(true)}
+              >
+                <span className="text-xl text-white">
+                  <IoNotifications />
+                </span>
+                {/* absolute modal */}
+                {notificationModal && (
+                  <div className="absolute z-20  -right-20  top-7 md:top-14 bg-light rounded-md w-[200px]">
+                    <NotificationDropdown />
+                  </div>
+                )}
+                {/* absolute modal */}
+              </div>
             <div
               ref={currencyRef}
               className="flex space-x-1 items-center cursor-pointer relative mr-4"

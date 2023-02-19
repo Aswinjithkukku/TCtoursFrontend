@@ -11,7 +11,7 @@ export default function AdminDropdown() {
 
     return (
         <div
-            className="absolute -right-12 top-7 md:top-10 bg-white shadow-[0_5px_10px_rgb(30_32_37_/_12%)] rounded min-w-[180px] py-2"
+            className="absolute -left-12 top-7 md:top-10 bg-white shadow-[0_5px_10px_rgb(30_32_37_/_12%)] rounded min-w-[180px] py-2"
         >
             {/* <span className="block px-4 py-2 text-[13px] font-medium text-grayColor">
                 Welcome {agent?.name}

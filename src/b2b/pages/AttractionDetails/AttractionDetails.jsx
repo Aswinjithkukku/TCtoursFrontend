@@ -61,7 +61,7 @@ function AttractionDetails() {
       </div> */}
       <div className="p-2 lg:p-6">
         <SearchCards />
-        <div className="bg-white rounded shadow-sm">
+        <div className="">
           {isLoading ? (
             <div className=" rounded animate-pulse p-6">
               <div className="lg:grid lg:grid-cols-12 gap-1">

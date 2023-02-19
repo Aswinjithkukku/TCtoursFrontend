@@ -11,7 +11,7 @@ function ImageSection() {
 
     return (
         <>
-            <div className='bg-white lg:py-10'>
+            <div className=' lg:py-10'>
                 <div className='lg:mx-auto lg:max-w-screen-2xl'>
                     <div className='lg:grid lg:grid-cols-12 gap-1'>
                         <div className='col-span-3 space-y-3 px-2 overflow-y-auto'>

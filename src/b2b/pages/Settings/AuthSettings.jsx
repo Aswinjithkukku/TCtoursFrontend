@@ -45,10 +45,13 @@ function AuthSettings() {
       setIsLoading(false);
     }
   };
+  console.log(newPassword, oldPassword, confirmPassword);
 
   useEffect(() => {
     if (newPassword !== confirmPassword) {
       setError("password you have entered is not similiar");
+    }else{
+      setError('')
     }
   }, [newPassword, confirmPassword]);
 

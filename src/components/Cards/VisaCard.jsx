@@ -47,7 +47,7 @@ function VisaCard() {
       <div className="md:col-span-10 flex justify-center items-center">
         <div className="space-y-2 w-10/12 ">
           <div className="flex items-center space-x-2 text-darktext">
-            <span className="text-2xl text-blue">
+            <span className="text-2xl text-blue-500">
               <IoLocationOutline />{" "}
             </span>
             <span className="text-lg text-white">Country</span>

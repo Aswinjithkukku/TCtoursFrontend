@@ -36,7 +36,7 @@ function HeroSection() {
   return (
     <>
       <MetaData title={agentExcursion?.title} link_title={agentExcursion?.title} description={'Get best deals on Travel and Tourism online with us'} thumbnail={agentExcursion?.images ? agentExcursion?.images[0] : ''} />
-      <div className='bg-white'>
+      <div className='bg-white rounded-3xl'>
         <div className='p-0 lg:p-6'>
           <div className=''>
             <div className='relative lg:grid lg:grid-cols-12 gap-5 py-2 lg:my-0 lg:py-5'>

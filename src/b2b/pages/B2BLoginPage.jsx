@@ -101,7 +101,6 @@ function B2BLoginPage() {
                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   id="signInInput4-1"
                   type="text"
-                  placeholder="Agent-code"
                   name="agentCode"
                   value={data.agentCode}
                   onChange={handleChange}
@@ -115,7 +114,6 @@ function B2BLoginPage() {
                 <input
                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type="text"
-                  placeholder="Email address"
                   name="email"
                   value={data.email}
                   onChange={handleChange}
@@ -135,7 +133,6 @@ function B2BLoginPage() {
                 <input
                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type={showPassword ? "text" : "password"}
-                  placeholder="Password"
                   name="password"
                   value={data.password}
                   onChange={handleChange}

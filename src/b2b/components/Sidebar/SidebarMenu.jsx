@@ -16,7 +16,7 @@ export default function SidebarMenu({
   const location = useLocation();
 
   return (
-    <li className="group relative mb-1">
+    <li className="group relative mb-4">
       <div
         className={
           `relative p-4 flex items-center text-[14.8px] justify-between  transition-all cursor-default rounded-xl  ` +
