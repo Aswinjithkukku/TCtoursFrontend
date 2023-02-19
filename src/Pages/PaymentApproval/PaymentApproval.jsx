@@ -6,7 +6,7 @@ import { paypalpng, stripepng, atmcardpng } from "../../static/images";
 import RazorpayComponent from "../../components/Payment/RazorpayComponent";
 import CCAvenue from "../../components/Payment/CCAvenue";
 
-function PaymentApproval({ onSuccess }) {
+function PaymentApproval({ onSuccess, data }) {
   const visaOrder = JSON.parse(localStorage.getItem("visaOrder"));
 
   const [method, setMethod] = useState({
@@ -65,6 +65,7 @@ function PaymentApproval({ onSuccess }) {
                     visaOrder={visaOrder}
                     onSuccess={onSuccess}
                     place={"visa"}
+                    data={data}
                   />
                 </div>
               )}

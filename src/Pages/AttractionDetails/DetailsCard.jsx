@@ -69,6 +69,7 @@ function DetailsCard() {
       setError("Fill the tour Date");
     }
   };
+  console.log(excursion);
 
   return (
     <>
@@ -79,7 +80,8 @@ function DetailsCard() {
             <p className="text-main text-xs">
               <s>
                 {priceConversion(
-                  excursion?.activities && excursion?.activities[0]?.lowPrice,
+                  excursion?.activities?.length &&
+                    excursion?.activities[0]?.lowPrice,
                   selectedCurrency,
                   true
                 )}
@@ -93,7 +95,8 @@ function DetailsCard() {
               {selectedCurrency?.isocode +
                 " " +
                 priceConversion(
-                  excursion?.activities[0]?.lowPrice,
+                  excursion?.activities?.length &&
+                    excursion?.activities[0]?.lowPrice,
                   selectedCurrency,
                   false
                 )}
