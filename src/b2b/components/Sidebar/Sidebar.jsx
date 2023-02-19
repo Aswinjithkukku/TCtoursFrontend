@@ -63,7 +63,7 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
           <WalletDepositModal setWalletDropdown={setWalletDropdown} />
         )} */}
 
-        <div id="sidebar" className="flex-1 overflow-y-auto mt-4 mr-[3px]">
+        <div id="sidebar" className="flex-1 overflow-y-auto mt-2 mr-[3px]">
           <ul className="">
             {sidebarMenus.map((item, index) => {
               return (

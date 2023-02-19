@@ -21,16 +21,16 @@ const sidebarMenus = [
     name: "Orders",
     icon: <HiOutlineShoppingCart />,
     link: "/b2b/order/attraction",
-    // dropdown: [
-    //   {
-    //     name: "Attraction",
-    //     link: "",
-    //   },
-    //   {
-    //     name: "Visa",
-    //     link: "",
-    //   },
-    // ],
+    dropdown: [
+      {
+        name: "Attraction",
+        link: "",
+      },
+      {
+        name: "Visa",
+        link: "/b2b/visa/order",
+      },
+    ],
   },
   
   // {

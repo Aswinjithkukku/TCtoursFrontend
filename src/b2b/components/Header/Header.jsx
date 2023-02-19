@@ -4,7 +4,7 @@ import AdminDropdown from "./AdminDropdown";
 import WalletDropDown from "./WalletDropDown";
 import CurrencyModal from "./CurrencyModal";
 import { useHandleClickOutside } from "../../../hooks";
-import { AiOutlineDown } from "react-icons/ai";
+import { AiFillSetting, AiOutlineDown } from "react-icons/ai";
 import { GrMenu } from "react-icons/gr";
 import { HiBellAlert } from "react-icons/hi2";
 import { getWalletBalance } from "../../../redux/slices/walletSlice";
@@ -13,7 +13,7 @@ import BtnLoader from "../BtnLoader";
 import NotificationDropdown from "./NotificationDropdown";
 import { getHome } from "../../../redux/slices/generalSlice";
 import { useLocation } from "react-router";
-import { RiUserAddFill } from "react-icons/ri";
+import { RiUserAddFill, RiUserFill } from "react-icons/ri";
 import { BsCartCheckFill, BsFileEarmarkMedicalFill } from "react-icons/bs";
 import { GoPlus } from "react-icons/go";
 
@@ -75,7 +75,12 @@ export default function Header({ setSidebarView, sidebarView }) {
                   <span>Advanced Markups</span>
                 </span>
               ) : location.pathname === "/b2b/resellers" ? (
-                <>Agent</>
+                <span className="flex items-center gap-1">
+                  <span>
+                  <RiUserFill/>
+                  </span>
+                  <span>Agent</span>
+                </span>
               ) : location.pathname === "/b2b/reseller/add" ? (
                 <span className="flex items-center gap-1">
                   <span>
@@ -84,7 +89,12 @@ export default function Header({ setSidebarView, sidebarView }) {
                   <span>New Agent</span>
                 </span>
               ) : location.pathname === "/b2b/settings" ? (
-                <>Settings</>
+                <span className="flex items-center gap-1">
+                  <span>
+                    <AiFillSetting />
+                  </span>
+                  <span>Settings</span>
+                </span>
               ) : (
                 ""
               )}
