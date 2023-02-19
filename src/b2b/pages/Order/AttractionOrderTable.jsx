@@ -69,8 +69,14 @@ function AttractionOrderTable({ item }) {
           <div className="">
             <p className="">{item?.referenceNumber} </p>
             <span className="flex justify-start gap-2">
-            <p className="bg-gray-400 text-gray-100 px-2 py-1 rounded">{item?.reseller?.agentCode}</p>
-            <p className={`bg-gray-300 text-gray-100 px-2 py-1 rounded capitalize`}>{item?.activities?.bookingType}</p>
+              <p className="bg-gray-400 text-gray-100 px-2 py-1 rounded">
+                {item?.reseller?.agentCode}
+              </p>
+              <p
+                className={`bg-gray-300 text-gray-100 px-2 py-1 rounded capitalize`}
+              >
+                {item?.activities?.bookingType}
+              </p>
             </span>
           </div>
         </td>
@@ -80,10 +86,16 @@ function AttractionOrderTable({ item }) {
           <div className="">
             <p className="">{item?.activities?.activity?.name}</p>
             <span className="flex justify-start gap-2 text-xs">
-            <p className="bg-gray-300 text-gray-100 px-2 py-1 rounded">Adult : {item?.activities?.adultsCount}</p>
-            <p className="bg-gray-300 text-gray-100 px-2 py-1 rounded">Child : {item?.activities?.childrenCount}</p>
-            <p className="bg-gray-300 text-gray-100 px-2 py-1 rounded">Infant : {item?.activities?.infantCount}</p>
-            {/* <p className={`${item?.activities?.bookingType === "ticket" ? " bg-main " :  " bg-blue-500 "} text-gray-100 px-2 py-1 rounded capitalize`}>{item?.activities?.bookingType}</p> */}
+              <p className="bg-gray-300 text-gray-100 px-2 py-1 rounded">
+                Adult : {item?.activities?.adultsCount}
+              </p>
+              <p className="bg-gray-300 text-gray-100 px-2 py-1 rounded">
+                Child : {item?.activities?.childrenCount}
+              </p>
+              <p className="bg-gray-300 text-gray-100 px-2 py-1 rounded">
+                Infant : {item?.activities?.infantCount}
+              </p>
+              {/* <p className={`${item?.activities?.bookingType === "ticket" ? " bg-main " :  " bg-blue-500 "} text-gray-100 px-2 py-1 rounded capitalize`}>{item?.activities?.bookingType}</p> */}
             </span>
           </div>
         </td>
@@ -124,9 +136,7 @@ function AttractionOrderTable({ item }) {
                 disabled={item?.activities?.status !== "confirmed"}
                 className=" px-2 py-1  rounded text-white text-[16px] flex items-center gap-1 justify-center w-[100%] bg-gray-400"
               >
-                <span className="text-sm">
-                Print
-                </span>
+                <span className="text-sm">Print</span>
                 <AiFillPrinter />
               </button>
             )}
@@ -235,21 +245,23 @@ function AttractionOrderTable({ item }) {
               <ul className="flex flex-wrap">
                 {list?.map((ele) => (
                   <>
-                    <button
-                      disabled={
-                        !ele?.validity ||
-                        item?.activities?.status !== "confirmed"
-                      }
-                      className="px-3 py-1 flex gap-2 items-center cursor-pointer "
-                      onClick={() => {
-                        handleSingleTicketDownload(ele?.ticketNo);
-                      }}
-                    >
-                      {ele?.ticketNo}{" "}
-                      <span>
-                        <FcDownload />
-                      </span>
-                    </button>
+                    <ReactToPrint
+                      trigger={() => (
+                        <button
+                          disabled={
+                            !ele?.validity ||
+                            item?.activities?.status !== "confirmed"
+                          }
+                          className="px-3 py-1 flex gap-2 items-center cursor-pointer "
+                        >
+                          {ele?.ticketNo}{" "}
+                          <span>
+                            <FcDownload />
+                          </span>
+                        </button>
+                      )}
+                      content={() => document.getElementById(ele?.ticketNo)}
+                    />
                   </>
                 ))}
               </ul>
