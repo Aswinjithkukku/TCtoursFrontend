@@ -247,13 +247,7 @@ function AttractionOrderTable({ item }) {
                   <>
                     <ReactToPrint
                       trigger={() => (
-                        <button
-                          disabled={
-                            !ele?.validity ||
-                            item?.activities?.status !== "confirmed"
-                          }
-                          className="px-3 py-1 flex gap-2 items-center cursor-pointer "
-                        >
+                        <button className="px-3 py-1 flex gap-2 items-center cursor-pointer ">
                           {ele?.ticketNo}{" "}
                           <span>
                             <FcDownload />
