@@ -112,8 +112,8 @@ function B2BRegisterPage() {
             <Link className="inline-block mb-56" to="#"></Link>
             <div className="max-w-xl">
               <p className="text-3xl font-semibold text-white leading-10 mb-8">
-                Travellers Choice B2B Portal is easy to use and has a lot of
-                great features that make it a valuable tool for any Agents.
+                Unleash Unforgettable Adventures: Your Trusted B2B Travel and
+                Tourism Operator
               </p>
               <div className="flex items-center mb-12">
                 <div></div>

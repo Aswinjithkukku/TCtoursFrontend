@@ -1,33 +1,49 @@
 // import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "../../axios";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function PaypalComponent({ visaOrder, onSuccess, place }) {
+function PaypalComponent({ visaOrder, onSuccess, place, data }) {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [attractionOrder, setAttractionOrder] = useState({});
+  const { jwtToken } = useSelector((state) => state.users);
+
+  const attractionOrderBody = { ...data, paymentProcessor: "paypal" };
+  const visaOrderBody = {
+    paymentProcessor: "paypal",
+  };
 
   const paypal = useRef();
 
-  const initiateUrl = !id
-    ? `/visa/application/initiate/${visaOrder?._id}`
-    : `/attractions/orders/initiate/${id}`;
-  const captureUrl = !id
-    ? `/visa/application/capture/paypal/${visaOrder?._id}`
-    : `/attractions/orders/paypal/capture`;
+  const initiateUrl = data
+    ? `/attractions/orders/create/`
+    : `/visa/application/initiate/${visaOrder?._id}`;
+  const captureUrl = data
+    ? `/attractions/orders/paypal/capture`
+    : `/visa/application/capture/paypal/${visaOrder?._id}`;
+  const config = {
+    headers: {
+      authorization: `Bearer ${jwtToken}`,
+    },
+  };
   useEffect(() => {
     window.paypal
       .Buttons({
         createOrder: async (actions, err) => {
           try {
-            const response = await axios.post(initiateUrl, {
-              paymentProcessor: "paypal",
-            });
+            const response = await axios.post(
+              initiateUrl,
+              data ? attractionOrderBody : visaOrderBody,
+              config
+            );
+
+            setAttractionOrder(response.data);
 
             return response.data.id;
           } catch (error) {
-            console.log(error);
             Swal.fire({
               icon: "error",
               title: error.response?.data?.error || "Something went wrong!",
@@ -36,12 +52,12 @@ function PaypalComponent({ visaOrder, onSuccess, place }) {
             return "";
           }
         },
-        onApprove: async (data, actions) => {
+        onApprove: async (resData, actions) => {
           const order = await actions.order.capture();
           let messageFromServer = "";
           try {
             const resFromServer = await axios.post(captureUrl, {
-              orderId: !id ? visaOrder?._id : id,
+              orderId: data ? attractionOrder?.order_?.id : visaOrder?._id,
               paymentOrderId: order.id,
               paymentId: order.purchase_units[0]?.payments["captures"][0]?.id,
             });
@@ -67,6 +83,8 @@ function PaypalComponent({ visaOrder, onSuccess, place }) {
       })
       .render(paypal.current);
   }, []);
+
+  console.log(attractionOrder);
   return (
     <div>
       <div className="" ref={paypal}></div>
