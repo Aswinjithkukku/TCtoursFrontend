@@ -6,23 +6,47 @@ import VisaDocumentSection from "./VisaDocumentSection";
 import VisaFAQsSection from "./VisaFAQsSection";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiOutlineDocumentDuplicate } from "react-icons/hi";
-import { GiEncirclement } from "react-icons/gi";
 import { VscTasklist } from "react-icons/vsc";
 import { FaQuoteRight, FaWpforms } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import SearchCards from "../../components/Cards/SearchCards";
-import { useDispatch } from "react-redux";
-import { fetchVisas } from "../../../redux/slices/visaSlice";
+import { useDispatch, useSelector } from "react-redux";
 import VisaIncludes from "./VisaIncludes";
+import { setVisas } from "../../../redux/slices/visaSlice";
+import axios from "../../../axios";
 
 function VisaHomeScreen() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
   const [viewCard, setViewCard] = useState(false);
 
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { token } = useSelector((state) => state.agents);
+
+  const fetchVisas = async (id) => {
+    try {
+      setError("");
+      setIsLoading(true);
+      const response = await axios.get(`/b2b/visa/list/${id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch(setVisas(response.data));
+      setIsLoading(false);
+    } catch (err) {
+      setError(err?.response?.data?.error);
+      navigate("/error");
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    dispatch(fetchVisas(id));
-  }, [dispatch, id]);
+    fetchVisas(id);
+  }, [id]);
 
   return (
     <>
@@ -46,29 +70,12 @@ function VisaHomeScreen() {
               }  z-20 px-10 py-8 lg:hidden`}
             >
               <button
-                className="bg-blue text-light w-full rounded-lg py-2"
+                className="bg-blueColor text-light w-full rounded-lg py-2"
                 onClick={() => setViewCard(!viewCard)}
               >
                 Apply Online
               </button>
             </div>
-            {/* <div className='visabanner object-cover bg-center h-[40vh]'>
-              <div className='md:max-w-screen-xl md:mx-auto flex py-7 '>
-                <div className=' w-full text-darktext lg:text-light space-y-7 px-4 lg:px-0'>
-                  <div className='text-5xl font-bold'>Dubai Visa</div>
-                  <div className='flex justify-around items-center gap-7'>
-                    <span className='space-y-2'>
-                      <div className='text-sm text-text'>Processing Time</div>
-                      <div className='text-xl'>Up to 48 hours</div>
-                    </span>
-                    <span className='space-y-2'>
-                      <div className='text-sm text-text'>Starting from</div>
-                      <div className='text-xl'>AED 310.00</div>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div> */}
             <div className="">
               <SearchCards />
             </div>
@@ -116,10 +123,48 @@ function VisaHomeScreen() {
               <div className="p-6">
                 <div className="lg:grid grid-cols-12 gap-10">
                   <div className="col-span-8">
-                    <VisaComponentPage />
-                    <VisaIncludes />
-                    <VisaDocumentSection />
-                    <VisaFAQsSection />
+                    {isLoading ? (
+                      <div className="-full p-4 border border-gray-200 rounded shadow animate-pulse md:p-6">
+                        <div className="h-5 bg-gray-200 rounded-full  w-48 my-4"></div>
+                        <div className="lg:grid grid-cols-2 gap-5">
+                          {[1, 2, 3, 4]?.map((item, index) => (
+                            <div
+                              className="rounded-2xl w-full bg-gray-200"
+                              key={index}
+                            >
+                              <div className="flex justify-center items-center my-5">
+                                <div className="h-16  w-11/12 bg-gray-300 rounded-2xl flex items-center ">
+                                  <div className="ml-3 h-7">
+                                    <div className="h-4 w-48 p-3 bg-gray-400 rounded-2xl"></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="h-52 w-11/12  mx-2">
+                                <div className="h-4 bg-gray-300 rounded-full  w-48 mb-4"></div>
+                                <div className="h-3 bg-gray-300 rounded-full  mb-2.5"></div>
+                                <div className="h-3 bg-gray-300 rounded-full  mb-2.5"></div>
+                                <div className="h-3 bg-gray-300 rounded-full  mb-2.5"></div>
+                                <div className="h-3 bg-gray-300 rounded-full "></div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="flex items-center w-5/12 rounded-2xl my-5 justify-center h-6  bg-gray-300"></div>
+                        <div className="flex items-center w-10/12 rounded-2xl my-5 justify-center h-4  bg-gray-300"></div>
+                        <div className="flex items-center w-10/12 rounded-2xl my-5 justify-center h-4  bg-gray-300"></div>
+                        <div className="flex items-center w-5/12 rounded-2xl my-5 py-3 justify-center h-6  bg-gray-300"></div>
+                        <div className="flex items-center w-10/12 rounded-2xl my-5 justify-center h-4  bg-gray-300"></div>
+                        <div className="flex items-center w-10/12 rounded-2xl my-5 justify-center h-4  bg-gray-300"></div>
+                        <div className="flex items-center w-full rounded-2xl my-7 justify-center h-36  bg-gray-300"></div>
+                      </div>
+                    ) : (
+                      <>
+                        <VisaComponentPage />
+                        <VisaIncludes />
+                        <VisaDocumentSection />
+                        <VisaFAQsSection />
+                      </>
+                    )}
                   </div>
                   <div className="col-span-4 relative">
                     <div

@@ -1,24 +1,24 @@
 import { FaHandsHelping } from "react-icons/fa";
 import { AiFillSetting } from "react-icons/ai";
-import { RxDashboard } from "react-icons/rx";
-import { GiWallet } from "react-icons/gi";
+import { GiPortal, GiWallet } from "react-icons/gi";
 import { HiOutlineShoppingCart } from "react-icons/hi";
-import { RiMarkupFill } from "react-icons/ri";
+import { GoPlus } from "react-icons/go";
 import { BsNewspaper } from "react-icons/bs";
+import { RiUserFill } from "react-icons/ri";
 
 const sidebarMenus = [
   {
-    name: "Dashboard",
+    name: "Portal",
     link: "/b2b",
-    icon: <RxDashboard />,
+    icon: <GiPortal />,
   },
+  // {
+  //   name: "Wallet",
+  //   icon: <GiWallet />,
+  //   link: "/b2b/wallet",
+  // },
   {
-    name: "Wallet",
-    icon: <GiWallet />,
-    link: "/b2b/wallet",
-  },
-  {
-    name: "Attraction Orders",
+    name: "Orders",
     icon: <HiOutlineShoppingCart />,
     link: "/b2b/order/attraction",
     // dropdown: [
@@ -33,40 +33,30 @@ const sidebarMenus = [
     // ],
   },
   
+  // {
+  //   name: "Visa Orders",
+  //   icon: <BsNewspaper />,
+  //   link: "/b2b/visa/order",
+  // },
   {
-    name: "Visa Orders",
-    icon: <BsNewspaper />,
-    link: "/b2b/visa/order",
+    name: "Advanced Markups",
+    icon: <GoPlus />,
+    link: "/b2b/markup/attraction",
+    // dropdown: [
+    //   {
+    //     name: "Attraction",
+    //     link: "/b2b/markup/attraction",
+    //   },
+    //   {
+    //     name: "Visa",
+    //     link: "/b2b/markup/visa",
+    //   },
+    // ],
   },
   {
-    name: "Markups",
-    icon: <RiMarkupFill />,
-    link: "#",
-    dropdown: [
-      {
-        name: "Attraction",
-        link: "/b2b/markup/attraction",
-      },
-      {
-        name: "Visa",
-        link: "/b2b/markup/visa",
-      },
-    ],
-  },
-  {
-    name: "Sub Agents",
-    icon: <FaHandsHelping />,
-    link: "#",
-    dropdown: [
-      {
-        name: "New Sub Agent",
-        link: "/b2b/reseller/add",
-      },
-      {
-        name: "Total Sub Agent",
-        link: "/b2b/resellers",
-      },
-    ],
+    name: "Agents",
+    icon: <RiUserFill />,
+    link: "/b2b/resellers",
   },
   {
     name: "Settings",

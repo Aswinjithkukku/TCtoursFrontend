@@ -41,18 +41,6 @@ const initialState = {
   visaApplyResponse: {},
 };
 
-export const fetchVisas = createAsyncThunk(
-  "visaSlice/fetchVisas",
-  async (args, { getState }) => {
-    const { token } = getState().agents;
-    const response = await axios.get(`/b2b/visa/list/${args}`, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  }
-);
 
 const visaSlice = createSlice({
   name: "visa",
@@ -138,11 +126,8 @@ const visaSlice = createSlice({
     setVisaResponseData: (state, action) => {
       state.visaApplyResponse = action.payload?.visaApplication;
     },
-  },
-  extraReducers: {
-    [fetchVisas.fulfilled]: (state, action) => {
+    setVisas: (state, action) => {
       state.visa = action.payload;
-      state.loading = false;
     },
   },
 });
@@ -154,6 +139,7 @@ export const {
   b2bhandleDOBChange,
   setVisaResponseData,
   b2bhandleExpiryChange,
+  setVisas,
 } = visaSlice.actions;
 
 export default visaSlice.reducer;

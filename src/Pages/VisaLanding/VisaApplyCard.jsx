@@ -168,7 +168,7 @@ function VisaApplyCard({ visaDetails }) {
               <div className="  flex justify-end px-2 my-3 text-lg text-lightblue">
                 <button
                   type="submit"
-                  className="bg-blue w-full  text-light px-2 py-1 rounded-md"
+                  className="bg-blueColor w-full  text-light px-2 py-1 rounded-md"
                 >
                   Submit
                 </button>
@@ -234,7 +234,7 @@ function VisaApplyCard({ visaDetails }) {
                 </div>
               </div>
               <div className="flex justify-end px-2 my-3 text-lg text-lightblue">
-                <button className="bg-blue text-light px-2 py-1 rounded-md">
+                <button className="bg-blueColor text-light px-2 py-1 rounded-md">
                   Submit
                 </button>
               </div>

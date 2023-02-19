@@ -57,11 +57,7 @@ function PackageSection() {
             <tbody>
               {agentRecievedActivities &&
                 agentRecievedActivities?.map((item, index) => (
-                  <ActivityTable
-                    item={{ ...item, bookingType: agentExcursion?.bookingType }}
-                    index={index}
-                    key={index}
-                  />
+                  <ActivityTable item={item} bookingType={agentRecievedActivities?.bookingType} index={index} key={index} />
                 ))}
             </tbody>
           </table>

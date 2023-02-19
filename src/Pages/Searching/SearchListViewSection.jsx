@@ -84,7 +84,7 @@ function SearchListViewSection() {
                               _id: item._id,
                               name: item?.title,
                               image: item?.images[0],
-                              price: item?.activity?.adultPrice,
+                              price: item?.activity?.lowPrice,
                             })
                           );
                         }}
@@ -151,7 +151,8 @@ function SearchListViewSection() {
                         <div className="text-xl font-bold text-darktext">
                           {priceConversion(
                             item?.isOffer === true
-                              ? item?.offerAmountType === "flat"
+                              ? item?.isOffer === true &&
+                                item?.offerAmountType === "flat"
                                 ? Number(item?.activity?.lowPrice) -
                                   Number(item?.offerAmount)
                                 : Number(item?.activity?.lowPrice) -
@@ -222,7 +223,7 @@ function SearchListViewSection() {
               />
               <button
                 type="submit"
-                className="inline-block px-6 py-2.5 mt-4 bg-blue text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                className="inline-block px-6 py-2.5 mt-4 bg-blueColor text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
               >

@@ -2,20 +2,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setVisaEnquiry } from "../../../redux/slices/visaSlice";
 
-function ItenarySection({ navigation, setNavigation }) {
+function ItenarySection({ navigation, setNavigation, setData, data }) {
   const dispatch = useDispatch();
 
-  const [data, setData] = useState({
-    visaType: JSON.parse(localStorage.getItem("visaEnquiry"))?.visaType || "",
-    email: JSON.parse(localStorage.getItem("visaEnquiry"))?.email || "",
-    contactNo: JSON.parse(localStorage.getItem("visaEnquiry"))?.contactNo || "",
-    traveller: JSON.parse(localStorage.getItem("visaEnquiry"))?.traveller || "",
-    onwardDate:
-      JSON.parse(localStorage.getItem("visaEnquiry"))?.onwardDate || "",
-    returnDate:
-      JSON.parse(localStorage.getItem("visaEnquiry"))?.returnDate || "",
-    country: "",
-  });
+
 
   const onChangeHandler = (e) => {
     setData((prev) => {

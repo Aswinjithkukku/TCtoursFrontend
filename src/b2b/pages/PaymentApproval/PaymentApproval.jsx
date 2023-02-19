@@ -5,6 +5,7 @@ import { paypalpng, stripepng, atmcardpng } from "../../../static/images";
 import AddWalletPaypalComponent from "../../components/Payment/AddWalletPaypalComponent";
 import { Link } from "react-router-dom";
 import RazorPayPaymentComponent from "../../components/Payment/RazorPayPaymentComponent";
+import CCAvenuePaymentComponent from "../../components/Payment/CCAvenuePaymentComponent";
 
 function PaymentApproval() {
   const [payMethod, setPayMethod] = useState("razorpay");
@@ -17,14 +18,14 @@ function PaymentApproval() {
             Dashboard{" "}
           </Link>
           <span>{">"} </span>
-          <span>Withdraw</span>
+          <span>AddToWallet</span>
         </div>
       </div>
 
       <div className="p-2 lg:p-6">
         <div className="bg-white rounded shadow-sm mt-2 lg:mt-6">
           <div className="flex items-center justify-between border-b border-dashed p-3 lg:p-6">
-            <h1 className="font-medium">"Withdraw Money"</h1>
+            <h1 className="font-medium">Add To Wallet</h1>
           </div>
 
           <div className="p-6">
@@ -56,11 +57,11 @@ function PaymentApproval() {
                   </div>
                   <div
                     onClick={() => {
-                      setPayMethod("stripe");
+                      setPayMethod("ccavenue");
                     }}
                     className="h-10 hover:bg-bluetrans flex tracking-wide items-center cursor-pointer px-2"
                   >
-                    Stripe
+                    CCAvenue
                   </div>
                 </div>
                 <div className="2 col-span-9 p-6">
@@ -82,7 +83,7 @@ function PaymentApproval() {
                     <div className="md:w-7/12">
                       {payMethod === "paypal" && <AddWalletPaypalComponent />}
                       {payMethod === "razorpay" && <RazorPayPaymentComponent />}
-                      {payMethod === "stripe" && <RazorPayPaymentComponent />}
+                      {payMethod === "ccavenue" && <CCAvenuePaymentComponent />}
                     </div>
                   </div>
                   <div className="flex justify-center items-center space-x-10 border-t border-dashed">
@@ -90,7 +91,7 @@ function PaymentApproval() {
                       <img src={paypalpng} alt="paypal" className="w-[60px]" />
                     </div>
                     <div className="">
-                      <img src={stripepng} alt="stripe" className="w-[50px]" />
+                      <img src={stripepng} alt="ccavenue" className="w-[50px]" />
                     </div>
                     <div className="">
                       <img src={atmcardpng} alt="cards" className="w-[40px]" />

@@ -76,7 +76,7 @@ function HeroSection() {
                         <span className=' text-yellow-500 flex space-x-1 '>
                           <Rating value={agentExcursion?.averageRating} text={agentExcursion?.totalReviews} color={"#FED049"} />
                         </span>
-                        <span className='flex items-center text-blue capitalize'><CiLocationOn /> {agentExcursion?.destination?.name} </span>
+                        <span className='flex items-center text-blueColor  capitalize'><CiLocationOn /> {agentExcursion?.destination?.name} </span>
                       </div>
 
                     </div>
@@ -117,7 +117,7 @@ function HeroSection() {
                 <div className='mx-2 lg:mx-0 mt-2 '>
                   <div className='bg-light py-5 px-4 rounded-2xl md:my-4 w-full  lg:mx-0 my-2 lg:my-0 text-darktext'>
                     <div className='py-3'>
-                      <span className='text-xl font-semibold text-blue '>{agentExcursion?.title} {agentExcursion?.title && 'Highlights'}</span>
+                      <span className='text-xl font-semibold text-blueColor  '>{agentExcursion?.title} {agentExcursion?.title && 'Highlights'}</span>
                     </div>
                     <div className='space-y-6 text-gray-500 mt-3'>
                       <div dangerouslySetInnerHTML={{ __html: agentExcursion?.highlights }} className='text-sm lg:text-base'>
@@ -177,10 +177,10 @@ function HeroSection() {
         </div>
 
         <div className={`fixed  ${viewBookCard ? "-bottom-full" : "bottom-0"} flex transition-all  duration-500 left-0 right-0 lg:hidden space-x-1 px-7 py-7 bg-[rgb(255,255,255,0)] rounded-t-xl z-10`}>
-          <button className='bg-blue w-2/12 flex justify-center items-center rounded-lg text-lg text-light'
+          <button className='bg-blueColor w-2/12 flex justify-center items-center rounded-lg text-lg text-light'
             onClick={() => navigate(-1)}
           ><FaChevronLeft /></button>
-          <button className='bg-blue w-10/12 py-3 rounded-lg font-semibold tracking-wider shadow-sm text-light' onClick={() => setViewBookCard(!viewBookCard)}>Book Now</button>
+          <button className='bg-blueColor w-10/12 py-3 rounded-lg font-semibold tracking-wider shadow-sm text-light' onClick={() => setViewBookCard(!viewBookCard)}>Book Now</button>
         </div>
       </div>
       {shareModal && (

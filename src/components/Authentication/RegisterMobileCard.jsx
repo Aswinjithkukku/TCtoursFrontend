@@ -145,21 +145,21 @@ function RegisterMobileCard({ view, setView }) {
         )}
         {/* <div className='text-text'>
             <span className='text-xs'>By register you agree to our</span>
-            <span className='text-xs text-blue hover:text-sky-500 cursor-pointer underline'>{' '} Terms and Conditions</span>
+            <span className='text-xs text-blueColor  hover:text-sky-500 cursor-pointer underline'>{' '} Terms and Conditions</span>
           </div> */}
         <div className='flex justify-center pt-2'>
-          <button type='submit' className='py-2 rounded-xl px-10 bg-blue hover:bg-light hover:text-blue text-light duration-300 flex items-center space-x-2 cursor-pointer'>
+          <button type='submit' className='py-2 rounded-xl px-10 bg-blueColor hover:bg-light hover:text-blueColor  text-light duration-300 flex items-center space-x-2 cursor-pointer'>
             <span className=''>Register</span>
             <span className=''><AiOutlineRight /> </span>
           </button>
 
         </div>
         <div className='flex items-center justify-between pt-2'>
-            <button className='flex items-center border border-lightblue space-x-2 bg-trans w-full mx-3 justify-center py-2 rounded-xl hover:bg-light hover:text-blue text-bluetrans duration-200'>
+            <button className='flex items-center border border-lightblue space-x-2 bg-trans w-full mx-3 justify-center py-2 rounded-xl hover:bg-light hover:text-blueColor  text-bluetrans duration-200'>
               <span className=''><FcGoogle /></span>
               <span className=''>Google</span>
             </button>
-            <button className='flex items-center border border-lightblue space-x-2 bg-trans w-full mx-3 justify-center py-2 rounded-xl hover:bg-light hover:text-blue text-bluetrans duration-200'>
+            <button className='flex items-center border border-lightblue space-x-2 bg-trans w-full mx-3 justify-center py-2 rounded-xl hover:bg-light hover:text-blueColor  text-bluetrans duration-200'>
               <span className='text-blue'><BsFacebook /> </span>
               <span className=''>Facebook</span>
             </button>

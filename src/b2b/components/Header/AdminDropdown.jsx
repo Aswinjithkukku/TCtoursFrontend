@@ -11,15 +11,15 @@ export default function AdminDropdown() {
 
     return (
         <div
-            className="absolute right-0 top-7 md:top-14 bg-white shadow-[0_5px_10px_rgb(30_32_37_/_12%)] rounded min-w-[180px] py-2"
+            className="absolute -right-12 top-7 md:top-10 bg-white shadow-[0_5px_10px_rgb(30_32_37_/_12%)] rounded min-w-[180px] py-2"
         >
-            <span className="block px-4 py-2 text-[13px] font-medium text-grayColor">
+            {/* <span className="block px-4 py-2 text-[13px] font-medium text-grayColor">
                 Welcome {agent?.name}
             </span>
             <span className="flex items-center gap-[10px] text-sm py-[6px] px-4 cursor-pointer hover:bg-[#f3f6f9]">
                 <FiSettings />
                 Settings
-            </span>
+            </span> */}
             <span
                 className="flex items-center gap-[10px] text-sm py-[6px] px-4 cursor-pointer hover:bg-[#f3f6f9]"
                 onClick={() => dispatch(logoutAgent())}

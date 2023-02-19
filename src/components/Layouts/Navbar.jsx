@@ -144,7 +144,7 @@ function Navbar() {
                                         Register{" "}
                                     </span>
                                     <span
-                                        className="hidden lg:flex items-center text-light text-xs lg:text-sm bg-blue px-2 lg:px-3 py-2 lg:my-2 rounded-lg  cursor-pointer"
+                                        className="hidden lg:flex items-center text-light text-xs lg:text-sm bg-blueColor px-2 lg:px-3 py-2 lg:my-2 rounded-lg  cursor-pointer"
                                         onClick={() => setViewAuth((prev) => {
                                             return { ...prev, viewLogin: true }
                                         })

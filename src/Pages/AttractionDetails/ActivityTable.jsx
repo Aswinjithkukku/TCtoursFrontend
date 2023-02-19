@@ -6,9 +6,7 @@ import {
 } from "../../redux/slices/excursionSlice";
 import priceConversion from "../../utils/PriceConversion";
 
-function ActivityTable({ item, index }) {
-  console.log(item);
-
+function ActivityTable({ item, bookingType, index }) {
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
 
@@ -113,7 +111,6 @@ function ActivityTable({ item, index }) {
   let mm = String(date.getMonth() + 1).padStart(2, "0");
   let yyyy = date.getFullYear();
   const res = yyyy + "-" + mm + "-" + dd;
-  console.log(res);
 
   return (
     <tr className="text-darktext border-b" key={index}>
@@ -140,7 +137,7 @@ function ActivityTable({ item, index }) {
           />
         </span>
         <span className="">{item?.name}</span>
-        {item?.bookingType === "ticket" && (
+        {bookingType === "ticket" && (
           <>
             <p
               className={`${
@@ -202,7 +199,7 @@ function ActivityTable({ item, index }) {
         >
           {Array.from({
             length:
-              item?.bookingType === "ticket"
+              bookingType === "ticket"
                 ? item?.commonTicketCount + item?.adultTicketCount
                 : 50,
           }).map((_, index) => (
@@ -223,7 +220,7 @@ function ActivityTable({ item, index }) {
         >
           {Array.from({
             length:
-              item?.bookingType === "ticket"
+              bookingType === "ticket"
                 ? item?.commonTicketCount + item?.childTicketCount || 1
                 : 50,
           }).map((_, index) => (
@@ -242,13 +239,13 @@ function ActivityTable({ item, index }) {
             handleChange({ value: e.target.value, name: e.target.name, index })
           }
         >
-          {Array.from({ length: item?.infantTicketCount || 6 }).map(
-            (_, index) => (
-              <option value={index} key={index}>
-                {index}
-              </option>
-            )
-          )}
+          {Array.from({
+            length: bookingType === "ticket" ? item?.infantTicketCount || 6 : 9,
+          }).map((_, index) => (
+            <option value={index} key={index}>
+              {index}
+            </option>
+          ))}
         </select>
       </td>
       <td className="py-3 px-1 min-w-[4em] pl-5">

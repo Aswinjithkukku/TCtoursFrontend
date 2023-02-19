@@ -104,7 +104,7 @@ function Wallet() {
                     </div>
 
                     <div className="lg:space-y-6 py-7 flex lg:block space-x-3 lg:space-x-0">
-                      {/* <div className=''>
+                      <div className=''>
                         <Link to='/b2b/payment/approval'>
                           <button className='w-[15em] bg-dark text-light py-3 rounded-[0.25rem] text-xs lg:text-sm'
                           >
@@ -119,7 +119,7 @@ function Wallet() {
                             WITHDRAW
                           </button>
                         </Link>
-                      </div> */}
+                      </div>
                     </div>
                   </div>
                 </div>

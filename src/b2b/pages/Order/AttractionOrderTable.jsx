@@ -11,6 +11,7 @@ import { useMemo } from "react";
 import domToPdf from "dom-to-pdf";
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
+import { AiFillPrinter } from "react-icons/ai";
 
 function AttractionOrderTable({ item }) {
   const [orderDetails, setOrderDetails] = useState(false);
@@ -61,23 +62,51 @@ function AttractionOrderTable({ item }) {
         </div>
       </div>
       <tr
-        className="border-b border-tableBorderColor"
+        className="relative overflow-hidden border-b border-tableBorderColor "
         onClick={() => setOrderDetails(!orderDetails)}
       >
-        <td className="p-3">{item?.referenceNumber} </td>
-        <td className="p-3">{item?.reseller?.companyName} </td>
-        <td className="p-3">{item?.reseller?.agentCode}</td>
-        <td className="p-3 min-w-[200px]">
-          {item?.activities?.activity?.name}{" "}
+        <td className="p-3">
+          <div className="">
+            <p className="">{item?.referenceNumber} </p>
+            <span className="flex justify-start gap-2">
+              <p className="bg-gray-400 text-gray-100 px-2 py-1 rounded">
+                {item?.reseller?.agentCode}
+              </p>
+              <p
+                className={`bg-gray-300 text-gray-100 px-2 py-1 rounded capitalize`}
+              >
+                {item?.activities?.bookingType}
+              </p>
+            </span>
+          </div>
         </td>
-        <td className="p-3 capitalize">{item?.activities?.bookingType}</td>
+        {/* <td className="p-3">{item?.reseller?.agentCode} </td>
+        <td className="p-3">{item?.reseller?.agentCode}</td> */}
+        <td className="p-3 min-w-[200px]">
+          <div className="">
+            <p className="">{item?.activities?.activity?.name}</p>
+            <span className="flex justify-start gap-2 text-xs">
+              <p className="bg-gray-300 text-gray-100 px-2 py-1 rounded">
+                Adult : {item?.activities?.adultsCount}
+              </p>
+              <p className="bg-gray-300 text-gray-100 px-2 py-1 rounded">
+                Child : {item?.activities?.childrenCount}
+              </p>
+              <p className="bg-gray-300 text-gray-100 px-2 py-1 rounded">
+                Infant : {item?.activities?.infantCount}
+              </p>
+              {/* <p className={`${item?.activities?.bookingType === "ticket" ? " bg-main " :  " bg-blue-500 "} text-gray-100 px-2 py-1 rounded capitalize`}>{item?.activities?.bookingType}</p> */}
+            </span>
+          </div>
+        </td>
+        {/* <td className="p-3 capitalize">{item?.activities?.bookingType}</td> */}
         <td className="p-3 ">{item?.activities?.date?.slice(0, 10)}</td>
         <td className="p-3 ">{item?.createdAt?.slice(0, 10)} </td>
-        <td className="p-3">{item?.activities?.adultsCount} </td>
+        {/* <td className="p-3">{item?.activities?.adultsCount} </td>
         <td className="p-3">{item?.activities?.childrenCount} </td>
-        <td className="p-3">{item?.activities?.infantCount} </td>
+        <td className="p-3">{item?.activities?.infantCount} </td> */}
         <td className="p-3 whitespace-nowrap">
-          {priceConversion(item?.activities?.amount, selectedCurrency, true)}{" "}
+          {priceConversion(item?.totalAmount, selectedCurrency, true)}{" "}
         </td>
         {/* <td className="p-3">5 AED</td> */}
         <td className="">
@@ -105,9 +134,10 @@ function AttractionOrderTable({ item }) {
             trigger={() => (
               <button
                 disabled={item?.activities?.status !== "confirmed"}
-                className=" px-2 py-1  rounded text-white text-[20px] flex justify-center w-[100%]"
+                className=" px-2 py-1  rounded text-white text-[16px] flex items-center gap-1 justify-center w-[100%] bg-gray-400"
               >
-                <FcDownload />
+                <span className="text-sm">Print</span>
+                <AiFillPrinter />
               </button>
             )}
             content={() => listRef.current}
@@ -215,21 +245,23 @@ function AttractionOrderTable({ item }) {
               <ul className="flex flex-wrap">
                 {list?.map((ele) => (
                   <>
-                    <button
-                      disabled={
-                        !ele?.validity ||
-                        item?.activities?.status !== "confirmed"
-                      }
-                      className="px-3 py-1 flex gap-2 items-center cursor-pointer "
-                      onClick={() => {
-                        handleSingleTicketDownload(ele?.ticketNo);
-                      }}
-                    >
-                      {ele?.ticketNo}{" "}
-                      <span>
-                        <FcDownload />
-                      </span>
-                    </button>
+                    <ReactToPrint
+                      trigger={() => (
+                        <button
+                          disabled={
+                            !ele?.validity ||
+                            item?.activities?.status !== "confirmed"
+                          }
+                          className="px-3 py-1 flex gap-2 items-center cursor-pointer "
+                        >
+                          {ele?.ticketNo}{" "}
+                          <span>
+                            <FcDownload />
+                          </span>
+                        </button>
+                      )}
+                      content={() => document.getElementById(ele?.ticketNo)}
+                    />
                   </>
                 ))}
               </ul>

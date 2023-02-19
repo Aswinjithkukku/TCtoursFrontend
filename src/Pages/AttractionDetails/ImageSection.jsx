@@ -105,7 +105,7 @@ function ImageSection() {
                   </div>
                 )}
               </div>
-              <button className="uppercase text-[14px] font-[500] text-white bg-blue px-7 rounded-r-lg">
+              <button className="uppercase text-[14px] font-[500] text-white bg-blueColor px-7 rounded-r-lg">
                 Search
               </button>
             </div>

@@ -165,7 +165,7 @@ function VisaApplyCard() {
                 <div className="flex justify-end px-2 my-3 text-lg text-lightblue">
                   <button
                     type="submit"
-                    className="bg-blue w-full  text-light px-2 py-1 rounded-md mb-2"
+                    className="bg-blueColor w-full  text-light px-2 py-1 rounded-md mb-2"
                   >
                     Submit
                   </button>

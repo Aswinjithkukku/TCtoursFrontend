@@ -8,7 +8,7 @@ import formatDate from "../../../utils/formatDate";
 
 const AttractionTicketTemplate = ({ ticket, index }) => {
   const ticketBoxRef = useRef();
-  const [minHeight, setminHeight] = useState("min-h-[30cm]");
+  const [minHeight, setminHeight] = useState("min-h-[34cm]");
   const ticketDescRef = useRef();
   let parser = new DOMParser();
 
@@ -29,8 +29,9 @@ const AttractionTicketTemplate = ({ ticket, index }) => {
       .getElementsByTagName("body")
       .item(0);
     setDescription(dom);
-    if (ticketBoxRef.current.clientHeight >= 1150) {
-      setminHeight("min-h-[66cm]");
+    if (ticketBoxRef.current.clientHeight >= 3000) {
+      console.log(ticketBoxRef.current.clientHeight);
+      setminHeight("min-h-[68.3cm]");
     }
   }, []);
 
@@ -39,12 +40,11 @@ const AttractionTicketTemplate = ({ ticket, index }) => {
 
   return (
     <>
-      <div
-        id="ticket_template"
-        className={`p-[20px] w-[1000px] ${minHeight} `}
-        ref={ticketBoxRef}
-      >
-        <section className="w-[100%] mx-auto flex flex-col items-center ">
+      <div className={`p-[30px] w-[1000px] ${minHeight}`} ref={ticketBoxRef}>
+        <section
+          id="ticket_template"
+          className="w-[100%] mx-auto flex flex-col items-center min-h-[29cm] "
+        >
           <div className="primary__section w-[90%]">
             <div className="grid grid-cols-5 pt-7">
               <div className=" col-span-2 ">

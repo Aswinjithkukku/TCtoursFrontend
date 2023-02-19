@@ -37,7 +37,7 @@ function VisaHomeScreen() {
         }  z-20 px-10 py-8 lg:hidden`}
       >
         <button
-          className="bg-blue text-light w-full rounded-lg py-2"
+          className="bg-blueColor text-light w-full rounded-lg py-2"
           onClick={() => setViewCard(!viewCard)}
         >
           Apply Online
