@@ -1,26 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import Lottie from "lottie-react";
-import SigninAnimation from '../data/lottie/23640-sign-in-or-sign-up-animation.json'
-import { logoPng } from '../../static/imagesB2B'
-import axios from '../../axios'
-import { setAgent } from '../../redux/slices/agentSlice'
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { BtnLoader } from '../components'
-import { BiHide, BiShow } from 'react-icons/bi';
+import SigninAnimation from "../data/lottie/23640-sign-in-or-sign-up-animation.json";
+import { logoPng } from "../../static/imagesB2B";
+import axios from "../../axios";
+import { setAgent } from "../../redux/slices/agentSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { BtnLoader } from "../components";
+import { BiHide, BiShow } from "react-icons/bi";
 
 function B2BLoginPage() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [data, setData] = useState({
     email: "",
     agentCode: "",
     password: "",
   });
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
 
   const handleChange = (e) => {
     setData((prev) => {
@@ -37,19 +36,20 @@ function B2BLoginPage() {
 
       dispatch(setAgent(response.data));
       setIsLoading(false);
-      navigate('/b2b')
+      navigate("/b2b");
     } catch (err) {
-
       if (err?.response?.data?.error === "Invalid credentials") {
-        setError("You have given incorrect email or password")
+        setError("You have given incorrect email or password");
       } else {
-        setError(err?.response?.data?.error)
+        err?.response?.data?.status === 500
+          ? setError("Something went wrong!!!")
+          : setError(err?.response?.data?.error);
       }
       setIsLoading(false);
     }
   };
 
-  const { isLoggedIn } = useSelector(state => state.agents)
+  const { isLoggedIn } = useSelector((state) => state.agents);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -58,101 +58,179 @@ function B2BLoginPage() {
   }, [isLoggedIn, navigate]);
 
   return (
-    <section className="h-screen max-w-screen-xl mx-auto">
-      <div className=" h-full text-darktext flex items-center justify-center">
-        <div className='bg-white px-10 py-5 rounded-lg '>
-
-          <div className='flex justify-center pb-4 mb-7 border-b'>
-            <img src={logoPng} alt='logo' className='h-[65px]'
-              onClick={() => navigate('/')}
-            />
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-[20px]">
-            <div className='flex justify-center'>
-              <div
-                className="w-8/12 flex justify-end items-center"
-              >
-                <Lottie animationData={SigninAnimation} />
-              </div>
+    <section className= "relative pt-24  min-h-screen">
+      <div className= "hidden lg:block absolute top-0 right-0 h-full w-1/2">
+        <img
+          className= "absolute top-0 left-0 h-full w-full object-cover"
+          src="https://images.unsplash.com/photo-1526495124232-a04e1849168c?crop=entropy&amp;cs=tinysrgb&amp;fm=jpg&amp;ixid=MnwzMzIzMzB8MHwxfHNlYXJjaHw0fHxkdWJhaXxlbnwwfHx8fDE2NzY3NTMwMDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1920"
+          alt=""
+        />
+        <div className= "relative p-20">
+          <Link className= "inline-block mb-56" to="#"></Link>
+          <div className= "max-w-xl">
+            <p className= "text-3xl font-semibold text-white leading-10 mb-8">
+              Travellers Choice B2B Portal is easy to use and has a lot of great features that make
+              it a valuable tool for any Agents.
+            </p>
+            <div className= "flex items-center mb-12">
+              <div></div>
             </div>
-            <div className=" lg:w-10/12 mb-12 md:mb-0">
-              <form onSubmit={handleSubmit}>
-
-                <div className="mb-6">
-                  <input
-                    type="text"
-                    className="input"
-                    id="exampleFormControlInput2"
-                    placeholder="Agent-code"
-                    name='agentCode'
-                    value={data.agentCode}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <input
-                    type="text"
-                    className="input"
-                    id="exampleFormControlInput2"
-                    placeholder="Email address"
-                    name='email'
-                    value={data.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <div className='relative text-gray-400 focus-within:text-gray-600'>
-                    <p className='text-2xl absolute top-1/2 transform -translate-y-1/2 right-3'
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? <BiShow /> : <BiHide />}
-                    </p>
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      className="input"
-                      id="exampleFormControlInput2"
-                      placeholder="Password"
-                      name="password"
-                      value={data.password}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="flex justify-end items-center mb-6">
-                  <a href="#!" className="text-gray-800">Forgot password?</a>
-                </div>
-                {error && (
-                  <p className='text-sm capitalize text-main mb-1'>{error} </p>
-                )}
-                <div className="text-center lg:text-left">
-                  <button
-                    type="submit"
-                    className="inline-block px-7 py-3 bg-lightblue text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+          </div>
+        </div>
+      </div>
+      <div className= "container px-4 mx-auto">
+        <div className= "lg:w-1/2">
+          <div className= "relative max-w-xs lg:max-w-md mx-auto text-center">
+            <Link className= "inline-block mx-auto mb-5" to="/">
+              <img className= "block" src={logoPng} alt="logo" />
+            </Link>
+            <h2 className= "text-2xl text-gray-300 font-semibold mb-2">
+              Log in to your account
+            </h2>
+            <p className= "text-gray-300 font-medium mb-10">
+              Welcome back! Please enter your details.
+            </p>
+            <form onSubmit={handleSubmit}>
+              <div className= "relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                  Agent Code
+                </span>
+                <input
+                  className= "block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+                  id="signInInput4-1"
+                  type="text"
+                  placeholder="Agent-code"
+                  name="agentCode"
+                  value={data.agentCode}
+                  onChange={handleChange}
+                  required
+                />
+              </div>{" "}
+              <div className= "relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                  Email
+                </span>
+                <input
+                  className= "block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+                  type="text"
+                  placeholder="Email address"
+                  name="email"
+                  value={data.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className= "relative w-full h-14 py-4 px-3 mb-6 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                  Password
+                </span>
+                <p
+                  className="text-2xl absolute top-1/2 transform -translate-y-1/2 right-3"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <BiShow /> : <BiHide />}
+                </p>
+                <input
+                  className= "block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  name="password"
+                  value={data.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className= "flex flex-wrap items-center justify-between mb-6">
+                <div className= "flex items-center mb-4 sm:mb-0"></div>
+                <div className= "w-full sm:w-auto">
+                  <Link
+                    className= "inline-block text-xs font-semibold text-blue-500 hover:text-blue-600"
+                    href="#"
                   >
-                    {isLoading ? <BtnLoader /> : "Login"}
-                  </button>
-                  <p className="text-sm font-semibold mt-2 pt-1 mb-0">
-                    Don't have an account?
-                    <Link
-                      to="/b2b/register"
-                      className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
-                    >Register</Link>
-                  </p>
+                    Forgot password?
+                  </Link>
                 </div>
-              </form>
+              </div>
+                  {error && (
+                    <p className="text-sm capitalize text-main mb-1">
+                      {error}{" "}
+                    </p>
+                  )}
+              <button className= "block w-full py-4 mb-4 leading-6 text-white font-semibold bg-blue-500 hover:bg-blue-600 rounded-lg transition duration-200">
+                {isLoading ? <BtnLoader /> : "Login"}
+              </button>
+              <p className= "font-medium">
+                <span className= "text-gray-300">Don’t have an account?</span>
+                <Link
+                  className= "inline-block text-blue-500 hover:underline"
+                  to="/b2b/register"
+                >
+                  Sign up
+                </Link>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div className= "lg:hidden relative mt-16">
+        <img
+          className= "absolute top-0 left-0 h-full w-full object-cover"
+          src="trizzle-assets/images/background-blue-gradient.png"
+          alt=""
+        />
+        <div className= "container px-4 mx-auto">
+          <div className= "relative max-w-xs mx-auto py-12">
+            <a className= "inline-block mb-24" href="#">
+              <img src="trizzle-assets/logos/trizzle-white-logo.svg" alt="" />
+            </a>
+            <div className= "max-w-xl">
+              <p className= "text-xl font-semibold text-white leading-10 mb-8">
+                Trizzle is easy to use and has a lot of great features that make
+                it a valuable tool for any developer.
+              </p>
+              <div className= "flex items-center mb-12">
+                <img
+                  className= "w-14 h-14 mr-4 rounded-full border border-blue-500"
+                  src="trizzle-assets/images/avatar-men-2.png"
+                  alt=""
+                />
+                <div>
+                  <h4 className= "text-lg leading-6 font-semibold text-white">
+                    John Doe
+                  </h4>
+                  <span className= "text-xs font-semibold text-gray-100">
+                    Front-End Developer
+                  </span>
+                </div>
+              </div>
+              <div>
+                <a
+                  className= "inline-block w-2 h-2 mr-2 rounded-full bg-blue-50"
+                  href="#"
+                ></a>
+                <a
+                  className= "inline-block w-2 h-2 mr-2 rounded-full bg-blue-400"
+                  href="#"
+                ></a>
+                <a
+                  className= "inline-block w-2 h-2 mr-2 rounded-full bg-blue-400"
+                  href="#"
+                ></a>
+                <a
+                  className= "inline-block w-2 h-2 mr-2 rounded-full bg-blue-400"
+                  href="#"
+                ></a>
+                <a
+                  className= "inline-block w-2 h-2 rounded-full bg-blue-400"
+                  href="#"
+                ></a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default B2BLoginPage
+export default B2BLoginPage;

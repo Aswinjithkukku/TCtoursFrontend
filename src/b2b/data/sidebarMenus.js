@@ -4,6 +4,7 @@ import { GiPortal, GiWallet } from "react-icons/gi";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { GoPlus } from "react-icons/go";
 import { BsNewspaper } from "react-icons/bs";
+import { RiUserFill } from "react-icons/ri";
 
 const sidebarMenus = [
   {
@@ -54,18 +55,8 @@ const sidebarMenus = [
   },
   {
     name: "Agents",
-    icon: <FaHandsHelping />,
+    icon: <RiUserFill />,
     link: "/b2b/resellers",
-    // dropdown: [
-    //   {
-    //     name: "New Sub Agent",
-    //     link: "/b2b/reseller/add",
-    //   },
-    //   {
-    //     name: "Total Sub Agent",
-    //     link: "/b2b/resellers",
-    //   },
-    // ],
   },
   {
     name: "Settings",

@@ -104,7 +104,7 @@ function HeroSection() {
                             color={"#FED049"}
                           />
                         </span>
-                        <span className="flex items-center text-blue capitalize">
+                        <span className="flex items-center text-blueColor  capitalize">
                           <CiLocationOn /> {excursion?.destination?.name}{" "}
                         </span>
                       </div>
@@ -152,7 +152,7 @@ function HeroSection() {
                 <div className="mx-2 lg:mx-0 lg:mt-4 mt-2">
                   <div className="bg-light py-5 px-4 rounded-2xl md:my-4 w-full  lg:mx-0 my-2 lg:my-0 text-darktext">
                     <div className="py-3">
-                      <span className="text-xl font-semibold text-blue ">
+                      <span className="text-xl font-semibold text-blueColor  ">
                         {excursion?.title} {excursion?.title && "Highlights"}
                       </span>
                     </div>

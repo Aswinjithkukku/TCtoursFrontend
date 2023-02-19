@@ -36,7 +36,7 @@ function SearchHomePage({ setCategory, setSearch, category }) {
                 type="search"
                 placeholder="Search here for attractions!!!"
                 onChange={(e) => setKeyword(e.target.value)}
-                className="input"
+                className="w-full rounded-lg h-14 px-2 border outline-none"
               />
             </div>
           </form>

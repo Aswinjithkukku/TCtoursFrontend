@@ -36,7 +36,7 @@ export default function Dashboard() {
                     </Link>
                 </div>
             </div> */}
-            <div className="lg:px-6 p-2 h-[60vh]">
+            <div className="lg:px-6 p-2 ">
                 {/* <div className="flex items-center justify-between gap-[10px] mb-5">
                     <div>
                         <span className="font-medium text-textColor">

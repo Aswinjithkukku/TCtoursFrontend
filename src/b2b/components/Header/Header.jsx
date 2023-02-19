@@ -13,6 +13,9 @@ import BtnLoader from "../BtnLoader";
 import NotificationDropdown from "./NotificationDropdown";
 import { getHome } from "../../../redux/slices/generalSlice";
 import { useLocation } from "react-router";
+import { RiUserAddFill } from "react-icons/ri";
+import { BsCartCheckFill, BsFileEarmarkMedicalFill } from "react-icons/bs";
+import { GoPlus } from "react-icons/go";
 
 export default function Header({ setSidebarView, sidebarView }) {
   const dispatch = useDispatch();
@@ -46,25 +49,40 @@ export default function Header({ setSidebarView, sidebarView }) {
 
   return (
     <section>
-      <div class="p-8 bg-[#003580] pl-[350px]">
-        <div class="flex flex-wrap items-center justify-between -mx-2">
-          <div class="w-full md:w-auto px-2 mb-6 md:mb-0">
+      <div className="p-8 bg-[#003580] pl-[350px]">
+        <div className="flex flex-wrap items-center justify-between -mx-2">
+          <div className="w-full md:w-auto px-2 mb-6 md:mb-0">
             <h4
-              class="text-2xl font-bold text-white leading-5 capitalize "
+              className="text-2xl font-bold text-white leading-5 capitalize "
               contenteditable="false"
             >
               {location.pathname === "/b2b" ? (
-                <>"Hi," {agent?.name}</>
+                <>Hi, {agent?.name}</>
               ) : location?.pathname === "/b2b/order/attraction" ||
                 location.pathname === "/b2b/visa/order" ? (
-                <>Orders</>
+                <span className="flex gap-1 items-center">
+                  <span>
+                    <BsCartCheckFill />
+                  </span>
+                  <span>Orders</span>
+                </span>
               ) : location?.pathname === "/b2b/markup/attraction" ||
                 location.pathname === "/b2b/markup/visa" ? (
-                <>Advanced Markups</>
+                <span className="flex gap-1 items-center">
+                  <span>
+                    <GoPlus />
+                  </span>
+                  <span>Advanced Markups</span>
+                </span>
               ) : location.pathname === "/b2b/resellers" ? (
                 <>Agent</>
               ) : location.pathname === "/b2b/reseller/add" ? (
-                <>New Agent</>
+                <span className="flex items-center gap-1">
+                  <span>
+                    <RiUserAddFill />
+                  </span>
+                  <span>New Agent</span>
+                </span>
               ) : location.pathname === "/b2b/settings" ? (
                 <>Settings</>
               ) : (
@@ -72,7 +90,7 @@ export default function Header({ setSidebarView, sidebarView }) {
               )}
             </h4>
           </div>
-          <div class="w-full md:w-auto px-2">
+          <div className="w-full md:w-auto px-2">
             <div
               ref={currencyRef}
               className="flex space-x-1 items-center cursor-pointer relative mr-4"

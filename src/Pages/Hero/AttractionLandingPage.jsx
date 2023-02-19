@@ -21,7 +21,7 @@ function AttractionLandingPage() {
         </div>
         <div className='lg:hidden'>
           <span className='flex justify-center'>
-            <button className=' py-2 bg-lightblue hover:border hover:bg-light border-lightblue hover:text-blue text-light rounded-lg w-10/12' onClick={() => setViewFilters(!viewFliters)}>Filters</button>
+            <button className=' py-2 bg-lightblue hover:border hover:bg-light border-lightblue hover:text-blueColor  text-light rounded-lg w-10/12' onClick={() => setViewFilters(!viewFliters)}>Filters</button>
           </span>
         </div>
         <div className='lg:grid lg:grid-cols-12 lg:gap-5 mt-3'>

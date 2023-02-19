@@ -16,7 +16,7 @@ export default function SidebarMenu({
   const location = useLocation();
 
   return (
-    <li className="group relative mb-4">
+    <li className="group relative mb-3">
       <div
         className={
           `relative p-4 flex items-center text-[14.8px] justify-between  transition-all cursor-default rounded-xl  ` +
@@ -30,7 +30,7 @@ export default function SidebarMenu({
           setIsDropDownOpen(!isDropDownOpen);
         }}
       >
-        <span className="flex items-center gap-[15px] transition-all">
+        <span className="flex items-center gap-[15px] font-[600] transition-all">
           <i className="transition-all text-lg">{icon}</i>
           {name}
         </span>

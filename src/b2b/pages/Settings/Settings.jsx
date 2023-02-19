@@ -26,9 +26,9 @@ function Settings() {
         </div>
       </div> */}
 
-      <div className="p-2 lg:p-6">
+      <div className="p-2 ">
         <div>
-          <div className="w-full px-6 mt-8">
+          <div className="w-full px-4 py-4">
             <ul className="flex flex-wrap -mb-4">
               <li className="mb-4 mr-8">
                 <span
@@ -133,7 +133,7 @@ function Settings() {
             </div>
           </div> */}
 
-          <div className="p-4">
+          <div className="p-4 mt-4">
             {settingSection.profile && <ProfileSettings />}
             {settingSection.company && <CompanySettings />}
             {settingSection.auth && <AuthSettings />}

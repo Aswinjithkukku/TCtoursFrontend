@@ -1,72 +1,74 @@
-import React, { useState } from 'react'
-import { GiFactory } from 'react-icons/gi'
-import { GoPerson } from 'react-icons/go'
-import { useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from '../../../axios'
-import { BtnLoader } from '../../components'
+import React, { useState } from "react";
+import { GiFactory } from "react-icons/gi";
+import { GoPerson } from "react-icons/go";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "../../../axios";
+import { BtnLoader } from "../../components";
 
 function NewRegisters() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [data, setData] = useState({
-    companyName: '',
-    address: '',
-    country: '',
-    trnNumber: '',
-    companyRegistration: '',
-    website: '',
-    city: '',
-    zipCode: '',
+    companyName: "",
+    address: "",
+    country: "",
+    trnNumber: "",
+    companyRegistration: "",
+    website: "",
+    city: "",
+    zipCode: "",
     name: "",
-    phoneNumber: '',
-    telephoneNumber: '',
-    email: '',
-    designation: '',
-    skypeId: '',
-    whatsappNumber: ''
-  })
+    phoneNumber: "",
+    telephoneNumber: "",
+    email: "",
+    designation: "",
+    skypeId: "",
+    whatsappNumber: "",
+  });
 
   const onChangeHandler = (e) => {
     setData((prev) => {
-      return { ...prev, [e.target.name]: e.target.value }
-    })
-  }
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
 
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const { token } = useSelector(state => state.agents)
-  const { countries } = useSelector(state => state.home)
+  const { token } = useSelector((state) => state.agents);
+  const { countries } = useSelector((state) => state.home);
 
   const submitHandler = async (e) => {
     try {
       e.preventDefault();
-      setError('')
+      setError("");
       setIsLoading(true);
 
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
+          Authorization: `Bearer ${token}`,
+        },
+      };
 
-      const response = await axios.post("/b2b/resellers/register", data, config);
-      setIsLoading(false);
-      navigate('/b2b/resellers')
-      return response.data;
-    } catch (err) {
-      setError(
-        err?.response?.data?.error || "Something went wrong, Try again"
+      const response = await axios.post(
+        "/b2b/resellers/register",
+        data,
+        config
       );
       setIsLoading(false);
+      navigate("/b2b/resellers");
+      return response.data;
+    } catch (err) {
+      setError(err?.response?.data?.error || "Something went wrong, Try again");
+      setIsLoading(false);
     }
-  }
+  };
 
-  const countryArray = countries?.filter((item) => item._id === data.country)
+  const countryArray = countries?.filter((item) => item._id === data.country);
 
   return (
-    <div className=''>
+    <div className="">
       {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
         <h1 className="font-[600] text-[15px] uppercase">
           New Reseller Register
@@ -79,32 +81,39 @@ function NewRegisters() {
           <span>New Register</span>
         </div>
       </div> */}
-      <div className='p-2 lg:p-6'>
+      <div className="p-2">
         <form onSubmit={submitHandler}>
-          <div className=" lg:mt-6 p-3 lg:p-6 ">
-            <div className='flex items-center justify-between border-b border-dashed p-4'>
-              <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
-                <span className=''><GiFactory /> </span>
-                <span className=''>Company Details</span>
+          <div className=" lg:mt-3 p-3 ">
+            <div className="flex items-center justify-between border-b border-dashed p-4">
+              <h2 className="text-xl font-bold tracking-wide space-x-2 flex">
+                <span className="">
+                  <GiFactory />{" "}
+                </span>
+                <span className="">Company Details</span>
               </h2>
             </div>
-            <div className='space-y-2 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-4'>
-
-              <div className=''>
-                <label className='label'>Travel Agency Name</label>
-                <input className='input'
-                  type='text'
-                  placeholder='Ex: TravellerChoice'
-                  name='companyName'
+            <div className="space-y-2 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[25px] mt-7">
+              <div className="relative w-full h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                  Travel Agency Name
+                </span>
+                <input
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+                  type="text"
+                  placeholder="Ex: TravellerChoice"
+                  name="companyName"
                   value={data.companyName}
                   onChange={onChangeHandler}
                   required
                 />
               </div>
 
-              <div className=''>
-                <label className='label'>Address</label>
-                <input className='input'
+              <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                Address
+                </span>
+                <input
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='text'
                   placeholder='Ex: Tc, North california'
                   name='address'
@@ -114,9 +123,12 @@ function NewRegisters() {
                 />
               </div>
 
-              <div className=''>
-                <label className='label'>Country</label>
-                <select className='select'
+              <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                  Nationality
+                </span>
+                <select
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   name='country'
                   value={data.country}
                   onChange={onChangeHandler}
@@ -129,9 +141,12 @@ function NewRegisters() {
               </div>
               {data.country && data.country === "63ac33ecff04e5652a2583f5" && (
                 <>
-                  <div className=''>
-                    <label className='label'>TRN Number</label>
-                    <input className='input'
+                  <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                    <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                    TRN Number
+                    </span>
+                    <input
+                      className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                       type='number'
                       placeholder=''
                       name='trnNumber'
@@ -140,9 +155,12 @@ function NewRegisters() {
                     />
                   </div>
 
-                  <div className=''>
-                    <label className='label'>Company Registration Number</label>
-                    <input className='input'
+                  <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                    <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                    Company Registration Number
+                    </span>
+                    <input
+                      className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                       type='number'
                       placeholder=''
                       name='companyRegistration'
@@ -153,9 +171,12 @@ function NewRegisters() {
                 </>
               )}
 
-              <div className=''>
-                <label className='label'>Website</label>
-                <input className='input'
+              <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                Website
+                </span>
+                <input
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='text'
                   placeholder='Ex: TravellerChoice.ae'
                   name='website'
@@ -164,9 +185,12 @@ function NewRegisters() {
                 />
               </div>
 
-              <div className=''>
-                <label className='label'>City</label>
-                <input className='input'
+              <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                City
+                </span>
+                <input
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='text'
                   placeholder='Ex: Dubai'
                   name='city'
@@ -175,30 +199,39 @@ function NewRegisters() {
                 />
               </div>
               {data.country && data.country !== "63ac33ecff04e5652a2583f5" && (
-              <div className=''>
-                <label className='label'>Zip Code</label>
-                <input className='input'
-                  type='number'
-                  placeholder=''
-                  name='zipCode'
-                  value={data.zipCode}
-                  onChange={onChangeHandler}
-                />
-              </div>
+
+                <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                  <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                  Zip Code
+                  </span>
+                  <input
+                    className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+                    type='number'
+                    placeholder=''
+                    name='zipCode'
+                    value={data.zipCode}
+                    onChange={onChangeHandler}
+                  />
+                </div>
               )}
             </div>
-            <div className='pt-5 lg:pt-3 flex items-center justify-between border-b border-dashed p-4'>
-              <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
-                <span className=''><GoPerson /> </span>
-                <span className=''>Profile Details</span>
+            <div className="pt-5 lg:pt-10 flex items-center justify-between border-b border-dashed p-4">
+              <h2 className="text-xl font-bold tracking-wide space-x-2 flex items-center ">
+                <span className="">
+                  <GoPerson />{" "}
+                </span>
+                <span className="">Profile Details</span>
               </h2>
             </div>
 
-            <div className='lg:space-y-0 space-y-2 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-4'>
+            <div className="lg:space-y-0 space-y-2 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[25px] mt-7">
 
-              <div className=''>
-                <label className='label'>Agent Name</label>
-                <input className='input'
+              <div className="relative w-full h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                Agent Name
+                </span>
+                <input
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='text'
                   placeholder='Ex: Name'
                   name='name'
@@ -207,16 +240,25 @@ function NewRegisters() {
                   required
                 />
               </div>
-              <div className=' flex gap-2'>
-                <div className='w-2/12'>
-                  <label className='label'>Code</label>
-                  <input className='input'
+
+              <div className=" flex gap-2">
+                <div className="relative w-2/12 h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                  <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                  Code
+                  </span>
+                  <input
+                    className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                     value={countryArray?.map((item) => item?.phonecode) || ''}
-                    readOnly />
+                    readOnly
+                  />
                 </div>
-                <div className='w-10/12'>
-                  <label className='label'>Number</label>
-                  <input className='input'
+
+                <div className="relative w-10/12 h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                  <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                  Number
+                  </span>
+                  <input
+                    className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                     type='number'
                     placeholder='Ex: 0000000000'
                     name='phoneNumber'
@@ -227,16 +269,24 @@ function NewRegisters() {
                 </div>
               </div>
 
-              <div className=' flex gap-2'>
-                <div className='w-2/12'>
-                  <label className='label'>Code</label>
-                  <input className='input'
+              <div className=" flex gap-2">
+                <div className="relative w-2/12 h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                  <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                  Code
+                  </span>
+                  <input
+                    className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                     value={countryArray?.map((item) => item?.phonecode) || ''}
-                    readOnly />
+                    readOnly
+                  />
                 </div>
-                <div className='w-10/12'>
-                  <label className='label'> Telephone Number</label>
-                  <input className='input'
+
+                <div className="relative w-10/12 h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                  <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                  Telephone Number
+                  </span>
+                  <input
+                    className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                     type='number'
                     placeholder='Ex: 0000000000'
                     name='telephoneNumber'
@@ -245,9 +295,13 @@ function NewRegisters() {
                   />
                 </div>
               </div>
-              <div className=''>
-                <label className='label'>Email</label>
-                <input className='input'
+              
+              <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                Email
+                </span>
+                <input
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='email'
                   placeholder='Ex: example@email.com'
                   name='email'
@@ -257,9 +311,12 @@ function NewRegisters() {
                 />
               </div>
 
-              <div className=''>
-                <label className='label'>preffered Currency</label>
-                <input className='input'
+              <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                Preffered Currency
+                </span>
+                <input
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='text'
                   placeholder='Ex: AED'
                   value={countryArray?.map((item) => item?.currencySymbol) || ''}
@@ -267,9 +324,12 @@ function NewRegisters() {
                 />
               </div>
 
-              <div className=''>
-                <label className='label'>designation</label>
-                <input className='input'
+              <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                Designation
+                </span>
+                <input
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='text'
                   placeholder='designation'
                   name='designation'
@@ -278,9 +338,13 @@ function NewRegisters() {
                   required
                 />
               </div>
-              <div className=''>
-                <label className='label'>Skype Id</label>
-                <input className='input'
+              
+              <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                Skype Id
+                </span>
+                <input
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='text'
                   placeholder='skypeid'
                   name='skypeId'
@@ -289,9 +353,12 @@ function NewRegisters() {
                 />
               </div>
 
-              <div className=''>
-                <label className='label'>Whatsapp</label>
-                <input className='input'
+              <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                Whatsapp
+                </span>
+                <input
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='number'
                   placeholder='Ex: 000000000'
                   name='whatsappNumber'
@@ -301,23 +368,27 @@ function NewRegisters() {
               </div>
             </div>
 
-            <div className='flex justify-end mt-6 gap-[20px] items-center'>
+            <div className="flex justify-end mt-6 gap-[20px] items-center">
               {error && (
-                <div className='flex justify-end'>
-                  <p className='text-main text-xs capitalize'>{error} </p>
+                <div className="flex justify-end">
+                  <p className="text-main text-xs capitalize">{error} </p>
                 </div>
               )}
-              <button className=' h-10 rounded-[.25rem] text-gray-400 bg-gray-200 w-[100px]' 
-              onClick={() => navigate(-1)}
-              >Back</button>
-              <button type='submit' className=' button w-[100px]'>{isLoading ? <BtnLoader /> : 'Create'}</button>
+              <button
+                className=" h-10 rounded-[.25rem] text-gray-400 bg-gray-200 w-[100px]"
+                onClick={() => navigate(-1)}
+              >
+                Back
+              </button>
+              <button type="submit" className=" button w-[100px]">
+                {isLoading ? <BtnLoader /> : "Create"}
+              </button>
             </div>
-
           </div>
         </form>
       </div>
     </div>
-  )
+  );
 }
 
-export default NewRegisters
+export default NewRegisters;

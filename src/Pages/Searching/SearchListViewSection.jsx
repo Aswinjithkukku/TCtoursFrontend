@@ -70,7 +70,7 @@ function SearchListViewSection() {
                                                     _id: item._id,
                                                     name: item?.title,
                                                     image: item?.images[0],
-                                                    price: item?.activity?.adultPrice
+                                                    price: item?.activity?.lowPrice
                                                 }))
                                             }}
                                         >
@@ -111,11 +111,11 @@ function SearchListViewSection() {
                                             <div className='text-xs text-text font-light'>Starting from</div>
                                             {item?.isOffer === true &&
                                                 <div className='text-xs text-main font-light'>
-                                                    <s> AED {item?.activity?.adultPrice}</s>
+                                                    <s> AED {item?.activity?.lowPrice}</s>
                                                 </div>}
                                             <div className='text-xl font-bold text-darktext'>
-                                                {priceConversion(item?.isOffer === true ? (item?.isOffer === true && item?.offerAmountType === "flat" ? Number(item?.activity?.adultPrice) - Number(item?.offerAmount) :
-                                                    Number(item?.activity?.adultPrice) - ((Number(item?.activity?.adultPrice) * Number(item?.offerAmount)) / 100)) : item?.activity?.adultPrice, selectedCurrency, true)}
+                                                {priceConversion(item?.isOffer === true ? (item?.isOffer === true && item?.offerAmountType === "flat" ? Number(item?.activity?.lowPrice) - Number(item?.offerAmount) :
+                                                    Number(item?.activity?.lowPrice) - ((Number(item?.activity?.lowPrice) * Number(item?.offerAmount)) / 100)) : item?.activity?.lowPrice, selectedCurrency, true)}
 
                                             </div>
                                             <div className='text-xs text-text font-light'>*price varies</div>

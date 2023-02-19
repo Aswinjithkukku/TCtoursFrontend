@@ -20,7 +20,7 @@ function BlogSection() {
                                 Blog
                             </div>
                             <Link to='/blog'>
-                                <div className='px-7 mr-2 hover:bg-soft hover:text-blue hover:border-blue hover:border bg-blueColor text-light shadow-sm py-2 rounded-md cursor-pointer'>View</div>
+                                <div className='px-7 mr-2 hover:bg-soft hover:text-blueColor  hover:border-blue hover:border bg-blueColor text-light shadow-sm py-2 rounded-md cursor-pointer'>View</div>
                             </Link>
                         </div>
                         <div className=' gap-5 md:grid-cols-2 md:grid lg:grid-cols-3'>

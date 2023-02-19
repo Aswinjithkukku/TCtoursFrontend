@@ -100,7 +100,7 @@ function RegisterCard({ setViewAuth, viewAuth }) {
                                     onSubmit={handleSubmit}
                                     className="p-5 space-y-3"
                                 >
-                                    {/* <div className="text-4xl text-blue font-semibold">
+                                    {/* <div className="text-4xl text-blueColor  font-semibold">
                                         Greetings...
                                     </div> */}
                                     <div className="flex justify-center items-center pb-1 border-text border-b-2 space-x-5">
@@ -198,14 +198,14 @@ function RegisterCard({ setViewAuth, viewAuth }) {
                                         <span className="text-xs">
                                             By register you agree to our
                                         </span>
-                                        <span className="text-xs text-blue hover:text-sky-500 cursor-pointer underline">
+                                        <span className="text-xs text-blueColor  hover:text-sky-500 cursor-pointer underline">
                                             Terms and Conditions
                                         </span>
                                     </div> */}
                                     <div className="flex justify-center pt-2">
                                         <button
                                             type="submit"
-                                            className="py-2 rounded-xl px-10 bg-blueColor hover:bg-light hover:text-blue text-light duration-300 flex items-center space-x-2 cursor-pointer"
+                                            className="py-2 rounded-xl px-10 bg-blueColor hover:bg-light hover:text-blueColor  text-light duration-300 flex items-center space-x-2 cursor-pointer"
                                         >
                                             <span className="">Register</span>
                                             <span className="">
@@ -214,13 +214,13 @@ function RegisterCard({ setViewAuth, viewAuth }) {
                                         </button>
                                     </div>
                                      <div className="flex items-center justify-between pt-2">
-                                        <button className="flex items-center space-x-2 bg-trans w-full mx-3 justify-center py-2 rounded-xl hover:bg-light hover:text-blue text-bluetrans duration-200">
+                                        <button className="flex items-center space-x-2 bg-trans w-full mx-3 justify-center py-2 rounded-xl hover:bg-light hover:text-blueColor  text-bluetrans duration-200">
                                             <span className="">
                                                 <FcGoogle />
                                             </span>
                                             <span className="">Google</span>
                                         </button>
-                                        <button className="flex items-center space-x-2 bg-trans w-full mx-3 justify-center py-2 rounded-xl hover:bg-light hover:text-blue text-bluetrans duration-200">
+                                        <button className="flex items-center space-x-2 bg-trans w-full mx-3 justify-center py-2 rounded-xl hover:bg-light hover:text-blueColor  text-bluetrans duration-200">
                                             <span className="text-blue">
                                                 <BsFacebook />{" "}
                                             </span>
@@ -232,7 +232,7 @@ function RegisterCard({ setViewAuth, viewAuth }) {
                                             Already have an account?{" "}
                                         </span>
                                         <span
-                                            className="text-blue underline cursor-pointer"
+                                            className="text-blueColor  underline cursor-pointer"
                                             onClick={() => {
                                                 setViewAuth((prev) => {
                                                     return { ...prev, viewRegister: false, viewLogin: true }
