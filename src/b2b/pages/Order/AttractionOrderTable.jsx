@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BiPhone, BiUser } from "react-icons/bi";
 import { FaBus } from "react-icons/fa";
 import { FcDownload } from "react-icons/fc";
+import { ImTicket } from "react-icons/im";
 import { FiMapPin } from "react-icons/fi";
 import { MdNoTransfer, MdOutlineEmail } from "react-icons/md";
 import { useSelector } from "react-redux";
@@ -12,6 +13,7 @@ import domToPdf from "dom-to-pdf";
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
 import { AiFillPrinter } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 function AttractionOrderTable({ item }) {
   const [orderDetails, setOrderDetails] = useState(false);
@@ -48,6 +50,7 @@ function AttractionOrderTable({ item }) {
 
   const list = tickets();
   const listRef = useRef();
+  console.log(item);
   return (
     <>
       <div className="h-fit absolute left-[20000px]" id="all_tickets">
@@ -130,18 +133,27 @@ function AttractionOrderTable({ item }) {
         </td>
 
         <td className="p-3">
-          <ReactToPrint
-            trigger={() => (
-              <button
-                disabled={item?.activities?.status !== "confirmed"}
-                className=" px-2 py-1  rounded text-white text-[16px] flex items-center gap-1 justify-center w-[100%] bg-gray-400"
-              >
-                <span className="text-sm">Print</span>
-                <AiFillPrinter />
-              </button>
-            )}
-            content={() => listRef.current}
-          />
+          <div className="flex flex-col gap-1">
+            <Link
+              disabled={item?.activities?.status !== "confirmed"}
+              className=" px-2 py-1  rounded text-white text-[16px] flex items-center gap-1 justify-center w-[100%] bg-gray-400"
+              to={`/ticket/attraction/${item?._id}`}
+            >
+              View <ImTicket />
+            </Link>
+            <ReactToPrint
+              trigger={() => (
+                <button
+                  disabled={item?.activities?.status !== "confirmed"}
+                  className=" px-2 py-1  rounded text-white text-[16px] flex items-center gap-1 justify-center w-[100%] bg-gray-400"
+                >
+                  <span className="text-sm">Print</span>
+                  <AiFillPrinter />
+                </button>
+              )}
+              content={() => listRef.current}
+            />
+          </div>
         </td>
       </tr>
       {orderDetails && (

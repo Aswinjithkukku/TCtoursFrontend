@@ -34,8 +34,8 @@ const AttractionTicketTemplate = ({ ticket, index }) => {
     }
   }, []);
 
-  const baseUrl = "https://secure.mytravellerschoice.com";
-  // const baseUrl = process.env.REACT_APP_SERVER_URL;
+  // const baseUrl = "https://secure.mytravellerschoice.com";
+  const baseUrl = process.env.REACT_APP_SERVER_URL;
 
   return (
     <>
@@ -78,7 +78,7 @@ const AttractionTicketTemplate = ({ ticket, index }) => {
                     <div className="capitalize">{ticket?.ticketFor}</div>
                     <div className="">Destination :</div>
                     <div className="capitalize">
-                      {ticket?.destination?.name}
+                      {ticket?.activity?.attraction?.destination?.name}
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-x-1 gap-y-2">
