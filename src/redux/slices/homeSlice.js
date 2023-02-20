@@ -71,13 +71,7 @@ const homeSlice = createSlice({
         title : action.payload?.title,
         text : action.payload?.text
       }
-      // setTimeout(() => {
-      //   state.alertSuccess = {
-      //     status: false,
-      //     title: "",
-      //     text: ""
-      //   }
-      // }, 5000 )
+
 
     },
     setAlertError: (state, action) => {
@@ -86,13 +80,7 @@ const homeSlice = createSlice({
         title : action.payload?.title,
         text : action.payload?.text
       }
-      // setTimeout(() => {
-      //   state.alertError = {
-      //     status: false,
-      //     title: "",
-      //     text: ""
-      //   }
-      // }, 5000 )
+
     },
   },
   extraReducers: {
