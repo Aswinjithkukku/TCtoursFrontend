@@ -21,7 +21,7 @@ function SuccessAlert() {
 
   return (
     <div
-      className={`bg-green-100 shadow-sm rounded-md fixed ${alertSuccess?.status ? " right-5 " : " -right-full "}  bottom-24 right-5 z-10 max-w-[30%] text-gray-400 duration-500 transition-all`}
+      className={`bg-green-100 shadow-sm rounded-md fixed ${alertSuccess?.status === true ? " right-5 " : " -right-[100%] "}  bottom-24 right-5 z-10 max-w-[30%] text-gray-400 duration-500 transition-all`}
     >
       <div className="p-4">
         <div className="flex justify-between">
