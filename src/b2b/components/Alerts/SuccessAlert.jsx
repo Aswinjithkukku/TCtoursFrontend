@@ -8,7 +8,6 @@ function SuccessAlert() {
   const dispatch = useDispatch();
   const { alertSuccess } = useSelector((state) => state.home);
 
-<<<<<<< HEAD
   if(alertSuccess?.status === true) {
     setTimeout(
       () => {
@@ -25,24 +24,6 @@ function SuccessAlert() {
   return (
     <div
       className={`bg-green-100 shadow-sm rounded-md fixed ${alertSuccess?.status === true ? " right-5 " : " -right-[100vw] "}  bottom-24 right-5 z-10 max-w-[30%] text-gray-400 duration-500 transition-all`}
-=======
-  // setTimeout(
-  //   () => {
-  //     dispatch(
-  //       setAlertSuccess({
-  //         status: false,
-  //         title: "",
-  //         text: "",
-  //       })
-  //     )
-  // }, 5000 )
-
-  return (
-    <div
-      className={`bg-green-100 shadow-sm rounded-md fixed ${
-        alertSuccess?.status === true ? " right-5 " : " -right-[100%] "
-      }  bottom-24 right-5 z-10 max-w-[30%] text-gray-400 duration-500 transition-all`}
->>>>>>> ad81fc3b6b9571ba54b62f595a586cdec032db90
     >
       <div className="p-4">
         <div className="flex justify-between">
