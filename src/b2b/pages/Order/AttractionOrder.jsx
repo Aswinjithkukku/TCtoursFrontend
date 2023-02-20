@@ -231,7 +231,7 @@ function AttractionOrder() {
                   <th className="font-[500] p-3 whitespace-nowrap">Infant</th> */}
                   <th className="font-[500] p-3 whitespace-nowrap">Price</th>
                   <th className="font-[500] p-3 whitespace-nowrap">Status</th>
-                  <th className="font-[500] p-3 whitespace-nowrap">Print</th>
+                  <th className="font-[500] p-3 whitespace-nowrap">Tickets</th>
                 </tr>
               </thead>
               <tbody className="text-sm overflow-hidden text-textColor">
