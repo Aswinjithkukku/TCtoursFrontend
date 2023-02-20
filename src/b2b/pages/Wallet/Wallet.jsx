@@ -11,9 +11,11 @@ import { getTransaction } from "../../../redux/slices/walletSlice";
 import BtnLoader from "../../components/BtnLoader";
 import { IoCallSharp } from "react-icons/io5";
 import { HiOutlineMail } from "react-icons/hi";
+import Modal from "../../components/modal/Modal";
 
 function Wallet() {
   const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
   const [component, setComponent] = useState({
     all: true,
     completed: false,
@@ -30,6 +32,9 @@ function Wallet() {
     dispatch(getTransaction());
   }, [dispatch]);
 
+  const handleToggleModal = () => {
+    setShowModal(!showModal);
+  };
   return (
     <>
       <div className=" ">
@@ -82,13 +87,17 @@ function Wallet() {
                             <span className="text-main">
                               <IoCallSharp />{" "}
                             </span>
-                            <span className="font-[550]">{home?.phoneNumber1}</span>
+                            <span className="font-[550]">
+                              {home?.phoneNumber1}
+                            </span>
                           </p>
                           <p className="text-xs text-text flex gap-1 items-center">
                             <span className="text-main">
                               <IoCallSharp />{" "}
                             </span>
-                            <span className="font-[550]">{home?.phoneNumber2}</span>
+                            <span className="font-[550]">
+                              {home?.phoneNumber2}
+                            </span>
                           </p>
                           <p className="text-xs text-text flex gap-1 items-center">
                             <span className="text-main">
@@ -104,17 +113,18 @@ function Wallet() {
                     </div>
 
                     <div className="lg:space-y-6 py-7 flex lg:block space-x-3 lg:space-x-0">
-                      <div className=''>
-                        <Link to='/b2b/payment/approval'>
-                          <button className='w-[15em] bg-dark text-light py-3 rounded-[0.25rem] text-xs lg:text-sm'
-                          >
+                      <div className="">
+                        <Link to="/b2b/payment/approval">
+                          <button className="w-[15em] bg-dark text-light py-3 rounded-[0.25rem] text-xs lg:text-sm">
                             ADD MONEY
                           </button>
                         </Link>
                       </div>
-                      <div className=''>
-                        <Link to='#' className=''>
-                          <button className='w-[15em] bg-dark text-light py-3 rounded-[0.25rem] text-xs lg:text-sm'
+                      <div className="">
+                        <Link to="#" className="">
+                          <button
+                            className="w-[15em] bg-dark text-light py-3 rounded-[0.25rem] text-xs lg:text-sm"
+                            onClick={handleToggleModal}
                           >
                             WITHDRAW
                           </button>
@@ -241,6 +251,7 @@ function Wallet() {
                   <FailedTransaction />
                 </div>
               )}
+              {showModal && <Modal hideDrawer={handleToggleModal} />}
             </div>
           </div>
         </div>
