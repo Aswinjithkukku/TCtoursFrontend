@@ -24,18 +24,9 @@ function AttractionCard({ setView }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // let result = searchQuery?.destinations?.find((item) => {
-    //   return value === item?.name;
-    // });
     if (selected.type === "destination") {
       navigate(`/b2b/attractions/${selected.value}`);
     } else {
-      // let data = searchQuery?.attractions?.find((item) => {
-      //   if (value?.toLowerCase() === item?.title?.toLowerCase()) {
-      //     return item?._id;
-      //   }
-      // });
-      // console.log(data?._id);
       navigate(`/b2b/attractions/details/${selected?.id}`);
     }
     setView &&
@@ -62,19 +53,6 @@ function AttractionCard({ setView }) {
           <div className="md:w-11/12 flex justify-center items-center ">
             <div className=" w-full ">
               <div className="" ref={dropdownWrapperRef}>
-                {/* <div className="relative">
-                  <input
-                    type="text"
-                    list="Country"
-                    value={value}
-                    placeholder="Where do you want to go?"
-                    onChange={(e) => setValue(e.target.value)}
-                    onFocus={handleFocus}
-                    required
-                    className="capitalize px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext"
-                  />
-                  
-                </div> */}
                 <div className= "relative w-full h-14 py-4 px-3  border border-blue-400 hover:border-blue-500 focus-within:border-green-500 rounded-lg">
                   <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-white rounded px-1 bg-blue-600">
                     Where do you want to go?
@@ -82,8 +60,7 @@ function AttractionCard({ setView }) {
                   <input
                     type="text"
                     list="Country"
-                    value={selected.value}
-                    // placeholder="Where do you want to go?"
+                    value={value}
                     onChange={(e) => setValue(e.target.value)}
                     onFocus={handleFocus}
                     required

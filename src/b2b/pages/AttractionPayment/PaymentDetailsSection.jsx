@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { AiOutlineDown } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import OtpModal from "./OtpModal";
 import axios from "../../../axios";
 import Swal from "sweetalert2";
 import priceConversion from "../../../utils/PriceConversion";
 import { BtnLoader } from "../../components";
+import { setAlertError } from "../../../redux/slices/homeSlice";
 
 function PaymentDetailsSection() {
+  const dispatch = useDispatch()
   const [otpModal, setOtpModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -72,11 +74,18 @@ function PaymentDetailsSection() {
     } catch (err) {
       if (err?.response?.data?.error) {
         setError(err?.response?.data?.error);
-        await Swal.fire({
-          icon: "error",
-          title: "Something went wrong!",
-          text: err?.response?.data?.error,
-        });
+        // await Swal.fire({
+        //   icon: "error",
+        //   title: "Something went wrong!",
+        //   text: err?.response?.data?.error,
+        // });
+        dispatch(
+          setAlertError({
+            status: true,
+            title: "Something went wrong!",
+            text: err?.response?.data?.error,
+          })
+        );
         setIsLoading(false);
       }
     }
@@ -88,7 +97,7 @@ function PaymentDetailsSection() {
 
   return (
     <>
-      <div className="bg-light  w-full p-5 rounded-2xl space-y-5">
+      <div className=" w-full p-5 rounded-2xl space-y-5">
         <form className="lg:space-y-3">
           <div className=" cursor-default">
             <h2 className="text-2xl font-semibold text-darktext">

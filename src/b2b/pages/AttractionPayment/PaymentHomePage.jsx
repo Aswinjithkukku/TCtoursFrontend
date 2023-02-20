@@ -11,33 +11,10 @@ function PaymentHomePage() {
     const { agentExcursionCart } = useSelector(state => state.agentExcursions)
     return (
         <>
-            <div className="bg-white flex items-center justify-between gap-[10px] px-6 shadow-sm border-t py-2">
-                <h1 className="font-[600] text-[15px] uppercase">
-                    Attraction
-                </h1>
-                <div className="text-sm text-grayColor cursor-pointer">
-                    <Link to="/b2b" className="text-textColor">
-                        Dashboard{" "}
-                    </Link>
-                    <span>{">"} </span>
-                    <span
-                        onClick={() => {
-                            navigate(-2)
-                        }}
-                    >Attraction</span>
-                    <span>{">"} </span>
-                    <span
-                        onClick={() => {
-                            navigate(-1)
-                        }}
-                    >Details</span>
-                    <span>{">"} </span>
-                    <span>Payment</span>
-                </div>
-            </div>
+           
 
             <div className="p-6">
-                <div className="bg-white rounded shadow-sm">
+                <div className="bg-white rounded-2xl shadow-sm">
 
                     <div className=''>
                         <div className='p-6'>
