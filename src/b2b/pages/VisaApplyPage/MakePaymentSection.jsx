@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Lottie from 'lottie-react'
 import { PaymentAnimation } from '../../../data'
 import VisaOtpModal from './VisaOtpModal'
@@ -30,8 +30,8 @@ function MakePaymentSection({ navigation, setNavigation }) {
       }
       const response = await axios.post(`/b2b/visa/application/create`, {
         visaType: visaEnquiry?.visaType,
-        email: visaEnquiry?.email,
-        contactNo: visaEnquiry?.contactNo,
+        email: rows[0]?.email,
+        contactNo: rows[0]?.contactNo,
         onwardDate: visaEnquiry?.onwardDate,
         returnDate: visaEnquiry?.returnDate,
         noOfTravellers: Number(visaEnquiry?.traveller),
@@ -39,16 +39,32 @@ function MakePaymentSection({ navigation, setNavigation }) {
         country: visa?.visa?.country?._id
       }, config);
       setIsLoading(false)
-      setOtpModal(true)
       setOrder(response.data)
-      return response.data
-    } catch (error) {
+      setOtpModal(true)
+    } catch (err) {
       setError(
-        error?.response?.data?.error || "Something went wrong, Try again"
+        err?.response?.data?.error || "Something went wrong, Try again"
       );
       setIsLoading(false);
     }
   }
+
+  const [selectedVisa, setSelectedVisa] = useState({});
+
+  useEffect(() => {
+    if (visa?.visaType?.length > 0) {
+      for (let item of visa?.visaType) {
+        if (item._id === visaEnquiry?.visaType) {
+          setSelectedVisa(item);
+        }
+      }
+    }
+  }, [visaEnquiry]);
+
+  const totalPrice =
+    +selectedVisa?.totalPrice + selectedVisa?.insurance + selectedVisa?.tax;
+
+  const grandTotal = totalPrice * visaEnquiry?.traveller;
 
   return (
     <>
@@ -60,17 +76,14 @@ function MakePaymentSection({ navigation, setNavigation }) {
         <form onSubmit={submitHandler}>
           <div className='flex justify-between gap-3 rounded-md shadow bg-white p-6'>
             <div className='space-y-2'>
-              <p className='text-gray-500 text-sm font-[500]'>Make use of our Wallet system to purchase which is help for faster transaction.</p>
-              <p className=''>Make payment through your wallet.</p>
-              <p className='text-gray-500 font-[500] text-sm'>Your wallet amount is : <span className='text-main font-[600]'>{priceConversion(balance, selectedCurrency, true)}</span> </p>
+              <p className='text-slate-400 text-sm font-[500]'>Make use of our Wallet system to purchase which is help for faster transaction.</p>
+              <p className='text-green-500 text-sm'>Make payment through your wallet.</p>
+              <p className='text-slate-400 font-[500] text-sm'>Your wallet amount is : <span className='text-main font-[600]'>{priceConversion(balance, selectedCurrency, true)}</span> </p>
+              <p className='text-slate-400 font-[500] text-sm'>Total Price : <span className='text-darktext font-[550]'> {priceConversion(grandTotal, selectedCurrency, true)}</span> </p>
               <button className='bg-lightblue rounded-[.25rem] text-white w-[100px] h-9'
                 onClick={() => setOtpModal(true)}
               >Pay</button>
             </div>
-            {/* <div className='text-center'>
-              <p className='text-gray-500  font-[500]'>Purchase Cost: </p>
-              <p className='text-lightblue underline text-xl font-[750]'> </p>
-            </div> */}
             <div className=' w-[170px] '>
               <Lottie animationData={PaymentAnimation} />
             </div>

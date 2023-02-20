@@ -3,6 +3,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { removeFromCart } from '../../../redux/slices/agentExcursionSlice'
+import { setAlertSuccess } from '../../../redux/slices/homeSlice'
 import priceConversion from '../../../utils/PriceConversion'
 
 function DetailsCard() {
@@ -102,7 +103,14 @@ function DetailsCard() {
                                             <span className='whitespace-nowrap flex items-center'>
                                                 {item?.isChecked === true && priceConversion(item?.price, selectedCurrency, true)}
                                                 <span className='ml-1 text-main'
-                                                onClick={() => dispatch(removeFromCart(item?._id))}
+                                                onClick={() => {
+                                                    dispatch(removeFromCart(item?._id))
+                                                    dispatch(setAlertSuccess({
+                                                        status: true,
+                                                        title: "Removed from Cart!",
+                                                        text: "The selected item successfully removed from cart"
+                                                      }))}
+                                                    }
                                                 ><AiOutlineClose /></span>
                                             </span>
                                         </div>

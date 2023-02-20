@@ -10,6 +10,11 @@ function AttractionCard({ setView }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
+  const [selected, setSelected] = useState({
+    value: "",
+    id: "",
+    type: ""
+  })
   const [datalist, setDatalist] = useState(false);
 
   const { searchQuery } = useSelector((state) => state.home);
@@ -19,19 +24,19 @@ function AttractionCard({ setView }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    let result = searchQuery?.destinations?.find((item) => {
-      return value === item?.name;
-    });
-    if (result) {
-      navigate(`/b2b/attractions/${value}`);
+    // let result = searchQuery?.destinations?.find((item) => {
+    //   return value === item?.name;
+    // });
+    if (selected.type === "destination") {
+      navigate(`/b2b/attractions/${selected.value}`);
     } else {
-      let data = searchQuery?.attractions?.find((item) => {
-        if (value?.toLowerCase() === item?.title?.toLowerCase()) {
-          return item?._id;
-        }
-      });
-      console.log(data?._id);
-      navigate(`/b2b/attractions/details/${data?._id}`);
+      // let data = searchQuery?.attractions?.find((item) => {
+      //   if (value?.toLowerCase() === item?.title?.toLowerCase()) {
+      //     return item?._id;
+      //   }
+      // });
+      // console.log(data?._id);
+      navigate(`/b2b/attractions/details/${selected?.id}`);
     }
     setView &&
       setView({
@@ -77,7 +82,7 @@ function AttractionCard({ setView }) {
                   <input
                     type="text"
                     list="Country"
-                    value={value}
+                    value={selected.value}
                     // placeholder="Where do you want to go?"
                     onChange={(e) => setValue(e.target.value)}
                     onFocus={handleFocus}
@@ -95,14 +100,19 @@ function AttractionCard({ setView }) {
                         {searchQuery?.destinations.map((item) => (
                           <>
                             <div
-                              key={item.name}
+                              key={item?.name}
                               className=" py-2 px-2 cursor-pointer capitalize text-darktext z-30 border-b text-sm"
                               onClick={() => {
-                                setValue(item.name);
+                                setValue(item?.name);
+                                setSelected({
+                                  value: item?.name,
+                                  id: item?._id,
+                                  type: "destination"
+                                })
                                 setDatalist(!datalist);
                               }}
                             >
-                              {item.name}
+                              {item?.name}
                             </div>
                           </>
                         ))}
@@ -117,6 +127,11 @@ function AttractionCard({ setView }) {
                             className=" py-2 px-2 cursor-pointer capitalize text-darktext z-30 border-b text-sm"
                             onClick={() => {
                               setValue(item.title);
+                              setSelected({
+                                value: item?.title,
+                                id: item?._id,
+                                type: "attraction"
+                              })
                               setDatalist(!datalist);
                             }}
                           >

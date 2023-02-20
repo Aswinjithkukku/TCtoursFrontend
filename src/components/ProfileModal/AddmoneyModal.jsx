@@ -37,7 +37,7 @@ function AddmoneyModal({ modal, setModal }) {
                         name="amount"
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
-                        className='px-3 w-full border placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-text' />
+                        className='px-3 w-full border placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-text' />
                     </div>
                   </div>
                 </div>

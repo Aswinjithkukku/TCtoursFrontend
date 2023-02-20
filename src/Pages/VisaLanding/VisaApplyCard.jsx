@@ -80,7 +80,7 @@ function VisaApplyCard({ visaDetails }) {
                     value={formData.email}
                     onChange={onChangeHandler}
                     placeholder="Email Id"
-                    className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
+                    className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
                     required
                   />
                 </div>
@@ -100,7 +100,7 @@ function VisaApplyCard({ visaDetails }) {
                     placeholder="Contact No"
                     onChange={onChangeHandler}
                     required
-                    className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
+                    className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
                   />
                 </div>
               </div>
@@ -119,7 +119,7 @@ function VisaApplyCard({ visaDetails }) {
                     required
                     onChange={onChangeHandler}
                     placeholder="Visa type"
-                    className="cursor-pointer px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
+                    className="cursor-pointer px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
                   >
                     <option selected disabled>
                       choose one
@@ -146,7 +146,7 @@ function VisaApplyCard({ visaDetails }) {
                     required
                     onChange={onChangeHandler}
                     placeholder="Travellers"
-                    className="cursor-pointer px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
+                    className="cursor-pointer px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
                   >
                     <option selected disabled>
                       Travellers
@@ -199,7 +199,7 @@ function VisaApplyCard({ visaDetails }) {
                   <input
                     type="email"
                     placeholder="Name"
-                    className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
+                    className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
                   />
                 </div>
               </div>
@@ -214,7 +214,7 @@ function VisaApplyCard({ visaDetails }) {
                   <input
                     type="email"
                     placeholder="Email"
-                    className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
+                    className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
                   />
                 </div>
               </div>
@@ -229,7 +229,7 @@ function VisaApplyCard({ visaDetails }) {
                   <input
                     type="email"
                     placeholder="Phone Number"
-                    className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
+                    className="px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl bg-light text-text"
                   />
                 </div>
               </div>

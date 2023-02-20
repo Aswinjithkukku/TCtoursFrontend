@@ -85,7 +85,7 @@ function VisaHomeScreen() {
                   <div className=" overflow-x-auto scrollbar-hide">
                     <div className=" flex md:grid md:grid-cols-4 space-x-1 px-1 md:px-10 py-3 md:py-1 items-center ">
                         <button
-                          className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-3 border-b-4 border-blue hover:text-lightblue text-lightblue  hover:border-b-4 duration-300 space-x-1 `}
+                          className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-3 border-b-4 border-blue-500 hover:text-lightblue text-lightblue  hover:border-b-4 duration-300 space-x-1 `}
                         >
                       <a className="w-full flex justify-center items-center gap-1" href={"#visas"}>
                           <span className="">
@@ -95,7 +95,7 @@ function VisaHomeScreen() {
                       </a>
                         </button>
                       <button
-                        className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1  `}
+                        className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3 border-blue-500 hover:text-lightblue  hover:border-b-4 duration-300 space-x-1  `}
                       >
                         <a className="w-full flex justify-center items-center gap-1" href={"#documents"}>
                         <span className="">
@@ -105,7 +105,7 @@ function VisaHomeScreen() {
                         </a>
                       </button>
                       <button
-                        className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1  `}
+                        className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-3 border-blue-500 hover:text-lightblue  hover:border-b-4 duration-300 space-x-1  `}
                       >
                         <a className="w-full flex justify-center items-center gap-1" href={"#faqs"}>
                         <span className="">
@@ -115,7 +115,7 @@ function VisaHomeScreen() {
                         </a>
                       </button>
                       <button
-                        className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1 `}
+                        className={`flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-3 border-blue-500 hover:text-lightblue  hover:border-b-4 duration-300 space-x-1 `}
                       >
                         <a className="w-full flex justify-center items-center gap-1" href={"#terms"}>
                         <span className="">

@@ -1,8 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import priceConversion from "../../../utils/PriceConversion";
 
 function VisaComponentPage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const { visa } = useSelector((state) => state.visa);
   const { selectedCurrency } = useSelector((state) => state.home);
 
@@ -27,7 +30,7 @@ function VisaComponentPage() {
                   </div>
                 </div>
                 <div className="p-5 space-y-3 ">
-                  <div className="flex border-b pb-2">
+                  <div className="flex justify-between border-b pb-2">
                     <span className="text-xl text-lightblue font-[600]  underline">
                       {priceConversion(
                         item?.totalPrice,
@@ -35,6 +38,15 @@ function VisaComponentPage() {
                         true
                       )}{" "}
                     </span>
+                    <button
+                      className="text-xs uppercase font-[500] text-white bg-blue-500 rounded px-2"
+                      onClick={() => {
+                        navigate(`/b2b/visa/${id}/apply`);
+                        localStorage.setItem("visaEnquiry", item?._id);
+                      }}
+                    >
+                      Apply online
+                    </button>
                   </div>
                   <div className=" border-b pb-3 text-text">
                     <div className="">{item?.visaName}</div>

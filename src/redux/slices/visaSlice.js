@@ -4,8 +4,8 @@ import axios from "../../axios";
 const initialState = {
   visaLoading: false,
   visaEnquiry:
-    (localStorage.getItem("visaEnquiry") &&
-      JSON.parse(localStorage.getItem("visaEnquiry"))) ||
+    localStorage.getItem("visaEnquiry") ?
+      localStorage.getItem("visaEnquiry") :
     {},
   rows: [
     {

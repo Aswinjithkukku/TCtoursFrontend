@@ -6,7 +6,7 @@ import { logoutAgent } from "../../../redux/slices/agentSlice";
 
 
 export default function AdminDropdown() {
-    const { agent } = useSelector((state) => state.agents);
+    // const { agent } = useSelector((state) => state.agents);
     const dispatch = useDispatch();
 
     return (

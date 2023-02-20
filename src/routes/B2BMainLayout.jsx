@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Sidebar, Header } from "../b2b/components";
+import SuccessAlert from "../b2b/components/Alerts/SuccessAlert";
 import BottomNav from "../b2b/components/BottomNavigattion/BottomNav";
 
 export default function B2BMainLayout() {
@@ -18,6 +19,7 @@ export default function B2BMainLayout() {
                 <div className={`${sidebarView ? "ml-[0px]" : "ml-[0px] lg:ml-[250px]"} min-h-screen lg:min-h-0 `}>
                     <Outlet />
                 </div>
+                <SuccessAlert />
                     <BottomNav />
             </main>
         </div>

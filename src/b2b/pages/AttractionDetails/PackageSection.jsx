@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { addToCart } from "../../../redux/slices/agentExcursionSlice";
 import ActivityTable from "./ActivityTable";
-import { ImBlocked } from "react-icons/im";
+import { setAlertSuccess } from "../../../redux/slices/homeSlice"
 
 function PackageSection() {
   const dispatch = useDispatch();
@@ -24,12 +24,11 @@ function PackageSection() {
     if (isDateExist.length > 0) {
       setError("");
       dispatch(addToCart(agentSelectedActivities));
-      Swal.fire({
-        icon: "success",
+      dispatch(setAlertSuccess({
+        status: true,
         title: "Added to Cart!",
-        text: "The selected item added to cart",
-        timer: 1500,
-      });
+        text: "The selected item successfully added to cart"
+      }))
     } else {
       setError("Fill the tour Date");
     }

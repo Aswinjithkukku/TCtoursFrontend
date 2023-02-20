@@ -4,8 +4,8 @@ import { IoMdCart } from 'react-icons/io'
 import { FaBaby, FaChild } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import priceConversion from '../../utils/PriceConversion'
-import { removeFromCart } from '../../redux/slices/excursionSlice'
+import priceConversion from '../../../utils/PriceConversion'
+import { removeFromCart } from '../../../redux/slices/excursionSlice'
 
 function CartModal({ setCart }) {
   const navigate = useNavigate()
@@ -13,15 +13,15 @@ function CartModal({ setCart }) {
 
   const [price, setPrice] = useState(0)
 
-  const { excursionCart } = useSelector(state => state.excursion)
+  const { agentExcursionCart } = useSelector(state => state.agentExcursions)
   const { selectedCurrency } = useSelector(state => state.home)
 
   useEffect(() => {
-    const sum = excursionCart?.reduce((acc, data) => {
+    const sum = agentExcursionCart?.reduce((acc, data) => {
       return Number(acc) + Number(data?.price)
     }, 0)
     setPrice(sum)
-  }, [excursionCart])
+  }, [agentExcursionCart])
 
   return (
     <div className="absolute z-20 top-7 md:top-10 right-0 bg-[#EFF5F5] rounded-xl w-[400px]  max-h-[70vh] overflow-y-auto"  >
@@ -31,12 +31,12 @@ function CartModal({ setCart }) {
             <h1 className='pl-3 text-darktext  text-xl'><IoMdCart /></h1>
             <h1 className='px-2 text-darktext  font-[800] tracking-wide text-xl'> My Cart</h1>
           </div>
-          {excursionCart?.length <= 0 && (
+          {agentExcursionCart?.length <= 0 && (
             <div className='flex justify-center py-10'>
               <p className='text-sm text-text'>Your Cart is empty.....</p>
             </div>
           )}
-          {excursionCart?.map((item, index) => (
+          {agentExcursionCart?.map((item, index) => (
             <div className="  hover:bg-gray-100 p-2  border-b  overflow-hidden" key={index}>
               <div className='flex justify-end'>
                 <button className='text-main text-xl bg-gray-200 rounded-full'

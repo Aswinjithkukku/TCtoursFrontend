@@ -283,7 +283,7 @@ function TravellerDetails({ navigation, setNavigation }) {
                   </div>
                   <div className="">
                     <input
-                      type="number"
+                      type="text"
                       className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none no-spinner"
                       name="passportNo"
                       value={row.passportNo}

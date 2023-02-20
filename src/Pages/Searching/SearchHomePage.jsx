@@ -131,7 +131,7 @@ function SearchHomePage({
           <div className=" flex justify-around lg:hidden">
             <span className="">
               <button
-                className="border border-blue rounded-lg px-5 py-2 hover:text-blue"
+                className="border border-blue-500 rounded-lg px-5 py-2 hover:text-blue"
                 onClick={() => setViewFilter(!viewFilter)}
               >
                 Category
@@ -139,7 +139,7 @@ function SearchHomePage({
             </span>
             <span className="">
               <button
-                className="border border-blue rounded-lg px-10 py-2"
+                className="border border-blue-500 rounded-lg px-10 py-2"
                 onClick={() => setViewCategory(!viewCategory)}
               >
                 Filters
