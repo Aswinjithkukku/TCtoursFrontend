@@ -231,7 +231,7 @@ function AttractionOrder() {
                   <th className="font-[500] p-3 whitespace-nowrap">Infant</th> */}
                   <th className="font-[500] p-3 whitespace-nowrap">Price</th>
                   <th className="font-[500] p-3 whitespace-nowrap">Status</th>
-                  <th className="font-[500] p-3 whitespace-nowrap">Tickets</th>
+                  <th className="font-[500] p-3 whitespace-nowrap">Print</th>
                 </tr>
               </thead>
               <tbody className="text-sm overflow-hidden text-textColor">
@@ -241,10 +241,16 @@ function AttractionOrder() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="13">
-                      <p className="flex justify-center my-5 text-gray-400 font-[500]">
-                        Data With this Query not found!!!
-                      </p>
+                    <td colSpan="13" className="h-[60vh]">
+                      <div class="flex flex-col items-center justify-center gap-y-4">
+                        <div
+                          class="inline-block h-14 w-14 animate-spin rounded-[40px] border-4 border-solid border-blue-400 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                          role="status"
+                        ></div>
+                        <span class="text-blue-400 font-semibold text-[20px]">
+                          Loading...
+                        </span>
+                      </div>
                     </td>
                   </tr>
                 )}
