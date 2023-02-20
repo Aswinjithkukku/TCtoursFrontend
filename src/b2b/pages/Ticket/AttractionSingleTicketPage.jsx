@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Barcode from "react-barcode";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import QRCode from "react-qr-code";
-import jsPDF from "jspdf";
 
 import axios from "../../../axios";
 import formatDate from "../../../utils/formatDate";
 import { PageLoader } from "../../components";
 
 function AttractionSingleTicketPage() {
-  const [ticket, setTicket] = useState({});
+  const [order, setOrder] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   const { id } = useParams();
@@ -21,14 +20,18 @@ function AttractionSingleTicketPage() {
     try {
       setIsLoading(true);
 
-      const response = await axios.get(
-        `/b2b/attractions/tickets/single/${id}`,
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
-      );
+      // const response = await axios.get(
+      //   `/b2b/attractions/tickets/single/${id}`,
+      //   {
+      //     headers: { authorization: `Bearer ${token}` },
+      //   }
+      // );
+      const response = await axios.get(`/b2b/attractions/orders/single/${id}`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
 
-      setTicket(response.data);
+      setOrder(response.data);
+      console.log(response.data);
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -39,132 +42,147 @@ function AttractionSingleTicketPage() {
     fetchSingleTicket();
   }, []);
 
-  const downloadTicket = async (id) => {
-    try {
-      const response = await axios.get(
-        `/b2b/attractions/tickets/single/${id}`,
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
-      );
-      console.log(response);
-      if (response?.status === 200) {
-        const doc = new jsPDF("p", "pt", "a4");
-        doc.html(document.getElementById("ticket_template"), {
-          callback: function (pdf) {
-            pdf.save(`${response?.data?.ticketNo}.pdf`);
-          },
+  const tickets = useMemo(() => {
+    return () => {
+      const data = order?.activites?.map((ele) => {
+        let tickets = [];
+        if (ele?.adultTickets) tickets = [...tickets, ...ele?.adultTickets];
+        if (ele?.childTickets) tickets = [...tickets, ...ele?.childTickets];
+        tickets = tickets?.map((tkt) => {
+          return {
+            ...tkt,
+            attraction: ele?.attraction,
+            activity: ele?.activity,
+            destination: ele?.destination,
+          };
         });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+        return tickets;
+      });
+      if (data) return data.flat(1);
+      return [];
+    };
+  }, [order]);
+
+  const ticketList = tickets();
+  const baseUrl = process.env.REACT_APP_SERVER_URL;
 
   return isLoading ? (
     <PageLoader />
   ) : (
-    <div className="min-w-screen min-h-screen bg-white">
-      <main className="w-[700px] mx-auto">
-        <div className="primary__section">
-          <div className="flex justify-end pt-7">
-            <div className="">
-              <Barcode
-                value={ticket?.ticketNo}
-                width={2}
-                height={40}
-                textMargin={0}
-                fontSize={14}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="secondary__section">
-          <div className="bg-[#e3f2fd] rounded-2xl mt-4 border-2 border-[#a3c4dc] grid grid-cols-12 items-center">
-            <div className="col-span-7 border-r-2 border-dashed border-[#a3c4dc] p-4">
-              <div className=" border-b border-dashed border-[#a3c4dc] ">
-                <h1 className="text-[14px] py-2 font-[600]">
-                  Tour Name : {ticket?.activity?.name}
-                </h1>
-              </div>
-              <div className="grid grid-cols-2 text-[10px] mt-4">
-                <div className="grid grid-cols-2 gap-x-1 gap-y-2">
-                  <div className="">Ticket Type:</div>
-                  <div className="capitalize">{ticket?.ticketFor}</div>
-                  <div className="">Destination:</div>
-                  <div className="capitalize">
-                    {ticket?.activity?.attraction?.destination?.name}
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-x-1 gap-y-2">
-                  <div className="">Validity Till:</div>
-                  <div className="">
-                    {ticket?.validity ? formatDate(ticket?.validTill) : "N/A"}
-                  </div>
-                  <div className="">Number:</div>
-                  <div className="">{ticket?.lotNo}</div>
-                </div>
-              </div>
-            </div>
-            <div className="col-span-5 py-10 relative">
-              <div className="h-5 w-5 rounded-full bg-white absolute -top-3 -left-[10px]"></div>
-              <div className="h-5 w-5 rounded-full bg-white absolute -bottom-3 -left-[10px]"></div>
-              <div className="w-full h-full flex justify-center items-center">
-                <div className="">
-                  <div className="flex justify-center">
-                    <div className="h-[70px] w-[70px]">
-                      <QRCode
-                        size={256}
-                        style={{
-                          height: "auto",
-                          maxWidth: "100%",
-                          width: "100%",
-                        }}
-                        value={ticket?.ticketNo}
-                        viewBox={`0 0 256 256`}
-                      />
-                    </div>
-                  </div>
-                  <p className="text-[9px] text-center mt-2">
-                    {ticket?.ticketNo}
-                  </p>
-                  <p className="text-[9px] text-center">
-                    Place Image against the scanner
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="last__section">
-          <div className="grid grid-cols-3 rounded-2xl overflow-hidden mt-7 h-[200px]">
-            {ticket?.activity?.attraction?.images
-              ?.slice(0, 3)
-              ?.map((img, index) => {
-                return (
-                  <div className="h-[100%]" key={index}>
+    <>
+      <div>
+        {ticketList?.map((ticket) => (
+          <div className="min-w-screen min-h-screen bg-white">
+            <main className="w-[700px] mx-auto">
+              <div className="primary__section w-[100%]">
+                <div className="grid grid-cols-5 pt-7">
+                  <div className=" col-span-2 ">
                     <img
-                      src={process.env.REACT_APP_SERVER_URL + img}
-                      alt="qr"
-                      className="w-full h-full object-cover"
+                      className="w-[200px] h-[100px] "
+                      src={`${baseUrl}${ticket?.attraction?.logo}`}
+                      alt=""
                     />
                   </div>
-                );
-              })}
-          </div>
-        </div>
+                  <div className="col-span-3 flex justify-end">
+                    <Barcode
+                      value={ticket?.ticketNo}
+                      width={1}
+                      height={50}
+                      textMargin={0}
+                      fontSize={20}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="secondary__section">
+                <div className="bg-[#e3f2fd] rounded-2xl mt-4 border-2 border-[#a3c4dc] grid grid-cols-12 items-center">
+                  <div className="col-span-7 border-r-2 border-dashed border-[#a3c4dc] p-4">
+                    <div className=" border-b border-dashed border-[#a3c4dc] ">
+                      <h1 className="text-[14px] py-2 font-[600]">
+                        Tour Name : {ticket?.activity?.name}
+                      </h1>
+                    </div>
+                    <div className="grid grid-cols-2 text-[10px] mt-4">
+                      <div className="grid grid-cols-2 gap-x-1 gap-y-2">
+                        <div className="">Ticket Type:</div>
+                        <div className="capitalize">{ticket?.ticketFor}</div>
+                        <div className="">Destination:</div>
+                        <div className="capitalize">
+                          {ticket?.destination?.name}
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-x-1 gap-y-2">
+                        <div className="">Validity Till:</div>
+                        <div className="">
+                          {ticket?.validity
+                            ? formatDate(ticket?.validTill)
+                            : "N/A"}
+                        </div>
+                        <div className="">Number:</div>
+                        <div className="">{ticket?.lotNo}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-span-5 py-10 relative">
+                    <div className="h-5 w-5 rounded-full bg-white absolute -top-3 -left-[10px]"></div>
+                    <div className="h-5 w-5 rounded-full bg-white absolute -bottom-3 -left-[10px]"></div>
+                    <div className="w-full h-full flex justify-center items-center">
+                      <div className="">
+                        <div className="flex justify-center">
+                          <div className="h-[100px] w-[100px]">
+                            <QRCode
+                              size={256}
+                              style={{
+                                height: "auto",
+                                maxWidth: "100%",
+                                width: "100%",
+                              }}
+                              value={ticket?.ticketNo}
+                              viewBox={`0 0 256 256`}
+                            />
+                          </div>
+                        </div>
+                        <p className="text-[9px] text-center mt-2">
+                          {ticket?.ticketNo}
+                        </p>
+                        <p className="text-[9px] text-center">
+                          Place Image against the scanner
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-        <div className="mt-7 text-[12px] leading-[22px]">
-          <div
-            dangerouslySetInnerHTML={{
-              __html: ticket?.activity?.description,
-            }}
-            id="ticket-description"
-          ></div>
-        </div>
-      </main>
-    </div>
+              <div className="last__section">
+                <div className=" grid grid-cols-3  w-[100%]  h-[200px] rounded-2xl overflow-hidden mt-4 ">
+                  {ticket?.attraction?.images?.map((link) => {
+                    return (
+                      <div className=" h-[300px]  ">
+                        <img
+                          src={`${baseUrl}${link}`}
+                          alt="images"
+                          className="h-[300px] w-[100%]"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="mt-7 text-[12px] leading-[22px]">
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: ticket?.activity?.description,
+                  }}
+                  id="ticket-description"
+                ></div>
+              </div>
+            </main>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 
