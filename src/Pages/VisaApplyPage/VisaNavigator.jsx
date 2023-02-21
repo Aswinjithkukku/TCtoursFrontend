@@ -46,7 +46,7 @@ function VisaNavigator({}) {
           <div className=" overflow-x-auto scrollbar-hide">
             <div className=" flex md:grid md:grid-cols-7  px-1 md:px-10 py-3 md:py-1 items-center  ">
               <button
-                className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-3 border-b-4 border-blue hover:text-lightblue text-lightblue  hover:border-b-4 duration-300 space-x-1 h-[100%]`}
+                className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-3 border-b-4 border-blue-500 hover:text-lightblue text-lightblue  hover:border-b-4 duration-300 space-x-1 h-[100%]`}
                 onClick={() => {
                   setNavigation({ itenary: true });
                 }}
@@ -58,7 +58,7 @@ function VisaNavigator({}) {
                   setNavigation({ details: true });
                 }}
                 className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-3 h-[100%] ${
-                  !navigation?.itenary ? " border-blue border-b-4" : ""
+                  !navigation?.itenary ? " border-blue-500 border-b-4" : ""
                 } `}
               >
                 <span
@@ -75,9 +75,9 @@ function VisaNavigator({}) {
                 onClick={() => {
                   setNavigation({ details: true });
                 }}
-                className={`h-[100%] flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1 ${
+                className={`h-[100%] flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3 border-blue-500 hover:text-lightblue  hover:border-b-4 duration-300 space-x-1 ${
                   navigation?.payment || navigation?.upload
-                    ? " border-blue border-b-4"
+                    ? " border-blue-500 border-b-4"
                     : ""
                 } `}
               >
@@ -89,7 +89,7 @@ function VisaNavigator({}) {
                 }}
                 className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3   duration-300 space-x-1  h-[100%] ${
                   navigation?.payment || navigation?.upload
-                    ? " border-blue border-b-4"
+                    ? " border-blue-500 border-b-4"
                     : ""
                 }`}
               >
@@ -111,8 +111,8 @@ function VisaNavigator({}) {
                 onClick={() => {
                   setNavigation({ payment: true });
                 }}
-                className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1 h-[100%] ${
-                  navigation?.upload ? " border-blue border-b-4" : ""
+                className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3 border-blue-500 hover:text-lightblue  hover:border-b-4 duration-300 space-x-1 h-[100%] ${
+                  navigation?.upload ? " border-blue-500 border-b-4" : ""
                 } `}
               >
                 <span className="">Make Payment</span>
@@ -123,7 +123,7 @@ function VisaNavigator({}) {
                   setNavigation({ upload: true });
                 }}
                 className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3   duration-300 space-x-1  h-[100%] ${
-                  navigation?.upload ? " border-blue border-b-4" : ""
+                  navigation?.upload ? " border-blue-500 border-b-4" : ""
                 } `}
               >
                 <span
@@ -140,7 +140,7 @@ function VisaNavigator({}) {
                 onClick={() => {
                   setNavigation({ upload: true });
                 }}
-                className={`h-[100%] flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-3 border-blue hover:text-lightblue  hover:border-b-4 duration-300 space-x-1  `}
+                className={`h-[100%] flex justify-center text-sm md:text-base items-center px-6 md:px-3 py-3 border-blue-500 hover:text-lightblue  hover:border-b-4 duration-300 space-x-1  `}
               >
                 <span className="">Upload Details</span>
               </button>

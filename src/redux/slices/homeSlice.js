@@ -16,6 +16,16 @@ const initialState = {
     conversionRate: 1,
     flag: UAE_FLAG,
   },
+  alertSuccess: {
+    status: false,
+    title: "",
+    text: ""
+  },
+  alertError: {
+    status: false,
+    title: "",
+    text: ""
+  },
 };
 
 // get all data for home
@@ -54,6 +64,23 @@ const homeSlice = createSlice({
         flag: action.payload?.flag,
       };
       localStorage.setItem("currency", JSON.stringify(state.selectedCurrency));
+    },
+    setAlertSuccess: (state, action) => {
+      state.alertSuccess = {
+        status : action.payload?.status,
+        title : action.payload?.title,
+        text : action.payload?.text
+      }
+
+
+    },
+    setAlertError: (state, action) => {
+      state.alertError = {
+        status : action.payload?.status,
+        title : action.payload?.title,
+        text : action.payload?.text
+      }
+
     },
   },
   extraReducers: {
@@ -111,6 +138,6 @@ const homeSlice = createSlice({
   },
 });
 
-export const { changeCurrency } = homeSlice.actions;
+export const { changeCurrency, setAlertSuccess, setAlertError } = homeSlice.actions;
 
 export default homeSlice.reducer;

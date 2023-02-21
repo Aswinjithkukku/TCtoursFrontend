@@ -14,6 +14,8 @@ import { useRef } from "react";
 import ReactToPrint from "react-to-print";
 import { AiFillPrinter } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import AttractionInvoicePdfTemplate from "../OrderInvoices/AttractionInvoicePdfTemplate";
+import B2bAttractionInvoiceTemplate from "../Ticket/B2bAttractionInvoiceTemplate";
 
 function AttractionOrderTable({ item }) {
   const [orderDetails, setOrderDetails] = useState(false);
@@ -50,7 +52,7 @@ function AttractionOrderTable({ item }) {
 
   const list = tickets();
   const listRef = useRef();
-  console.log(item);
+  // console.log(item);
   return (
     <>
       <div className="h-fit absolute left-[20000px]" id="all_tickets">
@@ -62,6 +64,9 @@ function AttractionOrderTable({ item }) {
               </div>
             </>
           ))}
+        </div>
+        <div id="attraction_order_pdf_template" className="w-[21cm]">
+          <B2bAttractionInvoiceTemplate data={item} />
         </div>
       </div>
       <tr
@@ -134,13 +139,29 @@ function AttractionOrderTable({ item }) {
 
         <td className="p-3">
           <div className="flex flex-col gap-1">
-            <Link
+            <ReactToPrint
+              trigger={() => (
+                <button
+                  disabled={item?.activities?.status !== "confirmed"}
+                  className=" px-2 py-1  rounded text-white text-[16px] flex items-center gap-1 justify-center w-[100%] bg-gray-400"
+                >
+                  <span className="text-sm">Invoice</span>
+                  <AiFillPrinter />
+                </button>
+              )}
+              content={() =>
+                document.getElementById("attraction_order_pdf_template")
+              }
+            />
+            <a
+              href={`${process.env.REACT_APP_URL}/ticket/attraction/${item?._id}`}
               disabled={item?.activities?.status !== "confirmed"}
               className=" px-2 py-1  rounded text-white text-[16px] flex items-center gap-1 justify-center w-[100%] bg-gray-400"
-              to={`/ticket/attraction/${item?._id}`}
+              // to={`/ticket/attraction/${item?._id}`}
+              target="blank"
             >
               View <ImTicket />
-            </Link>
+            </a>
             <ReactToPrint
               trigger={() => (
                 <button

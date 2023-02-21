@@ -73,7 +73,7 @@ function AttractionCard({ setView }) {
                     onChange={(e) => setValue(e.target.value)}
                     onFocus={handleFocus}
                     required
-                    className="capitalize bg-gray-50/80 px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext"
+                    className="capitalize bg-gray-50/80 px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext"
                   />
                 </div>
                 {datalist && (

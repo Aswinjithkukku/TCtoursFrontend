@@ -13,7 +13,7 @@ function CarCard() {
                         <span className='text-lg '>Pick-Up location</span>
                     </div>
                     <div className=''>
-                        <input type='text' placeholder='Where are you?' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+                        <input type='text' placeholder='Where are you?' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@ function CarCard() {
                         <span className='text-lg '>Drop-off location</span>
                     </div>
                     <div className=''>
-                        <input type='text' placeholder='where to?' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+                        <input type='text' placeholder='where to?' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@ function CarCard() {
                         <span className='text-lg'>Pick-Up</span>
                     </div>
                     <div className=''>
-                        <input type='date' placeholder='Choose date' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+                        <input type='date' placeholder='Choose date' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
                     </div>
                 </div>
             </div>

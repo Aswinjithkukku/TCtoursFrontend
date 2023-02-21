@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import axios from "../../../axios";
 import AttractionOrderTable from "./AttractionOrderTable";
 import OrdersNavigator from "../OrdersNavigator";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function AttractionOrder() {
   const [orderType, setOrderType] = useState(false);
@@ -25,6 +26,7 @@ function AttractionOrder() {
     totalOrders: 0,
     status: "",
     referenceNo: "",
+    hasMore: true,
   });
   const { token, agent } = useSelector((state) => state.agents);
 
@@ -60,6 +62,7 @@ function AttractionOrder() {
         return {
           ...prev,
           totalOrders: response?.data?.result?.totalOrders || 0,
+          hasMore: response?.data?.result?.totalOrders >= orders.length,
         };
       });
       setIsLoading(false);
@@ -98,10 +101,8 @@ function AttractionOrder() {
 
   useEffect(() => {
     if (filters.status !== "") {
-      setOrders([]);
       fetchOrders({ ...filters });
     } else if (filters.referenceNo !== "") {
-      setOrders([]);
       fetchOrders({ ...filters });
     } else {
       fetchOrders({ ...filters });
@@ -109,29 +110,31 @@ function AttractionOrder() {
     console.log("working");
   }, [filters.skip, filters.status, filters.referenceNo]);
 
-  const handelInfiniteScroll = async () => {
-    try {
-      if (
-        window.innerHeight + document.documentElement.scrollTop + 1 >=
-        document.documentElement.scrollHeight
-      ) {
-        setIsLoading(true);
-        setFilters((prev) => {
-          return {
-            ...prev,
-            skip: Number(prev.skip) + 1,
-          };
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  console.log("111111111111111111111");
 
-  useEffect(() => {
-    window.addEventListener("scroll", handelInfiniteScroll);
-    return () => window.removeEventListener("scroll", handelInfiniteScroll);
-  }, []);
+  // const handelInfiniteScroll = async () => {
+  //   try {
+  //     if (
+  //       window.innerHeight + document.documentElement.scrollTop + 1 >=
+  //       document.documentElement.scrollHeight
+  //     ) {
+  //       setIsLoading(true);
+  //       setFilters((prev) => {
+  //         return {
+  //           ...prev,
+  //           skip: Number(prev.skip) + 1,
+  //         };
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //     window.addEventListener("scroll", handelInfiniteScroll);
+  //     return () => window.removeEventListener("scroll", handelInfiniteScroll);
+  // }, []);
 
   return (
     <div>
@@ -159,7 +162,10 @@ function AttractionOrder() {
                 className="input"
                 onChange={(e) =>
                   setFilters((prev) => {
-                    return { ...prev, referenceNo: e.target.value };
+                    return {
+                      ...prev,
+                      referenceNo: e.target.value,
+                    };
                   })
                 }
               />
@@ -189,6 +195,7 @@ function AttractionOrder() {
                     <TransactionModal
                       setFilters={setFilters}
                       setTransactionType={setTransactionType}
+                      setOrders={setOrders}
                     />
                   )}
                 </div>
@@ -208,48 +215,62 @@ function AttractionOrder() {
             </span>
           </div> */}
           <div className="overflow-x-auto order__scroll ">
-            <table className="w-full relative overflow-hidden">
-              <thead className="bg-[#f3f6f9] text-grayColor text-[14px] text-left">
-                <tr>
-                  <th className="font-[500] p-3 whitespace-nowrap">Ref.No</th>
-                  {/* <th className="font-[500] p-3 whitespace-nowrap">Agent</th>
+            <InfiniteScroll
+              dataLength={orders?.length || 0}
+              next={() => {
+                setFilters((prev) => {
+                  return { ...prev, skip: prev.skip + 1 };
+                });
+              }}
+              hasMore={filters.hasMore}
+            >
+              <table className="w-full relative overflow-hidden">
+                <thead className="bg-[#f3f6f9] text-grayColor text-[14px] text-left">
+                  <tr>
+                    <th className="font-[500] p-3 whitespace-nowrap">Ref.No</th>
+                    {/* <th className="font-[500] p-3 whitespace-nowrap">Agent</th>
                   <th className="font-[500] p-3 whitespace-nowrap">
                     Agent code
                   </th> */}
-                  <th className="font-[500] p-3 whitespace-nowrap">Activity</th>
-                  {/* <th className="font-[500] p-3 whitespace-nowrap">
+                    <th className="font-[500] p-3 whitespace-nowrap">
+                      Activity
+                    </th>
+                    {/* <th className="font-[500] p-3 whitespace-nowrap">
                     Booking Type
                   </th> */}
-                  <th className="font-[500] p-3 whitespace-nowrap">
-                    Booking Date
-                  </th>
-                  <th className="font-[500] p-3 whitespace-nowrap">
-                    Purchase Date
-                  </th>
-                  {/* <th className="font-[500] p-3 whitespace-nowrap">Adults</th>
+                    <th className="font-[500] p-3 whitespace-nowrap">
+                      Booking Date
+                    </th>
+                    <th className="font-[500] p-3 whitespace-nowrap">
+                      Purchase Date
+                    </th>
+                    {/* <th className="font-[500] p-3 whitespace-nowrap">Adults</th>
                   <th className="font-[500] p-3 whitespace-nowrap">Children</th>
                   <th className="font-[500] p-3 whitespace-nowrap">Infant</th> */}
-                  <th className="font-[500] p-3 whitespace-nowrap">Price</th>
-                  <th className="font-[500] p-3 whitespace-nowrap">Status</th>
-                  <th className="font-[500] p-3 whitespace-nowrap">Tickets</th>
-                </tr>
-              </thead>
-              <tbody className="text-sm overflow-hidden text-textColor">
-                {orders?.length > 0 ? (
-                  orders?.map((item, index) => (
-                    <AttractionOrderTable item={item} key={index} />
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="13">
-                      <p className="flex justify-center my-5 text-gray-400 font-[500]">
-                        Data With this Query not found!!!
-                      </p>
-                    </td>
+                    <th className="font-[500] p-3 whitespace-nowrap">Price</th>
+                    <th className="font-[500] p-3 whitespace-nowrap">Status</th>
+                    <th className="font-[500] p-3 whitespace-nowrap">
+                      Tickets
+                    </th>
                   </tr>
-                )}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="text-sm overflow-hidden text-textColor">
+                  {orders?.length > 0 ? (
+                    orders?.map((item, index) => (
+                      <AttractionOrderTable item={item} key={index} />
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="13">
+                        <p className="flex justify-center my-5 text-gray-400 font-[500]">
+                          Data With this Query not found!!!
+                        </p>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </InfiniteScroll>
 
             {/* <div className="p-4">
               <Pagination

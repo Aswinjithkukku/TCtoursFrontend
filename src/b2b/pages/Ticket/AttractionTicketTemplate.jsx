@@ -53,7 +53,7 @@ const AttractionTicketTemplate = ({ ticket, index }) => {
                   alt=""
                 />
               </div>
-              <div className="col-span-3 flex justify-end">
+              <div className="col-span-3 flex justify-end ">
                 <Barcode
                   value={ticket?.ticketNo}
                   width={1}

@@ -3,13 +3,14 @@ import { BsDash } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeFromCart } from '../../../redux/slices/agentExcursionSlice'
 import priceConversion from '../../../utils/PriceConversion'
+import { setAlertSuccess } from "../../../redux/slices/homeSlice"
 
 function PaymentCardSection() {
     const dispatch = useDispatch()
 
     const { agentExcursionCart } = useSelector(state => state.agentExcursions)
 
-    const [vatAmount, setVatAmount] = useState(0)
+    // const [vatAmount, setVatAmount] = useState(0)
     // const [activities, setActivities] = useState(agentExcursionCart ? agentExcursionCart || [] : [])
 
     const { selectedCurrency } = useSelector(state => state.home)
@@ -37,7 +38,17 @@ function PaymentCardSection() {
                         <div className='p-3 border-b flex justify-between items-center'>
                             <h1 className='text-lg font-semibold text-darktext'>{item?.name} </h1>
                             <button className='rounded-full h-5 w-5 bg-gray-300 text-main flex justify-center items-center text-lg font-bold'
-                                onClick={() => dispatch(removeFromCart(item?._id))}
+                                onClick={() => {
+                                    dispatch(removeFromCart(item?._id))
+                                    dispatch(
+                                        setAlertSuccess({
+                                          status: true,
+                                          title: "Removed from Cart!",
+                                          text: "The selected item successfully removed from cart",
+                                        })
+                                      );
+                                } 
+                            }
                             >
                                 <BsDash />
                             </button>

@@ -359,8 +359,8 @@ function ReapplyIndividual() {
                       </div>
                       <div className="">
                         <input
-                          type="number"
-                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none no-spinner"
+                          type="text"
+                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none "
                           name="passportNo"
                           value={data.passportNo}
                           onChange={handleChange}

@@ -20,14 +20,14 @@ function VisaNavigator() {
   });
 
   const [data, setData] = useState({
-    visaType: JSON.parse(localStorage.getItem("visaEnquiry"))?.visaType || "",
-    email: JSON.parse(localStorage.getItem("visaEnquiry"))?.email || "",
-    contactNo: JSON.parse(localStorage.getItem("visaEnquiry"))?.contactNo || "",
-    traveller: JSON.parse(localStorage.getItem("visaEnquiry"))?.traveller || "",
-    onwardDate:
-      JSON.parse(localStorage.getItem("visaEnquiry"))?.onwardDate || "",
-    returnDate:
-      JSON.parse(localStorage.getItem("visaEnquiry"))?.returnDate || "",
+    visaType: localStorage.getItem("visaEnquiry")
+      ? localStorage.getItem("visaEnquiry")
+      : "",
+    email: "",
+    contactNo: "",
+    traveller: "",
+    onwardDate: "",
+    returnDate: "",
     country: "",
   });
 
@@ -35,11 +35,11 @@ function VisaNavigator() {
 
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedVisa, setSelectedVisa] = useState({})
+  const [selectedVisa, setSelectedVisa] = useState({});
 
   const { token } = useSelector((state) => state.agents);
-  const { visa, visaEnquiry } = useSelector(state => state.visa)
-  const { selectedCurrency } = useSelector(state => state.home)
+  const { visa, visaEnquiry } = useSelector((state) => state.visa);
+  const { selectedCurrency } = useSelector((state) => state.home);
 
   const fetchVisas = async (id) => {
     try {
@@ -63,25 +63,23 @@ function VisaNavigator() {
   }, [id]);
 
   useEffect(() => {
-    for (let item of visa?.visaType) {
-      if (item._id === visaEnquiry?.visaType) {
-        setSelectedVisa(item);
+    if (visa?.visaType?.length > 0) {
+      for (let item of visa?.visaType) {
+        if (item._id === visaEnquiry?.visaType) {
+          setSelectedVisa(item);
+        }
       }
     }
   }, [visaEnquiry]);
 
-  useEffect(() => {}, []);
-
   const totalPrice =
-    +selectedVisa?.totalPrice +
-    selectedVisa?.insurance +
-    selectedVisa?.tax;
+    +selectedVisa?.totalPrice + selectedVisa?.insurance + selectedVisa?.tax;
 
   const grandTotal = totalPrice * visaEnquiry?.traveller;
 
   return (
     <>
-      <div className="bg-gray-300 sticky top-0 z-10">
+      <div className="bg-gray-300 rounded-lg sticky top-0 z-10">
         <div className=" text-darktext ">
           <div className=" overflow-x-auto scrollbar-hide">
             <div className=" flex md:grid md:grid-cols-11  px-1 md:px-10 py-3 md:py-1 items-center ">
@@ -93,7 +91,7 @@ function VisaNavigator() {
                   navigation.payment
                     ? "border-b-4  text-lightblue"
                     : ""
-                } border-blue  hover:border-b-4 duration-300 space-x-1 `}
+                } border-blue-500  hover:border-b-4 duration-300 space-x-1 `}
                 onClick={() => {
                   navigation.details &&
                     setNavigation({
@@ -113,7 +111,7 @@ function VisaNavigator() {
                   navigation.details || navigation.upload || navigation.payment
                     ? "border-b-4 text-lightblue"
                     : ""
-                } border-blue  `}
+                } border-blue-500  `}
               >
                 {navigation.details ||
                 navigation.upload ||
@@ -132,7 +130,7 @@ function VisaNavigator() {
                   navigation.details || navigation.upload || navigation.payment
                     ? "border-b-4 text-lightblue"
                     : ""
-                } border-blue hover:border-b-4 duration-300 space-x-1  whitespace-nowrap`}
+                } border-blue-500 hover:border-b-4 duration-300 space-x-1  whitespace-nowrap`}
               >
                 <span className="">Traveller Details</span>
               </button>
@@ -141,7 +139,7 @@ function VisaNavigator() {
                   navigation.upload || navigation.payment
                     ? "border-b-4 text-lightblue"
                     : ""
-                } border-blue`}
+                } border-blue-500 `}
               >
                 {navigation.upload || navigation.payment ? (
                   <span className="text-2xl text-lightblue">
@@ -158,14 +156,14 @@ function VisaNavigator() {
                   navigation.upload || navigation.payment
                     ? "border-b-4 text-lightblue"
                     : ""
-                } border-blue hover:border-b-4 duration-300 space-x-1  whitespace-nowrap`}
+                } border-blue-500 hover:border-b-4 duration-300 space-x-1  whitespace-nowrap`}
               >
                 <span className="">Make Payment</span>
               </button>
               <button
                 className={`col-span-1 hidden lg:flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3  duration-300 space-x-1 ${
                   navigation.upload ? "border-b-4  text-lightblue" : ""
-                } border-blue`}
+                } border-blue-500 `}
               >
                 {navigation.upload ? (
                   <span className="text-2xl text-lightblue">
@@ -180,7 +178,7 @@ function VisaNavigator() {
               <button
                 className={`col-span-2 flex justify-center text-[10px] lg:text-sm md:text-base items-center px-6 md:px-3 py-3  hover:text-lightblue ${
                   navigation.upload ? "border-b-4  text-lightblue" : ""
-                } border-blue hover:border-b-4 duration-300 space-x-1  whitespace-nowrap`}
+                } border-blue-500 hover:border-b-4 duration-300 space-x-1  whitespace-nowrap`}
               >
                 {/* <span className=''><FaQuoteRight /></span> */}
                 <span className="">Upload Details</span>
@@ -189,8 +187,8 @@ function VisaNavigator() {
           </div>
         </div>
       </div>
-      <div className="main lg:grid grid-cols-12 ">
-        <div className="col-span-10">
+      <div className="main lg:flex ">
+        <div className="w-[80%]">
           <div className="">
             <ItenarySection
               navigation={navigation}
@@ -219,27 +217,43 @@ function VisaNavigator() {
             />
           </div>
         </div>
-        <div className="col-span-2 py-8 pr-6">
+        <div className="w-[20%] py-8 pr-6">
           <div className="bg-gray-100 shadow-sm rounded p-2 text-darktext">
             <p className="text-[16px]">Fare Details</p>
             <div className="border-b border-darktext py-2">
               <div className="flex justify-between">
                 <p className="text-[14px]">Base Fare</p>
-                <p className="text-[14px]">{priceConversion(selectedVisa?.totalPrice,selectedCurrency,true)} </p>
+                <p className="text-[14px]">
+                  {priceConversion(
+                    selectedVisa?.totalPrice,
+                    selectedCurrency,
+                    true
+                  )}{" "}
+                </p>
               </div>
               <div className="flex justify-between">
                 <p className="text-[14px]">Tax</p>
-                <p className="text-[14px]">{priceConversion(selectedVisa?.tax,selectedCurrency,true)} </p>
+                <p className="text-[14px]">
+                  {priceConversion(selectedVisa?.tax, selectedCurrency, true)}{" "}
+                </p>
               </div>
               <div className="flex justify-between">
                 <p className="text-[14px]">Insurance</p>
-                <p className="text-[14px]">{priceConversion(selectedVisa?.insurance,selectedCurrency,true)} </p>
+                <p className="text-[14px]">
+                  {priceConversion(
+                    selectedVisa?.insurance,
+                    selectedCurrency,
+                    true
+                  )}{" "}
+                </p>
               </div>
             </div>
             <div className="border-b border-darktext py-2">
               <div className="flex justify-between">
                 <p className="text-[14px]">Total Fare</p>
-                <p className="text-[14px]">{priceConversion(totalPrice,selectedCurrency,true)} </p>
+                <p className="text-[14px]">
+                  {priceConversion(totalPrice, selectedCurrency, true)}{" "}
+                </p>
               </div>
               <div className="flex justify-between">
                 <p className="text-[14px]">Traveller</p>
@@ -249,7 +263,9 @@ function VisaNavigator() {
             <div className="border-b  border-darktext py-1">
               <div className="flex justify-between">
                 <p className="text-[14px]">Total Price</p>
-                <p className="text-[14px]">{priceConversion(grandTotal,selectedCurrency,true)} </p>
+                <p className="text-[14px]">
+                  {priceConversion(grandTotal, selectedCurrency, true)}{" "}
+                </p>
               </div>
             </div>
           </div>

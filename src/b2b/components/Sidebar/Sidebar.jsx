@@ -67,7 +67,25 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
         )} */}
 
         <div id="sidebar" className="flex-1 mt-2 ">
-          <ul className="">
+        <div
+              ref={wrapperRef}
+              className="group flex py-5 px-6 items-center bg-gray-600 hover:bg-gray-500 rounded-xl transition duration-200"
+            >
+              <div className="flex px-2 h-12 items-center justify-center bg-gray-500 group-hover:bg-gray-600 rounded-lg text-3xl text-white">
+                <RxAvatar />
+              </div>
+              <div className="relative h-[100%] flex gap-[10px] items-center px-[12px] cursor-pointer">
+                <div className="hidden md:block">
+                  <span className="block text-[12px] text-grayColor">
+                    {agent?.agentCode}
+                  </span>
+                  <span className="block text-sm font-medium text-white capitalize">
+                    {agent?.companyName}
+                  </span>
+                </div>
+              </div>
+            </div>
+          <ul className="mt-4">
             {sidebarMenus.map((item, index) => {
               return (
                 <SidebarMenu
@@ -100,32 +118,7 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
               </p>
             </Link>
 
-            <div
-              ref={wrapperRef}
-              className="group flex py-5 px-6 items-center bg-gray-600 hover:bg-gray-500 rounded-xl transition duration-200"
-              onClick={() => setIsAdminDropdownOpen(!isAdminDropdownOpen)}
-            >
-              <div className="flex px-2 h-12 items-center justify-center bg-gray-500 group-hover:bg-gray-600 rounded-lg text-3xl text-white">
-                <RxAvatar />
-              </div>
-              <div className="relative h-[100%] flex gap-[10px] items-center px-[12px] cursor-pointer">
-                <div className="hidden md:block">
-                  <span className="block text-[12px] text-grayColor">
-                    {agent?.agentCode}
-                  </span>
-                  <span className="block text-sm font-medium text-white">
-                    {agent?.name}
-                  </span>
-                </div>
-                {/* absolute modal */}
-                {isAdminDropdownOpen && (
-                  <AdminDropdown
-                    setIsAdminDropdownOpen={setIsAdminDropdownOpen}
-                  />
-                )}
-                {/* absolute modal */}
-              </div>
-            </div>
+
           </div>
         </div>
 

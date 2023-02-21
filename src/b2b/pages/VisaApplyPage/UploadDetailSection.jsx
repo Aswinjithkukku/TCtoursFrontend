@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "../../../axios";
 import Swal from "sweetalert2";
 import { setVisaResponseData } from "../../../redux/slices/visaSlice";
+import { setAlertError, setAlertSuccess } from "../../../redux/slices/homeSlice";
 
 function UploadDetailSection({ navigation }) {
   const navigate = useNavigate();
@@ -83,22 +84,22 @@ function UploadDetailSection({ navigation }) {
 
       setIsLoading(false);
       dispatch(setVisaResponseData(response.data));
-      Swal.fire({
-        icon: "success",
-        title: "VISA Document submission Completed Successfully",
-        timer: 1000,
-      });
+      dispatch(setAlertSuccess({
+        status: true,
+        title: "Upload Success!",
+        text: "VISA Document submission Completed Successfully"
+      }))
       navigate(
         `/b2b/visa/apply/invoice/${response.data?.visaApplication?._id}`
       );
     } catch (err) {
       if (err?.response?.data?.error) {
         setError(err?.response?.data?.error);
-        await Swal.fire({
-          icon: "error",
+        dispatch(setAlertError({
+          status: true,
           title: "Something went wrong!",
-          text: error,
-        });
+          text: err?.response?.data?.error
+        }))
         setIsLoading(false);
       }
     }

@@ -86,7 +86,7 @@ function FlightCard() {
                     <span className='text-lg '>Departure from</span>
                 </div>
                 <div className=''>
-                    <input type='text' placeholder='Where do you want to go?' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+                    <input type='text' placeholder='Where do you want to go?' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
                 </div>
             </div>
         </div>
@@ -97,7 +97,7 @@ function FlightCard() {
                     <span className='text-lg'>Departure to</span>
                 </div>
                 <div className=''>
-                    <input type='text' placeholder='Choose date' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+                    <input type='text' placeholder='Choose date' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@ function FlightCard() {
                     <span className='text-lg'>Leave</span>
                 </div>
                 <div className=''>
-                    <input type='date' placeholder='Choose date' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+                    <input type='date' placeholder='Choose date' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
                 </div>
             </div>
         </div>
@@ -119,7 +119,7 @@ function FlightCard() {
                     <span className='text-lg'>Return</span>
                 </div>
                 <div className=''>
-                    <input type='date' placeholder='Choose date' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+                    <input type='date' placeholder='Choose date' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
                 </div>
             </div>
         </div>

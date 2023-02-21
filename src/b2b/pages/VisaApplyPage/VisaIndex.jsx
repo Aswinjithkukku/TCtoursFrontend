@@ -6,7 +6,7 @@ function VisaIndex() {
   return (
     <>
       <div>
-        <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
+        {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
           <h1 className="font-[600] text-[15px] uppercase">
             Visa
           </h1>
@@ -19,10 +19,10 @@ function VisaIndex() {
             <span>{">"} </span>
             <span>Apply</span>
           </div>
-        </div>
+        </div> */}
 
-        <div className="p-2 lg:p-6">
-          <div className="bg-white rounded shadow-sm">
+        <div className="p-2 ">
+          <div className="">
           <VisaNavigator />
           </div>
         </div>
