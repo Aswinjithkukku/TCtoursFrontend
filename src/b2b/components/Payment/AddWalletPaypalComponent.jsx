@@ -88,16 +88,17 @@ function AddWalletPaypalComponent() {
   return (
     <div>
       <div className="flex justify-center my-3">
-        <div className="w-full">
+        <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-gray-400 focus-within:border-green-500 rounded-lg">
+          <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-gray-500">
+            Enter Amount to be added to wallet
+          </span>
           <input
+            className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium no-spinner"
+            id="signInInput4-1"
             ref={inputRef}
-            className="input "
             type="number"
-            placeholder="Enter Amount to be added to wallet"
-            // value={inputAmount === 0 ? "Enter Amount to be added to wallet" : inputAmount}
-            // onChange={(e) => setInputAmount(e.target.value)}
           />
-        </div>
+        </div>{" "}
       </div>
       <div className="" ref={paypal}></div>
     </div>

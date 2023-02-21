@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useSearchParams } from "react-router-dom";
 import axios from "../../../axios";
-import { Pagination } from "../../components";
+import { PageLoader, Pagination } from "../../components";
 import OrdersNavigator from "../OrdersNavigator";
 import VisaOrderSingleRow from "./VisaOrderSingleRow";
 
@@ -54,10 +54,6 @@ function VisaOrderPage() {
     }
   };
 
-  // useEffect(() => {
-  //   fetchAllVisaOrder();
-  // }, []);
-
   useEffect(() => {
     let skip =
       Number(searchParams.get("skip")) > 0
@@ -85,7 +81,7 @@ function VisaOrderPage() {
               <span className="w-[400px]">
                 <input
                   type="search"
-                  className="input w-full"
+                  className="h-10 rounded-lg outline-none border px-2 w-full text-textColor"
                   placeholder="search!!!!!"
                   name="search"
                   value={filters.search}
@@ -94,34 +90,38 @@ function VisaOrderPage() {
               </span>
             </div>
             <div>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-[#f3f6f9] text-grayColor text-[14px] text-left">
-                    <tr>
-                      <th className="font-[500] p-3 whitespace-nowrap">
-                        Reference Number
-                      </th>
-                      <th className="font-[500] p-3 whitespace-nowrap">
-                        Country
-                      </th>
-                      <th className="font-[500] p-3 whitespace-nowrap">
-                        Travellers
-                      </th>
-                      <th className="font-[500] p-3 whitespace-nowrap">
-                        Default Price
-                      </th>
-                      <th className="font-[500] p-3 whitespace-nowrap">
-                        Status
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-sm text-textColor">
-                    {allVisaOrder?.visaApplication?.map((item, index) => (
-                      <VisaOrderSingleRow key={index} item={item} />
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              {isLoading ? (
+                <PageLoader />
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-gray-100 text-grayColor text-[14px] text-left">
+                      <tr>
+                        <th className="font-[500] p-3 whitespace-nowrap">
+                          Reference Number
+                        </th>
+                        <th className="font-[500] p-3 whitespace-nowrap">
+                          Country
+                        </th>
+                        <th className="font-[500] p-3 whitespace-nowrap">
+                          Travellers
+                        </th>
+                        <th className="font-[500] p-3 whitespace-nowrap">
+                          Default Price
+                        </th>
+                        <th className="font-[500] p-3 whitespace-nowrap">
+                          Status
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-sm text-textColor">
+                      {allVisaOrder?.visaApplication?.map((item, index) => (
+                        <VisaOrderSingleRow key={index} item={item} />
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
               <div className="p-4">
                 <Pagination
                   limit={filters?.limit}

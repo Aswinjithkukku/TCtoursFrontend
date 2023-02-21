@@ -19,7 +19,7 @@ function CompanySettings() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { countries } = useSelector((state) => state.home);
+  const { countries, UAE } = useSelector((state) => state.home);
 
   const handleChange = (e) => {
     setCompanyDetails((prev) => {
@@ -60,16 +60,7 @@ function CompanySettings() {
     <div className="">
       <form onSubmit={submitHandler}>
         <div className="space-y-2 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px]">
-          {/* <div className=''>
-            <label className='label'>Travel Agency Name</label>
-            <input className='input'
-              type='text'
-              placeholder='Ex: TravellerChoice'
-              name='companyName'
-              value={companyDetails.companyName}
-              onChange={handleChange}
-            />
-          </div> */}
+
           <div className= "relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               Travel Agency Name
@@ -77,24 +68,12 @@ function CompanySettings() {
             <input
               className= "block w-full outline-none bg-transparent text-sm text-gray-400 font-medium"
               type="text"
-              placeholder="Ex: TravellerChoice"
               name="companyName"
               value={companyDetails.companyName}
               onChange={handleChange}
             />
           </div>
 
-          {/* <div className="">
-            <label className="label">Address</label>
-            <input
-              className="input"
-              type="text"
-              placeholder="Ex: Tc, North california"
-              name="address"
-              value={companyDetails.address}
-              onChange={handleChange}
-            />
-          </div> */}
           <div className= "relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               Address
@@ -102,29 +81,12 @@ function CompanySettings() {
             <input
               className= "block w-full outline-none bg-transparent text-sm text-gray-400 font-medium"
               type="text"
-              placeholder="Ex: Tc, North california"
               name="address"
               value={companyDetails.address}
               onChange={handleChange}
             />
           </div>
 
-          {/* <div className="">
-            <label className="label">Country</label>
-            <select
-              className="select"
-              name="country"
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-            >
-              <option>select</option>
-              {countries?.map((item, index) => (
-                <option className="capitalize" value={item?._id} key={index}>
-                  {item?.countryName}{" "}
-                </option>
-              ))}
-            </select>
-          </div> */}
           <div className= "relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               Nationality
@@ -144,17 +106,7 @@ function CompanySettings() {
             </select>
           </div>
 
-          {/* <div className="">
-            <label className="label">Website</label>
-            <input
-              className="input"
-              type="text"
-              placeholder="Ex: TravellerChoice.ae"
-              name="website"
-              value={companyDetails.website}
-              onChange={handleChange}
-            />
-          </div> */}
+
           <div className= "relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               Website
@@ -162,26 +114,14 @@ function CompanySettings() {
             <input
               className= "block w-full outline-none bg-transparent text-sm text-gray-400 font-medium"
               type="text"
-              placeholder="Ex: TravellerChoice.ae"
               name="website"
               value={companyDetails.website}
               onChange={handleChange}
             />
           </div>
 
-          {country && country === "63ac33ecff04e5652a2583f5" && (
+          {country && country === UAE?._id && (
             <>
-              {/* <div className="">
-                <label className="label">TRN Number</label>
-                <input
-                  className="input"
-                  type="number"
-                  placeholder="Ex: Dubai"
-                  name="trnNumber"
-                  value={companyDetails.trnNumber}
-                  onChange={handleChange}
-                />
-              </div> */}
               <div className= "relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
                 <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
                   TRN Number
@@ -189,24 +129,11 @@ function CompanySettings() {
                 <input
                   className= "block w-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type="number"
-                  placeholder="Ex: Dubai"
                   name="trnNumber"
                   value={companyDetails.trnNumber}
                   onChange={handleChange}
                 />
               </div>
-
-              {/* <div className="">
-                <label className="label">Company Registration Number</label>
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Ex: Dubai"
-                  name="companyRegistration"
-                  value={companyDetails.companyRegistration}
-                  onChange={handleChange}
-                />
-              </div> */}
               <div className= "relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
                 <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
                   Company Registration Number
@@ -214,7 +141,6 @@ function CompanySettings() {
                 <input
                   className= "block w-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type="text"
-                  placeholder="Ex: Dubai"
                   name="companyRegistration"
                   value={companyDetails.companyRegistration}
                   onChange={handleChange}
@@ -228,7 +154,6 @@ function CompanySettings() {
             <input
               className="input"
               type="text"
-              placeholder="Ex: Dubai"
               name="city"
               value={companyDetails.city}
               onChange={handleChange}
@@ -241,14 +166,13 @@ function CompanySettings() {
             <input
               className= "block w-full outline-none bg-transparent text-sm text-gray-400 font-medium"
               type="text"
-              placeholder="Ex: Dubai"
               name="city"
               value={companyDetails.city}
               onChange={handleChange}
             />
           </div>
 
-          {country && country !== "63ac33ecff04e5652a2583f5" && (
+          {country && country !== UAE?._id && (
             <div className= "relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
               <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
                 Zip Code
@@ -256,7 +180,6 @@ function CompanySettings() {
               <input
                 className= "block w-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                 type="text"
-                placeholder=""
                 name="zipCode"
                 value={companyDetails.zipCode}
                 onChange={handleChange}

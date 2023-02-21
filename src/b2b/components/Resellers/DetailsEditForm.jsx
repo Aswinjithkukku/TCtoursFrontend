@@ -27,7 +27,7 @@ function DetailsEditForm() {
     whatsapp: ""
   })
 
-  const { countries } = useSelector(state => state.home)
+  const { countries, UAE } = useSelector(state => state.home)
 
   const handleChange = (e) => {
     setDetails((prev) => {
@@ -88,7 +88,7 @@ function DetailsEditForm() {
               ))}
             </select>
           </div>
-          {details.country === "63ac33ecff04e5652a2583f5" && (
+          {details.country === UAE?._Id && (
             <>
               <div className=''>
                 <label className='label'>TRN Number</label>

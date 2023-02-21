@@ -93,7 +93,7 @@ function B2BLoginPage() {
               Welcome back! Please enter your details.
             </p>
             <form onSubmit={handleSubmit}>
-              <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+              <div className="relative w-full h-14 py-2 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
                 <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
                   Agent Code
                 </span>
@@ -107,7 +107,7 @@ function B2BLoginPage() {
                   required
                 />
               </div>{" "}
-              <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+              <div className="relative w-full h-14 py-2 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
                 <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
                   Email
                 </span>
@@ -120,7 +120,7 @@ function B2BLoginPage() {
                   required
                 />
               </div>
-              <div className="relative w-full h-14 py-4 px-3 mb-6 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+              <div className="relative w-full h-14 py-2 px-3 mb-6 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
                 <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
                   Password
                 </span>

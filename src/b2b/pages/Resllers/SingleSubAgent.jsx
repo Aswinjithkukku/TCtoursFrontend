@@ -31,24 +31,6 @@ export default function SingleSubAgent() {
 
     return (
         <div>
-            <div className="bg-white flex items-center justify-between gap-[10px] px-6 shadow-sm border-t py-2">
-                <h1 className="font-[600] text-[15px] uppercase">
-                    Resellers Details
-                </h1>
-                <div className="text-sm text-grayColor">
-                    <Link to="/b2b" className="text-textColor">
-                        Dashboard{" "}
-                    </Link>
-                    <span>{">"} </span>
-                    <Link to="/b2b/reseller" className="text-textColor">
-                        Resellers{" "}
-                    </Link>
-                    <span>{">"} </span>
-                    <span>
-                        {id?.slice(0, 3)}...{id?.slice(-3)}{" "}
-                    </span>
-                </div>
-            </div>
 
             {loading ? (
                 <PageLoader />
@@ -77,60 +59,10 @@ export default function SingleSubAgent() {
                             <span className="text-sm text-grayColor">Agent Code</span>
                             <span className="ml-3 text-center font-medium mt-1">{reseller?.agentCode}</span>
                         </div>
-                        {/* <div>
-                            {isStatusLoading ? (
-                                <div>
-                                    <div className="w-[25px] h-[25px] rounded-full border-4 border-primaryColor border-r-transparent animate-spin"></div>
-                                </div>
-                            ) : reseller?.status === "pending" ? (
-                                <div className="flex items-center gap-[10px]">
-                                    <button
-                                        className="h-[35px] w-[35px] bg-green-500 flex items-center justify-center text-xl"
-                                    // onClick={() =>
-                                    //     handleStatusChange("ok")
-                                    // }
-                                    >
-                                        <FiCheck />
-                                    </button>
-                                    <button
-                                        className="h-[35px] w-[35px] bg-red-500 flex items-center justify-center text-xl"
-                                    // onClick={() =>
-                                    //     handleStatusChange("cancelled")
-                                    // }
-                                    >
-                                        <MdClose />
-                                    </button>
-                                </div>
-                            ) : reseller?.status === "cancelled" ? (
-                                <div>
-                                    <span className="py-1 px-2 text-[12px] font-medium rounded text-[#f06548] bg-[#f065481a]">
-                                        Cancelled
-                                    </span>
-                                </div>
-                            ) : (
-                                <div className="max-w-[120px]">
-                                    <select
-                                        name=""
-                                        id=""
-                                        value={reseller?.status || ""}
-                                    // onChange={(e) =>
-                                    //     handleStatusChange(
-                                    //         e.target.value
-                                    //     )
-                                    // }
-                                    >
-                                        <option value="ok">Enable</option>
-                                        <option value="disabled">
-                                            Disable
-                                        </option>
-                                    </select>
-                                </div>
-                            )}
-                        </div> */}
                     </div>
                 </div>
-                <div className="grid grid-cols-4 gap-4 mt-6">
-                    <div className="bg-white shadow-sm rounded p-4 flex items-start justify-between">
+                <div className="grid grid-cols-4 gap-4 mt-6 text-darktext">
+                    <div className="bg-white shadow-sm rounded-xl p-4 flex items-start justify-between">
                         <div>
                             <span className="block text-lg font-[600]">
                                 0 AED
@@ -143,7 +75,7 @@ export default function SingleSubAgent() {
                             <MdAccountBalanceWallet />
                         </span>
                     </div>
-                    <div className="bg-white shadow-sm rounded p-4 flex items-start justify-between">
+                    <div className="bg-white shadow-sm rounded-xl p-4 flex items-start justify-between">
                         <div>
                             <span className="block text-lg font-[600]">
                                 0 AED
@@ -156,7 +88,7 @@ export default function SingleSubAgent() {
                             <GiTakeMyMoney />
                         </span>
                     </div>
-                    <div className="bg-white shadow-sm rounded p-4 flex items-start justify-between">
+                    <div className="bg-white shadow-sm rounded-xl p-4 flex items-start justify-between">
                         <div>
                             <span className="block text-lg font-[600]">
                                 0 AED
@@ -169,7 +101,7 @@ export default function SingleSubAgent() {
                             <GrMoney />
                         </span>
                     </div>
-                    <div className="bg-white shadow-sm rounded p-4 flex items-start justify-between">
+                    <div className="bg-white shadow-sm rounded-xl p-4 flex items-start justify-between">
                         <div>
                             <span className="block text-lg font-[600]">
                                 0 AED

@@ -3,7 +3,7 @@ import React from 'react'
 function OrderHistory() {
   return (
     <table className="w-full">
-      <thead className="bg-[#f3f6f9] text-grayColor text-[14px] text-left">
+      <thead className="bg-gray-100 text-grayColor text-[14px] text-left">
         <tr>
           <th className="font-[500] p-3 whitespace-nowrap">Ref.No</th>
           <th className="font-[500] p-3 whitespace-nowrap">Activity</th>

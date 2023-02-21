@@ -50,7 +50,7 @@ function B2BRegisterPage() {
   const [info, setInfo] = useState(false);
   const [result, setResult] = useState({});
 
-  const { countries } = useSelector((state) => state.home);
+  const { countries, UAE } = useSelector((state) => state.home);
 
   const onChangeHandler = (e) => {
     setData((prev) => {
@@ -261,7 +261,7 @@ function B2BRegisterPage() {
                               ))}
                             </select>
                           </div>
-                          {data.country === "63ac33ecff04e5652a2583f5" && (
+                          {data.country === UAE?._id && (
                             <>
                               <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
                                 <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
@@ -301,7 +301,7 @@ function B2BRegisterPage() {
                               onChange={onChangeHandler}
                             />
                           </div>
-                          {data.country !== "63ac33ecff04e5652a2583f5" && (
+                          {data.country !== UAE?._id && (
                             <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
                               <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
                                 Zip Code

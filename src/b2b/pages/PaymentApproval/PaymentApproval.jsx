@@ -11,25 +11,12 @@ function PaymentApproval() {
   const [payMethod, setPayMethod] = useState("razorpay");
   return (
     <>
-      <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
-        <h1 className="font-[600] text-[15px] uppercase">Payment</h1>
-        <div className="text-sm text-grayColor">
-          <Link to="/b2b" className="text-textColor">
-            Dashboard{" "}
-          </Link>
-          <span>{">"} </span>
-          <span>AddToWallet</span>
-        </div>
-      </div>
 
-      <div className="p-2 lg:p-6">
-        <div className="bg-white rounded shadow-sm mt-2 lg:mt-6">
-          <div className="flex items-center justify-between border-b border-dashed p-3 lg:p-6">
-            <h1 className="font-medium">Add To Wallet</h1>
-          </div>
 
+      <div className="p-2 ">
+        <div className=" mt-2 ">
           <div className="p-6">
-            <div className="bg-light  md:rounded-md overflow-hidden w-full md:my-6">
+            <div className="bg-gray-500 shadow-sm md:rounded-md overflow-hidden w-full md:my-6">
               <div className="lg:grid grid-cols-12 gap-5">
                 <div className="1 col-span-3 bg-primaryColor p-6 text-white">
                   <div className="h-12 bg-bluetrans flex justify-center items-center font-medium tracking-wide rounded-md">
@@ -40,7 +27,7 @@ function PaymentApproval() {
                     onClick={() => {
                       setPayMethod("razorpay");
                     }}
-                    className="h-10 hover:bg-bluetrans  tracking-wide items-center cursor-pointer px-2 mt-5"
+                    className="h-10 hover:bg-bluetrans rounded-lg  tracking-wide items-center cursor-pointer px-2 mt-5"
                   >
                     <p className="">Razorpay</p>
                     <p className="text-[8px] text-text">
@@ -51,7 +38,7 @@ function PaymentApproval() {
                     onClick={() => {
                       setPayMethod("paypal");
                     }}
-                    className="h-10 hover:bg-bluetrans flex tracking-wide items-center cursor-pointer px-2"
+                    className="h-10 hover:bg-bluetrans rounded-lg flex tracking-wide items-center cursor-pointer px-2"
                   >
                     Paypal
                   </div>
@@ -59,17 +46,18 @@ function PaymentApproval() {
                     onClick={() => {
                       setPayMethod("ccavenue");
                     }}
-                    className="h-10 hover:bg-bluetrans flex tracking-wide items-center cursor-pointer px-2"
+                    className="h-10 hover:bg-bluetrans rounded-lg flex tracking-wide items-center cursor-pointer px-2"
                   >
                     CCAvenue
                   </div>
                 </div>
                 <div className="2 col-span-9 p-6">
-                  <div className="md:flex justify-between items-center border-b border-dashed mb-5">
+                  <div className="md:flex justify-between items-center border-b border-gray-200 border-dashed mb-5">
                     <div className="">
-                      <h2 className="text-3xl font-bold tracking-wider text-darktext underline">
+                      <h2 className="text-3xl font-bold tracking-wider text-gray-200 underline">
                         "Add to wallet"
                       </h2>
+                      <p className="text-gray-300 text-[11px]">Using wallet option make you transfer faster and easier</p>
                     </div>
                     <div className=" w-[150px] ">
                       <Lottie
@@ -86,7 +74,7 @@ function PaymentApproval() {
                       {payMethod === "ccavenue" && <CCAvenuePaymentComponent />}
                     </div>
                   </div>
-                  <div className="flex justify-center items-center space-x-10 border-t border-dashed">
+                  <div className="flex justify-center items-center space-x-10 border-gray-200 border-t border-dashed">
                     <div className="">
                       <img src={paypalpng} alt="paypal" className="w-[60px]" />
                     </div>
