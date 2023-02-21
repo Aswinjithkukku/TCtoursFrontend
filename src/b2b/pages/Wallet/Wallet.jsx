@@ -12,9 +12,21 @@ import BtnLoader from "../../components/BtnLoader";
 import { IoCallSharp } from "react-icons/io5";
 import { HiOutlineMail } from "react-icons/hi";
 import Modal from "../../components/modal/Modal";
+import FormInput from "../../components/FormInput";
+import Swal from "sweetalert2";
+import axios from "../../../axios";
 
 function Wallet() {
   const dispatch = useDispatch();
+  const { countries } = useSelector((state) => state.home);
+  const { token } = useSelector((state) => state.agents);
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   const [showModal, setShowModal] = useState(false);
   const [component, setComponent] = useState({
     all: true,
@@ -27,6 +39,7 @@ function Wallet() {
   );
   const { selectedCurrency } = useSelector((state) => state.home);
   const { home } = useSelector((state) => state.general);
+  const [bankDetails, setBankDetails] = useState({});
 
   useEffect(() => {
     dispatch(getTransaction());
@@ -34,6 +47,40 @@ function Wallet() {
 
   const handleToggleModal = () => {
     setShowModal(!showModal);
+  };
+
+  const handleDetailsChange = (e) => {
+    const {
+      target: { name, value },
+    } = e;
+    setBankDetails({ ...bankDetails, [name]: value });
+  };
+
+  const handleWidrawMoney = async (e) => {
+    e.preventDefault();
+    let isoCode;
+    for (let x of countries) {
+      if (x.countryName === bankDetails.bankCountry) {
+        isoCode = x.isocode;
+      }
+    }
+
+    if (bankDetails?.amount > balance) {
+      Swal.fire({
+        icon: "error",
+        title: "Insufficient Balance!!",
+        // text: "Please",
+      });
+    }
+    const body = { ...bankDetails, isoCode };
+
+    const response = await axios.post(
+      `/b2b/wallet/withdraw/initiate`,
+      body,
+      config
+    );
+
+    console.log(body);
   };
   return (
     <>
@@ -251,7 +298,97 @@ function Wallet() {
                   <FailedTransaction />
                 </div>
               )}
-              {showModal && <Modal hideDrawer={handleToggleModal} />}
+              {showModal && (
+                <Modal title="Withdraw Money" hideDrawer={handleToggleModal}>
+                  <div className="p-[40px]">
+                    <form
+                      action=""
+                      className="grid grid-cols-2  gap-6 mt-4 w-[600px]"
+                      onSubmit={handleWidrawMoney}
+                    >
+                      <FormInput
+                        label="Amount"
+                        name="amount"
+                        onchange={handleDetailsChange}
+                        defaultVal={bankDetails?.amount}
+                        type="number"
+                      />
+                      <FormInput
+                        label="Bank Name"
+                        name="bankName"
+                        onchange={handleDetailsChange}
+                        defaultVal={bankDetails?.bankName}
+                      />
+                      <div className="h-[40px] min-w-[200px] border-2  max-w-[350px] relative">
+                        <select
+                          name="bankCountry"
+                          required
+                          id=""
+                          className="text-[12px] w-[100%] border-none outline-none h-[100%] capitalize"
+                          onChange={handleDetailsChange}
+                        >
+                          <option selected disabled>
+                            Selecy Bank Country
+                          </option>
+                          {countries?.map((ele) => (
+                            <>
+                              <option
+                                className="capitalize"
+                                value={ele?.countryName}
+                              >
+                                {ele?.countryName}
+                              </option>
+                            </>
+                          ))}
+                        </select>
+                        <label
+                          htmlFor=""
+                          className=" absolute text-[10px] text-blue-700 -top-[9px] px-1.5 border-r-2  border-l-2   left-2 bg-white"
+                        >
+                          Bank Country
+                        </label>
+                      </div>
+                      <FormInput
+                        label="Account Holder Name"
+                        name="accountHolderName"
+                        onchange={handleDetailsChange}
+                        defaultVal={bankDetails?.accountHolderName}
+                      />
+                      <FormInput
+                        label="Account No."
+                        name="accountNo"
+                        type="number"
+                        onchange={handleDetailsChange}
+                        defaultVal={bankDetails?.accountNo}
+                      />
+                      {bankDetails?.bankCountry === "india" && (
+                        <FormInput
+                          label="IFSC Code"
+                          name="ifscCode"
+                          onchange={handleDetailsChange}
+                          defaultVal={bankDetails?.ifscCode}
+                        />
+                      )}
+                      {bankDetails?.bankCountry &&
+                        bankDetails?.bankCountry !== "india" && (
+                          <FormInput
+                            label="IBAN Code"
+                            name="ibanCode"
+                            onchange={handleDetailsChange}
+                            defaultVal={bankDetails?.ibanCode}
+                          />
+                        )}
+                      <div className="col-span-2 flex justify-end">
+                        <input
+                          type="submit"
+                          value="Submit"
+                          className="bg-blue-500 text-white px-4 h-[40px] w-[200px] rounded-md cursor-pointer"
+                        />
+                      </div>
+                    </form>
+                  </div>
+                </Modal>
+              )}
             </div>
           </div>
         </div>

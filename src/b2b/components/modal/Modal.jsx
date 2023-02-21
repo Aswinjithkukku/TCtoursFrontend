@@ -16,7 +16,7 @@ const Modal = ({ hideDrawer, children, title }) => {
       <div
         ref={drawerRef}
         id="drawer-right-example"
-        className=" rounded-lg bg-white w-[60vw] h-[80vh] overflow-hidden transition-all transition-1000 relative"
+        className=" rounded-lg bg-white max-w-[60vw] max-h-[80vh] overflow-hidden transition-all transition-1000 relative"
       >
         <div className="text-blue-700 border-b-[1px] p-2 pl-4 flex justify-between items-center bg-gray-200">
           <h2 className="font-semibold text-[20px]">{title}</h2>
