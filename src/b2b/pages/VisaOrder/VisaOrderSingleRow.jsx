@@ -14,8 +14,8 @@ function VisaOrderSingleRow({ item }) {
       >
         <td className="p-3">{item?.referenceNumber}  </td>
         <td className="p-3">India </td>
+        <td className="p-3">{item?.noOfTravellers} </td>
         <td className="p-3">{priceConversion(item?.totalAmount, selectedCurrency, true)} </td>
-        <td className="p-3">{item?.isDocumentUplaoded === true ? "Uploaded" : "Not Uploaded"}</td>
         <td className="p-3 capitalize">{item?.status} </td>
       </tr>
     </>

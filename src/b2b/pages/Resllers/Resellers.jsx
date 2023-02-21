@@ -18,21 +18,11 @@ function Resellers() {
   console.log(resellers);
 
   return (
-    <div className="">
-      {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
-        <h1 className="font-[600] text-[15px] uppercase">Resellers</h1>
-        <div className="text-sm text-grayColor">
-          <Link to="/b2b" className="text-textColor">
-            Dashboard{" "}
-          </Link>
-          <span>{">"} </span>
-          <span>Total resellers</span>
-        </div>
-      </div> */}
+    <div className=" text-textColor">
+
       <div className="p-2 lg:p-6">
         <div className="">
-          <div className="flex items-center justify-between border-b border-dashed p-3 lg:p-4">
-            <h1 className="font-medium"></h1>
+          <div className="flex items-center justify-end border-b border-dashed p-3 lg:p-4">
             <div className="flex h-12 gap-2">
               <button
                 className="flex gap-1 h-full px-5 rounded-lg bg-blue-600 text-white items-center"

@@ -78,23 +78,10 @@ function VisaOrderPage() {
   return (
     <>
       <div className=" ">
-        {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
-          <h1 className="font-[600] text-[15px] uppercase">Visa Order</h1>
-          <div className="text-sm text-grayColor">
-            <Link to="/b2b" className="text-textColor">
-              Dashboard{" "}
-            </Link>
-            <span>{">"} </span>
-            <span>Visa</span>
-            <span>{">"} </span>
-            <span>Order</span>
-          </div>
-        </div> */}
         <OrdersNavigator />
         <div className="p-2 lg:px-6">
           <div className="">
-            <div className="flex items-center justify-between border-b border-dashed p-4">
-              <h1 className="font-medium"></h1>
+            <div className="flex items-center justify-end border-b border-dashed p-4">
               <span className="w-[400px]">
                 <input
                   type="search"
@@ -118,10 +105,10 @@ function VisaOrderPage() {
                         Country
                       </th>
                       <th className="font-[500] p-3 whitespace-nowrap">
-                        Default Price
+                        Travellers
                       </th>
                       <th className="font-[500] p-3 whitespace-nowrap">
-                        Document Status
+                        Default Price
                       </th>
                       <th className="font-[500] p-3 whitespace-nowrap">
                         Status

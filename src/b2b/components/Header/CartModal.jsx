@@ -3,9 +3,10 @@ import { BsDash, BsPersonFill } from 'react-icons/bs'
 import { IoMdCart } from 'react-icons/io'
 import { FaBaby, FaChild } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import priceConversion from '../../../utils/PriceConversion'
-import { removeFromCart } from '../../../redux/slices/excursionSlice'
+import { removeFromCart } from '../../../redux/slices/agentExcursionSlice'
+import { setAlertSuccess } from '../../../redux/slices/homeSlice'
 
 function CartModal({ setCart }) {
   const navigate = useNavigate()
@@ -42,6 +43,13 @@ function CartModal({ setCart }) {
                 <button className='text-main text-xl bg-gray-200 rounded-full'
                   onClick={() => {
                     dispatch(removeFromCart(item?._id))
+                    dispatch(
+                      setAlertSuccess({
+                        status: true,
+                        title: "Removed from Cart!",
+                        text: "The selected item successfully removed from cart",
+                      })
+                    );
                   }}
                 >
                   <BsDash />
@@ -94,7 +102,7 @@ function CartModal({ setCart }) {
             </span>
               <button className='h-[35px] w-[150px] rounded-md bg-lightblue text-white text-[14px]'
               onClick={() => {
-                navigate('/payment')
+                navigate('/b2b/attractions/payment')
                 setCart(false)
               }}
               >

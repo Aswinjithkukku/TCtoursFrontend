@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { AiFillEdit } from "react-icons/ai";
+import { FiDownload } from "react-icons/fi";
 import { useNavigate, useParams } from "react-router-dom";
 
-function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
+function VisaOrderDetailSingleRow({ index, item, visaOrderDetail }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { id } = useParams()
-  const navigate = useNavigate()
+  const { id } = useParams();
+  const navigate = useNavigate();
   return (
     <>
       <tr onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
@@ -29,28 +31,60 @@ function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
         <td className="capitalize p-3 text-[14px] text-textColor">
           {item?.contactNo}{" "}
         </td>
- 
-        <td className="capitalize p-3 text-[14px]"
-        >
-          {visaOrderDetail?.status === "payed" && item?.isStatus === "initiated" && (
-            <span className=" underline text-lightblue cursor-pointer"onClick={() => navigate(`/b2b/visa/order/${id}/details/${item?._id}`)} >Edit</span>
-          )}
-          {/* {item?.isStatus === "initiated" && visaOrderDetail?.status !== "payed" && (
-            <span className="bg-orange-100 text-orange-500 cursor-pointer text-[12px] p-1 rounded" >Not Paid</span>
-          )} */}
-          {item?.isStatus === "approved" && (
-            <span className="bg-green-300/60 text-green-600 cursor-pointer text-[12px] p-1 rounded" >Approved</span>
-          )}
-          {item?.isStatus === "rejected" && (
-            <span className="bg-red-300/60 text-red-500 cursor-pointer text-[12px] p-1 rounded" >Rejected</span>
-          )}
+
+        <td className="capitalize p-3 text-[14px]">
+          {visaOrderDetail?.status === "payed" &&
+            item?.isStatus === "initiated" && (
+              <div
+                className=" flex items-center"
+                onClick={() =>
+                  navigate(`/b2b/visa/order/${id}/details/${item?._id}`)
+                }
+              >
+                <span className="flex items-center gap-1 p-1">
+                  <span className="text-blue-500 cursor-pointer  ">
+                    <AiFillEdit />
+                  </span>
+                  <span className="text-blue-500 cursor-pointer underline text-sm ">
+                    Edit
+                  </span>
+                </span>
+              </div>
+            )}
+          {item?.isStatus === "submitted" &&
+            visaOrderDetail?.status === "payed" && (
+              <span className="bg-orange-100 text-orange-500 cursor-pointer text-[12px] p-1 rounded">
+                Submitted
+              </span>
+            )}
+          {item?.isStatus === "approved" &&
+            visaOrderDetail?.status === "payed" && (
+              <div className=" flex items-center">
+                <span className="flex gap-1 bg-green-200/70 rounded p-1">
+                  <span className="text-green-600 cursor-pointer  ">
+                    <FiDownload />
+                  </span>
+                  <span className="text-green-600 cursor-pointer text-[11px] ">
+                    Download
+                  </span>
+                </span>
+              </div>
+            )}
+          {item?.isStatus === "rejected" &&
+            visaOrderDetail?.status === "payed" && (
+              <span className="bg-red-300/60 text-red-500 cursor-pointer text-[12px] p-1 rounded">
+                Rejected
+              </span>
+            )}
         </td>
       </tr>
       <>
         {item?.isStatus === "rejected" && (
           <tr className="border-b border-tableBorderColor">
             <td colSpan="8" className="p-3 py-5">
-              <p className="text-gray-600 text-[10px] underline">Reason for Rejection</p>
+              <p className="text-gray-600 text-[10px] underline">
+                Reason for Rejection
+              </p>
               <p className="text-[13px] text-gray-600">{item?.reason}</p>
             </td>
           </tr>
@@ -98,10 +132,10 @@ function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
                       </span>
                       <span className="block text-[15px]">
                         {item?.dateOfBirth?.day +
-                        " / " +
-                        item?.dateOfBirth?.month +
-                        " / " +
-                        item?.dateOfBirth?.year}
+                          " / " +
+                          item?.dateOfBirth?.month +
+                          " / " +
+                          item?.dateOfBirth?.year}
                       </span>
                     </div>
                     <div className="">
@@ -129,8 +163,8 @@ function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
                       </span>
                       <span className="block text-[15px]">
                         {item?.expiryDate?.month +
-                        " / " +
-                        item?.expiryDate?.year}
+                          " / " +
+                          item?.expiryDate?.year}
                       </span>
                     </div>
                   </div>
@@ -138,10 +172,10 @@ function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
                   <div className="mt-4">
                     <div className="w-[130px] h-[130px] overflow-hidden rounded-md relative">
                       <img
-                          src={
-                            process.env.REACT_APP_SERVER_URL +
-                            item?.documents?.passportFistPagePhoto
-                          }
+                        src={
+                          process.env.REACT_APP_SERVER_URL +
+                          item?.documents?.passportFistPagePhoto
+                        }
                         alt=""
                         className="w-full h-full object-cover"
                       />
@@ -149,11 +183,12 @@ function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
                   </div>
                   <div className="mt-4">
                     <a
-                    href={
-                      process.env.REACT_APP_SERVER_URL +
-                      item?.documents?.passportLastPagePhoto + ".jpg"
-                    }
-                    download
+                      href={
+                        process.env.REACT_APP_SERVER_URL +
+                        item?.documents?.passportLastPagePhoto +
+                        ".jpg"
+                      }
+                      download
                     >
                       <div className="w-[130px] h-[130px] overflow-hidden rounded-md relative">
                         <img
@@ -170,10 +205,10 @@ function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
                   <div className="mt-4">
                     <div className="w-[130px] h-[130px] overflow-hidden rounded-md relative">
                       <img
-                          src={
-                            process.env.REACT_APP_SERVER_URL +
-                            item?.documents?.passportSizePhoto
-                          }
+                        src={
+                          process.env.REACT_APP_SERVER_URL +
+                          item?.documents?.passportSizePhoto
+                        }
                         alt=""
                         className="w-full h-full object-cover"
                       />
@@ -182,10 +217,10 @@ function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
                   <div className="mt-4">
                     <div className="w-[130px] h-[130px] overflow-hidden rounded-md relative">
                       <img
-                          src={
-                            process.env.REACT_APP_SERVER_URL +
-                            item?.documents?.supportiveDoc1
-                          }
+                        src={
+                          process.env.REACT_APP_SERVER_URL +
+                          item?.documents?.supportiveDoc1
+                        }
                         alt=""
                         className="w-full h-full object-cover"
                       />
@@ -194,10 +229,10 @@ function VisaOrderDetailSingleRow({ index, item, visaOrderDetail}) {
                   <div className="mt-4">
                     <div className="w-[130px] h-[130px] overflow-hidden rounded-md relative">
                       <img
-                          src={
-                            process.env.REACT_APP_SERVER_URL +
-                            item?.documents?.supportiveDoc2
-                          }
+                        src={
+                          process.env.REACT_APP_SERVER_URL +
+                          item?.documents?.supportiveDoc2
+                        }
                         alt=""
                         className="w-full h-full object-cover"
                       />

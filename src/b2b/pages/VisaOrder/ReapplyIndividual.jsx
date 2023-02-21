@@ -163,31 +163,8 @@ function ReapplyIndividual() {
   return (
     <>
       <div className=" ">
-        <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
-          <h1 className="font-[600] text-[15px] uppercase">Visa Order</h1>
-          <div className="text-sm text-grayColor flex gap-1 items-center">
-            <Link to="/b2b" className="text-textColor">
-              Dashboard{" "}
-            </Link>
-            <span>{">"} </span>
-            <span className="text-textColor">Visa</span>
-            <span>{">"} </span>
-            <span className="text-textColor" onClick={() => navigate(-2)}>
-              Order
-            </span>
-            <span>{">"} </span>
-            <span className="text-textColor" onClick={() => navigate(-1)}>
-              Details
-            </span>
-            <span>{">"} </span>
-            <span>Passenger</span>
-          </div>
-        </div>
-        <div className="p-2 lg:p-6">
-          <div className="bg-white rounded shadow-sm mt-2 ">
-            <div className="flex items-center justify-between border-b border-dashed p-4">
-              <h1 className="font-medium">Edit Passenger</h1>
-            </div>
+        <div className="p-2 ">
+          <div className=" mt-2 ">
             <div>
               <form onSubmit={submitHandler}>
                 <div className="p-6">
@@ -201,7 +178,7 @@ function ReapplyIndividual() {
                           name="title"
                           value={data.title}
                           onChange={handleChange}
-                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft"
                         >
                           <option hidden>choose title</option>
                           <option value={"mr"}>Mr.</option>
@@ -221,7 +198,7 @@ function ReapplyIndividual() {
                           name="firstName"
                           value={data.firstName}
                           onChange={handleChange}
-                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft"
                         />
                       </div>
                     </div>
@@ -232,7 +209,7 @@ function ReapplyIndividual() {
                       <div className="">
                         <input
                           type="text"
-                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft"
                           name="lastName"
                           value={data.lastName}
                           onChange={handleChange}
@@ -248,7 +225,7 @@ function ReapplyIndividual() {
                       <div className="">
                         <input
                           type="email"
-                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft"
                           name="email"
                           value={data.email}
                           onChange={handleChange}
@@ -261,7 +238,7 @@ function ReapplyIndividual() {
                       </div>
                       <div className="">
                         <select
-                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft"
                           name="country"
                           value={data.country}
                           onChange={handleChange}
@@ -287,7 +264,7 @@ function ReapplyIndividual() {
                         <div className="">
                           <input
                             type="number"
-                            className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none no-spinner"
+                            className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft no-spinner"
                             name="contactNo"
                             value={data.contactNo}
                             onChange={handleChange}
@@ -304,7 +281,7 @@ function ReapplyIndividual() {
                       <div className="grid grid-cols-3 gap-2">
                         <div className="">
                           <select
-                            className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                            className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft"
                             name="expDay"
                             value={data?.expDay}
                             onChange={handleChange}
@@ -319,7 +296,7 @@ function ReapplyIndividual() {
                         </div>
                         <div className="">
                           <select
-                            className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                            className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft"
                             name="expMonth"
                             value={data?.expMonth}
                             onChange={handleChange}
@@ -338,7 +315,7 @@ function ReapplyIndividual() {
                         </div>
                         <div className="">
                           <select
-                            className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                            className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft"
                             name="expYear"
                             value={data?.expYear}
                             onChange={handleChange}
@@ -360,7 +337,7 @@ function ReapplyIndividual() {
                       <div className="">
                         <input
                           type="text"
-                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none "
+                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft "
                           name="passportNo"
                           value={data.passportNo}
                           onChange={handleChange}
@@ -375,7 +352,7 @@ function ReapplyIndividual() {
                         <div className="">
                           <select
                             placeholder="Day"
-                            className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                            className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft"
                             name="dobDay"
                             value={data?.dobDay}
                             onChange={handleChange}
@@ -391,7 +368,7 @@ function ReapplyIndividual() {
                         <div className="w-full">
                           <select
                             placeholder="Month"
-                            className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                            className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft"
                             name="dobMonth"
                             value={data?.dobMonth}
                             onChange={handleChange}
@@ -410,7 +387,7 @@ function ReapplyIndividual() {
                         </div>
                         <div className="w-full">
                           <select
-                            className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
+                            className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft"
                             name="dobYear"
                             value={data?.dobYear}
                             onChange={handleChange}
@@ -432,7 +409,7 @@ function ReapplyIndividual() {
                         Passport First Page
                       </label>
                       <input
-                        className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none "
+                        className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft "
                         name="passportFistPagePhoto"
                         type={"file"}
                         onChange={onChangeImageHandler}
@@ -443,7 +420,7 @@ function ReapplyIndividual() {
                         Passport Second Page
                       </label>
                       <input
-                        className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none "
+                        className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft "
                         name="passportLastPagePhoto"
                         type={"file"}
                         onChange={onChangeImageHandler}
@@ -454,7 +431,7 @@ function ReapplyIndividual() {
                         Passport Size Photo
                       </label>
                       <input
-                        className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none "
+                        className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft "
                         name="passportSizePhoto"
                         type={"file"}
                         onChange={onChangeImageHandler}
@@ -465,7 +442,7 @@ function ReapplyIndividual() {
                         Supportive Document 1
                       </label>
                       <input
-                        className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none "
+                        className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft "
                         name="supportiveDoc1"
                         type={"file"}
                         onChange={onChangeImageHandler}
@@ -476,7 +453,7 @@ function ReapplyIndividual() {
                         Supportive Document 2
                       </label>
                       <input
-                        className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none "
+                        className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none bg-soft "
                         name="supportiveDoc2"
                         type={"file"}
                         onChange={onChangeImageHandler}

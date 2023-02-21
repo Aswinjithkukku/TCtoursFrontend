@@ -53,9 +53,11 @@ function AttractionOrder() {
           ? setOrders([...new Set([...response?.data?.result?.data])])
           : setOrders([]);
       } else {
+        response?.data?.result?.data ? 
         setOrders((prev) => [
           ...new Set([...prev, ...response?.data?.result?.data]),
-        ]);
+        ]) 
+        : setOrders([])
       }
 
       setFilters((prev) => {
@@ -107,53 +109,16 @@ function AttractionOrder() {
     } else {
       fetchOrders({ ...filters });
     }
-    console.log("working");
   }, [filters.skip, filters.status, filters.referenceNo]);
 
-  console.log("111111111111111111111");
-
-  // const handelInfiniteScroll = async () => {
-  //   try {
-  //     if (
-  //       window.innerHeight + document.documentElement.scrollTop + 1 >=
-  //       document.documentElement.scrollHeight
-  //     ) {
-  //       setIsLoading(true);
-  //       setFilters((prev) => {
-  //         return {
-  //           ...prev,
-  //           skip: Number(prev.skip) + 1,
-  //         };
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //     window.addEventListener("scroll", handelInfiniteScroll);
-  //     return () => window.removeEventListener("scroll", handelInfiniteScroll);
-  // }, []);
 
   return (
     <div>
-      {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
-        <h1 className="font-[600] text-[15px] uppercase">Orders</h1>
-        <div className="text-sm text-grayColor">
-          <Link to="/b2b" className="text-textColor">
-            Dashboard{" "}
-          </Link>
-          <span>{">"} </span>
-          <span>orders</span>
-        </div>
-      </div> */}
 
       <OrdersNavigator />
       <div className="p-2 lg:px-6">
         <div className="">
-          <div className="flex items-center justify-between  p-4">
-            <h1 className="font-medium hidden md:block"></h1>
+          <div className="flex items-center justify-end  p-4">
             <div className="md:flex items-center gap-[10px] space-y-1 md:space-y-0 w-full md:w-auto">
               <input
                 type="text"
@@ -228,25 +193,15 @@ function AttractionOrder() {
                 <thead className="bg-[#f3f6f9] text-grayColor text-[14px] text-left">
                   <tr>
                     <th className="font-[500] p-3 whitespace-nowrap">Ref.No</th>
-                    {/* <th className="font-[500] p-3 whitespace-nowrap">Agent</th>
-                  <th className="font-[500] p-3 whitespace-nowrap">
-                    Agent code
-                  </th> */}
                     <th className="font-[500] p-3 whitespace-nowrap">
                       Activity
                     </th>
-                    {/* <th className="font-[500] p-3 whitespace-nowrap">
-                    Booking Type
-                  </th> */}
                     <th className="font-[500] p-3 whitespace-nowrap">
                       Booking Date
                     </th>
                     <th className="font-[500] p-3 whitespace-nowrap">
                       Purchase Date
                     </th>
-                    {/* <th className="font-[500] p-3 whitespace-nowrap">Adults</th>
-                  <th className="font-[500] p-3 whitespace-nowrap">Children</th>
-                  <th className="font-[500] p-3 whitespace-nowrap">Infant</th> */}
                     <th className="font-[500] p-3 whitespace-nowrap">Price</th>
                     <th className="font-[500] p-3 whitespace-nowrap">Status</th>
                     <th className="font-[500] p-3 whitespace-nowrap">
@@ -262,7 +217,7 @@ function AttractionOrder() {
                   ) : (
                     <tr>
                       <td colSpan="13">
-                        <p className="flex justify-center my-5 text-gray-400 font-[500]">
+                        <p className="flex justify-center py-10 text-gray-400 font-[500]">
                           Data With this Query not found!!!
                         </p>
                       </td>
@@ -271,27 +226,6 @@ function AttractionOrder() {
                 </tbody>
               </table>
             </InfiniteScroll>
-
-            {/* <div className="p-4">
-              <Pagination
-                limit={filters?.limit}
-                skip={filters?.skip}
-                total={filters?.totalOrders}
-                incOrDecSkip={(number) =>
-                  setFilters((prev) => {
-                    return {
-                      ...prev,
-                      skip: Number(prev.skip) + Number(number),
-                    };
-                  })
-                }
-                updateSkip={(skip) =>
-                  setFilters((prev) => {
-                    return { ...prev, skip };
-                  })
-                }
-              />
-            </div> */}
           </div>
         </div>
       </div>
