@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,21 +8,24 @@ function ErrorAlert() {
   const dispatch = useDispatch();
   const { alertError } = useSelector((state) => state.home);
 
-  if (alertError?.status === true) {
-    setTimeout(() => {
-      dispatch(
-        setAlertError({
-          status: false,
-          title: "",
-          text: "",
-        })
-      );
-    }, 5000);
-  }
+  useEffect(() => {
+    if (alertError?.status === true) {
+      setTimeout(() => {
+        dispatch(
+          setAlertError({
+            status: false,
+            title: "",
+            text: "",
+          })
+        );
+      }, 5000);
+    }
+  }, [alertError?.status]);
+  
   return (
     <div
       className={`bg-red-100 shadow-sm rounded-md fixed ${
-        alertError?.status === true ? " right-5 " : " -right-[100vw] "
+        alertError?.status === true ? " right-5 " : " right-[-100vw] "
       }  bottom-24 right-5 z-10 max-w-[30%] text-gray-400 duration-500 transition-all`}
     >
       <div className="p-4">

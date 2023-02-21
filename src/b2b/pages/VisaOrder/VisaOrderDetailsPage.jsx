@@ -40,7 +40,7 @@ function VisaOrderDetailsPage() {
 
   return (
     <div>
-      <div className="bg-white flex items-center justify-between gap-[10px] px-6 shadow-sm border-t py-2">
+      {/* <div className="bg-white flex items-center justify-between gap-[10px] px-6 shadow-sm border-t py-2">
         <h1 className="font-[600] text-[15px] uppercase">Visa Order</h1>
         <div className="text-sm text-grayColor">
           <Link to="/b2b" className="text-textColor">
@@ -53,13 +53,13 @@ function VisaOrderDetailsPage() {
           <span>{">"} </span>
           <span>Details</span>
         </div>
-      </div>
+      </div> */}
 
       <div className="p-6">
-        <div className="bg-white rounded shadow-sm">
-          <div className="flex items-center justify-between border-b border-dashed p-4">
+        <div className="">
+          {/* <div className="flex items-center justify-between border-b border-dashed p-4">
             <h1 className="font-medium">Visa Order</h1>
-          </div>
+          </div> */}
           {/* {approveModal && (
             <ApproveVisaModal setApproveModal={setApproveModal}/>
           )} */}
@@ -209,7 +209,7 @@ function VisaOrderDetailsPage() {
                     {visaOrderDetail?.createdAt?.slice(0, 10)}
                   </span>
                 </div>
-                <div className="mt-3">
+                {/* <div className="mt-3">
                   <span className="block text-[12px] text-grayColor">
                     Document Status
                   </span>
@@ -218,7 +218,7 @@ function VisaOrderDetailsPage() {
                       ? "Uploaded"
                       : "Not Uploaded"}
                   </span>
-                </div>
+                </div> */}
                 <div className="mt-3">
                   <span className="block text-[12px] text-grayColor">
                     Total Amount
@@ -251,7 +251,6 @@ function VisaOrderDetailsPage() {
                     <th className="font-[500] p-3">Passport Number</th>
                     <th className="font-[500] p-3">Country</th>
                     <th className="font-[500] p-3">Phone Number</th>
-                    <th className="font-[500] p-3">Document Status</th>
                     <th className="font-[500] p-3">Action</th>
                   </tr>
                 </thead>
