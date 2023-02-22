@@ -16,7 +16,7 @@ function PaymentApproval() {
       <div className="p-2 ">
         <div className=" mt-2 ">
           <div className="p-6">
-            <div className="bg-gray-500 shadow-sm md:rounded-md overflow-hidden w-full md:my-6">
+            <div className="bg-white shadow-sm md:rounded-md overflow-hidden w-full md:my-6">
               <div className="lg:grid grid-cols-12 gap-5">
                 <div className="1 col-span-3 bg-primaryColor p-6 text-white space-y-5">
                   <div className="h-12 bg-bluetrans flex justify-center items-center font-medium tracking-wide rounded-md">
@@ -54,8 +54,8 @@ function PaymentApproval() {
                 <div className="2 col-span-9 p-6">
                   <div className="md:flex justify-between items-center border-b border-gray-200 border-dashed mb-5">
                     <div className="">
-                      <h2 className="text-3xl font-bold tracking-wider text-gray-200 underline">
-                        "Add to wallet"
+                      <h2 className="text-3xl font-bold tracking-wider text-gray-400 underline">
+                        Add to wallet
                       </h2>
                       <p className="text-gray-300 text-[11px]">Using wallet option make you transfer faster and easier</p>
                     </div>

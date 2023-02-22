@@ -69,18 +69,6 @@ function NewRegisters() {
 
   return (
     <div className="">
-      {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
-        <h1 className="font-[600] text-[15px] uppercase">
-          New Reseller Register
-        </h1>
-        <div className="text-sm text-grayColor">
-          <Link to="/b2b" className="text-textColor">
-            Dashboard{" "}
-          </Link>
-          <span>{">"} </span>
-          <span>New Register</span>
-        </div>
-      </div> */}
       <div className="p-2">
         <form onSubmit={submitHandler}>
           <div className=" lg:mt-3 p-3 ">

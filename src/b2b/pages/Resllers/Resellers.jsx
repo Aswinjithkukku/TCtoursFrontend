@@ -1,22 +1,50 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillDelete, AiFillEdit, AiFillEye } from "react-icons/ai";
 import { GoPlus } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchResellers } from "../../../redux/slices/resellerSlice";
+import axios from "../../../axios";
+import {
+  fetchResellers,
+  setResellers,
+} from "../../../redux/slices/resellerSlice";
 import { PageLoader } from "../../components";
 
 function Resellers() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [search, setSearch] = useState("");
 
-  const { resellers, loading } = useSelector((state) => state.resellers);
+  const { resellers } = useSelector((state) => state.resellers);
+  const { token } = useSelector((state) => state.agents);
+
+  const fetchResellers = async (search) => {
+    try {
+      setIsLoading(true);
+      setError("");
+      const response = await axios.get(
+        `/b2b/resellers/listAll?search=${search}`,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(setResellers(response.data));
+      setIsLoading(false);
+    } catch (error) {
+      setError(
+        error?.response?.data?.error || "Something went wrong, Try again"
+      );
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    dispatch(fetchResellers());
-  }, [dispatch]);
-
-  console.log(resellers);
+    fetchResellers(search);
+  }, [search]);
 
   return (
     <div className=" text-textColor">
@@ -31,18 +59,20 @@ function Resellers() {
                 <span className="">
                   <GoPlus />{" "}
                 </span>
-                <span className="">Create </span>
+                <span className="font-[500]">Create </span>
               </button>
               <div className="w-[400px] h-full">
                 <input
                   type="search"
-                  className="h-full rounded-lg px-2 w-full"
-                  placeholder="search !!!"
+                  className="h-full rounded-lg px-2 w-full text-sm placeholder:text-gray-300 outline-none border-blue-400 border"
+                  placeholder="Search by Name & Company!!!"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
             </div>
           </div>
-          {loading ? (
+          {isLoading ? (
             <PageLoader />
           ) : (
             <div className="overflow-x-auto">
@@ -91,7 +121,9 @@ function Resellers() {
                         <td className="p-3 flex gap-2">
                           <span
                             className="text-xl text-lightblue"
-                            onClick={() => navigate(`/b2b/reseller/${item?._id}`)}
+                            onClick={() =>
+                              navigate(`/b2b/reseller/${item?._id}`)
+                            }
                           >
                             <AiFillEye />{" "}
                           </span>

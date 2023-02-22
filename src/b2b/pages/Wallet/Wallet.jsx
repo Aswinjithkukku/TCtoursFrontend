@@ -36,7 +36,7 @@ function Wallet() {
           <div className=" ">
             <div className="md:grid md:grid-cols-2 space-y-2 md:space-y-0 md:p-12 gap-12">
               <div className="">
-                <div className="bg-gray-500 rounded-lg py-3 shadow-sm px-2 lg:px-7">
+                <div className="bg-[#003580]  rounded-lg py-3 shadow-sm px-2 lg:px-7">
                   <div className="">
                     <div className="">
                       <h2 className="lg:text-3xl text-2xl text-center lg:text-start font-black text-gray-200 tracking-wider mb-3">
@@ -49,7 +49,7 @@ function Wallet() {
                         {loading ? (
                           <BtnLoader />
                         ) : (
-                          <p className="text-main">
+                          <p className="text-gray-200">
                             {priceConversion(balance, selectedCurrency, true)}
                           </p>
                         )}
@@ -61,14 +61,14 @@ function Wallet() {
                         <div className="flex w-full gap-3">
                           <div className="w-full">
                             <Link to="/b2b/payment/approval">
-                              <button className="w-full bg-gray-800 text-gray-100 py-3 rounded-[0.25rem] text-xs lg:text-sm">
+                              <button className="w-full bg-primaryColor text-gray-100 py-3 rounded-[0.25rem] text-xs lg:text-sm">
                                 ADD MONEY
                               </button>
                             </Link>
                           </div>
                           <div className="w-full">
                             <button
-                              className="w-full bg-gray-800 text-gray-100 py-3 rounded-[0.25rem] text-xs lg:text-sm"
+                              className="w-full bg-primaryColor text-gray-100 py-3 rounded-[0.25rem] text-xs lg:text-sm"
                               onClick={() => setViewWithdrawModal(true)}
                             >
                               WITHDRAW
@@ -101,7 +101,7 @@ function Wallet() {
                         {loading ? (
                           <BtnLoader />
                         ) : (
-                          <p className="text-main">
+                          <p className="text-gray-200">
                             {priceConversion(
                               pendingBalance,
                               selectedCurrency,

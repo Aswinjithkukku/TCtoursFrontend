@@ -149,16 +149,6 @@ function CompanySettings() {
             </>
           )}
 
-          {/* <div className="">
-            <label className="label">City</label>
-            <input
-              className="input"
-              type="text"
-              name="city"
-              value={companyDetails.city}
-              onChange={handleChange}
-            />
-          </div> */}
           <div className= "relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               City

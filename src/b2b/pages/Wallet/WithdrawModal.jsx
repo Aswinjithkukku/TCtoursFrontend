@@ -139,12 +139,12 @@ function WithdrawModal({ setViewWithdrawModal }) {
     <>
       {isOtpModal ? (
         <div className="z-50 fixed top-0 left-0 right-0 bottom-0 flex items-center w-full h-full p-4 lightglass overflow-y-auto">
-          <div className="max-w-xl w-full mx-auto bg-gray-500 rounded-xl overflow-hidden">
+          <div className="max-w-xl w-full mx-auto bg-white rounded-xl overflow-hidden">
             <form onSubmit={submitOtpHandler}>
-              <div className="text-gray-200 flex justify-center py-5">
+              <div className="text-gray-400 flex justify-center py-5">
                 <div className="mt-2">
                   <div className="flex justify-center w-full">
-                    <div class="flex items-center justify-center w-12 h-12 mb-5 bg-gray-600 rounded-full text-2xl">
+                    <div class="flex items-center justify-center w-12 h-12 mb-5 bg-blue-400 text-white rounded-full text-2xl">
                       <MdPassword />
                     </div>
                   </div>
@@ -163,7 +163,7 @@ function WithdrawModal({ setViewWithdrawModal }) {
                 className="flex flex-row justify-center text-center  my-5"
               >
                 <input
-                  className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-gray-400 border-gray-600 outline-none text-gray-200"
+                  className="m-2 no-spinner border h-10 w-10 text-center form-control rounded  border-gray-200 outline-none text-gray-500"
                   type="text"
                   id="first"
                   maxLength={1}
@@ -173,7 +173,7 @@ function WithdrawModal({ setViewWithdrawModal }) {
                   onChange={onChangeHandler}
                 />
                 <input
-                  className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-gray-400 border-gray-600 outline-none text-gray-200"
+                  className="m-2 no-spinner border h-10 w-10 text-center form-control rounded  border-gray-200 outline-none text-gray-500"
                   type="text"
                   id="second"
                   maxLength={1}
@@ -183,7 +183,7 @@ function WithdrawModal({ setViewWithdrawModal }) {
                   onChange={onChangeHandler}
                 />
                 <input
-                  className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-gray-400 border-gray-600 outline-none text-gray-200"
+                  className="m-2 no-spinner border h-10 w-10 text-center form-control rounded  border-gray-200 outline-none text-gray-500"
                   type="text"
                   id="third"
                   maxLength={1}
@@ -193,7 +193,7 @@ function WithdrawModal({ setViewWithdrawModal }) {
                   onChange={onChangeHandler}
                 />
                 <input
-                  className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-gray-400 border-gray-600 outline-none text-gray-200"
+                  className="m-2 no-spinner border h-10 w-10 text-center form-control rounded  border-gray-200 outline-none text-gray-500"
                   type="text"
                   id="fourth"
                   maxLength={1}
@@ -203,7 +203,7 @@ function WithdrawModal({ setViewWithdrawModal }) {
                   onChange={onChangeHandler}
                 />
                 <input
-                  className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-gray-400 border-gray-600 outline-none text-gray-200"
+                  className="m-2 no-spinner border h-10 w-10 text-center form-control rounded  border-gray-200 outline-none text-gray-500"
                   type="text"
                   id="fifth"
                   maxLength={1}
@@ -213,7 +213,7 @@ function WithdrawModal({ setViewWithdrawModal }) {
                   onChange={onChangeHandler}
                 />
               </div>
-              <div className="pt-5 pb-6 px-6 text-right bg-gray-600 -mb-2">
+              <div className="pt-5 pb-6 px-6 text-right bg-primaryColor -mb-2">
                 <button
                   type="submit"
                   className="inline-block w-full sm:w-auto py-3 px-5 mb-2 text-center font-semibold leading-6 text-blue-50 bg-blue-500 hover:bg-blue-600 rounded-lg transition duration-200"
@@ -226,14 +226,14 @@ function WithdrawModal({ setViewWithdrawModal }) {
         </div>
       ) : (
         <div className="z-50 fixed top-0 left-0 right-0 bottom-0 flex items-center w-full h-full p-4 lightglass overflow-y-auto">
-          <div className="max-w-xl w-full mx-auto pt-6 px-6 pb-8 bg-gray-500 rounded-xl shadow-sm">
+          <div className="max-w-xl w-full mx-auto pt-6 px-6 pb-8 bg-white rounded-xl shadow-sm">
             <div className="flex justify-between items-center">
               <div className="flex flex-wrap items-center mb-6">
-                <div className="flex items-center justify-center h-14 w-14 mb-4 sm:mb-0 bg-gray-600 rounded-xl mr-4 text-blue-400 text-xl">
+                <div className="flex items-center justify-center h-14 w-14 mb-4 sm:mb-0 bg-gray-100 shadow-sm rounded-xl mr-4 text-blue-400 text-xl">
                   <BsFillCreditCard2FrontFill />
                 </div>
                 <div className="w-full sm:w-auto">
-                  <h4 className="text-xl text-gray-100 leading-6 font-semibold">
+                  <h4 className="text-xl text-gray-500 leading-6 font-semibold">
                     Withdraw
                   </h4>
                   <span className="text-xs text-gray-300 font-semibold">
@@ -241,7 +241,7 @@ function WithdrawModal({ setViewWithdrawModal }) {
                   </span>
                 </div>
               </div>
-              <div className="flex items-center justify-center h-14 w-14 mb-4 sm:mb-0 bg-gray-600 rounded-xl mr-4 text-blue-400 text-xl"
+              <div className="flex items-center justify-center h-14 w-14 mb-4 sm:mb-0 bg-gray-100 shadow-sm rounded-xl mr-4 text-blue-400 text-xl"
               onClick={() => setViewWithdrawModal(false)}
               >
                 <RxEyeClosed />{" "}
@@ -250,12 +250,12 @@ function WithdrawModal({ setViewWithdrawModal }) {
             <form onSubmit={handleSubmit}>
               <div className="flex flex-wrap -mx-3 mb-10">
                 <div className="w-full  px-3 mb-10 sm:mb-0">
-                  <div className="relative w-full h-14 py-2 px-3 border border-gray-400 focus-within:border-green-500 rounded-lg">
-                    <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-300 px-1 bg-gray-500">
+                  <div className="relative w-full h-14 py-2 px-3 border border-blue-400 focus-within:border-green-500 rounded-lg">
+                    <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 px-1 bg-blue-500">
                       Country
                     </span>
                     <select
-                      className="block h-full w-full outline-none bg-transparent text-sm text-gray-100 font-medium"
+                      className="block h-full w-full outline-none bg-transparent text-sm text-gray-600 font-medium"
                       name="isoCode"
                       value={data.isoCode}
                       onChange={handleChange}
@@ -264,7 +264,7 @@ function WithdrawModal({ setViewWithdrawModal }) {
                       <option hidden></option>{" "}
                       {countries?.map((item) => (
                         <option
-                          className="capitalize bg-gray-400"
+                          className="capitalize bg-white"
                           value={item?.isocode}
                         >
                           {item?.countryName}{" "}
@@ -275,12 +275,12 @@ function WithdrawModal({ setViewWithdrawModal }) {
                 </div>
               </div>
 
-              <div className="relative w-full h-14 py-2 px-3 mb-6 border border-gray-400 focus-within:border-green-500 rounded-lg">
-                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-300 px-1 bg-gray-500">
+              <div className="relative w-full h-14 py-2 px-3 mb-6 border border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 px-1 bg-blue-500">
                   Account number
                 </span>
                 <input
-                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-100 font-medium"
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-600 font-medium"
                   id="modalInput9-4"
                   type="text"
                   name="accountNumber"
@@ -289,12 +289,12 @@ function WithdrawModal({ setViewWithdrawModal }) {
                   required
                 />
               </div>
-              <div className="relative w-full h-14 py-2 px-3 mb-6 border border-gray-400 focus-within:border-green-500 rounded-lg">
-                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-300 px-1 bg-gray-500">
+              <div className="relative w-full h-14 py-2 px-3 mb-6 border border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 px-1 bg-blue-500">
                   Bank name
                 </span>
                 <input
-                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-100 font-medium"
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-600 font-medium"
                   id="modalInput9-4"
                   type="text"
                   name="bankName"
@@ -304,12 +304,12 @@ function WithdrawModal({ setViewWithdrawModal }) {
                 />
               </div>
               {data?.isoCode === "IN" ? (
-              <div className="relative w-full h-14 py-2 px-3 mb-6 border border-gray-400 focus-within:border-green-500 rounded-lg">
-                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-300 px-1 bg-gray-500">
+              <div className="relative w-full h-14 py-2 px-3 mb-6 border border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 px-1 bg-blue-500">
                   IFSC Code
                 </span>
                 <input
-                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-100 font-medium"
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-600 font-medium"
                   id="modalInput9-4"
                   type="text"
                   name="ifscCode"
@@ -318,12 +318,12 @@ function WithdrawModal({ setViewWithdrawModal }) {
                 />
               </div>
               ) : (
-              <div className="relative w-full h-14 py-2 px-3 mb-6 border border-gray-400 focus-within:border-green-500 rounded-lg">
-                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-300 px-1 bg-gray-500">
+              <div className="relative w-full h-14 py-2 px-3 mb-6 border border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 px-1 bg-blue-500">
                 IBAN Code
                 </span>
                 <input
-                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-100 font-medium"
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-600 font-medium"
                   id="modalInput9-4"
                   type="text"
                   name="ibanCode"
@@ -332,12 +332,12 @@ function WithdrawModal({ setViewWithdrawModal }) {
                 />
               </div>
               )}
-              <div className="relative w-full h-14 py-2 px-3 mb-6 border border-gray-400 focus-within:border-green-500 rounded-lg">
-                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-300 px-1 bg-gray-500">
+              <div className="relative w-full h-14 py-2 px-3 mb-6 border border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 px-1 bg-blue-500">
                   Account Holder name
                 </span>
                 <input
-                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-100 font-medium"
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-600 font-medium"
                   id="modalInput9-4"
                   type="text"
                   name="accountHolderName"
@@ -346,12 +346,12 @@ function WithdrawModal({ setViewWithdrawModal }) {
                   required
                 />
               </div>
-              <div className="relative w-full h-14 py-2 px-3 mb-6 border border-gray-400 focus-within:border-green-500 rounded-lg">
-                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-300 px-1 bg-gray-500">
+              <div className="relative w-full h-14 py-2 px-3 mb-6 border border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 px-1 bg-blue-500">
                   Amount
                 </span>
                 <input
-                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-100 font-medium no-spinner"
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-600 font-medium no-spinner"
                   id="modalInput9-4"
                   type="number"
                   name="amount"
