@@ -8,7 +8,7 @@ import RazorPayPaymentComponent from "../../components/Payment/RazorPayPaymentCo
 import CCAvenuePaymentComponent from "../../components/Payment/CCAvenuePaymentComponent";
 
 function PaymentApproval() {
-  const [payMethod, setPayMethod] = useState("razorpay");
+  const [payMethod, setPayMethod] = useState("ccavenue");
   return (
     <>
 
@@ -18,12 +18,12 @@ function PaymentApproval() {
           <div className="p-6">
             <div className="bg-gray-500 shadow-sm md:rounded-md overflow-hidden w-full md:my-6">
               <div className="lg:grid grid-cols-12 gap-5">
-                <div className="1 col-span-3 bg-primaryColor p-6 text-white">
+                <div className="1 col-span-3 bg-primaryColor p-6 text-white space-y-5">
                   <div className="h-12 bg-bluetrans flex justify-center items-center font-medium tracking-wide rounded-md">
                     Payments
                   </div>
 
-                  <div
+                  {/* <div
                     onClick={() => {
                       setPayMethod("razorpay");
                     }}
@@ -33,15 +33,15 @@ function PaymentApproval() {
                     <p className="text-[8px] text-text">
                       (credit/debit-card, UPI payment)
                     </p>
-                  </div>
-                  <div
+                  </div> */}
+                  {/* <div
                     onClick={() => {
                       setPayMethod("paypal");
                     }}
                     className="h-10 hover:bg-bluetrans rounded-lg flex tracking-wide items-center cursor-pointer px-2"
                   >
                     Paypal
-                  </div>
+                  </div> */}
                   <div
                     onClick={() => {
                       setPayMethod("ccavenue");

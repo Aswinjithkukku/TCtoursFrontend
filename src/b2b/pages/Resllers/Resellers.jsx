@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { AiFillDelete, AiFillEdit, AiFillEye } from "react-icons/ai";
 import { GoPlus } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -75,7 +75,7 @@ function Resellers() {
                       <tr
                         className="border-b border-tableBorderColor cursor-default"
                         key={index}
-                        onClick={() => navigate(`/b2b/reseller/${item?._id}`)}
+                        // onClick={() => navigate(`/b2b/reseller/${item?._id}`)}
                       >
                         <td className="p-3">{item?.agentCode}</td>
                         <td className="p-3">
@@ -88,7 +88,13 @@ function Resellers() {
                         <td className="p-3 ">{item?.whatsappNumber}</td>
                         <td className="p-3">{item?.email}</td>
                         <td className="p-3">{item?.designation}</td>
-                        <td className="p-3 flex space-x-1">
+                        <td className="p-3 flex gap-2">
+                          <span
+                            className="text-xl text-lightblue"
+                            onClick={() => navigate(`/b2b/reseller/${item?._id}`)}
+                          >
+                            <AiFillEye />{" "}
+                          </span>
                           <span
                             className="text-xl text-lightblue"
                             onClick={() => navigate("/b2b/reseller/edit")}

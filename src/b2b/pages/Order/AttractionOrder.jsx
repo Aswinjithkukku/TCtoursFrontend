@@ -174,65 +174,63 @@ function AttractionOrder() {
             </div>
           </div>
 
-            <div className="overflow-x-auto order__scroll ">
-              <InfiniteScroll
-                dataLength={orders?.length || 0}
-                next={() => {
-                  setFilters((prev) => {
-                    return { ...prev, skip: prev.skip + 1 };
-                  });
-                }}
-                hasMore={filters.hasMore}
-              >
-                <table className="w-full relative overflow-hidden">
-                  <thead className="bg-gray-100 text-grayColor text-[14px] text-left">
-                    <tr>
-                      <th className="font-[500] p-3 whitespace-nowrap">
-                        Ref.No
-                      </th>
-                      <th className="font-[500] p-3 whitespace-nowrap">
-                        Activity
-                      </th>
-                      <th className="font-[500] p-3 whitespace-nowrap">
-                        Booking Date
-                      </th>
-                      <th className="font-[500] p-3 whitespace-nowrap">
-                        Purchase Date
-                      </th>
-                      <th className="font-[500] p-3 whitespace-nowrap">
-                        Price
-                      </th>
-                      <th className="font-[500] p-3 whitespace-nowrap">
-                        Status
-                      </th>
-                      <th className="font-[500] p-3 whitespace-nowrap">
-                        Tickets
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-sm overflow-hidden text-textColor">
-                    {orders?.length > 0 ? (
-                      orders?.map((item, index) => (
-                        <AttractionOrderTable item={item} key={index} />
-                      ))
-                    ) : (
-                      <>
-                        <tr>
-                        <PageLoader />
-                        </tr>
-                        <tr>
-                          <td colSpan="13">
-                            <p className="flex justify-center pt-5 pb-20 text-slate-400 font-[500]">
-                              Data With this Query not found!!!
-                            </p>
-                          </td>
-                        </tr>
-                      </>
-                    )}
-                  </tbody>
-                </table>
-              </InfiniteScroll>
-            </div>
+          <div className="overflow-x-auto order__scroll ">
+            <InfiniteScroll
+              dataLength={orders?.length || 0}
+              next={() => {
+                setFilters((prev) => {
+                  return { ...prev, skip: prev.skip + 1 };
+                });
+              }}
+              hasMore={filters.hasMore}
+            >
+              <table className="w-full relative overflow-hidden">
+                <thead className="bg-gray-100 text-grayColor text-[14px] text-left">
+                  <tr>
+                    <th className="font-[500] p-3 whitespace-nowrap">Ref.No</th>
+                    <th className="font-[500] p-3 whitespace-nowrap">
+                      Activity
+                    </th>
+                    <th className="font-[500] p-3 whitespace-nowrap">
+                      Booking Date
+                    </th>
+                    <th className="font-[500] p-3 whitespace-nowrap">
+                      Purchase Date
+                    </th>
+                    <th className="font-[500] p-3 whitespace-nowrap">Price</th>
+                    <th className="font-[500] p-3 whitespace-nowrap">Status</th>
+                    <th className="font-[500] p-3 whitespace-nowrap">
+                      Tickets
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="text-sm overflow-hidden text-textColor">
+                  {orders?.length > 0 ? (
+                    orders?.map((item, index) => (
+                      <AttractionOrderTable item={item} key={index} />
+                    ))
+                  ) : (
+                    <>
+                      <tr>
+                        <td colSpan="13">
+                          <div className="flex justify-center items-center h-10">
+                            <PageLoader />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colSpan="13">
+                          <p className="flex justify-center pt-5 pb-20 text-slate-400 font-[500]">
+                            Data With this Query not found!!!
+                          </p>
+                        </td>
+                      </tr>
+                    </>
+                  )}
+                </tbody>
+              </table>
+            </InfiniteScroll>
+          </div>
         </div>
       </div>
     </div>

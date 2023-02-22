@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { BtnLoader } from "../../components";
 import axios from "../../../axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { setAlertError, setAlertSuccess } from "../../../redux/slices/homeSlice";
 
 function AuthSettings() {
+  const dispatch = useDispatch()
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -29,31 +31,36 @@ function AuthSettings() {
 
         const response = await axios.patch(
           "/b2b/resellers/auth/update/password",
-          { oldPassword, newPassword },
+          { oldPassword, newPassword, confirmPassword },
           config
         );
         setIsLoading(false);
-        Swal.fire({
-          icon: "success",
+        dispatch(setAlertSuccess({
+          status: true,
           title: "Password Changed!",
           text: "Password Update Successful",
-        });
+        }))
         return response.data;
       }
     } catch (err) {
       setError(err?.response?.data?.error || "Something went wrong, Try again");
+      dispatch(setAlertError({
+        status: true,
+        title: "Something went wrong!",
+        text: err?.response?.data?.error
+      }))
       setIsLoading(false);
     }
   };
   console.log(newPassword, oldPassword, confirmPassword);
 
-  useEffect(() => {
-    if (newPassword !== confirmPassword) {
-      setError("password you have entered is not similiar");
-    }else{
-      setError('')
-    }
-  }, [newPassword, confirmPassword]);
+  // useEffect(() => {
+  //   if (newPassword !== confirmPassword) {
+  //     setError("password you have entered is not similiar");
+  //   }else{
+  //     setError('')
+  //   }
+  // }, [newPassword, confirmPassword]);
 
   return (
     <div className="">
