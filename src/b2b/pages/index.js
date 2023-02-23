@@ -24,6 +24,7 @@ import VisaOrderPage from "./VisaOrder/VisaOrderPage";
 import VisaOrderDetailsPage from "./VisaOrder/VisaOrderDetailsPage";
 import ReapplyIndividual from "./VisaOrder/ReapplyIndividual";
 import AttractionSingleTicketPage from "./Ticket/AttractionSingleTicketPage";
+import FlightHomePage from "./Flight/FlightHomePage";
 
 export {
   Dashboard,
@@ -52,4 +53,5 @@ export {
   VisaOrderDetailsPage,
   ReapplyIndividual,
   AttractionSingleTicketPage,
+  FlightHomePage,
 };

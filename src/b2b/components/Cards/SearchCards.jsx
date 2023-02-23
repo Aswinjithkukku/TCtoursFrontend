@@ -113,6 +113,30 @@ function SearchCards() {
                       Visa
                     </span>
                   </li>
+                  <li className="mb-4 mr-8">
+                    <span
+                      className={`inline-block pb-4 ${
+                        view.flight
+                          ? " text-blue-500 border-blue-500  "
+                          : " text-gray-400 border-transparent "
+                      } font-semibold border-b  hover:border-gray-400 transition duration-200 cursor-pointer`}
+                      href="#"
+                      onClick={() => {
+                        setView((prev) => {
+                          return {
+                            ...prev,
+                            attraction: false,
+                            hotel: false,
+                            visa: false,
+                            transfer: false,
+                            flight: true,
+                          };
+                        });
+                      }}
+                    >
+                      Flight
+                    </span>
+                  </li>
                 </ul>
               </div>
             </div>
