@@ -60,14 +60,14 @@ function VisaOrderDetailSingleRow({ index, item, visaOrderDetail }) {
           {item?.isStatus === "approved" &&
             visaOrderDetail?.status === "payed" && (
               <div className=" flex items-center">
-                <span className="flex gap-1 bg-green-200/70 rounded p-1">
+                <a className="flex gap-1 bg-green-200/70 rounded p-1" download href={process.env.REACT_APP_SERVER_URL + item?.visaUpload}>
                   <span className="text-green-600 cursor-pointer  ">
                     <FiDownload />
                   </span>
                   <span className="text-green-600 cursor-pointer text-[11px] ">
                     Download
                   </span>
-                </span>
+                </a>
               </div>
             )}
           {item?.isStatus === "rejected" &&

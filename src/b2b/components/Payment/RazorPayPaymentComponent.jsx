@@ -89,21 +89,23 @@ const RazorPayPaymentComponent = () => {
   return (
     <div>
       <div className="flex justify-center flex-col gap-4 my-3">
-        <input
-          ref={inputRef}
-          value={100}
-          className="input"
-          type="number"
-          placeholder="Enter Amount to be added to wallet"
-          min="0"
-          // disabled={!!}
-          // value={inputAmount === 0 ? "Enter Amount to be added to wallet" : inputAmount}
-          // onChange={(e) => setInputAmount(e.target.value)}
-        />
+                <div className="relative w-full h-14 py-3 px-3 mb-8 border border-gray-400 hover:border-gray-400 focus-within:border-green-500 rounded-lg">
+          <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-gray-500">
+            Enter Amount to be added to wallet
+          </span>
+          <input
+            className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium no-spinner"
+            ref={inputRef}
+            value={100}
+            type="number"
+            placeholder="Enter Amount to be added to wallet"
+            min="0"
+          />
+        </div>{" "}
         <button
           onClick={handlePayByRazorPay}
           // onClick={verifyPayment}
-          className="italic rounded-md px-4 w-[100%] tracking-wide text-white bg-primaryColor h-[40px]"
+          className="italic rounded-md px-4 w-[100%] tracking-wide text-white bg-gray-800 h-[40px]"
         >
           Razorpay
         </button>

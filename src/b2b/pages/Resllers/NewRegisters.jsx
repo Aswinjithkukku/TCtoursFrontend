@@ -37,7 +37,7 @@ function NewRegisters() {
   const [error, setError] = useState("");
 
   const { token } = useSelector((state) => state.agents);
-  const { countries } = useSelector((state) => state.home);
+  const { countries, UAE } = useSelector((state) => state.home);
 
   const submitHandler = async (e) => {
     try {
@@ -69,18 +69,6 @@ function NewRegisters() {
 
   return (
     <div className="">
-      {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
-        <h1 className="font-[600] text-[15px] uppercase">
-          New Reseller Register
-        </h1>
-        <div className="text-sm text-grayColor">
-          <Link to="/b2b" className="text-textColor">
-            Dashboard{" "}
-          </Link>
-          <span>{">"} </span>
-          <span>New Register</span>
-        </div>
-      </div> */}
       <div className="p-2">
         <form onSubmit={submitHandler}>
           <div className=" lg:mt-3 p-3 ">
@@ -100,7 +88,6 @@ function NewRegisters() {
                 <input
                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type="text"
-                  placeholder="Ex: TravellerChoice"
                   name="companyName"
                   value={data.companyName}
                   onChange={onChangeHandler}
@@ -115,7 +102,6 @@ function NewRegisters() {
                 <input
                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='text'
-                  placeholder='Ex: Tc, North california'
                   name='address'
                   value={data.address}
                   onChange={onChangeHandler}
@@ -133,13 +119,13 @@ function NewRegisters() {
                   value={data.country}
                   onChange={onChangeHandler}
                 >
-                  <option className='text-text' hidden>select Country</option>
+                  <option className='text-text' hidden></option>
                   {countries?.map((item, index) => (
                     <option className='capitalize' value={item?._id} key={index}>{item?.countryName} </option>
                   ))}
                 </select>
               </div>
-              {data.country && data.country === "63ac33ecff04e5652a2583f5" && (
+              {data.country && data.country === UAE?._id && (
                 <>
                   <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
                     <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
@@ -148,7 +134,6 @@ function NewRegisters() {
                     <input
                       className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                       type='number'
-                      placeholder=''
                       name='trnNumber'
                       value={data.trnNumber}
                       onChange={onChangeHandler}
@@ -162,7 +147,6 @@ function NewRegisters() {
                     <input
                       className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                       type='number'
-                      placeholder=''
                       name='companyRegistration'
                       value={data.companyRegistration}
                       onChange={onChangeHandler}
@@ -178,7 +162,6 @@ function NewRegisters() {
                 <input
                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='text'
-                  placeholder='Ex: TravellerChoice.ae'
                   name='website'
                   value={data.website}
                   onChange={onChangeHandler}
@@ -192,13 +175,12 @@ function NewRegisters() {
                 <input
                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='text'
-                  placeholder='Ex: Dubai'
                   name='city'
                   value={data.city}
                   onChange={onChangeHandler}
                 />
               </div>
-              {data.country && data.country !== "63ac33ecff04e5652a2583f5" && (
+              {data.country && data.country !== UAE?._id && (
 
                 <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
                   <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
@@ -207,7 +189,6 @@ function NewRegisters() {
                   <input
                     className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                     type='number'
-                    placeholder=''
                     name='zipCode'
                     value={data.zipCode}
                     onChange={onChangeHandler}
@@ -233,7 +214,6 @@ function NewRegisters() {
                 <input
                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='text'
-                  placeholder='Ex: Name'
                   name='name'
                   value={data.name}
                   onChange={onChangeHandler}
@@ -260,7 +240,6 @@ function NewRegisters() {
                   <input
                     className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                     type='number'
-                    placeholder='Ex: 0000000000'
                     name='phoneNumber'
                     value={data.phoneNumber}
                     onChange={onChangeHandler}
@@ -288,7 +267,6 @@ function NewRegisters() {
                   <input
                     className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                     type='number'
-                    placeholder='Ex: 0000000000'
                     name='telephoneNumber'
                     value={data.telephoneNumber}
                     onChange={onChangeHandler}
@@ -303,7 +281,6 @@ function NewRegisters() {
                 <input
                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='email'
-                  placeholder='Ex: example@email.com'
                   name='email'
                   value={data.email}
                   onChange={onChangeHandler}
@@ -318,7 +295,6 @@ function NewRegisters() {
                 <input
                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='text'
-                  placeholder='Ex: AED'
                   value={countryArray?.map((item) => item?.currencySymbol) || ''}
                   readOnly
                 />
@@ -331,7 +307,6 @@ function NewRegisters() {
                 <input
                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='text'
-                  placeholder='designation'
                   name='designation'
                   value={data.designation}
                   onChange={onChangeHandler}
@@ -346,7 +321,6 @@ function NewRegisters() {
                 <input
                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='text'
-                  placeholder='skypeid'
                   name='skypeId'
                   value={data.skypeId}
                   onChange={onChangeHandler}
@@ -360,7 +334,6 @@ function NewRegisters() {
                 <input
                   className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
                   type='number'
-                  placeholder='Ex: 000000000'
                   name='whatsappNumber'
                   value={data.whatsappNumber}
                   onChange={onChangeHandler}

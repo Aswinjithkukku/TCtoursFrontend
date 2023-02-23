@@ -106,12 +106,12 @@ function VisaOtpModal({ setOtpModal, order, setNavigation }) {
 
   return (
     <div className="z-50 fixed top-0 left-0 right-0 bottom-0 flex items-center w-full h-full p-4 lightglass overflow-y-auto">
-      <div className="max-w-xl w-full mx-auto bg-gray-500 rounded-xl overflow-hidden">
+      <div className="max-w-xl w-full mx-auto bg-white rounded-xl overflow-hidden">
         <form onSubmit={submitHandler}>
-          <div className="text-gray-200 flex justify-center py-5">
+          <div className="text-gray-500 flex justify-center py-5">
             <div className="mt-2">
               <div className="flex justify-center w-full">
-                <div class="flex items-center justify-center w-12 h-12 mb-5 bg-gray-600 rounded-full text-2xl">
+                <div class="flex items-center justify-center w-12 h-12 mb-5 bg-gray-200 text-blue-400 rounded-full text-2xl">
                   <MdPassword/>
                 </div>
               </div>
@@ -131,7 +131,7 @@ function VisaOtpModal({ setOtpModal, order, setNavigation }) {
           >
             <input
               ref={oneRef}
-              className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-gray-400 border-gray-600 outline-none text-gray-200"
+              className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-white border-gray-300 outline-none text-gray-500"
               type="text"
               id="first"
               maxLength={1}
@@ -141,7 +141,7 @@ function VisaOtpModal({ setOtpModal, order, setNavigation }) {
               onChange={onChangeHandler}
             />
             <input
-              className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-gray-400 border-gray-600 outline-none text-gray-200"
+              className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-white border-gray-300 outline-none text-gray-500"
               type="text"
               id="second"
               maxLength={1}
@@ -151,7 +151,7 @@ function VisaOtpModal({ setOtpModal, order, setNavigation }) {
               onChange={onChangeHandler}
             />
             <input
-              className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-gray-400 border-gray-600 outline-none text-gray-200"
+              className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-white border-gray-300 outline-none text-gray-500"
               type="text"
               id="third"
               maxLength={1}
@@ -161,7 +161,7 @@ function VisaOtpModal({ setOtpModal, order, setNavigation }) {
               onChange={onChangeHandler}
             />
             <input
-              className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-gray-400 border-gray-600 outline-none text-gray-200"
+              className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-white border-gray-300 outline-none text-gray-500"
               type="text"
               id="fourth"
               maxLength={1}
@@ -171,7 +171,7 @@ function VisaOtpModal({ setOtpModal, order, setNavigation }) {
               onChange={onChangeHandler}
             />
             <input
-              className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-gray-400 border-gray-600 outline-none text-gray-200"
+              className="m-2 no-spinner border h-10 w-10 text-center form-control rounded bg-white border-gray-300 outline-none text-gray-500"
               type="text"
               id="fifth"
               maxLength={1}
@@ -182,7 +182,7 @@ function VisaOtpModal({ setOtpModal, order, setNavigation }) {
             />
           </div>
           {/* <button className="inline-block w-full sm:w-auto py-3 px-5 mb-2 text-center font-semibold leading-6 text-blue-50 bg-blue-500 hover:bg-blue-600 rounded-lg transition duration-200">Submit</button> */}
-          <div className="pt-5 pb-6 px-6 text-right bg-gray-600 -mb-2">
+          <div className="pt-5 pb-6 px-6 text-right bg-primaryColor -mb-2">
             {/* <div className="inline-block w-full sm:w-auto py-3 px-5 mb-2 mr-4 text-center font-semibold leading-6 text-gray-200 bg-gray-500 hover:bg-gray-400 rounded-lg transition duration-200">
             Resend OTP
           </div> */}

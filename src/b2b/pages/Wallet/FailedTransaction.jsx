@@ -4,7 +4,7 @@ import { MdBlockFlipped } from 'react-icons/md'
 function FailedTransaction() {
   return (
     <table className="w-full">
-      <thead className="bg-[#f3f6f9] text-grayColor text-[14px] text-left">
+      <thead className="bg-gray-100 text-grayColor text-[14px] text-left">
         <tr>
           <th className="font-[500] p-3">Ref No.</th>
           <th className="font-[500] p-3">Gateway</th>

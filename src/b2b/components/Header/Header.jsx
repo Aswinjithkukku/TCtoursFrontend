@@ -1,20 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import AdminDropdown from "./AdminDropdown";
-import WalletDropDown from "./WalletDropDown";
 import CurrencyModal from "./CurrencyModal";
 import { useHandleClickOutside } from "../../../hooks";
 import { AiFillSetting, AiOutlineDown } from "react-icons/ai";
-import { GrMenu } from "react-icons/gr";
-import { HiBellAlert } from "react-icons/hi2";
 import { getWalletBalance } from "../../../redux/slices/walletSlice";
-import priceConversion from "../../../utils/PriceConversion";
-import BtnLoader from "../BtnLoader";
 import NotificationDropdown from "./NotificationDropdown";
 import { getHome } from "../../../redux/slices/generalSlice";
 import { useLocation } from "react-router";
 import { RiUserAddFill, RiUserFill } from "react-icons/ri";
-import { BsCartCheckFill, BsFileEarmarkMedicalFill } from "react-icons/bs";
+import { BsCartCheckFill } from "react-icons/bs";
 import { GoPlus } from "react-icons/go";
 import { IoNotifications } from "react-icons/io5";
 import { IoMdCart } from "react-icons/io";
@@ -26,24 +20,15 @@ export default function Header({ setSidebarView, sidebarView }) {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const [isAdminDropdownOpen, setIsAdminDropdownOpen] = useState(false);
-  const [walletDropdown, setWalletDropdown] = useState(false);
   const [currency, setCurrency] = useState(false);
   const [notificationModal, setNotificationModal] = useState(false);
   const [cart, setCart] = useState(false);
 
   const { agent } = useSelector((state) => state.agents);
   const { selectedCurrency } = useSelector((state) => state.home);
-  const { balance, loading } = useSelector((state) => state.wallet);
 
   const currencyRef = useRef();
   useHandleClickOutside(currencyRef, () => setCurrency(false));
-
-  const wrapperRef = useRef();
-  useHandleClickOutside(wrapperRef, () => setIsAdminDropdownOpen(false));
-
-  const walletRef = useRef();
-  useHandleClickOutside(walletRef, () => setWalletDropdown(false));
 
   const cartRef = useRef();
   useHandleClickOutside(cartRef, () => setCart(false));
@@ -110,7 +95,7 @@ export default function Header({ setSidebarView, sidebarView }) {
             </h4>
           </div>
           <div className="w-full md:w-auto gap-6 flex ">
-          <div
+            <div
               ref={currencyRef}
               className="flex space-x-1 items-center cursor-pointer relative mr-4"
               onClick={() => setCurrency(!currency)}
@@ -171,11 +156,14 @@ export default function Header({ setSidebarView, sidebarView }) {
                 {/* absolute cart modal */}
               </div>
             </div>
-<div className="flex justify-center items-center text-gray-100/50 text-xl ">|</div>
-            <div className="flex justify-center items-center text-white text-xl "
-            onClick={() => dispatch(logoutAgent())}
+            <div className="flex justify-center items-center text-gray-100/50 text-xl ">
+              |
+            </div>
+            <div
+              className="flex justify-center items-center text-white text-xl "
+              onClick={() => dispatch(logoutAgent())}
             >
-               <FaPowerOff/>
+              <FaPowerOff />
             </div>
           </div>
         </div>

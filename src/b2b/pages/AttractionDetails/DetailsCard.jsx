@@ -42,19 +42,19 @@ function DetailsCard() {
       if (agentExcursion?.isOffer) {
         if (agentExcursion?.offerAmountType === "flat") {
           let offer =
-            agentExcursion?.activities[0]?.adultPrice -
+            agentExcursion?.activities[0]?.lowPrice -
             agentExcursion?.offerAmount;
           setOfferAmount(offer);
         } else {
           let offer =
-            agentExcursion?.activities[0]?.adultPrice -
-            (agentExcursion?.activities[0]?.adultPrice *
+            agentExcursion?.activities[0]?.lowPrice -
+            (agentExcursion?.activities[0]?.lowPrice *
               agentExcursion?.offerAmount) /
               100;
           setOfferAmount(offer);
         }
       } else {
-        setOfferAmount(agentExcursion?.activities[0]?.adultPrice);
+        setOfferAmount(agentExcursion?.activities[0]?.lowPrice);
       }
     }
   }, [agentExcursion]);

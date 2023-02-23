@@ -8,22 +8,6 @@ const initialState = {
   reseller: {},
 };
 
-export const fetchResellers = createAsyncThunk(
-  "resellerSlice/fetchResellers",
-  async (args, { getState }) => {
-    const { token } = getState().agents;
-    if (token) {
-      const response = await axios.get(`/b2b/resellers/listAll`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      return response.data;
-    } else {
-      throw Error("Cant find resellers");
-    }
-  }
-);
 
 export const fetchSingleReseller = createAsyncThunk(
   "resellerSlice/fetchSingleReseller",
@@ -45,19 +29,12 @@ export const fetchSingleReseller = createAsyncThunk(
 const resellerSlice = createSlice({
   name: "reseller",
   initialState,
-  // reducers: {
-  //     setClientMarkup: (state, action) => {
-  //         state.clientMarkup = action.payload;
-  //     },
-  //     setAgentMarkup: (state, action) => {
-  //         state.agentMarkup = action.payload;
-  //     },
-  // },
+  reducers: {
+      setResellers: (state, action) => {
+        state.resellers = action.payload;
+      },
+  },
   extraReducers: {
-    [fetchResellers.fulfilled]: (state, action) => {
-      state.resellers = action.payload;
-      state.loading = false;
-    },
     [fetchSingleReseller.fulfilled]: (state, action) => {
       state.reseller = action.payload?.subAgent;
       state.loading = false;
@@ -65,6 +42,6 @@ const resellerSlice = createSlice({
   },
 });
 
-// export const { } = resellerSlice.actions;
+export const {setResellers } = resellerSlice.actions;
 
 export default resellerSlice.reducer;

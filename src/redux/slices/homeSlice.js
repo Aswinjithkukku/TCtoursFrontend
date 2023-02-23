@@ -6,6 +6,7 @@ const UAE_FLAG =
 
 const initialState = {
   loading: false,
+  UAE : "",
   currencies: [],
   destinations: [],
   countries: [],
@@ -122,6 +123,8 @@ const homeSlice = createSlice({
           flag: UAE_FLAG,
         };
       }
+
+      state.UAE = action.payload?.countries?.find(item => item?.isocode === "AE")
       state.loading = false;
     },
     [getInitialVisaCountryList.pending]: (state, action) => {

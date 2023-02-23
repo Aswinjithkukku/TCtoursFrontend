@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
-import { GiFactory } from 'react-icons/gi'
-import { GoPerson } from 'react-icons/go'
-import { useSelector } from 'react-redux'
+import React, { useState } from "react";
+import { GiFactory } from "react-icons/gi";
+import { GoPerson } from "react-icons/go";
+import { useSelector } from "react-redux";
 
 function DetailsEditForm() {
-
-  const [details, setDetails] = useState({
+  const [data, setData] = useState({
     agency_name: "",
     address: "",
     website: "",
@@ -24,205 +23,297 @@ function DetailsEditForm() {
     currency: "",
     director: "",
     skype: "",
-    whatsapp: ""
-  })
+    whatsapp: "",
+  });
 
-  const { countries } = useSelector(state => state.home)
+  const { countries, UAE } = useSelector((state) => state.home);
 
-  const handleChange = (e) => {
-    setDetails((prev) => {
+  const onChangeHandler = (e) => {
+    setData((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
 
+  const countryArray = countries?.filter((item) => item._id === data.country);
 
   return (
-    <div className=''>
-      <div className='p-3 lg:p-6'>
-        <div className='flex items-center justify-between border-b border-dashed p-4'>
-          <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
-            <span className=''><GiFactory /> </span>
-            <span className=''>Company Details</span>
+    <div className="">
+      <div className="p-3 lg:p-6">
+        <div className="flex items-center justify-between border-b border-dashed p-4">
+          <h2 className="text-xl font-bold tracking-wide space-x-2 flex">
+            <span className="">
+              <GiFactory />{" "}
+            </span>
+            <span className="">Company Details</span>
           </h2>
         </div>
-        <div className='space-y-2 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-4'>
-
-          <div className=''>
-            <label className='label'>Travel Agency Name</label>
+        <div className="space-y-2 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-4">
+          <div className="relative w-full h-14 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+              Travel Agency Name
+            </span>
             <input
-              className='input'
-              type='text'
-              placeholder='Ex: TravellerChoice'
-              name='agency_name'
-              value={details.agency_name}
-              onChange={handleChange}
+              className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+              type="text"
+              name="companyName"
+              value={data.companyName}
+              onChange={onChangeHandler}
+              required
             />
           </div>
 
-          <div className=''>
-            <label className='label'>Address</label>
+          <div className="relative w-full h-14 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+              Address
+            </span>
             <input
-              className='input'
-              type='text'
-              placeholder='Ex: Tc, North california'
-              name='address'
-              value={details.address}
-              onChange={handleChange}
+              className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+              type="text"
+              name="address"
+              value={data.address}
+              onChange={onChangeHandler}
+              required
             />
           </div>
 
-          <div className=''>
-            <label className='label'>Website</label>
-            <input className='input' type='text' placeholder='Ex: TravellerChoice.ae' />
-          </div>
-          <div className=''>
-            <label className='label'>Country</label>
-            <select className='select'
-              name='country'
-              value={details.country}
-              onChange={handleChange}
+          <div className="relative w-full h-14 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+              Nationality
+            </span>
+            <select
+              className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+              name="country"
+              value={data.country}
+              onChange={onChangeHandler}
             >
-              <option>Ex: United Arab Emirates</option>
+              <option className="text-text" hidden></option>
               {countries?.map((item, index) => (
-                <option className='capitalize' value={item?._id} key={index}>{item?.countryName} </option>
+                <option className="capitalize" value={item?._id} key={index}>
+                  {item?.countryName}{" "}
+                </option>
               ))}
             </select>
           </div>
-          {details.country === "63ac33ecff04e5652a2583f5" && (
+          {data.country && data.country === UAE?._id && (
             <>
-              <div className=''>
-                <label className='label'>TRN Number</label>
+              <div className="relative w-full h-14 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                  TRN Number
+                </span>
                 <input
-                  className='input'
-                  type='number'
-                  placeholder='Ex: Dubai'
-                  name='trn_number'
-                  value={details.trn_number}
-                  onChange={handleChange}
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium no-spinner"
+                  type="number"
+                  name="trnNumber"
+                  value={data.trnNumber}
+                  onChange={onChangeHandler}
                 />
               </div>
 
-              <div className=''>
-                <label className='label'>Company Registration Number</label>
-                <input className='input'
-                  type='number'
-                  placeholder='Ex: Dubai'
-                  name='registration_number'
-                  value={details.registration_number}
-                  onChange={handleChange}
+              <div className="relative w-full h-14 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                  Company Registration Number
+                </span>
+                <input
+                  className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium no-spinner"
+                  type="number"
+                  name="companyRegistration"
+                  value={data.companyRegistration}
+                  onChange={onChangeHandler}
                 />
               </div>
             </>
           )}
-          <div className=''>
-            <label className='label'>City</label>
+
+          <div className="relative w-full h-14 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+              Website
+            </span>
             <input
-              className='input'
-              type='text'
-              placeholder='Ex: Dubai'
-              name='city'
-              value={details.city}
-              onChange={handleChange}
+              className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+              type="text"
+              name="website"
+              value={data.website}
+              onChange={onChangeHandler}
             />
           </div>
-          <div className=''>
-            <label className='label'>Zip Code</label>
+
+          <div className="relative w-full h-14 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+              City
+            </span>
             <input
-              className='input'
-              type='text'
-              placeholder=''
-              name='city'
-              value={details.zip_code}
-              onChange={handleChange}
+              className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+              type="text"
+              name="city"
+              value={data.city}
+              onChange={onChangeHandler}
             />
           </div>
+          {data.country && data.country !== UAE?._id && (
+            <div className="relative w-full h-14 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+              <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                Zip Code
+              </span>
+              <input
+                className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium no-spinner"
+                type="number"
+                name="zipCode"
+                value={data.zipCode}
+                onChange={onChangeHandler}
+              />
+            </div>
+          )}
         </div>
-        <div className='flex items-center justify-between border-b border-dashed p-4'>
-          <h2 className='text-xl font-bold tracking-wide space-x-2 flex'>
-            <span className=''><GoPerson /> </span>
-            <span className=''>Profile Details</span>
+        <div className="flex items-center justify-between border-b border-dashed p-4">
+          <h2 className="text-xl font-bold tracking-wide space-x-2 flex">
+            <span className="">
+              <GoPerson />{" "}
+            </span>
+            <span className="">Profile Details</span>
           </h2>
         </div>
 
-        <div className='space-y-2 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-4'>
-
-          <div className=''>
-            <label className='label'>Agent Name</label>
-            <input className='input' 
-            type='text'
-             placeholder='Ex: Name'
-             name='agent_name'
-             value={details.agent_name}
-             onChange={handleChange}
-             />
-          </div>
-          <div className=' flex space-x-1'>
-            <div className='w-2/12'>
-              <label className='label'>Code</label>
-              <select className='select'>
-                <option>Ex: +0</option>
-                {countries?.map((item, index) => (
-                <option className='capitalize' value={item?._id} key={index}>{item?.phonecode} </option>
-              ))}
-              </select>
-            </div>
-            <div className='w-10/12'>
-              <label className='label'>Number</label>
-              <input className='input' type='text' placeholder='Ex: 0000000000' />
-            </div>
+        <div className="space-y-2 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-4">
+          <div className="relative w-full h-14 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+              Agent Name
+            </span>
+            <input
+              className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+              type="text"
+              name="name"
+              value={data.name}
+              onChange={onChangeHandler}
+              required
+            />
           </div>
 
-          <div className=' flex space-x-1'>
-            <div className='w-2/12'>
-              <label className='label'>Code</label>
-              <select className='select'>
-                <option>Ex: +0</option>
-                {countries?.map((item, index) => (
-                <option className='capitalize' value={item?._id} key={index}>{item?.phonecode} </option>
-              ))}
-              </select>
+          <div className=" flex gap-2">
+            <div className="relative w-2/12 h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+              <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                Code
+              </span>
+              <input
+                className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+                value={countryArray?.map((item) => item?.phonecode) || ""}
+                readOnly
+              />
             </div>
-            <div className='w-10/12'>
-              <label className='label'> Telephone Number</label>
-              <input className='input' type='number' placeholder='Ex: 0000000000' />
+
+            <div className="relative w-10/12 h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+              <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                Number
+              </span>
+              <input
+                className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium no-spinner"
+                type="number"
+                name="phoneNumber"
+                value={data.phoneNumber}
+                onChange={onChangeHandler}
+                required
+              />
             </div>
           </div>
-          <div className=''>
-            <label className='label'>Email</label>
-            <input className='input' type='text' placeholder='Ex: example@email.com' />
+
+          <div className=" flex gap-2">
+            <div className="relative w-2/12 h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+              <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                Code
+              </span>
+              <input
+                className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+                value={countryArray?.map((item) => item?.phonecode) || ""}
+                readOnly
+              />
+            </div>
+
+            <div className="relative w-10/12 h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+              <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+                Telephone Number
+              </span>
+              <input
+                className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium no-spinner"
+                type="number"
+                name="telephoneNumber"
+                value={data.telephoneNumber}
+                onChange={onChangeHandler}
+              />
+            </div>
           </div>
 
-          <div className='w'>
-            <label className='label'>Confirm Email</label>
-            <input className='input' type='text' placeholder='Ex: example@email.com' />
-          </div>
-          <div className=''>
-            <label className='label'>Reffered Currency</label>
-            <input className='input' type='text' placeholder='Ex: AED' />
-          </div>
-
-          <div className=''>
-            <label className='label'>Director</label>
-            <input className='input' type='text' placeholder='Director' />
-          </div>
-          <div className=''>
-            <label className='label'>Skype Id</label>
-            <input className='input' type='text' placeholder='skypeid' />
+          <div className="relative w-full h-14 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+              Email
+            </span>
+            <input
+              className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+              type="email"
+              name="email"
+              value={data.email}
+              onChange={onChangeHandler}
+              required
+            />
           </div>
 
-          <div className=''>
-            <label className='label'>Whatsapp</label>
-            <input className='input' type='number' placeholder='Ex: 000000000' />
+          <div className="relative w-full h-14 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+              Preffered Currency
+            </span>
+            <input
+              className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+              type="text"
+              value={countryArray?.map((item) => item?.currencySymbol) || ""}
+              readOnly
+            />
+          </div>
+
+          <div className="relative w-full h-14 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+              Designation
+            </span>
+            <input
+              className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+              type="text"
+              name="designation"
+              value={data.designation}
+              onChange={onChangeHandler}
+              required
+            />
+          </div>
+
+          <div className="relative w-full h-14 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+              Skype Id
+            </span>
+            <input
+              className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium"
+              type="text"
+              name="skypeId"
+              value={data.skypeId}
+              onChange={onChangeHandler}
+            />
+          </div>
+
+          <div className="relative w-full h-14 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
+              Whatsapp
+            </span>
+            <input
+              className="block w-full h-full outline-none bg-transparent text-sm text-gray-400 font-medium no-spinner"
+              type="number"
+              name="whatsappNumber"
+              value={data.whatsappNumber}
+              onChange={onChangeHandler}
+            />
           </div>
         </div>
 
-        <div className='flex justify-end mt-6'>
-          <button className='button w-[100px]'>Update</button>
+        <div className="flex justify-end mt-6">
+          <button className="button w-[100px]">Update</button>
         </div>
-
       </div>
     </div>
-  )
+  );
 }
 
-export default DetailsEditForm
+export default DetailsEditForm;
