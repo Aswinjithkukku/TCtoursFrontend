@@ -28,7 +28,13 @@ const flightSlice = createSlice({
       state.tripType = payload;
     },
     addFlightRow: (state, action) => {
-      state.flightsData = [...state.flightsData, state.row];
+      state.flightsData = [
+        ...state.flightsData,
+        {
+          ...state.row,
+          cityFrom: state.flightsData[state.flightsData.length - 1]?.cityTo,
+        },
+      ];
     },
     removeFlightRow: (state, action) => {
       const prevRows = [...state.flightsData];

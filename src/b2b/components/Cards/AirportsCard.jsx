@@ -7,7 +7,7 @@ const AirportsCard = ({ name, index, hide }) => {
   const dispatch = useDispatch();
 
   const [value, setValue] = useState("");
-  const [filteredAirports, setFilteredAirports] = useState([...airports]);
+  const [filteredAirports, setFilteredAirports] = useState([]);
 
   useEffect(() => {
     const filterTimer = setTimeout(() => {

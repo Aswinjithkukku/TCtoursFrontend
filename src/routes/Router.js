@@ -51,6 +51,7 @@ import {
   ReapplyIndividual,
   AttractionSingleTicketPage,
   FlightHomePage,
+  FlightBookingPage,
 } from "../b2b/pages";
 import B2BPrivateRoute from "./B2BPrivateRoute";
 import LoadingWrapper from "./LoadingWrapper";
@@ -130,6 +131,7 @@ const ThemeRoutes = [
       },
       { path: "/b2b/attractions/invoice/:id", element: <AttractionInvoice /> },
       { path: "/b2b/flight/order", element: <FlightHomePage /> },
+      { path: "/b2b/flight/booking/:id", element: <FlightBookingPage /> },
     ],
   },
   {

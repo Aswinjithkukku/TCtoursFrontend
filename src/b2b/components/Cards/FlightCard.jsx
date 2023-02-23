@@ -48,52 +48,54 @@ function FlightCard() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="flex px-5 pt-7 pb-4 space-x-3">
-        <div className="flex space-x-2">
-          <div className="">
-            <input
-              type="radio"
-              name="choose"
-              className="cursor-pointer"
-              value="oneWay"
-              onChange={handleTripTypeChange}
-              checked={tripType === "oneWay"}
-            />
+    <>
+      <form onSubmit={handleSubmit}>
+        <div className="flex px-5 pt-7 pb-4 space-x-3">
+          <div className="flex space-x-2">
+            <div className="">
+              <input
+                type="radio"
+                name="choose"
+                className="cursor-pointer"
+                value="oneWay"
+                onChange={handleTripTypeChange}
+                checked={tripType === "oneWay"}
+              />
+            </div>
+            <div className="text-sm">One-way</div>
           </div>
-          <div className="text-sm">One-way</div>
-        </div>
-        <div className="flex space-x-2">
-          <div className="">
-            <input
-              type="radio"
-              name="choose"
-              className="cursor-pointer"
-              value="roundTrip"
-              onChange={handleTripTypeChange}
-            />
+          <div className="flex space-x-2">
+            <div className="">
+              <input
+                type="radio"
+                name="choose"
+                className="cursor-pointer"
+                value="roundTrip"
+                onChange={handleTripTypeChange}
+              />
+            </div>
+            <div className="text-sm">Round trip</div>
           </div>
-          <div className="text-sm">Round trip</div>
-        </div>
-        <div className="flex space-x-2">
-          <div className="">
-            <input
-              type="radio"
-              name="choose"
-              className="cursor-pointer"
-              value="multiCity"
-              onChange={handleTripTypeChange}
-            />
+          <div className="flex space-x-2">
+            <div className="">
+              <input
+                type="radio"
+                name="choose"
+                className="cursor-pointer"
+                value="multiCity"
+                onChange={handleTripTypeChange}
+              />
+            </div>
+            <div className="text-sm">Multi-city</div>
           </div>
-          <div className="text-sm">Multi-city</div>
         </div>
-      </div>
-      {flightsData?.map((data, index, array) => (
-        <>
-          <FlightCardForm index={index} data={data} length={array.length} />
-        </>
-      ))}
-    </form>
+        {flightsData?.map((data, index, array) => (
+          <>
+            <FlightCardForm index={index} data={data} length={array.length} />
+          </>
+        ))}
+      </form>
+    </>
   );
 }
 
