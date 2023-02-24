@@ -163,7 +163,7 @@ const ThemeRoutes = [
     element: <DubaiDolphinarium />,
   },
   {
-    path: "/ticket/attraction/:id",
+    path: "/ticket/attraction/:id/:activityId",
     element: <AttractionSingleTicketPage />,
   },
 ];

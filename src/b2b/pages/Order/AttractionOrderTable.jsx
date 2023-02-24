@@ -41,30 +41,32 @@ function AttractionOrderTable({ item }) {
     };
   }, [item]);
 
-  const handleSingleTicketDownload = (ticketNo) => {
-    var node = document.getElementById(ticketNo);
-
-    var options = {
-      filename: `${ticketNo}.pdf`,
-    };
-    domToPdf(node, options, function (pdf) {});
-  };
-
   const list = tickets();
   const listRef = useRef();
-  // console.log(item);
   return (
     <>
       <div className="h-fit absolute left-[20000px]" id="all_tickets">
         <div ref={listRef}>
-          {list?.map((ele) => (
+          {item?.activities?.bookingType === "ticket" && (
             <>
-              <div id={ele?.ticketNo} className="w-[100%] ">
-                <AttractionTicketTemplate ticket={ele} />
+              {list?.map((ele) => (
+                <>
+                  <div id={ele?.ticketNo} className="w-[100%] ">
+                    <AttractionTicketTemplate ticket={ele} />
+                  </div>
+                </>
+              ))}
+            </>
+          )}
+        </div>
+        {item?.activities?.bookingType === "booking" &&
+          item?.activities?.status === "confirmed" && (
+            <>
+              <div id={item?._id}>
+                <AttractionTicketTemplate data={item} />
               </div>
             </>
-          ))}
-        </div>
+          )}
         <div id="attraction_order_pdf_template" className="w-[21cm]">
           <B2bAttractionInvoiceTemplate data={item} />
         </div>
@@ -127,8 +129,10 @@ function AttractionOrderTable({ item }) {
               {item?.activities?.status}
             </span>
           ) : item?.activities?.status === "booked" ? (
-            <span className="bg-lightblue text-sm text-light px-4 rounded capitalize">
-              {item?.activities?.status}
+            <span className="bg-lightblue text-sm text-light px-4 rounded capitalize max-w-[150px] text-center block">
+              {item?.activities?.bookingType === "ticket"
+                ? item?.activities?.status
+                : "Waiting for confirmation ..."}
             </span>
           ) : (
             <span className="bg-red-400 text-sm text-light px-4 rounded capitalize">
@@ -154,10 +158,9 @@ function AttractionOrderTable({ item }) {
               }
             />
             <a
-              href={`${process.env.REACT_APP_URL}/ticket/attraction/${item?._id}`}
+              href={`${process.env.REACT_APP_URL}/ticket/attraction/${item?._id}/${item?.activities?._id}`}
               disabled={item?.activities?.status !== "confirmed"}
               className=" px-2 py-1  rounded text-white text-[16px] flex items-center gap-1 justify-center w-[100%] bg-gray-400"
-              // to={`/ticket/attraction/${item?._id}`}
               target="blank"
             >
               View <ImTicket />
@@ -172,7 +175,11 @@ function AttractionOrderTable({ item }) {
                   <AiFillPrinter />
                 </button>
               )}
-              content={() => listRef.current}
+              content={() =>
+                item?.activities?.bookingType === "ticket"
+                  ? listRef.current
+                  : document.getElementById(item?._id)
+              }
             />
           </div>
         </td>

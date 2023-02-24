@@ -107,10 +107,11 @@ function AttractionInvoice() {
   const list = tickets();
   const listRef = useRef();
   const invoiveRef = useRef();
+  console.log(output);
   return (
     <>
       <div className=" relative overflow-hidden">
-        <div className="absolute right-[20000000px]">
+        <div className="absolute left-[2000000px]">
           <div ref={listRef}>
             {list?.map((ele) => (
               <>
@@ -128,25 +129,8 @@ function AttractionInvoice() {
             <AttractionInvoicePdfTemplate data={output} />
           </div>
         </div>
-        {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
-          <h1 className="font-[600] text-[15px] uppercase">Invoice</h1>
-          <div className="text-sm text-grayColor flex items-center gap-[7px]">
-            <Link to="/b2b" className="text-textColor">
-              Dashboard{" "}
-            </Link>
-            <span>{">"} </span>
-            <span className="text-textColor">Attraction</span>
-            <span>{">"} </span>
-            <span className="text-textColor">Details</span>
-            <span>{">"} </span>
-            <span>Invoice</span>
-          </div>
-        </div> */}
         <div className="p-2 ">
           <div className=" mt-2 ">
-            {/* <div className="flex items-center justify-between border-b border-dashed p-4">
-            <h1 className="font-medium">Markup Lists</h1>
-          </div> */}
             <div className="main__section mt-4">
               <div className="flex justify-center">
                 <div className="">
@@ -160,48 +144,85 @@ function AttractionInvoice() {
                       You have Ordered Successfully!
                     </h2>
                   </div>
-                  <div className="mt-4 text-center space-y-2">
-                    <p className="text-[14px] font-[500] text-gray-600">
-                      Download the E-Ticket from here
-                    </p>
-                    <div className="flex flex-col">
-                      <ReactToPrint
-                        trigger={() => (
-                          <button className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded flex justify-center items-center gap-4">
-                            Download All Tickets{" "}
-                            <span className="text-white text-[18px]">
-                              <MdDownload />
-                            </span>
-                          </button>
-                        )}
-                        content={() => listRef.current}
-                      />
-                      <ul className="flex flex-col gap-1 py-2 list-none w-[100%]">
-                        {list?.map((ele, i) => (
-                          <>
-                            <li className="flex justify-between  w-[100%] ">
-                              <span className="flex gap-1">
-                                Ticket No. : <span>{ele?.ticketNo}</span>
+                  {output?.activites?.map((ele) => {
+                    if (ele?.bookingType === "ticket")
+                      return (
+                        <>
+                          <div className="mt-4 text-center space-y-2 border-[1px] p-4 pt-0">
+                            <h2 className="text-left text-blue-500 ">
+                              {ele?.attraction?.title}
+                            </h2>
+                            <p className="text-[14px] font-[500] text-gray-600">
+                              Download the E-Ticket from here
+                            </p>
+                            <div className="flex flex-col">
+                              <ReactToPrint
+                                trigger={() => (
+                                  <button className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded flex justify-center items-center gap-4">
+                                    Download All Tickets{" "}
+                                    <span className="text-white text-[18px]">
+                                      <MdDownload />
+                                    </span>
+                                  </button>
+                                )}
+                                content={() => listRef.current}
+                              />
+                              <ul className="flex flex-col gap-1 py-2 list-none w-[100%] overflow-y-scroll max-h-[400px] mt-2">
+                                {list?.map((ele, i) => (
+                                  <>
+                                    <li className="flex justify-between  w-[100%] ">
+                                      <span className="flex gap-1">
+                                        Ticket No. :{" "}
+                                        <span>{ele?.ticketNo}</span>
+                                      </span>
+                                      <ReactToPrint
+                                        trigger={() => (
+                                          <button className="text-[18px] font-[500] uppercase text-white px-3 py-1 rounded">
+                                            <span className="">
+                                              <FcDownload />
+                                            </span>
+                                          </button>
+                                        )}
+                                        content={() =>
+                                          document.getElementById(ele?.ticketNo)
+                                        }
+                                      />
+                                    </li>
+                                  </>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                        </>
+                      );
+                    if (ele?.bookingType === "booking") {
+                      return (
+                        <>
+                          <div className="flex flex-col  justify-center gap-2 border-[1px]  px-4 pb-4">
+                            <h2 className="text-left text-blue-500 ">
+                              {ele?.attraction?.title}
+                            </h2>
+                            <div className="flex justify-center">
+                              <span className="   text-red-500 tracking-wide">
+                                Waiting for booking confirmation ....
                               </span>
+                            </div>
+                            <div className=" flex justify-end">
                               <button
-                                className="text-[18px] font-[500] uppercase text-white px-3 py-1 rounded"
+                                className="px-2 bg-blue-500 text-white py-1 rounded-md"
                                 onClick={() => {
-                                  downloadTicket(ele?.ticketNo);
-                                  // navigate(
-                                  //   `/ticket/attraction/${ele?.ticketId}`
-                                  // );
+                                  navigate("/b2b/order/attraction");
                                 }}
                               >
-                                <span className="">
-                                  <FcDownload />
-                                </span>
+                                Go To Orders
                               </button>
-                            </li>
-                          </>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+                            </div>
+                          </div>
+                        </>
+                      );
+                    }
+                    return "";
+                  })}
                 </div>
               </div>
               <div className="flex justify-center w-full mt-5">
@@ -212,7 +233,6 @@ function AttractionInvoice() {
                         {agent?.companyName}{" "}
                       </h2>
                     </div>
-                    {/* <p className='text-sm text-gray-500 font-[600]'>Dec 3 2023</p> */}
                     <div className="flex gap-2 items-center">
                       <p className="text-[16px] font-[650] whitespace-nowrap">
                         {priceConversion(
@@ -280,15 +300,6 @@ function AttractionInvoice() {
                         </div>
                       ))}
 
-                      {/* <div className='grid grid-cols-12 py-3 border-b-2'>
-                      <div className='grid__first col-span-7'>
-                        <p className='text-[14px] text-text'>VAT Amount</p>
-                        <p className='text-[10px] text-lightblue bg-[#cbedfd] uppercase w-fit px-2 rounded  py-[2px]'>null</p>
-                      </div>
-                      <div className='grid__first col-span-5 flex justify-end items-end'>
-                        <p className='text-[16px] text-text'>5.00 AED</p>
-                      </div>
-                    </div>  */}
                       <div className="grid grid-cols-12 py-3">
                         <div className="grid__first col-span-7">
                           <p className="text-[16px] font-[650] text-darktext">
