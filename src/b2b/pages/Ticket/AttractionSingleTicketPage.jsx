@@ -18,21 +18,13 @@ function AttractionSingleTicketPage() {
   const fetchSingleTicket = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`/b2b/attractions/orders/single/${id}`, {
-        headers: { authorization: `Bearer ${token}` },
-      });
-      console.log(response?.data);
-
-      const activites = response?.data?.activites?.filter((ele) => {
-        if (ele?._id === activityId) return ele;
-        return null;
-      });
-      const filtered = {
-        ...response?.data,
-        activites,
-      };
-
-      setOrder(filtered);
+      const response = await axios.get(
+        `/b2b/attractions/orders/${id}/ticket/${activityId}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      setOrder(response?.data);
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -45,8 +37,8 @@ function AttractionSingleTicketPage() {
 
   const tickets = useMemo(() => {
     return () => {
-      const ele = order?.activites?.[0];
-      console.log(ele);
+      const ele = order?.activities;
+
       if (ele?.bookingType === "ticket") {
         let tickets = [];
         if (ele?.adultTickets) tickets = [...tickets, ...ele?.adultTickets];
