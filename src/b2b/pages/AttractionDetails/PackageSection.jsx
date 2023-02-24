@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { addToCart } from "../../../redux/slices/agentExcursionSlice";
 import ActivityTable from "./ActivityTable";
 import { setAlertSuccess } from "../../../redux/slices/homeSlice"
+import ActivityComponent from "./ActivityComponent";
 
 function PackageSection() {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ function PackageSection() {
               {agentRecievedActivities &&
                 agentRecievedActivities?.map((item, index) => (
                   <ActivityTable item={item} bookingType={agentRecievedActivities?.bookingType} index={index} key={index} />
+                  // <ActivityComponent item={item} bookingType={agentRecievedActivities?.bookingType} index={index} key={index} />
                 ))}
             </tbody>
           </table>

@@ -24,7 +24,7 @@ function MarkupChipList({ item }) {
       <>
          <div className="mb-2.5 bg-neutral-50 border border-neutral-100 rounded-xl m-4 shadow-sm">
             <div className="p-4">
-               <div className="w-full overflow-x-auto">
+               <div className="w-full">
                   <table className="w-full min-w-max">
                      <tbody>
                         <tr>

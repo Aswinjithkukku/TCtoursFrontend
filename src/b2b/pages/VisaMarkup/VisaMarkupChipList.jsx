@@ -25,7 +25,7 @@ function VisaMarkupChipList({ item }) {
       <>
          <div class="mb-2.5 bg-neutral-50 border border-neutral-100 m-4 shadow-sm rounded-xl">
             <div class="p-4">
-               <div class="w-full overflow-x-auto">
+               <div class="w-full">
                   <table class="w-full min-w-max">
                      <tbody>
                         <tr>
