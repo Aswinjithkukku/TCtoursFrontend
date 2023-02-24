@@ -91,19 +91,20 @@ function AttractionInvoice() {
   return (
     <>
       <div className=" relative overflow-hidden">
-        <div className="absolute left-[2000000px]">
+        <div className="">
+          {/* <div className="absolute left-[2000000px]"> */}
           <div ref={listRef}>
             {list?.map((ele) => (
               <>
                 <div id={ele?.ticketNo} className="w-[100%] bg-white pt-[20px]">
-                  <AttractionTicketTemplate ticket={ele} />
+                  {/* <AttractionTicketTemplate ticket={ele} /> */}
                 </div>
               </>
             ))}
           </div>
           <div
             id="attraction_invoice_pdf_template"
-            className="w-[21cm]"
+            className="w-[21cm] m-auto"
             ref={invoiveRef}
           >
             <AttractionInvoicePdfTemplate data={output} />
@@ -112,7 +113,7 @@ function AttractionInvoice() {
         <div className="p-2 ">
           <div className=" mt-2 ">
             <div className="main__section mt-4">
-              <div className="grid grid-cols-8 px-4">
+              <div className="grid grid-cols-8 px-4 gap-y-10">
                 <div className="col-span-8">
                   <span className="flex justify-center">
                     <div className=" w-[250px] ">
@@ -125,14 +126,14 @@ function AttractionInvoice() {
                     </h2>
                   </div>
                 </div>
-                <div className=" col-span-2 mt-[32px] ">
-                  <div className="">
+                <div className=" col-span-2 ">
+                  <div className=" py-4 bg-white rounded-md">
                     {output?.activites?.map((ele) => {
                       if (ele?.bookingType === "ticket")
                         return (
                           <>
-                            <div className="mt-4 text-center space-y-2 border-[1px] p-4 pt-0 bg-white rounded-md">
-                              <h2 className="text-left text-blue-500 mt-2">
+                            <div className=" text-center space-y-2 p-4 pt-0 border-b-[1px] border-dashed">
+                              <h2 className="text-left text-blue-500 capitalize">
                                 {ele?.attraction?.title}
                               </h2>
                               <p className="text-[14px] font-[500] text-gray-600">
@@ -183,8 +184,8 @@ function AttractionInvoice() {
                       if (ele?.bookingType === "booking") {
                         return (
                           <>
-                            <div className="flex flex-col  justify-center gap-2 border-[1px]  px-4 pb-4">
-                              <h2 className="text-left text-blue-500 ">
+                            <div className="flex flex-col  justify-center gap-2 px-4 pt-2 bg-white  border-b-[1px] border-dashed pb-2">
+                              <h2 className="text-left text-blue-500 capitalize">
                                 {ele?.attraction?.title}
                               </h2>
                               <div className="flex justify-center">
@@ -210,10 +211,10 @@ function AttractionInvoice() {
                     })}
                   </div>
                 </div>
-                <div className="col-span-6  w-[100%]  px-[40px]">
-                  <div className="flex justify-center w-[100%] mt-5">
+                <div className="col-span-6 w-[100%]  px-[40px]">
+                  <div className="flex justify-center w-[100%]">
                     <div className="first__section  w-full ">
-                      <div className="bg-white shadow-sm m-6 rounded-[0.30rem] p-6 mx-auto ">
+                      <div className="bg-white shadow-sm rounded-[0.30rem] p-6 mx-auto ">
                         <div className="text-center">
                           <h2 className="text-xl font-[600] text-darktext">
                             {agent?.companyName}{" "}
