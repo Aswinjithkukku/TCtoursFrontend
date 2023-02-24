@@ -63,8 +63,11 @@ function PaypalComponent({ visaOrder, onSuccess, place, data }) {
             });
             messageFromServer = resFromServer.message;
             // Make Calls to backend to changes in react state corresponding to successful payment here
-            navigate(`/print/${id}`);
-            console.log(resFromServer);
+
+            if (place !== "visa") {
+              console.log("8767868768687687687678678");
+              navigate(`/print/${id}`);
+            }
             Swal.fire({
               icon: "success",
               title: "Success!",
