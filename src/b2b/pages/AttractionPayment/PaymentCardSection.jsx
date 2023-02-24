@@ -10,15 +10,8 @@ function PaymentCardSection() {
 
     const { agentExcursionCart } = useSelector(state => state.agentExcursions)
 
-    // const [vatAmount, setVatAmount] = useState(0)
-    // const [activities, setActivities] = useState(agentExcursionCart ? agentExcursionCart || [] : [])
-
     const { selectedCurrency } = useSelector(state => state.home)
 
-    // useEffect(() => {
-    //     const array = JSON.parse(localStorage.getItem('agentExcursionCart')) || []
-    //     setActivities(array)
-    // }, [activities])
 
     const finalPayment = agentExcursionCart && agentExcursionCart.reduce((acc, item) => {
         const vatPrice = item?.vat && item?.isVat && (item?.price * item?.vat) / 100
@@ -34,7 +27,7 @@ function PaymentCardSection() {
         <>
             <div className=''>
                 {agentExcursionCart?.map((item, index) => (
-                    <div className='bg-light w-full pb-3 rounded-2xl' key={index}>
+                    <div className=' w-full pb-3 rounded-2xl' key={index}>
                         <div className='p-3 border-b flex justify-between items-center'>
                             <h1 className='text-lg font-semibold text-darktext'>{item?.name} </h1>
                             <button className='rounded-full h-5 w-5 bg-gray-300 text-main flex justify-center items-center text-lg font-bold'
@@ -100,7 +93,7 @@ function PaymentCardSection() {
                     </div>
                 ))}
 
-                <div className='bg-light rounded-2xl mt-5'>
+                <div className=' rounded-2xl mt-5 mb-20 lg:mb-0'>
                     <div className='p-5 border-b'>
                         <h1 className='text-lg font-semibold text-darktext'>Final Payment</h1>
                     </div>

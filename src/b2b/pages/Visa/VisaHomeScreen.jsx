@@ -51,20 +51,8 @@ function VisaHomeScreen() {
   return (
     <>
       <div>
-        <div className="p-2 lg:p-6">
+        <div className="p-2 lg:p-6 pb-10 lg:pb-0">
           <div className="">
-            <div
-              className={`fixed  left-0 right-0 bg-light rounded-t-2xl transition-all duration-500 ${
-                viewCard ? "-bottom-full" : "bottom-0"
-              }  z-20 px-10 py-8 lg:hidden`}
-            >
-              <button
-                className="bg-blueColor text-light w-full rounded-lg py-2"
-                onClick={() => setViewCard(!viewCard)}
-              >
-                Apply Online
-              </button>
-            </div>
             <div className="">
               <SearchCards />
             </div>
@@ -74,7 +62,7 @@ function VisaHomeScreen() {
                   <div className=" overflow-x-auto scrollbar-hide">
                     <div className=" flex md:grid md:grid-cols-4 space-x-1 px-1 md:px-10 py-3 md:py-1 items-center ">
                         <button
-                          className={`flex justify-center text-sm md:text-base items-center px-2 md:px-3 py-3 border-b-4 border-blue-500 hover:text-lightblue text-lightblue  hover:border-b-4 duration-300 space-x-1 `}
+                          className={`flex justify-center text-sm md:text-base items-center px-5 md:px-3 py-3 border-blue-500 hover:text-lightblue  hover:border-b-4 duration-300 space-x-1 `}
                         >
                       <a className="w-full flex justify-center items-center gap-1" href={"#visas"}>
                           <span className="">
@@ -117,7 +105,7 @@ function VisaHomeScreen() {
                   </div>
                 </div>
               </div>
-              <div className="p-6">
+              <div className="">
                 <div className="lg:grid grid-cols-12 gap-10">
                   <div className="col-span-8">
                     {isLoading ? (
@@ -196,8 +184,8 @@ function VisaHomeScreen() {
                   </div>
                 </div>
               </div>
-              <div className="bg-light">
-                <div id="terms" className="p-6">
+              <div className="">
+                <div id="terms" className="">
                   <TermsConditionSection />
                 </div>
               </div>

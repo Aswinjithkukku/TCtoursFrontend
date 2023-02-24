@@ -128,25 +128,8 @@ function AttractionInvoice() {
             <AttractionInvoicePdfTemplate data={output} />
           </div>
         </div>
-        {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
-          <h1 className="font-[600] text-[15px] uppercase">Invoice</h1>
-          <div className="text-sm text-grayColor flex items-center gap-[7px]">
-            <Link to="/b2b" className="text-textColor">
-              Dashboard{" "}
-            </Link>
-            <span>{">"} </span>
-            <span className="text-textColor">Attraction</span>
-            <span>{">"} </span>
-            <span className="text-textColor">Details</span>
-            <span>{">"} </span>
-            <span>Invoice</span>
-          </div>
-        </div> */}
         <div className="p-2 ">
           <div className=" mt-2 ">
-            {/* <div className="flex items-center justify-between border-b border-dashed p-4">
-            <h1 className="font-medium">Markup Lists</h1>
-          </div> */}
             <div className="main__section mt-4">
               <div className="flex justify-center">
                 <div className="">
@@ -206,7 +189,7 @@ function AttractionInvoice() {
               </div>
               <div className="flex justify-center w-full mt-5">
                 <div className="first__section  w-full">
-                  <div className="bg-white shadow-sm m-6 rounded-[0.30rem] p-6 w-6/12 mx-auto ">
+                  <div className="bg-white shadow-sm m-6 rounded-[0.30rem] p-6 w-full sm:w-11/12 md:w-9/12 lg:w-6/12 mx-auto ">
                     <div className="text-center">
                       <h2 className="text-xl font-[600] text-darktext">
                         {agent?.companyName}{" "}
@@ -309,7 +292,7 @@ function AttractionInvoice() {
                   </div>
                 </div>
               </div>
-              <div className="second__section mx-auto w-6/12">
+              <div className="second__section mx-auto w-full sm:w-11/12 md:w-9/12 lg:w-6/12">
                 <div className="py-4 flex justify-between">
                   <div className="text-gray-500 text-sm">
                     <p className="">

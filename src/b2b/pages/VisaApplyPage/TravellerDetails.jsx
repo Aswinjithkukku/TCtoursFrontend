@@ -64,7 +64,7 @@ function TravellerDetails({ navigation, setNavigation }) {
   };
 
   return (
-    <div className="p-6 text-darktext ">
+    <div className="py-6 text-darktext ">
       <div
         className={`my-2 border px-3 py-4 ${
           navigation.details ? "bg-lightblue " : "bg-slate-400"

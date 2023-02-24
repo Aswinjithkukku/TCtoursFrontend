@@ -53,7 +53,7 @@ export default function Dashboard() {
                     </div>
                 </div> */}
 
-                <div className="my-2 ">
+                <div className="">
                     <SearchCards />
                 </div>
 
