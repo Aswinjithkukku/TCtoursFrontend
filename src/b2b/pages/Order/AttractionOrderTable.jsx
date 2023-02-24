@@ -13,7 +13,6 @@ import domToPdf from "dom-to-pdf";
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
 import { AiFillPrinter } from "react-icons/ai";
-import { Link } from "react-router-dom";
 import AttractionInvoicePdfTemplate from "../OrderInvoices/AttractionInvoicePdfTemplate";
 import B2bAttractionInvoiceTemplate from "../Ticket/B2bAttractionInvoiceTemplate";
 
@@ -41,32 +40,29 @@ function AttractionOrderTable({ item }) {
     };
   }, [item]);
 
+  const handleSingleTicketDownload = (ticketNo) => {
+    var node = document.getElementById(ticketNo);
+
+    var options = {
+      filename: `${ticketNo}.pdf`,
+    };
+    domToPdf(node, options, function (pdf) {});
+  };
+
   const list = tickets();
   const listRef = useRef();
   return (
     <>
       <div className="h-fit absolute left-[20000px]" id="all_tickets">
         <div ref={listRef}>
-          {item?.activities?.bookingType === "ticket" && (
+          {list?.map((ele) => (
             <>
-              {list?.map((ele) => (
-                <>
-                  <div id={ele?.ticketNo} className="w-[100%] ">
-                    <AttractionTicketTemplate ticket={ele} />
-                  </div>
-                </>
-              ))}
-            </>
-          )}
-        </div>
-        {item?.activities?.bookingType === "booking" &&
-          item?.activities?.status === "confirmed" && (
-            <>
-              <div id={item?._id}>
-                <AttractionTicketTemplate data={item} />
+              <div id={ele?.ticketNo} className="w-[100%] ">
+                <AttractionTicketTemplate ticket={ele} />
               </div>
             </>
-          )}
+          ))}
+        </div>
         <div id="attraction_order_pdf_template" className="w-[21cm]">
           <B2bAttractionInvoiceTemplate data={item} />
         </div>
@@ -90,8 +86,6 @@ function AttractionOrderTable({ item }) {
             </span>
           </div>
         </td>
-        {/* <td className="p-3">{item?.reseller?.agentCode} </td>
-        <td className="p-3">{item?.reseller?.agentCode}</td> */}
         <td className="p-3 min-w-[200px]">
           <div className="">
             <p className="">{item?.activities?.activity?.name}</p>
@@ -105,20 +99,14 @@ function AttractionOrderTable({ item }) {
               <p className="bg-gray-300 text-gray-100 px-2 py-1 rounded">
                 Infant : {item?.activities?.infantCount}
               </p>
-              {/* <p className={`${item?.activities?.bookingType === "ticket" ? " bg-main " :  " bg-blue-500 "} text-gray-100 px-2 py-1 rounded capitalize`}>{item?.activities?.bookingType}</p> */}
             </span>
           </div>
         </td>
-        {/* <td className="p-3 capitalize">{item?.activities?.bookingType}</td> */}
         <td className="p-3 ">{item?.activities?.date?.slice(0, 10)}</td>
         <td className="p-3 ">{item?.createdAt?.slice(0, 10)} </td>
-        {/* <td className="p-3">{item?.activities?.adultsCount} </td>
-        <td className="p-3">{item?.activities?.childrenCount} </td>
-        <td className="p-3">{item?.activities?.infantCount} </td> */}
         <td className="p-3 whitespace-nowrap">
           {priceConversion(item?.totalAmount, selectedCurrency, true)}{" "}
         </td>
-        {/* <td className="p-3">5 AED</td> */}
         <td className="">
           {item?.activities?.status === "confirmed" ? (
             <span className="bg-green-400 text-sm text-light px-4 rounded capitalize">
@@ -129,10 +117,8 @@ function AttractionOrderTable({ item }) {
               {item?.activities?.status}
             </span>
           ) : item?.activities?.status === "booked" ? (
-            <span className="bg-lightblue text-sm text-light px-4 rounded capitalize max-w-[150px] text-center block">
-              {item?.activities?.bookingType === "ticket"
-                ? item?.activities?.status
-                : "Waiting for confirmation ..."}
+            <span className="bg-lightblue text-sm text-light px-4 rounded capitalize">
+              {item?.activities?.status}
             </span>
           ) : (
             <span className="bg-red-400 text-sm text-light px-4 rounded capitalize">
@@ -158,9 +144,10 @@ function AttractionOrderTable({ item }) {
               }
             />
             <a
-              href={`${process.env.REACT_APP_URL}/ticket/attraction/${item?._id}/${item?.activities?._id}`}
+              href={`${process.env.REACT_APP_URL}/ticket/attraction/${item?._id}`}
               disabled={item?.activities?.status !== "confirmed"}
               className=" px-2 py-1  rounded text-white text-[16px] flex items-center gap-1 justify-center w-[100%] bg-gray-400"
+              // to={`/ticket/attraction/${item?._id}`}
               target="blank"
             >
               View <ImTicket />
@@ -175,11 +162,7 @@ function AttractionOrderTable({ item }) {
                   <AiFillPrinter />
                 </button>
               )}
-              content={() =>
-                item?.activities?.bookingType === "ticket"
-                  ? listRef.current
-                  : document.getElementById(item?._id)
-              }
+              content={() => listRef.current}
             />
           </div>
         </td>

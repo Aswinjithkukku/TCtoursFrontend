@@ -80,7 +80,7 @@ function NewRegisters() {
                 <span className="">Company Details</span>
               </h2>
             </div>
-            <div className="space-y-2 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[25px] mt-7">
+            <div className="space-y-5 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[25px] mt-7">
               <div className="relative w-full h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
                 <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">
                   Travel Agency Name
@@ -205,7 +205,7 @@ function NewRegisters() {
               </h2>
             </div>
 
-            <div className="lg:space-y-0 space-y-2 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[25px] mt-7">
+            <div className="md:space-y-0 space-y-5 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[25px] mt-7">
 
               <div className="relative w-full h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
                 <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-500">

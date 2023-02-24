@@ -26,17 +26,6 @@ function MarkupListSingleRow({ item }) {
 
   return (
     <>
-      {/* {loading ? (
-        <tr className='w-full'>
-          <td className='h-3 bg-gray-200 rounded-full w-full'>.</td>
-          <td className='h-3 bg-gray-200 rounded-full w-full'></td>
-          <td className='h-3 bg-gray-200 rounded-full w-full'></td>
-          <td className='h-3 bg-gray-200 rounded-full w-full'></td>
-          <td className='h-3 bg-gray-200 rounded-full w-full'></td>
-          <td className='h-3 bg-gray-200 rounded-full w-full'></td>
-        </tr>
-
-      ) : ( */}
       <tr className="border-b border-tableBorderColor">
         <td className="p-3">{item?.title}</td>
         <td className="p-3">{item?.bookingType}</td>
