@@ -269,18 +269,22 @@ function AttractionOrder() {
                         ) : (
                            <>
                               <tr>
-                                 <td colSpan="13">
-                                    <div className="flex justify-center items-center h-10">
-                                       <PageLoader />
-                                    </div>
-                                 </td>
+                                 {isLoading && (
+                                    <td colSpan="13">
+                                       <div className="flex justify-center items-center h-10">
+                                          <PageLoader />
+                                       </div>
+                                    </td>
+                                 )}
                               </tr>
                               <tr>
-                                 <td colSpan="13">
-                                    <p className="flex justify-center pt-5 pb-20 text-slate-400 font-[500]">
-                                       Data With this Query not found!!!
-                                    </p>
-                                 </td>
+                                 {!isLoading && (
+                                    <td colSpan="13">
+                                       <p className="flex justify-center pt-5 pb-20 text-slate-400 font-[500]">
+                                          Data With this Query not found!!!
+                                       </p>
+                                    </td>
+                                 )}
                               </tr>
                            </>
                         )}
