@@ -25,7 +25,7 @@ function CartModal({ setCart }) {
   }, [agentExcursionCart])
 
   return (
-    <div className="absolute z-20 top-7 md:top-10 right-0 bg-[#EFF5F5] rounded-xl w-[400px]  max-h-[70vh] overflow-y-auto"  >
+    <div className="absolute z-20 top-7 md:top-10 right-0 bg-[#EFF5F5] rounded-xl w-[330px] sm:w-[400px]  max-h-[70vh] overflow-y-auto"  >
       <div className=" p-2">
         <div className='border rounded-lg overflow-hidden'>
           <div className='flex justify-start items-center h-12 bg-[#D6E4E5]'>

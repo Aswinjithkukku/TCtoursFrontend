@@ -156,7 +156,7 @@ function HeroSection() {
 
                         <div
                            id="packageSection"
-                           className="p-5  bg-light rounded-2xl "
+                           className="py-5 px-2  bg-light rounded-2xl "
                         >
                            <PackageSection />
                         </div>

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
 import { FaWallet } from "react-icons/fa";
-import { GiHamburgerMenu, GiPortal, GiWallet } from "react-icons/gi";
-import { HiOutlineShoppingCart } from "react-icons/hi";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { SiDoordash } from "react-icons/si";
+import { TbLayoutDashboard } from "react-icons/tb";
 import { IoMdCart } from "react-icons/io";
-import { RiMarkupFill, RiMenuUnfoldFill } from "react-icons/ri";
-import { RxDashboard } from "react-icons/rx";
+import { RiMarkupFill } from "react-icons/ri";
 import { useLocation, useNavigate } from "react-router-dom";
 import SearchCardModal from "./SearchCardModal";
 
@@ -50,7 +49,7 @@ function BottomNav({ setSidebarView }) {
                      onClick={() => navigate("/b2b")}
                   >
                      <div className="flex justify-center items-center text-3xl">
-                        <GiPortal />
+                        <TbLayoutDashboard />
                      </div>
                   </div>
                </div>

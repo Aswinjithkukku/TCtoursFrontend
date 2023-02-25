@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import priceConversion from "../../../utils/PriceConversion";
 import { RxAvatar } from "react-icons/rx";
 import { logoPng } from "../../../static/imagesB2B";
+import DialogBox from "../../../components/Layouts/DialogBox";
 
 export default function Sidebar({ setSidebarView, sidebarView }) {
    const navigate = useNavigate();
@@ -26,8 +27,9 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
             } overflow-hidden fixed flex-col transition-all `}
          >
             <div className="flex items-center justify-between lg:justify-around  py-5 cursor-pointer px-2 ">
+               <DialogBox title={"Come Home"} text={"I will take you to home page of this b2b portal."}>
                <div
-                  className="h-12 bg-gray-200/50 px-5 py-1 rounded-xl"
+                  className="h-12 bg-gray-200 px-5 py-1 rounded-xl"
                   onClick={() => navigate("/b2b")}
                >
                   <img
@@ -36,6 +38,7 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
                      className="h-full object-fill"
                   />
                </div>
+               </DialogBox>
                <p
                   className="lg:hidden text-light text-xl"
                   onClick={() => setSidebarView(false)}
@@ -54,7 +57,7 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
                         <span className="block text-[12px] text-grayColor">
                            {agent?.agentCode}
                         </span>
-                        <span className="block text-[13px] font-medium text-white capitalize">
+                        <span className="block text-[12px] font-medium text-white capitalize">
                            {agent?.companyName}
                         </span>
                      </div>

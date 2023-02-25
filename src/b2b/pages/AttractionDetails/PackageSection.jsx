@@ -42,7 +42,7 @@ function PackageSection() {
       </div>
       <div className="rounded-sm overflow-x-auto">
         <div className=" ">
-          <table className="w-full">
+          {/* <table className="w-full">
             <thead>
               <tr className="bg-semisoft text-left">
                 <th className="py-2 font-medium pl-2 w-[13em]">Tour</th>
@@ -55,13 +55,13 @@ function PackageSection() {
               </tr>
             </thead>
             <tbody>
+            </tbody>
+          </table> */}
               {agentRecievedActivities &&
                 agentRecievedActivities?.map((item, index) => (
-                  <ActivityTable item={item} bookingType={agentRecievedActivities?.bookingType} index={index} key={index} />
-                  // <ActivityComponent item={item} bookingType={agentRecievedActivities?.bookingType} index={index} key={index} />
+                  // <ActivityTable item={item} bookingType={agentRecievedActivities?.bookingType} index={index} key={index} />
+                  <ActivityComponent item={item} bookingType={agentRecievedActivities?.bookingType} index={index} key={index} />
                 ))}
-            </tbody>
-          </table>
           <div className="flex justify-end items-center mt-2">
             {/* {agentExcursion?.bookingType === "ticket" && ticketCount === 0 && (
               <p className="text-main text-xs mr-5 font-[500]">
