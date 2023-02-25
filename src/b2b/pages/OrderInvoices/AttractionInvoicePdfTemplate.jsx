@@ -61,33 +61,59 @@ const AttractionInvoicePdfTemplate = ({ data }) => {
                 <th className="p-2 pl-4  border-solid border-r-[1px]  ">
                   Name
                 </th>
-                <th className="p-2  border-solid border-r-[1px] ">Adult</th>
+                {/* <th className="p-2  border-solid border-r-[1px] ">Adult</th>
                 <th className="p-2  border-solid border-r-[1px] ">Child</th>
                 <th className="p-2  border-solid border-r-[1px] ">Infant</th>
-                <th className="p-2  border-solid border-r-[1px] ">Transfer</th>
+                <th className="p-2  border-solid border-r-[1px] ">Transfer</th> */}
                 <th className="p-2  border-solid border-r-[1px] ">Amount</th>
               </tr>
             </thead>
             <tbody className="text-[16px]">
               {data?.activites?.map((ele) => (
-                <tr className="text-center bg-white">
-                  <td className="p-2 pl-4 border-solid  border-r-[1px] text-left">
-                    {ele?.activity?.name}
-                  </td>
-                  <td className="p-2 border-solid  border-r-[1px]">
-                    {ele?.adultsCount}
-                  </td>
-                  <td className="p-2 border-solid  border-r-[1px]">
-                    {ele?.childrenCount}
-                  </td>
-                  <td className="p-2 border-solid  border-r-[1px]">
-                    {ele?.infantCount}
-                  </td>
-                  <td className="p-2 border-solid  border-r-[1px]">
-                    {ele?.transferType}
-                  </td>
-                  <td className="p-2 ">{ele?.amount} AED</td>
-                </tr>
+                <>
+                  <tr className="text-center bg-white">
+                    <td className="p-2 pl-4 border-solid  border-r-[1px] text-left flex flex-col">
+                      {ele?.activity?.name}
+                      <span>Adult : {ele?.adultsCount}</span>
+                      {ele?.childrenCount > 0 && (
+                        <span>Child : {ele?.childrenCount}</span>
+                      )}
+                      {ele?.infantCount > 0 && (
+                        <span>Infant : {data?.activities?.infantCount}</span>
+                      )}
+                    </td>
+                    <td className="p-2 ">
+                      <div className="flex flex-col gap-y-1">
+                        {ele?.adultTickets?.length > 0 && (
+                          <span>
+                            Adult : {ele?.adultTickets?.[0]?.cost} AED
+                          </span>
+                        )}
+                        {ele?.childTickets?.length > 0 && (
+                          <span>
+                            Adult : {ele?.childTickets?.[0]?.cost} AED
+                          </span>
+                        )}
+                        {ele?.infantTickets?.length > 0 && (
+                          <span>
+                            Adult : {ele?.infantTickets?.[0]?.cost} AED
+                          </span>
+                        )}
+                        <span> Total : {ele?.grandTotal} AED</span>
+                      </div>
+                    </td>
+                  </tr>
+                  {ele?.transferType !== "without" && (
+                    <tr className="text-center bg-white border-t-[1px]">
+                      <td className="p-2 pl-4 border-solid  border-r-[1px] text-left flex flex-col">
+                        <span className="capitalize">
+                          Transfer Type : {ele?.transferType}
+                        </span>
+                      </td>
+                      <td className="p-2 ">{ele?.amount} AED</td>
+                    </tr>
+                  )}
+                </>
               ))}
             </tbody>
           </table>

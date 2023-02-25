@@ -22,7 +22,6 @@ const AttractionTicketTemplate = ({ ticket, index, data }) => {
   }, []);
 
   const baseUrl = process.env.REACT_APP_SERVER_URL;
-  console.log(ticket);
 
   return (
     <>

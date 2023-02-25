@@ -69,9 +69,6 @@ function AttractionSingleTicketPage() {
 
   const ticketList = tickets();
   const baseUrl = process.env.REACT_APP_SERVER_URL;
-
-  console.log(ticketList);
-
   return isLoading ? (
     <PageLoader />
   ) : (

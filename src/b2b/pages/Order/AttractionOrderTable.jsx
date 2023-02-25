@@ -13,7 +13,6 @@ import domToPdf from "dom-to-pdf";
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
 import { AiFillPrinter } from "react-icons/ai";
-import AttractionInvoicePdfTemplate from "../OrderInvoices/AttractionInvoicePdfTemplate";
 import B2bAttractionInvoiceTemplate from "../Ticket/B2bAttractionInvoiceTemplate";
 
 function AttractionOrderTable({ item }) {
@@ -53,7 +52,8 @@ function AttractionOrderTable({ item }) {
   const listRef = useRef();
   return (
     <>
-      <div className="h-fit absolute left-[20000px]" id="all_tickets">
+      <div className="h-fit " id="all_tickets">
+        {/* <div className="h-fit absolute left-[20000px]" id="all_tickets"> */}
         <div ref={listRef}>
           {list?.map((ele) => (
             <>
