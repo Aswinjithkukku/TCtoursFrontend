@@ -227,7 +227,7 @@ function AttractionOrdersChipList({ item }) {
                                     <TbListDetails />
                                  </button>
                                  <span
-                                    className="sm:hidden pl-2"
+                                    className="sm:hidden "
                                     onClick={() =>
                                        setOrderDetails(!orderDetails)
                                     }
