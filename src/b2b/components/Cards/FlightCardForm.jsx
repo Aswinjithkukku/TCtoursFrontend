@@ -100,7 +100,9 @@ const FlightCardForm = ({ index, data, length }) => {
                 setShowCityFrom(!showCityFrom);
               }}
             >
-              {flightsData?.[index]?.cityFrom?.name || "City From"}
+              {flightsData?.[index]?.cityFrom?.name?.length > 0
+                ? `${flightsData?.[index]?.cityFrom?.name}, (${flightsData?.[index]?.cityFrom?.iata})`
+                : "City From"}
             </div>
             {showCityFrom && (
               <AirportsCard
@@ -133,7 +135,9 @@ const FlightCardForm = ({ index, data, length }) => {
               setShowCityTo(!showCityTo);
             }}
           >
-            {flightsData?.[index]?.cityTo?.name || "City To"}
+            {flightsData?.[index]?.cityTo?.name?.length > 0
+              ? `${flightsData?.[index]?.cityTo?.name}, (${flightsData?.[index]?.cityTo?.iata})`
+              : "City To"}
           </div>
           {showCityTo && (
             <AirportsCard name="cityTo" index={index} hide={setShowCityTo} />
