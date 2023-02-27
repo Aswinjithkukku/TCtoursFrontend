@@ -4,13 +4,28 @@ import {
   MdOutlineFlightLand,
   MdOutlineFlightTakeoff,
 } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const FlightCard = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/b2b/flight/booking/54646545645");
+  };
+
   return (
     <>
-      <div className="grid grid-cols-3 min-w-[400px] max-w-[800px] bg-white h-[200px] p-4 rounded-lg items-center cursor-pointer">
-        <div className="col-span-3">logosection</div>
-        <div className="grid grid-cols-10 col-span-3  mb-2 gap-4 items-center ">
+      <div className="grid grid-cols-8 min-w-[400px] w-[90%] bg-white h-[140px] p-4 rounded-lg items-center cursor-pointer">
+        <div className="col-span-1">
+          <div className=" grid place-items-center">
+            <img
+              src="https://media.istockphoto.com/id/1137971264/vector/airplane-fly-out-logo-plane-taking-off-stylized-sign.jpg?s=612x612&w=0&k=20&c=TH1vDs4wmGnfWapq_e1XYxqzQV_qxaF4_aJWoDJyKNI="
+              alt=""
+              className="h-[100px]"
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-10 col-span-5  mb-2 gap-4 items-center  ">
           <div className="flex flex-col col-span-2 items-end">
             <span className="text-left text-[20px]">10:10</span>
             <span className="text-left text-[12px] font-semibold text-blue-400">
@@ -40,12 +55,15 @@ const FlightCard = () => {
             </span>
           </div>
         </div>
-        <div className="col-span-2 flex justify-center items-center flex-col pl-4">
+        <div className="col-span-1 flex justify-center items-center flex-col pl-4">
           <h2 className="text-[12px] w-[100%]">Price : </h2>
           <h2 className="text-[18px] font-semibold w-[100%]">1200 AED</h2>
         </div>
         <div className="col-span-1 flex justify-center items-center">
-          <button className="bg-blue-500 text-white rounded-md h-10 px-4 font-bold">
+          <button
+            className="bg-blue-500 text-white rounded-md h-10 px-4 font-bold"
+            onClick={handleClick}
+          >
             Book Now
           </button>
         </div>

@@ -52,7 +52,7 @@ function AttractionOrderTable({ item }) {
 
   const list = tickets();
   const listRef = useRef();
-  // console.log(item);
+  console.log(list);
   return (
     <>
       <div className="h-fit absolute left-[20000px]" id="all_tickets">

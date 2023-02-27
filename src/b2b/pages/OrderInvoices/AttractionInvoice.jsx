@@ -82,28 +82,6 @@ function AttractionInvoice() {
     };
   }, [output]);
 
-  const downloadAllTickets = async () => {
-    const ticketList = tickets();
-
-    ticketList?.forEach((ele) => {
-      var node = document.getElementById(ele?.ticketNo);
-
-      var options = {
-        filename: `${ele?.ticketNo}.pdf`,
-      };
-      domToPdf(node, options, function (pdf) {});
-    });
-  };
-
-  const handleDownloadInvoice = () => {
-    var node = document.getElementById("attraction_invoice_pdf_template");
-
-    var options = {
-      filename: `${"Invoice"}.pdf`,
-    };
-    domToPdf(node, options, function (pdf) {});
-  };
-
   const list = tickets();
   const listRef = useRef();
   const invoiveRef = useRef();
