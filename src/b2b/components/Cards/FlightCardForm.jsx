@@ -100,7 +100,9 @@ const FlightCardForm = ({ index, data, length }) => {
                 setShowCityFrom(!showCityFrom);
               }}
             >
-              {flightsData?.[index]?.cityFrom?.name || "City From"}
+              {flightsData?.[index]?.cityFrom?.name?.length > 0
+                ? `${flightsData?.[index]?.cityFrom?.name} (${flightsData?.[index]?.cityFrom?.iata})`
+                : "City From"}
             </div>
             {showCityFrom && (
               <AirportsCard
@@ -115,7 +117,7 @@ const FlightCardForm = ({ index, data, length }) => {
             {(tripType === "oneway" || tripType === "multiCity") && (
               <TbArrowsRight />
             )}
-            {tripType === "roundTrip" && <TbArrowsRightLeft />}
+            {tripType === "return" && <TbArrowsRightLeft />}
           </span>
         </div>
       </div>
@@ -133,7 +135,9 @@ const FlightCardForm = ({ index, data, length }) => {
               setShowCityTo(!showCityTo);
             }}
           >
-            {flightsData?.[index]?.cityTo?.name || "City To"}
+            {flightsData?.[index]?.cityTo?.name?.length > 0
+              ? `${flightsData?.[index]?.cityTo?.name}, (${flightsData?.[index]?.cityTo?.iata})`
+              : "City To"}
           </div>
           {showCityTo && (
             <AirportsCard name="cityTo" index={index} hide={setShowCityTo} />
@@ -174,7 +178,7 @@ const FlightCardForm = ({ index, data, length }) => {
             type="date"
             list="Country"
             placeholder="?"
-            disabled={tripType !== "roundTrip"}
+            disabled={tripType !== "return"}
             name="returnDate"
             value={data?.returnDate}
             onChange={(e) => {

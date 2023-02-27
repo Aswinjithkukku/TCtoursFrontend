@@ -22,9 +22,7 @@ const FlightCard = ({ data, index }) => {
 
   const flightDurationMin = 60 / +flightDuration?.[1];
 
-  console.log(flightDuration);
-  console.log(flightDurationMin);
-
+  console.log(data);
   return (
     <>
       <div className="grid grid-cols-8 min-w-[400px]  bg-white h-[140px] p-4 rounded-lg items-center cursor-pointer shadow-lg mb-4 transform hover:translate-y-[-4px] transition-all">
