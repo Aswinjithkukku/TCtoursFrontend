@@ -6,10 +6,11 @@ import {
   BsFillSunriseFill,
   BsFillSunsetFill,
 } from "react-icons/bs";
+import { IoChevronBackSharp } from "react-icons/io5";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { TbArrowsRight } from "react-icons/tb";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "../../../axios";
 import SearchCards from "../../components/Cards/SearchCards";
 import VisaApplyCard from "../Visa/VisaApplyCard";
@@ -83,9 +84,27 @@ const FlightHomePage = () => {
     fetchFlightsData();
   }, []);
 
+  console.log(flights);
+
+  const navigate = useNavigate();
+
   return (
     <>
-      <div className="min-h-[100vh] mt-4">
+      <div className="px-10 pb-0 mt-2 flex justify-between">
+        <SearchCards />
+        <button
+          onClick={() => {
+            navigate(-1);
+          }}
+          className="px-4 mt-3 items-center flex bg-blue-400 text-white h-[40px] rounded-md font-semibold"
+        >
+          <span>
+            <IoChevronBackSharp />
+          </span>
+          Back
+        </button>
+      </div>
+      <div className="min-h-[100vh] mt-1">
         <div className=" w-[100%] h-[80px] px-10 flex  ">
           <div className=" w-[100%] h-[80px] flex justify-between rounded-lg border-[1px]">
             <div className=" w-[100%] h-[100%] flex ">

@@ -34,11 +34,11 @@ function Wallet() {
       <div className=" ">
         <div className="p-2 ">
           <div className=" ">
-            <div className="md:grid md:grid-cols-2 space-y-2 md:space-y-0 md:p-12 gap-12">
+            <div className="sm:grid sm:grid-cols-2 space-y-2 sm:space-y-0 sm:p-2 md:py-6 lg:p-12 gap-5 lg:gap-12">
               <div className="">
-                <div className="bg-[#003580]  rounded-lg py-3 shadow-sm px-2 lg:px-7">
-                  <div className="">
-                    <div className="">
+                <div className="bg-[#003580]  rounded-lg py-3 shadow-sm px-3 h-full lg:px-7">
+                  <div className="h-full">
+                    <div className="h-full">
                       <h2 className="lg:text-3xl text-2xl text-center lg:text-start font-black text-gray-200 tracking-wider mb-3">
                         Wallet Balance
                       </h2>
@@ -54,11 +54,11 @@ function Wallet() {
                           </p>
                         )}
                       </div>
-                      <div className="mb-5 ">
+                      <div className="mb-5">
                         <h5 className="text-xs lg:text-sm text-text mb-3">
                           is left on your wallet!
                         </h5>
-                        <div className="flex w-full gap-3">
+                        <div className="flex  h-full w-full gap-3">
                           <div className="w-full">
                             <Link to="/b2b/payment/approval">
                               <button className="w-full bg-primaryColor text-gray-100 py-3 rounded-[0.25rem] text-xs lg:text-sm">
@@ -88,8 +88,8 @@ function Wallet() {
                 </div>
               </div>
               <div className="h-full ">
-                <div className="bg-[#003580] h-full rounded-xl py-3 shadow-sm px-2 lg:px-7">
-                  <div className="lg:flex justify-between">
+                <div className="bg-[#003580] h-full rounded-xl py-3 shadow-sm px-3 lg:px-7">
+                  <div className="flex justify-between">
                     <div className="">
                       <h2 className="lg:text-3xl text-2xl text-center lg:text-start font-black text-gray-200 tracking-wider mb-3">
                         Pending Balance
@@ -124,7 +124,7 @@ function Wallet() {
                     </div>
 
                     <div className="lg:space-y-6 py-7 flex lg:block space-x-3 lg:space-x-0">
-                      <div className="flex justify-end items-end">
+                      <div className="flex justify-end lg:items-end items-start">
                         <img
                           src={totalRevenuePng}
                           alt="revenue"
