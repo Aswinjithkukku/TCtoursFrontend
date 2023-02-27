@@ -31,6 +31,7 @@ import {
   B2BLoginPage,
   B2BRegisterPage,
   Dashboard,
+  DubaiDolphinarium,
   EditResellers,
   AttractionOrder,
   MarkUpList,
@@ -49,10 +50,14 @@ import {
   Wallet,
   ReapplyIndividual,
   AttractionSingleTicketPage,
-  PaymentSuccessPage,
+  FlightHomePage,
+  FlightBookingPage,
 } from "../b2b/pages";
 import B2BPrivateRoute from "./B2BPrivateRoute";
 import LoadingWrapper from "./LoadingWrapper";
+import FlightCard from "../b2b/components/Cards/FlightCard";
+import AttractionCard from "../b2b/components/Cards/AttractionCard";
+import VisaCard from "../b2b/components/Cards/VisaCard";
 
 const ThemeRoutes = [
   {
@@ -98,10 +103,18 @@ const ThemeRoutes = [
       </B2BPrivateRoute>
     ),
     children: [
-      { path: "/b2b", element: <Dashboard /> },
+      {
+        path: "/b2b",
+        element: <Dashboard />,
+        children: [
+          { path: "/b2b/portal/attractions", element: <AttractionCard /> },
+          { path: "/b2b/portal/visa", element: <VisaCard /> },
+          { path: "/b2b/portal/flight", element: <FlightCard /> },
+        ],
+      },
       { path: "/b2b/reseller/add", element: <NewRegisters /> },
       { path: "/b2b/resellers", element: <Resellers /> },
-      { path: "/b2b/reseller/:id/edit", element: <EditResellers /> },
+      { path: "/b2b/reseller/edit", element: <EditResellers /> },
       { path: "/b2b/reseller/:id", element: <SingleSubAgent /> },
       { path: "/b2b/attractions/:slug", element: <Attraction /> },
       { path: "/b2b/attractions/details/:id", element: <AttractionDetails /> },
@@ -128,6 +141,8 @@ const ThemeRoutes = [
         element: <VisaApplySuccessPage />,
       },
       { path: "/b2b/attractions/invoice/:id", element: <AttractionInvoice /> },
+      { path: "/b2b/flight/order", element: <FlightHomePage /> },
+      { path: "/b2b/flight/booking/:id", element: <FlightBookingPage /> },
     ],
   },
   {
@@ -151,16 +166,16 @@ const ThemeRoutes = [
     element: <PaymentDecline />,
   },
   {
-    path: "/payment-success",
-    element: <PaymentSuccessPage />,
-  },
-  {
     path: "/attractions/invoice",
     element: <AttractionOrderInvoice />,
   },
   {
     path: "/b2b/attractions/invoice",
     element: <AttractionOrderInvoice />,
+  },
+  {
+    path: "/attractions/invoice/dolphin",
+    element: <DubaiDolphinarium />,
   },
   {
     path: "/ticket/attraction/:id",

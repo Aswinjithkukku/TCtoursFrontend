@@ -1,4 +1,17 @@
 import React from "react";
+<<<<<<< HEAD
+import { logoPng } from "../../../static/imagesB2B";
+
+function PaymentSuccessPage() {
+   return (
+      <div className="h-screen w-full flex justify-center items-center">
+         <div className=" bg-white shadow-sm p-4 w-7/12 rounded-[0.40rem]">
+            <div className="border-b flex justify-center pb-3">
+               <img src={logoPng} alt="hero" className="h-16" />
+            </div>
+            <div className="">
+               <h2 className="">Payment Successfull!</h2>
+=======
 import { useNavigate } from "react-router-dom";
 import { logoPng } from "../../../static/imagesB2B";
 
@@ -17,6 +30,7 @@ function PaymentSuccessPage() {
                <button className="" 
                onClick={() => navigate('/b2b/')}
                ></button>
+>>>>>>> b87ed9f2ab9d1620aefb38d54583ffd5c8cfabf5
             </div>
          </div>
       </div>
