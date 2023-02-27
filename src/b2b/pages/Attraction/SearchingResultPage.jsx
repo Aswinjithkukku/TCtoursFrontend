@@ -16,7 +16,6 @@ function SearchingResultPage() {
 
   const [viewCategory, setViewCategory] = useState(false);
   const [category, setCategory] = useState("");
-  const [search, setSearch] = useState("");
 
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +27,7 @@ function SearchingResultPage() {
       setError("");
       setIsLoading(true);
       const response = await axios.get(
-        `/b2b/resellers/client/attraction/all?search=${args.search}&limit=100&destination=${args.destination}&category=${args.category}`,
+        `/b2b/resellers/client/attraction/all?limit=100&destination=${args.destination}&category=${args.category}`,
         {
           headers: {
             authorization: `Bearer ${token}`,
@@ -44,19 +43,18 @@ function SearchingResultPage() {
 
   let destination = params.slug;
   useEffect(() => {
-    fetchAgentAllExcursionData({ destination, category, search });
-  }, [dispatch, destination, category, search]);
+    fetchAgentAllExcursionData({ destination, category });
+  }, [dispatch, destination, category]);
 
   return (
     <div className="">
-      <div className=" p-6">
+      <div className="">
         <div className="">
           <SearchHomePage
             viewCategory={viewCategory}
             setViewCategory={setViewCategory}
             category={category}
             setCategory={setCategory}
-            setSearch={setSearch}
           />
           <div className="">
             <div className="">

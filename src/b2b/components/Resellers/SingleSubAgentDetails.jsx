@@ -8,7 +8,7 @@ function SingleSubAgentDetails() {
    const { reseller, loading } = useSelector((state) => state.resellers);
 
   return (
-   <div className="p-4 grid grid-cols-2 gap-[20px]">
+   <div className="p-4 grid sm:grid-cols-2 gap-[20px]">
    <div>
        <div className="flex items-center gap-[8px] mb-3">
            <span>

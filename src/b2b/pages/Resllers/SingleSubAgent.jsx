@@ -11,6 +11,7 @@ import SingleSubAgentDetails from "../../components/Resellers/SingleSubAgentDeta
 import OrderHistory from "../../components/Resellers/OrderHistory";
 import TransactionHistoryTable from "../../components/Resellers/TransactionHistoryTable";
 import { IoCash } from "react-icons/io5";
+import priceConversion from "../../../utils/PriceConversion";
 
 export default function SingleSubAgent() {
   const dispatch = useDispatch();
@@ -22,7 +23,10 @@ export default function SingleSubAgent() {
   });
 
   const { id } = useParams();
-  const { reseller, loading } = useSelector((state) => state.resellers);
+  const { reseller, loading, resellerWalletInfo } = useSelector(
+    (state) => state.resellers
+  );
+  const { selectedCurrency } = useSelector((state) => state.home);
 
   useEffect(() => {
     dispatch(fetchSingleReseller(id));
@@ -61,10 +65,16 @@ export default function SingleSubAgent() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-4 gap-4 mt-6 text-gray-200">
+          <div className="grid sm:grid-cols-4 gap-4 mt-6 text-gray-200">
             <div className="bg-[#003580] shadow-sm rounded-xl p-4 flex items-start justify-between">
               <div>
-                <span className="block text-lg font-[600]">0 AED</span>
+                <span className="block text-lg font-[600]">
+                  {priceConversion(
+                    resellerWalletInfo?.balance,
+                    selectedCurrency,
+                    true
+                  ) || `0 ${selectedCurrency?.isocode}`}{" "}
+                </span>
                 <span className="block text-sm text-grayColor font-medium mt-[2px]">
                   Available Balance
                 </span>
@@ -75,7 +85,14 @@ export default function SingleSubAgent() {
             </div>
             <div className="bg-[#003580] shadow-sm rounded-xl p-4 flex items-start justify-between">
               <div>
-                <span className="block text-lg font-[600]">0 AED</span>
+                <span className="block text-lg font-[600]">
+                  {" "}
+                  {priceConversion(
+                    resellerWalletInfo?.totalEarnings,
+                    selectedCurrency,
+                    true
+                  ) || `0 ${selectedCurrency?.isocode}`}{" "}
+                </span>
                 <span className="block text-sm text-grayColor font-medium mt-[2px]">
                   Total Earnings
                 </span>
@@ -86,7 +103,14 @@ export default function SingleSubAgent() {
             </div>
             <div className="bg-[#003580] shadow-sm rounded-xl p-4 flex items-start justify-between">
               <div>
-                <span className="block text-lg font-[600]">0 AED</span>
+                <span className="block text-lg font-[600]">
+                  {" "}
+                  {priceConversion(
+                    resellerWalletInfo?.pendingEarnings,
+                    selectedCurrency,
+                    true
+                  ) || `0 ${selectedCurrency?.isocode}`}{" "}
+                </span>
                 <span className="block text-sm text-grayColor font-medium mt-[2px]">
                   Pending Earnings
                 </span>
@@ -97,7 +121,14 @@ export default function SingleSubAgent() {
             </div>
             <div className="bg-[#003580] shadow-sm rounded-xl p-4 flex items-start justify-between">
               <div>
-                <span className="block text-lg font-[600]">0 AED</span>
+                <span className="block text-lg font-[600]">
+                  {" "}
+                  {priceConversion(
+                    resellerWalletInfo?.withdrawTotal,
+                    selectedCurrency,
+                    true
+                  ) || `0 ${selectedCurrency?.isocode}`}{" "}
+                </span>
                 <span className="block text-sm text-grayColor font-medium mt-[2px]">
                   Total Withdrawal
                 </span>
@@ -126,7 +157,7 @@ export default function SingleSubAgent() {
               >
                 Details
               </button>
-              <button
+              {/* <button
                 className={`${
                   component.orders
                     ? " border-b border-b-blue-500 text-blue-500 "
@@ -157,7 +188,7 @@ export default function SingleSubAgent() {
                 }
               >
                 Attraction Orders
-              </button>
+              </button> */}
             </div>
             {component.details && <SingleSubAgentDetails />}
             {component.orders && <OrderHistory />}

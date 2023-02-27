@@ -13,7 +13,6 @@ import {
   usersReducer,
   visaReducer,
   walletReducer,
-  flightReducer,
 } from "./slices";
 
 const store = configureStore({
@@ -31,7 +30,6 @@ const store = configureStore({
     wallet: walletReducer,
     visa: visaReducer,
     b2cVisa: b2cVisaReducer,
-    flight: flightReducer,
   },
   devTools: true,
 });

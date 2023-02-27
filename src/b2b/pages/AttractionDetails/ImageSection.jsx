@@ -30,7 +30,7 @@ function ImageSection() {
 
                         </div>
                         <div className='col-span-9 '>
-                            <div className='w-full md:h-full h-72 md:rounded-3xl overflow-hidden'>
+                            <div className='w-full lg:h-full h-72 md:h-80 md:rounded-3xl overflow-hidden'>
                                 <ReactPlayer width={'100%'} height={'100%'} muted playing loop url={`${agentExcursion?.youtubeLink}?modestbranding=1`} />
                                 {/* controls  playing loop */}
                             </div>
