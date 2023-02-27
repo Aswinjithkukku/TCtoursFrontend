@@ -1,11 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-// import { BiPhone, BiUser } from "react-icons/bi";
 import { AiOutlineDown } from "react-icons/ai";
-// import { FiMapPin } from "react-icons/fi";
-// import { FaBus } from "react-icons/fa";
-// import { MdOutlineEmail } from "react-icons/md";
-// import Pagination from "../../components/Pagination";
 import OrderModal from "./OrderModal";
 import { useHandleClickOutside } from "../../../hooks";
 import TransactionModal from "./TransactionModal";
@@ -268,24 +263,23 @@ function AttractionOrder() {
                            ))
                         ) : (
                            <>
-                              <tr>
-                                 {isLoading && (
+                              {isLoading ? (
+                                 <tr>
                                     <td colSpan="13">
                                        <div className="flex justify-center items-center h-10">
                                           <PageLoader />
                                        </div>
                                     </td>
-                                 )}
-                              </tr>
-                              <tr>
-                                 {!isLoading && (
+                                 </tr>
+                              ) : (
+                                 <tr>
                                     <td colSpan="13">
                                        <p className="flex justify-center pt-5 pb-20 text-slate-400 font-[500]">
                                           Data With this Query not found!!!
                                        </p>
                                     </td>
-                                 )}
-                              </tr>
+                                 </tr>
+                              )}
                            </>
                         )}
                      </div>

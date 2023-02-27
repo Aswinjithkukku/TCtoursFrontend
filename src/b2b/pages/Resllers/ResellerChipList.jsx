@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiFillDelete, AiFillEdit, AiFillEye } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from "../../../axios";
+import { setResellers } from "../../../redux/slices/resellerSlice";
 
 function ResellerChipList({ item }) {
    const navigate = useNavigate();
+   const dispatch = useDispatch();
+   const [error, setError] = useState("");
+
+   const { resellers } = useSelector((state) => state.resellers);
+   const { token } = useSelector((state) => state.agents);
+
+   const deleteReseller = async (id) => {
+      try {
+         console.log(id);
+         setError("");
+         const response = await axios.delete(`/b2b/resellers/delete/${id}`, {
+            headers: {
+               authorization: `Bearer ${token}`,
+            },
+         });
+         const result = resellers?.filter((item) => item._id !== id);
+         dispatch(setResellers(result));
+      } catch (error) {
+         setError(
+            error?.response?.data?.error || "Something went wrong, Try again"
+         );
+      }
+   };
    return (
       <>
          <div className="mb-2.5 bg-neutral-50 border border-neutral-100 rounded-xl m-4 shadow-sm">
@@ -97,7 +123,10 @@ function ResellerChipList({ item }) {
                                        <AiFillEdit />
                                     </span>
                                  </button>
-                                 <button className="text-main px-4 py-3 font-medium flex gap-1 items-center justify-center w-full sm:w-auto text-xs border hover:border-neutral-200 rounded-lg">
+                                 <button
+                                    className="text-main px-4 py-3 font-medium flex gap-1 items-center justify-center w-full sm:w-auto text-xs border hover:border-neutral-200 rounded-lg"
+                                    onClick={() => deleteReseller(item?._id)}
+                                 >
                                     <span>Delete</span>
                                     <span className="text-[14px]">
                                        <AiFillDelete />

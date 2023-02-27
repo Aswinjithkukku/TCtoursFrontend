@@ -234,7 +234,7 @@ function ActivityComponent({ item, bookingType, index }) {
                               type="number"
                               min={1}
                               onChange={(e) => {
-                                 e.target.value < 1
+                                 e.target.value < 0
                                     ? handleChange({
                                          value: 1,
                                          name: e.target.name,

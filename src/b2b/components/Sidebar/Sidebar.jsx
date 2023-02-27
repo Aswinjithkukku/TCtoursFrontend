@@ -27,7 +27,6 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
             } overflow-hidden fixed flex-col transition-all `}
          >
             <div className="flex items-center justify-between lg:justify-around  py-5 cursor-pointer px-2 ">
-               <DialogBox title={"Come Home"} text={"I will take you to home page of this b2b portal."}>
                <div
                   className="h-12 bg-gray-200 px-5 py-1 rounded-xl"
                   onClick={() => navigate("/b2b")}
@@ -38,7 +37,6 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
                      className="h-full object-fill"
                   />
                </div>
-               </DialogBox>
                <p
                   className="lg:hidden text-light text-xl"
                   onClick={() => setSidebarView(false)}
@@ -124,7 +122,7 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
             </div>
          </div>
          <div
-         onClick={() => setSidebarView(false)}
+            onClick={() => setSidebarView(false)}
             className={`${
                sidebarView ? " fixed " : " hidden "
             } lightglass fixed top-0 bottom-0 right-0 left-0 z-10`}

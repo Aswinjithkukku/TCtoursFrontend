@@ -31,7 +31,6 @@ import {
   B2BLoginPage,
   B2BRegisterPage,
   Dashboard,
-  DubaiDolphinarium,
   EditResellers,
   AttractionOrder,
   MarkUpList,
@@ -50,6 +49,7 @@ import {
   Wallet,
   ReapplyIndividual,
   AttractionSingleTicketPage,
+  PaymentSuccessPage,
 } from "../b2b/pages";
 import B2BPrivateRoute from "./B2BPrivateRoute";
 import LoadingWrapper from "./LoadingWrapper";
@@ -151,16 +151,16 @@ const ThemeRoutes = [
     element: <PaymentDecline />,
   },
   {
+    path: "/payment-success",
+    element: <PaymentSuccessPage />,
+  },
+  {
     path: "/attractions/invoice",
     element: <AttractionOrderInvoice />,
   },
   {
     path: "/b2b/attractions/invoice",
     element: <AttractionOrderInvoice />,
-  },
-  {
-    path: "/attractions/invoice/dolphin",
-    element: <DubaiDolphinarium />,
   },
   {
     path: "/ticket/attraction/:id",

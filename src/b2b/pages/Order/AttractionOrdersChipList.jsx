@@ -71,15 +71,14 @@ function AttractionOrdersChipList({ item }) {
             </div>
          </div>
          <div className="mb-2.5 bg-neutral-50 border border-neutral-100 rounded-xl m-4 shadow-sm">
-            <div className="p-4">
+            <div className="p-3">
                <div className="w-full">
-                  <table className="w-full min-w-max">
+                  <table className="w-full">
                      <tbody>
                         <tr>
-                           <td className="pr-4 pb-3">
-                              <div className="flex flex-wrap items-center -m-2">
-                                 <div className="w-auto p-2"></div>
-                                 <div className="w-auto p-2 space-y-2">
+                           <td className=" pb-3">
+                              <div className="flex flex-wrap items-center">
+                                 <div className="w-auto  space-y-2">
                                     <span className="sm:flex gap-5  sm:space-y-0 space-y-2 text-sm font-[500]">
                                        <div className="">
                                           <p className="text-textColor">
@@ -168,8 +167,8 @@ function AttractionOrdersChipList({ item }) {
                            </td>
                         </tr>
                         <tr>
-                           <td className="pr-4">
-                              <div className="flex flex-wrap gap-2 sm:justify-start justify-between items-center">
+                           <td className="">
+                              <div className="flex  gap-2 sm:justify-start justify-between items-center">
                                  <ReactToPrint
                                     trigger={() => (
                                        <button
