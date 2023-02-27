@@ -3,45 +3,63 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { addToCart } from "../../../redux/slices/agentExcursionSlice";
 import ActivityTable from "./ActivityTable";
-import { setAlertSuccess } from "../../../redux/slices/homeSlice"
+import {
+   setAlertError,
+   setAlertSuccess,
+} from "../../../redux/slices/homeSlice";
+import ActivityComponent from "./ActivityComponent";
 
 function PackageSection() {
-  const dispatch = useDispatch();
-  const [error, setError] = useState("");
+   const dispatch = useDispatch();
+   const [error, setError] = useState("");
 
-  const {
-    agentRecievedActivities,
-    agentSelectedActivities,
-    ticketStatus,
-    ticketCount,
-    agentExcursion,
-  } = useSelector((state) => state.agentExcursions);
+   const {
+      agentRecievedActivities,
+      agentSelectedActivities,
+      ticketStatus,
+      ticketCount,
+      agentExcursion,
+   } = useSelector((state) => state.agentExcursions);
 
-  const carting = () => {
-    const isDateExist = agentSelectedActivities?.filter((item) => {
-      return item?.isChecked === true && item?.date !== "";
-    });
-    if (isDateExist.length > 0) {
-      setError("");
-      dispatch(addToCart(agentSelectedActivities));
-      dispatch(setAlertSuccess({
-        status: true,
-        title: "Added to Cart!",
-        text: "The selected item successfully added to cart"
-      }))
-    } else {
-      setError("Fill the tour Date");
-    }
-  };
+   const carting = () => {
+      const isDateExist = agentSelectedActivities?.filter((item) => {
+         return item?.isChecked === true && item?.date !== "";
+      });
+      const isAdultAvail = agentSelectedActivities?.filter((item) => {
+         return Number(item?.adult) > 0;
+      });
+      if (isDateExist.length > 0 && isAdultAvail) {
+         setError("");
+         dispatch(addToCart(agentSelectedActivities));
+         dispatch(
+            setAlertSuccess({
+               status: true,
+               title: "Added to Cart!",
+               text: "The selected item successfully added to cart",
+            })
+         );
+      } else {
+         setError("Fill the tour Date");
+         if (!isAdultAvail) {
+            dispatch(
+               setAlertError({
+                  status: true,
+                  title: "Invalid adult number!",
+                  text: "Adult must be greater than 0",
+               })
+            );
+         }
+      }
+   };
 
-  return (
-    <>
-      <div className=" my-2 text-xl text-darktext font-bold tracking-wider">
-        Select Tour Options
-      </div>
-      <div className="rounded-sm overflow-x-auto">
-        <div className=" ">
-          <table className="w-full">
+   return (
+      <>
+         <div className=" my-2 text-xl text-darktext font-bold tracking-wider">
+            Select Tour Options
+         </div>
+         <div className="rounded-sm overflow-x-auto">
+            <div className=" ">
+               {/* <table className="w-full">
             <thead>
               <tr className="bg-semisoft text-left">
                 <th className="py-2 font-medium pl-2 w-[13em]">Tour</th>
@@ -54,14 +72,20 @@ function PackageSection() {
               </tr>
             </thead>
             <tbody>
-              {agentRecievedActivities &&
-                agentRecievedActivities?.map((item, index) => (
-                  <ActivityTable item={item} bookingType={agentRecievedActivities?.bookingType} index={index} key={index} />
-                ))}
             </tbody>
-          </table>
-          <div className="flex justify-end items-center mt-2">
-            {/* {agentExcursion?.bookingType === "ticket" && ticketCount === 0 && (
+          </table> */}
+               {agentRecievedActivities &&
+                  agentRecievedActivities?.map((item, index) => (
+                     // <ActivityTable item={item} bookingType={agentRecievedActivities?.bookingType} index={index} key={index} />
+                     <ActivityComponent
+                        item={item}
+                        bookingType={agentRecievedActivities?.bookingType}
+                        index={index}
+                        key={index}
+                     />
+                  ))}
+               <div className="flex justify-end items-center mt-2">
+                  {/* {agentExcursion?.bookingType === "ticket" && ticketCount === 0 && (
               <p className="text-main text-xs mr-5 font-[500]">
                 No tickets left
               </p>
@@ -71,19 +95,19 @@ function PackageSection() {
                 Only below {ticketCount && ticketCount} tickets are left
               </p>
             )} */}
-            {error && <p className="text-main text-xs mr-5">{error}</p>}
-            <button className="button w-[100px]" onClick={carting}>
-              Add to cart
-            </button>
+                  {error && <p className="text-main text-xs mr-5">{error}</p>}
+                  <button className="button w-[100px]" onClick={carting}>
+                     Add to cart
+                  </button>
 
-            {/* <button className="button w-[100px]" onClick={carting}>
+                  {/* <button className="button w-[100px]" onClick={carting}>
               Add to cart
             </button> */}
-          </div>
-        </div>
-      </div>
-    </>
-  );
+               </div>
+            </div>
+         </div>
+      </>
+   );
 }
 
 export default PackageSection;

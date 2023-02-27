@@ -1,18 +1,18 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import HeroSearch from './Attraction/HeroSearch'
-import SearchCards from "../components/Cards/SearchCards";
+import SearchCards from '../components/Cards/SearchCards'
 
 import {
-  bookingCancelledPng,
-  bookingConfirmedPng,
-  bookingReceivedPng,
-  ticketBoughtPng,
-  ticketCancelledPng,
-  ticketConfirmedPng,
-  totalRevenuePng,
-  usersPng,
+    bookingCancelledPng,
+    bookingConfirmedPng,
+    bookingReceivedPng,
+    ticketBoughtPng,
+    ticketCancelledPng,
+    ticketConfirmedPng,
+    totalRevenuePng,
+    usersPng,
 } from "../../static/imagesB2B";
 import TopCard from "../components/features/TopCard";
 import WalletCard from "../components/features/WalletCard";
@@ -20,24 +20,13 @@ import { AiFillAlert } from "react-icons/ai";
 import TopDestination from "./TopDestination";
 
 export default function Dashboard() {
-  const { agent } = useSelector((state) => state.agents);
-  const { balance } = useSelector((state) => state.wallet);
+    const { agent } = useSelector((state) => state.agents);
+    const { balance } = useSelector(state => state.wallet)
 
-  return (
-    <div className="">
-      {/* <div className="bg-white flex items-center justify-between gap-[10px] lg:px-6 px-2 shadow-sm border-t py-2">
-                <h1 className="font-[600] text-[15px] uppercase">
-                    Dashboard
-                </h1>
-
-                <div className="text-sm text-grayColor">
-                    <Link to="/b2b" className="text-textColor">
-                        Dashboard{" "}
-                    </Link>
-                </div>
-            </div> */}
-      <div className="lg:px-6 p-2 ">
-        {/* <div className="flex items-center justify-between gap-[10px] mb-5">
+    return (
+        <div className="pb-14 lg:py-0">
+            <div className="lg:px-6 p-2 ">
+                {/* <div className="flex items-center justify-between gap-[10px] mb-5">
                     <div>
                         <span className="font-medium text-textColor">
                             Good morning, {agent?.name}
@@ -53,16 +42,15 @@ export default function Dashboard() {
                     </div>
                 </div> */}
 
-        <div className="my-2 ">
-          <SearchCards />
-        </div>
-        <Outlet />
+                <div className="">
+                    <SearchCards />
+                </div>
 
-        <div className="my-2">
-          <TopDestination />
-        </div>
+                <div className="my-2">
+                    <TopDestination />
+                </div>
 
-        {/* <div className="md:grid md:grid-cols-2 space-y-2 md:space-y-0 lg:grid-cols-4 gap-6">
+                {/* <div className="md:grid md:grid-cols-2 space-y-2 md:space-y-0 lg:grid-cols-4 gap-6">
                     <WalletCard
                         title={"Wallet Balance"}
                         value={balance}
@@ -97,7 +85,7 @@ export default function Dashboard() {
                     />
                 </div> */}
 
-        {/* <div className="md:grid md:grid-cols-2 lg:grid-cols-4 space-y-2 lg:space-y-0 gap-6 mt-2 lg:mt-6">
+                {/* <div className="md:grid md:grid-cols-2 lg:grid-cols-4 space-y-2 lg:space-y-0 gap-6 mt-2 lg:mt-6">
                     <TopCard
                         title={"Total Revenue"}
                         value={300}
@@ -156,7 +144,8 @@ export default function Dashboard() {
                         icon={ticketCancelledPng}
                     />
                 </div> */}
-      </div>
-    </div>
-  );
+
+            </div>
+        </div>
+    );
 }

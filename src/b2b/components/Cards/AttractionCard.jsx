@@ -10,33 +10,12 @@ function AttractionCard({ setView }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
-  const [selected, setSelected] = useState({
-    value: "",
-    id: "",
-    type: "",
-  });
   const [datalist, setDatalist] = useState(false);
 
   const { searchQuery } = useSelector((state) => state.home);
 
   const dropdownWrapperRef = useRef();
   useHandleClickOutside(dropdownWrapperRef, () => setDatalist(false));
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (selected.type === "destination") {
-      navigate(`/b2b/attractions/${selected.value}`);
-    } else {
-      navigate(`/b2b/attractions/details/${selected?.id}`);
-    }
-    setView &&
-      setView({
-        favourite: false,
-        search: false,
-        profile: false,
-        help: false,
-      });
-  };
 
   const handleFocus = (e) => {
     setDatalist(true);
@@ -48,13 +27,13 @@ function AttractionCard({ setView }) {
 
   return (
     <>
-      <form onSubmit={submitHandler}>
-        <div className="md:flex gap-2 py-5 space-y-4 md:space-y-0 px-6">
-          <div className="md:w-11/12 flex justify-center items-center ">
+      <form>
+        <div className="md:flex gap-2 py-5 space-y-4 md:space-y-0 ">
+          <div className="w-full flex justify-center items-center ">
             <div className=" w-full ">
               <div className="" ref={dropdownWrapperRef}>
-                <div className="relative w-full h-14 py-4 px-3  border border-blue-400 hover:border-blue-500 focus-within:border-green-500 rounded-lg">
-                  <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-white rounded px-1 bg-blue-600">
+                <div className= "relative w-full h-14 py-4 px-3  border border-blue-400 hover:border-blue-500 focus-within:border-green-500 rounded-lg">
+                  <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-white rounded px-1 bg-blue-600">
                     Where do you want to go?
                   </span>
                   <input
@@ -64,11 +43,11 @@ function AttractionCard({ setView }) {
                     onChange={(e) => setValue(e.target.value)}
                     onFocus={handleFocus}
                     required
-                    className="block w-full capitalize outline-none bg-transparent text-sm text-gray-300 font-medium"
+                    className= "block w-full capitalize outline-none bg-transparent text-sm text-gray-300 font-medium"
                   />
                 </div>
                 {datalist && (
-                  <div className="absolute max-h-[17em] w-[21em] mt-1  bg-light rounded-lg overflow-y-auto z-40">
+                  <div className="absolute max-h-[17em] w-[21em] mt-1  bg-light rounded-lg overflow-y-auto z-20">
                     <div className="w-full p-2 overflow-y-auto">
                       <div className="">
                         <p className="bg-gray-200 py-[2px] px-2 text-[14px] font-[600] text-textColor">
@@ -81,12 +60,8 @@ function AttractionCard({ setView }) {
                               className=" py-2 px-2 cursor-pointer capitalize text-darktext z-30 border-b text-sm"
                               onClick={() => {
                                 setValue(item?.name);
-                                setSelected({
-                                  value: item?.name,
-                                  id: item?._id,
-                                  type: "destination",
-                                });
                                 setDatalist(!datalist);
+                                navigate(`/b2b/attractions/${item?.name}`);
                               }}
                             >
                               {item?.name}
@@ -104,12 +79,8 @@ function AttractionCard({ setView }) {
                             className=" py-2 px-2 cursor-pointer capitalize text-darktext z-30 border-b text-sm"
                             onClick={() => {
                               setValue(item.title);
-                              setSelected({
-                                value: item?.title,
-                                id: item?._id,
-                                type: "attraction",
-                              });
                               setDatalist(!datalist);
+                              navigate(`/b2b/attractions/details/${item?._id}`)
                             }}
                           >
                             {item.title}
@@ -120,19 +91,6 @@ function AttractionCard({ setView }) {
                   </div>
                 )}
               </div>
-            </div>
-          </div>
-          <div className=" flex justify-center items-center">
-            <div className="">
-              <button
-                type="submit"
-                className="md:h-14 h-12  px-4  bg-blueColor rounded-xl text-light text-3xl flex justify-center items-center"
-              >
-                <span className="">
-                  <AiOutlineSearch />
-                </span>
-                <span className="text-base uppercase">Search</span>
-              </button>
             </div>
           </div>
         </div>

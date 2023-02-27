@@ -16,7 +16,7 @@ function PaymentApproval() {
       <div className="p-2 ">
         <div className=" mt-2 ">
           <div className="p-6">
-            <div className="bg-white shadow-sm md:rounded-md overflow-hidden w-full md:my-6">
+            <div className="bg-white shadow-sm rounded-md overflow-hidden w-full md:my-6">
               <div className="lg:grid grid-cols-12 gap-5">
                 <div className="1 col-span-3 bg-primaryColor p-6 text-white space-y-5">
                   <div className="h-12 bg-bluetrans flex justify-center items-center font-medium tracking-wide rounded-md">
@@ -46,7 +46,7 @@ function PaymentApproval() {
                     onClick={() => {
                       setPayMethod("ccavenue");
                     }}
-                    className="h-10 hover:bg-bluetrans rounded-lg flex tracking-wide items-center cursor-pointer px-2"
+                    className={`h-10 hover:bg-bluetrans ${payMethod === "ccavenue" ? " bg-blue-600 " : " bg-transparent "} uppercase font-medium text-[13px] rounded-lg flex tracking-wide items-center cursor-pointer px-4`}
                   >
                     CCAvenue
                   </div>

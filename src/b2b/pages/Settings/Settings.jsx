@@ -13,23 +13,10 @@ function Settings() {
   });
   return (
     <div>
-      {/* <div className="bg-white flex items-center justify-between gap-[10px] px-2 lg:px-6 shadow-sm border-t py-2">
-        <h1 className="font-[600] text-[15px] uppercase">
-          Settings
-        </h1>
-        <div className="text-sm text-grayColor">
-          <Link to="/b2b" className="text-textColor">
-            Dashboard{" "}
-          </Link>
-          <span>{">"} </span>
-          <span>Settings</span>
-        </div>
-      </div> */}
-
       <div className="p-2 ">
         <div>
           <div className="w-full px-4 py-4">
-            <ul className="flex flex-wrap -mb-4">
+            <ul className="flex -mb-4">
               <li className="mb-4 mr-8">
                 <span
                   className={`inline-block pb-4 ${

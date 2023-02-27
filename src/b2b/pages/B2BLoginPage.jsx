@@ -241,58 +241,6 @@ function B2BLoginPage() {
           )}
         </div>
       </div>
-      <div className="lg:hidden relative mt-16 bg-[#003580]">
-        <div className="container px-4 mx-auto">
-          <div className="relative max-w-xs mx-auto py-12">
-            <a className="inline-block mb-24" href="#">
-              <img src="trizzle-assets/logos/trizzle-white-logo.svg" alt="" />
-            </a>
-            <div className="max-w-xl">
-              <p className="text-xl font-semibold text-white leading-10 mb-8">
-                Trizzle is easy to use and has a lot of great features that make
-                it a valuable tool for any developer.
-              </p>
-              <div className="flex items-center mb-12">
-                <img
-                  className="w-14 h-14 mr-4 rounded-full border border-blue-500"
-                  src="trizzle-assets/images/avatar-men-2.png"
-                  alt=""
-                />
-                <div>
-                  <h4 className="text-lg leading-6 font-semibold text-white">
-                    John Doe
-                  </h4>
-                  <span className="text-xs font-semibold text-gray-100">
-                    Front-End Developer
-                  </span>
-                </div>
-              </div>
-              <div>
-                <a
-                  className="inline-block w-2 h-2 mr-2 rounded-full bg-blue-50"
-                  href="#"
-                ></a>
-                <a
-                  className="inline-block w-2 h-2 mr-2 rounded-full bg-blue-400"
-                  href="#"
-                ></a>
-                <a
-                  className="inline-block w-2 h-2 mr-2 rounded-full bg-blue-400"
-                  href="#"
-                ></a>
-                <a
-                  className="inline-block w-2 h-2 mr-2 rounded-full bg-blue-400"
-                  href="#"
-                ></a>
-                <a
-                  className="inline-block w-2 h-2 rounded-full bg-blue-400"
-                  href="#"
-                ></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
   );
 }

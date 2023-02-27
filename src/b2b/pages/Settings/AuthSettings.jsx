@@ -54,29 +54,13 @@ function AuthSettings() {
   };
   console.log(newPassword, oldPassword, confirmPassword);
 
-  // useEffect(() => {
-  //   if (newPassword !== confirmPassword) {
-  //     setError("password you have entered is not similiar");
-  //   }else{
-  //     setError('')
-  //   }
-  // }, [newPassword, confirmPassword]);
+
 
   return (
     <div className="">
       <form onSubmit={submitHandler}>
-        <div className="space-y-2 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px]">
-          {/* <div className=''>
-            <label className='label'>Old Password</label>
-            <input className='input'
-              type='password'
-              placeholder='*******'
-              value={oldPassword}
-              onChange={(e) => setOldPassword(e.target.value)}
-              required
-            />
-          </div> */}
-          <div className= "relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+        <div className="space-y-5 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px]">
+          <div className= "relative w-full h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               Old Password
             </span>
@@ -99,7 +83,7 @@ function AuthSettings() {
               required
             />
           </div> */}
-          <div className= "relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+          <div className= "relative w-full h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               New Password
             </span>
@@ -123,7 +107,7 @@ function AuthSettings() {
               required
             />
           </div> */}
-          <div className= "relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+          <div className= "relative w-full h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               Confirm Password
             </span>
