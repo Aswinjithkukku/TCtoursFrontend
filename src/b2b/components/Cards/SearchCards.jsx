@@ -88,7 +88,7 @@ function SearchCards() {
                         });
                       }}
                     >
-                      <Link to="/b2b/dashboard/visa">Attractions</Link>
+                      <Link to="/b2b/portal/attractions">Attractions</Link>
                     </span>
                   </li>
                   <li className="mb-4 mr-8">
@@ -112,7 +112,7 @@ function SearchCards() {
                         });
                       }}
                     >
-                      <Link to="/b2b/dashboard/visa">Visa</Link>
+                      <Link to="/b2b/portal/visa">Visa</Link>
                     </span>
                   </li>
                   <li className="mb-4 mr-8">
@@ -136,7 +136,7 @@ function SearchCards() {
                         });
                       }}
                     >
-                      <Link to="/b2b/dashboard/flight">Flight</Link>
+                      <Link to="/b2b/portal/flight">Flight</Link>
                     </span>
                   </li>
                 </ul>

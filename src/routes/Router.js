@@ -107,9 +107,9 @@ const ThemeRoutes = [
         path: "/b2b",
         element: <Dashboard />,
         children: [
-          { path: "/b2b/dashboard/attractions", element: <AttractionCard /> },
-          { path: "/b2b/dashboard/visa", element: <VisaCard /> },
-          { path: "/b2b/dashboard/flight", element: <FlightCard /> },
+          { path: "/b2b/portal/attractions", element: <AttractionCard /> },
+          { path: "/b2b/portal/visa", element: <VisaCard /> },
+          { path: "/b2b/portal/flight", element: <FlightCard /> },
         ],
       },
       { path: "/b2b/reseller/add", element: <NewRegisters /> },
