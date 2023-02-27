@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import axios from "../../../axios";
 import { PageLoader } from "../../components";
 import MarkupsNavigation from "../MarkupsNavigation";
-import MarkupChipList from "./MarkupChipList";
 import MarkupListSingleRow from "./MarkupListSingleRow";
 
 function MarkUpList() {
@@ -59,44 +58,37 @@ function MarkUpList() {
             {isLoading ? (
               <PageLoader />
             ) : (
-              <>
-                <div className="overflow-x-auto hidden lg:block">
-                  <table className="w-full">
-                    <thead className="bg-gray-100 text-grayColor text-[14px] text-left">
-                      <tr>
-                        <th className="font-[500] p-3 whitespace-nowrap">
-                          Attraction
-                        </th>
-                        <th className="font-[500] p-3 whitespace-nowrap">
-                          Booking Type
-                        </th>
-                        <th className="font-[500] p-3 whitespace-nowrap">
-                          Destination
-                        </th>
-                        <th className="font-[500] p-3 whitespace-nowrap">
-                          Default price
-                        </th>
-                        <th className="font-[500] p-3 whitespace-nowrap">
-                          Agent MarkUp
-                        </th>
-                        <th className="font-[500] p-3 whitespace-nowrap">
-                          Client MarkUp
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="text-sm text-textColor">
-                      {markups?.attractions?.data?.map((item) => (
-                        <MarkupListSingleRow item={item} key={item?._id} />
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <div className="lg:hidden">
-                  {markups?.attractions?.data?.map((item) => (
-                    <MarkupChipList item={item} key={item?._id} />
-                  ))}
-                </div>
-              </>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-100 text-grayColor text-[14px] text-left">
+                    <tr>
+                      <th className="font-[500] p-3 whitespace-nowrap">
+                        Attraction
+                      </th>
+                      <th className="font-[500] p-3 whitespace-nowrap">
+                        Booking Type
+                      </th>
+                      <th className="font-[500] p-3 whitespace-nowrap">
+                        Destination
+                      </th>
+                      <th className="font-[500] p-3 whitespace-nowrap">
+                        Default price
+                      </th>
+                      <th className="font-[500] p-3 whitespace-nowrap">
+                        Agent MarkUp
+                      </th>
+                      <th className="font-[500] p-3 whitespace-nowrap">
+                        Client MarkUp
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-sm text-textColor">
+                    {markups?.attractions?.data?.map((item) => (
+                      <MarkupListSingleRow item={item} key={item?._id} />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
         </div>

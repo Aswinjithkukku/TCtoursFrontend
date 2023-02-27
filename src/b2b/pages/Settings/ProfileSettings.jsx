@@ -65,8 +65,8 @@ function ProfileSettings() {
   return (
     <div className="">
       <form onSubmit={submitHandler}>
-        <div className="space-y-6 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px]">
-          <div className="relative w-full h-14 py-4 px-3  border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+        <div className="space-y-2 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-[20px]">
+          <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               Agent Name
             </span>
@@ -78,7 +78,7 @@ function ProfileSettings() {
               onChange={onChangeHandler}
             />
           </div>
-          <div className="relative w-full h-14 py-4 px-3 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+          <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               Nationality
             </span>
@@ -97,7 +97,7 @@ function ProfileSettings() {
             </select>
           </div>
           <div className="flex gap-2">
-            <div className="relative w-2/12 h-14 py-4 px-3 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <div className="relative w-2/12 h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
               <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
                 code
               </span>
@@ -108,7 +108,7 @@ function ProfileSettings() {
                 readOnly
               />
             </div>
-            <div className="relative w-10/12 h-14 py-4 px-3 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <div className="relative w-10/12 h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
               <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
                 Number
               </span>
@@ -122,7 +122,7 @@ function ProfileSettings() {
             </div>
           </div>
           <div className="flex gap-2">
-            <div className="relative w-2/12 h-14 py-4 px-3 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <div className="relative w-2/12 h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
               <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
                 code
               </span>
@@ -133,7 +133,7 @@ function ProfileSettings() {
                 value={countryArray?.map((item) => item?.phonecode) || ""}
               />
             </div>
-            <div className="relative w-10/12 h-14 py-4 px-3 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+            <div className="relative w-10/12 h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
               <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
                 Telephone Number
               </span>
@@ -147,7 +147,7 @@ function ProfileSettings() {
             </div>
           </div>
 
-          <div className="relative w-full h-14 py-4 px-3 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+          <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               Email
             </span>
@@ -159,7 +159,7 @@ function ProfileSettings() {
               onChange={onChangeHandler}
             />
           </div>
-          <div className="relative w-full h-14 py-4 px-3 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+          <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               Preffered Currency
             </span>
@@ -175,7 +175,7 @@ function ProfileSettings() {
             />
           </div>
 
-          <div className="relative w-full h-14 py-4 px-3 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+          <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               Designation
             </span>
@@ -187,7 +187,7 @@ function ProfileSettings() {
               onChange={onChangeHandler}
             />
           </div>
-          <div className="relative w-full h-14 py-4 px-3 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+          <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               Skype Id
             </span>
@@ -199,7 +199,7 @@ function ProfileSettings() {
               onChange={onChangeHandler}
             />
           </div>
-          <div className="relative w-full h-14 py-4 px-3 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
+          <div className="relative w-full h-14 py-4 px-3 mb-8 border border-gray-400 hover:border-blue-400 focus-within:border-green-500 rounded-lg">
             <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 rounded px-1 bg-blue-600">
               Whatsapp
             </span>

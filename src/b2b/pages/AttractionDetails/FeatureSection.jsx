@@ -19,7 +19,7 @@ function FeatureSection() {
   // console.log(avail);
 
   return (
-    <div className=" md:border border-lightblue bg-light py-4 lg:py-5 px-3 rounded-2xl md:my-4 lg:flex text-center justify-between w-full grid grid-cols-3 sm:grid-cols-4 gap-5">
+    <div className=" md:border border-lightblue bg-light py-4 lg:py-5 px-3 rounded-2xl md:my-4 lg:flex text-center justify-between w-full grid grid-cols-3 gap-5">
       {agentExcursion?.availability && (
         <div className="text-center bg-soft lg:bg-light py-5 lg:py-0 rounded-lg lg:rounded-none">
           <span className="text-2xl lg:text-3xl text-lightblue flex justify-center">

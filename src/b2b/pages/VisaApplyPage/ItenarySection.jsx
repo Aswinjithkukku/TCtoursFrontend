@@ -28,7 +28,7 @@ function ItenarySection({ navigation, setNavigation, setData, data }) {
   };
 
   return (
-    <div className="py-6 text-darktext">
+    <div className="p-6 text-darktext">
       <form onSubmit={submitHandler}>
         <div
           className={`my-2 border px-3 py-4 ${
@@ -48,7 +48,7 @@ function ItenarySection({ navigation, setNavigation, setData, data }) {
         </div>
         {navigation.itenary && (
           <div className="rounded-md shadow bg-white p-6">
-            <div className="md:grid grid-cols-12 gap-3 ">
+            <div className="lg:grid grid-cols-12 gap-3 ">
               <div className="col-span-4 flex flex-col">
                 <label htmlFor="" className="label">
                   Visa Type

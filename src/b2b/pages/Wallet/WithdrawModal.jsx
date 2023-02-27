@@ -248,8 +248,8 @@ function WithdrawModal({ setViewWithdrawModal }) {
               </div>
             </div>
             <form onSubmit={handleSubmit}>
-              <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full  px-3 ">
+              <div className="flex flex-wrap -mx-3 mb-10">
+                <div className="w-full  px-3 mb-10 sm:mb-0">
                   <div className="relative w-full h-14 py-2 px-3 border border-blue-400 focus-within:border-green-500 rounded-lg">
                     <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-gray-100 px-1 bg-blue-500">
                       Country

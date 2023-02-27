@@ -21,7 +21,7 @@ export default function B2BMainLayout() {
         </div>
         <SuccessAlert />
         <ErrorAlert />
-        <BottomNav setSidebarView={setSidebarView} />
+        <BottomNav />
       </main>
     </div>
   );

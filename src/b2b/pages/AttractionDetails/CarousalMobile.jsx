@@ -6,7 +6,7 @@ import { Carousel } from 'react-responsive-carousel';
 function CarousalMobile() {
   const { agentExcursion } = useSelector(state => state.agentExcursions)
   return (
-    <div className=' overflow-hidden h-[25vh] sm:[35vh] md:h-[40vh]  relative bg-cover lg:hidden bg-light rounded-2xl my-2'>
+    <div className=' overflow-hidden h-[25vh]  relative bg-cover lg:hidden bg-light rounded-2xl my-2'>
       <p className='absolute z-10 mt-5 ml-5 text-xl text-darktext font-bold tracking-wider'>
         Images
       </p>

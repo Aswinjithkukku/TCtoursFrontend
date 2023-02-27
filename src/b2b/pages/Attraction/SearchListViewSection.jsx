@@ -31,7 +31,7 @@ function SearchListViewSection() {
   return (
     <div>
       {agentExcursions?.attractions?.data?.length > 0 && (
-        <div className=" sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-2">
+        <div className="md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-2">
           {agentExcursions?.attractions?.data?.length > 0 &&
             agentExcursions?.attractions?.data?.map((item, index) => (
               <div
@@ -83,7 +83,7 @@ function SearchListViewSection() {
                   </div>
                   <div className="text-xs text-text px-3  flex space-x-1 items-center">
                     <div className="">
-                      <button className="bg-yellow-500  px-2 py-1 text-light rounded-md capitalize">
+                      <button className="bg-yellow-500 w-16 px-2 py-1 text-light rounded-md capitalize">
                         {item.bookingType}
                       </button>
                     </div>
@@ -100,12 +100,12 @@ function SearchListViewSection() {
                       )}
                     </div>
                     <div className="flex space-x-1 items-center">
-                      <span className="text-light bg-lightblue px-2 py-1 whitespace-nowrap text-center rounded-md capitalize ">
+                      <span className="text-light bg-lightblue px-4 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs">
                         {item?.category?.categoryName}{" "}
                       </span>
                       {item?.isOffer === true &&
                         item?.offerAmountType === "flat" && (
-                          <span className="text-light bg-green-600  py-1 whitespace-nowrap text-center rounded-md capitalize ">
+                          <span className="text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs">
                             {item?.offerAmountType === "flat"
                               ? `$ ${item?.offerAmount} OFF`
                               : ""}{" "}
@@ -113,7 +113,7 @@ function SearchListViewSection() {
                         )}
                       {item?.isOffer === true &&
                         item?.offerAmountType === "percentage" && (
-                          <span className="text-light bg-green-600  py-1 whitespace-nowrap text-center rounded-md capitalize text-xs">
+                          <span className="text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs">
                             {item?.offerAmountType === "percentage"
                               ? `${item?.offerAmount} % OFF`
                               : ""}{" "}

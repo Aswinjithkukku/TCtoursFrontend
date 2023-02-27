@@ -106,7 +106,7 @@ function UploadDetailSection({ navigation }) {
   };
 
   return (
-    <div className="py-6 text-darktext">
+    <div className="p-6 text-darktext">
       <div
         className={`my-2 border px-3 py-4 ${
           navigation.upload ? "bg-lightblue " : "bg-slate-400"
@@ -132,7 +132,7 @@ function UploadDetailSection({ navigation }) {
                   <p className="">
                     {index === 0 ? "Lead passenger" : `${index + 1} passenger`}{" "}
                   </p>
-                  <div className="flex flex-wrap gap-4 my-2">
+                  <div className="flex gap-4 my-2">
                     <span className="flex gap-2 font-[400] text-sm">
                       <p className="">Title: </p>
                       <p className="text-[#12acfd] capitalize">
@@ -162,7 +162,7 @@ function UploadDetailSection({ navigation }) {
                       </p>
                     </span>
                   </div>
-                  <div className="flex flex-wrap gap-4 my-2">
+                  <div className="flex gap-4 my-2">
                     <span className="flex gap-2 font-[400] text-sm">
                       <p className="">Visit Date: </p>
                       <p className="text-[#12acfd] capitalize">
@@ -185,7 +185,7 @@ function UploadDetailSection({ navigation }) {
                     </span>
                   </div>
                 </div>
-                <div className="sm:grid sm:grid-cols-2 md:grid-cols-3  lg:grid-cols-5 gap-3 mt-4" key={index}>
+                <div className="lg:grid grid-cols-5 gap-3 mt-4" key={index}>
                   <div className=" flex flex-col">
                     <label htmlFor="" className="label">
                       Passport First Page

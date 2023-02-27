@@ -12,20 +12,20 @@ function VisaComponentPage() {
   return (
     <>
       <div className="mb-10 ">
-        <div className="py-7 ">
+        <div className="py-7 mx-4 lg:mx-0">
           <div className="text-2xl font-medium text-darktext">
             Types of Dubai Visa
           </div>
         </div>
         {visa?.visaType?.length > 0 ? (
-          <div className="sm:grid grid-cols-2 sm:gap-2 lg:gap-5  space-y-3 sm:space-y-0">
+          <div className="lg:grid grid-cols-2 gap-5 mx-4 lg:mx-0 space-y-3 lg:space-y-0">
             {visa?.visaType?.map((item, index) => (
               <div
                 className=" rounded-2xl bg-[#f4f7ff]  shadow text-darktext cursor-pointer"
                 key={index}
               >
                 <div className="m-2  bg-gray-200 rounded-md">
-                  <div className="text-lg font-[500] p-5 text-gray-400">
+                  <div className="text-lg font-[500] p-5 text-gray-600">
                     {item?.visaName}
                   </div>
                 </div>

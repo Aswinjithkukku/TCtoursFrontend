@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "../../../axios";
-import { reduceWalletManipulation } from "../../../redux/slices/walletSlice";
+import Swal from "sweetalert2";
 import { useEffect } from "react";
 import { useRef } from "react";
-import { BtnLoader } from "../../components";
 import {
   setAlertError,
   setAlertSuccess,
@@ -12,8 +13,9 @@ import {
 import { MdPassword } from "react-icons/md";
 // import { reduceWalletManipulation } from '../../../redux/slices/walletSlice'
 
-function VisaOtpModal({ setOtpModal, order, setNavigation, grandTotal }) {
+function VisaOtpModal({ setOtpModal, order, setNavigation }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -53,7 +55,7 @@ function VisaOtpModal({ setOtpModal, order, setNavigation, grandTotal }) {
       setIsLoading(false);
       setOtpModal(false);
       localStorage.setItem("visaOrder", JSON.stringify(response.data));
-      dispatch(reduceWalletManipulation(grandTotal));
+      // dispatch(reduceWalletManipulation(activity))
       dispatch(
         setAlertSuccess({
           status: true,
@@ -110,7 +112,7 @@ function VisaOtpModal({ setOtpModal, order, setNavigation, grandTotal }) {
             <div className="mt-2">
               <div className="flex justify-center w-full">
                 <div class="flex items-center justify-center w-12 h-12 mb-5 bg-gray-200 text-blue-400 rounded-full text-2xl">
-                  <MdPassword />
+                  <MdPassword/>
                 </div>
               </div>
               <h1 className="text-2xl text-center font-bold">
@@ -184,11 +186,8 @@ function VisaOtpModal({ setOtpModal, order, setNavigation, grandTotal }) {
             {/* <div className="inline-block w-full sm:w-auto py-3 px-5 mb-2 mr-4 text-center font-semibold leading-6 text-gray-200 bg-gray-500 hover:bg-gray-400 rounded-lg transition duration-200">
             Resend OTP
           </div> */}
-            <button
-              type="submit"
-              className="inline-block w-full sm:w-auto py-3 px-5 mb-2 text-center font-semibold leading-6 text-blue-50 bg-blue-500 hover:bg-blue-600 rounded-lg transition duration-200"
-            >
-              {isLoading ? <BtnLoader /> : "Submit"}
+            <button type='submit' className="inline-block w-full sm:w-auto py-3 px-5 mb-2 text-center font-semibold leading-6 text-blue-50 bg-blue-500 hover:bg-blue-600 rounded-lg transition duration-200">
+              Submit
             </button>
           </div>
         </form>

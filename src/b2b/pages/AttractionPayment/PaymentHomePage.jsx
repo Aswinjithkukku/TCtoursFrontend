@@ -13,12 +13,12 @@ function PaymentHomePage() {
         <>
            
 
-            <div className="">
-                <div className="">
+            <div className="p-6">
+                <div className="bg-white rounded-2xl shadow-sm">
 
                     <div className=''>
-                        <div className='p-2 lg:p-6'>
-                            <div className='lg:flex lg:justify-between text-darktext p-5 bg-white rounded-md cursor-default space-y-3'>
+                        <div className='p-6'>
+                            <div className='lg:flex lg:justify-between text-darktext p-5 bg-soft rounded-md cursor-default space-y-3'>
                                 <div className='lg:space-y-5 font-light lg:text-xl'>
                                     <div className=''>You've got the best price</div>
                                     <div className=''>Best Price Guarantee</div>
@@ -42,7 +42,7 @@ function PaymentHomePage() {
                                 <div className='1 col-span-8'>
                                     <PaymentDetailsSection />
                                 </div>
-                                <div className='2 col-span-4 lg:border-l'>
+                                <div className='2 col-span-4 border-l'>
                                     <PaymentCardSection />
                                 </div>
                             </div>

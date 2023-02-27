@@ -33,7 +33,7 @@ function ShareModal({ setShareModal, shareModal }) {
             <h2 className=''>{agentExcursion?.title} </h2>
           </div>
           <div className='flex px-5 items-center space-x-2'>
-            <div className='lg:w-[20em] w-full py-2 rounded-lg bg-semisoft px-2 overflow-hidden'>{process.env.REACT_APP_URL + location.pathname} </div>
+            <div className='w-[20em]  py-2 rounded-lg bg-semisoft px-2 overflow-hidden'>{process.env.REACT_APP_URL + location.pathname} </div>
             <div className='text-2xl' onClick={() => {
               navigator.clipboard.writeText(process.env.REACT_APP_URL + location.pathname)
               setIsCopied(true)
