@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 import priceConversion from "../../../utils/PriceConversion";
 import AttractionTicketTemplate from "../Ticket/AttractionTicketTemplate";
 import { useMemo } from "react";
-import domToPdf from "dom-to-pdf";
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
 import { AiFillPrinter } from "react-icons/ai";
@@ -39,21 +38,11 @@ function AttractionOrderTable({ item }) {
     };
   }, [item]);
 
-  const handleSingleTicketDownload = (ticketNo) => {
-    var node = document.getElementById(ticketNo);
-
-    var options = {
-      filename: `${ticketNo}.pdf`,
-    };
-    domToPdf(node, options, function (pdf) {});
-  };
-
   const list = tickets();
   const listRef = useRef();
   return (
     <>
-      <div className="h-fit " id="all_tickets">
-        {/* <div className="h-fit absolute left-[20000px]" id="all_tickets"> */}
+      <div className="h-fit absolute left-[20000px]" id="all_tickets">
         <div ref={listRef}>
           {list?.map((ele) => (
             <>
@@ -86,6 +75,8 @@ function AttractionOrderTable({ item }) {
             </span>
           </div>
         </td>
+        {/* <td className="p-3">{item?.reseller?.agentCode} </td>
+        <td className="p-3">{item?.reseller?.agentCode}</td> */}
         <td className="p-3 min-w-[200px]">
           <div className="">
             <p className="">{item?.activities?.activity?.name}</p>
@@ -99,14 +90,20 @@ function AttractionOrderTable({ item }) {
               <p className="bg-gray-300 text-gray-100 px-2 py-1 rounded">
                 Infant : {item?.activities?.infantCount}
               </p>
+              {/* <p className={`${item?.activities?.bookingType === "ticket" ? " bg-main " :  " bg-blue-500 "} text-gray-100 px-2 py-1 rounded capitalize`}>{item?.activities?.bookingType}</p> */}
             </span>
           </div>
         </td>
+        {/* <td className="p-3 capitalize">{item?.activities?.bookingType}</td> */}
         <td className="p-3 ">{item?.activities?.date?.slice(0, 10)}</td>
         <td className="p-3 ">{item?.createdAt?.slice(0, 10)} </td>
+        {/* <td className="p-3">{item?.activities?.adultsCount} </td>
+        <td className="p-3">{item?.activities?.childrenCount} </td>
+        <td className="p-3">{item?.activities?.infantCount} </td> */}
         <td className="p-3 whitespace-nowrap">
           {priceConversion(item?.totalAmount, selectedCurrency, true)}{" "}
         </td>
+        {/* <td className="p-3">5 AED</td> */}
         <td className="">
           {item?.activities?.status === "confirmed" ? (
             <span className="bg-green-400 text-sm text-light px-4 rounded capitalize">

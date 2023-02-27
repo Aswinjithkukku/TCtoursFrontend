@@ -5,7 +5,6 @@ import priceConversion from "../../../utils/PriceConversion";
 
 const B2bAttractionInvoiceTemplate = ({ data }) => {
   const { selectedCurrency } = useSelector((state) => state.home);
-  console.log(88888888, data);
   return (
     <div className="p-[30px] pt-[40px] w-[21cm] bg-transparent  h-[29cm] relative mt-4">
       <div className="absolute top-0 left-0 w-[21cm] h-[29cm] bg-[whitesmoke] z-[-1] overflow-hidden">
