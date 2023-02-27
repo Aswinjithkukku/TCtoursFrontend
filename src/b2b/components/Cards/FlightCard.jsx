@@ -57,9 +57,9 @@ function FlightCard() {
                 type="radio"
                 name="choose"
                 className="cursor-pointer"
-                value="oneWay"
+                value="oneway"
                 onChange={handleTripTypeChange}
-                checked={tripType === "oneWay"}
+                checked={tripType === "oneway"}
               />
             </div>
             <div className="text-sm">One-way</div>

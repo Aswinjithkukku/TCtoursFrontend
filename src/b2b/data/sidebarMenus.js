@@ -9,7 +9,7 @@ import { RiUserFill } from "react-icons/ri";
 const sidebarMenus = [
   {
     name: "Portal",
-    link: "/b2b",
+    link: "/b2b/dashboard/attractions",
     icon: <GiPortal />,
   },
   // {
@@ -32,7 +32,7 @@ const sidebarMenus = [
       },
     ],
   },
-  
+
   // {
   //   name: "Visa Orders",
   //   icon: <BsNewspaper />,

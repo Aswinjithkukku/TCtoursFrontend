@@ -50,7 +50,7 @@ export default function Header({ setSidebarView, sidebarView }) {
               className="text-2xl font-bold text-white leading-5 capitalize "
               contenteditable="false"
             >
-              {location.pathname === "/b2b" ? (
+              {location.pathname.startsWith("/b2b") ? (
                 <>Hi, {agent?.name}</>
               ) : location?.pathname === "/b2b/order/attraction" ||
                 location.pathname === "/b2b/visa/order" ? (

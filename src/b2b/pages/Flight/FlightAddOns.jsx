@@ -35,7 +35,7 @@ const FlightAddOns = ({ navigation, setNavigation }) => {
         </div>
         {navigation.addOns && (
           <div className="rounded-md shadow bg-white p-6">
-            <div className="h-[200px] w-[100%] flex flex-col gap-y-2">
+            <div className="w-[100%] flex flex-col gap-y-2">
               <div className="py-2 text-gray-500 font-[550]  bg-gray-100 border-dashed px-1">
                 <h2 className="flex gap-2 text-[18px] font-medium">
                   <span className="text-[25px]">
@@ -69,7 +69,9 @@ const FlightAddOns = ({ navigation, setNavigation }) => {
                   Add Extra Luggage
                 </h2>
               </div>
-              <div></div>
+              <div className="flex shadow-md h-[100px]">
+                <div className=""></div>
+              </div>
             </div>
             <div className="mt-2 flex justify-end">
               <button

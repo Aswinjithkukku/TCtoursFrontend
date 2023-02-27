@@ -55,6 +55,9 @@ import {
 } from "../b2b/pages";
 import B2BPrivateRoute from "./B2BPrivateRoute";
 import LoadingWrapper from "./LoadingWrapper";
+import FlightCard from "../b2b/components/Cards/FlightCard";
+import AttractionCard from "../b2b/components/Cards/AttractionCard";
+import VisaCard from "../b2b/components/Cards/VisaCard";
 
 const ThemeRoutes = [
   {
@@ -100,7 +103,15 @@ const ThemeRoutes = [
       </B2BPrivateRoute>
     ),
     children: [
-      { path: "/b2b", element: <Dashboard /> },
+      {
+        path: "/b2b",
+        element: <Dashboard />,
+        children: [
+          { path: "/b2b/dashboard/attractions", element: <AttractionCard /> },
+          { path: "/b2b/dashboard/visa", element: <VisaCard /> },
+          { path: "/b2b/dashboard/flight", element: <FlightCard /> },
+        ],
+      },
       { path: "/b2b/reseller/add", element: <NewRegisters /> },
       { path: "/b2b/resellers", element: <Resellers /> },
       { path: "/b2b/reseller/edit", element: <EditResellers /> },

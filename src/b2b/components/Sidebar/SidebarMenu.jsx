@@ -19,13 +19,16 @@ export default function SidebarMenu({
       <div
         className={
           `relative p-4 flex items-center text-[14.8px] justify-between  transition-all cursor-default rounded-xl  ` +
-          (location.pathname === link  ? "  text-white bg-blue-500 " : "text-gray-300  hover:bg-gray-800  ")
+          (location.pathname === link ||
+          (name === "Portal" && location.pathname.startsWith("/b2b/dashboard/"))
+            ? "  text-white bg-blue-500 "
+            : "text-gray-300  hover:bg-gray-800  ")
         }
         onClick={() => {
-          if(link !== "#") {
-            navigate(link)
-            setSidebarView(false)
-          }  
+          if (link !== "#") {
+            navigate(link);
+            setSidebarView(false);
+          }
           setIsDropDownOpen(!isDropDownOpen);
         }}
       >

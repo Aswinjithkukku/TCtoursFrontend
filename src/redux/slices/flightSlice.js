@@ -1,8 +1,28 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../axios";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  tripType: "oneWay",
+  tripType: "oneway",
+  travellerDetails: [
+    {
+      title: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      country: "",
+      contactNo: "",
+      passportNo: "",
+      expiryDate: {
+        day: "",
+        month: "",
+        year: "",
+      },
+      dateOfBirth: {
+        day: "",
+        month: "",
+        year: "",
+      },
+    },
+  ],
   travellers: { adult: 1, children: 0, infant: 0 },
   flightsData: [
     {
@@ -47,6 +67,18 @@ const flightSlice = createSlice({
     },
     handleTravellersChange: (state, { payload }) => {
       state.travellers = payload.data;
+    },
+    handleAddDetailsRows: (state, { payload }) => {
+      const totalTravellers =
+        state.travellers.adult + state.travellers.children;
+      const row = state.travellerDetails[0];
+      const detailsRows = [row];
+      if (totalTravellers > 1) {
+        for (let i = 1; i < totalTravellers; i++) {
+          detailsRows.push(row);
+        }
+      }
+      state.travellerDetails = detailsRows;
     },
 
     handleFlightDeatilsChange: (state, { payload }) => {

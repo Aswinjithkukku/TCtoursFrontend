@@ -8,8 +8,10 @@ import { IoIosCar } from "react-icons/io";
 import { MdAttractions } from "react-icons/md";
 import { GiCommercialAirplane } from "react-icons/gi";
 import { FaHotel, FaWpforms } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
 
 function SearchCards() {
+  const location = useLocation();
   const [view, setView] = useState({
     attraction: true,
     flight: false,
@@ -86,7 +88,7 @@ function SearchCards() {
                         });
                       }}
                     >
-                      Attractions
+                      <Link to="/b2b/dashboard/visa">Attractions</Link>
                     </span>
                   </li>
                   <li className="mb-4 mr-8">
@@ -110,7 +112,7 @@ function SearchCards() {
                         });
                       }}
                     >
-                      Visa
+                      <Link to="/b2b/dashboard/visa">Visa</Link>
                     </span>
                   </li>
                   <li className="mb-4 mr-8">
@@ -134,7 +136,7 @@ function SearchCards() {
                         });
                       }}
                     >
-                      Flight
+                      <Link to="/b2b/dashboard/flight">Flight</Link>
                     </span>
                   </li>
                 </ul>
@@ -145,12 +147,14 @@ function SearchCards() {
           <div className="flex items-center justify-center shadow-b-sm shadow-x-sm">
             <div className=" w-full mt-7 md:rounded-md relative ">
               <>
-                {view.attraction && <AttractionCard />}
-
+                {location.pathname === "/b2b" && view.attraction && (
+                  <AttractionCard />
+                )}
+                {/* 
                 {view.flight && <FlightCard />}
                 {view.hotel && <HotelCard />}
                 {view.visa && <VisaCard />}
-                {view.transfer && <CarCard />}
+                {view.transfer && <CarCard />} */}
               </>
             </div>
           </div>
