@@ -59,10 +59,11 @@ const FlightHomePage = () => {
     from: flightsData[0]?.cityFrom.iata,
     to: flightsData[0].cityTo.iata,
     departureDate: new Date(flightsData[0].departureDate),
+    returnDate: new Date(flightsData[0].returnDate),
     noOfAdults: travellers.adult,
     noOfChildren: travellers.children,
     noOfInfants: travellers.infant,
-    type: "oneway",
+    type: tripType,
   };
 
   const fetchFlightsData = async () => {

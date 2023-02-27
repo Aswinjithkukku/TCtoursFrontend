@@ -70,7 +70,7 @@ function FlightCard() {
                 type="radio"
                 name="choose"
                 className="cursor-pointer"
-                value="roundTrip"
+                value="return"
                 onChange={handleTripTypeChange}
               />
             </div>
