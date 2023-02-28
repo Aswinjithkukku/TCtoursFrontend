@@ -20,6 +20,7 @@ function VisaCard({ setView }) {
   };
 
   const { visaCountries } = useSelector((state) => state.home);
+  const { countries } = useSelector((state) => state.home);
 
   useEffect(() => {
     const list = visaCountries?.filter((data) => {
@@ -29,14 +30,16 @@ function VisaCard({ setView }) {
     setFilteredData(list);
   }, [value, visaCountries]);
 
+  console.log(countries);
+
   return (
     <>
       <form>
         <div className="md:flex gap-2 py-5 space-y-4 md:space-y-0 ">
           <div className="w-full flex justify-center items-center ">
             <div className="space-y-2 w-full ">
-              <div className= "relative w-full h-14 py-4 px-3  border border-blue-400 hover:border-blue-500 focus-within:border-green-500 rounded-lg">
-                <span className= "absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-white rounded px-1 bg-blue-600">
+              <div className="relative w-full h-14 py-4 px-3  border border-blue-400 hover:border-blue-500 focus-within:border-green-500 rounded-lg">
+                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-white rounded px-1 bg-blue-600">
                   Where do you want to go?
                 </span>
                 <input
@@ -46,7 +49,7 @@ function VisaCard({ setView }) {
                   onChange={(e) => setValue(e.target.value)}
                   onFocus={handleFocus}
                   required
-                  className= "block w-full capitalize outline-none bg-transparent text-sm text-gray-300 font-medium"
+                  className="block w-full capitalize outline-none bg-transparent text-sm text-gray-300 font-medium"
                 />
                 {datalist && (
                   <div className="absolute max-h-[17em] w-[21em] mt-1  bg-light rounded-lg overflow-y-auto z-20">
@@ -58,7 +61,7 @@ function VisaCard({ setView }) {
                           onClick={() => {
                             setValue(item?.country?.countryName);
                             setDatalist(!datalist);
-                            navigate(`/b2b/visa/${item?._id}`)
+                            navigate(`/b2b/visa/${item?._id}`);
                           }}
                         >
                           {item?.country?.countryName}
@@ -72,6 +75,37 @@ function VisaCard({ setView }) {
           </div>
         </div>
       </form>
+      <div>
+        <div className="text-xl md:text-2xl font-semibold text-darktext mb-4">
+          Top Visited Countries
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+          {countries?.map((item, index) => (
+            <div
+              className="mt-2 relative cursor-pointer shadow-md rounded-2xl"
+              key={index}
+              // onClick={() => navigate(`/b2b/attractions/${item?.name}`)}
+            >
+              <div className="overflow-hidden rounded-2xl">
+                <img
+                  className="hover:scale-110 object-cover rounded-2xl h-[7em] md:h-[13em] w-full  transition-all duration-500 cursor-pointer"
+                  src={item?.flag}
+                  alt={item?.countryName}
+                />
+              </div>
+              <div
+                className={`absolute bottom-2 left-4  ${
+                  item?.isocode === "US" ? "text-darktext" : "text-light"
+                }`}
+              >
+                <div className="font-semibold capitalize ">
+                  {item?.countryName}{" "}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 }

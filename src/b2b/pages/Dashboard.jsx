@@ -58,9 +58,9 @@ export default function Dashboard() {
         </div>
         <Outlet />
 
-        <div className="my-2">
+        {/* <div className="my-2">
           <TopDestination />
-        </div>
+        </div> */}
 
         {/* <div className="md:grid md:grid-cols-2 space-y-2 md:space-y-0 lg:grid-cols-4 gap-6">
                     <WalletCard

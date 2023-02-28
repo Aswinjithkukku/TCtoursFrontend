@@ -168,7 +168,7 @@ const FlightHomePage = () => {
           </div>
         </div>
         <div className="px-10 flex justify-center mt-4 ">
-          <div className="w-[100%] bg-white flex rounded-md px-10 relative">
+          <div className="w-[100%] bg-white flex rounded-md px-10 relative shadow-md">
             <div className="text-[30px] cursor-pointer text-blue-500 absolute top-0 left-0 h-[100%] w-[40px] grid place-items-center border-r-2">
               <AiFillCaretLeft />
             </div>
@@ -192,7 +192,7 @@ const FlightHomePage = () => {
           </div>
         </div>
         <div className=" w-[100%] grid grid-cols-8 p-10 gap-5">
-          <div className="col-span-2">
+          <div className="col-span-2 shadow-lg">
             <FlightFilter />
             <div className="w-[100%]">
               <VisaApplyCard />
@@ -230,7 +230,7 @@ const FlightHomePage = () => {
             {!loading &&
               flights?.map((ele, i) => (
                 <>
-                  <div className=" w-[90%] flex flex-col gap-4 ">
+                  <div className=" w-[90%] flex flex-col gap-4 relative">
                     <FlightCard index={i} data={ele} />
                   </div>
                 </>
