@@ -11,7 +11,7 @@ function PaymentDecline() {
   const navigate = useNavigate()
   return (
     <div className='h-screen w-full flex justify-center items-center'>
-      <div className=' bg-white shadow-sm p-4 w-7/12 rounded-[0.40rem]'>
+      <div className=' bg-white shadow-sm p-4 w-full lg:w-9/12 rounded-[0.40rem]'>
         <div className='border-b flex justify-center pb-3'>
           <img src={logoPng} alt='hero' className='h-16' />
         </div>
@@ -26,7 +26,7 @@ function PaymentDecline() {
             </div>
           </div>
 
-          <div className='grid grid-cols-3 gap-1 mt-2 text-textColor'>
+          <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-1 mt-2 text-textColor'>
             <div className='flex justify-between border h-7 text-sm p-2'>
               <span className='font-medium'>Customer Id</span>
               <span className=''>10111</span>
@@ -54,8 +54,8 @@ function PaymentDecline() {
           </div>
           
           <div className=''>
-            <div className=' flex justify-between items-center'>
-              <div className='w-9/12 grid grid-cols-2 gap-2 p-6'>
+            <div className=' sm:flex justify-between items-center'>
+              <div className='sm:w-9/12 grid md:grid-cols-2 gap-2 p-6'>
                 <div className='border rounded-[.25rem] pl-2 py-1 border-[#A0C3D2]'>
                   <span className=''>1. Unauthorized Card Country</span>
                   <span className=''></span>
@@ -77,18 +77,18 @@ function PaymentDecline() {
                   <span className=''></span>
                 </div>
               </div>
-              <div className='w-3/12'>
+              <div className='w-3/12 mx-auto'>
               <Lottie animationData={CardPaymentError} />
               </div>
             </div>
               <div className='flex justify-center'>
                 <button className='text-sm bg-blueColor text-light w-[100px] py-1 rounded-[0.25rem]'
-                onClick={() => navigate(-1)}
+                onClick={() => navigate("/b2b/wallet")}
                 >Try Again</button>
               </div>
           </div>
 
-          <div className='grid grid-cols-3 mt-4'>
+          <div className='grid sm:grid-cols-3 mt-4'>
             <div className='flex space-x-2 bg-soft shadow-sm p-2'>
               <div className=' h-10 w-10 text-2xl rounded-full bg-[#A0C3D2] flex justify-center items-center'>
                 <FcAssistant />
