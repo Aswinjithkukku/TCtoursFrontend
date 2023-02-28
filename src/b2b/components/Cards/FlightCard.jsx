@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { json, useNavigate } from "react-router-dom";
 import {
   addFlightRow,
+  handleRescentSearchCardClick,
   removeFlightRow,
   setTripType,
 } from "../../../redux/slices/flightSlice";
@@ -64,7 +65,7 @@ function FlightCard() {
       data = [info];
     }
     localStorage.setItem("flightSearches", JSON.stringify(data));
-    // navigate("/b2b/flight/order");
+    navigate("/b2b/flight/order");
   };
 
   let rescentSearches = localStorage.getItem("flightSearches");
@@ -74,6 +75,11 @@ function FlightCard() {
   }
 
   console.log(rescentSearches);
+
+  const handlerescentCardClick = (data) => {
+    dispatch(handleRescentSearchCardClick(data));
+    navigate("/b2b/flight/order");
+  };
 
   return (
     <>
@@ -135,7 +141,12 @@ function FlightCard() {
             console.log(ele);
             return (
               <>
-                <div className=" h-[80px] rounded-xl flex p-4 cursor-pointer bg-white shadow-lg">
+                <div
+                  className=" h-[80px] rounded-xl flex p-4 cursor-pointer bg-white shadow-lg "
+                  onClick={() => {
+                    handlerescentCardClick(ele);
+                  }}
+                >
                   {ele?.flightsData?.map((data) => (
                     <>
                       <div className="flex justify-between items-center w-[100%] ">

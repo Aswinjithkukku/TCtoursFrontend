@@ -19,6 +19,7 @@ function SearchCards() {
     visa: false,
     transfer: false,
   });
+
   return (
     <>
       <div className=" w-full  ">
@@ -70,23 +71,23 @@ function SearchCards() {
                   <li className="mb-4 mr-8">
                     <span
                       className={`inline-block pb-4 ${
-                        view.attraction
+                        location.pathname.includes("attractions")
                           ? " text-blue-500 border-blue-500  "
                           : " text-gray-400 border-transparent "
                       } font-semibold border-b  hover:border-gray-400 transition duration-200 cursor-pointer`}
                       href="#"
-                      onClick={() => {
-                        setView((prev) => {
-                          return {
-                            ...prev,
-                            attraction: true,
-                            hotel: false,
-                            visa: false,
-                            transfer: false,
-                            flight: false,
-                          };
-                        });
-                      }}
+                      // onClick={() => {
+                      //   setView((prev) => {
+                      //     return {
+                      //       ...prev,
+                      //       attraction: true,
+                      //       hotel: false,
+                      //       visa: false,
+                      //       transfer: false,
+                      //       flight: false,
+                      //     };
+                      //   });
+                      // }}
                     >
                       <Link to="/b2b/portal/attractions">Attractions</Link>
                     </span>
@@ -94,23 +95,23 @@ function SearchCards() {
                   <li className="mb-4 mr-8">
                     <span
                       className={`inline-block pb-4 ${
-                        view.visa
+                        location.pathname.includes("visa")
                           ? " text-blue-500 border-blue-500  "
                           : " text-gray-400 border-transparent "
                       } font-semibold border-b  hover:border-gray-400 transition duration-200 cursor-pointer`}
                       href="#"
-                      onClick={() => {
-                        setView((prev) => {
-                          return {
-                            ...prev,
-                            attraction: false,
-                            hotel: false,
-                            visa: true,
-                            transfer: false,
-                            flight: false,
-                          };
-                        });
-                      }}
+                      // onClick={() => {
+                      //   setView((prev) => {
+                      //     return {
+                      //       ...prev,
+                      //       attraction: false,
+                      //       hotel: false,
+                      //       visa: true,
+                      //       transfer: false,
+                      //       flight: false,
+                      //     };
+                      //   });
+                      // }}
                     >
                       <Link to="/b2b/portal/visa">Visa</Link>
                     </span>
@@ -118,23 +119,23 @@ function SearchCards() {
                   <li className="mb-4 mr-8">
                     <span
                       className={`inline-block pb-4 ${
-                        view.flight
+                        location.pathname.includes("flight")
                           ? " text-blue-500 border-blue-500  "
                           : " text-gray-400 border-transparent "
                       } font-semibold border-b  hover:border-gray-400 transition duration-200 cursor-pointer`}
                       href="#"
-                      onClick={() => {
-                        setView((prev) => {
-                          return {
-                            ...prev,
-                            attraction: false,
-                            hotel: false,
-                            visa: false,
-                            transfer: false,
-                            flight: true,
-                          };
-                        });
-                      }}
+                      // onClick={() => {
+                      //   setView((prev) => {
+                      //     return {
+                      //       ...prev,
+                      //       attraction: false,
+                      //       hotel: false,
+                      //       visa: false,
+                      //       transfer: false,
+                      //       flight: true,
+                      //     };
+                      //   });
+                      // }}
                     >
                       <Link to="/b2b/portal/flight">Flight</Link>
                     </span>
