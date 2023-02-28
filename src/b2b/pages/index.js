@@ -24,6 +24,8 @@ import VisaOrderPage from "./VisaOrder/VisaOrderPage";
 import VisaOrderDetailsPage from "./VisaOrder/VisaOrderDetailsPage";
 import ReapplyIndividual from "./VisaOrder/ReapplyIndividual";
 import AttractionSingleTicketPage from "./Ticket/AttractionSingleTicketPage";
+import FlightHomePage from "./Flight/FlightHomePage";
+import FlightBookingPage from "./Flight/FlightBookingPage";
 import PaymentSuccessPage from "./PaymentApproval/PaymentSuccessPage";
 
 export {
@@ -53,5 +55,7 @@ export {
    VisaOrderDetailsPage,
    ReapplyIndividual,
    AttractionSingleTicketPage,
+   FlightHomePage,
+   FlightBookingPage,
    PaymentSuccessPage,
 };
