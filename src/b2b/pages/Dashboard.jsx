@@ -56,7 +56,7 @@ export default function Dashboard() {
         <div className="my-2 ">
           <SearchCards />
         </div>
-        <Outlet />
+        {/* <Outlet /> */}
 
         <div className="my-2">
           <TopDestination />
