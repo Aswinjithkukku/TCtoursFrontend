@@ -4,10 +4,13 @@ import { BsCalendar2Date } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useHandleClickOutside } from "../../../hooks";
+import DatePicker, { DateObject } from "react-multi-date-picker";
 
 function HotelCard() {
    const navigate = useNavigate();
    const [dropdown, setDropdown] = useState(false);
+   const [value, setValue] = useState([new DateObject(), new DateObject()]);
+   console.log(value);
 
    const dropdownWrapperRef = useRef();
    useHandleClickOutside(dropdownWrapperRef, () => setDropdown(false));
@@ -34,7 +37,7 @@ function HotelCard() {
                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-white rounded px-1 bg-blue-600">
                   Checkin - Chekout
                </span>
-               <input
+               {/* <input
                   type="text"
                   list="Country"
                   // value={value}
@@ -42,7 +45,8 @@ function HotelCard() {
                   // onFocus={handleFocus}
                   required
                   className="block w-full capitalize outline-none bg-transparent text-sm text-textColor font-medium"
-               />
+               /> */}
+               <DatePicker value={value} range rangeHover onChange={setValue} />
             </div>
          </div>
          <div className="md:col-span-4 flex justify-center items-center ">
