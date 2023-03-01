@@ -75,37 +75,6 @@ function VisaCard({ setView }) {
           </div>
         </div>
       </form>
-      <div>
-        <div className="text-xl md:text-2xl font-semibold text-darktext mb-4">
-          Top Visited Countries
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-          {countries?.map((item, index) => (
-            <div
-              className="mt-2 relative cursor-pointer shadow-md rounded-2xl"
-              key={index}
-              // onClick={() => navigate(`/b2b/attractions/${item?.name}`)}
-            >
-              <div className="overflow-hidden rounded-2xl">
-                <img
-                  className="hover:scale-110 object-cover rounded-2xl h-[7em] md:h-[13em] w-full  transition-all duration-500 cursor-pointer"
-                  src={item?.flag}
-                  alt={item?.countryName}
-                />
-              </div>
-              <div
-                className={`absolute bottom-2 left-4  ${
-                  item?.isocode === "US" ? "text-darktext" : "text-light"
-                }`}
-              >
-                <div className="font-semibold capitalize ">
-                  {item?.countryName}{" "}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </>
   );
 }

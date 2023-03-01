@@ -54,7 +54,7 @@ function HeroSection() {
                                  {/* tags */}
                                  <div className="text-xs text-text   flex space-x-1 items-center">
                                     <div className="">
-                                       <button className="bg-yellow-500 w-16 px-2 py-1 text-light rounded-md capitalize">
+                                       <button className="bg-yellow-500  px-2 py-1 text-light rounded-md capitalize">
                                           {agentExcursion?.bookingType}
                                        </button>
                                     </div>
