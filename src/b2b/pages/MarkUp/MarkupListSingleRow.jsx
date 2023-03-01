@@ -28,7 +28,7 @@ function MarkupListSingleRow({ item }) {
     <>
       <tr className="border-b border-tableBorderColor">
         <td className="p-3">{item?.title}</td>
-        <td className="p-3">{item?.bookingType}</td>
+        <td className="p-3 capitalize">{item?.bookingType}</td>
         <td className="p-3 capitalize">{item?.destination?.name} </td>
         <td className="p-3">
           {priceConversion(

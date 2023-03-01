@@ -27,6 +27,7 @@ import AttractionSingleTicketPage from "./Ticket/AttractionSingleTicketPage";
 import FlightHomePage from "./Flight/FlightHomePage";
 import FlightBookingPage from "./Flight/FlightBookingPage";
 import PaymentSuccessPage from "./PaymentApproval/PaymentSuccessPage";
+import HotelIndexPage from "./Hotel/HotelIndexPage";
 
 export {
    Dashboard,
@@ -58,4 +59,5 @@ export {
    FlightHomePage,
    FlightBookingPage,
    PaymentSuccessPage,
+   HotelIndexPage,
 };

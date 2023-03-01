@@ -87,7 +87,7 @@ const flightSlice = createSlice({
       currentData[index] = { ...currentData[index], [name]: value };
 
       if (
-        state.tripType === "multiCity" &&
+        state.tripType === "multicity" &&
         index < state.flightsData?.length - 1 &&
         name === "cityTo"
       ) {

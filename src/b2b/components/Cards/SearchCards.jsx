@@ -13,13 +13,17 @@ import { Link, useLocation } from "react-router-dom";
 function SearchCards() {
   const location = useLocation();
   const [view, setView] = useState({
-    attraction: true,
-    flight: false,
-    hotel: false,
-    visa: false,
+    attraction:
+      location.pathname.includes("/b2b/visa") ||
+      location.pathname.includes("/b2b/flight") ||
+      location.pathname.includes("/b2b/hotel")
+        ? false
+        : true,
+    flight: location.pathname.includes("/b2b/flight") ? true : false,
+    hotel: location.pathname.includes("/b2b/hotel") ? true : false,
+    visa: location.pathname.includes("/b2b/visa") ? true : false,
     transfer: false,
   });
-
   return (
     <>
       <div className=" w-full  ">
@@ -71,73 +75,97 @@ function SearchCards() {
                   <li className="mb-4 mr-8">
                     <span
                       className={`inline-block pb-4 ${
-                        location.pathname.includes("attractions")
+                        view.attraction
                           ? " text-blue-500 border-blue-500  "
                           : " text-gray-400 border-transparent "
                       } font-semibold border-b  hover:border-gray-400 transition duration-200 cursor-pointer`}
                       href="#"
-                      // onClick={() => {
-                      //   setView((prev) => {
-                      //     return {
-                      //       ...prev,
-                      //       attraction: true,
-                      //       hotel: false,
-                      //       visa: false,
-                      //       transfer: false,
-                      //       flight: false,
-                      //     };
-                      //   });
-                      // }}
+                      onClick={() => {
+                        setView((prev) => {
+                          return {
+                            ...prev,
+                            attraction: true,
+                            hotel: false,
+                            visa: false,
+                            transfer: false,
+                            flight: false,
+                          };
+                        });
+                      }}
                     >
-                      <Link to="/b2b/portal/attractions">Attractions</Link>
+                      Attractions
                     </span>
                   </li>
                   <li className="mb-4 mr-8">
                     <span
                       className={`inline-block pb-4 ${
-                        location.pathname.includes("visa")
+                        view.visa
                           ? " text-blue-500 border-blue-500  "
                           : " text-gray-400 border-transparent "
                       } font-semibold border-b  hover:border-gray-400 transition duration-200 cursor-pointer`}
                       href="#"
-                      // onClick={() => {
-                      //   setView((prev) => {
-                      //     return {
-                      //       ...prev,
-                      //       attraction: false,
-                      //       hotel: false,
-                      //       visa: true,
-                      //       transfer: false,
-                      //       flight: false,
-                      //     };
-                      //   });
-                      // }}
+                      onClick={() => {
+                        setView((prev) => {
+                          return {
+                            ...prev,
+                            attraction: false,
+                            hotel: false,
+                            visa: true,
+                            transfer: false,
+                            flight: false,
+                          };
+                        });
+                      }}
                     >
-                      <Link to="/b2b/portal/visa">Visa</Link>
+                      Visa
                     </span>
                   </li>
                   <li className="mb-4 mr-8">
                     <span
                       className={`inline-block pb-4 ${
-                        location.pathname.includes("flight")
+                        view.flight
                           ? " text-blue-500 border-blue-500  "
                           : " text-gray-400 border-transparent "
                       } font-semibold border-b  hover:border-gray-400 transition duration-200 cursor-pointer`}
                       href="#"
-                      // onClick={() => {
-                      //   setView((prev) => {
-                      //     return {
-                      //       ...prev,
-                      //       attraction: false,
-                      //       hotel: false,
-                      //       visa: false,
-                      //       transfer: false,
-                      //       flight: true,
-                      //     };
-                      //   });
-                      // }}
+                      onClick={() => {
+                        setView((prev) => {
+                          return {
+                            ...prev,
+                            attraction: false,
+                            hotel: false,
+                            visa: false,
+                            transfer: false,
+                            flight: true,
+                          };
+                        });
+                      }}
                     >
-                      <Link to="/b2b/portal/flight">Flight</Link>
+                      Flight
+                    </span>
+                  </li>
+                  <li className="mb-4 mr-8">
+                    <span
+                      className={`inline-block pb-4 ${
+                        view.hotel
+                          ? " text-blue-500 border-blue-500  "
+                          : " text-gray-400 border-transparent "
+                      } font-semibold border-b  hover:border-gray-400 transition duration-200 cursor-pointer`}
+                      href="#"
+                      onClick={() => {
+                        setView((prev) => {
+                          return {
+                            ...prev,
+                            attraction: false,
+                            hotel: true,
+                            visa: false,
+                            transfer: false,
+                            flight: false,
+                          };
+                        });
+                      }}
+                    >
+                      Hotel
                     </span>
                   </li>
                 </ul>
@@ -148,14 +176,12 @@ function SearchCards() {
           <div className="flex items-center justify-center shadow-b-sm shadow-x-sm">
             <div className=" w-full mt-7 md:rounded-md relative ">
               <>
-                {location.pathname === "/b2b" && view.attraction && (
-                  <AttractionCard />
-                )}
-                {/* 
+                {view.attraction && <AttractionCard />}
+
                 {view.flight && <FlightCard />}
                 {view.hotel && <HotelCard />}
                 {view.visa && <VisaCard />}
-                {view.transfer && <CarCard />} */}
+                {view.transfer && <CarCard />}
               </>
             </div>
           </div>
