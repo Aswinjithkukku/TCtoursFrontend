@@ -177,7 +177,6 @@ function SearchCards() {
             <div className=" w-full mt-7 md:rounded-md relative ">
               <>
                 {view.attraction && <AttractionCard />}
-
                 {view.flight && <FlightCard />}
                 {view.hotel && <HotelCard />}
                 {view.visa && <VisaCard />}
