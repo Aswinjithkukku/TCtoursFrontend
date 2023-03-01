@@ -1,32 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MdBlockFlipped, MdOutlineArrowUpward } from "react-icons/md";
 import { BsExclamationLg } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import priceConversion from "../../../utils/PriceConversion";
+import { getTransaction } from "../../../redux/slices/walletSlice";
 
 function AllTransaction() {
+   const dispatch = useDispatch()
    const { transaction } = useSelector((state) => state.wallet);
    const { selectedCurrency } = useSelector((state) => state.home);
 
+
    return (
-      <table className="w-full">
-         <thead className="bg-gray-100 text-grayColor text-[14px] text-left">
+      <table className="w-full text-textColor">
+         <thead className="bg-gray-100 text-textColor text-[14px] text-left">
             <tr>
-               <th className="font-[500] p-3">Ref No.</th>
+               <th className="font-[500] p-3">Transaction No.</th>
                <th className="font-[500] p-3">Gateway</th>
-               <th className="font-[500] p-3">Purchase</th>
                <th className="font-[500] p-3">Date</th>
                <th className="font-[500] p-3">Time</th>
                <th className="font-[500] p-3">Status</th>
                <th className="font-[500] p-3">Price</th>
             </tr>
          </thead>
-         <tbody className="text-sm">
+         <tbody className="text-sm text-textColor">
             {transaction?.result?.data?.map((item, index) => (
                <tr className="border-b border-tableBorderColor" key={index}>
-                  <td className="p-3">{item?._id?.slice(0, 10)} </td>
+                  <td className="p-3"># {item?.b2bTransactionNo}</td>
                   <td className="p-3 capitalize">{item?.paymentProcessor}</td>
-                  <td className="p-3">N/A</td>
                   <td className="p-3 whitespace-nowrap">
                      {item?.createdAt?.slice(0, 10)}{" "}
                   </td>
