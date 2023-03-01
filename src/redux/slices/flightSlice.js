@@ -87,7 +87,7 @@ const flightSlice = createSlice({
       currentData[index] = { ...currentData[index], [name]: value };
 
       if (
-        state.tripType === "multiCity" &&
+        state.tripType === "multicity" &&
         index < state.flightsData?.length - 1 &&
         name === "cityTo"
       ) {
@@ -95,6 +95,9 @@ const flightSlice = createSlice({
       }
       console.log(currentData);
       state.flightsData = currentData;
+    },
+    handleRescentSearchCardClick: (state, { payload }) => {
+      state.flightsData = payload?.flightsData;
     },
   },
   // extraReducers: {
@@ -111,6 +114,7 @@ export const {
   removeFlightRow,
   handleTravellersChange,
   handleFlightDeatilsChange,
+  handleRescentSearchCardClick,
 } = flightSlice.actions;
 
 export default flightSlice.reducer;
