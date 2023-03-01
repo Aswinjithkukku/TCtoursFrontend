@@ -148,12 +148,14 @@ function SearchCards() {
           <div className="flex items-center justify-center shadow-b-sm shadow-x-sm">
             <div className=" w-full mt-7 md:rounded-md relative ">
               <>
-                {view.attraction && <AttractionCard />}
-
+                {location.pathname === "/b2b" && view.attraction && (
+                  <AttractionCard />
+                )}
+                {/* 
                 {view.flight && <FlightCard />}
                 {view.hotel && <HotelCard />}
                 {view.visa && <VisaCard />}
-                {view.transfer && <CarCard />}
+                {view.transfer && <CarCard />} */}
               </>
             </div>
           </div>
