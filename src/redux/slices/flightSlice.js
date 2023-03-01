@@ -96,6 +96,9 @@ const flightSlice = createSlice({
       console.log(currentData);
       state.flightsData = currentData;
     },
+    handleRescentSearchCardClick: (state, { payload }) => {
+      state.flightsData = payload?.flightsData;
+    },
   },
   // extraReducers: {
   //   [fetchVisas.fulfilled]: (state, action) => {
@@ -111,6 +114,7 @@ export const {
   removeFlightRow,
   handleTravellersChange,
   handleFlightDeatilsChange,
+  handleRescentSearchCardClick,
 } = flightSlice.actions;
 
 export default flightSlice.reducer;

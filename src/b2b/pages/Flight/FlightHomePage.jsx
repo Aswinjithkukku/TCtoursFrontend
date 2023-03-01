@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useDebugValue, useEffect, useState } from "react";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import {
   BsFillMoonStarsFill,
@@ -8,17 +8,28 @@ import {
 } from "react-icons/bs";
 import { IoChevronBackSharp } from "react-icons/io5";
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import { TbArrowsRight } from "react-icons/tb";
-import { useSelector } from "react-redux";
+import { TbArrowsRight, TbArrowsRightLeft } from "react-icons/tb";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../../../axios";
+import {
+  addFlightRow,
+  removeFlightRow,
+  setTripType,
+} from "../../../redux/slices/flightSlice";
+import FlightCardForm from "../../components/Cards/FlightCardForm";
 import SearchCards from "../../components/Cards/SearchCards";
 import VisaApplyCard from "../Visa/VisaApplyCard";
 import FlightCard from "./FlightCard";
 import FlightFilter from "./FlightFilter";
 
 const FlightHomePage = () => {
+  const dispatch = useDispatch();
+
   const [loading, setLoading] = useState(false);
+  const [change, setChange] = useState(false);
+  const [reload, setReload] = useState(false);
+
   const { flightsData, travellers, tripType } = useSelector(
     (state) => state.flight
   );
@@ -53,8 +64,6 @@ const FlightHomePage = () => {
     );
   };
 
-  console.log(flightsData.length);
-
   const body = {
     from: flightsData[0]?.cityFrom.iata,
     to: flightsData[0].cityTo.iata,
@@ -83,11 +92,24 @@ const FlightHomePage = () => {
 
   useEffect(() => {
     fetchFlightsData();
-  }, []);
-
-  console.log(flights);
+  }, [reload]);
 
   const navigate = useNavigate();
+
+  const handleUpdateDetails = (e) => {
+    e.preventDefault();
+    setChange(!change);
+    setReload(!reload);
+  };
+
+  const handleTripTypeChange = (e) => {
+    dispatch(setTripType(e.target.value));
+    if (e.target.value === "multiCity") {
+      dispatch(addFlightRow());
+    } else {
+      dispatch(removeFlightRow({ index: "notMultiCity" }));
+    }
+  };
 
   return (
     <>
@@ -106,69 +128,143 @@ const FlightHomePage = () => {
         </button>
       </div>
       <div className="min-h-[100vh] mt-1">
-        <div className=" w-[100%] h-[80px] px-10 flex  ">
-          <div className=" w-[100%] h-[80px] flex justify-between rounded-lg border-[1px]">
-            <div className=" w-[100%] h-[100%] flex ">
-              <div className="">
-                {flightsData.length === 1 ? (
-                  <div className="max-w-[240px] flex justify-center px-4 items-center border-r-[1px] h-[100%] gap-x-6 ">
-                    <div className="flex flex-col">
-                      <span className="font-semibold">
-                        {flightsData?.[0]?.cityFrom?.iata}
-                      </span>
-                      <span className="text-[12px]">
-                        {flightsData?.[0]?.cityFrom?.name}
-                      </span>
+        <div className=" w-[100%] px-10  ">
+          {!change ? (
+            <div className=" w-[100%] h-[80px] flex justify-between rounded-lg border-[1px]">
+              <div className=" w-[100%] h-[100%] flex ">
+                <div className="">
+                  {flightsData.length === 1 ? (
+                    <div className="max-w-[240px] flex justify-center px-4 items-center border-r-[1px] h-[100%] gap-x-6 ">
+                      <div className="flex flex-col">
+                        <span className="font-semibold">
+                          {flightsData?.[0]?.cityFrom?.iata}
+                        </span>
+                        <span className="text-[12px]">
+                          {flightsData?.[0]?.cityFrom?.name}
+                        </span>
+                      </div>
+                      <div className="text-[20px] text-blue-500 flex items-center">
+                        {tripType === "return" ? (
+                          <TbArrowsRightLeft />
+                        ) : (
+                          <TbArrowsRight />
+                        )}
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-semibold">
+                          {flightsData?.[0]?.cityTo?.iata}
+                        </span>
+                        <span className="text-[12px]">
+                          {flightsData?.[0]?.cityTo?.name}
+                        </span>
+                      </div>
                     </div>
-                    <div className="text-[20px] text-blue-500 flex items-center">
-                      <TbArrowsRight />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="font-semibold">
-                        {flightsData?.[0]?.cityTo?.iata}
-                      </span>
-                      <span className="text-[12px]">
-                        {flightsData?.[0]?.cityTo?.name}
-                      </span>
-                    </div>
+                  ) : (
+                    <>
+                      <div className=" w-[100%] h-[100%] flex ">
+                        {flightsData?.map((ele) => (
+                          <>
+                            <Flight info={ele} />
+                          </>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+                {flightsData.length === 1 && (
+                  <div className="max-w-[170px] flex flex-col px-4 justify-center border-r-[1px] ">
+                    <span className="text-[12px]">Departure Date</span>
+                    <span className="text-[16px]  tracking-[2px] font-medium">
+                      {flightsData?.[0]?.departureDate}
+                    </span>
                   </div>
-                ) : (
-                  <>
-                    <div className=" w-[100%] h-[100%] flex ">
-                      {flightsData?.map((ele) => (
-                        <>
-                          <Flight info={ele} />
-                        </>
-                      ))}
-                    </div>
-                  </>
                 )}
-              </div>
-              {flightsData.length === 1 && (
-                <div className="max-w-[150px] flex flex-col px-4 justify-center border-r-[1px] ">
-                  <span className="text-[12px]">Departure Date</span>
-                  <span className="text-[16px]  tracking-[2px] font-medium">
-                    {flightsData?.[0]?.departureDate}
+                {tripType === "return" && (
+                  <div className="max-w-[170px] flex flex-col px-4 justify-center border-r-[1px] ">
+                    <span className="text-[12px]">Return Date</span>
+                    <span className="text-[16px]  tracking-[2px] font-medium">
+                      {flightsData?.[0]?.returnDate}
+                    </span>
+                  </div>
+                )}
+                <div className="max-w-[150px] flex flex-col px-4 justify-center ">
+                  <span className="text-[12px]">Travellers</span>
+                  <span className="text-[18px] font-medium tracking-[2px]">
+                    {totalTravellers < 10 && "0"}
+                    {totalTravellers}
                   </span>
                 </div>
-              )}
-              <div className="max-w-[150px] flex flex-col px-4 justify-center ">
-                <span className="text-[12px]">Travellers</span>
-                <span className="text-[18px] font-medium tracking-[2px]">
-                  {totalTravellers < 10 && "0"}
-                  {totalTravellers}
-                </span>
+              </div>
+              <div className="flex items-center px-4">
+                <button
+                  className="h-10 px-4 py-2 bg-blue-500 text-white rounded-md"
+                  onClick={() => {
+                    setChange(!change);
+                  }}
+                >
+                  Change
+                </button>
               </div>
             </div>
-            <div className="flex items-center px-4">
-              <button className="h-10 px-4 py-2 bg-blue-500 text-white rounded-md">
-                Change
-              </button>
+          ) : (
+            <div className=" w-[100%] shadow-md py-4 rounded-md border-[1px]">
+              <div className="flex px-5 pt-7 pb-4 space-x-3">
+                <div className="flex space-x-2">
+                  <div className="">
+                    <input
+                      type="radio"
+                      name="choose"
+                      className="cursor-pointer"
+                      value="oneway"
+                      onChange={handleTripTypeChange}
+                      checked={tripType === "oneway"}
+                    />
+                  </div>
+                  <div className="text-sm">One-way</div>
+                </div>
+                <div className="flex space-x-2">
+                  <div className="">
+                    <input
+                      type="radio"
+                      name="choose"
+                      className="cursor-pointer"
+                      value="return"
+                      onChange={handleTripTypeChange}
+                      checked={tripType === "return"}
+                    />
+                  </div>
+                  <div className="text-sm">Round trip</div>
+                </div>
+                <div className="flex space-x-2">
+                  <div className="">
+                    <input
+                      type="radio"
+                      name="choose"
+                      className="cursor-pointer"
+                      value="multiCity"
+                      onChange={handleTripTypeChange}
+                      checked={tripType === "multicity"}
+                    />
+                  </div>
+                  <div className="text-sm">Multi-city</div>
+                </div>
+              </div>
+              <form action="" onSubmit={handleUpdateDetails}>
+                {flightsData?.map((data, index, array) => (
+                  <>
+                    <FlightCardForm
+                      index={index}
+                      data={data}
+                      length={array.length}
+                    />
+                  </>
+                ))}
+              </form>
             </div>
-          </div>
+          )}
         </div>
         <div className="px-10 flex justify-center mt-4 ">
-          <div className="w-[100%] bg-white flex rounded-md px-10 relative">
+          <div className="w-[100%] bg-white flex rounded-md px-10 relative shadow-md">
             <div className="text-[30px] cursor-pointer text-blue-500 absolute top-0 left-0 h-[100%] w-[40px] grid place-items-center border-r-2">
               <AiFillCaretLeft />
             </div>
@@ -192,7 +288,7 @@ const FlightHomePage = () => {
           </div>
         </div>
         <div className=" w-[100%] grid grid-cols-8 p-10 gap-5">
-          <div className="col-span-2">
+          <div className="col-span-2 shadow-lg">
             <FlightFilter />
             <div className="w-[100%]">
               <VisaApplyCard />
@@ -230,7 +326,7 @@ const FlightHomePage = () => {
             {!loading &&
               flights?.map((ele, i) => (
                 <>
-                  <div className=" w-[90%] flex flex-col gap-4 ">
+                  <div className=" w-[90%] flex flex-col gap-4 relative">
                     <FlightCard index={i} data={ele} />
                   </div>
                 </>
