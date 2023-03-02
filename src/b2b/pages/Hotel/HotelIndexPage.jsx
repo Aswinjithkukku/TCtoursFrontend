@@ -1,19 +1,23 @@
 import React from "react";
+import { AiOutlineRight } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import Rating from "../../../components/Rating/Rating";
 import SearchCards from "../../components/Cards/SearchCards";
 import { HotelFilters } from "../../data";
 
 function HotelIndexPage() {
+   const navigate = useNavigate()
    return (
       <div className="p-2 lg:p-6">
          <SearchCards />
          <div className="">
             <div className="grid grid-cols-12 gap-2">
                <div className="filter__section col-span-3">
-                  <div className="h-screen w-full border rounded-xl border-gray-700 p-2">
+                  <div className=" w-full  rounded-xl  p-2">
+                     <p className="uppercase font-[700] text-textColor">Filters</p>
                      {HotelFilters?.map((item, index) => (
                         <div
-                           className="text-gray-400 font-light space-y-2"
+                           className="text-gray-400 shadow-sm mt-2 p-3 bg-gray-100/40 rounded-lg font-light space-y-2"
                            key={index}
                         >
                            <h4 className="text-[12px] font-[700] text-textColor mt-2">
@@ -37,7 +41,7 @@ function HotelIndexPage() {
                   </div>
                </div>
                <div className="list__section col-span-9">
-                  <div className="w-full h-screen ">
+                  <div className="w-full  ">
                      <div className="flex gap-2 w-full shadow-sm rounded-xl p-3">
                         <div className="w-3/12 h-full rounded-md overflow-hidden">
                            <img
@@ -79,14 +83,31 @@ function HotelIndexPage() {
                                  </p>
                               </div>
                            </div>
-                           <div className="right__section flex justify-end">
-                              <div className="">
-                                 <Rating value={5} color="rgb(234 179 8)" />
-                                 <p className="text-[10px] text-yellow-500">
-                                    5.0 from 200 Reviews
-                                 </p>
+                           <div className="right__section flex justify-end text-darktext">
+                              <div className="flex flex-col justify-between">
+                                 <div className="flex flex-col items-end">
+                                    <Rating value={5} color="rgb(234 179 8)" />
+                                    <p className="text-[10px] text-yellow-500">
+                                       5.0 from 200 Reviews
+                                    </p>
+                                 </div>
+                                 <div className="flex flex-col items-end space-y-1">
+                                    <p className="text-[11px]">
+                                       1 Night, 1 Adult
+                                    </p>
+                                    <p className="font-[750] text-[18px]">
+                                       1200 AED
+                                    </p>
+                                    <p className="text-green-500 text-[10px]">
+                                       Currently available
+                                    </p>
+                                    <button className="px-3 py-1 rounded-md bg-blue-600 flex justify-center items-center gap-2 text-white font-semibold"
+                                    onClick={() => navigate('/b2b/hotel/details')}
+                                    >
+                                       Book Now <AiOutlineRight />
+                                    </button>
+                                 </div>
                               </div>
-                              <div className=""></div>
                            </div>
                         </div>
                      </div>

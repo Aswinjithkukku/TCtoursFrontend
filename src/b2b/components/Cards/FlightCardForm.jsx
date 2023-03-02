@@ -114,7 +114,7 @@ const FlightCardForm = ({ index, data, length }) => {
           </div>
 
           <span className="absolute -right-4 bottom-[15px] bg-[#F5F5F5] rounded-lg text-[30px] text-blue-500 ">
-            {(tripType === "oneway" || tripType === "multiCity") && (
+            {(tripType === "oneway" || tripType === "multicity") && (
               <TbArrowsRight />
             )}
             {tripType === "return" && <TbArrowsRightLeft />}
@@ -254,7 +254,7 @@ const FlightCardForm = ({ index, data, length }) => {
               <AiOutlineSearch />
             </button>
           </div>
-          {tripType === "multiCity" && (
+          {tripType === "multicity" && (
             <div className="">
               <button
                 onClick={handleAddCity}

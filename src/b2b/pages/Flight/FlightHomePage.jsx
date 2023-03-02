@@ -104,7 +104,7 @@ const FlightHomePage = () => {
 
   const handleTripTypeChange = (e) => {
     dispatch(setTripType(e.target.value));
-    if (e.target.value === "multiCity") {
+    if (e.target.value === "multicity") {
       dispatch(addFlightRow());
     } else {
       dispatch(removeFlightRow({ index: "notMultiCity" }));
@@ -260,7 +260,7 @@ const FlightHomePage = () => {
                       type="radio"
                       name="choose"
                       className="cursor-pointer"
-                      value="multiCity"
+                      value="multicity"
                       onChange={handleTripTypeChange}
                       checked={tripType === "multicity"}
                     />

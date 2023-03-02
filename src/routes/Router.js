@@ -54,6 +54,7 @@ import {
   FlightHomePage,
   FlightBookingPage,
   HotelIndexPage,
+  HotelDetailIndex,
 } from "../b2b/pages";
 import B2BPrivateRoute from "./B2BPrivateRoute";
 import LoadingWrapper from "./LoadingWrapper";
@@ -161,11 +162,11 @@ const ThemeRoutes = [
     element: <PageNotFound />,
   },
   {
-    path: "/wallet/deposit/:id/cancelled",
+    path: "/b2b/wallet/deposit/:id/cancelled",
     element: <PaymentDecline />,
   },
   {
-    path: "/wallet/deposit/:id/success",
+    path: "/b2b/wallet/deposit/:id/success",
     element: <PaymentSuccessPage />,
   },
   {
@@ -226,12 +227,6 @@ const ThemeRoutes = [
       {
         path: "/b2b",
         element: <Dashboard />,
-        children: [
-          { path: "/b2b/portal/attractions", element: <AttractionCard /> },
-          { path: "/b2b/portal/visa", element: <VisaCard /> },
-          { path: "/b2b/portal/flight", element: <FlightCard /> },
-          { path: "/b2b/portal/hotel", element: <HotelCard /> },
-        ],
       },
       { path: "/b2b/reseller/add", element: <NewRegisters /> },
       { path: "/b2b/resellers", element: <Resellers /> },
@@ -269,8 +264,9 @@ const ThemeRoutes = [
         element: <AttractionInvoice />,
       },
       { path: "/b2b/flight/order", element: <FlightHomePage /> },
-      { path: "/b2b/flight/booking", element: <FlightBookingPage /> },
+      { path: "/b2b/flight/booking/:id", element: <FlightBookingPage /> },
       { path: "/b2b/hotel", element: <HotelIndexPage /> },
+      { path: "/b2b/hotel/details", element: <HotelDetailIndex /> },
     ],
   },
   {

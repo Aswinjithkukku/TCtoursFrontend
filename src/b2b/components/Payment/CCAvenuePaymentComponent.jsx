@@ -51,6 +51,9 @@ function CCAvenuePaymentComponent() {
                min={10}
             />
          </div>{" "}
+         <p className="text-gray-400 text-[12px] text-center pb-1">
+            3.0% of processing fee will be deducted from the transaction amount
+         </p>
          <button className="button w-full italic" onClick={submitHandler}>
             CC Avenue
          </button>

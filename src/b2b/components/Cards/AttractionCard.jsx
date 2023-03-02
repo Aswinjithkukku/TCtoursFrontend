@@ -96,9 +96,6 @@ function AttractionCard({ setView }) {
           </div>
         </div>
       </form>
-      <div>
-        <TopDestination />
-      </div>
     </>
   );
 }

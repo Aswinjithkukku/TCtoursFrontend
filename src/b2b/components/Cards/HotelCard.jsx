@@ -4,10 +4,13 @@ import { BsCalendar2Date } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useHandleClickOutside } from "../../../hooks";
+import DatePicker, { DateObject } from "react-multi-date-picker";
 
 function HotelCard() {
    const navigate = useNavigate();
    const [dropdown, setDropdown] = useState(false);
+   const [value, setValue] = useState([new DateObject(), new DateObject()]);
+   console.log(value);
 
    const dropdownWrapperRef = useRef();
    useHandleClickOutside(dropdownWrapperRef, () => setDropdown(false));
@@ -30,19 +33,19 @@ function HotelCard() {
             </div>
          </div>
          <div className="md:col-span-4 flex justify-center items-center ">
-            <div className="relative w-full h-14 py-4 px-3  border border-blue-400 hover:border-blue-500 focus-within:border-green-500 rounded-lg">
+            <div className="relative w-full h-14 py-4 px-3  border border-blue-400 hover:border-blue-500 focus-within:border-green-500 rounded-lg ">
                <span className="absolute bottom-full left-0 ml-3 -mb-1 transform translate-y-0.5 text-xs font-semibold text-white rounded px-1 bg-blue-600">
                   Checkin - Chekout
                </span>
-               <input
-                  type="text"
-                  list="Country"
-                  // value={value}
-                  // onChange={(e) => setValue(e.target.value)}
-                  // onFocus={handleFocus}
-                  required
-                  className="block w-full capitalize outline-none bg-transparent text-sm text-textColor font-medium"
-               />
+               <div className="h-full w-full overflow-hidden">
+                  <DatePicker
+                     value={value}
+                     range
+                     rangeHover
+                     onChange={setValue}
+                     inputClass="w-[30em]  bg-transparent border-none outline-none"
+                  />
+               </div>
             </div>
          </div>
          <div className="md:col-span-4 flex justify-center items-center ">

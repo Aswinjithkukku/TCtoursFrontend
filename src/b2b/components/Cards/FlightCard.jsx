@@ -21,7 +21,7 @@ function FlightCard() {
 
   const handleTripTypeChange = (e) => {
     dispatch(setTripType(e.target.value));
-    if (e.target.value === "multiCity") {
+    if (e.target.value === "multicity") {
       dispatch(addFlightRow());
     } else {
       dispatch(removeFlightRow({ index: "notMultiCity" }));
@@ -33,12 +33,12 @@ function FlightCard() {
   //   // const dataArray = [...flightDetails];
   //   // dataArray[index] = { ...dataArray[index], [name]: value };
 
-  //   // if (tripType === "multiCity" && index < dataArray.length - 1) {
+  //   // if (tripType === "multicity" && index < dataArray.length - 1) {
   //   //   if (name === "cityTo") {
   //   //     dataArray[index + 1] = { ...dataArray[index + 1], cityFrom: value };
   //   //   }
   //   // }
-  //   // if (tripType === "multiCity" && index > 0) {
+  //   // if (tripType === "multicity" && index > 0) {
   //   //   if (name === "cityFrom") {
   //   //     dataArray[index - 1] = { ...dataArray[index + 1], cityTo: value };
   //   //   }
@@ -120,7 +120,7 @@ function FlightCard() {
                 type="radio"
                 name="choose"
                 className="cursor-pointer"
-                value="multiCity"
+                value="multicity"
                 onChange={handleTripTypeChange}
                 checked={tripType === "multicity"}
               />
