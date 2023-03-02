@@ -174,7 +174,7 @@ const FlightHomePage = () => {
                 {flightsData.length === 1 && (
                   <div className="max-w-[170px] flex flex-col px-4 justify-center border-r-[1px] ">
                     <span className="text-[12px]">Departure Date</span>
-                    <span className="text-[16px]  tracking-[2px] font-medium">
+                    <span className="text-[16px]  tracking-[2px] font-medium  text-gray-300">
                       {flightsData?.[0]?.departureDate}
                     </span>
                   </div>
@@ -182,17 +182,36 @@ const FlightHomePage = () => {
                 {tripType === "return" && (
                   <div className="max-w-[170px] flex flex-col px-4 justify-center border-r-[1px] ">
                     <span className="text-[12px]">Return Date</span>
-                    <span className="text-[16px]  tracking-[2px] font-medium">
+                    <span className="text-[16px]  tracking-[2px] font-medium  text-gray-300">
                       {flightsData?.[0]?.returnDate}
                     </span>
                   </div>
                 )}
-                <div className="max-w-[150px] flex flex-col px-4 justify-center ">
-                  <span className="text-[12px]">Travellers</span>
-                  <span className="text-[18px] font-medium tracking-[2px]">
-                    {totalTravellers < 10 && "0"}
-                    {totalTravellers}
-                  </span>
+                <div className="flex border-r-[1px]">
+                  <div className="max-w-[150px] flex flex-col px-4 justify-center ">
+                    <span className="text-[12px]">Adult</span>
+                    <span className="text-[18px] font-medium tracking-[2px] text-gray-300">
+                      {/* {totalTravellers < 10 && "0"} */}
+                      {/* {totalTravellers} */}
+                      {travellers.adult}
+                    </span>
+                  </div>
+                  <div className="max-w-[150px] flex flex-col px-4 justify-center ">
+                    <span className="text-[12px]">Child</span>
+                    <span className="text-[18px] font-medium tracking-[2px] text-gray-300">
+                      {/* {totalTravellers < 10 && "0"} */}
+                      {/* {totalTravellers} */}
+                      {travellers.children}
+                    </span>
+                  </div>
+                  <div className="max-w-[150px] flex flex-col px-4 justify-center ">
+                    <span className="text-[12px]">infant</span>
+                    <span className="text-[18px] font-medium tracking-[2px] text-gray-300">
+                      {/* {totalTravellers < 10 && "0"} */}
+                      {/* {totalTravellers} */}
+                      {travellers.infant}
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="flex items-center px-4">

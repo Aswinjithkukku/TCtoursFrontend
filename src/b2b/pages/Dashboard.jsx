@@ -24,7 +24,7 @@ export default function Dashboard() {
   const { balance } = useSelector((state) => state.wallet);
 
   return (
-    <div className="">
+    <div className="min-h-[80vh]">
       {/* <div className="bg-white flex items-center justify-between gap-[10px] lg:px-6 px-2 shadow-sm border-t py-2">
                 <h1 className="font-[600] text-[15px] uppercase">
                     Dashboard

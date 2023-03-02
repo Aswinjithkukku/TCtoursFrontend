@@ -269,7 +269,7 @@ const ThemeRoutes = [
         element: <AttractionInvoice />,
       },
       { path: "/b2b/flight/order", element: <FlightHomePage /> },
-      { path: "/b2b/flight/booking/:id", element: <FlightBookingPage /> },
+      { path: "/b2b/flight/booking", element: <FlightBookingPage /> },
       { path: "/b2b/hotel", element: <HotelIndexPage /> },
     ],
   },

@@ -7,8 +7,11 @@ import {
 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useHandleClickOutside } from "../../../hooks";
+import { useDispatch } from "react-redux";
+import { setSelectedFlight } from "../../../redux/slices/flightSlice";
 
 const FlightCard = ({ data, index }) => {
+  const dispatch = useDispatch();
   const cardRef = useRef();
   const dropDownRef = useRef();
   const navigate = useNavigate();
@@ -16,7 +19,8 @@ const FlightCard = ({ data, index }) => {
   const [selected, setSelected] = useState(null);
 
   const handleClick = () => {
-    navigate("/b2b/flight/booking/54646545645");
+    dispatch(setSelectedFlight(data));
+    navigate("/b2b/flight/booking");
   };
 
   const findFlightDuration = (from, to) => {
@@ -50,7 +54,10 @@ const FlightCard = ({ data, index }) => {
                   alt=""
                   className="h-[50px]"
                 />
-                <span className="font-medium">Air Arabia</span>
+                <span className="font-medium text-[12px]">Air Arabia</span>
+                <span className="font-medium text-teal-400 text-[12px]">
+                  {data?.trips?.[0]?.flightSegments?.[0]?.flightNumber}
+                </span>
               </>
             ) : (
               <>

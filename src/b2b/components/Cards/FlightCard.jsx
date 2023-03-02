@@ -57,6 +57,8 @@ function FlightCard() {
 
     let data;
 
+    console.log(info);
+
     if (prev) {
       prev = JSON.parse(prev);
       console.log(prev);
@@ -72,6 +74,7 @@ function FlightCard() {
 
   if (rescentSearches) {
     rescentSearches = JSON.parse(rescentSearches);
+    rescentSearches = rescentSearches.reverse();
   }
 
   console.log(rescentSearches);
@@ -142,30 +145,71 @@ function FlightCard() {
             return (
               <>
                 <div
-                  className=" h-[80px] rounded-xl flex p-4 cursor-pointer bg-white shadow-lg "
+                  className=" rounded-xl flex flex-col justify-center p-4 pt-8 cursor-pointer bg-white shadow-lg relative shadow-blue-300/20 transform hover:translate-y-[-4px]"
                   onClick={() => {
                     handlerescentCardClick(ele);
                   }}
                 >
+                  <div
+                    className={`absolute top-2 left-4 capitalize font-medium text-[14px] ${
+                      ele?.tripType === "oneway"
+                        ? "text-teal-500"
+                        : "text-red-500"
+                    } `}
+                  >
+                    {ele?.tripType === "return" ? "Round Trip" : "One-Way"}
+                  </div>
                   {ele?.flightsData?.map((data) => (
                     <>
-                      <div className="flex justify-between items-center w-[100%] ">
-                        <div className="flex gap-1 pr-2">
-                          <span>{data?.cityFrom?.name}</span>
-                          <span>({data?.cityFrom?.iata})</span>
+                      <div className="w-[100%] ">
+                        <div className="flex justify-between items-center w-[100%] ">
+                          <div className="flex gap-1 pr-2">
+                            <span>{data?.cityFrom?.name}</span>
+                            <span className="text-gray-300 font-medium">
+                              ({data?.cityFrom?.iata})
+                            </span>
+                          </div>
+                          <div className="flex  text-blue-400 text-[25px]">
+                            <TbArrowsRight />
+                          </div>
+                          <div className="flex gap-1 pl-2">
+                            <span>{data?.cityTo?.name}</span>
+                            <span className="text-gray-300 font-medium">
+                              ({data?.cityTo?.iata})
+                            </span>
+                          </div>
                         </div>
-                        <div className="flex  text-blue-400 text-[25px]">
-                          <TbArrowsRight />
-                        </div>
-                        <div className="flex gap-1 pl-2">
-                          <span>{data?.cityTo?.name}</span>
-                          <span>({data?.cityTo?.iata})</span>
+                        <div className="flex gap-2 mt-2 text-[14px]">
+                          Departure Date :{" "}
+                          <span className="text-gray-300 ">
+                            {data?.departureDate}
+                          </span>
                         </div>
                       </div>
                     </>
                   ))}
-                  <div></div>
-                  <div></div>
+                  {ele?.tripType === "return" && (
+                    <div className="flex gap-2 mt-2 text-[14px]">
+                      Return Date :{" "}
+                      <span className="text-gray-300 ">
+                        {ele?.flightsData[0].returnDate}
+                      </span>
+                    </div>
+                  )}
+                  <div className="flex gap-2 mt-2">
+                    <span className="flex  gap-1 text-[12px]">
+                      <span>Adult :</span>
+                      {ele?.travellers?.adult}
+                    </span>
+                    <span className="flex  gap-1 text-[12px]">
+                      <span>Child :</span>
+                      {ele?.travellers?.children}
+                    </span>
+                    <span className="flex  gap-1 text-[12px]">
+                      <span>Infant :</span>
+                      {ele?.travellers?.infant}
+                    </span>
+                  </div>
                 </div>
               </>
             );

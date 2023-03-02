@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handleFlightDeatilsChange } from "../../../redux/slices/flightSlice";
 
 const AirportsCard = ({ name, index, hide }) => {
   const { airports } = useSelector((state) => state.general);
+  const inputRef = useRef();
   const dispatch = useDispatch();
 
   const [value, setValue] = useState("");
@@ -33,6 +34,23 @@ const AirportsCard = ({ name, index, hide }) => {
         hide(false);
       }
     });
+
+    inputRef.current.focus();
+
+    let rescentSearches = localStorage.getItem("flightSearches");
+
+    if (rescentSearches) {
+      rescentSearches = JSON.parse(rescentSearches);
+      rescentSearches = rescentSearches.reverse();
+    }
+
+    const data = rescentSearches?.map((ele) => {
+      if (name === "cityFrom") return ele?.flightsData[0]?.cityFrom;
+      if (name === "cityTo") return ele?.flightsData[0]?.cityTo;
+      return null;
+    });
+
+    console.log(data);
   }, []);
 
   const handleClick = (item, name) => {
@@ -48,11 +66,12 @@ const AirportsCard = ({ name, index, hide }) => {
   return (
     <>
       <div
-        className="absolute max-h-[17em] w-[21em] mt-1  bg-light rounded-lg overflow-y-auto z-20 pt-2"
+        className="absolute max-h-[17em] w-[21em] mt-1  bg-light rounded-lg overflow-y-auto pt-2 z-[9999]"
         id="airportdd"
       >
         <div className=" mx-2 px-2 py-1 border-[1px]">
           <input
+            ref={inputRef}
             type="text"
             list="Country"
             placeholder={name === "cityFrom" ? "City From" : "City To"}

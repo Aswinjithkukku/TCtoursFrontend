@@ -24,6 +24,12 @@ const initialState = {
     },
   ],
   travellers: { adult: 1, children: 0, infant: 0 },
+  selectedFlight: {},
+  selectedAddOns: {
+    seats: [],
+    meal: [],
+    luggage: [],
+  },
   flightsData: [
     {
       cityFrom: "",
@@ -80,6 +86,27 @@ const flightSlice = createSlice({
       }
       state.travellerDetails = detailsRows;
     },
+    handleTravellerRowChange: (state, { payload }) => {
+      const prev = state.travellerDetails[payload?.index];
+
+      prev[payload?.value?.name] = payload?.value?.value;
+
+      state.travellerDetails[payload?.index] = prev;
+    },
+    handleTravellerRowDobChange: (state, { payload }) => {
+      const prev = state.travellerDetails[payload?.index];
+
+      prev.dateOfBirth[payload?.value?.name] = payload?.value?.value;
+
+      state.travellerDetails[payload?.index] = prev;
+    },
+    handleTravellerRowExpiryChange: (state, { payload }) => {
+      const prev = state.travellerDetails[payload?.index];
+
+      prev.expiryDate[payload?.value?.name] = payload?.value?.value;
+
+      state.travellerDetails[payload?.index] = prev;
+    },
 
     handleFlightDeatilsChange: (state, { payload }) => {
       const currentData = [...state.flightsData];
@@ -98,6 +125,20 @@ const flightSlice = createSlice({
     },
     handleRescentSearchCardClick: (state, { payload }) => {
       state.flightsData = payload?.flightsData;
+      state.travellers = payload?.travellers;
+      state.tripType = payload?.tripType;
+    },
+    setSelectedFlight: (state, { payload }) => {
+      state.selectedFlight = payload;
+    },
+    handleFlightAddOnsChange: (state, { payload }) => {
+      state.selectedAddOns = {
+        ...state.selectedAddOns,
+        [payload.name]: [
+          ...state.selectedAddOns?.[payload?.name],
+          payload?.value,
+        ],
+      };
     },
   },
   // extraReducers: {
@@ -114,6 +155,11 @@ export const {
   removeFlightRow,
   handleTravellersChange,
   handleFlightDeatilsChange,
+  handleFlightAddOnsChange,
+  handleTravellerRowChange,
+  handleTravellerRowDobChange,
+  handleTravellerRowExpiryChange,
+  setSelectedFlight,
   handleRescentSearchCardClick,
 } = flightSlice.actions;
 

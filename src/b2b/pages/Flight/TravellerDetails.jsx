@@ -1,9 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MonthNames from "../../../data/MonthNames";
+import {
+  handleTravellerRowChange,
+  handleTravellerRowDobChange,
+  handleTravellerRowExpiryChange,
+} from "../../../redux/slices/flightSlice";
 
 const TravellerDetails = ({ navigation, setNavigation }) => {
+  const dispatch = useDispatch();
   const { countries } = useSelector((state) => state.home);
+  const { travellers, travellerDetails } = useSelector((state) => state.flight);
 
   let limit = new Date().getFullYear();
   let year = [];
@@ -32,6 +39,23 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
     });
   };
 
+  const onRowChange = (e, index) => {
+    const {
+      target: { value, name },
+    } = e;
+
+    dispatch(handleTravellerRowChange({ index, value: { value, name } }));
+  };
+
+  const onDobChange = ({ name, value, index }) => {
+    dispatch(handleTravellerRowDobChange({ index, value: { value, name } }));
+  };
+  const onExpiryChange = ({ name, value, index }) => {
+    dispatch(handleTravellerRowExpiryChange({ index, value: { value, name } }));
+  };
+
+  console.log(travellerDetails);
+
   return (
     <div className="p-6 text-darktext">
       <form onSubmit={submitHandler}>
@@ -54,7 +78,7 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
         {navigation.details && (
           <div className="rounded-md shadow bg-white p-6">
             <div className="w-[100%]">
-              {Array.from({ length: 2 }).map((row, index) => (
+              {travellerDetails.map((row, index) => (
                 <div key={index} className="pb-6 ">
                   <div className="py-2 text-gray-500 font-[550]  bg-gray-100 border-dashed px-1">
                     <p className="">
@@ -72,7 +96,7 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
                         <select
                           name="title"
                           value={row?.title}
-                          // onChange={(e) => onRowChange(e, index)}
+                          onChange={(e) => onRowChange(e, index)}
                           className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
                         >
                           <option hidden>choose title</option>
@@ -92,7 +116,7 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
                           type="text"
                           name="firstName"
                           value={row?.firstName}
-                          // onChange={(e) => onRowChange(e, index)}
+                          onChange={(e) => onRowChange(e, index)}
                           className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
                         />
                       </div>
@@ -107,7 +131,7 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
                           className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
                           name="lastName"
                           value={row?.lastName}
-                          // onChange={(e) => onRowChange(e, index)}
+                          onChange={(e) => onRowChange(e, index)}
                         />
                       </div>
                     </div>
@@ -123,7 +147,7 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
                           className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
                           name="email"
                           value={row?.email}
-                          // onChange={(e) => onRowChange(e, index)}
+                          onChange={(e) => onRowChange(e, index)}
                         />
                       </div>
                     </div>
@@ -136,9 +160,9 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
                           className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none"
                           name="country"
                           value={row?.country}
-                          // onChange={(e) => {
-                          //   onRowChange(e, index);
-                          // }}
+                          onChange={(e) => {
+                            onRowChange(e, index);
+                          }}
                         >
                           <option hidden>Choose Country</option>
                           {countries?.map((item, index) => (
@@ -178,13 +202,27 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
                             className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none no-spinner"
                             name="contactNo"
                             value={row?.contactNo}
-                            // onChange={(e) => onRowChange(e, index)}
+                            onChange={(e) => onRowChange(e, index)}
                           />
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="lg:grid grid-cols-12 gap-5 text-darktext space-y-3 lg:space-y-0 lg:py-2">
+                    <div className="col-span-6">
+                      <div className="">
+                        <label className="label">Passport Number</label>
+                      </div>
+                      <div className="">
+                        <input
+                          type="text"
+                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none no-spinner"
+                          name="passportNo"
+                          value={row?.passportNo}
+                          onChange={(e) => onRowChange(e, index)}
+                        />
+                      </div>
+                    </div>
                     <div className="col-span-3">
                       <div className="w-full">
                         <label className="label">passport Expiry</label>
@@ -196,11 +234,11 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
                             name="day"
                             value={row?.expiryDate?.day}
                             onChange={(e) => {
-                              // handleExpChange({
-                              //   value: e.target.value,
-                              //   name: e.target.name,
-                              //   index,
-                              // });
+                              onExpiryChange({
+                                value: e.target.value,
+                                name: e.target.name,
+                                index,
+                              });
                             }}
                           >
                             <option hidden>Day</option>
@@ -217,11 +255,11 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
                             name="month"
                             value={row?.expiryDate?.month}
                             onChange={(e) => {
-                              // handleExpChange({
-                              //   value: e.target.value,
-                              //   name: e.target.name,
-                              //   index,
-                              // });
+                              onExpiryChange({
+                                value: e.target.value,
+                                name: e.target.name,
+                                index,
+                              });
                             }}
                           >
                             <option hidden>Month</option>
@@ -243,11 +281,11 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
                             name="year"
                             value={row?.expiryDate?.year}
                             onChange={(e) => {
-                              // handleExpChange({
-                              //   value: e.target.value,
-                              //   name: e.target.name,
-                              //   index,
-                              // });
+                              onExpiryChange({
+                                value: e.target.value,
+                                name: e.target.name,
+                                index,
+                              });
                             }}
                           >
                             <option hidden>Year</option>
@@ -258,20 +296,6 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
                             ))}
                           </select>
                         </div>
-                      </div>
-                    </div>
-                    <div className="col-span-6">
-                      <div className="">
-                        <label className="label">Passport Number</label>
-                      </div>
-                      <div className="">
-                        <input
-                          type="text"
-                          className="w-full py-2 p-1 text-primaryColor border-b border-darktext outline-none no-spinner"
-                          name="passportNo"
-                          value={row?.passportNo}
-                          // onChange={(e) => onRowChange(e, index)}
-                        />
                       </div>
                     </div>
                     <div className="col-span-3">
@@ -286,11 +310,11 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
                             name="day"
                             value={row?.dateOfBirth?.day}
                             onChange={(e) => {
-                              // handleChange({
-                              //   value: e.target.value,
-                              //   name: e.target.name,
-                              //   index,
-                              // });
+                              onDobChange({
+                                value: e.target.value,
+                                name: e.target.name,
+                                index,
+                              });
                             }}
                           >
                             <option hidden> Day</option>
@@ -308,11 +332,11 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
                             name="month"
                             value={row?.dateOfBirth?.month}
                             onChange={(e) => {
-                              // handleChange({
-                              //   value: e.target.value,
-                              //   name: e.target.name,
-                              //   index,
-                              // });
+                              onDobChange({
+                                value: e.target.value,
+                                name: e.target.name,
+                                index,
+                              });
                             }}
                           >
                             <option hidden>Month</option>
@@ -333,11 +357,11 @@ const TravellerDetails = ({ navigation, setNavigation }) => {
                             name="year"
                             value={row?.dateOfBirth?.year}
                             onChange={(e) => {
-                              // handleChange({
-                              //   value: e.target.value,
-                              //   name: e.target.name,
-                              //   index,
-                              // });
+                              onDobChange({
+                                value: e.target.value,
+                                name: e.target.name,
+                                index,
+                              });
                             }}
                           >
                             <option hidden>Year</option>
