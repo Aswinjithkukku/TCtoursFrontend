@@ -26,7 +26,7 @@ export default function Dashboard() {
    const { agent } = useSelector((state) => state.agents);
    const { balance } = useSelector((state) => state.wallet);
    const { b2bMenuStatus } = useSelector((state) => state.general);
-   const { countries } = useSelector((state) => state.home);
+   const { visaCountries } = useSelector((state) => state.home);
 
    useEffect(() => {
          dispatch(
@@ -53,7 +53,7 @@ export default function Dashboard() {
                     </Link>
                 </div>
             </div> */}
-         <div className="lg:px-6 p-2 ">
+         <div className="lg:px-6 p-2 min-h-screen">
             {/* <div className="flex items-center justify-between gap-[10px] mb-5">
                     <div>
                         <span className="font-medium text-textColor">
@@ -82,7 +82,7 @@ export default function Dashboard() {
                         Top Visited Countries
                      </div>
                      <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-                        {countries?.map((item, index) => (
+                        {visaCountries?.map((item, index) => (
                            <div
                               className="mt-2 relative cursor-pointer shadow-md rounded-2xl"
                               key={index}

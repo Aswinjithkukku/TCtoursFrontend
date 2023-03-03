@@ -5,7 +5,12 @@ import { RxShare2 } from "react-icons/rx";
 import Rating from "../../../components/Rating/Rating";
 import banner from "../../../static/images/banner.jpg";
 import map from "../../../static/images/map.jpg";
+import AvailabilitySection from "./AvailabilitySection";
 import DetailsSection from "./DetailsSection";
+import FacilitySection from "./FacilitySection";
+import FaqSection from "./FaqSection";
+import HouseRules from "./HouseRules";
+import ReviewSection from "./ReviewSection";
 
 function HotelDetailIndex() {
    return (
@@ -51,8 +56,23 @@ function HotelDetailIndex() {
                </div>
             </div>
          </div>
-         <div className="Details__section mt-1">
+         <div className="Details__section mt-5">
             <DetailsSection />
+         </div>
+         <div className="Availability__section">
+            <AvailabilitySection/>
+         </div>
+         {/* <div className="review__section mt-5">
+            <ReviewSection />
+         </div> */}
+         <div className="facility__section mt-5">
+            <FacilitySection />
+         </div>
+         <div className="house_rule__section mt-5">
+            <HouseRules />
+         </div>
+         <div className="faq__section mt-5">
+            <FaqSection />
          </div>
       </div>
    );

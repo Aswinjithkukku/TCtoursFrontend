@@ -133,7 +133,7 @@ function FlightCard() {
       </form>
       <div className="p-3">
         <h2 className="text-xl md:text-2xl font-semibold text-darktext mb-4">
-          Rescent Search
+          Recent Search
         </h2>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">

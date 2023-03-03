@@ -55,6 +55,7 @@ import {
    FlightBookingPage,
    HotelIndexPage,
    HotelDetailIndex,
+   HotelApplyIndex,
 } from "../b2b/pages";
 import B2BPrivateRoute from "./B2BPrivateRoute";
 import LoadingWrapper from "./LoadingWrapper";
@@ -267,6 +268,7 @@ const ThemeRoutes = [
          { path: "/b2b/flight/booking/:id", element: <FlightBookingPage /> },
          { path: "/b2b/hotel", element: <HotelIndexPage /> },
          { path: "/b2b/hotel/details", element: <HotelDetailIndex /> },
+         { path: "/b2b/hotel/apply", element: <HotelApplyIndex /> },
       ],
    },
    {
