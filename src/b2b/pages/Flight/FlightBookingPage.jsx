@@ -8,6 +8,7 @@ import {
   MdOutlineFlightLand,
   MdOutlineFlightTakeoff,
 } from "react-icons/md";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SearchCards from "../../components/Cards/SearchCards";
 import VisaApplyCard from "../Visa/VisaApplyCard";
@@ -24,6 +25,8 @@ const FlightBookingPage = () => {
     payment: false,
   });
   const navigate = useNavigate();
+
+  const { selectedFlight } = useSelector((state) => state.flight);
 
   return (
     <>

@@ -29,16 +29,16 @@ export default function Dashboard() {
    const { visaCountries } = useSelector((state) => state.home);
 
    useEffect(() => {
-         dispatch(
-            setMenuStatus({
-               attraction: true,
-               hotel: false,
-               visa: false,
-               transfer: false,
-               flight: false,
-            })
-         );
-   },[]);
+      dispatch(
+         setMenuStatus({
+            attraction: true,
+            hotel: false,
+            visa: false,
+            transfer: false,
+            flight: false,
+         })
+      );
+   }, []);
 
    return (
       <div className="">
