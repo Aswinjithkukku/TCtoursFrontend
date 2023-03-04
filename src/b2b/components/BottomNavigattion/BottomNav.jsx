@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
 import { FaWallet } from "react-icons/fa";
-import { GiHamburgerMenu, GiPortal, GiWallet } from "react-icons/gi";
-import { HiOutlineShoppingCart } from "react-icons/hi";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { SiDoordash } from "react-icons/si";
+import { TbLayoutDashboard } from "react-icons/tb";
 import { IoMdCart } from "react-icons/io";
-import { RiMarkupFill, RiMenuUnfoldFill } from "react-icons/ri";
-import { RxDashboard } from "react-icons/rx";
+import { RiMarkupFill } from "react-icons/ri";
 import { useLocation, useNavigate } from "react-router-dom";
 import SearchCardModal from "./SearchCardModal";
 
@@ -21,12 +20,12 @@ function BottomNav({ setSidebarView }) {
                location.pathname.includes("/b2b/attractions/details/")
                   ? "hidden"
                   : "block"
-            } lg:hidden fixed w-full bottom-0 bg-primaryColor text-white h-[60px] flex justify-center items-center`}
+            } lg:hidden fixed w-full bottom-0 bg-primaryColor text-white h-[48px] flex justify-center items-center`}
          >
             <div className="grid grid-cols-5 gap-4 px-2 w-full">
                <div className="flex justify-center items-center">
                   <div className="" onClick={() => setSidebarView(true)}>
-                     <div className="flex justify-center items-center text-2xl">
+                     <div className="flex justify-center items-center text-[20px]">
                         <GiHamburgerMenu />
                      </div>
                      <div className="">
@@ -36,7 +35,7 @@ function BottomNav({ setSidebarView }) {
                </div>
                <div className=" flex justify-center items-center">
                   <div className="" onClick={() => navigate("/b2b/wallet")}>
-                     <div className="flex justify-center items-center text-2xl">
+                     <div className="flex justify-center items-center text-[20px]">
                         <FaWallet />
                      </div>
                      <div className="">
@@ -46,11 +45,11 @@ function BottomNav({ setSidebarView }) {
                </div>
                <div className=" flex justify-center items-center relative">
                   <div
-                     className="absolute -top-9 w-[70px] h-[70px] bg-main rounded-full flex justify-center items-center"
+                     className="absolute -top-7 w-[60px] h-[60px] bg-main rounded-full flex justify-center items-center"
                      onClick={() => navigate("/b2b")}
                   >
-                     <div className="flex justify-center items-center text-3xl">
-                        <GiPortal />
+                     <div className="flex justify-center items-center text-2xl">
+                        <TbLayoutDashboard />
                      </div>
                   </div>
                </div>
@@ -59,7 +58,7 @@ function BottomNav({ setSidebarView }) {
                      className=""
                      onClick={() => navigate("/b2b/markup/attraction")}
                   >
-                     <div className="flex justify-center items-center text-2xl">
+                     <div className="flex justify-center items-center text-[20px]">
                         <RiMarkupFill />
                      </div>
                      <div className="">
@@ -72,7 +71,7 @@ function BottomNav({ setSidebarView }) {
                      className=""
                      onClick={() => navigate("/b2b/order/attraction")}
                   >
-                     <div className="flex justify-center items-center text-2xl">
+                     <div className="flex justify-center items-center text-[20px]">
                         <IoMdCart />
                      </div>
                      <div className="">

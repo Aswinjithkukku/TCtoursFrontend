@@ -113,7 +113,7 @@ const AttractionOrderCard = ({ orderInfo }) => {
               </div>
               <div className="col-span-2 w-full h-[7em] overflow-hidden rounded-md ">
                 <img
-                  src={`${serverUrl}${ele?.attraction?.logo}`}
+                  src={`${process.env.REACT_APP_SERVER_URL + ele?.attraction?.logo}`}
                   alt="Attraction logo"
                   className="h-[100%] w-[100%]"
                 />

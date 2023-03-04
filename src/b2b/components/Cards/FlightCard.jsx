@@ -1,138 +1,240 @@
-import React, { useState } from 'react'
-import { AiOutlineDown, AiOutlineSearch, AiOutlineUp } from 'react-icons/ai'
-import { BsCalendar2Date } from 'react-icons/bs'
-import { IoLocationOutline } from 'react-icons/io5'
+import React from "react";
+import { TbArrowsRight } from "react-icons/tb";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  json,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import {
+  addFlightRow,
+  handleRescentSearchCardClick,
+  removeFlightRow,
+  setTripType,
+} from "../../../redux/slices/flightSlice";
+
+import FlightCardForm from "./FlightCardForm";
 
 function FlightCard() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    const [ dropdown , setDropdown ] = useState(false)
+  const { tripType, flightsData, travellers } = useSelector(
+    (state) => state.flight
+  );
+
+  const handleTripTypeChange = (e) => {
+    dispatch(setTripType(e.target.value));
+    if (e.target.value === "multicity") {
+      dispatch(addFlightRow());
+    } else {
+      dispatch(removeFlightRow({ index: "notMultiCity" }));
+    }
+  };
+
+  const location = useLocation();
+
+  console.log(location.pathname);
+
+  // const handleDetailChange = (data, index) => {
+  //   dispatch(handleFlightDeatilsChange({ data, index }));
+  //   // const dataArray = [...flightDetails];
+  //   // dataArray[index] = { ...dataArray[index], [name]: value };
+
+  //   // if (tripType === "multicity" && index < dataArray.length - 1) {
+  //   //   if (name === "cityTo") {
+  //   //     dataArray[index + 1] = { ...dataArray[index + 1], cityFrom: value };
+  //   //   }
+  //   // }
+  //   // if (tripType === "multicity" && index > 0) {
+  //   //   if (name === "cityFrom") {
+  //   //     dataArray[index - 1] = { ...dataArray[index + 1], cityTo: value };
+  //   //   }
+  //   // }
+  //   // setFlightDetails([...dataArray]);
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let prev = localStorage.getItem("flightSearches");
+    const info = {
+      flightsData,
+      tripType,
+      travellers,
+    };
+
+    let data;
+
+    console.log(info);
+
+    if (prev) {
+      prev = JSON.parse(prev);
+      console.log(prev);
+      data = [...prev, info];
+    } else {
+      data = [info];
+    }
+    localStorage.setItem("flightSearches", JSON.stringify(data));
+    navigate("/b2b/flight/order");
+  };
+
+  let rescentSearches = localStorage.getItem("flightSearches");
+
+  if (rescentSearches) {
+    rescentSearches = JSON.parse(rescentSearches);
+    rescentSearches = rescentSearches.reverse();
+  }
+
+  console.log(rescentSearches);
+
+  const handlerescentCardClick = (data) => {
+    dispatch(handleRescentSearchCardClick(data));
+    navigate("/b2b/flight/order");
+  };
+
   return (
-    <form>
-    <div className='flex px-5 pt-7 pb-4 space-x-3'>
-        <div className='flex space-x-2'>
-            <div className=''>
-                <input type='radio' name='choose' />
+    <>
+      {location.pathname === "/b2b" && (
+        <>
+          <form onSubmit={handleSubmit}>
+            <div className="flex px-5 pt-7 pb-4 space-x-3">
+              <div className="flex space-x-2">
+                <div className="">
+                  <input
+                    type="radio"
+                    name="choose"
+                    className="cursor-pointer"
+                    value="oneway"
+                    onChange={handleTripTypeChange}
+                    checked={tripType === "oneway"}
+                  />
+                </div>
+                <div className="text-sm">One-way</div>
+              </div>
+              <div className="flex space-x-2">
+                <div className="">
+                  <input
+                    type="radio"
+                    name="choose"
+                    className="cursor-pointer"
+                    value="return"
+                    onChange={handleTripTypeChange}
+                    checked={tripType === "return"}
+                  />
+                </div>
+                <div className="text-sm">Round trip</div>
+              </div>
+              <div className="flex space-x-2">
+                <div className="">
+                  <input
+                    type="radio"
+                    name="choose"
+                    className="cursor-pointer"
+                    value="multicity"
+                    onChange={handleTripTypeChange}
+                    checked={tripType === "multicity"}
+                  />
+                </div>
+                <div className="text-sm">Multi-city</div>
+              </div>
             </div>
-            <div className='text-sm'>
-                Round trip
-            </div>
-        </div>
-        <div className='flex space-x-2'>
-            <div className=''>
-                <input type='radio' name='choose' />
-            </div>
-            <div className='text-sm'>
-                One-way
-            </div>
-        </div>
-        <div className='flex space-x-2'>
-            <div className=''>
-                <input type='radio' name='choose' />
-            </div>
-            <div className='text-sm'>
-                Multi-city
-            </div>
-        </div>
-        <div className='flex border rounded-xl justify-between items-center relative text-darktext'>
-            <div className='flex items-center cursor-pointer' onClick={() => setDropdown(!dropdown)} >
-                <span className='px-3 text-sm'>Peoples</span>
-                <span className='px-3 text-sm'>{dropdown ? <AiOutlineUp /> : <AiOutlineDown />}  </span>
-            </div>
-            {/* absolute div */}
-            {dropdown && (
-                <div className="absolute bg-soft border-2 right-0 top-[25px] rounded-2xl w-[15em] z-10 shadow-sm">
-                    <ul>
-                        <li>
-                            <div
-                                className="flex items-center gap-[12px] text-sm px-6 py-[12px]  transition-all text-darktext justify-between"
-                            >
-                                <span>Adults</span>
-                                <span>
-                                    <input type='number' min={0} max={10} className='text-center border placeholder:text-text py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+            {flightsData?.map((data, index, array) => (
+              <>
+                <FlightCardForm
+                  index={index}
+                  data={data}
+                  length={array.length}
+                />
+              </>
+            ))}
+          </form>
+          <div className="p-3">
+            <h2 className="text-xl md:text-2xl font-semibold text-darktext mb-4">
+              Rescent Search
+            </h2>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+              {rescentSearches?.map((ele) => {
+                console.log(ele);
+                return (
+                  <>
+                    <div
+                      className=" rounded-xl flex flex-col justify-center p-4 pt-8 cursor-pointer bg-white shadow-lg relative shadow-blue-300/20 transform hover:translate-y-[-4px]"
+                      onClick={() => {
+                        handlerescentCardClick(ele);
+                      }}
+                    >
+                      <div
+                        className={`absolute top-2 left-4 capitalize font-medium text-[14px] ${
+                          ele?.tripType === "oneway"
+                            ? "text-teal-500"
+                            : "text-red-500"
+                        } `}
+                      >
+                        {ele?.tripType === "return" ? "Round Trip" : "One-Way"}
+                      </div>
+                      {ele?.flightsData?.map((data) => (
+                        <>
+                          <div className="w-[100%] ">
+                            <div className="flex justify-between items-center w-[100%] ">
+                              <div className="flex gap-1 pr-2">
+                                <span>{data?.cityFrom?.name}</span>
+                                <span className="text-gray-300 font-medium">
+                                  ({data?.cityFrom?.iata})
                                 </span>
-                            </div>
-                        </li>
-                        <li>
-                            <div
-                                className="flex items-center gap-[12px] text-sm px-6 py-[12px] transition-all text-darktext justify-between"
-                            >
-                                <span>Seniors</span>
-                                <span>
-                                    <input type='number' min={0} max={10} className='text-center border placeholder:text-text py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
+                              </div>
+                              <div className="flex  text-blue-400 text-[25px]">
+                                <TbArrowsRight />
+                              </div>
+                              <div className="flex gap-1 pl-2">
+                                <span>{data?.cityTo?.name}</span>
+                                <span className="text-gray-300 font-medium">
+                                  ({data?.cityTo?.iata})
                                 </span>
+                              </div>
                             </div>
-                        </li>
-                        <li>
-                            <div
-                                className="flex items-center gap-[12px] text-sm px-6 py-[12px] transition-all text-darktext justify-between"
-                            >
-                                <span>Children</span>
-                                <span>
-                                    <input type='number' min={0} max={10} className='text-center border placeholder:text-text py-3 focus:outline-none focus:border-none focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
-                                </span>
+                            <div className="flex gap-2 mt-2 text-[14px]">
+                              Departure Date :{" "}
+                              <span className="text-gray-300 ">
+                                {data?.departureDate}
+                              </span>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-            )}
-            {/* absolute div */}
-        </div>
-    </div>
-    <div className='md:grid md:grid-cols-12 gap-0 pb-7 space-y-4 md:space-y-0'>
-        <div className='md:col-span-3 flex justify-center items-center md:border-r-2 border-bluetrans'>
-            <div className='space-y-2 w-10/12 '>
-                <div className='flex items-center space-x-2 text-darktext'>
-                    <span className='text-2xl text-blue'><IoLocationOutline /> </span>
-                    <span className='text-lg '>Departure from</span>
-                </div>
-                <div className=''>
-                    <input type='text' placeholder='Where do you want to go?' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
-                </div>
+                          </div>
+                        </>
+                      ))}
+                      {ele?.tripType === "return" && (
+                        <div className="flex gap-2 mt-2 text-[14px]">
+                          Return Date :{" "}
+                          <span className="text-gray-300 ">
+                            {ele?.flightsData[0].returnDate}
+                          </span>
+                        </div>
+                      )}
+                      <div className="flex gap-2 mt-2">
+                        <span className="flex  gap-1 text-[12px]">
+                          <span>Adult :</span>
+                          {ele?.travellers?.adult}
+                        </span>
+                        <span className="flex  gap-1 text-[12px]">
+                          <span>Child :</span>
+                          {ele?.travellers?.children}
+                        </span>
+                        <span className="flex  gap-1 text-[12px]">
+                          <span>Infant :</span>
+                          {ele?.travellers?.infant}
+                        </span>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
             </div>
-        </div>
-        <div className='md:col-span-3 flex justify-center items-center md:border-r-2 border-bluetrans'>
-            <div className='space-y-2 w-10/12 '>
-                <div className='flex items-center space-x-2 text-darktext'>
-                    <span className='text-2xl text-blue'><IoLocationOutline /> </span>
-                    <span className='text-lg'>Departure to</span>
-                </div>
-                <div className=''>
-                    <input type='text' placeholder='Choose date' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
-                </div>
-            </div>
-        </div>
-        <div className='md:col-span-2 flex justify-center items-center md:border-r-2 border-bluetrans'>
-            <div className='space-y-2 w-10/12 '>
-                <div className='flex items-center space-x-2 text-darktext'>
-                    <span className='text-2xl text-blue'><BsCalendar2Date /> </span>
-                    <span className='text-lg'>Leave</span>
-                </div>
-                <div className=''>
-                    <input type='date' placeholder='Choose date' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
-                </div>
-            </div>
-        </div>
-        <div className='md:col-span-2 flex justify-center items-center md:border-r-2 border-bluetrans'>
-            <div className='space-y-2 w-10/12 '>
-                <div className='flex items-center space-x-2 text-darktext'>
-                    <span className='text-2xl text-blue'><BsCalendar2Date /> </span>
-                    <span className='text-lg'>Return</span>
-                </div>
-                <div className=''>
-                    <input type='date' placeholder='Choose date' className='px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext' />
-                </div>
-            </div>
-        </div>
-        <div className='md:col-span-2 flex justify-center items-center'>
-            <div className=''>
-                <button className='h-14 w-14 bg-blueColor rounded-xl text-light text-3xl flex justify-center items-center'>
-                    <AiOutlineSearch />
-                </button>
-            </div>
-        </div>
-    </div>
-</form>
-  )
+          </div>
+        </>
+      )}
+    </>
+  );
 }
 
-export default FlightCard
+export default FlightCard;

@@ -42,6 +42,26 @@ function Resellers() {
          setIsLoading(false);
       }
    };
+   const deleteReseller = async (id) => {
+      try {
+         console.log(id);
+         setError("");
+         const response = await axios.delete(
+            `/b2b/resellers/delete/${id}`,
+            {
+               headers: {
+                  authorization: `Bearer ${token}`,
+               },
+            }
+         );
+         const result = resellers?.filter(item => item._id !== id)
+         dispatch(setResellers(result));
+      } catch (error) {
+         setError(
+            error?.response?.data?.error || "Something went wrong, Try again"
+         );
+      }
+   };
 
    useEffect(() => {
       fetchResellers(search);
@@ -155,7 +175,9 @@ function Resellers() {
                                           >
                                              <AiFillEdit />{" "}
                                           </span>
-                                          <span className="text-xl text-main">
+                                          <span className="text-xl text-main"
+                                          onClick={() => deleteReseller(item?._id)}
+                                          >
                                              <AiFillDelete />{" "}
                                           </span>
                                        </td>

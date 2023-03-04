@@ -3,10 +3,10 @@ import { AiOutlineDown } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import OtpModal from "./OtpModal";
 import axios from "../../../axios";
-import Swal from "sweetalert2";
 import priceConversion from "../../../utils/PriceConversion";
 import { BtnLoader } from "../../components";
 import { setAlertError } from "../../../redux/slices/homeSlice";
+import { BiBlock } from "react-icons/bi";
 
 function PaymentDetailsSection() {
    const dispatch = useDispatch();
@@ -74,11 +74,6 @@ function PaymentDetailsSection() {
       } catch (err) {
          if (err?.response?.data?.error) {
             setError(err?.response?.data?.error);
-            // await Swal.fire({
-            //   icon: "error",
-            //   title: "Something went wrong!",
-            //   text: err?.response?.data?.error,
-            // });
             dispatch(
                setAlertError({
                   status: true,
@@ -94,6 +89,15 @@ function PaymentDetailsSection() {
    const country = countries?.filter(
       (item) => item._id === travellerData?.country
    );
+
+   const finalPayment =
+      agentExcursionCart &&
+      agentExcursionCart.reduce((acc, item) => {
+         const vatPrice =
+            item?.vat && item?.isVat && (item?.price * item?.vat) / 100;
+         const sum = vatPrice + item?.price;
+         return acc + sum;
+      }, 0);
 
    return (
       <>
@@ -285,10 +289,16 @@ function PaymentDetailsSection() {
             </div>
             <div className="text-center fixed lg:static bottom-0 left-0 right-0 rounded-t-3xl lg:rounded-none py-8 bg-white lg:bg-soft lg:bg-none px-10 lg:px-0 z-10">
                <button
-                  className="text-light bg-lightblue  py-2 rounded-lg text whitespace-nowrap w-full px-10"
-                  onClick={submitHandler}
+                  className={`text-light bg-lightblue  py-2 rounded-lg text whitespace-nowrap w-full px-10  ${balance < finalPayment ? " cursor-not-allowed " : " cursor-pointer "}`}
+                  onClick={balance > finalPayment && submitHandler}
                >
-                  Pay Now
+                  {balance < finalPayment ? (
+                     <span className="text-xl">
+                        <BiBlock />
+                     </span>
+                  ) : (
+                     "Pay Now"
+                  )}
                </button>
             </div>
          </div>

@@ -123,7 +123,7 @@ function SearchListViewSection() {
                         item?.offerAmountType === "flat" && (
                           <span className="text-light bg-green-600 w-20 py-1 whitespace-nowrap text-center rounded-md capitalize text-xs">
                             {item?.offerAmountType === "flat"
-                              ? `$ ${item?.offerAmount} OFF`
+                              ? `${item?.offerAmount} ${selectedCurrency?.isocode} OFF`
                               : ""}{" "}
                           </span>
                         )}
@@ -198,7 +198,7 @@ function SearchListViewSection() {
         </div>
       )}
       <>
-        {excursions?.attractions?.data?.length < 1 && (
+        {!excursions?.attractions && (
           <div className="p-6 shadow-lg rounded-lg bg-gray-100 text-gray-700">
             <h2 className="font-semibold text-3xl mb-5">Found Nothing!</h2>
             <p>
@@ -212,7 +212,7 @@ function SearchListViewSection() {
               <span className="text-lightblue underline"> email Id</span> with
               us!
             </p>
-            <form onSubmit={submitHandler}>
+            <form className="" onSubmit={submitHandler}>
               <input
                 type="email"
                 required

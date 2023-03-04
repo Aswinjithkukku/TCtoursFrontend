@@ -11,6 +11,7 @@ import agentExcursionReducer from "./agentExcursionSlice";
 import walletReducer from "./walletSlice";
 import visaReducer from "./visaSlice";
 import b2cVisaReducer from "./b2cvisaSlice";
+import flightReducer from "./flightSlice";
 
 export {
   excursionReducer,
@@ -26,4 +27,5 @@ export {
   walletReducer,
   visaReducer,
   b2cVisaReducer,
+  flightReducer,
 };

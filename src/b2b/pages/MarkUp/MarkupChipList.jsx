@@ -22,17 +22,16 @@ function MarkupChipList({ item }) {
    const { selectedCurrency } = useSelector((state) => state.home);
    return (
       <>
-         <div className="mb-2.5 bg-neutral-50 border border-neutral-100 rounded-xl m-4 shadow-sm">
+         <div className="mb-2.5 bg-neutral-50 border border-neutral-100 rounded-xl m-4 shadow-sm ">
             <div className="p-4">
                <div className="w-full">
-                  <table className="w-full min-w-max">
+                  <table className="w-full ">
                      <tbody>
                         <tr>
                            <td className="pr-4 pb-3">
-                              <div className="flex flex-wrap items-center -m-2">
-                                 <div className="w-auto p-2"></div>
-                                 <div className="w-auto p-2 space-y-2">
-                                    <span className="block text-sm font-semibold">
+                              <div className="flex flex-wrap items-center  w-full">
+                                 <div className="w-auto p-2 space-y-2 ">
+                                    <span className="flex text-sm font-semibold break-words ">
                                        {item?.title}
                                     </span>
                                     <span className="text-xs flex gap-4 capitalize text-slate-800">
@@ -94,7 +93,7 @@ function MarkupChipList({ item }) {
                         </tr>
                         <tr>
                            <td className="pr-4">
-                              <div className="flex flex-wrap gap-2 sm:justify-start justify-between items-center">
+                              <div className="flex  gap-2 sm:justify-start justify-between items-center">
                                  <button
                                     className="px-4 py-3 font-medium text-xs border hover:border-neutral-200 rounded-lg"
                                     onClick={() => {

@@ -26,13 +26,12 @@ function VisaMarkupChipList({ item }) {
          <div class="mb-2.5 bg-neutral-50 border border-neutral-100 m-4 shadow-sm rounded-xl">
             <div class="p-4">
                <div class="w-full">
-                  <table class="w-full min-w-max">
+                  <table class="w-full ">
                      <tbody>
                         <tr>
-                           <td class="pr-4 pb-3">
-                              <div class="flex flex-wrap items-center -m-2">
-                                 <div class="w-auto p-2"></div>
-                                 <div class="w-auto p-2 space-y-2">
+                           <td class=" pb-3">
+                              <div class="flex flex-wrap items-center">
+                                 <div class="w-auto space-y-2">
                                     <span class="block text-sm font-semibold">
                                        {item?.visaName}
                                     </span>
@@ -93,7 +92,7 @@ function VisaMarkupChipList({ item }) {
                         </tr>
                         <tr>
                            <td class="pr-4">
-                              <div class="flex flex-wrap gap-2 sm:justify-start justify-between items-center">
+                              <div class="flex gap-2 sm:justify-start justify-between items-center">
                                  <button
                                     class="px-4 py-3 font-medium text-xs border hover:border-neutral-200 rounded-lg"
                                     onClick={() => {

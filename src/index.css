@@ -251,3 +251,9 @@ button:disabled {
   margin: 0;
   -webkit-appearance: none;
 }
+
+.success-page {
+  background-image: url("./static/imagesB2B/trip.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

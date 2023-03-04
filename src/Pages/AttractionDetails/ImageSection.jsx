@@ -20,24 +20,6 @@ function ImageSection() {
   const dropdownWrapperRef = useRef();
   useHandleClickOutside(dropdownWrapperRef, () => setDatalist(false));
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    let result = searchQuery?.destinations?.find((item) => {
-      return value === item?.name;
-    });
-    if (result) {
-      navigate(`/search/${value}`);
-    } else {
-      let data = searchQuery?.attractions?.find((item) => {
-        if (value?.toLowerCase() === item?.title?.toLowerCase()) {
-          return item?._id;
-        }
-      });
-      console.log(data?._id);
-      navigate(`/details/${data?._id}`);
-    }
-  };
-
   const handleFocus = (e) => {
     setDatalist(true);
   };
@@ -51,35 +33,39 @@ function ImageSection() {
       <div className="bg-soft lg:py-10">
         <div className="lg:mx-auto lg:max-w-screen-2xl">
           <div className="lg:ml-3 mx-2 ">
-            <form onSubmit={submitHandler}>
-            <div className="w-full mb-3 flex">
-              <div ref={dropdownWrapperRef} className='w-full'>
-                <input
-                  className="w-full h-10 rounded-l-lg px-2 outline-none border focus:border-lightblue capitalize"
-                  type="search"
-                  value={value}
-                  placeholder="Where do you want to go?"
-                  onChange={(e) => setValue(e.target.value)}
-                  onFocus={handleFocus}
-                />
+            <div className="w-full mb-5 ">
+            <div className="" ref={dropdownWrapperRef}>
+                <div className="relative">
+                  <input
+                    type="text"
+                    list="Country"
+                    value={value}
+                    placeholder="Where do you want to go?"
+                    onChange={(e) => setValue(e.target.value)}
+                    onFocus={handleFocus}
+                    required
+                    className="capitalize bg-gray-50/40 px-3 w-full border outline-none  placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext"
+                  />
+                </div>
                 {datalist && (
-                  <div className="absolute max-h-[17em] w-[21em] mt-1  bg-light rounded-lg overflow-y-auto">
+                  <div className="absolute max-h-[17em] w-[21em] mt-1  bg-light rounded-lg overflow-y-auto z-20">
                     <div className="w-full p-2 overflow-y-auto">
                       <div className="">
                         <p className="bg-gray-200 py-[2px] px-2 text-[14px] font-[600] text-textColor">
                           Destinations
                         </p>
-                        {searchQuery?.destinations?.map((item) => (
+                        {searchQuery?.destinations.map((item) => (
                           <>
                             <div
-                              key={item.name}
+                              key={item?.name}
                               className=" py-2 px-2 cursor-pointer capitalize text-darktext z-30 border-b text-sm"
                               onClick={() => {
-                                setValue(item.name);
+                                setValue(item?.name);
                                 setDatalist(!datalist);
+                                navigate(`/search/${item?.name}`);
                               }}
                             >
-                              {item.name}
+                              {item?.name}
                             </div>
                           </>
                         ))}
@@ -88,13 +74,14 @@ function ImageSection() {
                         <p className="bg-gray-200 py-[2px] px-2 text-[14px] font-[600] text-textColor">
                           Attractions
                         </p>
-                        {searchQuery?.attractions?.map((item) => (
+                        {searchQuery?.attractions.map((item) => (
                           <div
                             key={item.title}
                             className=" py-2 px-2 cursor-pointer capitalize text-darktext z-30 border-b text-sm"
                             onClick={() => {
                               setValue(item.title);
                               setDatalist(!datalist);
+                              navigate(`/details/${item?._id}`);
                             }}
                           >
                             {item.title}
@@ -105,11 +92,7 @@ function ImageSection() {
                   </div>
                 )}
               </div>
-              <button className="uppercase text-[14px] font-[500] text-white bg-blueColor px-7 rounded-r-lg">
-                Search
-              </button>
             </div>
-            </form>
           </div>
           <div className="lg:grid lg:grid-cols-12 gap-1">
             <div className="col-span-3 space-y-3 px-5 overflow-y-auto">

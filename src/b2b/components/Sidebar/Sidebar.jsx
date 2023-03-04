@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import priceConversion from "../../../utils/PriceConversion";
 import { RxAvatar } from "react-icons/rx";
 import { logoPng } from "../../../static/imagesB2B";
+import DialogBox from "../../../components/Layouts/DialogBox";
 
 export default function Sidebar({ setSidebarView, sidebarView }) {
    const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
          >
             <div className="flex items-center justify-between lg:justify-around  py-5 cursor-pointer px-2 ">
                <div
-                  className="h-12 bg-gray-200/50 px-5 py-1 rounded-xl"
+                  className="h-12 bg-gray-200 px-5 py-1 rounded-xl"
                   onClick={() => navigate("/b2b")}
                >
                   <img
@@ -54,7 +55,7 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
                         <span className="block text-[12px] text-grayColor">
                            {agent?.agentCode}
                         </span>
-                        <span className="block text-[13px] font-medium text-white capitalize">
+                        <span className="block text-[12px] font-medium text-white capitalize">
                            {agent?.companyName}
                         </span>
                      </div>
@@ -121,7 +122,7 @@ export default function Sidebar({ setSidebarView, sidebarView }) {
             </div>
          </div>
          <div
-         onClick={() => setSidebarView(false)}
+            onClick={() => setSidebarView(false)}
             className={`${
                sidebarView ? " fixed " : " hidden "
             } lightglass fixed top-0 bottom-0 right-0 left-0 z-10`}
