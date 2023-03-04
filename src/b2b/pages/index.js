@@ -29,6 +29,7 @@ import FlightBookingPage from "./Flight/FlightBookingPage";
 import PaymentSuccessPage from "./PaymentApproval/PaymentSuccessPage";
 import HotelIndexPage from "./Hotel/HotelIndexPage";
 import HotelDetailIndex from "./HotelDetails/HotelDetailIndex";
+import HotelApplyIndex from "./HotelApply/HotelApplyIndex";
 
 export {
    Dashboard,
@@ -62,4 +63,5 @@ export {
    PaymentSuccessPage,
    HotelIndexPage,
    HotelDetailIndex,
+   HotelApplyIndex,
 };

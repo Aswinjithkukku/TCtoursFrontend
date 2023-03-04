@@ -18,30 +18,6 @@ function AttractionCard({ setView }) {
   const dropdownWrapperRef = useRef();
   useHandleClickOutside(dropdownWrapperRef, () => setDatalist(false));
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    let result = searchQuery?.destinations?.find((item) => {
-      return value === item?.name;
-    });
-    if (result) {
-      navigate(`/search/${value}`);
-    } else {
-      let data = searchQuery?.attractions?.find((item) => {
-        if(value?.toLowerCase() === item?.title?.toLowerCase())  {
-          return item?._id
-        }
-      });
-      console.log(data?._id)
-      navigate(`/details/${data?._id}`);
-    }
-    setView &&
-      setView({
-        favourite: false,
-        search: false,
-        profile: false,
-        help: false,
-      });
-  };
 
   const handleFocus = (e) => {
     setDatalist(true);
@@ -53,9 +29,8 @@ function AttractionCard({ setView }) {
 
   return (
     <>
-      <form onSubmit={submitHandler}>
-        <div className="md:grid md:grid-cols-12 gap-0 py-4 space-y-4 md:space-y-0">
-          <div className="md:col-span-10 flex justify-center items-center">
+        <div className=" py-4 space-y-4 md:space-y-0">
+          <div className="w-full flex justify-center items-center">
             <div className="space-y-2 w-10/12 ">
               <div className="flex items-center space-x-2 text-darktext">
                 <span className="text-2xl text-blue-500">
@@ -73,7 +48,7 @@ function AttractionCard({ setView }) {
                     onChange={(e) => setValue(e.target.value)}
                     onFocus={handleFocus}
                     required
-                    className="capitalize bg-gray-50/80 px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext"
+                    className="capitalize bg-gray-50/40 px-3 w-full border-none placeholder:text-text py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue rounded-xl text-darktext"
                   />
                 </div>
                 {datalist && (
@@ -83,17 +58,18 @@ function AttractionCard({ setView }) {
                         <p className="bg-gray-200 py-[2px] px-2 text-[14px] font-[600] text-textColor">
                           Destinations
                         </p>
-                        {searchQuery?.destinations?.map((item) => (
+                        {searchQuery?.destinations.map((item) => (
                           <>
                             <div
-                              key={item.name}
+                              key={item?.name}
                               className=" py-2 px-2 cursor-pointer capitalize text-darktext z-30 border-b text-sm"
                               onClick={() => {
-                                setValue(item.name);
+                                setValue(item?.name);
                                 setDatalist(!datalist);
+                                navigate(`/search/${item?.name}`);
                               }}
                             >
-                              {item.name}
+                              {item?.name}
                             </div>
                           </>
                         ))}
@@ -102,13 +78,14 @@ function AttractionCard({ setView }) {
                         <p className="bg-gray-200 py-[2px] px-2 text-[14px] font-[600] text-textColor">
                           Attractions
                         </p>
-                        {searchQuery?.attractions?.map((item) => (
+                        {searchQuery?.attractions.map((item) => (
                           <div
                             key={item.title}
                             className=" py-2 px-2 cursor-pointer capitalize text-darktext z-30 border-b text-sm"
                             onClick={() => {
                               setValue(item.title);
                               setDatalist(!datalist);
+                              navigate(`/details/${item?._id}`);
                             }}
                           >
                             {item.title}
@@ -121,21 +98,7 @@ function AttractionCard({ setView }) {
               </div>
             </div>
           </div>
-          <div className="md:col-span-2 flex justify-center items-center">
-            <div className="">
-              <button
-                type="submit"
-                className="md:h-14 h-12 md:w-14 px-4 md:px-0 bg-blueColor rounded-xl text-light text-3xl flex justify-center items-center"
-              >
-                <span className="">
-                  <AiOutlineSearch />
-                </span>
-                <span className="text-lg md:hidden">Search</span>
-              </button>
-            </div>
-          </div>
         </div>
-      </form>
     </>
   );
 }
