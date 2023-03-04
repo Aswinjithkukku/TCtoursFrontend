@@ -226,7 +226,17 @@ const FlightHomePage = () => {
               </div>
             </div>
           ) : (
-            <div className=" w-[100%] shadow-md py-4 rounded-md border-[1px]">
+            <div className=" w-[100%] shadow-md py-4 rounded-md border-[1px] relative">
+              <div className="absolute right-5 top-5">
+                <button
+                  className=" text-blue-500 font-medium"
+                  onClick={() => {
+                    setChange(false);
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
               <div className="flex px-5 pt-7 pb-4 space-x-3">
                 <div className="flex space-x-2">
                   <div className="">
@@ -337,7 +347,11 @@ const FlightHomePage = () => {
             {loading && (
               <>
                 <div className="animate-pulse w-[90%]">
-                  <FlightCard />
+                  {Array.from({ length: 3 }).map((ele) => (
+                    <>
+                      <FlightCard />
+                    </>
+                  ))}
                 </div>
               </>
             )}
