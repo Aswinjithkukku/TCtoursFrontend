@@ -91,13 +91,13 @@ function AttractionInvoice() {
   return (
     <>
       <div className=" relative overflow-hidden">
-        <div className="">
-          {/* <div className="absolute left-[2000000px]"> */}
+        {/* <div className=""> */}
+        <div className="absolute left-[2000000px]">
           <div ref={listRef}>
             {list?.map((ele) => (
               <>
-                <div id={ele?.ticketNo} className="w-[100%] bg-white pt-[20px]">
-                  {/* <AttractionTicketTemplate ticket={ele} /> */}
+                <div id={ele?.ticketNo} className="w-[100%] bg-white">
+                  <AttractionTicketTemplate ticket={ele} />
                 </div>
               </>
             ))}
