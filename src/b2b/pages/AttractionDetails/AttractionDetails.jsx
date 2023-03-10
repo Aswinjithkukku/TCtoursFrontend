@@ -35,7 +35,7 @@ function AttractionDetails() {
       } catch (err) {
          setError(err?.response?.data?.error);
          console.log(error);
-         navigate("/error");
+         // navigate("/error");
       }
    };
 
