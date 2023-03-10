@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { BiCheckCircle } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { setAlertSuccess } from "../../../../TCtoursFrontend/src/redux/slices/homeSlice";
+import { setAlertSuccess } from "../../../redux/slices/homeSlice";
 
 function SuccessAlert() {
    const dispatch = useDispatch();

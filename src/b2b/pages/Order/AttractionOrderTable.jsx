@@ -18,6 +18,7 @@ import axios from "../../../axios";
 function AttractionOrderTable({ item }) {
   const [orderDetails, setOrderDetails] = useState(false);
   const { selectedCurrency } = useSelector((state) => state.home);
+  const { token } = useSelector(state => state.agents)
 
   const tickets = useMemo(() => {
     return () => {
@@ -44,19 +45,38 @@ function AttractionOrderTable({ item }) {
 
   const handleDownloadAllTickets = async (ele) => {
     try {
-      const response = await axios.get(
-        `/b2b/attractions/orders/${item?._id}/ticket/${item?.activities?._id}`
-      );
-      console.log(response);
-      const url = window.URL.createObjectURL(
-        new Blob([response.data], { type: "application/pdf" })
-      );
-      var link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "resume.pdf");
-      document.body.appendChild(link);
-      link.click();
-    } catch (error) {}
+      // const response = await axios.get(
+      //   `/b2b/attractions/orders/${item?._id}/ticket/${item?.activities?._id}`
+      // );
+      // console.log(response);
+      // const url = window.URL.createObjectURL(
+      //   new Blob([response.data], { type: "application/pdf" })
+      // );
+      // var link = document.createElement("a");
+      // link.href = url;
+      // link.setAttribute("download", "resume.pdf");
+      // document.body.appendChild(link);
+      // link.click();
+      const pdfBuffer = await axios.get(
+        `/b2b/attractions/orders/${item?._id}/ticket/${item?.activities?._id}`,
+        {
+            headers: { authorization: `Bearer ${token}` },
+            responseType: "arraybuffer",
+        }
+    );
+
+    console.log(pdfBuffer, "pdfBuffer");
+    const blob = new Blob([pdfBuffer.data], {
+        type: "application/pdf",
+    });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = "tickets.pdf";
+    document.body.appendChild(link);
+    link.click();
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleDownloadTicket = async (ele) => {
     try {
@@ -109,8 +129,6 @@ function AttractionOrderTable({ item }) {
             </span>
           </div>
         </td>
-        {/* <td className="p-3">{item?.reseller?.agentCode} </td>
-        <td className="p-3">{item?.reseller?.agentCode}</td> */}
         <td className="p-3 min-w-[200px]">
           <div className="">
             <p className="">{item?.activities?.activity?.name}</p>
@@ -124,20 +142,14 @@ function AttractionOrderTable({ item }) {
               <p className="bg-gray-300 text-gray-100 px-2 py-1 rounded">
                 Infant : {item?.activities?.infantCount}
               </p>
-              {/* <p className={`${item?.activities?.bookingType === "ticket" ? " bg-main " :  " bg-blue-500 "} text-gray-100 px-2 py-1 rounded capitalize`}>{item?.activities?.bookingType}</p> */}
             </span>
           </div>
         </td>
-        {/* <td className="p-3 capitalize">{item?.activities?.bookingType}</td> */}
         <td className="p-3 ">{item?.activities?.date?.slice(0, 10)}</td>
         <td className="p-3 ">{item?.createdAt?.slice(0, 10)} </td>
-        {/* <td className="p-3">{item?.activities?.adultsCount} </td>
-        <td className="p-3">{item?.activities?.childrenCount} </td>
-        <td className="p-3">{item?.activities?.infantCount} </td> */}
         <td className="p-3 whitespace-nowrap">
           {priceConversion(item?.totalAmount, selectedCurrency, true)}{" "}
         </td>
-        {/* <td className="p-3">5 AED</td> */}
         <td className="">
           {item?.activities?.status === "confirmed" ? (
             <span className="bg-green-400 text-sm text-light px-4 rounded capitalize">

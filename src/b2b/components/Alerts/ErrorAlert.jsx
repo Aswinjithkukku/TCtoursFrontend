@@ -1,11 +1,9 @@
-"use client";
-
 import { useEffect } from "react";
 import { BiXCircle } from "react-icons/bi";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { setAlertError } from "../../redux/slices/homeSlice";
+import { setAlertError } from "../../../redux/slices/homeSlice";
 
 function ErrorAlert() {
    const dispatch = useDispatch();
