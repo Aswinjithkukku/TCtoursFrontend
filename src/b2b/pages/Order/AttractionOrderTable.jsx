@@ -13,6 +13,7 @@ import { useRef } from "react";
 import ReactToPrint from "react-to-print";
 import { AiFillPrinter } from "react-icons/ai";
 import B2bAttractionInvoiceTemplate from "../Ticket/B2bAttractionInvoiceTemplate";
+import axios from "../../../axios";
 
 function AttractionOrderTable({ item }) {
   const [orderDetails, setOrderDetails] = useState(false);
@@ -40,6 +41,39 @@ function AttractionOrderTable({ item }) {
 
   const list = tickets();
   const listRef = useRef();
+
+  const handleDownloadAllTickets = async (ele) => {
+    try {
+      const response = await axios.get(
+        `/b2b/attractions/orders/${item?._id}/ticket/${item?.activities?._id}`
+      );
+      console.log(response);
+      const url = window.URL.createObjectURL(
+        new Blob([response.data], { type: "application/pdf" })
+      );
+      var link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "resume.pdf");
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {}
+  };
+  const handleDownloadTicket = async (ele) => {
+    try {
+      const response = await axios.get(
+        `/b2b/attractions/orders/${item?._id}/ticket/${item?.activities?._id}/single/${ele?.ticketNo}`
+      );
+      const url = window.URL.createObjectURL(
+        new Blob([response.data], { type: "application/pdf" })
+      );
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `${ele?.ticketNo}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {}
+  };
   return (
     <>
       <div className="h-fit absolute left-[20000px]" id="all_tickets">
@@ -161,6 +195,14 @@ function AttractionOrderTable({ item }) {
               )}
               content={() => listRef.current}
             />
+            <button
+              disabled={item?.activities?.status !== "confirmed"}
+              onClick={handleDownloadAllTickets}
+              className=" px-1 py-1  rounded text-white text-[16px] flex items-center gap-1 justify-center w-[100%] bg-gray-400"
+            >
+              <span className="text-sm">Download</span>
+              <ImTicket />
+            </button>
           </div>
         </td>
       </tr>
@@ -265,17 +307,22 @@ function AttractionOrderTable({ item }) {
               <ul className="flex flex-wrap">
                 {list?.map((ele) => (
                   <>
-                    <ReactToPrint
-                      trigger={() => (
-                        <button className="px-3 py-1 flex gap-2 items-center cursor-pointer ">
-                          {ele?.ticketNo}{" "}
-                          <span>
-                            <FcDownload />
-                          </span>
-                        </button>
-                      )}
+                    {/* <ReactToPrint
+                      trigger={() => ( */}
+                    <button
+                      className="px-3 py-1 flex gap-2 items-center cursor-pointer "
+                      onClick={() => {
+                        handleDownloadTicket(ele);
+                      }}
+                    >
+                      {ele?.ticketNo}{" "}
+                      <span>
+                        <FcDownload />
+                      </span>
+                    </button>
+                    {/* )}
                       content={() => document.getElementById(ele?.ticketNo)}
-                    />
+                    /> */}
                   </>
                 ))}
               </ul>

@@ -54,15 +54,6 @@ function AttractionInvoice() {
     fetchData();
   }, []);
 
-  const downloadTicket = async (ele) => {
-    var node = document.getElementById(ele);
-
-    var options = {
-      filename: `${ele}.pdf`,
-    };
-    domToPdf(node, options, function (pdf) {});
-  };
-
   const tickets = useMemo(() => {
     return () => {
       const data = output?.activites?.map((ele) => {
@@ -87,7 +78,41 @@ function AttractionInvoice() {
   const list = tickets();
   const listRef = useRef();
   const invoiveRef = useRef();
-  console.log(output);
+
+  const handleDownloadAllTickets = async (ele) => {
+    try {
+      output.activites?.forEach(async (item) => {
+        const response = await axios.get(
+          `/b2b/attractions/orders/${output?._id}/ticket/${item?._id}`
+        );
+        const url = window.URL.createObjectURL(
+          new Blob([response.data], { type: "application/pdf" })
+        );
+        var link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "resume.pdf");
+        document.body.appendChild(link);
+        link.click();
+      });
+    } catch (error) {}
+  };
+  const handleDownloadTicket = async (ele) => {
+    try {
+      const response = await axios.get(
+        `/b2b/attractions/orders/${output?._id}/ticket/${output?.activities?._id}/single/${ele?.ticketNo}`
+      );
+      const url = window.URL.createObjectURL(
+        new Blob([response.data], { type: "application/pdf" })
+      );
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `${ele?.ticketNo}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {}
+  };
+
   return (
     <>
       <div className=" relative overflow-hidden">
@@ -140,17 +165,22 @@ function AttractionInvoice() {
                                 Download the E-Ticket from here
                               </p>
                               <div className="flex flex-col">
-                                <ReactToPrint
-                                  trigger={() => (
-                                    <button className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded flex justify-center items-center gap-4">
-                                      Download All Tickets{" "}
-                                      <span className="text-white text-[18px]">
-                                        <MdDownload />
-                                      </span>
-                                    </button>
-                                  )}
+                                {/* <ReactToPrint
+                                  trigger={() => ( */}
+                                <button
+                                  onClick={() => {
+                                    handleDownloadAllTickets();
+                                  }}
+                                  className="text-[13px] font-[500] uppercase text-white bg-green-500 px-3 py-1 rounded flex justify-center items-center gap-4"
+                                >
+                                  Download All Tickets{" "}
+                                  <span className="text-white text-[18px]">
+                                    <MdDownload />
+                                  </span>
+                                </button>
+                                {/* )}
                                   content={() => listRef.current}
-                                />
+                                /> */}
                                 <ul className="flex flex-col gap-1 py-2 list-none w-[100%] overflow-y-scroll max-h-[400px] mt-2">
                                   {list?.map((ele, i) => (
                                     <>
@@ -159,20 +189,25 @@ function AttractionInvoice() {
                                           Ticket No. :{" "}
                                           <span>{ele?.ticketNo}</span>
                                         </span>
-                                        <ReactToPrint
-                                          trigger={() => (
-                                            <button className="text-[18px] font-[500] uppercase text-white px-3 py-1 rounded">
-                                              <span className="">
-                                                <FcDownload />
-                                              </span>
-                                            </button>
-                                          )}
+                                        {/* <ReactToPrint
+                                          trigger={() => ( */}
+                                        <button
+                                          onClick={() => {
+                                            handleDownloadTicket(ele);
+                                          }}
+                                          className="text-[18px] font-[500] uppercase text-white px-3 py-1 rounded"
+                                        >
+                                          <span className="">
+                                            <FcDownload />
+                                          </span>
+                                        </button>
+                                        {/* )}
                                           content={() =>
                                             document.getElementById(
                                               ele?.ticketNo
                                             )
                                           }
-                                        />
+                                        /> */}
                                       </li>
                                     </>
                                   ))}
