@@ -13,13 +13,20 @@ const AirportsCard = ({ name, index, hide }) => {
   useEffect(() => {
     const filterTimer = setTimeout(() => {
       if (airports.length > 0 && value.length > 0) {
+        let airportByIata = false;
         const filtered = airports.filter((ele) => {
           const x = value.toLocaleLowerCase();
           const city = ele?.city?.toLocaleLowerCase();
           const iata = ele?.iata?.toLocaleLowerCase();
+          if (iata === x) airportByIata = ele;
+          if (airportByIata) return false;
           if (city?.startsWith(x) || iata?.startsWith(x)) return ele;
           else return null;
         });
+        if (airportByIata) {
+          setFilteredAirports([airportByIata]);
+          return;
+        }
         setFilteredAirports([...filtered]);
       } else if (value.length === 0) {
         setFilteredAirports(null);
