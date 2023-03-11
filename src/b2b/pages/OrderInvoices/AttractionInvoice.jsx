@@ -94,7 +94,7 @@ function AttractionInvoice() {
         // document.body.appendChild(link);
         // link.click();
         const pdfBuffer = await axios.get(
-          `/b2b/attractions/orders/${output?._id}/ticket/${item?._id}`,
+          `/b2b/attractions/orders/${id}/ticket/${item?._id}`,
           {
             headers: { authorization: `Bearer ${token}` },
             responseType: "arraybuffer",
