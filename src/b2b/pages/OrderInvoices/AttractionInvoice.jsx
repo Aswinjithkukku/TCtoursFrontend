@@ -83,7 +83,7 @@ function AttractionInvoice() {
     try {
       output.activites?.forEach(async (item) => {
         const response = await axios.get(
-          `/b2b/attractions/orders/${output?._id}/ticket/${item?._id}`
+          `/b2b/attractions/orders/${id}/ticket/${item?._id}`
         );
         const url = window.URL.createObjectURL(
           new Blob([response.data], { type: "application/pdf" })
