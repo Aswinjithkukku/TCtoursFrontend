@@ -161,7 +161,7 @@ function ActivityComponent({ item, bookingType, index }) {
                   per {item?.base} *
                </p>
                <p className="font-[600] whitespace-nowrap text-[12px] sm:text-[17px] flex items-end">
-                  {priceConversion(item?.adultPrice, selectedCurrency, true)}
+                  {priceConversion(item?.lowPrice, selectedCurrency, true)}
                </p>
             </span>
          </div>

@@ -82,19 +82,38 @@ function AttractionInvoice() {
   const handleDownloadAllTickets = async (ele) => {
     try {
       output.activites?.forEach(async (item) => {
-        const response = await axios.get(
-          `/b2b/attractions/orders/${id}/ticket/${item?._id}`
+        // const response = await axios.get(
+        //   `/b2b/attractions/orders/${output?._id}/ticket/${item?._id}`
+        // );
+        // const url = window.URL.createObjectURL(
+        //   new Blob([response.data], { type: "application/pdf" })
+        // );
+        // var link = document.createElement("a");
+        // link.href = url;
+        // link.setAttribute("download", "resume.pdf");
+        // document.body.appendChild(link);
+        // link.click();
+        const pdfBuffer = await axios.get(
+          `/b2b/attractions/orders/${output?._id}/ticket/${item?._id}`,
+          {
+            headers: { authorization: `Bearer ${token}` },
+            responseType: "arraybuffer",
+          }
         );
-        const url = window.URL.createObjectURL(
-          new Blob([response.data], { type: "application/pdf" })
-        );
-        var link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "resume.pdf");
+
+        console.log(pdfBuffer, "pdfBuffer");
+        const blob = new Blob([pdfBuffer.data], {
+          type: "application/pdf",
+        });
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.download = "tickets.pdf";
         document.body.appendChild(link);
         link.click();
       });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleDownloadTicket = async (ele) => {
     try {
