@@ -82,12 +82,13 @@ const agentExcursionSlice = createSlice({
             state.agentExcursion.activities[i].isChecked =
                i === 0 ? true : false;
             state.agentExcursion.activities[i].date = "";
-            state.agentExcursion.activities[i].transfer = "without";
+            state.agentExcursion.activities[i].transfer = "";
             state.agentExcursion.activities[i].adult = 1;
             state.agentExcursion.activities[i].child = 0;
             state.agentExcursion.activities[i].infant = 0;
             state.agentExcursion.activities[i].sum = 0;
             state.agentExcursion.activities[i].vehicle = []
+            state.agentExcursion.activities[i].selectedVehicle = []
             array.push(state.agentExcursion.activities[i]);
          }
          state.agentRecievedActivities = array;

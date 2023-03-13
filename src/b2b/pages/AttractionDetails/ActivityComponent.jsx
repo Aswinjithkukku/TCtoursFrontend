@@ -86,28 +86,82 @@ function ActivityComponent({ item, bookingType, index }) {
             index,
          })
       );
-      // dispatch(
-      //    setActivities({
-      //       value: array,
-      //       name: "vehicle",
-      //       index,
-      //    })
-      // );
+      dispatch(
+         setActivities({
+            value: array,
+            name: "vehicle",
+            index,
+         })
+      );
+   }, [item?.adult, item?.child, item?.infant, item?.transfer, dispatch]);
 
-      // let uniqueArray = [];
-      // let uniqueObj = {};
-      // let data = item?.vehicle;
-      // for (let i in data) {
-      //    let id = data[i]["_id"];
-      //    uniqueObj[id] = data[i];
-      // }
+   useEffect(() => {
+      let uniqueArray = [];
+      let uniqueObj = {};
+      let data = item?.vehicle;
+      for (let i in data) {
+         let id = data[i]["_id"];
+         uniqueObj[id] = data[i];
+      }
 
-      // // unique object of array
-      // for (let i in uniqueObj) {
-      //    uniqueArray.push(uniqueObj[i]);
-      // }
-   
-   }, [item?.adult, item?.child, item?.infant, agentRecievedActivities, dispatch]);
+      // unique object of array
+      for (let i in uniqueObj) {
+         uniqueArray.push(uniqueObj[i]);
+      }
+
+      let resultArray = [];
+      for (let i = 0; i < uniqueArray.length; i++) {
+         let first = [];
+         for (let j = 0; j < data.length; j++) {
+            if (uniqueArray[i]._id === data[j]._id) {
+               first.push(data[j]);
+            }
+         }
+         let res = { ...first[0], length: first.length };
+         resultArray.push(res);
+      }
+      dispatch(
+         setActivities({
+            value: resultArray,
+            name: "selectedVehicle",
+            index,
+         })
+      );
+   }, [
+      item?.vehicle,
+      item?.adult,
+      item?.child,
+      item?.infant,
+      item?.transfer,
+      dispatch,
+   ]);
+   useEffect(() => {
+      if (item?.activityType !== "transfer") {
+         dispatch(
+            setActivities({
+               value: "without",
+               name: "transfer",
+               index,
+            })
+         );
+      } else if (item?.isPrivateTransferAvailable && item.privateTransfers) {
+         dispatch(
+            setActivities({
+               value: "private",
+               name: "transfer",
+               index,
+            })
+         );
+      } else if (item?.isSharedTransferAvailable && item.sharedTransferPrice) {
+         dispatch(
+            setActivities({
+               value: "shared",
+               name: "transfer",
+               index,
+            })
+         );
+      }
+   }, []);
 
    useEffect(() => {
       const result = agentRecievedActivities?.filter(
@@ -179,7 +233,7 @@ function ActivityComponent({ item, bookingType, index }) {
          </div>
          {item?.isChecked && (
             <div className="space-y-3">
-               <div className="sm:flex justify-between items-center">
+               <div className="block xl:flex justify-between items-center">
                   <div className="flex gap-2 mt-2">
                      <input
                         className="border border-blue-500 px-2 rounded outline-1 outline-green-500 py-2"
@@ -220,24 +274,32 @@ function ActivityComponent({ item, bookingType, index }) {
                            )}
                      </select>
                   </div>
-                  {/* <div className="text-[13px] text-slate-500 font-[500]">
-                     {item?.vehicle?.slice(0,1)?.map((ride) => (
-                        <p className="flex" key={ride?._id}>
-                           <span className="">{ride?.name}-</span>
-                           <span className="">{ride?.maxCapacity} seats-</span>
-                           <span className="">
-                              {priceConversion(
-                                 ride?.price,
-                                 selectedCurrency,
-                                 true
-                              )}
-                           </span>
-                           <span className="">
-                              X {item?.vehicle?.length}
-                           </span>
-                        </p>
+                  <div className="text-[13px] text-slate-500 font-[500] flex flex-wrap gap-1 ">
+                     {item?.selectedVehicle?.map((ride) => (
+                        <div
+                           className="p-3 rounded-xl bg-white shadow-sm shadow-inner"
+                           key={ride?._id}
+                        >
+                           <p className="text-left text-darktext underline">
+                              {ride?.name}
+                           </p>
+                           <p className="flex gap-1 justify-between">
+                              <span className="">
+                                 {priceConversion(
+                                    ride?.price,
+                                    selectedCurrency,
+                                    true
+                                 )}
+                              </span>
+                              <span className="">X {ride?.length}</span>
+                           </p>
+                           <p className="flex justify-between">
+                              <span className="">Seats:</span>
+                              <span className="">{ride?.maxCapacity} </span>
+                           </p>
+                        </div>
                      ))}
-                  </div> */}
+                  </div>
                </div>
                <div className="sm:flex justify-between">
                   <div className="flex gap-5 ml-2 mt-2">
