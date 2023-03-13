@@ -32,7 +32,7 @@ function ActivityComponent({ item, bookingType, index }) {
          item?.infantPrice * Number(item?.infant);
 
       let totalTravellers = Number(item?.adult) + Number(item?.child);
-      if (item?.isPrivateTransferAvailable) {
+      if (item?.transfer === "private") {
          if (item?.privateTransfers?.length !== 0) {
             let priceList = [...item?.privateTransfers];
             priceList = priceList?.sort((a, b) => {
@@ -74,7 +74,7 @@ function ActivityComponent({ item, bookingType, index }) {
             }
             sum = sum + totalPrice;
          }
-      } else if (item?.isSharedTransferAvailable) {
+      } else if (item?.transfer === "shared") {
          sum = sum + Number(totalTravellers) * item?.sharedTransferPrice;
       }
       setPrice(sum);
@@ -86,13 +86,13 @@ function ActivityComponent({ item, bookingType, index }) {
             index,
          })
       );
-      dispatch(
-         setActivities({
-            value: array,
-            name: "vehicle",
-            index,
-         })
-      );
+      // dispatch(
+      //    setActivities({
+      //       value: array,
+      //       name: "vehicle",
+      //       index,
+      //    })
+      // );
 
       // let uniqueArray = [];
       // let uniqueObj = {};
