@@ -220,7 +220,7 @@ function ActivityComponent({ item, bookingType, index }) {
                            )}
                      </select>
                   </div>
-                  <div className="text-[13px] text-slate-500 font-[500]">
+                  {/* <div className="text-[13px] text-slate-500 font-[500]">
                      {item?.vehicle?.slice(0,1)?.map((ride) => (
                         <p className="flex" key={ride?._id}>
                            <span className="">{ride?.name}-</span>
@@ -237,7 +237,7 @@ function ActivityComponent({ item, bookingType, index }) {
                            </span>
                         </p>
                      ))}
-                  </div>
+                  </div> */}
                </div>
                <div className="sm:flex justify-between">
                   <div className="flex gap-5 ml-2 mt-2">
