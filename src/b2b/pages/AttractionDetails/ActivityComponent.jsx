@@ -107,7 +107,7 @@ function ActivityComponent({ item, bookingType, index }) {
       //    uniqueArray.push(uniqueObj[i]);
       // }
    
-   }, [item?.adult, item?.child, item?.infant, dispatch]);
+   }, [item?.adult, item?.child, item?.infant, agentRecievedActivities, dispatch]);
 
    useEffect(() => {
       const result = agentRecievedActivities?.filter(
