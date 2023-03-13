@@ -5,8 +5,6 @@ import { setVisaEnquiry } from "../../../redux/slices/visaSlice";
 function ItenarySection({ navigation, setNavigation, setData, data }) {
   const dispatch = useDispatch();
 
-
-
   const onChangeHandler = (e) => {
     setData((prev) => {
       return { ...prev, [e.target.name]: e.target.value };

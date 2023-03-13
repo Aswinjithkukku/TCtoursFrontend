@@ -12,6 +12,7 @@ import {
   setAlertError,
   setAlertSuccess,
 } from "../../../redux/slices/homeSlice";
+import { logoutAgent } from "../../../redux/slices/agentSlice";
 
 function OtpModal({ setOtpModal, orderId }) {
   const dispatch = useDispatch();

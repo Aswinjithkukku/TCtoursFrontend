@@ -9,7 +9,7 @@ import { HiOutlineDocumentDuplicate } from "react-icons/hi";
 import { GiEncirclement } from "react-icons/gi";
 import { VscTasklist } from "react-icons/vsc";
 import { FaQuoteRight, FaWpforms } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "../../axios";
 
@@ -17,15 +17,16 @@ function VisaHomeScreen() {
   const location = useLocation();
   const [viewCard, setViewCard] = useState(false);
   const [visaDetails, setVisaDetails] = useState(null);
+  const { id } = useParams()
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get(`visa/type/all/${location?.state}`);
+      const res = await axios.get(`visa/type/all/${id}`);
       if (res.status === 200) {
         setVisaDetails(res.data);
       }
     })();
-  }, [location.state]);
+  }, [id]);
 
   console.log(visaDetails);
 

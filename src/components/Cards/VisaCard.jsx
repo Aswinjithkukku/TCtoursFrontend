@@ -70,7 +70,7 @@ function VisaCard() {
                      <div className="absolute max-h-[17em] w-[21em] mt-1  bg-light rounded-lg overflow-y-auto">
                         <div className="w-full p-2 overflow-y-auto">
                            {filteredData?.map((item) => (
-                              <Link to="/visa" state={country?._id}>
+                              <Link to={`/visa/${item?._id}`} >
                                  <div
                                     key={item?._id}
                                     className="bg-soft py-2 px-2 cursor-pointer capitalize  z-30"

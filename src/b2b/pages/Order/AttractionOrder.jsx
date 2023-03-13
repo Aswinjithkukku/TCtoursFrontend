@@ -1,18 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineDown } from "react-icons/ai";
 import OrderModal from "./OrderModal";
 import { useHandleClickOutside } from "../../../hooks";
 import TransactionModal from "./TransactionModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "../../../axios";
 import AttractionOrderTable from "./AttractionOrderTable";
 import OrdersNavigator from "../OrdersNavigator";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { PageLoader } from "../../components";
 import AttractionOrdersChipList from "./AttractionOrdersChipList";
+import { logoutAgent } from "../../../redux/slices/agentSlice";
 
 function AttractionOrder() {
+   const navigate = useNavigate();
+   const dispatch = useDispatch()
+
    const [orderType, setOrderType] = useState(false);
    const [transactionType, setTransactionType] = useState(false);
    const [isLoading, setIsLoading] = useState(false);

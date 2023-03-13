@@ -28,7 +28,6 @@ const agentExcursionSlice = createSlice({
             action.payload.sum
          ] = action.payload.value;
       },
-
       setSelectionArray: (state, action) => {
          state.agentSelectedActivities = action.payload;
       },
@@ -88,6 +87,7 @@ const agentExcursionSlice = createSlice({
             state.agentExcursion.activities[i].child = 0;
             state.agentExcursion.activities[i].infant = 0;
             state.agentExcursion.activities[i].sum = 0;
+            state.agentExcursion.activities[i].vehicle = []
             array.push(state.agentExcursion.activities[i]);
          }
          state.agentRecievedActivities = array;
@@ -106,6 +106,7 @@ export const {
    emptyCart,
    setAgentExcursion,
    setAgentAllExcursions,
+   setVehicle,
 } = agentExcursionSlice.actions;
 
 export default agentExcursionSlice.reducer;

@@ -61,10 +61,6 @@ const AttractionInvoicePdfTemplate = ({ data }) => {
                 <th className="p-2 pl-4  border-solid border-r-[1px]  ">
                   Name
                 </th>
-                {/* <th className="p-2  border-solid border-r-[1px] ">Adult</th>
-                <th className="p-2  border-solid border-r-[1px] ">Child</th>
-                <th className="p-2  border-solid border-r-[1px] ">Infant</th>
-                <th className="p-2  border-solid border-r-[1px] ">Transfer</th> */}
                 <th className="p-2  border-solid border-r-[1px] ">Amount</th>
               </tr>
             </thead>

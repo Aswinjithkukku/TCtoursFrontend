@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import priceConversion from "../../../utils/PriceConversion";
 
 function VisaComponentPage() {
-  const { id } = useParams();
+  const params = useParams();
   const navigate = useNavigate();
   const { visa } = useSelector((state) => state.visa);
   const { selectedCurrency } = useSelector((state) => state.home);
@@ -41,7 +41,7 @@ function VisaComponentPage() {
                     <button
                       className="text-xs uppercase font-[500] text-white bg-blue-500 rounded px-2"
                       onClick={() => {
-                        navigate(`/b2b/visa/${id}/apply`);
+                        navigate(`/b2b/visa/${params.id}/apply`);
                         localStorage.setItem("visaEnquiry", item?._id);
                       }}
                     >

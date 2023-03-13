@@ -10,8 +10,6 @@ function ActivityComponent({ item, bookingType, index }) {
    const [price, setPrice] = useState(0);
    const dispatch = useDispatch();
 
-   console.log(item);
-
    const { agentRecievedActivities, agentExcursion } = useSelector(
       (state) => state.agentExcursions
    );
@@ -27,13 +25,14 @@ function ActivityComponent({ item, bookingType, index }) {
       );
    };
    useEffect(() => {
+      let array = [];
       let sum =
          item?.adultPrice * Number(item?.adult) +
          item?.childPrice * Number(item?.child) +
          item?.infantPrice * Number(item?.infant);
 
       let totalTravellers = Number(item?.adult) + Number(item?.child);
-      if (item?.transfer === "private") {
+      if (item?.isPrivateTransferAvailable) {
          if (item?.privateTransfers?.length !== 0) {
             let priceList = [...item?.privateTransfers];
             priceList = priceList?.sort((a, b) => {
@@ -50,6 +49,7 @@ function ActivityComponent({ item, bookingType, index }) {
                         totalPrice = totalPrice + priceList[x].price;
                         totalTravellers =
                            totalTravellers - priceList[x].maxCapacity;
+                        array = [...array, priceList[x]];
                         break;
                      }
                   } else {
@@ -60,6 +60,7 @@ function ActivityComponent({ item, bookingType, index }) {
                         totalPrice = totalPrice + priceList[x].price;
                         totalTravellers =
                            totalTravellers - priceList[x].maxCapacity;
+                        array = [...array, priceList[x]];
                         break;
                      }
                   }
@@ -67,12 +68,13 @@ function ActivityComponent({ item, bookingType, index }) {
                      totalPrice = totalPrice + priceList[x].price;
                      totalTravellers =
                         totalTravellers - priceList[x].maxCapacity;
+                     array = [...array, priceList[x]];
                   }
                }
             }
             sum = sum + totalPrice;
          }
-      } else if (item?.transfer === "shared") {
+      } else if (item?.isSharedTransferAvailable) {
          sum = sum + Number(totalTravellers) * item?.sharedTransferPrice;
       }
       setPrice(sum);
@@ -84,7 +86,28 @@ function ActivityComponent({ item, bookingType, index }) {
             index,
          })
       );
-   }, [item.adult, item.child, item.infant, agentRecievedActivities, dispatch]);
+      dispatch(
+         setActivities({
+            value: array,
+            name: "vehicle",
+            index,
+         })
+      );
+
+      // let uniqueArray = [];
+      // let uniqueObj = {};
+      // let data = item?.vehicle;
+      // for (let i in data) {
+      //    let id = data[i]["_id"];
+      //    uniqueObj[id] = data[i];
+      // }
+
+      // // unique object of array
+      // for (let i in uniqueObj) {
+      //    uniqueArray.push(uniqueObj[i]);
+      // }
+   
+   }, [item?.adult, item?.child, item?.infant, dispatch]);
 
    useEffect(() => {
       const result = agentRecievedActivities?.filter(
@@ -93,18 +116,6 @@ function ActivityComponent({ item, bookingType, index }) {
       localStorage.setItem("tour_order", JSON.stringify(result));
       dispatch(setSelectionArray(result));
    }, [agentRecievedActivities, dispatch]);
-
-   useEffect(() => {
-      if (item.activityType === "transfer") {
-         dispatch(
-            setActivities({
-               value: "private",
-               name: "transfer",
-               index,
-            })
-         );
-      }
-   }, []);
 
    let date = new Date();
    let dd = agentExcursion?.bookingPriorDays
@@ -115,6 +126,7 @@ function ActivityComponent({ item, bookingType, index }) {
    let mm = String(date.getMonth() + 1).padStart(2, "0");
    let yyyy = date.getFullYear();
    const res = yyyy + "-" + mm + "-" + dd;
+
    return (
       <div className="text-textColor shadow-md bg-gray-100/30 rounded-lg p-4 mb-4">
          <div className="w-full flex justify-between items-center ">
@@ -167,45 +179,65 @@ function ActivityComponent({ item, bookingType, index }) {
          </div>
          {item?.isChecked && (
             <div className="space-y-3">
-               <div className="flex gap-2 mt-2">
-                  <input
-                     className="border border-blue-500 px-2 rounded outline-1 outline-green-500 py-2"
-                     type="date"
-                     name="date"
-                     min={res}
-                     value={item.date}
-                     onChange={(e) => {
-                        handleChange({
-                           value: e.target.value,
-                           name: e.target.name,
-                           index,
-                        });
-                     }}
-                  />
-                  <select
-                     className="border border-blue-500 px-4 rounded outline-1 outline-green-500 py-2"
-                     name="transfer"
-                     value={item.transfer}
-                     onChange={(e) =>
-                        handleChange({
-                           value: e.target.value,
-                           name: e.target.name,
-                           index,
-                        })
-                     }
-                  >
-                     {item.activityType !== "transfer" && (
-                        <option value="without">Without Transfer</option>
-                     )}
-                     {item?.isPrivateTransferAvailable &&
-                        item.privateTransfers && (
-                           <option value="private">Private Transfer</option>
+               <div className="sm:flex justify-between items-center">
+                  <div className="flex gap-2 mt-2">
+                     <input
+                        className="border border-blue-500 px-2 rounded outline-1 outline-green-500 py-2"
+                        type="date"
+                        name="date"
+                        min={res}
+                        value={item.date}
+                        onChange={(e) => {
+                           handleChange({
+                              value: e.target.value,
+                              name: e.target.name,
+                              index,
+                           });
+                        }}
+                     />
+                     <select
+                        className="border border-blue-500 px-4 rounded outline-1 outline-green-500 py-2"
+                        name="transfer"
+                        value={item.transfer}
+                        onChange={(e) =>
+                           handleChange({
+                              value: e.target.value,
+                              name: e.target.name,
+                              index,
+                           })
+                        }
+                     >
+                        {item.activityType !== "transfer" && (
+                           <option value="without">Without Transfer</option>
                         )}
-                     {item?.isSharedTransferAvailable &&
-                        item.sharedTransferPrice && (
-                           <option value="shared">Shared Transfer</option>
-                        )}
-                  </select>
+                        {item?.isPrivateTransferAvailable &&
+                           item.privateTransfers && (
+                              <option value="private">Private Transfer</option>
+                           )}
+                        {item?.isSharedTransferAvailable &&
+                           item.sharedTransferPrice && (
+                              <option value="shared">Shared Transfer</option>
+                           )}
+                     </select>
+                  </div>
+                  <div className="text-[13px] text-slate-500 font-[500]">
+                     {item?.vehicle?.slice(0,1)?.map((ride) => (
+                        <p className="flex" key={ride?._id}>
+                           <span className="">{ride?.name}-</span>
+                           <span className="">{ride?.maxCapacity} seats-</span>
+                           <span className="">
+                              {priceConversion(
+                                 ride?.price,
+                                 selectedCurrency,
+                                 true
+                              )}
+                           </span>
+                           <span className="">
+                              X {item?.vehicle?.length}
+                           </span>
+                        </p>
+                     ))}
+                  </div>
                </div>
                <div className="sm:flex justify-between">
                   <div className="flex gap-5 ml-2 mt-2">
@@ -268,7 +300,6 @@ function ActivityComponent({ item, bookingType, index }) {
                         </p>
                      </span>
                      <span className="">
-
                         <div className=" flex items-center">
                            <div
                               className=" text-lg flex justify-center items-center text-white font-[550] rounded-full bg-blue-600 w-5 h-5 cursor-pointer"

@@ -2,67 +2,66 @@ import MainLayout from "./MainLayout";
 import B2BMainLayout from "./B2BMainLayout";
 
 import {
-  AttractionHomePage,
-  AttractionDetailsPage,
-  AttractionLandingPage,
-  ComboLandingPage,
-  SpecialOfferLandingPage,
-  VisaLandingPage,
-  BlogLandingPage,
-  BlogDetailsPage,
-  SearchingResultPage,
-  PaymentPage,
-  ProfileMainPage,
-  ProfileSettingsPage,
-  ProfilePasswordPage,
-  PaymentApprovalPage,
-  Invoice,
-  VisaActionPage,
-  OrderListPage,
-  VisaApplyInvoicePage,
-  ReApplyVisaPage,
+   AttractionHomePage,
+   AttractionDetailsPage,
+   AttractionLandingPage,
+   ComboLandingPage,
+   SpecialOfferLandingPage,
+   VisaLandingPage,
+   BlogLandingPage,
+   BlogDetailsPage,
+   SearchingResultPage,
+   PaymentPage,
+   ProfileMainPage,
+   ProfileSettingsPage,
+   ProfilePasswordPage,
+   PaymentApprovalPage,
+   Invoice,
+   VisaActionPage,
+   OrderListPage,
+   VisaApplyInvoicePage,
+   ReApplyVisaPage,
 } from "../Pages/Hero";
 import { PageNotFound, PaymentDecline } from "../Pages/Errors";
 import {
-  Attraction,
-  AttractionDetails,
-  AttractionInvoice,
-  AttractionOrderInvoice,
-  B2BLoginPage,
-  B2BRegisterPage,
-  Dashboard,
-  DubaiDolphinarium,
-  EditResellers,
-  AttractionOrder,
-  MarkUpList,
-  NewRegisters,
-  PaymentApproval,
-  PaymentHomePage,
-  Resellers,
-  Settings,
-  SingleSubAgent,
-  VisaApplySuccessPage,
-  VisaHomeScreen,
-  VisaIndex,
-  VisaMarkupList,
-  VisaOrderDetailsPage,
-  VisaOrderPage,
-  Wallet,
-  ReapplyIndividual,
-  PaymentSuccessPage,
-  AttractionSingleTicketPage,
-  FlightHomePage,
-  FlightBookingPage,
-  HotelIndexPage,
-  HotelDetailIndex,
-  HotelApplyIndex,
+   Attraction,
+   AttractionDetails,
+   AttractionInvoice,
+   AttractionOrderInvoice,
+   B2BLoginPage,
+   B2BRegisterPage,
+   Dashboard,
+   DubaiDolphinarium,
+   EditResellers,
+   AttractionOrder,
+   MarkUpList,
+   NewRegisters,
+   PaymentApproval,
+   PaymentHomePage,
+   Resellers,
+   Settings,
+   SingleSubAgent,
+   VisaApplySuccessPage,
+   VisaHomeScreen,
+   VisaIndex,
+   VisaMarkupList,
+   VisaOrderDetailsPage,
+   VisaOrderPage,
+   Wallet,
+   ReapplyIndividual,
+   PaymentSuccessPage,
+   AttractionSingleTicketPage,
+   FlightHomePage,
+   FlightBookingPage,
+   HotelIndexPage,
+   HotelDetailIndex,
+   HotelApplyIndex,
 } from "../b2b/pages";
 import B2BPrivateRoute from "./B2BPrivateRoute";
 import LoadingWrapper from "./LoadingWrapper";
-
+import { AxiosInterceptor } from "../axios";
 
 const ThemeRoutes = [
-   
    {
       path: "",
       element: (
@@ -80,7 +79,7 @@ const ThemeRoutes = [
          },
          { path: "/combo", element: <ComboLandingPage /> },
          { path: "/specialoffer", element: <SpecialOfferLandingPage /> },
-         { path: "/visa", element: <VisaLandingPage /> },
+         { path: "/visa/:id", element: <VisaLandingPage /> },
          { path: "/visa/apply", element: <VisaActionPage /> },
          { path: "/visa/invoice/:orderId", element: <VisaApplyInvoicePage /> },
          {
@@ -101,9 +100,11 @@ const ThemeRoutes = [
    {
       path: "",
       element: (
-         <B2BPrivateRoute>
-            <B2BMainLayout />
-         </B2BPrivateRoute>
+         <AxiosInterceptor>
+            <B2BPrivateRoute>
+               <B2BMainLayout />
+            </B2BPrivateRoute>
+         </AxiosInterceptor>
       ),
       children: [
          {
